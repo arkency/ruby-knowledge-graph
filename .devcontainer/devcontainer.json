@@ -1,0 +1,15 @@
+{
+  "name": "Planet",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspace",
+  "forwardPorts": [3000],
+  "postCreateCommand": "bundle install && bin/rails db:prepare && bin/rails db:seed && curl -fsSL http://ollama:11434/api/pull -d '{\"name\":\"qwen3-embedding:4b\"}'",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "Shopify.ruby-lsp"
+      ]
+    }
+  }
+}
