@@ -1,0 +1,64 @@
+service: planet
+image: your-org/planet
+
+servers:
+  web:
+    - your.server.ip
+
+registry:
+  server: ghcr.io
+  username: your-username
+  password:
+    - KAMAL_REGISTRY_PASSWORD
+
+env:
+  secret:
+    - RAILS_MASTER_KEY
+    - PLANET_DATABASE_PASSWORD
+    - ANTHROPIC_API_KEY
+    - WEBHOOK_TOKEN
+    - ADMIN_PASSWORD
+  clear:
+    SOLID_QUEUE_IN_PUMA: true
+    DB_HOST: planet-db
+    OLLAMA_URL: http://planet-ollama:11434
+
+aliases:
+  console: app exec --interactive --reuse "bin/rails console"
+  shell: app exec --interactive --reuse "bash"
+  logs: app logs -f
+  dbc: app exec --interactive --reuse "bin/rails dbconsole --include-password"
+
+proxy:
+  ssl: true
+  host: planet.example.com
+
+asset_path: /rails/public/assets
+
+builder:
+  arch: amd64
+
+accessories:
+  db:
+    image: pgvector/pgvector:pg17
+    host: 37.27.218.126
+    port: "127.0.0.1:5432:5432"
+    env:
+      secret:
+        - POSTGRES_PASSWORD
+      clear:
+        POSTGRES_USER: planet
+        POSTGRES_DB: planet_production
+    files:
+      - config/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+    directories:
+      - data:/var/lib/postgresql/data
+  ollama:
+    image: ollama/ollama:latest
+    host: 37.27.218.126
+    port: "127.0.0.1:11434:11434"
+    env:
+      clear:
+        OLLAMA_KEEP_ALIVE: 2m
+    directories:
+      - ollama_data:/root/.ollama

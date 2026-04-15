@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+require_relative "../config/environment"
+
+# Logger na stderr — stdout zarezerwowany dla JSON-RPC
+Rails.logger = ActiveSupport::Logger.new(STDERR)
+
+server = McpServerConfig.build_server
+
+MCP::Server::Transports::StdioTransport.new(server).open

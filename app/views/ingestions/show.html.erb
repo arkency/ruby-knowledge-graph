@@ -1,0 +1,191 @@
+<div class="node-header">
+  <%= link_to "&larr; Ingestions".html_safe, ingestions_path, class: "back-link" %>
+  <h1 class="page-title">
+    Ingestion <code><%= @ingestion.id.slice(0, 8) %></code>
+    <span id="ingestion-badge-<%= @ingestion.id %>" class="badge badge-<%= @ingestion.status %>"><%= @ingestion.status %></span>
+  </h1>
+</div>
+
+<div class="attrs-grid">
+  <div class="attr-card">
+    <div class="attr-key">Format</div>
+    <div class="attr-value"><%= @ingestion.format %></div>
+  </div>
+  <div class="attr-card">
+    <div class="attr-key">Kind</div>
+    <div class="attr-value"><%= @ingestion.kind %></div>
+  </div>
+  <div class="attr-card">
+    <div class="attr-key">External ID</div>
+    <div class="attr-value"><code><%= @ingestion.external_id %></code></div>
+  </div>
+  <div class="attr-card">
+    <div class="attr-key">Content hash</div>
+    <div class="attr-value"><code><%= @ingestion.content_hash&.slice(0, 12) %></code></div>
+  </div>
+  <div class="attr-card">
+    <div class="attr-key">Source at</div>
+    <div class="attr-value"><%= @ingestion.source_at&.strftime("%Y-%m-%d %H:%M") || "-" %></div>
+  </div>
+</div>
+
+<span id="ingestion-actions-<%= @ingestion.id %>">
+  <% unless @ingestion.status.in?(%w[queued requeued extracting]) %>
+    <div style="margin-top: 1.5rem;">
+      <%= form_with url: extract_ingestion_path(@ingestion), method: :post, class: "reextract-form" do |f| %>
+        <%= f.select :model_id, ExtractionPrompt::AVAILABLE_MODELS, {}, class: "model-select" %>
+        <%= f.submit "Extract", class: "btn btn-sm" %>
+      <% end %>
+    </div>
+  <% end %>
+</span>
+
+<% if @extractions.any? %>
+  <div class="edges-section">
+    <h2>Extractions (<%= @extractions.size %>)</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Status</th>
+          <th>Model</th>
+          <th>Tokens (in/out)</th>
+          <th>Duration</th>
+          <th>Cost</th>
+          <th>Nodes/edges</th>
+          <th>Read set (nodes/edges)</th>
+          <th>Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @extractions.each do |ext| %>
+          <tr class="clickable-row" tabindex="0" data-href="<%= extraction_path(ext) %>">
+            <td><span class="badge badge-<%= ext.status %>"><%= ext.status %></span></td>
+            <td><code><%= ext.model_id %></code></td>
+            <% case ext.status %>
+            <% when "queued" %>
+              <td colspan="5" class="text-muted">Waiting in queue...</td>
+            <% when "started" %>
+              <td colspan="5" class="text-muted">In progress...</td>
+            <% when "failed" %>
+              <td colspan="5" class="text-muted"><%= ext.error_class %>: <%= truncate(ext.error_message.to_s, length: 80) %></td>
+            <% else %>
+              <td class="tokens-cell">
+                <div class="tokens-total">
+                  <span style="color: var(--green)"><%= number_with_delimiter(ext.input_tokens.to_i + ext.cached_tokens.to_i + ext.cache_creation_tokens.to_i) %></span>
+                  /
+                  <span style="color: var(--yellow)"><%= number_with_delimiter(ext.output_tokens) %></span>
+                </div>
+                <% if ext.cached_tokens.to_i > 0 || ext.cache_creation_tokens.to_i > 0 %>
+                  <div class="tokens-detail">
+                    <%= [
+                      ("#{number_with_delimiter(ext.cached_tokens)} cached" if ext.cached_tokens.to_i > 0),
+                      ("#{number_with_delimiter(ext.cache_creation_tokens)} write" if ext.cache_creation_tokens.to_i > 0)
+                    ].compact.join(" · ") %>
+                  </div>
+                <% end %>
+              </td>
+              <td><%= ext.duration_ms ? "#{(ext.duration_ms / 1000.0).round(1)}s" : "-" %></td>
+              <td><%= format_cost(extraction_cost(ext)) %></td>
+              <td><%= ext.nodes_count %> / <%= ext.edges_count %></td>
+              <td><%= ext.node_reads_count %> / <%= ext.edge_reads_count %></td>
+            <% end %>
+            <td><%= ext.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
+
+<% if @ingestion.content.present? %>
+  <div class="edges-section">
+    <h2>Content</h2>
+    <div class="content-search-bar">
+      <input type="text" class="search-input content-search" placeholder="Search content..." style="flex: 1; font-size: 0.875rem; padding: 0.5rem 0.75rem;">
+      <span class="search-counter" id="search-counter"></span>
+      <button type="button" class="btn btn-sm" id="search-prev" style="display:none;">&uarr;</button>
+      <button type="button" class="btn btn-sm" id="search-next" style="display:none;">&darr;</button>
+    </div>
+    <pre class="content-block" id="content-pre"><code><%= @ingestion.content %></code></pre>
+  </div>
+
+  <script>
+    (function() {
+      const input = document.querySelector('.content-search');
+      const pre = document.getElementById('content-pre');
+      const code = pre.querySelector('code');
+      const originalText = code.textContent;
+      const counter = document.getElementById('search-counter');
+      const btnPrev = document.getElementById('search-prev');
+      const btnNext = document.getElementById('search-next');
+      let currentIndex = -1;
+      let marks = [];
+
+      function highlightCurrent() {
+        marks.forEach(m => m.classList.remove('mark-active'));
+        if (marks.length > 0 && currentIndex >= 0) {
+          marks[currentIndex].classList.add('mark-active');
+          marks[currentIndex].scrollIntoView({ block: 'center', behavior: 'smooth' });
+          counter.textContent = (currentIndex + 1) + ' / ' + marks.length;
+        }
+      }
+
+      function search() {
+        const query = input.value.trim();
+        if (!query) {
+          code.innerHTML = '';
+          code.textContent = originalText;
+          counter.textContent = '';
+          btnPrev.style.display = 'none';
+          btnNext.style.display = 'none';
+          currentIndex = -1;
+          marks = [];
+          return;
+        }
+
+        const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const regex = new RegExp('(' + escaped + ')', 'gi');
+        const safeText = originalText.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        code.innerHTML = safeText.replace(regex, '<mark>$1</mark>');
+
+        marks = Array.from(code.querySelectorAll('mark'));
+        if (marks.length > 0) {
+          currentIndex = 0;
+          btnPrev.style.display = '';
+          btnNext.style.display = '';
+          highlightCurrent();
+        } else {
+          currentIndex = -1;
+          counter.textContent = '0 / 0';
+          btnPrev.style.display = 'none';
+          btnNext.style.display = 'none';
+        }
+      }
+
+      input.addEventListener('input', search);
+
+      input.addEventListener('keydown', function(e) {
+        if (marks.length === 0) return;
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          currentIndex = e.shiftKey
+            ? (currentIndex - 1 + marks.length) % marks.length
+            : (currentIndex + 1) % marks.length;
+          highlightCurrent();
+        }
+      });
+
+      btnNext.addEventListener('click', function() {
+        if (marks.length === 0) return;
+        currentIndex = (currentIndex + 1) % marks.length;
+        highlightCurrent();
+      });
+
+      btnPrev.addEventListener('click', function() {
+        if (marks.length === 0) return;
+        currentIndex = (currentIndex - 1 + marks.length) % marks.length;
+        highlightCurrent();
+      });
+    })();
+  </script>
+<% end %>

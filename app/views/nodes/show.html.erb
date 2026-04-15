@@ -1,0 +1,99 @@
+<div class="node-header">
+  <%= link_to "&larr; Graph".html_safe, nodes_path, class: "back-link" %>
+  <h1 class="page-title"><%= @node.name %></h1>
+  <div class="node-kind">
+    <span class="badge badge-kind badge-kind-<%= @node.kind %>"><%= @node.kind %></span>
+    <span class="node-connections"><%= @node.outgoing_edges_count + @node.incoming_edges_count %> connections</span>
+  </div>
+  <% if @node.description.present? %>
+    <p class="node-description"><%= @node.description %></p>
+  <% end %>
+</div>
+
+<% if @node.attrs.present? && @node.attrs.any? %>
+  <div class="attrs-grid">
+    <% @node.attrs.each do |key, value| %>
+      <div class="attr-card">
+        <div class="attr-key"><%= key %></div>
+        <div class="attr-value"><%= value %></div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<% @edges_by_relation.each do |relation, edges| %>
+  <div class="edges-section">
+    <% edges.each do |edge| %>
+      <div class="edge-card">
+        <div class="edge-row">
+          <div class="edge-source">
+            <span class="badge badge-kind badge-kind-<%= edge.source_node.kind %>"><%= edge.source_node.kind %></span>
+            <% if edge.source_node_id == @node.id %>
+              <span class="edge-node-name edge-node-current"><%= edge.source_node.name %></span>
+            <% else %>
+              <%= link_to edge.source_node.name, node_path(slug: edge.source_node.slug), class: "edge-node-name" %>
+            <% end %>
+            <span class="edge-line"></span>
+          </div>
+          <div class="edge-arrow">
+            <span class="edge-relation"><%= edge.relation %></span>
+          </div>
+          <div class="edge-target">
+            <span class="edge-line edge-line-arrow"></span>
+            <% if edge.target_node_id == @node.id %>
+              <span class="edge-node-name edge-node-current"><%= edge.target_node.name %></span>
+            <% else %>
+              <%= link_to edge.target_node.name, node_path(slug: edge.target_node.slug), class: "edge-node-name" %>
+            <% end %>
+            <span class="badge badge-kind badge-kind-<%= edge.target_node.kind %>"><%= edge.target_node.kind %></span>
+          </div>
+        </div>
+        <% if edge.context.present? %>
+          <div class="edge-context"><%= edge.context %></div>
+        <% end %>
+        <% if edge.try(:attrs).present? && edge.attrs.any? %>
+          <div class="edge-attrs">
+            <% edge.attrs.each do |key, value| %>
+              <span class="edge-attr"><span class="edge-attr-key"><%= key %>:</span> <%= value %></span>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<div class="node-provenance">
+  <h3 class="provenance-heading">Provenance</h3>
+  <dl class="provenance-list">
+    <% if @node.creating_extraction %>
+      <div class="provenance-item">
+        <dt>Created in</dt>
+        <dd><%= link_to truncate(@node.creating_extraction.title.to_s, length: 60), extraction_path(@node.creating_extraction) %> <span class="provenance-date"><%= @node.creating_extraction.created_at&.strftime("%Y-%m-%d %H:%M") %></span></dd>
+      </div>
+    <% else %>
+      <div class="provenance-item">
+        <dt>Created</dt>
+        <dd><span class="provenance-date"><%= @node.created_at&.strftime("%Y-%m-%d %H:%M") %></span> <span class="badge badge-pending">seed</span></dd>
+      </div>
+    <% end %>
+    <% if @node.last_updating_extraction %>
+      <div class="provenance-item">
+        <dt>Last updated in</dt>
+        <dd><%= link_to truncate(@node.last_updating_extraction.title.to_s, length: 60), extraction_path(@node.last_updating_extraction) %> <span class="provenance-date"><%= @node.last_updating_extraction.created_at&.strftime("%Y-%m-%d %H:%M") %></span></dd>
+      </div>
+      <% if @node.updates_count > 1 %>
+        <div class="provenance-item">
+          <dt>Total updates</dt>
+          <dd><%= @node.updates_count %> extractions</dd>
+        </div>
+      <% end %>
+    <% end %>
+    <% if @node.reads_count > 0 %>
+      <div class="provenance-item">
+        <dt>Read by</dt>
+        <dd><%= @node.reads_count %> <%= "extraction".pluralize(@node.reads_count) %></dd>
+      </div>
+    <% end %>
+  </dl>
+</div>
