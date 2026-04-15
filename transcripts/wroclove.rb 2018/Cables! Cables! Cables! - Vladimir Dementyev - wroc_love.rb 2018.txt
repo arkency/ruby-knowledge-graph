@@ -1,0 +1,2020 @@
+so first of all thanks to Stefan for the
+
+
+great talk on Rails performance and for
+
+
+saying multiple times that Ruby is slow
+
+
+so don't help to repeat it because my
+
+
+talk is related to performance - and
+
+
+some weak parts of Ruby some quick
+
+
+introduction and for the first time here
+
+
+so my name is Vladimir and I came from
+
+
+Moscow all the way and I I think I
+
+
+brought the snow two rods off sorry for
+
+
+that I have expected weather like this
+
+
+here I hope to travel to the spring
+
+
+weather you know it's all the same
+
+
+apart from program in Ruby and air lunk
+
+
+and go long and Christo or whatever I
+
+
+mean doing a lot of open source stuff
+
+
+you can find me on github and Twitter
+
+
+it's my technical Twitter account and
+
+
+I'm working at a company called evil
+
+
+Martians
+
+
+it's a Lagos really fun well we're doing
+
+
+a lot of great stuff so we're working
+
+
+for big companies and small startups
+
+
+during product development we doing a
+
+
+lot of open source we write about it in
+
+
+our beautiful block with cool
+
+
+illustrations and that's it for the
+
+
+introduction because we don't have
+
+
+enough time to talk about Ruby so why
+
+
+I'm here
+
+
+and actually that's the reason why I'm
+
+
+here so aggressive looking for someone
+
+
+who have an experience with action cable
+
+
+so this brand new not so new it's
+
+
+already almost three years old framework
+
+
+from the rails family and I'd like to
+
+
+tell you about its good parts and bad
+
+
+parts and some stories scary stories
+
+
+maybe and about other cables that there
+
+
+are in the wild so first of all what do
+
+
+you mean by cable what is this by cable
+
+
+I mean any tool framework which allows
+
+
+you to build real time web applications
+
+
+and what is real time sorry okay so by
+
+
+real time web application is application
+
+
+that allows user to receive information
+
+
+as soon as it's appeared and anywhere
+
+
+else in the system from other users
+
+
+without checking periodically for
+
+
+updates so it's actually kind of a
+
+
+synchronous communication and it's fast
+
+
+communications there's some of the
+
+
+examples of real-time applications it's
+
+
+a pretty simple one is a typical chat
+
+
+application and we're talking about Ruby
+
+
+so there are a lot of Ruby cables Ruby
+
+
+solutions to build real time
+
+
+applications some of them I think
+
+
+already dead
+
+
+but maybe someone use it some are brand
+
+
+new and no one knows about them and the
+
+
+question is and that's we were gonna
+
+
+mention some elixir things first time
+
+
+that usually even being a ruby developer
+
+
+when you get a challenge to build
+
+
+something real time Ruby where else
+
+
+developers often choose non Ruby
+
+
+solutions and because Ruby slow right we
+
+
+already know that and there are a lot of
+
+
+things out there they're different
+
+
+technologies and you build a micro
+
+
+servers along with your rails app to
+
+
+handle WebSockets or you use a
+
+
+third-party service like pusher firebase
+
+
+whatever and the reason that Ruby is not
+
+
+a good language for concurrent
+
+
+applications right so it's that's kind
+
+
+of by design we got some limitations so
+
+
+in global interpreter lock and my
+
+
+Morimoto is not as good as it could be
+
+
+so that's a problem but I am want to ask
+
+
+a question once again this is the same
+
+
+question would you like to choose Ruby
+
+
+for your real-time applications or you
+
+
+don't want to even try to do that maybe
+
+
+there is a chance that we can write
+
+
+performant concurrent applications using
+
+
+Ruby not only in Ruby and that's a
+
+
+question I'd like to ask during my talk
+
+
+so first of all let's talk about action
+
+
+cables that's our main subject quick
+
+
+reminder what action cable is it
+
+
+consists of several parts first of all
+
+
+we got a server that's apart which
+
+
+handles all the low-level web sockets
+
+
+manipulations or parsing WebSocket
+
+
+protocol sending and receiving messages
+
+
+etc then we got a broadcaster part this
+
+
+part is possible for sending messages to
+
+
+the clients we should subscribe to the
+
+
+particular streams so just identified
+
+
+communication channels and to write code
+
+
+for all that stuff we got a kind of
+
+
+channels framework that's a framework
+
+
+for writing your code that's three main
+
+
+pillars of action cable apart from that
+
+
+we got of course clients and client
+
+
+implementations some built into rails
+
+
+like JavaScript client and some third
+
+
+party clients for the platforms let's
+
+
+talk about good and bad parts of action
+
+
+cable as I see them first of all what
+
+
+makes an action cable attractive for
+
+
+rails developers for not Peru bit but
+
+
+for rails and pinnell that's that it's
+
+
+just built into rails you're doing rails
+
+
+new you got application which is ready
+
+
+for your time you don't have to worry
+
+
+about it and and one more thing here is
+
+
+that unlike previous solutions prayer
+
+
+action cable solutions like our PI event
+
+
+machine based solutions you don't have
+
+
+to run separate Ruby process to handle
+
+
+WebSockets everything happens within
+
+
+your typical process here boom a web
+
+
+server it's wrecked compatible it's
+
+
+really easy to work with so it's
+
+
+simplicity of first steps it's it's cool
+
+
+the second good part is a channels
+
+
+framework I already told about let me
+
+
+show some code example if you're not
+
+
+familiar with it so it's a wave you're a
+
+
+LC way framework it's kind of channel is
+
+
+a kind of controller for
+
+
+your WebSocket so you manage access
+
+
+manage subscriptions whatever and it's
+
+
+really good and of course you get call
+
+
+backs because it's rails and the third
+
+
+part is already mentioned - so we got a
+
+
+client's it just works and it's a little
+
+
+bit smarter than nothing because it
+
+
+handles connection problems and it know
+
+
+how to reconnect and Reese absque right
+
+
+when everything goes anything goes wrong
+
+
+so it's again easy to use easy to work
+
+
+with but still there is a question
+
+
+anyone out there use action cable pods
+
+
+or use rails maybe maybe there are no
+
+
+rails programmers okay that's not
+
+
+strange actually there are some problems
+
+
+with it it's not easy to find a
+
+
+real-life usage of action cable and but
+
+
+I found one and I'll tell you about it
+
+
+let's talk about some bad parts some
+
+
+missing parts first of all it's not a
+
+
+main problem but we can I cannot skip it
+
+
+action cables WebSockets only protocol
+
+
+server it doesn't have any felt backs
+
+
+you may say well who cares and at least
+
+
+6% out there this plant cares because
+
+
+they still use really really old
+
+
+technologies which don't support
+
+
+WebSockets and even in Europe there are
+
+
+three percent of users I know who who's
+
+
+now I don't think anyone from suits your
+
+
+audience but they don't have WebSocket
+
+
+support and their laptops unlikely
+
+
+things that's kind of big scary personal
+
+
+computers so we should take it and took
+
+
+into account but that's not the main
+
+
+problem with section cable of course
+
+
+unless you're building applications for
+
+
+cells for three percents and the main
+
+
+reason why people afraid of action cable
+
+
+one of the main reasons is memory usage
+
+
+and it's due to some Ruby limitations to
+
+
+just a quick example very simple
+
+
+benchmark we compare in almost doing
+
+
+nothing WebSocket server
+
+
+WebSocket application or reading with
+
+
+help of action cable and similar
+
+
+implementations reading
+
+
+in Ireland just to compare things so you
+
+
+could see the memory required for Ruby
+
+
+is much more than for others and it's
+
+
+actually it's it became a little bit
+
+
+better since two point five has been
+
+
+released for two point three it was
+
+
+about 20-30 percent more memory for
+
+
+action cable but we're going to talk
+
+
+about memory when we speak about
+
+
+real-life example another main thing
+
+
+that is a real-time performance we are
+
+
+talking about page load performance
+
+
+previously and there were some kind of
+
+
+milliseconds so on and so forth and
+
+
+context switching psychology so for
+
+
+real-time performance we usually take
+
+
+into account the amount of time it takes
+
+
+for server to broadcast message to
+
+
+everyone who's listening to the stream
+
+
+so help how big is latency between
+
+
+something happened and everyone knows
+
+
+about it for some applications it's a
+
+
+crucial metrics because you don't want
+
+
+to write a chat application whether your
+
+
+latency is now several seconds because
+
+
+communication won't be good so to
+
+
+measure it we got a a great benchmark
+
+
+written by a rocket company which
+
+
+actually measures this real-time
+
+
+performance so we measure the time it
+
+
+takes error to bilk as a message to
+
+
+everyone that as I already stated let's
+
+
+see the numbers hey pretty scary
+
+
+first of all we introduced a version of
+
+
+action cable with only two workers in
+
+
+okay the mittens minimum possible for
+
+
+good work and we see that for even a
+
+
+couple of thousands of clients well for
+
+
+someone is too big for high-level
+
+
+applications it's not so large number we
+
+
+see that Layton sees grouse very fast
+
+
+and thousands of seconds it's an
+
+
+acceptable actually when we add more
+
+
+workers say eight workers we get an
+
+
+eight CPU of course machine for this
+
+
+benchmark so let us see it's smaller but
+
+
+it's too gross and it's much much more
+
+
+than four again more suitable
+
+
+technologies doesn't means that
+
+
+well forget about that cable stop
+
+
+talking about it let's go about talk
+
+
+about Tara long I know not sure that's
+
+
+not this time maybe that going to be a
+
+
+long road soft conference someday at
+
+
+least Alex here it's possible to talk
+
+
+about the elixir on everyone come to us
+
+
+now it doesn't mean that action cable I
+
+
+know how to say it but lightly so I just
+
+
+give it this part so that's kind of
+
+
+theorem for cable right if you want to
+
+
+use action cable you should either
+
+
+sacrifice your latency oh you should
+
+
+aware of crowded channels by crowded
+
+
+channels and main channels which will
+
+
+subscribe share a little large number of
+
+
+subscribers say thousands so if you
+
+
+don't have such case if you use an
+
+
+action cable to broadcast thousands of
+
+
+clients it's okay to use it there is no
+
+
+problem from the real-time point of view
+
+
+it's good enough to work with that's it
+
+
+but if you want to handle millions of
+
+
+connections not even millions about
+
+
+hundreds of thousands and you want to
+
+
+have low latency of course that's not
+
+
+for you and even a Ruby not for you and
+
+
+just to us but not least let me show you
+
+
+this quick gift while I'm drinking water
+
+
+okay so that CPU usership
+
+
+action cable surrounder not so heavy
+
+
+load actually you don't have a room for
+
+
+anything else on this machine
+
+
+that's a 16 core Seyfried 4x large
+
+
+Amazon instance pretty expensive
+
+
+actually
+
+
+well that's all about theory and
+
+
+benchmarks and don't believe benchmarks
+
+
+artificial that don't tell you about the
+
+
+real-life usage so it's kind of
+
+
+experiments academic research whatever
+
+
+let's talk about real life and I want to
+
+
+talk about an service code quit calm
+
+
+what is it it's a platform for managing
+
+
+and monitoring equestrians shows so it's
+
+
+a kind of sports with horses
+
+
+another big fan of such sports but turn
+
+
+out to be very popular in Europe the
+
+
+platform is heavily used WebSockets
+
+
+first of all for monitoring service
+
+
+that's kind of textual translation what
+
+
+happened in real areal time during these
+
+
+shows a lot of shells happened on during
+
+
+the weekends and the load is pretty high
+
+
+and have thousands of connections well I
+
+
+talked with the owners of this startup
+
+
+and they tell me certain Tony's story
+
+
+so they used different technologies
+
+
+different cables they call them include
+
+
+an action cable and unless he finally
+
+
+until we finally switch to something I
+
+
+call X for now and review it's in a
+
+
+minute what is it
+
+
+and according to action cable word he
+
+
+told that memory is a problem in Ruby
+
+
+and in action cable is much more a
+
+
+bigger problem because to handle all
+
+
+that load they have to use more than 21
+
+
+X Heroku dynos each 1gb ram so they
+
+
+hosted on Heroku and the memory will
+
+
+grow in their application wherewithal it
+
+
+due to memory core exceeded exceptions
+
+
+and everything was not so good and that
+
+
+was the situation with action cable
+
+
+under the high load then they switched
+
+
+to some other cable
+
+
+and the amount of resources they need
+
+
+drastically decreased 10 times because
+
+
+they now have four dinars twice smaller
+
+
+that's well looks kind of fantastic of
+
+
+course they spend much less money ten
+
+
+times less for this configuration and
+
+
+they have a room for more low so it's a
+
+
+kind of for future and the question is
+
+
+what is X any ideas how there may be
+
+
+it's Alex cereal no unfortunately that
+
+
+was not the case because they get a
+
+
+large platform with a lot of legacy code
+
+
+and it's all been written in rails and
+
+
+to migrated to act elixir I guess it's
+
+
+was it a lot of a lot of effort the
+
+
+migration to X took only a couple of
+
+
+weeks and that's good part of this
+
+
+migration and the X is any cable and
+
+
+that's another cable I'd like to talk
+
+
+about today that's the way I'd like to
+
+
+prove that it's possible to write
+
+
+concurrent applications with Ruby and
+
+
+something else so what is any cable
+
+
+there is good enough definition by one
+
+
+person probably know whose it it is so
+
+
+it's it's sound tool which allows you to
+
+
+enhance action cable not to replace it
+
+
+but to make it faster to make it consume
+
+
+less resources to make it better
+
+
+actually
+
+
+so let me tell you how we can accomplish
+
+
+this so let's recall that's we have four
+
+
+parts of our action cable and actually
+
+
+the part which is responsible for that
+
+
+poor performance and resources used is a
+
+
+server the pilot which handles all their
+
+
+words low-level WebSocket stuff not the
+
+
+framework itself right because if I go
+
+
+gesture Ruby code and not doing anything
+
+
+much difficult so what if we can extract
+
+
+this server part out of MRI out of Ruby
+
+
+out of
+
+
+our slow Ruby and implement using
+
+
+different technology and connect it to
+
+
+Ruby that's actually the idea that lies
+
+
+behind any cable so with any cable it's
+
+
+possible but first before showing how it
+
+
+works and showing sophisticated diagrams
+
+
+let me tell you a few notes about our PC
+
+
+who are afraid of PowerPC raise your
+
+
+hands
+
+
+that's current situation that's when I'm
+
+
+talking about our pcs if you go watch
+
+
+reason our PC where you came from 90s
+
+
+well yeah that's a problem with our
+
+
+perceive it's bad word but we talking
+
+
+about GRP see what is it first of all
+
+
+yeah we can call it a Google RPC it's
+
+
+not an official officially geez for
+
+
+nothing they do not tell anything about
+
+
+Jesus just a letter but we can call it
+
+
+Google RPC because it is born it was
+
+
+born Google it is heavily used by Google
+
+
+services you probably know about that
+
+
+because many of public public Google API
+
+
+is have Jerry PC versions and that's a
+
+
+universal RPC framework but also I mean
+
+
+that it's possible to build easily built
+
+
+servers and clients and different
+
+
+languages and communicate with each
+
+
+other and technically we use HTTP 2 and
+
+
+brought above serialization which is
+
+
+fast which is binary protocol which is
+
+
+fast insulation des civilisations and
+
+
+it's good indirect data compression and
+
+
+HTTP to allow us to make a lot of
+
+
+concurrent requests using the same
+
+
+connection so it's actually a OPC is
+
+
+just a combination of sales to
+
+
+technologies hemant is we can build
+
+
+something like that well a lot of campo
+
+
+come components but okay just a quick
+
+
+explanation what's going on here instead
+
+
+of connecting our
+
+
+to our application as with action cable
+
+
+we connect them to some WebSocket server
+
+
+written in other languages say go and
+
+
+then our task is to proxy all the action
+
+
+cable protocol messages to our business
+
+
+logic to our Ruby application so in this
+
+
+case in that case it's a RPC part so
+
+
+that's an ER PC connection that's just
+
+
+an instance of your rails application
+
+
+but with a different server with RPC
+
+
+server everything else is available so
+
+
+just a rails application and that's way
+
+
+you your clients communicate with the
+
+
+application and there is one part which
+
+
+is called Redis but it could be
+
+
+something else actually the way we
+
+
+broadcast messages from our application
+
+
+to WebSocket server which is responsible
+
+
+to fan out all these messages to clients
+
+
+that's how any cable works right now
+
+
+okay we know some diagrams let's around
+
+
+our benchmarks again to see the
+
+
+difference between election cable pure
+
+
+Ruby solution and any cable Ruby and
+
+
+something else solution right now we get
+
+
+two implementations for any cable
+
+
+WebSocket servers one written in goal
+
+
+another one another one written in
+
+
+airlock don't ask me why there are two
+
+
+of them right now after a talk I will be
+
+
+ready to answer this question and first
+
+
+well just quick comparison of CPU usage
+
+
+it's pretty interesting actually in
+
+
+terms of comparing air lankan golang
+
+
+because we can see that air link is
+
+
+sterile scheduler is much more better
+
+
+because almost equal amount of CPU for
+
+
+every core is used not as per girl and
+
+
+it's kind of chaotic but it's both of
+
+
+them are much better than Ruby of course
+
+
+as for real-time performance and our
+
+
+shoot out framework everything is clear
+
+
+- so we got a much better performances
+
+
+it's we can't call it real-time and what
+
+
+is the cost for using a rack any cable
+
+
+so except from having a couple of more
+
+
+servers right it's not that easy
+
+
+but despite from that you don't need
+
+
+anything else just a couple of commands
+
+
+and your application is ready to be used
+
+
+with any cable server you don't have to
+
+
+rewrite your channels mostly so we got
+
+
+some kind of compatibility table which
+
+
+shows that almost all features affection
+
+
+cables supported not not oh so there are
+
+
+even articles describing subtle
+
+
+differences from users who use it in
+
+
+production but apart from solving the
+
+
+performance and resources problem any
+
+
+cable bring us an opportunity to extend
+
+
+functionality to do something else
+
+
+something some cool features I'd like to
+
+
+talk about and the first such features I
+
+
+call it zero disconnect deployment
+
+
+typically we know some kind of zero
+
+
+downtime deployment but when we're
+
+
+talking about sockets there is a notion
+
+
+of zero disconnect deployment what
+
+
+happens when you deploy your action
+
+
+cable server so new version of action
+
+
+cable application you have to reload
+
+
+your web server and when you reload your
+
+
+web server all the connections got
+
+
+disconnected so we got a thousands of
+
+
+connected clients they all disconnect it
+
+
+at once and they'll at once try to
+
+
+connect again so first of all there is a
+
+
+gap between this connection and when
+
+
+they got reinitialized and you can lose
+
+
+some messages and actions that's another
+
+
+problem of action cable I'm not going to
+
+
+talk about today I can talk about mostly
+
+
+performance so another problem is when
+
+
+you thousands of clients try to connect
+
+
+all at a time your server won't feel
+
+
+good right because it's kind of peak
+
+
+load which we don't know can end up with
+
+
+something not so good and I think it was
+
+
+situation changed because we do have a
+
+
+kind of proxy WebSocket server which is
+
+
+logic class we do not have to reload it
+
+
+on deployment because it doesn't contain
+
+
+any logic it's just a sound
+
+
+of enhanced proxy for WebSockets so you
+
+
+can just reload the application and your
+
+
+clients are stay connected you don't
+
+
+have to disconnect them everything works
+
+
+as previously it's this feature is very
+
+
+crucial for applications which are
+
+
+deployed you know every five minutes
+
+
+like big rails monoliths like Shopify
+
+
+maybe github they deploy in every time
+
+
+and if you got a disconnect every minute
+
+
+it's not good for real-time so that's
+
+
+just simplified diagram there is a
+
+
+little bit more complex diagram how it
+
+
+actually works our configuration design
+
+
+with proxy and kind of rolling update
+
+
+its make the process even more smoothly
+
+
+no RPC Rios or whatever another great
+
+
+feature I was brand new for any cable
+
+
+the one reason why I build it as having
+
+
+advanced analytics if you're working
+
+
+with a again a little application you
+
+
+should know what's happening inside you
+
+
+should monitor what's going on to
+
+
+prevent some outrage and with the game
+
+
+then cable it's easy it's got from a
+
+
+sales compatible metrics endpoint for
+
+
+example and you can build such good -
+
+
+Birds in your graph on a-- and set up
+
+
+alerts and well monitor all the stuff at
+
+
+least know what is going on inside how
+
+
+many clients do you have how many unique
+
+
+clients to have so that's a quick
+
+
+overview of Nek but we got a pretty
+
+
+beautiful site you can check it a lot of
+
+
+resources out there talks and posts and
+
+
+of course github and twitter let's stop
+
+
+with talking about rails no land
+
+
+interested in it I got a five minute to
+
+
+talk about not trails usage and some
+
+
+other cables
+
+
+any questions so far you mentioned that
+
+
+you can explain why there are two
+
+
+implementations in written okay
+
+
+explanation is pretty easy yeah I
+
+
+haven't programmed go lank when I was
+
+
+trying to write any cable first about
+
+
+1/2 years ago I tried to write in in air
+
+
+long but there was some problem because
+
+
+there is no Jerry PC library for I work
+
+
+I had to roll one by myself but first I
+
+
+decided to build this really quick
+
+
+prototype in go along because gonk is
+
+
+pretty cool and writing something very
+
+
+fast and for the last two months I spent
+
+
+two refactoring all that go mess that I
+
+
+wrote a years ago because it was hard to
+
+
+maintain
+
+
+now I'm not supporting our long version
+
+
+because well frankly speaking it's not
+
+
+easy for most people to use it because
+
+
+go long is pretty much much more easy
+
+
+just download the binary and run it
+
+
+that's it and with our lungs there are
+
+
+some additional complexities and when I
+
+
+will use any cable for my own project
+
+
+not will use it on other project to
+
+
+Marsha's I'm not working for them so
+
+
+maybe I'll try to use along because I
+
+
+know how to use some great features and
+
+
+enhance the cable protocol with it but
+
+
+for usual ruby developer is much easy to
+
+
+use :
+
+
+binary than to run along with am with
+
+
+all its complexities okay thank you
+
+
+that's the final part it's pretty short
+
+
+part but it's kind of I want to show
+
+
+some other cables out there and the
+
+
+story begins with the issue again and
+
+
+any cable repository when I release it
+
+
+year ago one person asked me well well
+
+
+I'd like to use it without rails well
+
+
+what what how it's possible
+
+
+now fought well what bring what make its
+
+
+dependent on Rails actually just the
+
+
+part which is where we write our called
+
+
+our channels Ruby framework and I
+
+
+decided that's not too hard to build our
+
+
+own framework for channels because I
+
+
+know how action cable works from the
+
+
+inside I'm tried to make it better in
+
+
+the rails repository by making a lot of
+
+
+pull requests most of them still not got
+
+
+merged but including some which saw some
+
+
+performance issues by the way but havin
+
+
+some ideas in mind
+
+
+I built a project called light cable and
+
+
+it well pretty obvious what does it mean
+
+
+it's a rails free action cable so it
+
+
+implements the same protocol but it
+
+
+doesn't depend on anything not even
+
+
+active support and it's compatible with
+
+
+any cable out of the box so it was built
+
+
+fine a cable initially and it's
+
+
+compatible with all the action cable
+
+
+clients out there and it's really easy
+
+
+to use
+
+
+it's looks this almost the same as
+
+
+action cable less magic no callbacks but
+
+
+the main features are supported and it
+
+
+could be used even with rack so you
+
+
+don't have to use anything else you can
+
+
+try to write something for your time
+
+
+with rack but it's designed to be used
+
+
+with any cable there is a good example
+
+
+of usage of live cable and any cable
+
+
+with Konami framework and for the
+
+
+Internet of Things project so it's
+
+
+really easy to configure it and run so
+
+
+you can use it sky coded konami cable
+
+
+because well kinda me doesn't help its
+
+
+own solution i think who won't help one
+
+
+it's doesn't make sense and right now
+
+
+we're working on one more integration
+
+
+it's with a project called play z and
+
+
+work in progress i think we're gonna
+
+
+finish it in a couple of weeks it's not
+
+
+as easy as we thought
+
+
+what is blazing that it is a framework
+
+
+built on top of IOT and web server
+
+
+that's an new alternative web server in
+
+
+the Ruby world it's kind of alternative
+
+
+to pull my passengers or whatever so
+
+
+it's just actually wrapper oversee
+
+
+library 4c framework for HTTP
+
+
+applications it's right compatible so it
+
+
+can be used to run your rails
+
+
+application and has been mostly
+
+
+repairable see it's really resource
+
+
+efficient so CPU efficient and memory
+
+
+efficient but as for now it's not as
+
+
+stable as I wish it to be there are some
+
+
+backs but the offer of the framework is
+
+
+we're responsible cause and it's fast
+
+
+but there are some backs in the wild
+
+
+so there are two projects I odin's a web
+
+
+server and the pleasure is a framework
+
+
+to write real the applications on top of
+
+
+it
+
+
+and having this - and making it possible
+
+
+for example to connect the action cable
+
+
+or to light cable would bring new
+
+
+opportunities to really because it's
+
+
+really really good and it's not as
+
+
+complex as event machine for example
+
+
+that I I think they're gonna be
+
+
+questioned about it so I'm preparing
+
+
+myself ok
+
+
+to sum up hmm do I want to use Ruby for
+
+
+your time or not so is it slow is it
+
+
+fast enough on that for us so we know
+
+
+that WebSockets and Ruby is possible so
+
+
+we can write applications that's okay
+
+
+but if you want to use it for high
+
+
+performance application we need to bring
+
+
+something else to the stack not on just
+
+
+Ruby is not enough as for action cable
+
+
+it's usable and many people use it small
+
+
+projects for example or for MVP projects
+
+
+because they don't know whether it's
+
+
+going to be good idea or not and when
+
+
+you face the problem of performance
+
+
+sorry you can just takes action cable
+
+
+I'll replace it with something else as I
+
+
+already showed so we got down action any
+
+
+cable we got like a table we got lazy ni
+
+
+Odin maybe someone could write something
+
+
+else on top of it they
+
+
+is to leave out the business logic in
+
+
+your Ruby application because it's much
+
+
+more easy to write it out there and to
+
+
+bring all the hard work somewhere else
+
+
+and connect them so how that's main goal
+
+
+of the any cable and related projects
+
+
+well itself now yeah I got a bunch of
+
+
+stickers feel free to ping me if you
+
+
+sticker fun and you have a place on your
+
+
+laptop to put them on thank you
+
+
+[Applause]
+
+
+[Music]
+
+
+[Applause]

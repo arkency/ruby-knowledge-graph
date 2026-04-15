@@ -1,0 +1,3088 @@
+hello everyone welcome to Russ love
+
+
+[Laughter]
+
+
+sorry I'm not Aaron Patterson I'm not
+
+
+good at pants but I thought this was so
+
+
+funny I had to put this in my
+
+
+presentation and I'm not gonna start the
+
+
+presentation you as usual with drunk
+
+
+photos I'm gonna start with this
+
+
+beautiful backdrop that I created with
+
+
+[ __ ] on Linux not on Mac OS as you can
+
+
+see I'm quite talented now with like
+
+
+fonts and stuff it looks pretty cool so
+
+
+I'm not going to show and Ray in
+
+
+underpants I'm not going to show anyone
+
+
+drunk from last night
+
+
+I'm going to tell you so I learned how
+
+
+to eat Tata and Poland's basically you
+
+
+mix two of the most dangerous things in
+
+
+the world raw like raw meat and raw egg
+
+
+and then you put stuff on top and then
+
+
+you mix it and it's delicious when I
+
+
+came to Poland and what it takes is that
+
+
+an extremely extremely talented Polish
+
+
+person to put salt and pepper on top in
+
+
+a specific way that's how you eat
+
+
+tartare so today I had this and it was
+
+
+great I'm feeling amazing I want you I
+
+
+want to draw here or what no it wasn't
+
+
+that salty because I already had a salty
+
+
+breakfast which ah it was assault it was
+
+
+at a pun hey hey hey come on stage so I
+
+
+want to draw your attention to my
+
+
+beautiful backdrop again because I'm so
+
+
+proud of it took me like 10 minutes to
+
+
+get the scaling and everything so I'm
+
+
+lots of people were laughing saying ha
+
+
+ha ha et cetera is coming he doesn't
+
+
+have a talk titled he's probably gonna
+
+
+talk about trailers it's like super
+
+
+surprising that people talk about their
+
+
+projects when they are invited to
+
+
+conferences I'm not gonna talk about
+
+
+railways this slide is all these people
+
+
+remind me I have stickers and lanyards
+
+
+pretty cool for Trailblazer so if if you
+
+
+like tribe if you hate trail visit just
+
+
+come get a sticker and I don't know like
+
+
+burn it on camera or something like that
+
+
+again like look at this like okay so
+
+
+today is a beautiful day it's Saturday I
+
+
+guess so I'm I'm planning to walk you
+
+
+through my life from
+
+
+basically a day one of my programming at
+
+
+Korea if you can call it Korea to to
+
+
+today which and trying to explain how I
+
+
+like how my programming style changed
+
+
+from like the stuff we learn in like
+
+
+books and and so on to you know stuff we
+
+
+were just discussing in the panel with
+
+
+like event sourcing and components and
+
+
+all this kind of stuff
+
+
+so when people ask me when I started
+
+
+programming I always say I was eight
+
+
+because it sounds cool I have no idea
+
+
+when I started programming but this is
+
+
+my friends and myself I can you spot me
+
+
+like this is me about eight years old so
+
+
+this when I started programming
+
+
+officially so my first programming book
+
+
+was a book called tricks of the Mack
+
+
+game programming gurus back then I
+
+
+thought it's pronounced gurus but that
+
+
+was because I didn't speak English and
+
+
+so I wanted to start programming to to
+
+
+program it on game basically and I was
+
+
+using a Mac before it was cool and this
+
+
+book was basically teaching programming
+
+
+on Mac and I remember exactly that I
+
+
+learned like C++ with a different book
+
+
+and I was really struggling with like I
+
+
+loved the concept of a function I kind
+
+
+of got the idea but I didn't understand
+
+
+why you can like do you have the
+
+
+parameter like int a and int B and then
+
+
+use a and B in that function but when
+
+
+you call that function the a and B can
+
+
+have different names for example VAR a
+
+
+or something that it might example so I
+
+
+was talking to my dad and he kind of
+
+
+explained me like hey man just think of
+
+
+just think of a function as a component
+
+
+you call and you throw in the arguments
+
+
+or like the values you want to process
+
+
+and the implementer of the function like
+
+
+myself you don't care about how that
+
+
+variables call on the outside so that's
+
+
+kind of how I understood okay a in my
+
+
+function can actually be called variable
+
+
+from another planet in the out in in the
+
+
+calling code so and that was kind of for
+
+
+me that was a like a traumatic event in
+
+
+a positive way so I kind of I kind of
+
+
+answered hey cool so I can use functions
+
+
+to
+
+
+and capsulate behavior and the outside
+
+
+world doesn't know what I'm doing in
+
+
+that function because I can name my
+
+
+variables the way I want in the outside
+
+
+world doesn't know about it and I don't
+
+
+give a [ __ ] about how the outside world
+
+
+the caller is processing variables
+
+
+because I can like it's just two
+
+
+different components and so I took that
+
+
+stuff from C++ my C++ code thank you I'm
+
+
+I I didn't know what I was doing I agree
+
+
+I was just copying stuff from C++ books
+
+
+to C++ compilers I don't know the name
+
+
+anymore but and it worked so but I love
+
+
+the idea of functions and I took this to
+
+
+Perl because I started programming Perl
+
+
+this was the actual first programming
+
+
+book you should all read it not and kind
+
+
+of am from Perl I learned programming
+
+
+and then I started to use Ruby rails and
+
+
+Ruby and I was instantly unsatisfied
+
+
+with the way functions you know and
+
+
+encapsulation was handled in rails not
+
+
+in Ruby Ruby has functions Ruby has
+
+
+methods Ruby is all this kind of stuff
+
+
+but in rails it was always like I don't
+
+
+know like there was one big thing
+
+
+handling everything so I started rails
+
+
+and it was like absolutely amazing but I
+
+
+was struggling to find the architectural
+
+
+ideas behind it and so I started writing
+
+
+my first gem cut cells and what cells
+
+
+did was super simple like you know you
+
+
+have like a huge web page this is Amazon
+
+
+this is not I didn't write anything and
+
+
+so so for example you have a sidebar and
+
+
+you want to have that sidebar on every
+
+
+page so in rails the only way was like a
+
+
+partial and controller and before filter
+
+
+and you share logic in the controller
+
+
+and all this kind of stuff so basically
+
+
+I wanted to have a class you know like
+
+
+this don't worry about the actual code
+
+
+so basically I wanted to have this in an
+
+
+object and that object exactly like a
+
+
+function doesn't know what's happening
+
+
+on the outside and the outside doesn't
+
+
+know what's happening in the cell so I
+
+
+kind of wrote this blah blah blah you
+
+
+know cell jam and you had like a class
+
+
+and the class could render could be
+
+
+rendered with a helper so you said
+
+
+render cell and then it would call that
+
+
+function and a partial or sidebar or an
+
+
+entire page would be rendered and the
+
+
+the rendering didn't know anything about
+
+
+the other
+
+
+ring and what was pretty awesome was
+
+
+that you could do that you could attest
+
+
+that stuff in isolation yeah like so I
+
+
+could render my cell and it would do
+
+
+exactly what it will do in production
+
+
+because I had to pass in the
+
+
+dependencies and I got out HTML as a
+
+
+HTML string that was pretty cool and the
+
+
+cool thing is I liked it so here
+
+
+actually that was like a 2008 or
+
+
+something let me check that here 2008 so
+
+
+he emailed me like hey this is actually
+
+
+a cool idea and so he liked the idea of
+
+
+encapsulation so just to remind you
+
+
+that's the same guy who now tells
+
+
+everyone that concerns are a great idea
+
+
+and you should push as much code as
+
+
+possible into one class called their
+
+
+model in rails and so he liked it it was
+
+
+pretty proud of myself and nothing ever
+
+
+happened after this so so the next
+
+
+proper Oliver was approaching was reform
+
+
+so I kind of hid the idea hey there's a
+
+
+forum in a web UI why the hell would I
+
+
+have this forum in my models and stuff
+
+
+like why don't I let's introduce a new
+
+
+class for that model and that class is
+
+
+only mapping to that forum you just saw
+
+
+so you define properties you can define
+
+
+collections blah blah blah blah blah you
+
+
+could define validations only for that
+
+
+forum yeah like contextual validation in
+
+
+a class and the cool thing was you could
+
+
+test that in isolation again and you
+
+
+wouldn't know what is happening inside
+
+
+and the inside wouldn't know what
+
+
+happening outside and the cool thing is
+
+
+that you can test that without having to
+
+
+run a [ __ ] HTTP request sorry for my
+
+
+words I'm already wholly aggressive so
+
+
+yeah she's liked it high enough okay
+
+
+yeah he kind of is so we hit this chat
+
+
+on my email again and he said hey I can
+
+
+see how this is helpful and actually I
+
+
+don't like accepts nice attributes for I
+
+
+forgot before and so I I'm still
+
+
+wondering why do we have it in rails if
+
+
+they don't like it but yeah it's cool to
+
+
+have features and put them into the
+
+
+society and people think it's good but
+
+
+it's bad anyway so I kind of work with
+
+
+rails and I kind of like I wrote some
+
+
+gems and stuff and I didn't really see
+
+
+why are we making our life so difficult
+
+
+with this like monolithic thinking like
+
+
+one controller for everything and
+
+
+my code sits in the model and model is
+
+
+an object and where are the boundaries
+
+
+no idea because it's cool like it's just
+
+
+fast and you can build Basecamp and you
+
+
+can make millions of dollars if you're
+
+
+good at it
+
+
+good this is so and the problem was that
+
+
+I introduced objects and I introduced
+
+
+encapsulation but we still have this
+
+
+problem of now I have those objects now
+
+
+I have my like scope but how do I tweak
+
+
+those objects how to customize them yeah
+
+
+like a cell is a cell but if you want to
+
+
+have another cell phone I don't know for
+
+
+Christmas with a different theme how do
+
+
+you customize it if you have a new form
+
+
+with a different validation how do you
+
+
+do that and you're always like since you
+
+
+have an object you have to in the Ruby
+
+
+you have to use inheritance or beautiful
+
+
+mix-ins and you just you know use the
+
+
+mechanics that we have in Ruby because
+
+
+Ruby hasn't changed in more than 10
+
+
+years or 20 years so we we always use
+
+
+like extend and super and you override
+
+
+methods I'm gonna talk about this in a
+
+
+little bit and you kind of have really
+
+
+low level and lower level when I say low
+
+
+level now I mean lower level like
+
+
+mechanics to customize objects so we
+
+
+have objects now which is great but
+
+
+we're still struggling to customize them
+
+
+and then they introduce refinements I'm
+
+
+a hundred percent sure no one in this
+
+
+room has ever used refinements because
+
+
+they are so [ __ ] hard to understand
+
+
+and like no one knows what they do and
+
+
+come on raise your hand
+
+
+ah oh my goodness I'm leaving give me a
+
+
+drink so yeah oh so refined it was a
+
+
+nice idea but it didn't work so it's
+
+
+like customizing object add run to him
+
+
+and compare time we don't have that
+
+
+concept in Ruby yet and so I stood on a
+
+
+mountain with a cloth on my hands and I
+
+
+liked looking towards the horizon the
+
+
+Sun was rising and so what do you when
+
+
+when you're unhappy with something you
+
+
+write your own framework of course
+
+
+because again it's a great tool on there
+
+
+whether you can do like your own cover
+
+
+and by the way I'm not going to talk
+
+
+thirty minutes I'm gonna talk longer and
+
+
+so so so the idea was I had the cells
+
+
+and reform another
+
+
+so I kind of started okay now let's
+
+
+focus on business logic like how do we
+
+
+get rid of really big controllers how do
+
+
+we get rid of like models that are you
+
+
+doing your drugs again this guy right so
+
+
+so I started to think about let's make
+
+
+controllers great again and I started to
+
+
+introduce these constant operations or
+
+
+inner controller instead of having like
+
+
+500 lines of code you would just
+
+
+delegate to a specific object we call it
+
+
+operation and it's from this gem called
+
+
+trailblazer and so if you look at it you
+
+
+really only call a function again like
+
+
+it's it's it's the same concept as we
+
+
+have with cell or with the form object
+
+
+or something like that you call an
+
+
+object and that object does something
+
+
+and it's not like crazy it's just have
+
+
+responsibilities scoped okay and so the
+
+
+operation was well accepted but lots of
+
+
+people thought it's like a monolithic
+
+
+object and it has too many things and
+
+
+it's basically just an object delegating
+
+
+to other objects that's an Orchestrator
+
+
+yeah and here's like an example of in
+
+
+Trevor's at one point one the object was
+
+
+doing lots of stuff and with this big
+
+
+DSL and like you hit the process method
+
+
+and in the process method you would do
+
+
+your business logic and you know like
+
+
+it's creating a model and validating and
+
+
+all this kind of stuff the cool thing
+
+
+was you could test it in isolation
+
+
+that's great and there what do you have
+
+
+objects you can actually test them
+
+
+without having to run an entire HTTP
+
+
+stack and that's why I like testing and
+
+
+ehh doesn't so so you could run this
+
+
+operation test it test the outcome test
+
+
+the side effects done and this stuff
+
+
+will work exactly the same way in
+
+
+production you could also use operations
+
+
+as a factory so if I want to create a
+
+
+comment the way it's done in my web
+
+
+application
+
+
+I run the operation that does that and I
+
+
+have the exact same application set in
+
+
+my test which is amazing because Factory
+
+
+Girl is an approach to make your test
+
+
+State like your application state but
+
+
+it's not because we forgot about the is
+
+
+admin flag or something like that so you
+
+
+run that operation everything is exactly
+
+
+as it is in production the problem was
+
+
+in 1.1 we had this process method and in
+
+
+that method you would run you drag your
+
+
+Ruby code like literal ruby code and you
+
+
+know if you had if you had lots of logic
+
+
+you had to split it up in
+
+
+to methods and classes and it was all up
+
+
+to you so the idea of tribes' a 1.1 was
+
+
+you run this object and everything
+
+
+behind that is up to you and then like
+
+
+it was a nightmare because you had to
+
+
+know the exact scald stack yeah you know
+
+
+I mean you don't have to understand all
+
+
+the methods but like when you run an
+
+
+object there will be methods call the
+
+
+methods calling method or mebiner and if
+
+
+you want to override something specific
+
+
+for example there was always a policy
+
+
+check run automatically in an operation
+
+
+yeah like is this user allowed to create
+
+
+a comment and you had to know where this
+
+
+happens and what is the call second what
+
+
+method you have to override and then
+
+
+your own code would be run in the
+
+
+process method and again here this call
+
+
+ii need to know where what is called how
+
+
+and it was super messy like it if you
+
+
+want to do over at specific behavior for
+
+
+example hey
+
+
+in that case i don't want to run a
+
+
+policy you had to override the check
+
+
+policy method but you had to know that
+
+
+it's called check policy with a bash and
+
+
+you had to know where and it was just
+
+
+horrible yeah so um what so the example
+
+
+with the policy is right here like if
+
+
+you over at something you have to
+
+
+inherit yeah so I'm inheriting and I'm
+
+
+overriding actually this is a complete
+
+
+whatever so so if you have to over at
+
+
+that specific method because you have to
+
+
+know that method exists in that class
+
+
+and it's called at that point and then
+
+
+you can do stuff like you called super
+
+
+and super will call the original
+
+
+implementation but it only works if you
+
+
+include a module because if you don't
+
+
+include module its whatever it's like
+
+
+super messy and like I started to
+
+
+realize hey maybe maybe Ruby doesn't
+
+
+give me the tools out of the box i I
+
+
+need you know like if I want to have
+
+
+workflows and I want to be able to
+
+
+override specific parts maybe I need a
+
+
+different tool set now and this was
+
+
+especially if funny if you had like
+
+
+multiple modules included they were all
+
+
+over at the same method and you know
+
+
+like the last included module overrides
+
+
+the method and then if you call super it
+
+
+will call the other method before and if
+
+
+you want to skip something for example
+
+
+it's impossible in Ruby you can't say
+
+
+let's call the original method and the
+
+
+method from the third module include
+
+
+sighs it's just [ __ ] basically and
+
+
+but these are the mechanics Ruby gives
+
+
+us and it's I'm not blaming Ruby and
+
+
+blaming my bad design choice basically
+
+
+yeah and every time I talk to people
+
+
+they all told me this is Ruby this is
+
+
+how you do it and just do it like that
+
+
+you know modules are awesome inheritance
+
+
+is great do it like this is what we have
+
+
+like this is how we do it okay so I've
+
+
+kept they're moving alright so the idea
+
+
+and red laser was have those operations
+
+
+you call them there's no other way to
+
+
+invoke them you call basically a
+
+
+function and the function will delegate
+
+
+to different other stakeholder objects
+
+
+without knowing what they do again like
+
+
+it's an encapsulation some people from
+
+
+rails don't know this and then the
+
+
+problem was we had this cost I get to
+
+
+know what is happening in the operation
+
+
+it was really hard to communicate that
+
+
+you have to document that [ __ ] and
+
+
+documentation sucks and so you always
+
+
+had this object floating around and
+
+
+people could call methods on the
+
+
+operation instance in the wrong order
+
+
+and it was just terrible the [ __ ]
+
+
+cool thing was DHH liked it not I I
+
+
+didn't paste the email he sent me but so
+
+
+[Music]
+
+
+so did I already mention I'm gonna talk
+
+
+more than thirty minutes that's great so
+
+
+I kept you know working with code and I
+
+
+hated the call stack and I hated to use
+
+
+super and modules to override stuff and
+
+
+to know what operation does and what
+
+
+order and it's kind of hey didn't you
+
+
+promise me to give me a B on my talk
+
+
+here we go so I slowly moved into the
+
+
+direction of you know functional
+
+
+programming like I realized hey maybe
+
+
+object-oriented programming maybe I just
+
+
+hit the boundaries maybe my style of
+
+
+writing software is not it's warm right
+
+
+okay open please so and so I kind of
+
+
+left the left the the thinking of
+
+
+object-oriented programming actually
+
+
+paratus own it's one of my great
+
+
+inspirations I kind of nudged me to that
+
+
+direction did I tell you that I can say
+
+
+two things in Polish one thing is
+
+
+oscillator
+
+
+the other one is Tina Pierre doll
+
+
+[Laughter]
+
+
+just delicious so I kind of moved into
+
+
+the direction of let's but like
+
+
+functional programming is nothing you
+
+
+know crazy or something you just call
+
+
+something and it does something and
+
+
+gives you something back yeah so
+
+
+basically you you throws arguments into
+
+
+an object on a into an object method in
+
+
+that case in Ruby because we don't have
+
+
+like functions and this function does
+
+
+something gives you something back and
+
+
+that was basically what we already had
+
+
+with trailblazer like you call an
+
+
+operation there's no way like calling an
+
+
+operation with the dot bracket which
+
+
+looks really weird but it's basically
+
+
+like calling a function y and you had
+
+
+your input and you throw that into the
+
+
+operation and you you get a result back
+
+
+and we just defined that the result has
+
+
+a state successful and not successful
+
+
+and the result also allows you to access
+
+
+the state that comes out of the function
+
+
+like the output of the function is
+
+
+basically accessible by the result
+
+
+object so the the the idea was already
+
+
+kind of function I didn't realize it but
+
+
+my great inspiration killed us Alyssa
+
+
+made me wear it so what we wanted to get
+
+
+rid of in Trevor's
+
+
+2.0 was that you don't hear this call
+
+
+stack master that we had I wanted to get
+
+
+rid of that and so basically what we did
+
+
+is instead of letting the user define
+
+
+their methods and call call call call
+
+
+call we gave them a DSL that allows them
+
+
+to define workflows yeah so for example
+
+
+like you have that pass and step and
+
+
+fail in ba-ba-ba-ba-ba so in the end of
+
+
+the day what you will get is a diagram
+
+
+or a flow like this like you look at it
+
+
+and you know exactly what's happening I
+
+
+don't have to explain it right because
+
+
+everyone here's really smart so without
+
+
+the details so what inspired me to kind
+
+
+of come up with that DSL is I didn't
+
+
+invent it because I'm not smart I'm just
+
+
+stealing a lot of ideas and put them in
+
+
+my own gems and then I say Nick cetera
+
+
+and it's like another thing so I saw
+
+
+that for what's that the right way
+
+
+oriented programming exactly so that's a
+
+
+function of parent from dotnet community
+
+
+Microsoft who I really
+
+
+so I think Microsoft and so the railway
+
+
+oriented programming is basically you
+
+
+define two tracks and then you run logic
+
+
+and if something like fails in a certain
+
+
+step it jumps to the left track to the
+
+
+error track and nothing of the of the
+
+
+right track is executed anymore so it
+
+
+kind of stops the execution and goes to
+
+
+the error handling and you can have as
+
+
+many tracks as many steps on each track
+
+
+as you want yeah this is kind of
+
+
+beautiful illustration again my gym
+
+
+skills are amazing i also use
+
+
+libreoffice for this and it took me like
+
+
+20 minutes to do to prepare this wait
+
+
+should we look at it again like just
+
+
+because it's so beautiful okay so m so
+
+
+you call this operation this railway
+
+
+animation is running and you can AskMe
+
+
+result hey were you successful meaning
+
+
+you ended on the upper track or were
+
+
+you're not successful meaning you ended
+
+
+on the lower track and you can ask the
+
+
+result for a state from the inside so
+
+
+I'm gonna talk about this in a second so
+
+
+that was kind of the idea and the DSL
+
+
+you can like it or you can not like it
+
+
+but it was can people kind of started
+
+
+accepting it okay that's pretty cool you
+
+
+can you can define workflows without
+
+
+having to know how to wire Ruby
+
+
+functions together and without calling
+
+
+them manually so every step in
+
+
+trailblazer is a callable object or an
+
+
+instance method so I'm only showing the
+
+
+instance method because it's the easiest
+
+
+to understand if you just define
+
+
+everything every step as a method the
+
+
+step gets a context object and keyword
+
+
+arguments from the outside and basically
+
+
+what you do in that step is up to you
+
+
+but you write state to the context
+
+
+object and that is exactly what you will
+
+
+retrieve in the end in the result object
+
+
+yeah so there's an instance variables no
+
+
+like weird global variables you write to
+
+
+the context object and then you can ask
+
+
+the context object for that state you
+
+
+wrote in on the inside yeah so that's
+
+
+the only way to communicate with the
+
+
+outer world in an operation and it's
+
+
+it's a concept that was really well
+
+
+accepted in in the community basically
+
+
+the other thing is depending on the
+
+
+result of a state true or false means
+
+
+true we stay on the right on the
+
+
+successful track and the upper track
+
+
+false means you jump to the lower track
+
+
+remember my beautiful animation the
+
+
+thing is that
+
+
+we also allowed to do compositions yeah
+
+
+so you can nest those operations and
+
+
+that's lots of people started over using
+
+
+I mean it's great to use composition but
+
+
+I wasn't aware that people love
+
+
+compositions which is amazing like
+
+
+people used the nesting feature
+
+
+everywhere so it's like they built
+
+
+reusable components and use the reusable
+
+
+components in every operation so
+
+
+basically by using nested you kind of
+
+
+built a composition and when you call it
+
+
+when you use nested what happens is
+
+
+basically this is the nested activity
+
+
+that is being run and so the the nesting
+
+
+operation calls that activity and then
+
+
+you can why are the ends of that nested
+
+
+activity two different connections and
+
+
+kind of process different outcomes in a
+
+
+different way so this is all i bla bla
+
+
+bla they look at this picture you see
+
+
+lots of arrows is great so again we had
+
+
+functions which are operations and steps
+
+
+and the only writable or mutable object
+
+
+was this context object that we passed
+
+
+through all those steps and if you have
+
+
+compositions you pass in the same
+
+
+context object and operations can write
+
+
+to the context object and the only way
+
+
+to communicate is by the context object
+
+
+so that was pretty well received but
+
+
+this is just normal JPEG I just copied
+
+
+it so it didn't take me longer than 15
+
+
+seconds to like prepare I'm not good at
+
+
+3d modeling so what we also allowed
+
+
+people and this is kind of the learning
+
+
+from you know overriding methods with
+
+
+modules and calling super is like now
+
+
+that we have this beautiful structuring
+
+
+in steps let's allow people for example
+
+
+to exchange a step here like I'm gonna
+
+
+I'm gonna replace notify happen with
+
+
+another step called mail so you had to
+
+
+use subclass it and you can use the
+
+
+replace option and replace a certain
+
+
+step like impossible in Ruby with super
+
+
+or something like that you can't replace
+
+
+something specific
+
+
+or you can do stuff like inserting a
+
+
+step with the like just by using the DSL
+
+
+and saying after blah blah blah or
+
+
+before blah blah blah you could
+
+
+at steps to that workflow in a sub class
+
+
+without interfering with original code
+
+
+again almost impossible in Ruby unless
+
+
+you use like include in the right order
+
+
+it's just a nightmare
+
+
+was it prepend prepared yeah exactly but
+
+
+then prepend is and again a feature no
+
+
+one uses in Ruby I don't know what oh
+
+
+I'm wrong hey let's talk about event
+
+
+sourcing so another thing you could do
+
+
+is the for example you could delete and
+
+
+now you come with your pre pendant
+
+
+there's no way like in Ruby you can't
+
+
+delete a method that is in a specified
+
+
+work for drivers you could just say okay
+
+
+delete that last step in my subclass
+
+
+with the delete option just as an
+
+
+example and so you basically so you have
+
+
+all the mechanics to rearrange your
+
+
+workflow to customize a workflow
+
+
+out-of-the-box so we didn't have this
+
+
+nightmare of including objects and sorry
+
+
+modules and all this kind of stuff yeah
+
+
+many people appreciated it and lots of
+
+
+people said how can you this can stuff
+
+
+like we have Ruby I want to be my own
+
+
+like I want to be in control of my
+
+
+workflows like don't do this with Ruby
+
+
+we've been writing Ruby the way we were
+
+
+writing it since 2001
+
+
+how can you introduce this kind of stuff
+
+
+that was the ranting session and also
+
+
+there were people who asked you for more
+
+
+features because once you give them food
+
+
+they will ask for more food so for
+
+
+example people ask hey let's give us
+
+
+tracing or something we want to know it
+
+
+did that way did we go that way or did
+
+
+we go that way and or did we go that way
+
+
+so people are asked for like a feature
+
+
+called tracing and it sounds like you
+
+
+know hilarious but I mean the feature
+
+
+itself is amazingly for debugging and
+
+
+for reconstructing but it was really
+
+
+hard to kind of change the internals to
+
+
+make that stuff happen so in 2.0 2.0 we
+
+
+had we still had this call style
+
+
+actually it's wrong because there should
+
+
+be a dot between create and the bracket
+
+
+but whatever and so we introduced the
+
+
+DSL to make you know workflows defining
+
+
+the diagrams simpler and we still had
+
+
+this concept of you throw something into
+
+
+the operation and the
+
+
+operation calls different steps but the
+
+
+steps don't know what the operation is
+
+
+doing and so on like you know like
+
+
+functional information hiding basically
+
+
+and the most amazing feature was that
+
+
+you could also push like you could use
+
+
+the developer gem and throw in an
+
+
+operation and the operation would be
+
+
+rendered as a diagram automatically
+
+
+which was pretty cool because people
+
+
+didn't have to understand what the
+
+
+operation does they just look at the
+
+
+diagram I'm better at visual stuff then
+
+
+at non visual stuff so people this guy
+
+
+is basically asking me why are you being
+
+
+an [ __ ] you idiot why do you change
+
+
+the API from 1.12 2.0 and I said because
+
+
+I can like people were really angry with
+
+
+me like hey how can you change the API
+
+
+like it's a and it's like a major
+
+
+version and semantic versioning implies
+
+
+that's exactly the point of a major
+
+
+version release right but you change the
+
+
+API whatever so people don't like
+
+
+innovation please stay in the same way
+
+
+you have always been the same way that
+
+
+res does it and hasn't changed for ten
+
+
+years it's great okay let me drink a sip
+
+
+of this beautiful voice often aghh okay
+
+
+so um we had the I mean the 2.0 version
+
+
+was kind of well received lots of people
+
+
+were using it you know they like the way
+
+
+they can structure this stuff and the
+
+
+first thing we did in 2.1 is we get them
+
+
+tracing so they basically could see okay
+
+
+this and that happened when i run a
+
+
+specific operation which was pretty cool
+
+
+feature and we also gave them the
+
+
+ability to you know like have different
+
+
+workflows not only linear railway also
+
+
+like different branches and going back
+
+
+and all this kind of stuff and that was
+
+
+exactly the time when i started working
+
+
+for the police like for the band because
+
+
+they needed a new bass player i'm just
+
+
+kidding i'm actually working for the
+
+
+german police and they had lots of
+
+
+documents you know describing their
+
+
+workflows and this is this is how our
+
+
+like this is confidential stuff stop
+
+
+reading it so they had lots of workflows
+
+
+and you know like they were using like a
+
+
+pseudo diagram language and the problem
+
+
+was the they the code didn't match the
+
+
+diagrams and diagrams didn't match the
+
+
+code so I kind of came up I read about
+
+
+BPMN I was really intrigued by it bpmn
+
+
+is the business process modeling
+
+
+notation and this is the point where
+
+
+yeah I'm going Enterprise now so I'm the
+
+
+VPN is a pretty cool thing like you know
+
+
+arbitrary a businessman like BPM and
+
+
+Chuck Norris like CPM and Trump OSP he's
+
+
+a businessman so he knows everything
+
+
+about business if he likes people it
+
+
+must be good also thh like selfie
+
+
+feeling not so BPM ends basically a
+
+
+diagram language you just design
+
+
+processes and activities and they're
+
+
+like those diagrams they call activities
+
+
+and that's how you model your entire
+
+
+workflow in the application and that
+
+
+goes hand-in-hand with the event
+
+
+sourcing stuff we were talking about
+
+
+earlier so basically you have boxes your
+
+
+circles you have arrows and your
+
+
+vomiting unicron's I'm just kidding
+
+
+about the vomiting unicron's of course
+
+
+because there's only boxes and circuses
+
+
+and errors in vtn and so BPMN allows you
+
+
+to like you know you have like pools and
+
+
+the pools can talk to each other and you
+
+
+have like functions where one little box
+
+
+means there's actually a sub activity
+
+
+being called and you have like events so
+
+
+every activity ends in some end event
+
+
+basically and you can map those end
+
+
+events to other events and to other you
+
+
+know connections and this kind of stuff
+
+
+is super cool and super simple way to
+
+
+model
+
+
+why are you loving okay I thought I said
+
+
+something stupid so and you also have
+
+
+like the idea of like throwing events so
+
+
+you can say hey something happened
+
+
+events or sync event DDD whatever and
+
+
+you also have catching events like you
+
+
+can say tell me if something happened in
+
+
+BPM and so you basically have a lot of
+
+
+cool mechanics and I kind of loved the
+
+
+idea that I don't have to reinvent the
+
+
+diagram language because it's already
+
+
+there it's from Java and people in Ruby
+
+
+community hate Java but it's kind of
+
+
+like pretty useful so what we did and
+
+
+2.1 inch red laser is we introduced a a
+
+
+new like concept called activity not
+
+
+operation activity activity is basically
+
+
+like an operation has the exact same
+
+
+behavior like you have methods to
+
+
+fighting the steps or the boxes and then
+
+
+you have the exact same DSL to define
+
+
+like this is gonna be my tears this is
+
+
+gonna be my tivity and it gives you like
+
+
+those diagrams for free basically and
+
+
+you can't have like different ends so we
+
+
+added like a little bit of DSL it
+
+
+doesn't really matter and you you can
+
+
+like nest stuff and you know like
+
+
+actually totally like irrelevant how it
+
+
+works but you can look at that but you
+
+
+can do this kind of diagrams which is
+
+
+pretty cool and you can like map nest
+
+
+diagrams to other nestled activities to
+
+
+other activities you know here's again
+
+
+like cold but it actually doesn't really
+
+
+matter because online so but they're
+
+
+surprising new thing we did in 2.1 was
+
+
+we introduced a concept called workflow
+
+
+so it's basically the idea of having the
+
+
+little operations being a defining
+
+
+application wide workflows did I mention
+
+
+that I'm gonna be over time you're the
+
+
+organizer you should tell me to stop or
+
+
+something like that okay that's good
+
+
+it's great when the organizer doesn't
+
+
+care so what do you see here for example
+
+
+what do you see here is a workflow at
+
+
+the police for a one-time password login
+
+
+like you know people sign up they get a
+
+
+one-time password they have to login
+
+
+with that one-time password if they'd
+
+
+wanted password is okay we have to
+
+
+change their password like like they
+
+
+can't do anything else so that's
+
+
+basically defining that workflow
+
+
+visually and we're using the exact same
+
+
+concept again like you every step is
+
+
+just a function that gets input and
+
+
+returns output so this is just some
+
+
+weird pseudo code I throw in just to
+
+
+show you how those work for us look in
+
+
+Ruby like those again like every step
+
+
+can be a callable Ruby object there can
+
+
+be a method or I can be whatever like it
+
+
+doesn't really matter so just to give
+
+
+you a quick example how those workflows
+
+
+actually operate let's look at this one
+
+
+time password login so you usually start
+
+
+a workflow by like triggering a start
+
+
+event and this will basically run the
+
+
+machine or the process as long as
+
+
+possible until it hits resume event yeah
+
+
+so so this is like and this is an
+
+
+example how you would do that like you
+
+
+you trigger workflows for example from a
+
+
+controller action it's not like you know
+
+
+a fancy thing running in the background
+
+
+you just change the way you think in my
+
+
+controller action i trigger the workflow
+
+
+this is again back to event sourcing I
+
+
+think we have lots of stuff to talk
+
+
+about later at the pub before I'm drunk
+
+
+procedural programming I love that
+
+
+because it's almost functional so you
+
+
+trigger that machine it starts running
+
+
+you know excuse as much code as possible
+
+
+and stops at the next
+
+
+resume suspend event basically and as
+
+
+every time this machine stops at a
+
+
+resume event it will give you an event
+
+
+object and that event object you can
+
+
+persist or you can memorize or whatever
+
+
+it's up to you and throughout all the
+
+
+eggs because I could talk like 545 hours
+
+
+about this stuff so it just you trigger
+
+
+something you run the workflow and when
+
+
+the workflow finishes it gives you an
+
+
+event object and that event object you
+
+
+reuse to continue from that point again
+
+
+okay so and again the details are
+
+
+completely irrelevant like you have an
+
+
+event ID and bla bla bla bla bla but
+
+
+what do you do is basically throw events
+
+
+into that process engine and it will
+
+
+continue the workflow for you where it
+
+
+stopped it's really interesting I don't
+
+
+know if you heard of event sourcing but
+
+
+I hear that it's pretty close to that
+
+
+kind of stuff so on the event the
+
+
+process energy will like continue and
+
+
+bla bla bla and go to the next like step
+
+
+and execute everything until it hits
+
+
+another suspend event and this way you
+
+
+can model really complex applications
+
+
+like at the police we have you know this
+
+
+is just a sign-up process for example
+
+
+but we have like you know inquiries
+
+
+about people and so if you have a
+
+
+problem in Germany just tell me I can
+
+
+fix it and so we you know acquire ease
+
+
+about criminal people or maybe they're
+
+
+not criminal and we have fair you know
+
+
+like a lot of administrational workflows
+
+
+and all this kind of stuff so everything
+
+
+in that application was modeled with
+
+
+those kind of workflows and it was
+
+
+actually pretty well and the cool thing
+
+
+was that tracing since we have it in 2.1
+
+
+it also works like it gives you this
+
+
+weird thing or it just kind of shows you
+
+
+this is what happens so you can see what
+
+
+happened in my activity and my events
+
+
+and you can see the flow of my of the
+
+
+application visually and that's kind of
+
+
+pretty cool so and the the change or the
+
+
+for me what I would have extracted as
+
+
+usable components is that we finally
+
+
+could have workflows and in Ruby you
+
+
+just have like controller actions and in
+
+
+red saree and like blur and something
+
+
+works now we had like now we have like a
+
+
+building blocks to build workflows we
+
+
+have you can have parts of your workflow
+
+
+like an activity coming from gems so for
+
+
+example in tyrant which is a replacement
+
+
+for device you have lots of work lost if
+
+
+predefined for you so like a one-time
+
+
+password signup is predefined in the
+
+
+tyrant gem you don't have to know what
+
+
+it does it just you know executes of the
+
+
+steps necessary and you just say cool my
+
+
+user is signed up and I have control
+
+
+what's happening so you have reusable
+
+
+workflow of fragments and you can do
+
+
+that stuff visually and many other
+
+
+things I couldn't show because I only
+
+
+have 45 minutes and I'm already 6
+
+
+minutes overtime so the the the my
+
+
+thinking has changed from like you know
+
+
+using rubies mechanics with like modules
+
+
+and objects to let's define little
+
+
+blocks those boxes in as callable ruby
+
+
+code and let trailblazer do the workflow
+
+
+execution basically yeah and every block
+
+
+every task every box doesn't know [ __ ]
+
+
+about the outside world and the outside
+
+
+world doesn't know what's happening
+
+
+inside so very functional concepts
+
+
+because you pass in stuff you get stuff
+
+
+out it's really cool then the process
+
+
+engine takes care of you know running
+
+
+complex workflows for you and you know
+
+
+taking care of when is this work for
+
+
+finish when is the request over when
+
+
+where do we have to continue and we got
+
+
+this amazing like visual element that
+
+
+you can trace what happened that you can
+
+
+visualize what happened so the police
+
+
+was like super excited hey cool now we
+
+
+actually see what our code does and our
+
+
+code does what we see which is like
+
+
+something that normally doesn't work
+
+
+because code generators we learned that
+
+
+25 years ago don't work yeah
+
+
+so my entire last the last couple of
+
+
+years of my precious life has basically
+
+
+evolved around how do I have small
+
+
+working units of code we're throw-in
+
+
+stuff and I get stuff out and how do I
+
+
+compare compose those pieces of code
+
+
+into a working software basically yeah
+
+
+and so I realized this is exactly what
+
+
+my dad told me like like a 25 years ago
+
+
+because I'm that old
+
+
+that you know you've built a small
+
+
+component in a big system and the small
+
+
+component doesn't know anything that
+
+
+happens on the outside and that is kind
+
+
+of the idea that I kept working on in
+
+
+the last of 20 years more or less that I
+
+
+you know it simplifies my life I don't I
+
+
+don't know what in a sign-up process and
+
+
+a one-time Hospital process what is
+
+
+happening in step number five I just
+
+
+know it does something and it gives me
+
+
+back a specific output that I'm
+
+
+expecting and I don't care about the
+
+
+workflow I don't care about the you know
+
+
+environment like give me small pieces
+
+
+and I arrange them and everything else
+
+
+happens automatically and this is
+
+
+basically the extract of my journey from
+
+
+the last 30 years that break stuff down
+
+
+to little pieces and let someone else
+
+
+take care of the workflow and I mean
+
+
+you've been an amazing audience so
+
+
+thanks for listening to my presentation
+
+
+[Laughter]
+
+
+[Applause]
+
+
+Nikki no not sure I have Twitter but I
+
+
+don't use it we don't have time I'm 10
+
+
+minutes over [ __ ]
+
+
+15 15 no my timer says 9 minutes I'm
+
+
+sorry I was wondering have you ever
+
+
+thought about changing the tolling for
+
+
+instance because you said that you try
+
+
+to build your flow but Ruby didn't help
+
+
+you because of this inheritance modules
+
+
+instance states that there are super
+
+
+yeah and then you removed all of them
+
+
+and used more like a functional approach
+
+
+so I was wondering this is the first
+
+
+thing that came to my mind well maybe I
+
+
+need to change the tooling for instance
+
+
+language for instance functional
+
+
+language for instance you're right so I
+
+
+so first of all I'm in the
+
+
+programming language definitely but the
+
+
+cool thing about Ruby is you can't go to
+
+
+conferences and meet coal people doesn't
+
+
+work in other languages like Haskell
+
+
+imagine half the conference like and the
+
+
+other thing is that you know even in
+
+
+Alexi or something so I was talking to
+
+
+just say well even the creator of elixir
+
+
+and he actually likes the stuff we do
+
+
+you know like the workflows because they
+
+
+also don't have that they have functions
+
+
+there are a function language they have
+
+
+the pipeline process the pipeline
+
+
+operator but that's only a linear flow
+
+
+so they still have the problem what if a
+
+
+method D in ABCD once we have two out
+
+
+three outputs yeah how do we handle that
+
+
+so elixir doesn't do that so they also
+
+
+will end up with with something pretty
+
+
+close to our you know step DSL in a way
+
+
+so I figured out that as much as I
+
+
+criticized Ruby all the time because it
+
+
+doesn't move on the language it's
+
+
+probably not gonna change it because I
+
+
+haven't seen any language with this kind
+
+
+of abstraction of activities and you
+
+
+know mapping outputs to different flows
+
+
+unless you use like either monads and
+
+
+this kind of stuff but hey sorry and I'm
+
+
+not a mathematic professor so I just
+
+
+wanna like look at code and understand
+
+
+it so yeah I thought it was wrong in
+
+
+Ruby but I'm still feeling a premium
+
+
+welcome in a way we're very good
+
+
+question okay thank you
+
+
+[Applause]

@@ -1,0 +1,1777 @@
+I like boring stuff but I'm getting
+
+
+calls I'm 23 at the moment so I think
+
+
+it's time to do something crazy and you
+
+
+know there is this buzzword called sad
+
+
+worthless I wanted to know about
+
+
+something about it
+
+
+of course I wanted to connect it with
+
+
+Robbie and I would like to talk about it
+
+
+and what is self-fertilize I would ask
+
+
+you to act on our service providers
+
+
+evolved from like if thou shalt
+
+
+infrastructure does a service which was
+
+
+something like easy - easy - we just
+
+
+care about operating system we care
+
+
+about sky scaling here then we got
+
+
+containers as a service like ECS so we
+
+
+buy we are scaling our containers then
+
+
+we have platform as a service like
+
+
+Heroku which is skate on the application
+
+
+level and now we have something called
+
+
+cyber glass which is function as a
+
+
+service and it's skate on function level
+
+
+so we have like one application and we
+
+
+have many functions which we scale or we
+
+
+don't scale scale them because because
+
+
+it's survivalist we don't care about
+
+
+servers so it decisions operational cost
+
+
+because you don't have to set up servers
+
+
+you don't need the DevOps you just put
+
+
+code on the platform and it's running
+
+
+you don't care about anything it offers
+
+
+great capability because you don't have
+
+
+to care about servers
+
+
+it's everything up to your provider so
+
+
+you can scale to the limits of the
+
+
+Amazon so it will be pretty much a lot
+
+
+and I think it encourages a good code
+
+
+because you know it if your code is
+
+
+better it's faster you will pay less and
+
+
+it's pretty hard to do like big coupled
+
+
+code so it looks better so demo of of
+
+
+course is we live demo because I don't
+
+
+want to be boring anymore what can go
+
+
+wrong
+
+
+yeah of course right like I can't handle
+
+
+it
+
+
+so so here we have after deployment we
+
+
+created two functions its application to
+
+
+take care about bills that I bought
+
+
+yesterday or just during the event
+
+
+so it offers two functionalities okay
+
+
+first one is creating new bill like this
+
+
+we have oh it worked
+
+
+so I added it it responded me with new
+
+
+created object and the list list works -
+
+
+and time to see some code you know it's
+
+
+just one function so we can treat it as
+
+
+one file of Ruby you know it's like very
+
+
+few lines it's created everything works
+
+
+at least is pretty simple - but this
+
+
+everything is big life because several
+
+
+lists like providers don't support Ruby
+
+
+still so these are the supported
+
+
+languages Ruby is not supported and
+
+
+that's the problem
+
+
+but you know we are community so we can
+
+
+work on it so that is a petition you
+
+
+want function as a service for Ruby
+
+
+there are already like seven funded
+
+
+developer signed and you would like to
+
+
+join if you are interested just go to
+
+
+services for Ruby dot org and signed
+
+
+petition with your github account thank
+
+
+you
+
+
+[Applause]
+
+
+okay Ruby on $4 computer okay my name is
+
+
+Sergey Ivanov normally I develop
+
+
+backends with Ruby and other languages
+
+
+but it's during the days in when dark is
+
+
+cabine
+
+
+I grab microcontrollers and start to
+
+
+write ugly C code and today I want to
+
+
+say couple words about how to run Ruby
+
+
+on cup of coffee a cup of coffee
+
+
+is this really small microcontroller in
+
+
+inside this model it's SP 32 byte by
+
+
+Chinese expressive on this model there
+
+
+is also from megabytes of storage and
+
+
+this microcontroller may have on board
+
+
+to course of extends to extensive course
+
+
+it's like arm button not armed just have
+
+
+megabyte of RAM it's brittle over Ruby
+
+
+and Wi-Fi and Bluetooth that's enough
+
+
+for us also all normal wires for
+
+
+microcontrollers SPI to C and so on so
+
+
+this model itself cost only $4 dollars
+
+
+but if you want to tinker with it it's
+
+
+better to find some development
+
+
+development board there are a lot of
+
+
+them we is Lea these battery charges
+
+
+with screens up to $10 you can just go
+
+
+to ebay and search for ESP 32 you'll
+
+
+find a lot of them so to start letting
+
+
+go is it first you have to install ESP
+
+
+IDF it's official toolkit based on
+
+
+freertos real-time operating system
+
+
+this side expressive this Chinese
+
+
+company but they have really great the
+
+
+commutation maybe this is the only
+
+
+Chinese company with perfect dogs it's
+
+
+hard to believe so what I found a few
+
+
+days ago it's a project M Ruby for SP 32
+
+
+M Ruby is another Ruby interpreter
+
+
+written by Matz but it's small an
+
+
+embeddable and it's possible to embed in
+
+
+such a small device like this
+
+
+microcontroller so for example if in to
+
+
+this microcontroller there is also
+
+
+connected B me to a tee environment
+
+
+sensor it measured temperature humidity
+
+
+and pressure so basic sketch how to work
+
+
+with it we just include library in its
+
+
+sensor and then written read
+
+
+measurements so we do it in loop and
+
+
+after each measurements sleep for 10
+
+
+seconds so but this microcontroller also
+
+
+have Wi-Fi on board so we can connect to
+
+
+Wi-Fi and if it will measure free RAM
+
+
+after connecting to Wi-Fi it will be
+
+
+still 150 kilobytes not bad now we want
+
+
+to send some data from from this device
+
+
+to cloud to make some measurements I use
+
+
+the things peak things peak is a public
+
+
+service where you can store some data
+
+
+and because we don't have normal HTTP
+
+
+library we have only some TCP library
+
+
+for written in Ruby for this
+
+
+microcontroller that may work so you can
+
+
+you have to write request by yourself
+
+
+but it's possible to send data with one
+
+
+head requests and go on so I think it's
+
+
+if you want to find full full code it
+
+
+available on
+
+
+sling I think small dammit i'm i will
+
+
+restart my controller now it connects to
+
+
+Wi-Fi and send data okay if we'll take a
+
+
+look on how it looks okay it's pretty
+
+
+clear that it's pretty hot here too
+
+
+right now 26 degrees I believe our
+
+
+hearts are really hot and we are really
+
+
+a dream we have really dry minds and
+
+
+make smart decisions so is it good to be
+
+
+clear no when I last finished with this
+
+
+simple example don't ask me about TLS it
+
+
+possible on this microcontroller it has
+
+
+[Music]
+
+
+[Applause]
+
+
+thank you from Vlad superb e2 DDD
+
+
+[Music]
+
+
+to free okay thanks hello fruits of our
+
+
+be my name is Adam and I wanted to share
+
+
+with you quick case study about how rots
+
+
+love RB impacts developers and also
+
+
+companies in general I didn't meant to
+
+
+give a lightning talk today but
+
+
+yesterday I spoke to Andre and he said
+
+
+that maybe it's worth to share this this
+
+
+story with you today and we all know
+
+
+that everything Andrea says is valuable
+
+
+maybe not everything but at least we can
+
+
+take it into consideration so what is
+
+
+the case the case is that it is my fault
+
+
+Russell of Araby conference and two
+
+
+years ago well I I wasn't such a
+
+
+experienced developer like now so I was
+
+
+really amazed about everything that I
+
+
+heard the all these concepts patterns
+
+
+like DDD CQRS saga patterns etc and I
+
+
+was I was so surprised amazed and
+
+
+actually impressed that after the
+
+
+conference I decided to to dig deeper
+
+
+this topic and I wanted to use it
+
+
+actually in work and recently after the
+
+
+conference in the new project after
+
+
+reading some blocks of her course blog
+
+
+posts articles books watching some
+
+
+presentations I decided to do DDD staff
+
+
+and a new project and from perspective
+
+
+of time I need to say that it was kind
+
+
+of risky decision because no one at the
+
+
+company had before experience with DDD
+
+
+so it was risky but actually thanks to
+
+
+two
+
+
+for for instance blog posts from our
+
+
+concei and the rails even store Jam we
+
+
+were able to succeed and actually it
+
+
+worked it worked pretty well and we
+
+
+gained a lot of things out of the box
+
+
+like for example activity audit trail
+
+
+log from from even store so that the
+
+
+thing is that we need to be we need to
+
+
+have courage I think and Russell Kirby
+
+
+thanks for this inspiration and I'm
+
+
+looking for next inspiration after this
+
+
+particular conference thanks thank you
+
+
+[Applause]
+
+
+refine your not to refine
+
+
+[Music]
+
+
+so am i letting talk us about it to
+
+
+refinements and it was you know you know
+
+
+I was triggered by make hotel not want
+
+
+to use in refinement and actually it's
+
+
+not the first time because discussing to
+
+
+think well there's interesting
+
+
+discussion in Twitter now I want to use
+
+
+your finance but we already know that
+
+
+some of you use it and me personally use
+
+
+it pretty often
+
+
+almost every gem I'm working on he used
+
+
+a couple of refinements and here I'd
+
+
+like to tell you a little bit about the
+
+
+story of five months some interesting
+
+
+facts probably no one no knows and some
+
+
+use cases and some problems with them so
+
+
+in order to help you to define whether
+
+
+you want to use your fine mint or not
+
+
+so the history and the problem actually
+
+
+the first problem refinements were
+
+
+introduced in ribbit - oh and they were
+
+
+checked as an experimental feature and
+
+
+that was make them less acceptable
+
+
+because who want to use experimental
+
+
+feature in their software no one because
+
+
+know what happened when it disappeared
+
+
+for example in the future but since 2.1
+
+
+it wasn't experimental anymore so it
+
+
+become a part of the language a pill
+
+
+still don't use it don't afraid is still
+
+
+afraid of it because actually from 2.0
+
+
+to 2.1 there were a lot of problems with
+
+
+them that's why it was cold marked as
+
+
+experimental bugs and they are still
+
+
+some of them actually for some very very
+
+
+sophisticated use cases and two years
+
+
+ago I had a chance to interview Kira
+
+
+Matsuda core team member there were some
+
+
+interesting facts about refinements
+
+
+first of all do
+
+
+Josefa author of refinements I thought
+
+
+surely I don't know his name because
+
+
+it's really hard to understand this
+
+
+Japanese name sorry but that wasn't
+
+
+Matt's boss from his peers I guess
+
+
+employer no no idea of why did he need
+
+
+this feature but initially refinance
+
+
+former more powerful but due to jury
+
+
+ruby and the complexity of supportive
+
+
+payments for JRuby most of the features
+
+
+were cut and I guess that's the reason
+
+
+why their sandbox left related to says
+
+
+all teachers and if you know who's asada
+
+
+he's working on gills also recording
+
+
+member and they offer incremental
+
+
+generator garbage collector was prone to
+
+
+owned free so he's the one person who
+
+
+wants to get rid of refinance so
+
+
+actually even it's this Fisher is not
+
+
+experimental maybe won't help them and
+
+
+will be free but no one knows so let me
+
+
+tell about examples when it's okay to
+
+
+use a famines when I think it's great
+
+
+good to you can check Acuras jams he's
+
+
+also the only person I know who actively
+
+
+use refinements and in some of his jams
+
+
+so actually you can find a finance even
+
+
+such gems like siku it has a refinement
+
+
+mode instead of monkey patching I don't
+
+
+know whether anyone use it and we even
+
+
+had refinements and rails thanks to a
+
+
+curie again but as for you know rails 5
+
+
+something this patch was rolled back due
+
+
+to some problems with finance
+
+
+unfortunately I come back to this case
+
+
+in the end of the talk so use cases just
+
+
+a few examples mostly from my own gems
+
+
+so it would be easy for me to explain
+
+
+why I decide to use example so the first
+
+
+case is dependency reduction I was
+
+
+working on a jam code anyway can think I
+
+
+think so
+
+
+and initially as always it has active
+
+
+support as dependency there was a lot of
+
+
+code which relies of core extensions
+
+
+from active support in order to not
+
+
+rewrite everything can just edit
+
+
+refinement which emulates is the active
+
+
+support behavior
+
+
+and with just adding one line of code I
+
+
+now have a gem with zero dependencies
+
+
+still walking with the same syntax as
+
+
+before that's the first case when we
+
+
+want to remove something which were
+
+
+broken another use case putting a new
+
+
+one as kind of a coordinated
+
+
+modernization I want to use new ruby
+
+
+features but as a gem offer I don't want
+
+
+to restrict a ruby version to use with
+
+
+my jam so I like to use a new feature in
+
+
+Ruby 2.5 called Fred fetch but it's a
+
+
+it's only existent it only exists and
+
+
+Ruby 2 point 5 so I'm using refinement
+
+
+and I think later in a couple of years I
+
+
+just removed this requirement and can
+
+
+rely on Ruby itself but without
+
+
+modifying my code that's it thank you
+
+
+thank you I think tomorrow there will be
+
+
+the second part of this ok hi Amy how as
+
+
+like everyone here is a developer and I
+
+
+said developer we like to out called
+
+
+write code and solve problems but of
+
+
+course I like that too but what I love
+
+
+is when you can remove code so if you
+
+
+have a very complex problem project and
+
+
+you have some legacy code that is used
+
+
+like in one part of replication and
+
+
+can't really remove it and finally like
+
+
+you refer to it a little bit and you get
+
+
+the green light and obey we can remove
+
+
+it so I love it like it's a great
+
+
+feeling like anybody shred this feeling
+
+
+yeah yeah great but it's like there is a
+
+
+problem of it usually when we remove
+
+
+code if you do it just go to the do your
+
+
+classes and just delete it it's very
+
+
+easy to like leave something and light
+
+
+around like it will like
+
+
+surface like yet later or something like
+
+
+that so I want to share a few tips like
+
+
+how to remove like everything completely
+
+
+like hundred percent and we can use
+
+
+computer science for this so if you look
+
+
+at your classes or your code this
+
+
+basically like the relate interaction so
+
+
+this is like a graphs so whenever like
+
+
+one class this isn't another one there
+
+
+is like a connection like edge between
+
+
+one node to the other node and it's like
+
+
+the same of the with methods so one
+
+
+let's call another this is like the
+
+
+recognition in graph and we have like
+
+
+two methods for traversing graphs like
+
+
+that first search and breadth-first
+
+
+search so the depth-first search is like
+
+
+going like one way until you like it's
+
+
+have nothing else to go and you need to
+
+
+go back and choose another way and with
+
+
+breadth-first search you like exploring
+
+
+like the linear slide edges when
+
+
+everything is done you go go further so
+
+
+I prefer like the the breadth-first
+
+
+search so you can apply the same for
+
+
+removing code you don't have like any
+
+
+data structure for that you can have
+
+
+like the notebook
+
+
+alright a file you need to just start
+
+
+from the top from like your top level
+
+
+class or endpoint you right you like
+
+
+what you need to remove at the top just
+
+
+like the breadth first search is using
+
+
+direct we and Q so you add at the end
+
+
+you move it from the top so in taste of
+
+
+notebooks you need to reverse it so you
+
+
+like at your like first class at the top
+
+
+a little like everything what is using
+
+
+every method and other classes you write
+
+
+it below when you clear it out you just
+
+
+cross it out and you go next and you
+
+
+repeat the same process and yeah after
+
+
+it's done you'd like to complete
+
+
+elephant but one couple of morphine is
+
+
+that you need to be aware is like there
+
+
+is like
+
+
+translations so whenever you see like
+
+
+the file and you're removing it and you
+
+
+see like translation you should also add
+
+
+it to your light notes or your file and
+
+
+you know come back to it later
+
+
+CSS so eagerly from if you remove in
+
+
+views you should know this is a
+
+
+JavaScript I think so the classes CSS
+
+
+classes that are used as their for
+
+
+binding events she can also put it in
+
+
+the notebook and then look for it like
+
+
+in JavaScript and you can also remove
+
+
+that and the last thing is like the CSS
+
+
+so like you should put everything in
+
+
+this in this node and you know cross it
+
+
+out and tendon in the next thing and
+
+
+look for dependencies added to the
+
+
+bottom until you like remove everything
+
+
+[Applause]
+
+
+[Music]
+
+
+so hi my name is Arturo stroke and why
+
+
+do we love Ruby yeah first of all of
+
+
+course because we must is nice and
+
+
+another thing is that unlike pattern
+
+
+Python developers we are more creative
+
+
+and we are like like to argue how to
+
+
+approach certain problems so you know in
+
+
+the old good times we just used to write
+
+
+a ruby like that right we used mops
+
+
+sometimes because we tend to be
+
+
+functional but then actually a leak
+
+
+searing came around and whoops we've got
+
+
+pipe and everybody loved pipe and I'll
+
+
+show you after that basically Ruby usage
+
+
+dropped this is at least what I heard
+
+
+and Ruby try to catch up
+
+
+Ruby tried to catch up so we tried to do
+
+
+like referencing methods we try to and
+
+
+Ruby 2.5 introduced this year itself
+
+
+which tries to be the new pipe for Ruby
+
+
+so yeah but it's not everything there is
+
+
+a missing piece so first I found like my
+
+
+house one needs keep host introducing
+
+
+yield and there was like reference to
+
+
+Ruby tracker issue talking about the
+
+
+forensic methods so people came with
+
+
+Psalms a lot of like ideas introducing
+
+
+new syntax in Ruby to reference methods
+
+
+in a nice way because we are calling a
+
+
+method and then brackets passing a
+
+
+symbol it just not nice so yeah one of
+
+
+the ideas was mine the last one actually
+
+
+it was pretty ugly but then this guy see
+
+
+Ben came and he showed that actually we
+
+
+can implement something pretty nice
+
+
+using using current Ruby but you know
+
+
+it's all about execution so it took the
+
+
+liberty to execute and we have the
+
+
+missing piece so basically this is the
+
+
+way actually use so it also on Nick's
+
+
+slides today yeah we we can reference
+
+
+Ruby methods like that but with small
+
+
+ruby gem week on the reference methods
+
+
+in that way and what actually this looks
+
+
+like a cosmetic change but actually this
+
+
+also gives you like some other nice
+
+
+features so for example you can have as
+
+
+a bonus parameter like pre applying
+
+
+parameters on a method and also yeah
+
+
+why I would do that like for example you
+
+
+can reference a private method which
+
+
+wraps around an object which you fetch
+
+
+from API and yeah there are others
+
+
+features like actually you can carry
+
+
+blocks as well I'm not sure why would
+
+
+you do that but maybe you can come up
+
+
+with some nicer api's for some stuff
+
+
+yeah and this is actually implement the
+
+
+implementation of an example from my
+
+
+house post where you just pass method
+
+
+references in that way I mean it's not
+
+
+perfect like
+
+
+you know we can't be a league here but
+
+
+something it's something right and so
+
+
+what features we have we have
+
+
+referencing public methods of other
+
+
+objects and we have referencing private
+
+
+methods of self so if you actually with
+
+
+the default method implementation of
+
+
+Ruby you can actually reference private
+
+
+method of another object this is not not
+
+
+good right we we are not like Python
+
+
+so actually we prevent that I prevented
+
+
+with this with this gem so you cannot
+
+
+reference you have argument carrying
+
+
+keywords argument carrying blocks
+
+
+carrying just things and referencing
+
+
+instance methods in case you would like
+
+
+that how do you download it just gem
+
+
+install methods thank you Thanks so this
+
+
+work oh right okay let's say I'm ready
+
+
+but I don't know if I'll be in time my
+
+
+name is magic and I wanted to share with
+
+
+you some of my thoughts a about two
+
+
+questions the first question is what it
+
+
+means to be a developer and the second
+
+
+question is will computer to replace us
+
+
+ok so first of all show of hands who in
+
+
+the room is a programmer nice one and
+
+
+who is a developer and first question
+
+
+what is the difference and I think that
+
+
+it's not that important but to me the
+
+
+thing is that a programmer is a person
+
+
+who works with code well developer is
+
+
+someone who works with problems and
+
+
+develop some solutions to those problems
+
+
+so writing code is a part of the job of
+
+
+a developer at most of developers are
+
+
+programmers but not all of them so there
+
+
+are two parts that I like to think like
+
+
+this duality in developer work which is
+
+
+there is a part a related to business to
+
+
+the problem that we are solving and
+
+
+there is this other part that is related
+
+
+to code and we as developers must be
+
+
+fluent in two languages
+
+
+so we need to speak the language of code
+
+
+and we need to speak the language of the
+
+
+client and the second part is something
+
+
+that more often than not it gets
+
+
+forgotten or maybe it doesn't get enough
+
+
+attention so and ii think that really
+
+
+opened my eyes is that we are also
+
+
+building mental models so when i work as
+
+
+a programmer as a developer when i work
+
+
+with a client then I flex my mind and
+
+
+try to understand build a model of the
+
+
+problem that I'm trying to solve and on
+
+
+the other hand I have some model some
+
+
+mental model of a solution and both of
+
+
+these are really difficult to express
+
+
+and to work efficiently I need to
+
+
+understand both of these domains and be
+
+
+able to connect them quickly ok and what
+
+
+I wanted to say is that we use this
+
+
+language that I talked about the
+
+
+language of code and the language of
+
+
+business to express these two models and
+
+
+these models are really strongly
+
+
+dependent on the language we use and if
+
+
+they are far from each other so we use a
+
+
+different language in the system in the
+
+
+code then the language that we use when
+
+
+talking to the Cree enter and telling
+
+
+which client uses when talking to us
+
+
+then we have problems because we use a
+
+
+crud terminology we say that we are
+
+
+creating something or removing or
+
+
+updating or deleting and the client says
+
+
+ok so I place an order or i I don't know
+
+
+prepare a shipment and if these are not
+
+
+represented in our code base then we
+
+
+need to sit in front of this code and
+
+
+think a lot about which what is what in
+
+
+these terms and I think that the
+
+
+language is this important part and we
+
+
+have heard about it today because DDD
+
+
+nails dis perfectly and when we are
+
+
+doing DDD we are trying to get these
+
+
+languages and get these two models as
+
+
+close to each other as is possible so
+
+
+that it's easy to work easy to relate
+
+
+them easy to a connect and a Windows a I
+
+
+come in there is this a duality
+
+
+makes the part of the developers work in
+
+
+understanding what people need and
+
+
+understanding how to solve it how to
+
+
+teach a computer to do it and the second
+
+
+part is something that computers are
+
+
+much better than us so this is the place
+
+
+where we can get replaced and we
+
+
+actually are getting replaced constantly
+
+
+because we are not working with punch
+
+
+cards or machine code or anything we are
+
+
+writing in Ruby not in C++ and this is
+
+
+something we know about so computers
+
+
+replace us at this low-level work but it
+
+
+would be really hard for them to replace
+
+
+us
+
+
+at the high level at the level of
+
+
+contact with the client so I want you to
+
+
+use your imagination and just think
+
+
+about this even storming sessions and
+
+
+imagine an AI really advanced AI trying
+
+
+to participate in this session getting
+
+
+these postcards putting them on the wall
+
+
+walking among people listening in what
+
+
+they talk about and all of the other
+
+
+stuff and I think that it's impossible
+
+
+because the AI would not be able to
+
+
+empathize with these people with clients
+
+
+with business and business would not
+
+
+empathize with AI and I think that it's
+
+
+not impossible for computers to achieve
+
+
+this ability of understanding people's
+
+
+needs people emotions but if it happens
+
+
+job security will be our lowest problem
+
+
+so just to conclude my prediction is
+
+
+that not much will change so the
+
+
+software will thanks a lot
+
+
+[Applause]

@@ -1,0 +1,42 @@
+<h1 class="page-title">Ingestions <span class="count"><%= @ingestions.size %></span></h1>
+
+<% if @ingestions.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Status</th>
+        <th>ID</th>
+        <th>Kind / Format</th>
+        <th>External ID</th>
+        <th>Time</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @ingestions.each do |ing| %>
+        <% status = ing.status %>
+        <tr class="clickable-row" tabindex="0" data-href="<%= ingestion_path(ing) %>">
+          <td><span id="ingestion-badge-<%= ing.id %>" class="badge badge-<%= status %>"><%= status %></span></td>
+          <td><code><%= ing.id&.slice(0, 8) %></code></td>
+          <td><%= ing.kind %> / <%= ing.format %></td>
+          <td><code><%= truncate(ing.external_id.to_s, length: 40) %></code></td>
+          <td><%= ing.source_at&.strftime("%Y-%m-%d %H:%M") || "-" %></td>
+          <td>
+            <span id="ingestion-actions-<%= ing.id %>">
+              <% unless status.in?(%w[queued requeued extracting]) %>
+                <%= form_with url: extract_ingestion_path(ing), method: :post, class: "reextract-form" do |f| %>
+                  <%= f.select :model_id, ExtractionPrompt::AVAILABLE_MODELS, {}, class: "model-select" %>
+                  <%= f.submit "Extract", class: "btn btn-sm" %>
+                <% end %>
+              <% end %>
+            </span>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="empty-state">
+    <p>No ingestions yet.</p>
+  </div>
+<% end %>

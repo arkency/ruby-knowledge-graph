@@ -1,0 +1,1636 @@
+thank
+
+
+you okay it's going to be weird because
+
+
+I I have two devices in my both of my
+
+
+hands so I need to get used to that so I
+
+
+might switch the microphone and the
+
+
+remote control so CH
+
+
+everybody uh I still
+
+
+find I still find uh polish a little bit
+
+
+funny that you always sound cute and
+
+
+funny to us and you greet each other
+
+
+with
+
+
+honor so uh my name is David I come from
+
+
+the Czech Republic from the city of
+
+
+brunau I guess you know where it is it's
+
+
+just a 4-Hour drive from here uh I work
+
+
+for a company called Red Hat you
+
+
+probably heard about it I work on a
+
+
+small Ruby project there uh and I also
+
+
+do some research since Co I decided that
+
+
+I should do something with my life and
+
+
+uh I wanted to do something interesting
+
+
+next to work so I research how machines
+
+
+will trust each other in the future we
+
+
+can talk about that later at the party
+
+
+maybe so who studied computer science
+
+
+here hands up
+
+
+please oh
+
+
+no it's it's not going to be new for you
+
+
+then but uh my excuse is that Andre made
+
+
+me do
+
+
+it if you if you know the big guy the
+
+
+small on the picture but the big guy of
+
+
+the conference
+
+
+so chapter one how computers
+
+
+work okay so
+
+
+sorry okay so how computers work uh
+
+
+crash course for Ruby programmers you
+
+
+have some
+
+
+instructions uh I need to look closer to
+
+
+see them because some Angel might
+
+
+reorganize my some Demon might
+
+
+reorganize my slides so you have an
+
+
+instruction class and there you have a
+
+
+pointer that every time you execute an
+
+
+instruction you increase a pointer then
+
+
+you have instructions that are sub
+
+
+classes of these uh instruction class
+
+
+such as jump where you just set the
+
+
+pointer to an actual
+
+
+number uh or you
+
+
+have uh classes like add where you add
+
+
+the two operant and then yield back to
+
+
+the pointer uh by calling the super it
+
+
+increases the pointer then you have
+
+
+substract and other stuff as well this
+
+
+is how a Ruby programmer would imagine
+
+
+how assembly looks like or computer
+
+
+instructions looks like uh the computer
+
+
+is just an iteration on those
+
+
+instructions I'll give you some
+
+
+time okay now everybody knows how
+
+
+computers work right so chapter one
+
+
+let's talk about
+
+
+languages not these let's talk about
+
+
+languages with star let's talk about
+
+
+formal languages and I'm sorry for
+
+
+bringing back your nightmares from the
+
+
+computer science classes uh you're going
+
+
+to relieve that again Andre made me do
+
+
+it for the others you might see
+
+
+something interesting so languages are
+
+
+consisting of alphabet use some kind of
+
+
+letters same as in a normal
+
+
+language uh in this case you have digits
+
+
+from 0 to 9 and plus and minus
+
+
+uh the words are a subset of iterations
+
+
+of these letters so you do all the
+
+
+possible combination of the symbols
+
+
+letters and you take some of them let's
+
+
+say 1 plus one and 2 plus two 3+ 3 4
+
+
+plus 4 these are let's say our language
+
+
+and doesn't contain anything that's our
+
+
+domain we work in that then there are
+
+
+some other formal Parts called
+
+
+grammars where you have a symbol
+
+
+and a non-terminal symbol you iterate
+
+
+that then you have another non-terminal
+
+
+symbol again a symbol all non-terminal
+
+
+symbol iterated that gets translated to
+
+
+a symbol and a non-terminal symbol
+
+
+iterated very complicated in a
+
+
+simplified way
+
+
+uh is it okay if I go further in front
+
+
+Okay uh so let's say you have an
+
+
+alphabet of uh three symbols you have
+
+
+two non-terminals D and O and this is
+
+
+one rule of the grammar the O translates
+
+
+to a to a plus I guess it's easier to
+
+
+understand than this thing second one
+
+
+the O can also translate to a minus and
+
+
+the D can translate to either one and
+
+
+two this generates us a language that
+
+
+can do 1 + 1 1 + 2 1 - one 1 - two 2
+
+
+minus one you know you get the idea all
+
+
+the combination this is our domain these
+
+
+these rules set how our language look
+
+
+like you can look into that later as a
+
+
+homework so uh we categorize languages
+
+
+into uh different groups the simplest
+
+
+languages are called regular languages
+
+
+they usually have regular grammars where
+
+
+the grammar is very simple that you have
+
+
+a non-terminal symbol on the left and on
+
+
+the right you have a non- terminal
+
+
+symbol and and uh and a symbol of the
+
+
+language or you have final symbol that
+
+
+translates to a final non- terminal to
+
+
+translate into a symbol uh it consists
+
+
+all the finite
+
+
+languages uh and they are parsable by
+
+
+final State machines and one more thing
+
+
+you can parse them by regular
+
+
+expressions with a star so from
+
+
+programming you know what the regular
+
+
+expression is anybody here who doesn't
+
+
+know what a regular expression
+
+
+is you don't know it or you know
+
+
+it okay nice that you read all of
+
+
+everybody's Minds awesome so uh
+
+
+basically a regular language for which
+
+
+you can construct a finite State machine
+
+
+this one is taking any language that
+
+
+starts with a it has infinite amount of
+
+
+a characters and ends with a
+
+
+b or in a uh regular expression it's a
+
+
+plus b if uh somebody knows how to read
+
+
+regular expression
+
+
+anything else it's outside the domain
+
+
+it's not part of the
+
+
+language also as I said all the finite
+
+
+languages are regular because you can
+
+
+just write an automat that parses
+
+
+through all the possible ones or you can
+
+
+just put all the combinations into into
+
+
+one big regular expression so the
+
+
+important part is whenever you write a
+
+
+regex in Ruby it actually generates you
+
+
+an automate like this that's how it's
+
+
+getting parsed if you can look under the
+
+
+hood you can check it out and then you
+
+
+will know that I didn't
+
+
+lie so more complicated languages are
+
+
+the Contra three ones where the grammar
+
+
+on the left side there is always one
+
+
+symbol very important and on the right
+
+
+side you have a combination of Terminals
+
+
+and non-terminals that's not the really
+
+
+important it's an alpha the important
+
+
+part is that on the left side there is
+
+
+always just one non terminal symbol so
+
+
+you cannot create very crazy stuff uh to
+
+
+pars it
+
+
+you have to create uh push down automat
+
+
+this is basically a finance State
+
+
+machine and the stack so you need some
+
+
+kind of
+
+
+memory uh and there are two kinds of uh
+
+
+languages in this group there are
+
+
+deterministic and non-
+
+
+deterministic uh it's important that uh
+
+
+like uh if you want to have a p androme
+
+
+so let's say you have a lot of words
+
+
+like ABB then it's reverse it's B BBA
+
+
+and if you have a word like abbbb a
+
+
+according to this rule it's a it's part
+
+
+of that language for that you cannot
+
+
+construct uh simple push down
+
+
+automatan but if you have a symbol in
+
+
+the middle so we have
+
+
+ABB pipe BB a then you can catch that
+
+
+symbol and this automat actually parses
+
+
+it so the expression power that's
+
+
+another important word the expression
+
+
+power of a deterministic and
+
+
+non-deterministic uh
+
+
+context free language is not the same so
+
+
+it's a subgroup during uh regular
+
+
+languages determinism isn't important uh
+
+
+sorry for scaring the hell out of you
+
+
+who studied this and struggled with
+
+
+pumping lemas in
+
+
+University uh in context three languages
+
+
+it is important part you can construct a
+
+
+push down alatan to parse it uh anything
+
+
+with parenthesis so whenever you have
+
+
+even in your editor you have parenthesis
+
+
+and you are checking if the parentheses
+
+
+are okay the number on the left is the
+
+
+same the opening parenthesis and the
+
+
+closing parenthesis is the same you can
+
+
+write a push down automat to check it
+
+
+because you put all the left parentheses
+
+
+to the stack and whenever you close the
+
+
+parenthesis you take it out from the
+
+
+stack I guess it's
+
+
+easy then there are context sensitive
+
+
+languages import and P art here the
+
+
+grammar has more than one symbol on the
+
+
+left
+
+
+side rest is not that important you can
+
+
+generate any kind of craziness with this
+
+
+kind with this uh grammar for parsing it
+
+
+you can uh parse it with a linearly
+
+
+bound automation yeah linearly bound
+
+
+automation which is a touring machine
+
+
+with a finite uh space tape so it's
+
+
+really close to what we call computers
+
+
+because it has finite amount of memory
+
+
+and I will show you in the next slide
+
+
+what touring machines are so there are
+
+
+recursively enumerable
+
+
+languages uh these use unrestricted
+
+
+grammar everything is
+
+
+allowed uh you can parse them obviously
+
+
+by a touring machine and you can also
+
+
+describe them by General recursive
+
+
+functions and Lambda Calculus if anybody
+
+
+start studied these math terms uh these
+
+
+are equivalent so you can always
+
+
+construct a Lambda calculus for your
+
+
+touring machine or generally recursive
+
+
+functions so touring machine
+
+
+uh you probably who hasn't seen the
+
+
+movie with Benedict
+
+
+Cumberbatch imitation
+
+
+game
+
+
+Sorry
+
+
+hasn't good okay you don't learn
+
+
+anything about the ring machines there
+
+
+but so you have an infinite tape and it
+
+
+has a head and the tape has an
+
+
+alphabet its own then you have a read
+
+
+right head that moves on the tape it can
+
+
+read and right and move left or right it
+
+
+has States and it has some transition
+
+
+function based on the symbol on the tape
+
+
+and the current state it can move to
+
+
+another state write another symbol to
+
+
+the tape and move left to the right I
+
+
+guess it reminds you of a computer in a
+
+
+simplified
+
+
+way
+
+
+uh there are the stuff I just explained
+
+
+I'm sorry I didn't see it uh uh it's
+
+
+pretty
+
+
+complicated it's a mathematical model of
+
+
+something much more powerful than the
+
+
+computer the biggest uh difference is
+
+
+that you have an infinite tape in a
+
+
+computer you cannot have an infinite
+
+
+tape obviously because we have finite
+
+
+memory
+
+
+so important things with touring
+
+
+machines they don't use them for
+
+
+computing anything they are used for
+
+
+mathematical proofs one machine can
+
+
+simulate another I I guess that's uh
+
+
+pretty long proof we will not go into
+
+
+that sorry for anybody who's interested
+
+
+in that uh determinism isn't
+
+
+important uh non deterministic touring
+
+
+machine can simulate deterministic one
+
+
+and the deterministic one can simulate a
+
+
+non-deterministic one it just takes
+
+
+longer time so determinism here you try
+
+
+all the
+
+
+combinations if if uh you want a simple
+
+
+answer uh you can Al do multitape uh
+
+
+machines and multitap machines can be
+
+
+simplified to single tape machines which
+
+
+was the proof that you can actually
+
+
+construct a computer with single kind of
+
+
+memory historically you had two memories
+
+
+usually even in asembly if you do x86
+
+
+assembly you have two kinds of memory in
+
+
+your computer there is the code segment
+
+
+and the data
+
+
+segment uh but physically they are in
+
+
+one space the same way as during machine
+
+
+can handle two tapes simulated on one
+
+
+tape it's the same thing happening in
+
+
+computers so there is a mathematical
+
+
+proof that computers can
+
+
+exist yeah we cannot construct them on
+
+
+real in real life unfortunately and as I
+
+
+said uh we we use it to prove stuff and
+
+
+there is something called Church during
+
+
+thesis it's basically saying that
+
+
+whatever can be expressed with touring
+
+
+machines or its equivalent like Lambda
+
+
+calculus or partially recursive function
+
+
+functions can be mathematically computed
+
+
+so whatever the touring machine cannot
+
+
+compute you don't have to run it you
+
+
+just have to prove it that it cannot
+
+
+compute it's not solvable by our current
+
+
+state of
+
+
+mathematics or
+
+
+algorithms there's also one thing called
+
+
+the universal touring
+
+
+machine which is a machine with two
+
+
+tapes one tape has the code the other
+
+
+tape has data which can you again join
+
+
+into one uh tape and get get very
+
+
+similar something to a mathematical
+
+
+model of a computer that can be used
+
+
+other again other for other proving
+
+
+stuff hope I didn't uh destroy anybody's
+
+
+brain by explaining these things but uh
+
+
+I when I teach my students at the
+
+
+University I do believe that recognizing
+
+
+patterns is important so in the next
+
+
+chapter we going to no not yet
+
+
+sorry uh before we go to the next
+
+
+chapter there is another thing want to
+
+
+talk about is algorithmic
+
+
+complexity there is two kinds of
+
+
+algorithmic complexity space and
+
+
+time not that kind of space and time but
+
+
+in the uh perspective of touring
+
+
+machines space spatial complexity of an
+
+
+algorithm is how many pieces on the tape
+
+
+you
+
+
+use in time wise how many movements you
+
+
+do on the tape so when if you are able
+
+
+to move your algorithm to the touring
+
+
+machine domain you just have to do these
+
+
+two calculations to know if your
+
+
+algorithm is quadratic linear in space
+
+
+or time
+
+
+whatever and again pattern
+
+
+recognition uh we're going to go through
+
+
+what how compilers and interpreters
+
+
+work so when you write your code it goes
+
+
+through a ton of stages in your Ruby
+
+
+interpreter so first we do lexical
+
+
+analysis then we do syntax iCal
+
+
+semantical we generate some intermediate
+
+
+code these three are
+
+
+overlapped then there are some
+
+
+optimizations and at the end we do
+
+
+execution compilers do code
+
+
+generation so when you do lexical
+
+
+analysis you read characters one by one
+
+
+and here is important that you have some
+
+
+pattern recognition
+
+
+skills this is a regular expression this
+
+
+is as well this is as well as well so I
+
+
+I guess it's easy to see that this is a
+
+
+finite State machine for language three
+
+
+uh type
+
+
+three
+
+
+right okay okay recognizing
+
+
+patterns then there is syntactical
+
+
+analysis that I won't show because it
+
+
+wouldn't fit on the table uh table um
+
+
+slide and I don't want to spin through
+
+
+like five slides basically we par these
+
+
+tokens and we construct some kind of
+
+
+internal representation which doesn't
+
+
+necessarily happen in this time this uh
+
+
+phase but from the tokens you generate
+
+
+some kind of tree of in in case of Ruby
+
+
+you create an abstract syntax tree which
+
+
+uh has instructions the know the usually
+
+
+the top of the tree is an operation and
+
+
+on the side you have the
+
+
+operand uh there are other um ways of
+
+
+internal representation creating in this
+
+
+uh step but uh uh the most famous lately
+
+
+is bite code uh so like Java stuff uh in
+
+
+in some cases doesn't generate as but
+
+
+goes through a bite code depending on
+
+
+how how you configure it it's not that
+
+
+important next one is yeah and that's
+
+
+where you get the syntax errors so if it
+
+
+doesn't go through then you see the
+
+
+syntax error in your interpreter next
+
+
+one is called semantical analysis where
+
+
+you usually check if your code actually
+
+
+has a meaning semantics so type
+
+
+coherence uh Scopes and declarations uh
+
+
+like your variable is defined in that
+
+
+moment it's you're not overwriting a
+
+
+constant things like that basically
+
+
+logical
+
+
+analyzation uh they mainly do that by by
+
+
+going through graphs you have a tree you
+
+
+can Traverse that tree multiple times it
+
+
+happens plenty of times in any
+
+
+programming
+
+
+language yeah and also rust has its own
+
+
+uh famous fancy checker for uh errors
+
+
+it's done in this this stage where they
+
+
+actually do the memor M checks and they
+
+
+claim that they can write write super
+
+
+safe
+
+
+code and next thing is
+
+
+optimization uh I have some examples so
+
+
+constant folding you see it on the top
+
+
+when you have a multiplication in your
+
+
+code the compiler or interpreter can
+
+
+actually multiply it in advance and
+
+
+store it in the as as this so it doesn't
+
+
+have to do the multiplication later you
+
+
+can make it fast same with constant
+
+
+property ation if you have an A and 3 *
+
+
+a in in B variable then it can just
+
+
+write 3 * 3 and avoid the constant
+
+
+calling basically flattening your tree a
+
+
+little bit then there is caching you
+
+
+have a multiplication with a number you
+
+
+can pull out that number into a constant
+
+
+and uh do the multiplications one and
+
+
+and uh multi do do the adding once and
+
+
+multiply it uh 10 times
+
+
+uh of course I mean you can also write
+
+
+it on your own but if you do this
+
+
+actually this happens under the hood so
+
+
+you don't multi do you don't do the
+
+
+adding multiple times just the
+
+
+multiplication Loop unrolling is my
+
+
+favorite and I actually implemented it
+
+
+at the University in Hardware so when
+
+
+you have MMX or SSC capable CPUs which
+
+
+is most of your processor most of our
+
+
+processors currently then it's faster to
+
+
+do four instruction it's possible to do
+
+
+four multiplication at the same time so
+
+
+instead of going through one by one
+
+
+through this 1 to 256 and multiplying a
+
+
+number by two the compiler can actually
+
+
+detect your or The Interpreter can
+
+
+actually detect that your CPU has MMX or
+
+
+SS instruction set and unroll your Loop
+
+
+into four
+
+
+multiplication and these four
+
+
+multiplications happen the same time
+
+
+which can be pretty fast it's it looks
+
+
+like it's slower but it's actually four
+
+
+times faster because it runs in Hardware
+
+
+so the optimization job is to make your
+
+
+to use your Hardware to the
+
+
+fullest and uh if you remember from the
+
+
+beginning uh how computers work then you
+
+
+this code will be very easy to
+
+
+understand so The Interpreter is just
+
+
+going through the instructions and run
+
+
+runs them obviously and if you compile
+
+
+it you write them to a file in assembly
+
+
+assembly is the machine instructions set
+
+
+for a CP VI and then it runs through an
+
+
+assembler and and it becomes bite
+
+
+code so uh there is one more piece that
+
+
+I didn't mention yet it's called the
+
+
+virtual
+
+
+machine it's not a virtual machine in
+
+
+the sense as you run it on uh virtual
+
+
+box or or Parallels it's it's very
+
+
+similar you have a machine uh when when
+
+
+you have something that can run
+
+
+instructions that don't run directly on
+
+
+the hardware you already have a virtual
+
+
+machine and the purpose of this virtual
+
+
+machine is to run through this
+
+
+intermediate representation sometimes
+
+
+directly on as sometimes on three
+
+
+address code or or bite code or whatever
+
+
+uh it's an direction to run it in
+
+
+multiple uh
+
+
+platforms and good thing is that you can
+
+
+take this virtual machine and swap it to
+
+
+other languages it can support stuff
+
+
+like Justin type complication in the
+
+
+case of Ruby even garbage collection is
+
+
+imported in it and paralis management
+
+
+isn't but the global VM lock you
+
+
+probably heard it that's killing
+
+
+parallelism is in Ruby is actually in
+
+
+there so some examples uh the most uh
+
+
+famous for you is probably the Yar of
+
+
+the you yet another Ruby Virtual Machine
+
+
+written by Koji actually it's a stack
+
+
+based uh virtual machine implemented and
+
+
+it optimizes and executes your Ruby code
+
+
+under the hood
+
+
+uh so next
+
+
+chapter I have a really bad news for you
+
+
+you probably will never do this in your
+
+
+real life manually even though there are
+
+
+patterns and these things are are
+
+
+available and you can always do it there
+
+
+are tools to generate lexers and
+
+
+parsers uh you can describe the grammar
+
+
+of the language and run those three
+
+
+tools and it generates you a parser the
+
+
+the thing that gets you ASDS or some
+
+
+kind of internal
+
+
+representation then you can just
+
+
+translate it to some bite code or
+
+
+whatever you want and then virtual
+
+
+machines are also
+
+
+available you can use the Java VM it's
+
+
+already existing as J Ruby hi Charlie
+
+
+n uh there is grow VM truffer Ruby which
+
+
+is again an alternative implementation
+
+
+so uh we generate code for that VM there
+
+
+is llvm for Ruby news and there are of
+
+
+course many more like parro net and
+
+
+others so when you hear these names that
+
+
+they are compatible with Ruby they are
+
+
+but they are Runing on a different
+
+
+virtual machine that has maybe better or
+
+
+worse performance depending on the
+
+
+context creating a programming language
+
+
+like this is not fun
+
+
+but but I I think you you saw the
+
+
+patterns that we use some theoretical
+
+
+informatics and we use those patterns to
+
+
+be able to create a language like
+
+
+syntactical analysis is using push down
+
+
+automatons and and finite State machines
+
+
+uh semantical analysis uses graft
+
+
+reversal these are things that you
+
+
+already do so it's always nice to have
+
+
+to understand how these things work
+
+
+under the
+
+
+hood and uh thank you for having
+
+
+me okay any questions
+
+
+sorry for triggering bad memories from
+
+
+University I saw in Michael
+
+
+that I think we just understand
+
+
+everything and we trust
+
+
+you okay uh thank you very much big
+
+
+appla for the
+
+
+[Applause]

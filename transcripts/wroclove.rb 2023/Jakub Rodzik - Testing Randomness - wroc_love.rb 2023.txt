@@ -1,0 +1,2713 @@
+yeah thank you so from what I've heard
+
+
+I'm replacing a guy that's supposed to
+
+
+be tall and good looking so you know
+
+
+jokes on you huh
+
+
+all right all right I think we can start
+
+
+so today I'm going to tell you a story I
+
+
+know some of you might be tired already
+
+
+so you can treat it as a bedtime story
+
+
+so this story will be about an adventure
+
+
+as in any good Adventure there should be
+
+
+a hero
+
+
+so our story will have a hero as well
+
+
+and our hero will face a lot of
+
+
+challenges
+
+
+to answer one question how to test
+
+
+something that's random so we keep our
+
+
+fingers crossed for our hero hopefully
+
+
+he will learn something and hopefully
+
+
+some of you learned something as well
+
+
+or at least you'll have some fun
+
+
+let's start
+
+
+meet Fredo Fredo might look familiar to
+
+
+some of you because Fredo just like most
+
+
+of you is just like most of us is a
+
+
+developer so you know it's natural that
+
+
+you can see some parts of yourself in
+
+
+Fredo and Fredo will go on an adventure
+
+
+now what's the adventure about
+
+
+Fredo has to write a game
+
+
+a game that takes two players each one
+
+
+of them rolls a dice and if the first
+
+
+player rolls a better score he wins
+
+
+otherwise the second player wins
+
+
+sounds simple enough
+
+
+I think right now is the time where we
+
+
+can try to look through Fredo's eyes and
+
+
+try to implement this ourselves
+
+
+let's start
+
+
+we started with a class game and with
+
+
+tests where do we start of course with
+
+
+tests so
+
+
+let's oh by the way those are in our
+
+
+specs so you probably all are familiar
+
+
+with it so our game should
+
+
+um
+
+
+return a winner right
+
+
+so we want to have a game which is game
+
+
+new exactly and it should take two
+
+
+players let's call them by pin
+
+
+and maybe uh
+
+
+Miri whatever
+
+
+right okay we want to have it to have a
+
+
+play Method
+
+
+and
+
+
+and now the fun part begins because we
+
+
+expect this game to have a winner right
+
+
+but it shouldn't be like typing all the
+
+
+time on or Miri all the time so this
+
+
+thing puzzles further but he's very
+
+
+pragmatic and so he doesn't let this
+
+
+tiny details stop him he writes the code
+
+
+just as he heard business requirement if
+
+
+game
+
+
+P1
+
+
+score
+
+
+is bigger than game p2's car piping wins
+
+
+otherwise it's Miri right sounds simple
+
+
+enough looks simple enough
+
+
+let's see if
+
+
+our tests tell us something the main
+
+
+thing you have to look for here is are
+
+
+the test thread or are they green this
+
+
+time it's red means it's good we're also
+
+
+we wrote tests that are not covered
+
+
+right there's nothing here they fail
+
+
+it's perfect all right let's try to
+
+
+write some implementation now
+
+
+initialize we take P1
+
+
+and P2
+
+
+of course we
+
+
+want this to have
+
+
+a play Method
+
+
+um
+
+
+yeah
+
+
+and this should exactly P1 score
+
+
+P2 score
+
+
+maybe there should actually be a result
+
+
+of a dice roll so let's say one two six
+
+
+we've all C dice before six sides from
+
+
+one to six
+
+
+and our main logic here
+
+
+so if P1 score is bigger P1 wins else
+
+
+it's P2
+
+
+all right and let's see if our tests
+
+
+will work only one more thing attribute
+
+
+readers
+
+
+all right let's run some tests now
+
+
+look at that everything is green
+
+
+everything is perfect Fredo is very
+
+
+happy with his code because not only we
+
+
+solve the problem
+
+
+not only road tests we wrote tests first
+
+
+which means it has to be tdd right only
+
+
+one thing left
+
+
+we have to let the word know so
+
+
+let's go on LinkedIn tdd it's there it's
+
+
+perfect company earns a ton of money and
+
+
+we want some improvements right because
+
+
+we already validated our idea it's great
+
+
+it's fantastic we need some more
+
+
+so we have a new Quest here basically
+
+
+let's add a draw right because right now
+
+
+well it's only one under the other but
+
+
+sometimes both of them with all the same
+
+
+number and like it's it's supposed to be
+
+
+a tie
+
+
+well that doesn't sound sound that bad
+
+
+right
+
+
+so let's back let's go back to the code
+
+
+and let's see what can we do here so
+
+
+first of all where do we start
+
+
+with tests right and we already have
+
+
+those beautiful tests here right so
+
+
+let's try to modify them
+
+
+we have
+
+
+our else Branch let's change to else if
+
+
+P1 score game P2 score perfect and one
+
+
+more thing else
+
+
+it's supposed to be a time that's fine
+
+
+now let's run some tests
+
+
+and the first thing that was unexpected
+
+
+happens so we just added a new
+
+
+requirement to our tests I think at
+
+
+least further think he did and the tests
+
+
+still pass
+
+
+how it's possible
+
+
+well Fredo has a group of friends very
+
+
+close friends one might even say it's a
+
+
+fellowship but yeah he asked them about
+
+
+it they help him I don't have freda's
+
+
+help freda's friends here but I have you
+
+
+guys so
+
+
+um let's start what's wrong with this
+
+
+test it's obvious so anyone
+
+
+yes they are random yeah that's true but
+
+
+in this specific scenario what do you
+
+
+think could be improved why did the test
+
+
+pass here like when we add this here
+
+
+come on I know you know it's not that
+
+
+late of course because we have those if
+
+
+statements here right
+
+
+uh so because of those only one of those
+
+
+test branches is run at a time
+
+
+and this is not what we're looking for
+
+
+because we either test if the Pepin was
+
+
+a winner or Miri but we never test all
+
+
+of those branches here at once
+
+
+all right so now what do we do let's go
+
+
+back to the state where we actually had
+
+
+a code that we thought was working with
+
+
+the tests that we thought were working
+
+
+so let's remove this additional
+
+
+um
+
+
+additional requirements here
+
+
+okay so what can we do to actually make
+
+
+those tests better now
+
+
+any ideas we want to get rid of if else
+
+
+statements so what can we do come on
+
+
+monkey patched around how would we
+
+
+achieve that
+
+
+yeah down the rabbit hole no no no okay
+
+
+any any ideas like any simpler one
+
+
+oh yeah I I can hear something I think
+
+
+Freda would love that's true let's let's
+
+
+begin with with stabs or marks and so
+
+
+Fredo as experience developer is
+
+
+that's of course and just that so we go
+
+
+here our spec stab brand
+
+
+stop front
+
+
+all right
+
+
+it gives us hope because it looks like
+
+
+someone else was looking for that as
+
+
+well there's a question that looks like
+
+
+maybe it might be about the same thing
+
+
+there's like answer but a bit too long
+
+
+so whatever and but oh look at this one
+
+
+liner that's nice
+
+
+six subvotes that's even nicer right
+
+
+okay copy paste like it it has to be
+
+
+good right all right
+
+
+let's type it here I will show you the
+
+
+full line
+
+
+so it's allowed to receive Grant and
+
+
+return one two three four five we
+
+
+actually want to update it a bit right
+
+
+three then one meaning meaning that the
+
+
+first time we call rant uh it returns
+
+
+three it returns three second time it
+
+
+returns one and this means that
+
+
+um
+
+
+we should be able to get rid of those
+
+
+but to make sure that we didn't break
+
+
+anything let's run tests there's two
+
+
+pass okay and let's validate our
+
+
+assumption so we should be able to
+
+
+remove
+
+
+those lines
+
+
+and
+
+
+we should still be good here right
+
+
+Let's test it
+
+
+perfect now we have a test that always
+
+
+tests the first Branch here the line 13.
+
+
+the only thing left is to write another
+
+
+one
+
+
+that actually maybe we would can change
+
+
+here
+
+
+and let's write another one that returns
+
+
+a Miri
+
+
+yeah thanks Copilot
+
+
+let's run it
+
+
+now we have two examples both of them
+
+
+pass both of them look much more
+
+
+reliable than what we used to have here
+
+
+okay now time for the new requirement
+
+
+it returns time
+
+
+okay in case we have three and three we
+
+
+want a tie let's run some tests
+
+
+they are red as we expected
+
+
+so the only thing left is to
+
+
+update
+
+
+the code itself right
+
+
+okay let's run some tests
+
+
+outstanding yeah Fredo is very happy
+
+
+he's he became like a company hero right
+
+
+now
+
+
+uh of course something we have to like
+
+
+include in our city right and uh now
+
+
+we're starting to see other company
+
+
+companies pursuing our success like
+
+
+there's a lot of companies that want to
+
+
+make the same amount of money that we do
+
+
+but fear not our business is actually
+
+
+prepared for that we know how to be one
+
+
+step ahead of our competitors
+
+
+you might say this is a revolution a
+
+
+revolutionary idea
+
+
+we're going to use a new dice but we
+
+
+don't call it new we call it the better
+
+
+dice right so previously the old boring
+
+
+dice had only one to six scores our new
+
+
+one will have one one three four five
+
+
+and six well sounds simple
+
+
+although Prado is not convinced it's
+
+
+like a revolution but the ticket is
+
+
+already in Gerard so
+
+
+why not
+
+
+back to code then
+
+
+thredot takes a quick look on what he
+
+
+already has here and he notices one
+
+
+thing we actually don't change any of
+
+
+the logic we have here like not at all
+
+
+it stays the same basically we shouldn't
+
+
+change tests as well because they should
+
+
+test the logic that we have here so the
+
+
+only thing that's left actually is to
+
+
+change the code that represents the dice
+
+
+roll right because this is what in fact
+
+
+was changed so maybe we could do
+
+
+something like one one three four five
+
+
+and six and Dot sample
+
+
+it's simple enough right this is what we
+
+
+want node 2 here it's only one uh we
+
+
+should be good here
+
+
+so you probably already know what will
+
+
+happen when I run these tests yeah Fredo
+
+
+is about to find out
+
+
+yeah red everywhere
+
+
+so further space getting red as well
+
+
+because we were supposed to do DDD tdd
+
+
+sorry
+
+
+it all supposed to be beautiful and easy
+
+
+and fun and looks like whenever we get a
+
+
+new requirement it it goes down right uh
+
+
+tests are always red it would be best to
+
+
+remove them but probably we wouldn't get
+
+
+an approved on GitHub so like we have to
+
+
+do something about them
+
+
+okay
+
+
+so first thing first let's get back to
+
+
+the version that we know was working
+
+
+the one with front
+
+
+so what what can we do now
+
+
+Shredder actually asks his friends
+
+
+about this and they told him one thing
+
+
+solid yeah further knows about solid a
+
+
+thing or two especially about the O
+
+
+because o was his favorite letter the
+
+
+most round one uh yeah and he remembers
+
+
+what it stands for it's for open close
+
+
+principle
+
+
+and the idea is that maybe this could
+
+
+somehow Hub further as well
+
+
+um the other thing is that he notices
+
+
+that although the game looks like we
+
+
+should roll a dice and then you know
+
+
+combine compare scores select the winner
+
+
+we don't actually have a dice anywhere
+
+
+here in the code
+
+
+so those lines from 9 and 10 should be
+
+
+represent a bit better
+
+
+maybe we should even introduce an
+
+
+abstraction here something that we can
+
+
+call a dice
+
+
+let's do that
+
+
+that's called dice
+
+
+should return the same right front one
+
+
+to six okay let's try to include this in
+
+
+our class
+
+
+dice new of course attribute reader
+
+
+and
+
+
+um
+
+
+what we need to have here
+
+
+is also
+
+
+a variable
+
+
+all right before we do anything else
+
+
+let's make sure we didn't break anything
+
+
+tests are still green that's good
+
+
+uh let's maybe try now to include this
+
+
+abstraction here
+
+
+awesome
+
+
+tests are still green
+
+
+which means we actually did a proper
+
+
+refactor here right nothing's changed uh
+
+
+besides the implementation so the
+
+
+behavior stayed the same that's good
+
+
+uh however how did that supposed to help
+
+
+us we still have a dice that rolls
+
+
+right and it rolls randomly however if
+
+
+we somehow could in our Workshop machine
+
+
+dies that rolls in a very specific way
+
+
+we could then use it in our tests right
+
+
+because if we know it always rolls one
+
+
+we could test for a tie
+
+
+so let's see if redo is able to somehow
+
+
+machine this dice here
+
+
+we can call it fake Dice and now
+
+
+we want to
+
+
+be able to define those roles on the go
+
+
+and of course
+
+
+it has to have a method role right uh I
+
+
+think it's called dice typing right if
+
+
+it looks like a dice and rolls like a
+
+
+dice it's a dice uh I heard that
+
+
+somewhere okay let's see if we can
+
+
+somehow include this fake dice in our
+
+
+tests
+
+
+maybe we can do
+
+
+a dice
+
+
+it's a fake dice okay let's
+
+
+included here
+
+
+and let's run our tests
+
+
+nothing's changed which is good expect
+
+
+it
+
+
+now if our assumption is correct we
+
+
+should be able to actually remove
+
+
+this line let's see what happens now
+
+
+it still works great now let's just do
+
+
+this for the
+
+
+for the rest of the examples
+
+
+one three and here we want one and one
+
+
+and let's remove those lines
+
+
+we don't need stabs anymore
+
+
+I has I had to like of course forget
+
+
+about passing dice
+
+
+[Music]
+
+
+okay
+
+
+perfect we'll still
+
+
+in the very beginning meaning uh
+
+
+everything works
+
+
+kinda as it used to but there is one
+
+
+more important thing here
+
+
+our class that we were testing no longer
+
+
+no longer cares about the dice and the
+
+
+type of the dice right it only cares
+
+
+that it rolls so to achieve our goal we
+
+
+have to do one more thing
+
+
+you remember how we call it right it's
+
+
+better dice nothing nice
+
+
+and here we implement
+
+
+sample all right now we replace this
+
+
+dice this old boring dice with
+
+
+better dice
+
+
+and we run tests
+
+
+tests are still green because we don't
+
+
+really care about the dice anymore we
+
+
+only care that it works and we test this
+
+
+what we have here
+
+
+perfect
+
+
+so you probably know what this is called
+
+
+and if you don't you can follow uh Fredo
+
+
+on LinkedIn it's called dependency
+
+
+injection
+
+
+all right a company is very happy yes
+
+
+there's the question
+
+
+yeah the tests are using the fake dust
+
+
+yeah that's right
+
+
+yeah in real world we should I would
+
+
+actually suggest testing like uh kinda
+
+
+end to end or you know uh like not
+
+
+unique tests with fake dice only
+
+
+uh but it's not a real word it's a story
+
+
+yeah but that's a good point we actually
+
+
+should include those in tests um only if
+
+
+we don't if you want to test this with
+
+
+unit tests you can go ahead and use like
+
+
+a fake dice
+
+
+um
+
+
+okay we did it our company is happy a
+
+
+very rich company now
+
+
+we're also very rich because look at our
+
+
+resume
+
+
+um so there's one more problem here
+
+
+one last tiny thing
+
+
+our code looks like it works perfectly
+
+
+but we still get call from this one
+
+
+customer
+
+
+and he tells us that well
+
+
+I play with my friend April 5 Heroes one
+
+
+and I still lose
+
+
+so it shouldn't it shouldn't supposed to
+
+
+work like that right
+
+
+uh yeah it shouldn't
+
+
+and Fredo is a bit angry because the
+
+
+tests are showing that you know
+
+
+everything works right tests are green
+
+
+it has to work uh so he was about to
+
+
+grab a phone and kindly explain to the
+
+
+customer why why it works but on the
+
+
+other hand I think he briefly remembers
+
+
+the project maybe you also remember such
+
+
+projects where tests were green
+
+
+and yet features didn't work like have
+
+
+you and anyone
+
+
+yeah
+
+
+less than a half that I hope for all
+
+
+right
+
+
+um tests are green but can we actually
+
+
+prove that our code works
+
+
+uh Fredo
+
+
+talks with his group
+
+
+and has an idea
+
+
+right now when the game ends we know who
+
+
+wins right
+
+
+but it would be really really nice if we
+
+
+should if we could tell why that person
+
+
+won right because look at this in in
+
+
+this way
+
+
+player one wins it means that he could
+
+
+have rolled a six and his opponent could
+
+
+have throught a one or a two or a three
+
+
+yeah they got it right so there are many
+
+
+events that lead to the same result it
+
+
+would be really nice if we could somehow
+
+
+track this
+
+
+so he gets an idea it would be really
+
+
+nice if we had a game that
+
+
+actually returns some events some logs
+
+
+some audits so
+
+
+let's say that our fake dies rolls two
+
+
+and one we want to have an event maybe I
+
+
+can show it better here we want to have
+
+
+an event that that says that Pepin World
+
+
+2 maybe wrote one and that the winner
+
+
+piping right
+
+
+because then we could exactly know what
+
+
+happened
+
+
+and white Pepin won not only that he won
+
+
+all right so to do that
+
+
+we add of course events here
+
+
+and
+
+
+let's initialize it
+
+
+and now this is important after every
+
+
+each one of the state changes meaning
+
+
+every time we use the instance variable
+
+
+or assign a new value to it we want to
+
+
+log it
+
+
+so
+
+
+player one world something P2
+
+
+roll something and finally who the
+
+
+winner is because right now
+
+
+you can actually take a look at those
+
+
+Events maybe you can store them in a
+
+
+database maybe you can log them
+
+
+somewhere else in like Sumo logic or
+
+
+datadoc or whatever you use
+
+
+and you can actually follow the full
+
+
+execution of your code see what what was
+
+
+happening and assert
+
+
+the code actually behaves as I expected
+
+
+to as we have written in tests so one
+
+
+final thing
+
+
+tests are still green everyone is
+
+
+clapping uh Fredo learned a new skill
+
+
+and yeah
+
+
+with such impressive resume he becomes a
+
+
+president and his journey ends here but
+
+
+uh ours does not not yet at least I'd
+
+
+like to go through some of those tests
+
+
+with you and talk a bit about them so
+
+
+let's start with the ones with
+
+
+conditionals
+
+
+so
+
+
+those are very very
+
+
+obvious examples of how not to write
+
+
+tests right so we have logic and tests
+
+
+that's the main problem
+
+
+what's bad about it like to be to be
+
+
+fair I don't think there's anything good
+
+
+about them but so what's bad well logic
+
+
+in tests always makes them harder to
+
+
+understand
+
+
+logic in tests that mimics the logic in
+
+
+code actually means that you're probably
+
+
+not testing anything and it gives you
+
+
+very false sense of security so like
+
+
+don't use it
+
+
+uh yeah another question who is this
+
+
+logic in codes or ever used ever seen
+
+
+like hands up
+
+
+no one yeah okay
+
+
+in test sorry logic intests all right
+
+
+uh so there are different flavors of
+
+
+logic have you ever seen like a loop in
+
+
+tests
+
+
+yeah it's logic
+
+
+um because like why is it bad not every
+
+
+logic is bad right but when you have a
+
+
+loop like that you test like 100
+
+
+products like and the test fails right
+
+
+it returns 101 instead of one oh so for
+
+
+which product did it happen like it's
+
+
+hard to tell
+
+
+it should be understandable immediately
+
+
+have you ever seen something like that
+
+
+like I've seen that so we have this nice
+
+
+serializer that turns sent to dollars
+
+
+and you know our code already uses it so
+
+
+let's use it in our tests well yeah but
+
+
+if cents to Dollars break and start
+
+
+returning new our code will still pass
+
+
+and but that but our feature won't work
+
+
+okay
+
+
+the second thing the one with stabbing
+
+
+so now we're getting to the more
+
+
+controversies uh and why it's good why
+
+
+it's bad
+
+
+so the good thing is that we are
+
+
+actually testing things and we're
+
+
+testing all of them uh another good
+
+
+thing is that those tests are
+
+
+deterministic so no matter how many
+
+
+times we are we run them we expect the
+
+
+same thing to happen which is good and
+
+
+they those are easy to write let's like
+
+
+uh let's acknowledge that because I
+
+
+think this is also very important
+
+
+what's bad about them well they make
+
+
+your code couples to implementation
+
+
+which might make uh refactoring much
+
+
+harder as we've seen in this example
+
+
+uh okay so hands up who uses stops or
+
+
+mocks in codes
+
+
+yeah uh so have you ever seen something
+
+
+like that like where you have message
+
+
+change this is an actual example from my
+
+
+code base I only changed you know the
+
+
+variables name but and the amount of
+
+
+those attributes is is accurate and like
+
+
+good luck if you want to refactor it
+
+
+anytime soon and also you know results
+
+
+is a double it allows results to return
+
+
+something else which returns another
+
+
+double it's hard to understand at and
+
+
+tests are supposed to be easy
+
+
+yeah
+
+
+of course
+
+
+client or any other election
+
+
+one two
+
+
+two so if you have a documentation for
+
+
+the external API the optical injecting
+
+
+into your class
+
+
+you will have the fake guys video
+
+
+but this kind of like expect to receive
+
+
+the role
+
+
+would be useful because this is the only
+
+
+thing that
+
+
+is
+
+
+called a different right way like
+
+
+yeah I I fully agree it can be useful uh
+
+
+it just comes with a price and like as
+
+
+long as you're aware of that you're good
+
+
+to go right I'm I'm not telling that you
+
+
+should avoid using any of those things
+
+
+or maybe conditionals like never don't
+
+
+but honestly yeah it comes with a price
+
+
+and that there are like functions
+
+
+methods that uh we don't really care
+
+
+about what they return but we only care
+
+
+about side effects like an IPI call
+
+
+right and we we have to test it somehow
+
+
+and I think this is like in good and
+
+
+easy and low cost way to do that and
+
+
+maybe there are more benefits than you
+
+
+know uh hustle with refactor ink later
+
+
+on or maybe we won't be ever refactoring
+
+
+this which is you know even better right
+
+
+so yeah if it works for you
+
+
+work with it right but if you start
+
+
+using stops everywhere
+
+
+like ask yourself if it's worth it and
+
+
+if you see like receive message chain
+
+
+this should actually you know light up
+
+
+some
+
+
+heavy orange lights in your head
+
+
+okay uh let's go to the dependency
+
+
+injection yeah anyone uses something
+
+
+similar in tests
+
+
+all right how does it work for you is it
+
+
+is it fun is it easy to implement
+
+
+you you use a different class
+
+
+specifically for uh for tests
+
+
+Miller is actually
+
+
+maybe talking about it tomorrow I think
+
+
+and it's called substitute I don't know
+
+
+if you arrived from there as well I have
+
+
+problems with convincing other to
+
+
+accept non-production code they seem to
+
+
+always say hey it's not production code
+
+
+so what's your reaction is testing
+
+
+so this is the product yeah I
+
+
+yeah
+
+
+I can feel that
+
+
+it's hard but if you instead of making a
+
+
+new class uh you use sorry one one of
+
+
+all if you instead of using new class
+
+
+you use instance double then suddenly it
+
+
+because it becomes really yeah it's okay
+
+
+it's fun oh we all do that right
+
+
+so first let's talk about what's what's
+
+
+good in my opinion in injecting tests uh
+
+
+like Independence injection tests it
+
+
+lets the code to be open which is
+
+
+actually a big thing when your code
+
+
+changes a lot those are still
+
+
+deterministing and we gained some
+
+
+decoupling from implementation which is
+
+
+actually very good because it makes
+
+
+refactoring much easier
+
+
+what's bad about it well
+
+
+first of all as you mentioned some of
+
+
+the people don't want to do it simply
+
+
+under preference and that's fine
+
+
+[Music]
+
+
+fake dice needs to be added like it's a
+
+
+code right I mentioned before that when
+
+
+we add code or logic to tests it makes
+
+
+them less readable and we just added
+
+
+code to tests right we should avoid that
+
+
+we'd like to
+
+
+second thing we need to make sure that
+
+
+fake Dice and dice stay aligned right if
+
+
+methods on a dice change we should
+
+
+change them on fake dice It's Tricky
+
+
+and lastly if we pick the wrong
+
+
+abstraction there is a big chance that
+
+
+further on we will regret it it will
+
+
+make the code more complicated that that
+
+
+it needs it needs to be and there's like
+
+
+a
+
+
+one thing here I I want to point out
+
+
+because I can see a lot of instance
+
+
+double uses and it's nice because it
+
+
+actually guards us from using like
+
+
+method that doesn't exist right what it
+
+
+doesn't help us is
+
+
+returning value that's actually not
+
+
+possible to be returned right here
+
+
+calculate methods returns an integer and
+
+
+in our instance double we return string
+
+
+if we do something like that in our
+
+
+tests our tests will test something
+
+
+different than our code
+
+
+so something to keep in mind
+
+
+um all right so what about the the tests
+
+
+with monitoring what about monitoring
+
+
+like in general right or logging uh like
+
+
+whatever you call it auditing
+
+
+uh it's actually a very good idea I
+
+
+highly recommend it especially in
+
+
+important parts of your system it makes
+
+
+debugging Tom like a lot easier
+
+
+um it gives you audit of changes and
+
+
+like at the very very uh last thing it
+
+
+gives you ability to manually test it if
+
+
+you have complicated algorithm and you
+
+
+know all the inputs you can like use
+
+
+your calculator in your phone and test
+
+
+if the value is actually matching the
+
+
+one that was calculated from your code
+
+
+uh
+
+
+of course if you use the technique that
+
+
+was already mentioned yesterday and a
+
+
+few times today called event sourcing
+
+
+you like have this for free right
+
+
+because you already have those all
+
+
+events that alter the state of an object
+
+
+what's tricky about logging
+
+
+so first of all if you overuse it in
+
+
+your domain code or in the code that
+
+
+makes this that cares about business
+
+
+logic it becomes hard to read Because
+
+
+you log everything right do something
+
+
+log do something log do something log
+
+
+and second thing if you don't properly
+
+
+choose the tools
+
+
+you might end up with like a pricey bill
+
+
+because if you log extensively under
+
+
+heavy traffic your Sumo logic Bill might
+
+
+increase maybe you know think about it
+
+
+maybe it's better to store them in the
+
+
+database maybe a simple data doc Matrix
+
+
+would be sufficient like pick the right
+
+
+tools for the job
+
+
+and I also recommend using this with uh
+
+
+Legacy code it actually helped me a few
+
+
+times with uh with understanding and
+
+
+debugging the code because when you have
+
+
+big bottle of mud and you add logging to
+
+
+the mix you will still have big pile of
+
+
+mud
+
+
+but
+
+
+you might understand it tiny bit better
+
+
+so I recommend you to try it
+
+
+okay
+
+
+so now back to the original question how
+
+
+to test randomness
+
+
+um in my opinion don't don't test
+
+
+Randomness
+
+
+try to understand it
+
+
+try to extract it and at the very end
+
+
+try to control it
+
+
+yeah so you might think that there is no
+
+
+Randomness in your systems
+
+
+and you might be right because why would
+
+
+be uh
+
+
+but there's one thing that that looks
+
+
+very similar to
+
+
+to random things right maybe some of you
+
+
+sin uh piece of code like that somewhere
+
+
+in the system
+
+
+like time current right I bet if we all
+
+
+uh right now Run Race console on our
+
+
+MacBooks
+
+
+it we all would get different results it
+
+
+kinda looks like it's a random thing
+
+
+although let's be let's be uh real here
+
+
+it's not that complex right this code
+
+
+looks pretty simple so here is my
+
+
+favorite
+
+
+solution to how should we test it
+
+
+time travel yeah only option to test
+
+
+this a fairly straightforward piece of
+
+
+code
+
+
+we need to use time traveling okay
+
+
+that's it from my site but I have one
+
+
+more
+
+
+question or maybe uh one more one more
+
+
+favor to ask you this QR code leads to
+
+
+feedback form there's a slight chance
+
+
+that I might give this uh talk sometime
+
+
+in the future so I would really
+
+
+appreciate it if you could give me
+
+
+feedback it's really quick you just open
+
+
+the form you type in I hated it because
+
+
+and this is the important stuff for me
+
+
+okay thanks that's all from my site and
+
+
+if you have any questions I will be
+
+
+happy to answer
+
+
+[Applause]
+
+
+I just want to challenge your statement
+
+
+the last statement that the time travel
+
+
+is the only thing to test the time
+
+
+current or time now like I know at least
+
+
+I know two other battles and one is that
+
+
+effects like algebraic effects and the
+
+
+other is the independence injection
+
+
+actually when you can have like a single
+
+
+current time initialized per request or
+
+
+per whatever process you have and inject
+
+
+it down to the system so yeah yeah I
+
+
+mean I 100 agree with you this is
+
+
+probably much better and you can use
+
+
+stabs or whatever like probably even
+
+
+some logic that I show here
+
+
+um I agree and yet I still sometimes see
+
+
+a piece of code like that in our system
+
+
+so I I agree you're right you can test
+
+
+it in many different better ways so yeah
+
+
+and yet still you know there's time
+
+
+travel methods in in our spec
+
+
+yeah any any more questions
+
+
+all right and thank you very much okay
+
+
+one more question
+
+
+uh
+
+
+as we've said uh during a presentation
+
+
+there is this usually there is this talk
+
+
+about that piece of code not be being
+
+
+really a production code do you ever
+
+
+keep it with production files because
+
+
+sometimes well this is a Dyson in your
+
+
+uh in your example it's a dice but
+
+
+something sometimes this kind of object
+
+
+is useful between tests like you need it
+
+
+for multiple tasks for example if you
+
+
+have this for example maybe special
+
+
+specialized time object for example do
+
+
+you ever keep it with production code or
+
+
+does it belong to the the test code for
+
+
+in your place I never keep it with
+
+
+production code and like I take the hit
+
+
+if I need to change it like if if I need
+
+
+to share this between tests well too bad
+
+
+I will write it twice three times five
+
+
+times although like it doesn't happen
+
+
+often uh but I personally rather have
+
+
+this in few different places because
+
+
+it's like
+
+
+a rare thing to change uh so you know
+
+
+I'm okay with that it might not be
+
+
+perfect solution for you you might want
+
+
+to use like kind of helper or something
+
+
+like that maybe or a factory it might be
+
+
+better for you but I would avoid like
+
+
+keeping this with code you know just so
+
+
+things don't go wrong right so I would
+
+
+clearly state that this is test thing
+
+
+only
+
+
+yeah yeah you you
+
+
+yeah you're right I actually have a
+
+
+comment about this one technique I've
+
+
+seen used successfully to ensure there
+
+
+is like an alignment between the fake
+
+
+implementation and the production
+
+
+implementation is to run a suit of tests
+
+
+against both production implementation
+
+
+and the fake and in this example it
+
+
+wouldn't work so well because the fact
+
+
+is is a bit special because it's random
+
+
+but often you have stuff like
+
+
+repositories and you can make sure like
+
+
+that when you write something you read
+
+
+back the same thing and you have
+
+
+suggested a test you can you could
+
+
+potentially run the same test against
+
+
+the production implementation which
+
+
+right to the database and like in memory
+
+
+implementation and this way uh there the
+
+
+chances are a lot better of those two
+
+
+staying in sync another like thing that
+
+
+is important especially if you develop
+
+
+in like uh many teams is that the team
+
+
+that owns the production implementation
+
+
+should also own the fake
+
+
+and ideally they would
+
+
+always provide the fake if their
+
+
+implementation is slow for example
+
+
+yeah uh that's a good point testing both
+
+
+of those Solutions the fake one as well
+
+
+is a really good approach I think even
+
+
+if you read uh like 99 bottles or maybe
+
+
+these practical practical object
+
+
+oriented design in Ruby by Sandy mads
+
+
+she mentions that way and I think that
+
+
+this is really good although if you
+
+
+already have problems with convincing
+
+
+your team to use fake code in tests try
+
+
+convincing them that that they have to
+
+
+test it as well like it might be
+
+
+Troublesome but I honestly really really
+
+
+like this approach
+
+
+so also my comment for keeping
+
+
+consistent uh returns from those both
+
+
+classes could be RBS
+
+
+which will do this automatically for you
+
+
+if you include this in your rspectus
+
+
+something I don't know nothing about so
+
+
+yeah the RBS is this typing system but I
+
+
+never use this that way but it's a very
+
+
+very table
+
+
+um interesting idea
+
+
+okay no more questions thank you thank
+
+
+you very much
+
+
+[Applause]
+
+
+[Music]
+
+
+Okay so

@@ -1,0 +1,1531 @@
+we can start so what can you see in the
+
+
+picture
+
+
+well yeah
+
+
+louder
+
+
+tomato yes
+
+
+no please stop trolling dude it's
+
+
+serious presentation so what is a tomato
+
+
+is it a vegetable
+
+
+it is
+
+
+the fruit
+
+
+okay well
+
+
+yes you can see a spot a consultant over
+
+
+here but uh I'll let Romeo answer that
+
+
+one
+
+
+and uh what he says is I really like
+
+
+this tweet because he's saying that in
+
+
+culinary bounded context tomato is a
+
+
+vegetable in botanic one that context
+
+
+tomatoes are fruit and then like mood or
+
+
+like theatric pundit context uh tomato
+
+
+is a feedback you can give me a feedback
+
+
+later and just say tomato so as you see
+
+
+words have a meaning right and uh
+
+
+sometimes in different contexts one word
+
+
+May
+
+
+different have me different meaning
+
+
+and a model
+
+
+in that case if you move it to the
+
+
+programming world it's not supposed to
+
+
+match reality right just some part of it
+
+
+in a specific context
+
+
+so we could also say that if you think
+
+
+about one special model that model will
+
+
+be wrong but actually every model is
+
+
+wrong but some are useful right and with
+
+
+strategic domain event design it can
+
+
+help you if you use this pattern well to
+
+
+find out what model do you need in a
+
+
+specific context and we had this debate
+
+
+about DDD yesterday it was all about the
+
+
+Aggregates and I agree
+
+
+Aggregates sometimes are unnecessary and
+
+
+they may be too much but it's not about
+
+
+Aggregates it's not only about the
+
+
+Aggregates and we should limit ourselves
+
+
+to it
+
+
+because there's more
+
+
+and usually in our systems I think
+
+
+especially in race I noticed that our
+
+
+models grow too much
+
+
+and that's why DDD sucks
+
+
+data driven
+
+
+database driven development of course
+
+
+but not always because there is a place
+
+
+for it in certain spaces
+
+
+uh but usually
+
+
+we need more sophisticated modeling
+
+
+techniques as the project goes on and as
+
+
+it grows thank you
+
+
+conferences
+
+
+okay sorry uh good good hint
+
+
+um so yeah
+
+
+welcome
+
+
+I'm not so fluent in English but I try
+
+
+my best so my presentation will be short
+
+
+it's called
+
+
+golfing
+
+
+so on on the on the game of Advent of
+
+
+code example
+
+
+I am the prog organizer so Posner
+
+
+Community we are often often and intense
+
+
+there we drink some Pitch yeah
+
+
+alcohol and flavor the thing after so
+
+
+it's cool join us
+
+
+Alvin this is the it's in December some
+
+
+some tasks to do and they
+
+
+they are quite quite easy to pass some
+
+
+data and analyze it people are yeah are
+
+
+eager to solve it at the beginning but
+
+
+the lighter it is we drop this so a huge
+
+
+community and and
+
+
+talking about the the quests and the
+
+
+solutions memes this is really crazy I
+
+
+like it actually
+
+
+and code golfing is the solving problem
+
+
+with the shortest source source code as
+
+
+could be so people just can't the back
+
+
+the the bytes in the code and the
+
+
+solutions and we compare with it let's
+
+
+code this better than to match
+
+
+and shorter code is better too
+
+
+I don't know a very specialized
+
+
+languages for code golfing golf script
+
+
+is the the macro for Ruby actually and
+
+
+it was really well known in community
+
+
+there are special languages which are
+
+
+they are not readable at all they are
+
+
+also base 64 actually commands plugged
+
+
+into software compiled so it's crazy
+
+
+just to have yeah better score very
+
+
+Google called gem so if we solve the the
+
+
+Solutions algorithms and people are
+
+
+trying to get very fast to solve it and
+
+
+they even introduce a code golfing
+
+
+languages to make it faster because it's
+
+
+it's making shorter also the what we
+
+
+have to write
+
+
+it's of course cryptic but uh this is
+
+
+how it is
+
+
+um and this is the show time
+
+
+sorry
+
+
+um so as you can see here uh there is
+
+
+some some various uh golf uh admin of
+
+
+code
+
+
+task we have to pass this this
+
+
+CDs so some console and parse it and
+
+
+here is the trivial solution for it uh
+
+
+in normal way but in code golf we have
+
+
+to make it shorter yeah so I will maybe
+
+
+Zoom a bit a bit Yeah and yeah you can
+
+
+see that here is evaluing the strings
+
+
+missing the spaces and you also hack
+
+
+what requires the space and
+
+
+um so you learn a lot about the language
+
+
+itself and what is required and it's
+
+
+cryptic of course but we can make it
+
+
+better with ruboko or something like
+
+
+that here is the more advanced stuff so
+
+
+less than uh yeah a little bit more than
+
+
+100 charts yeah we could say charts
+
+
+actually there or bytes and you try to
+
+
+solve the issues which normally would be
+
+
+quite easy but adding this goal of
+
+
+having code golf it makes yeah fun and
+
+
+interesting actually yeah and
+
+
+um
+
+
+yeah it's fun it's good to have uh what
+
+
+I discovered here I said also about the
+
+
+control flow about the about why we have
+
+
+some such dollars uh dollar actually
+
+
+variables uh Global variables in Ruby so
+
+
+they are useful for for scripts in Ruby
+
+
+scripted language uh better parsing the
+
+
+files which are passed to scripts which
+
+
+which I learned in by using it
+
+
+and less code is not easier to
+
+
+understand at all
+
+
+uh what section I also discovered that
+
+
+we have reversive recursive arrays in in
+
+
+Ruby and actually it's supported so we
+
+
+can see on the bottom that we have some
+
+
+brackets with three dots in in output so
+
+
+it's it's supported
+
+
+interesting so we can you can make some
+
+
+graphs which are Yeah by using some
+
+
+arrays
+
+
+and here is the source
+
+
+yeah
+
+
+yeah so thanks for listening
+
+
+yeah there is also some some tips about
+
+
+Ruby Ruby code golfing there
+
+
+slide so I'm just gonna monologue
+
+
+um yeah the second talk I'm giving today
+
+
+at a ruby conference that has no Ruby
+
+
+code in it so that's always interesting
+
+
+um I'm just going to talk about
+
+
+mentorship and how we delivered the
+
+
+rails World website project so I've been
+
+
+writing software professionally for
+
+
+about 10 years so I like to think of
+
+
+myself as an old fart uh grumpy old man
+
+
+who's way too young to say back in my
+
+
+day but I still say back in my day far
+
+
+too often
+
+
+um so back in um
+
+
+I think March or April the newly found
+
+
+rails Foundation but at a blog post
+
+
+saying we want a junior developer to
+
+
+build our website and a senior to Mentor
+
+
+this junior developer which I thought
+
+
+was a really great initiative given uh
+
+
+chat earlier this afternoon about how
+
+
+hard it is for juniors to get started in
+
+
+the Ruby world so I looked at that and
+
+
+thought okay what a great opportunity to
+
+
+completely ruin the mind of an
+
+
+optimistic excited Junior so
+
+
+I put my name in the Hat for the mentor
+
+
+role and and I got it and I had a
+
+
+meeting with Amanda who runs the rails
+
+
+Foundation uh the junior developer Shona
+
+
+and yeah we got started with the project
+
+
+and uh Shona was an absolute star like
+
+
+uh she made my job really really easy
+
+
+but
+
+
+um as a mentor I kind of went into this
+
+
+project with a few kind of rules in in
+
+
+mind one was I didn't want to write any
+
+
+code myself at all I wanted to lay out
+
+
+guidance in written form beforehand and
+
+
+then through code review and feedback
+
+
+and player programming kind of guide the
+
+
+Junior because if I did all the work
+
+
+then she wouldn't learn the other thing
+
+
+was I didn't want to take any credit I
+
+
+thought any credit I need to deflect on
+
+
+to Shona but if something goes wrong
+
+
+then I'll take the blame and that's a
+
+
+very very hard mindset I think for you
+
+
+even though like I intentionally did it
+
+
+it was a very hard mindset to kind of
+
+
+get into because yeah there's only
+
+
+downside and not a lot outside for you
+
+
+from an external like point of view so
+
+
+those are kind of my principles going
+
+
+into the project and um the website
+
+
+itself is going to live under Ruby
+
+
+onrails.org in the same repo which is a
+
+
+jackal site and doesn't have any
+
+
+JavaScript in it so to start with that
+
+
+is like uh okay let's try and not try
+
+
+any JavaScript HTML and CSS that went
+
+
+out of the window quite quickly because
+
+
+client wanted like moodles and carousels
+
+
+and all that stuff so I started thinking
+
+
+okay how are we gonna do all of this
+
+
+stuff
+
+
+um Anna like like I said you want to
+
+
+write any code so I couldn't do anything
+
+
+and I'm like okay well maybe I'll teach
+
+
+you how to set up an es build Pipeline
+
+
+and do all that and I was like more I
+
+
+think about it is like that's just too
+
+
+hard like can you imagine a junior
+
+
+developer who doesn't know this
+
+
+JavaScript world too well trying to set
+
+
+up an es build pipeline it's just
+
+
+nightmarish and I'm like wait a sec why
+
+
+do we need to do any of that
+
+
+javascript's in a pretty good place I
+
+
+just we just used custom elements to
+
+
+kind of encapsulate stuff in in classes
+
+
+so we're not writing like crappy
+
+
+procedural code like 15 years ago but
+
+
+literally just encapsulating stuff in
+
+
+classes which are custom elements and
+
+
+then referencing them just as is uh like
+
+
+in a script tag just referencing a
+
+
+Javascript file the same way we did 15
+
+
+years ago uh that's all we did so we had
+
+
+like I think a turbo import on top and
+
+
+then below to our two or three
+
+
+JavaScript files which is a simple
+
+
+classes that kind of do like Carousel
+
+
+stuff and Moodle stuff and things like
+
+
+that and yeah we delivered what I think
+
+
+is a pretty modern website uh writing
+
+
+code probably the way we did 15 years
+
+
+ago in terms of websites
+
+
+and the website kind of works without
+
+
+JavaScript so if you turn it off
+
+
+um everything still works and I was
+
+
+really just proud of firstly off show
+
+
+and after delivering this project and
+
+
+making my job quite easy and secondly I
+
+
+learned a lot as a mentor
+
+
+um because I would have never thought of
+
+
+stripping back all of this complexity if
+
+
+I wasn't doing the mentoring job as you
+
+
+is building it myself I would have
+
+
+thrown all this complexity in just
+
+
+because like I said I'm an old fart I'm
+
+
+set in my ways I like to do things in a
+
+
+certain way uh and um sometimes you do
+
+
+hear that the coach actually learns more
+
+
+than the student and that was for me
+
+
+very true in this case so I just wanted
+
+
+to like share the story because
+
+
+mentorship I think is something that's
+
+
+really important with all the chat
+
+
+around Juniors not getting good
+
+
+opportunities I think it's really good
+
+
+to um if if you are experienced to kind
+
+
+of share that knowledge around because
+
+
+uh you will probably gain a lot more
+
+
+from entering a junior that that you
+
+
+imagine and I think I don't know if some
+
+
+of you might have heard that the
+
+
+organizer Brighton Ruby Andy Kroll runs
+
+
+a project called first Ruby friend which
+
+
+is kind of a thing that matches up
+
+
+mentors to mentees so that's a really
+
+
+great way of getting started with
+
+
+mentorship if you want to
+
+
+um yeah perfect timing thank you
+
+
+[Applause]
+
+
+hello everyone again so this is my
+
+
+second lightning talk uh on the previous
+
+
+one I was mentioning a helpling tool
+
+
+belt I don't actually have any slides I
+
+
+don't really need them for this one so I
+
+
+mentioned that we are creating our own
+
+
+internal command line tool and uh when
+
+
+you are doing this thing in Ruby uh
+
+
+there are like two ways you can approach
+
+
+that you can either have it in just one
+
+
+big script which is easier or you can
+
+
+have it properly so like with multiple
+
+
+files so it's easier to maintain but
+
+
+then there is this problem like when
+
+
+you're running a ruby script uh like
+
+
+this it kinda gets messy when for
+
+
+example you have multiple ruby versions
+
+
+or like and then you don't have the gems
+
+
+installed for your command line too or
+
+
+um there was this issue with bundler
+
+
+that it actually requires the gem file
+
+
+in your current directory to have all
+
+
+the gems installed and even if your
+
+
+script doesn't use any of that it's
+
+
+still going to fail and it's going to
+
+
+complain that you need to install your
+
+
+jams which for us was annoying when we
+
+
+were using docker so there is a way to
+
+
+avoid that it's to actually package your
+
+
+uh binary script into a binary for those
+
+
+of you that are in Ruby like uh world
+
+
+for at least since 2014 there was
+
+
+something called traveling Ruby it was
+
+
+made by the people from the Fusion
+
+
+passenger it was basically like a
+
+
+pre-built Ruby with some niceties and
+
+
+then it packaged it into one directory
+
+
+and you could use that
+
+
+and I mentioned 2014 for a reason
+
+
+because that's around the time when the
+
+
+last actual contribution was made there
+
+
+was some slight movement in 2021 to uh
+
+
+like you know to bring this back but
+
+
+there weren't actually any progress so
+
+
+like I've checked the GitHub before and
+
+
+yeah it's it's not really usable right
+
+
+now the Ruby is like 2.4 and I wouldn't
+
+
+recommend it and there is an alternative
+
+
+for that it's called Ruby Packer and
+
+
+it's a tool that uh Works in a slightly
+
+
+different way what it does is it's
+
+
+actually compiles Ruby and gets your
+
+
+code into a virtual file system inside
+
+
+and then patches Ruby a little bit so it
+
+
+uh works with that file system and it
+
+
+can reference files from there it can
+
+
+require them from there uh like from
+
+
+your perspective it's actually pretty
+
+
+transparent so you don't have to worry
+
+
+about that once you actually build your
+
+
+tool and the title of this lightning
+
+
+talk is The Good the Bad and the Ugly so
+
+
+the good thing is that when you build
+
+
+your binary tool
+
+
+um I think I'm going too far here uh
+
+
+when you're building that tool
+
+
+um you no longer have to worry about the
+
+
+gems you don't have to worry about
+
+
+installing Ruby it just works because
+
+
+it's a single binary uh the bad part is
+
+
+that well this binary is going to be
+
+
+pretty big
+
+
+um like hour two is like 30 megabytes
+
+
+which may or may not be a problem for
+
+
+you depending on your use case
+
+
+and also another ugly thing is that the
+
+
+original outer of this store has stopped
+
+
+maintaining it like two years ago and
+
+
+there are various Forks that you can
+
+
+probably find on Google I've managed to
+
+
+find one that actually embeds Ruby 3.1.3
+
+
+so it works pretty well uh I would
+
+
+normally have a slide with like a link
+
+
+to it but since I don't have slides then
+
+
+apologies you will also have to Google
+
+
+it uh the guy actually advertised it on
+
+
+Reddit so Ruby Parker read it and you
+
+
+will find it it's probably the first
+
+
+thing
+
+
+and now the ugly part well this is a
+
+
+binary so it's built like a binary uh
+
+
+which unfortunately means that uh you
+
+
+cannot really cross compile it if you
+
+
+want to build a binary format you need
+
+
+to build it on Mac if you have a binary
+
+
+for Linux you have to build it for Linux
+
+
+and also I've noticed that there is a
+
+
+problem that not everything is actually
+
+
+statically compiled so
+
+
+um like we're building this for a very
+
+
+specific uh Linux distribution and Mac
+
+
+so we are building this for Ubuntu and I
+
+
+have no idea if it's actually gonna work
+
+
+on like Fedora or Arch Linux or whatever
+
+
+because I know that it doesn't work with
+
+
+older versions of Ubuntu because of some
+
+
+libraries being missing so it's quite
+
+
+possible that you would actually have to
+
+
+also build it on different distributions
+
+
+which may be a no-go but other than that
+
+
+it's actually pretty nice and it allows
+
+
+you to have a command line tool without
+
+
+worrying about the overall environment
+
+
+all over the place
+
+
+so yeah Ruby Parker thank you
+
+
+[Applause]
+
+
+okay so do you see my screen
+
+
+okay great
+
+
+so
+
+
+um uh you remember this is also my
+
+
+second lightning talk first one was uh
+
+
+yesterday I spoke about procrastination
+
+
+about how when I procrastinate on my
+
+
+actual job I optimize certain shell
+
+
+tools and like tweak my setup a little
+
+
+bit and generally like I believe that
+
+
+computers are extremely boring and
+
+
+sometimes the only way to survive is by
+
+
+having fun with them so one of the ways
+
+
+that I found to have fun with my Mac it
+
+
+sounds really sad but it is
+
+
+um is by using this by using the say
+
+
+command
+
+
+um it's uses Macos built in text to
+
+
+speech
+
+
+so if I type let's see if if this sound
+
+
+output works
+
+
+[Music]
+
+
+yeah so if you type say uh good evening
+
+
+now again
+
+
+good evening could you hear that okay
+
+
+more or less right okay so
+
+
+um and you can you can have fun with it
+
+
+as I said you can make it it's funny
+
+
+things like if you pick a French
+
+
+sounding voice
+
+
+um like some voices are specialized some
+
+
+voices are text to speech generators
+
+
+that are specializing in a certain
+
+
+Locale or language so if you pick a
+
+
+French voice make it say some English
+
+
+things it will uh be adorable like this
+
+
+good evening my friends did you enjoy
+
+
+the conference in whatsoever
+
+
+I had to misspell Wordsworth for it to
+
+
+pronounce it correctly you can also do
+
+
+some essay make it say some um some
+
+
+Polish things
+
+
+did you understand that all right cool
+
+
+you can also make it say things in
+
+
+Russian
+
+
+okay you get the idea right so um in
+
+
+addition I use the terminal emulator
+
+
+called item and this item thing has um
+
+
+has a feature called triggers it just
+
+
+um finds a text matching some regular
+
+
+expression in your terminal session and
+
+
+then it executes a command and you see
+
+
+where this is going right my test Runner
+
+
+which is our spec sorry not sorry it's
+
+
+our spec uh it produces an output it's
+
+
+called five test failed or all test pass
+
+
+this is very simple I I just trained the
+
+
+trained I set up two triggers as you can
+
+
+see
+
+
+here I set up two triggers
+
+
+in my test window
+
+
+triggers when basically I don't know if
+
+
+it zooms yeah basically when it finds
+
+
+when it finds like some some examples of
+
+
+your failures it says Speak test success
+
+
+right this is so I can do the the
+
+
+following I can um oh now I need to
+
+
+put the microphone back in here
+
+
+so this is some toy Ruby code the best
+
+
+kind of Ruby code
+
+
+um you can see I if I run the test it
+
+
+runs in the in a separate window down
+
+
+here but really when I work on laptop I
+
+
+don't want to see the window at all
+
+
+right all I want to see is my my code
+
+
+so like every dangerous weapon this
+
+
+feature is requires a safety so first
+
+
+they have to say speech on
+
+
+right and now we can test it finally
+
+
+run my test
+
+
+nice work tests are green
+
+
+so now it gives me the feedback without
+
+
+me even looking at the test output right
+
+
+and now if I um you know if I um
+
+
+basically
+
+
+intentionally break the test and run it
+
+
+again
+
+
+come on
+
+
+oh wait sorry
+
+
+five tests failed so now it tells me
+
+
+that
+
+
+oh no five tests failed so and it's like
+
+
+a randomizes uh things yeah I know my
+
+
+time is up uh it randomizes things like
+
+
+I have these several phrases set up for
+
+
+test success is this this failure and um
+
+
+yeah that's basically it
+
+
+thank you very much
+
+
+foreign

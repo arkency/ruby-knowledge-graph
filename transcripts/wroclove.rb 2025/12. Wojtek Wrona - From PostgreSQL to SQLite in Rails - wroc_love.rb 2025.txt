@@ -1,0 +1,2917 @@
+So uh our next speaker is Voyag Verona
+
+
+and um he's actually it's a really nice
+
+
+proof that attending conferences can
+
+
+influence your thinking which can
+
+
+influence your what you do on the daily
+
+
+basis which then can lead to a great
+
+
+presentation. So ladies and gentlemen,
+
+
+let's welcome Voytech.
+
+
+[Applause]
+
+
+Hello. Hey. Uh, so my name is Reek and
+
+
+uh, apparently I'm a crazy person. At
+
+
+least that's what I've been told
+
+
+yesterday.
+
+
+And you know why? Yeah. Well, he already
+
+
+said that I'm using Escalite on
+
+
+production. Not only that, I
+
+
+actually Not only that, I actually
+
+
+migrated from Postgress to Escalite. Uh,
+
+
+and I like it. I don't know why they let
+
+
+me in here but so um maybe let me
+
+
+quickly tell you why we decided to do
+
+
+that. U so I met it as a small startup.
+
+
+Uh we have eight developers total only
+
+
+three of which are backend developers
+
+
+that includes me. Uh my attention is
+
+
+split between quite a few things. So uh
+
+
+that's not that much velocity. Uh our
+
+
+race app has 18,000 lines of code right
+
+
+now. Twice as many lines of tests. uh we
+
+
+have a mobile app, we have a web app,
+
+
+there's quite a lot of work to do and as
+
+
+it as it is at startups there are tight
+
+
+budgets deadlines we don't have that
+
+
+much time for optimizations there's a
+
+
+lot of work to do we don't have a
+
+
+dedicated devops team dedicated
+
+
+optimization speed uh performance team
+
+
+last year I attended uh Ros uh and I saw
+
+
+I was influenced by by uh by theite
+
+
+influencer s who had a great
+
+
+presentation uh and I thought well that
+
+
+maybe something we we could use we could
+
+
+use that could work for us uh but I
+
+
+wasn't fully convinced yet but then race
+
+
+improved support for escalate uh largely
+
+
+thanks to Steven's contributions uh then
+
+
+they released uh all the solid stack
+
+
+gems solid cache solid jobs uh and it
+
+
+started looking pretty solid. So,
+
+
+uh yeah, we we decided we may uh test it
+
+
+out. And yeah, so why did we uh actually
+
+
+decide to to take this step? Uh Stephen
+
+
+yesterday had pretty great presentation
+
+
+where he outlined quite quite some great
+
+
+advantages of of uh escite. But let me
+
+
+just quickly uh tell you why uh why we
+
+
+we thought it will work for us. So first
+
+
+of all, Escalite is an embedded
+
+
+database. Uh which means there are no uh
+
+
+well maybe let's let's pass some
+
+
+uh what what does it mean that is
+
+
+embedded? If you look at escalates how
+
+
+Escalite is built, they actually can
+
+
+connected all of their uh source files
+
+
+into a single large file uh which then
+
+
+is uh basically compiled into a gem
+
+
+which means you don't need to start you
+
+
+don't need to install anything external.
+
+
+Once you install gem you have a database
+
+
+you don't need to start a posgress
+
+
+server you don't need to start a radius
+
+
+server.
+
+
+[Music]
+
+
+Uh that means among other things that
+
+
+latency is basically non-existent. Uh as
+
+
+again as Stephen said yesterday uh N
+
+
+plus1 queries uh aren't really an issue
+
+
+or not a big issue at least. So you
+
+
+don't really need to spend nearly as
+
+
+much time on optimizations as you would
+
+
+in postgress. Uh and vast majority of
+
+
+our queries were for our application are
+
+
+brid. So it seemed like pretty good uh
+
+
+fit. Then uh we also run a mobile
+
+
+application and we do end to end tests
+
+
+for mobile applications uh for our
+
+
+mobile applications and end to end tests
+
+
+aren't so simple for for for those uh
+
+
+well you need to run simulator with uh
+
+
+iOS. There is it's it's not very trivial
+
+
+to to set up a back end for for for
+
+
+those tests. So we were running a test
+
+
+server with with a persistent database
+
+
+which meant that we could only have one
+
+
+uh end to end test running uh at a time
+
+
+because we only had one database for the
+
+
+test. Uh with client we're basically
+
+
+just copying our database where when
+
+
+when each test starts and each test run
+
+
+can have a separate database. Uh which
+
+
+means we can run as many well maybe not
+
+
+so many but a few parallel tests uh and
+
+
+it works.
+
+
+uh bundle bundler is I mean we just do
+
+
+bundle install you have everything you
+
+
+need you have your database with the
+
+
+solid uh stack you have your casure you
+
+
+have everything you need just after
+
+
+installing bundler and with that we
+
+
+decided to actually get rid of docker
+
+
+and don't get me wrong I think
+
+
+containers are great uh but well there
+
+
+is some overhead with managing docker
+
+
+you need to uh well if if you want to
+
+
+deploy using docker do do you want to
+
+
+use docker perhap or something like
+
+
+that. Do you want to There's a bunch of
+
+
+decisions we have to make, a bunch of
+
+
+things we need to maintain. Without
+
+
+Docker, it's well with Escalite, we just
+
+
+decided that we don't need it anymore.
+
+
+And with that, uh our deployment became
+
+
+uh very very simple actually because uh
+
+
+well, you only run one server, you run
+
+
+bundle install and that's it.
+
+
+Uh yeah.
+
+
+uh and if deployment is very easy maybe
+
+
+we don't so we were using render I don't
+
+
+know if you know don't know what render
+
+
+is like Heroku but cheaper uh and uh
+
+
+yeah I mean it it was pretty simple but
+
+
+well we needed some additional
+
+
+dependencies so we actually were using
+
+
+docker on render they they are supposed
+
+
+to cach your builds but it was still
+
+
+very slow uh there you need to set up
+
+
+those all those uh you know Postgress
+
+
+red you have to figure out uh how
+
+
+big posgress dyno you're doing it
+
+
+um with with with with this simplified
+
+
+model we could very easily actually
+
+
+migrate to uh a single server we right
+
+
+now we're using so and that is uh that
+
+
+allowed us to to cut to slash our cost
+
+
+by quite a lot uh right now we are using
+
+
+cats and we're deploying it with hbox if
+
+
+you don't know what hatchbox is
+
+
+like Heroku for your own server, but you
+
+
+pay 10 bucks per month and that's it.
+
+
+And they handle uh environment
+
+
+variables, the envir they handle uh team
+
+
+access, they they handle u deploy hooks
+
+
+with with with GitHub, they do
+
+
+everything that Heroku does for you. Uh
+
+
+I mean they don't have those uh plugins
+
+
+that Heroku does, but I mean we don't
+
+
+need them uh with uh with slide. So I
+
+
+did this very quick comparison for for
+
+
+for the price. Uh so right now we're
+
+
+using um a small head server with uh 16
+
+
+vcpus to get similar amount of vpus of
+
+
+on render. we would have to pay like 650
+
+
+bucks a month for what we get for uh 7
+
+
+77 bucks on Hson right now. And that's
+
+
+assuming that you're okay with running
+
+
+14 like here I assume that you want it
+
+
+you will have 14 uh small uh dinos with
+
+
+one vCPU and one D with two VCPUs for
+
+
+for the worker. Uh and that also has
+
+
+some uh downside. I mean you have to
+
+
+rely on their uh load balancing which is
+
+
+won't won't be as performance as uh
+
+
+having everything on a single node. If
+
+
+you were to use a single big node on
+
+
+render that the cost would basically
+
+
+double. So yeah that's quite a lot and
+
+
+we have a few hundred daily users right
+
+
+now. This machine is we utilizing just a
+
+
+tiny bit of of the performance that we
+
+
+have.
+
+
+[Music]
+
+
+Um so how did it go? The whole migration
+
+
+actually went pretty smoothly. Uh I was
+
+
+the only person working on it. It took
+
+
+me around 3 days to migrate the whole
+
+
+application. Uh again we have 80,000
+
+
+lines of code. So I think it wasn't that
+
+
+bad. Uh and our requests
+
+
+are basically slashed in half. Uh I mean
+
+
+it's hard to compare because we are
+
+
+using headser now instead of render. So
+
+
+it's not only you know uh it doesn't
+
+
+mean that we we just change that way and
+
+
+does that but uh I mean yeah everything
+
+
+is much faster um
+
+
+uh and yeah our infrastructure cost just
+
+
+dropped by an order of magnitude we
+
+
+don't really need to care about devops
+
+
+well to be honest I think uh heads with
+
+
+a single node is easier to manage than
+
+
+render was uh even though render is
+
+
+already very simple
+
+
+Um and with that we have more time to
+
+
+focus on features. We don't need to
+
+
+spend as near as much time on
+
+
+infrastructure on
+
+
+automizations. So how did we uh get
+
+
+there? Uh well so we wanted to we didn't
+
+
+want to do this big bank strategy as uh
+
+
+as it was mentioned today. Uh we wanted
+
+
+to do a few small incremental steps. I
+
+
+wanted to be able to push all merge each
+
+
+of the steps, test them, uh make sure
+
+
+that they're reversible anything goes
+
+
+wrong.
+
+
+[Music]
+
+
+Um yeah so our approach was to first of
+
+
+all we wanted to make sure we can we
+
+
+migrate everything make sure we we we
+
+
+have our uh migrate everything we can
+
+
+while still using
+
+
+posgress and that meant basically
+
+
+migrating our schemas our types step by
+
+
+step
+
+
+uh testing them running all all the
+
+
+tests deploying it to staging testing it
+
+
+and only only after that only after we
+
+
+uh our pos schema was uh compatible with
+
+
+with escalite. Uh we did the the switch.
+
+
+We switched the the database out there
+
+
+and we actually migrated
+
+
+data and after that we we've run all of
+
+
+our tests. We saw what's failing. We
+
+
+fixed those things and yeah so the first
+
+
+step was to handle unsupported types.
+
+
+Now uh escalite has pretty unorthodox
+
+
+take on on on types but uh yeah but in
+
+
+in practice what that means that well
+
+
+there are some types in postgress code
+
+
+that aren't available in escalate u like
+
+
+say inet or uid or interval or
+
+
+posgresses aris
+
+
+uh and escalate uses dynamic typing uh
+
+
+maybe let's not get into that to to the
+
+
+but uh so how do we migrate how do we
+
+
+make sure that we can store our data
+
+
+without really having to rewrite our
+
+
+application uh and we used active record
+
+
+types so if you think about it uh
+
+
+whenever so let's say you use inet which
+
+
+u and at column time with which maps to
+
+
+uh IP address uh class in in Ruby
+
+
+uh anyways uh whenever active record
+
+
+tries to save that data into database it
+
+
+actually has to serialize it somehow u I
+
+
+mean postgress doesn't really understand
+
+
+native Ruby types right so uh active of
+
+
+course has something they call types uh
+
+
+which defines how to serialize and how
+
+
+to serialize uh Ruby objects into
+
+
+something that the database understands
+
+
+uh and race actually allows you to
+
+
+define custom types you just uh inherit
+
+
+from or write your own or you can just
+
+
+inherit from from types element arrays
+
+
+and uh yeah so uh that way you canize
+
+
+how to serize those objects how to
+
+
+decorize them uh and if you do it like
+
+
+that then most of your application code
+
+
+remains unchanged your application
+
+
+doesn't really need to know how it's how
+
+
+how how the how your database are stored
+
+
+in the database uh as long as rays is
+
+
+handlingization dialization
+
+
+uh just to show you how it uh can look
+
+
+like there. Here's a very simple example
+
+
+for uh for Inet uh for for the IP
+
+
+address data data class. So um you
+
+
+define a serialized method which uh it
+
+
+can take either uh already the
+
+
+serialized value or or stiz value.
+
+
+There's uh but you just have to uh it
+
+
+just takes a value and you have to
+
+
+serialize it to something that uh your
+
+
+database will be able to understand and
+
+
+you also have to define uh how to what
+
+
+to do the the other way. So how to take
+
+
+a value that is uh the value from the
+
+
+database and decarize it. Um after that
+
+
+well you need to tell race to use your
+
+
+uh class uh for a given attribute
+
+
+because in the database it's actually
+
+
+stored as as a string. So race can infer
+
+
+uh the type on its own.
+
+
+Uh but yeah that's that's it. Uh and
+
+
+after that race will use your type for
+
+
+civilization dialization. It will also
+
+
+use it for queries. So if you use your
+
+
+uh your your your uh Ruby object in
+
+
+where statement or find by it will also
+
+
+serialize it
+
+
+properly. You need to change uh your
+
+
+coms in uh in the database. So you just
+
+
+specify to uh you just well so for IP
+
+
+posgress can actually pretty easily
+
+
+convert them to strings. If you want to
+
+
+uh reverse
+
+
+migration, yeah, if you want to reverse
+
+
+migration, you have to help it a little
+
+
+bit. But it's very simple. It all runs
+
+
+in posgress. You can deploy it, test it,
+
+
+see if it works, run all of tests, test
+
+
+it on staging. If it doesn't work, you
+
+
+can revert it and you can do all of that
+
+
+while still using
+
+
+posgress. Uh one challenge where uh so I
+
+
+don't know if anyone uses arrays in
+
+
+posgress.
+
+
+Oh yeah, a few people. Okay. uh arrays
+
+
+are slightly trickier and we use them
+
+
+quite a bit because I mean you can
+
+
+serialize arrays to to string if you
+
+
+want but uh you wouldn't be able to
+
+
+easily query them uh for a specific
+
+
+value right uh
+
+
+so all right so we decided to serialize
+
+
+them to JSONs because escalate does
+
+
+support JSON and you can actually query
+
+
+uh query JSON's I mean an array is a
+
+
+valid JSON and you can query JSON arrays
+
+
+for a specific value. Uh I probably
+
+
+won't have time to go over the actual
+
+
+implementation of that. I wanted to
+
+
+create to extract this to a simple gem
+
+
+but didn't have enough time. So here is
+
+
+a link to uh where the gem will be soon.
+
+
+Uh yeah so as the next step we decided
+
+
+to go into the solid stack.
+
+
+Uh there is a ton of tutorials on on the
+
+
+internet on how to how to migrate to to
+
+
+solid stack, how to use it. Uh we you
+
+
+don't really need radius anymore. Uh
+
+
+each solid gem uses its own separate
+
+
+escalated database. So you can run it
+
+
+alongside your posgress uh
+
+
+database. Uh again you can migrate, put
+
+
+it on staging, test it, see if it works.
+
+
+uh another change we had uh before uh
+
+
+the data migration were constraints. So
+
+
+we use check constraints quite
+
+
+extensively in our application and uh
+
+
+well some functions in postsql uh
+
+
+different from functions
+
+
+uh in particular casting uh things uh
+
+
+like to integer and so on is slightly
+
+
+different. Uh which means that those
+
+
+constraints would fail in escalite. Uh
+
+
+we decided to
+
+
+just remove those constraints before the
+
+
+migration and add them back after
+
+
+migration. Actually, SQGP is great at
+
+
+translating from uh from postsql syntax
+
+
+to SQLite syntax. So, we just put our
+
+
+our scheme DB schema into a slide and it
+
+
+produce all the migration we needed.
+
+
+Uh so yeah then we did the actual data
+
+
+migration uh with uh with types migrated
+
+
+with constraints dropped uh our schema
+
+
+well we didn't have anything in our
+
+
+schema anymore that escalate wouldn't be
+
+
+able to handle on it own
+
+
+uh so
+
+
+we change our escalade adapter our
+
+
+database adapter escalate uh we pointed
+
+
+uh our database yam to a new escalate
+
+
+file uh we create a new database we uh
+
+
+we've run uh the RB create RB migrate
+
+
+the created database with schema uh we
+
+
+use this uh open source script we had to
+
+
+slightly tweak it but it's just a single
+
+
+bash script you can review it tw as
+
+
+however you want uh and after done we've
+
+
+run our test suit to see what works and
+
+
+what doesn't actually was wasn't nearly
+
+
+as bad as we thought it will be uh but
+
+
+well yeah a few things were missing so
+
+
+before I start maybe let me tell you
+
+
+that a little bit about uh extensions.
+
+
+So, SQLite is very light uh but you can
+
+
+extend it with extensions. Um there's a
+
+
+gem called SQL which bundles a lot of
+
+
+useful uh extensions that you may want
+
+
+to uh to to use like uh IP addresses,
+
+
+map,
+
+
+reg on on the newest race. I don't think
+
+
+this is actually really we we we had to
+
+
+switch to race main to use it but uh in
+
+
+race you can uh specify which extensions
+
+
+you want to load for your uh database in
+
+
+your database uh yam and that's it. uh
+
+
+if those if escal isn't enough you can
+
+
+there is uh there is uh I forgot the
+
+
+name but there is another repository of
+
+
+like 100 or more extensions there are
+
+
+even extensions which use open AI from
+
+
+the database things like that there's
+
+
+almost anything uh
+
+
+there uh so one issue we had were uh one
+
+
+surprise were uh IAS so I like is used
+
+
+for case in sensive search uh turns out
+
+
+it's quite doesn't have a like. What's
+
+
+more like in escalate is actually case
+
+
+insensitive by default but only for
+
+
+asking. So if you use it with uh well
+
+
+why is that? We we are pretty surprised
+
+
+by that. And escalate FAQ they actually
+
+
+uh explain that to do uh case uh to swap
+
+
+case for full uni code you would need to
+
+
+include tables of logic that would
+
+
+nearly double the size of escalate
+
+
+library. SQLite is very tiny. Uh how do
+
+
+you solve it? Well, the easiest thing
+
+
+you can do is to actually instant
+
+
+escalate SQL text extension which adds
+
+
+all the all the functions that operate
+
+
+on uh on a uni code. Uh you can even
+
+
+alias them to the built-in functions
+
+
+though to be honest we didn't do that.
+
+
+we use something slightly different
+
+
+um because uh there are two things in
+
+
+Calate that you can do to to solve that.
+
+
+So uh first of all there is uh you can
+
+
+specify collate for for a specific uh
+
+
+column. Uh collate is almost like a
+
+
+comparison function. You can tell uh
+
+
+your database how to compare to two
+
+
+values between uh between two rows. So
+
+
+uh we for comments that are always in
+
+
+case insensitive uh like email like we
+
+
+always want to compare emails in case
+
+
+insensitive way or like you you have
+
+
+discount codes you probably don't want
+
+
+to compare uh you you always want to not
+
+
+care about case when comparing the them.
+
+
+So
+
+
+uh you can run this migration after
+
+
+adding this SQL in text glue gem you can
+
+
+add this migration to add uh specific
+
+
+collation to to your column. Uh if you
+
+
+do it like that your email column
+
+
+becomes case insensitive when it comes
+
+
+to comparisons. It also works for unique
+
+
+constraints like that. Uh if you have
+
+
+columns that are sometimes case
+
+
+insensitive uh you can actually we did
+
+
+that you can include you can create a
+
+
+virtual stored column uh here we are
+
+
+actually combining first name last name
+
+
+and lower casing it uh before storing
+
+
+it. If you do it like that you can index
+
+
+it which means your queries will be
+
+
+faster.
+
+
+Um so yeah so for uh if you use Cate uh
+
+
+no case you can just query your column
+
+
+as you would normally do and your
+
+
+database won't care about uh your your
+
+
+text case you have uh if you use those
+
+
+virtual columns in progress you would do
+
+
+I like in escalate we just use our
+
+
+virtual com and use either like and down
+
+
+the text in in Ruby uh the the text that
+
+
+we searched for or you would use you can
+
+
+also use globe. Globe is similar to like
+
+
+but uses those Linux style file globing
+
+
+syntax and is uh case uh case sensitive
+
+
+by default. Uh yeah
+
+
+uh also remember we migrated our ricoms
+
+
+to to JSON. Uh well so turns out it
+
+
+worked while we were on progress. uh but
+
+
+uh it worked because posgress has those
+
+
+uh function for querying uh arrays. Once
+
+
+we migrated to escalate those uh some of
+
+
+those queries stopped working uh because
+
+
+escal progress was able to to to to well
+
+
+use those function even though we were
+
+
+using sk
+
+
+uh the easiest solution you there is an
+
+
+array extension and it would probably
+
+
+work though we decided to just switch to
+
+
+JSON uh functions uh and again Stephen
+
+
+has great article on to on how to
+
+
+abstract uh quering JSON fields. Uh we
+
+
+just used that.
+
+
+Uh also cool thing. So since uh escalite
+
+
+is embedded, it runs inside your Ruby
+
+
+process which means it has access to
+
+
+your Ruby memory. It has access to your
+
+
+Ruby code. It since it has access to
+
+
+your Ruby code, it can call your Ruby
+
+
+code. So if there is something missing
+
+
+and there is no extension available, you
+
+
+don't know how to uh how to fill that
+
+
+gap uh you can uh I don't know if that
+
+
+we haven't really tried it on production
+
+
+yet but you can create create custom
+
+
+Ruby functions
+
+
+[Music]
+
+
+um functions uh you can define both
+
+
+scalar or grey guy functions uh so
+
+
+that's how it works a silly example, but
+
+
+I created a function that sorts letter
+
+
+in a given column. Uh, this is Ruby. If
+
+
+you look at it, it's using active
+
+
+support. You have access to everything I
+
+
+have in my my application. Uh, and I can
+
+
+actually run it. So here I'm uh I'm
+
+
+selecting just first names for my for my
+
+
+users. Uh, and if I use my silly sort
+
+
+letters functions, it's returning it
+
+
+them sorted alphabetically.
+
+
+uh you can also define aggregate
+
+
+functions. It's sort of right almost
+
+
+like writing reduce in in Ruby. Uh here
+
+
+I'm writing a function. So oh when
+
+
+you're defining those function you can
+
+
+also define 80 of them uh how many
+
+
+arguments they take. Uh here I'm
+
+
+defining function that counts uh strings
+
+
+for for for how many uh occurrence of a
+
+
+given letter they have. And with that we
+
+
+can count how many users has a in their
+
+
+first name or we can have find all the
+
+
+for us we we organizing events. So we
+
+
+can find all the events which have more
+
+
+than 267 users with the letter A in
+
+
+there. I mean it is a silly example but
+
+
+but you can do whatever you want with
+
+
+it.
+
+
+Uh another difference we had were uh so
+
+
+that this was uh small but nodes uh are
+
+
+treated in slightly different way in
+
+
+escalate than they are in posgressql
+
+
+when it comes to sorting. So uh in
+
+
+postgress are the highest possible value
+
+
+included as the lowest possible value
+
+
+when when when used in the used in the
+
+
+order class order by clause. uh the
+
+
+solution if you really care about it for
+
+
+a given query you can specify nu whether
+
+
+n should be first or last I don't know
+
+
+if I don't know of any uh nicer way to
+
+
+do it than using our table
+
+
+[Music]
+
+
+uh so we migrated our database from uh
+
+
+from uh postgrisq toite we deployed it
+
+
+to staging everything worked but we
+
+
+found out uh about so maybe let's start
+
+
+with uh how concurrency works in in uh
+
+
+escalite
+
+
+uh postgress has a pretty sophisticated
+
+
+rowle locking there is this uh it uses
+
+
+MVCC which basically allows you to uh
+
+
+have multiple writers uh writers proceed
+
+
+as as long as they're touching different
+
+
+rows in most cases uh in escalite uh so
+
+
+right now we have uh the wall mode by
+
+
+default in RS which allows you to have
+
+
+multiple readers concurrently but you
+
+
+still are limited to a single writer at
+
+
+the same time.
+
+
+Uh what that means is so in new in new
+
+
+restaurant uh raise uses backing
+
+
+immediate transaction uh transactions by
+
+
+default. Uh which means that uh whenever
+
+
+you open a transaction uh the
+
+
+transaction acquires a reserve locked
+
+
+lock which uh locks your database from
+
+
+from right. You can still have as many
+
+
+RAS as you want in in parallel. Uh but
+
+
+you can only have one right at the same
+
+
+time. So for typical race model updates
+
+
+when you do like user create user
+
+
+updates that's usually quite fine
+
+
+because those right in escalates if
+
+
+you're using an N anime SSD they're
+
+
+extremely fast but when you have longer
+
+
+transactions that may become an issue.
+
+
+So I have another silly example. Let's
+
+
+say we have a transaction that updates
+
+
+model and then calls an external
+
+
+service. Uh and well so until the
+
+
+external service returns you your
+
+
+transaction is still open your your log
+
+
+is is still acquired in posgress. I mean
+
+
+this probably isn't a good practice but
+
+
+we used it in some places
+
+
+because it was a shortcut in a way. uh
+
+
+if your external call f falls fails uh
+
+
+then your transaction would roll back
+
+
+your change would be wouldn't be
+
+
+persisted uh and clite you can't really
+
+
+do that I mean you can but you'll log
+
+
+out your application and uh yeah your
+
+
+your app will fail uh
+
+
+so with in this silly example uh we
+
+
+could just reorder things and do this
+
+
+transaction sort of manually so call the
+
+
+external service and only update if it's
+
+
+uh succeeded. Uh but you can't always do
+
+
+that and one place where you can't do
+
+
+that easily are trans are uh data
+
+
+migrations. So let's say you have a
+
+
+migration in which you so in in
+
+
+migration rates uh by default by default
+
+
+wraps the whole migration in a
+
+
+transaction. So you have migration in
+
+
+which
+
+
+here we're updating each user computing
+
+
+some new status for for that user. Uh it
+
+
+may take a while especially if you have
+
+
+a lot of users especially if computing
+
+
+the new status takes a while. So for the
+
+
+whole duration of the transaction your
+
+
+database be it will be
+
+
+locked and I don't know of actually any
+
+
+good solution. Uh there's a few things
+
+
+that you can do to mitigate it uh to
+
+
+some extent. So
+
+
+uh well you can use uh row row
+
+
+SQL that may be just fast enough for you
+
+
+but you know many cases it probably
+
+
+won't uh you can disable transactions
+
+
+for for a given migration. Uh then
+
+
+you'll have each other will have it own
+
+
+small uh transaction which wouldn't log
+
+
+your applic your database for for the
+
+
+whole duration of your transaction but
+
+
+you're losing uh transactional
+
+
+migrations. uh you can not do your data
+
+
+migrations in in a database migration
+
+
+create a ra task for it.
+
+
+Uh
+
+
+yeah so another trade-offs were foreign
+
+
+key errors. Uh in postsql if you delete
+
+
+something from or update something uh in
+
+
+your database and it breaks the foreign
+
+
+key you get this very very clear error.
+
+
+you know exactly which Frank key was
+
+
+broken on which table on which uh
+
+
+row. SQLite errors are slightly less
+
+
+helpful. You just know which error code
+
+
+was rised and that's it. And uh that can
+
+
+be frustrating if you forgot to specify
+
+
+some relations on your uh on your model.
+
+
+So let's say you have user user model
+
+
+you forgot to add has many you know uh
+
+
+orders dependent something and you try
+
+
+to delete this this this user from
+
+
+database you will just get a foreign key
+
+
+constraint failed error uh and you'll
+
+
+have to figure it out on your own. Uh
+
+
+the only thing we figured out uh for so
+
+
+far for debugging those errors is to
+
+
+disable foreign keys, execute the query
+
+
+that breaks the foreign keys and then
+
+
+you can run uh this command which uh
+
+
+will force checking uh all the config
+
+
+foreign keys. I will give you some
+
+
+details but obviously you can't run it
+
+
+on production. You can only really do it
+
+
+on your development machine. So yeah,
+
+
+that's annoying.
+
+
+Uh another limitation is that you're
+
+
+limited to a single node by default. Uh
+
+
+so since escalite is just a file files
+
+
+uh on a disk. Uh and there is no server.
+
+
+Uh you're limited to the server on which
+
+
+you run it. Uh you could scale it. I
+
+
+mean you can actually replicate your
+
+
+data into multiple machines. Uh there
+
+
+are tools like live stream or or uh
+
+
+torso has uh replication. Uh but uh
+
+
+you're still writer still limited to one
+
+
+node. Uh so how do
+
+
+uh the simplest thing you can do is to
+
+
+go vertical. Uh since modern servers are
+
+
+pretty powerful you can actually go
+
+
+pretty far with it especially since
+
+
+escalite is incredibly efficient. There
+
+
+is no network connections. no
+
+
+interprocess connection everything is uh
+
+
+much faster uh and yeah because of that
+
+
+you can get a lot of performance from a
+
+
+single large instance uh so here's an
+
+
+example we we are currently running uh
+
+
+our production on 16VPO server on
+
+
+headner which costs around 70 bucks a
+
+
+month uh then headner on their cloud
+
+
+solution allows up to 48 dedicated we
+
+
+are actually running on shared vpus they
+
+
+allow up to 48 dedicated vpus with 192
+
+
+GB RAM. Uh and there are even I' I've
+
+
+seen even uh other clouds which offer up
+
+
+to 256 vCPUs. That's a lot. And those
+
+
+and if you have a bare metal solution,
+
+
+you have access to the whole uh NVME SSD
+
+
+which are extremely fast that will be
+
+
+able to handle a lot of
+
+
+traffic. Uh another thing you can look
+
+
+into is replication. So there's this
+
+
+thing called DBSQL uh which is an open
+
+
+source fork or of escalite. Uh they're
+
+
+working on uh quite a lot of things. Uh
+
+
+it has an official Ruby adapter as as
+
+
+now called Ruby. Uh and they have this
+
+
+thing called embedded replicas which
+
+
+allow you to well replicate your uh
+
+
+database into multiple nodes. Uh they
+
+
+forward right to the primary nodes. Uh
+
+
+they make sure that you always
+
+
+read read all your rights. uh it's does
+
+
+most of that those things for you. uh we
+
+
+haven't used it but it seems pretty
+
+
+promising and the company that uh that's
+
+
+that is behind uh this fork called
+
+
+Trussor they they also have managed
+
+
+cloud services they recently actually u
+
+
+announced that they uh allow you to sync
+
+
+your database to uh AWS S3 express u so
+
+
+that's something you could look into if
+
+
+vertical skying isn't is enough for some
+
+
+reason for
+
+
+you so to wrap it
+
+
+uh our journey we we went with escalite
+
+
+to because we were driven by the
+
+
+simplicity by uh the promise of lower
+
+
+costs of uh by because we were
+
+
+constrained on on our uh development
+
+
+team's
+
+
+velocity. Uh the result is that our
+
+
+application is faster. We slashed our
+
+
+cost quite a lot. We don't really need
+
+
+to deal with DevOps anymore. Uh, I think
+
+
+Escalite is actually pretty viable and
+
+
+beneficial for you can you can run it
+
+
+for for any apps uh in production. Uh,
+
+
+there are obviously some trade-offs. Uh,
+
+
+you need to make sure you understand
+
+
+them and that uh your application uh
+
+
+that you're okay with them. But for us,
+
+
+I think it was very good
+
+
+choice. So yeah, that's it.
+
+
+[Applause]
+
+
+Thank you Voytech. It's very great talk.
+
+
+I'm going to
+
+
+Hello. Thank you very um I have a
+
+
+question because um you didn't mention
+
+
+about the backups and uh how you are
+
+
+doing that and so on. So can you really
+
+
+Right. So uh actually I had my initial
+
+
+version of the presentation had twice as
+
+
+many slides and some of them were on
+
+
+buckas. Um we're using two things
+
+
+actually. The first one is light stream
+
+
+uh which uh replicates your database
+
+
+into we use um cloud R2 but you can also
+
+
+use uh uh AWS S3 or whatever you want as
+
+
+soon as as long as it's compatible with
+
+
+with S3. Um what it does it replicates
+
+
+your so we have it set up so it
+
+
+replicates every change uh every second
+
+
+which means you have basically an exact
+
+
+copy of database in your S3 h and if you
+
+
+use R2 on cloud is actually almost free
+
+
+because they don't charge you for for
+
+
+many things
+
+
+uh actually it's pretty useful because
+
+
+we can replicate our production staging
+
+
+database into our development
+
+
+environment with one command uh and in a
+
+
+few seconds we have all the data we need
+
+
+uh and you can go back to any point. So
+
+
+we have it set up so it remembers last
+
+
+48 hours. We can go back to any point in
+
+
+time in last 48 hours. But other than
+
+
+that we also run a simple script in a
+
+
+chrome which just runs uh I mean is just
+
+
+just the database. It has this command
+
+
+called backup which exports uh a
+
+
+database in in a backup format. You can
+
+
+just uh t it uh and put into your S3. Uh
+
+
+so we have this those few lines of code
+
+
+which which we run every day to to do
+
+
+like a separate full full database
+
+
+backup. Thank you. Uh I have a one more
+
+
+uh why you are not not using u solid
+
+
+queue just
+
+
+for migration with bunches if some
+
+
+migration need to have a transaction and
+
+
+and really heavy load.
+
+
+Um yeah, I mean I you we you probably
+
+
+can do that. Yeah, why not? Uh I guess
+
+
+it depends a lot on what kind of
+
+
+transaction the migration you have. Uh
+
+
+but yeah, that's probably one of the um
+
+
+yeah, that's that seems like a viable
+
+
+option.
+
+
+Thanks. Thanks for your talk. Um quick
+
+
+question. Have you considered just
+
+
+running a local instance of posgress?
+
+
+Sounds like that would save 80% of your
+
+
+headaches and then you wouldn't have the
+
+
+migration issues and stuff like that.
+
+
+Uh all right. So uh there's a few
+
+
+things. So the the first of all uh there
+
+
+are some benefits for running uh
+
+
+escalates
+
+
+uh even if you were to run postgress on
+
+
+the same machine uh because runs in the
+
+
+same process which means so even if you
+
+
+were running it on a on the same machine
+
+
+separate server uh each time you wanted
+
+
+you you to try to get something from
+
+
+database your uh application has to
+
+
+serialize it even if you are using
+
+
+socket it has to write it over the
+
+
+socket to a different process. uh this
+
+
+process has to process the respond and
+
+
+so on. So there is still some overhead
+
+
+definitely more overhead than with
+
+
+SQLite uh which means that uh N plus
+
+
+ones would still have some overhead
+
+
+um other than that well you still need
+
+
+to manage it you still need to uh
+
+
+escalate is actually very easy to manage
+
+
+because they it's it's meant to be run
+
+
+inside your uh your your your process
+
+
+there it's is built from with the idea
+
+
+that it will be embedded. So uh with you
+
+
+can I mean if you're not using a manage
+
+
+posgress instance you probably know of
+
+
+some of the headaches that uh comes from
+
+
+from managing it on your own. Uh also
+
+
+you would need to care about with
+
+
+posgress you always have to care about
+
+
+the connection p like how many
+
+
+connections you have if you have too
+
+
+many you have to pull them somehow.
+
+
+There's a bunch of other issues that we
+
+
+would have to solve. Uh and migration
+
+
+wasn't really that that bad. Uh yeah it
+
+
+took us 3 days uh uh for for a single
+
+
+person and uh if we everything is
+
+
+reversible so if we don't like it if we
+
+
+decide
+
+
+that escalate isn't enough actually uh
+
+
+we can always just go back to postgress.
+
+
+Hi uh first of all uh great
+
+
+presentation. Thank you. Um, thanks. And
+
+
+how how long ago did you migrate and
+
+
+have you ever regretted the decision?
+
+
+Uh, so sorry so the first question was
+
+
+how do you I'm not sure how long ago did
+
+
+you migrate? How long? Okay. Um
+
+
+h I think it was like three months ago
+
+
+something like that. Not not that long
+
+
+ago. Uh did we regret it? Uh not really.
+
+
+I mean the the the mere fact that
+
+
+everything is so much faster and we
+
+
+don't have to worry about uh uh about
+
+
+performance. We had some issues with
+
+
+scaling or render and the bill was
+
+
+getting pretty ridiculous for for the
+
+
+amount of traffic we were having. Uh
+
+
+right now we don't have to worry about
+
+
+it at all. Our application loads almost
+
+
+instantly. It's it's great. Uh I guess
+
+
+the biggest regret was I mean the the
+
+
+the the biggest frustration we had were
+
+
+with those for keys which sounds silly
+
+
+but debugging those them uh yeah it was
+
+
+it was pretty annoying. Um no we are
+
+
+very h very happy so
+
+
+far. Can we get a promise that if you
+
+
+start regretting that you'll make a talk
+
+
+next year? Sure. Thank you.
+
+
+Hi great talk. Uh so what's is the
+
+
+biggest like table how many records do
+
+
+you have there and what's the total size
+
+
+of your database on machine right so I
+
+
+don't know how many records we have but
+
+
+our database isn't really that big right
+
+
+now we have uh it's it's a little bit
+
+
+more than one gabyte uh yeah so the
+
+
+biggest table like ballpark estimation
+
+
+you have how many records
+
+
+uh in one table
+
+
+I don't know maybe tens of thousands max
+
+
+something like that. Okay, thanks.
+
+
+Be the last one.
+
+
+So, two hands simultaneously. Damn it.
+
+
+Race condition. I'm confused.
+
+
+Okay. Thank you for the great talk and
+
+
+great experience. uh sharing one note uh
+
+
+that you were were mentioning a few
+
+
+times that N plus1 is are not an issue
+
+
+here but uh and definitely there's
+
+
+smaller overhead on uh on selects on
+
+
+database side but still want to warn
+
+
+some people that there would be you're
+
+
+using active record and there would be a
+
+
+massive overhead on like memory
+
+
+allocation wise so it's not like you're
+
+
+still not using EP framework where there
+
+
+would be in orders of magnitude less
+
+
+memory allocation on models and over all
+
+
+different principles. uh so kind of I
+
+
+think you still have to deal with the
+
+
+same n plus1 elimination like you would
+
+
+do on in posgress so it doesn't
+
+
+change right so uh yeah probably I mean
+
+
+I I mean we we've run some tests for
+
+
+simple n plus ones uh where we were just
+
+
+testing how it behaves with includes
+
+
+relation and we held it for some
+
+
+requests and the difference was uh
+
+
+negligible uh for for most requests but
+
+
+you still have to remember not to
+
+
+overfetch data. I mean, if you you can't
+
+
+be reckless uh and just fetch all of the
+
+
+users from a database to find one
+
+
+record, right? Uh but for from at least
+
+
+for those simple N plus1 queries uh in
+
+
+our
+
+
+tests, it wasn't really slower with and
+
+
+or without N plus1 ones, but yeah,
+
+
+you're probably I mean you're instantane
+
+
+there is probably some overheads there.
+
+
+Okay, thank you.
+
+
+Okay, sorry. I take one more because I'm
+
+
+on good foot with P and I don't want to
+
+
+lose
+
+
+that. Hello, thank you for the
+
+
+talk. Could you tell how did you manage
+
+
+with uh existing data migration and uh
+
+
+what was the downtime that you required
+
+
+to switch from one engine to another
+
+
+one? Uh right. So uh existing data we we
+
+
+use this script there was
+
+
+uh uh where it was there there was
+
+
+there's this open source script which uh
+
+
+does data
+
+
+migration it was there somewhere um but
+
+
+uh we had we slightly modified it
+
+
+because oh there it is we used this
+
+
+script basically uh we slightly modified
+
+
+it uh because it was created database
+
+
+from the scratch we wanted to create our
+
+
+database through to make sure that uh
+
+
+we're using the schema created by we
+
+
+basically removed a few lines from it.
+
+
+Uh and uh since our our schema was
+
+
+compatible with this clite since uh
+
+
+everything that uh uh we were using
+
+
+postgress was already available in slide
+
+
+it just went through and that was it.
+
+
+The downtime
+
+
+uh it took us I think well I think we
+
+
+took down the app for like an hour or
+
+
+two or something like that.
+
+
+Yeah, that's it.
+
+
+Cool. All right. Thank you very much,
+
+
+VTEC. Thanks,

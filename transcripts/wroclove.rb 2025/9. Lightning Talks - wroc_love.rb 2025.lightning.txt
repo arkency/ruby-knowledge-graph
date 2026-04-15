@@ -1,0 +1,2944 @@
+Okay. So, Mat on his talk was using
+
+
+something that was called decider. And
+
+
+question to you, raise your hand if you
+
+
+heard about decider before his talk. Not
+
+
+so many. Have you been using it?
+
+
+Okay. So, you you can learn something
+
+
+new.
+
+
+Um so this idea basically is a little
+
+
+bit more concrete uh like version of
+
+
+aggregate pattern the one that you can
+
+
+know from domain
+
+
+design and it uses functional
+
+
+uh pure functions. Pure function means
+
+
+that there are no side effects and for
+
+
+every call with basic with uh specific
+
+
+arguments you have guarantee that there
+
+
+will be always the same result. So like
+
+
+you cannot take something from the
+
+
+context and you can think about it like
+
+
+a some boundary that protects um
+
+
+protects your
+
+
+changes. So here
+
+
+coming call for change which is uh
+
+
+basically command and to proceed a
+
+
+command you need some state and state
+
+
+because it is a pure function. So state
+
+
+state cannot be like taken from the fly
+
+
+from the database or something. You have
+
+
+to pass it
+
+
+explicitly state and as a
+
+
+result you
+
+
+return collection of
+
+
+events and we call it this function that
+
+
+protects
+
+
+the
+
+
+rules. a decide
+
+
+function. So that's one of the parts of
+
+
+the decided pattern. The other part part
+
+
+is that you also have to like make an
+
+
+evolution of the state because like
+
+
+state
+
+
+changes and use it for for this you are
+
+
+using another function that's called
+
+
+evolve like for evolution of the
+
+
+state and to compute
+
+
+it you take the events or actually an
+
+
+event that that already
+
+
+happened pass it to this
+
+
+function and you also pass
+
+
+um a state that you're evolving and then
+
+
+as you as a
+
+
+result you are getting a new
+
+
+state and that's actually basically
+
+
+decider pattern. You can connect dots uh
+
+
+connect
+
+
+them. See
+
+
+how state
+
+
+is pass from one function to another.
+
+
+That's a decider function, the decider
+
+
+pattern. You also need a initial state
+
+
+which is most often just another
+
+
+function that starts all the all the
+
+
+process. And the thing is that because
+
+
+of this very concrete structured uh
+
+
+definition there are some mathematical
+
+
+consequences that actually deserve
+
+
+another look full uh talk. So instead of
+
+
+that I will just show you how we can
+
+
+implement
+
+
+this. Uh so I created a gam called
+
+
+decide RB. I wanted to use decider but
+
+
+it's taken like for 15 years or
+
+
+something and it's a competition of
+
+
+array
+
+
+sample. Um so like you can think about
+
+
+uh a state is represented as a data that
+
+
+has ID and some
+
+
+some name of the
+
+
+state. Uh it's actually taken from
+
+
+aggregates repository from ARC.
+
+
+uh just simplify it a little. Uh so we
+
+
+have we can open issue we can resolve an
+
+
+issue issue can be opened resolved and
+
+
+here's the definition of the slider. So
+
+
+we say that this is our initial state we
+
+
+have a fun like definition of the
+
+
+function that whenever we pass a command
+
+
+that is open issue on on a state that is
+
+
+none we are we have this block that to
+
+
+to be executed. So we for example is
+
+
+issue emit an event that issue was
+
+
+opened or we can use uh pattern matching
+
+
+and like whenever proc returns true that
+
+
+that this block will be uh executed. So
+
+
+for example we can pass in a command
+
+
+state if it match now we are uh issu
+
+
+emitting this event.
+
+
+So just a second. Uh so there is also
+
+
+evolution of the function
+
+
+anywhere too fast. Okay. Thank you.
+
+
+Thank you. All right. Hi. Uh my name is
+
+
+Tomas and I'm going to uh do like a
+
+
+short intro to open telemetry. Uh why?
+
+
+Because there was like a great talk in
+
+
+the morning about structure logging. You
+
+
+might remember it or not. And I feel it
+
+
+deserves a bit of extra context and a
+
+
+bit of showing um basically where we are
+
+
+and and what we're doing and also like
+
+
+how to maybe take it to the next level.
+
+
+Um but also because the world of open
+
+
+telemetry is kind of taking the world of
+
+
+web applications by storm. You might not
+
+
+feel it, you might not know it if but if
+
+
+you have like a non-trivial application
+
+
+with any sort of telemetry vendor or any
+
+
+sort of application performance
+
+
+monitoring like Newelli basically if you
+
+
+have anything beyond plain logs piped to
+
+
+std out or a file uh you probably have a
+
+
+some sort of open some sort of metrics
+
+
+uh logs observability vendor and even if
+
+
+you don't use it explicitly this
+
+
+observability vendor is switching as
+
+
+we're speaking to open telemetry so we
+
+
+might as well know it understand it and
+
+
+use it to and leverage it to actually uh
+
+
+make get way more out of it and use it
+
+
+as a part of modern civility stack. Uh
+
+
+so yeah, you're going to be users of
+
+
+open telemetry whether conscious or not.
+
+
+This is lightning talk. I hope that that
+
+
+the conscious one's going to win. So you
+
+
+know why we log of course this isn't
+
+
+lightning talk so we're not going to do
+
+
+all like like why we log plane logs are
+
+
+pretty natural structuring are way
+
+
+better. or we can include some context,
+
+
+some numbers that we can for example
+
+
+like do operations on and so on and so
+
+
+on. But also logs are not everything.
+
+
+Sometimes we need traces especially if
+
+
+you have like multiple services,
+
+
+multiple calls. We need to be able to
+
+
+connect events or things happening,
+
+
+state changes happening when the request
+
+
+is going through different services and
+
+
+uh logs are not enough because logs can
+
+
+give us isolated situations what was
+
+
+happening on specific service but
+
+
+there's no connection between the two
+
+
+log statements from two different
+
+
+services. Um and yeah there's like this
+
+
+classical trio free tabs of like you
+
+
+know monitoring metrics logs and traces
+
+
+they all have their drawbacks listed
+
+
+here not going to read them sorry uh but
+
+
+what's great is now we have a standard
+
+
+called well an evolving standard called
+
+
+open telemetry uh where they are all uh
+
+
+facets of a basic unique called the wide
+
+
+event. wide event has high cardality,
+
+
+high dimensionality. Those are fancy
+
+
+words basically saying we have a lot of
+
+
+keys and each key can have a lot of
+
+
+values and uh yeah they still have
+
+
+traces spans and events. Uh span is like
+
+
+a pretty uh pretty cool thing because
+
+
+you know it has a time stamp so it
+
+
+happens at point in time. It has extra
+
+
+attributes. It can have a human readable
+
+
+message. It can span can also uh and and
+
+
+then event can belong to a span. Uh
+
+
+we're not going to be talking about
+
+
+schemaless databases. Yes, they are
+
+
+schemaless and it's uh terrible as a
+
+
+transactional uh database for
+
+
+application but actually for you know
+
+
+logging monitoring telemetry when you
+
+
+don't know what sort of data we're going
+
+
+to be gathering right now in the future
+
+
+and how you're going to aggregate it or
+
+
+correlate it actually schemaless
+
+
+databases uh are pretty cool for this
+
+
+sort of usage. So this is like an
+
+
+example view from a service I'm going to
+
+
+like you know advertise even though I
+
+
+use it a lot. This is an example trace
+
+
+coming from like know a lot of services.
+
+
+Those bars are spans. Those circles are
+
+
+actually events and quite often then
+
+
+could be like log statements. We can
+
+
+basically see what log statement
+
+
+happened in exactly what context and
+
+
+they all have like a lot of data both
+
+
+from like you know what kind of request
+
+
+came in what was happening with it what
+
+
+sort of user trigger it and a lot and
+
+
+you can basically attach any arbitrary
+
+
+data to it from all of those services
+
+
+because what's also great is that in
+
+
+distributed tracing every service that's
+
+
+basically processing a request or like
+
+
+anything that's happening as long as you
+
+
+pass down trace ID with every subsequent
+
+
+call uh every service should report span
+
+
+on their own passing on the in trace ID
+
+
+and what's called an open telemetry
+
+
+collector. So basically let's say the
+
+
+vendor the service that all the data
+
+
+gets sent to um is tasked with getting
+
+
+all the spans with the same uh trace ID
+
+
+but also with parent spent ID if
+
+
+possible and glued them all together so
+
+
+that they could be shown in the sort of
+
+
+like unified way and you could basically
+
+
+have a very good insight into what's
+
+
+happening in our entire system
+
+
+regardless of how many applications
+
+
+monolith services whatnot log statements
+
+
+anything we have and yeah it also allows
+
+
+to allows us to also pretty pretty
+
+
+easily because we have like a lot of
+
+
+dimensions lot of values also allows us
+
+
+to pretty easily visualize it and
+
+
+inspect this data to see what are the
+
+
+anomalies. This is the screen for from
+
+
+the same service. Again, not going to
+
+
+name it, but I use it. It's great.
+
+
+Anyway, u and it's also in Ruby. There's
+
+
+no parametric Ruby. Uh we can very
+
+
+easily get the current span, add any
+
+
+arbitrary attributes we want to it. We
+
+
+can even like you know send send an
+
+
+event with like a human readable title.
+
+
+So almost like a log structured log. U
+
+
+yeah we can basically like add an event
+
+
+to current span. Uh a logger info if you
+
+
+have open telemetry logging integrated.
+
+
+Uh it's also like an event which has a
+
+
+which belongs to a span and you can
+
+
+basically see it all together. We can
+
+
+create our own traces. There's a pretty
+
+
+awesome book about it. I suggest you all
+
+
+read it. Uh what's the catch? Open
+
+
+telemetry is new. It's an evolving
+
+
+standard. It's a work in progress. Open
+
+
+telemetry rub is pretty immature.
+
+
+Logging is like experimental and stuff,
+
+
+but I suggest you'll get to it because
+
+
+you're still going to be using it.
+
+
+That's all. Thank you.
+
+
+Hi, my name is Kristoff. This is my
+
+
+presentation. It's about
+
+
+airspec. Uh and it's about using the
+
+
+right tool for the right job and using
+
+
+correctly. So basically airspec it's a
+
+
+big gem. It's a big tool and it's used
+
+
+for specs not which are a type of test
+
+
+but not necessarily just that like test
+
+
+and specs are not exactly the same.
+
+
+There is a scientical difference if you
+
+
+will uh which I will not get into but
+
+
+there will be a source to why this is
+
+
+not the they should not be used as the
+
+
+same words there are different things
+
+
+rather specs are subset of
+
+
+tests and for test we have different
+
+
+tools in RSpec we have mini test which
+
+
+is everyone uses as internet explorer on
+
+
+windows so to just download another
+
+
+browser we use mini test to delete it
+
+
+and install ourspec mostly Okay, at
+
+
+least that's my experience. I worked on
+
+
+a lot of projects. Uh, but I keep
+
+
+getting fired and every time I go to a
+
+
+new company, there's always an RSpec no
+
+
+matter whatever the project is. And
+
+
+there's also smaller things like
+
+
+testbench, there's quick draw done by
+
+
+Jo, which who did a do different
+
+
+presentation and earthspect is way
+
+
+bigger than that than than them. And so
+
+
+yeah, example from testbench. This is a
+
+
+test. This is not a spec, right? Very
+
+
+simple stuff. This is just Ruby. There's
+
+
+no special DSL which airspec has plenty
+
+
+of. This is mini test in a test mode.
+
+
+This is mini test in a spec mode because
+
+
+mini test is actually a tool for both
+
+
+test and specs. Airspec is just for
+
+
+specs. And yeah, airspec big tool for a
+
+
+specific job. Uh you can think as a
+
+
+metaphor. Let's say you don't
+
+
+necessarily use a bazooka to kill a
+
+
+child although you could. You probably
+
+
+could use a knife or something more
+
+
+efficient.
+
+
+Uh or a sledgehammer to hit a nail or
+
+
+whatever. If you laugh about this, your
+
+
+sense of humor is a bit weird, but
+
+
+okay. But yeah, airspec not a good tool
+
+
+to build tests, but a lot of people kind
+
+
+of use it in a way that they just build
+
+
+tests, not specs. Uh, and to use airspec
+
+
+to build specs, you need to use its all
+
+
+functions, which is building custom
+
+
+match, for example. Here's a one. It's a
+
+
+matter that checks if operation returns
+
+
+a decorated object, which looks very
+
+
+simple, but does a few other things. If
+
+
+I get time and show some code, probably
+
+
+won't. Uh, you have to leverage your own
+
+
+DSL to create actual specs because specs
+
+
+are tests written for humans basically,
+
+
+not for the computer. So you replace the
+
+
+thing at the top which is a very boring
+
+
+code that you have to spend few seconds
+
+
+to understand that each line is doing
+
+
+what but you can replace this with your
+
+
+own DSL that immediately tells you I'm
+
+
+stubbing a policy I'm stubbing a
+
+
+service and you create some bigger
+
+
+helpers to have actual specs not tests
+
+
+for example this with every combination
+
+
+is very useful for stuff like I have a
+
+
+user that can do some actions and some
+
+
+object but not on some others. Writing
+
+
+test for cases like this manually either
+
+
+uses 200 lines or you doing some things
+
+
+with sample and collections which is not
+
+
+very good. So here you kind of replace
+
+
+not having to write everything manually
+
+
+and you also don't have to write loops
+
+
+which are uh very hard to understand and
+
+
+it can also give you better
+
+
+uh messages outputs. I'm sorry that this
+
+
+is ugly but I had very little time for
+
+
+to prepare this presentation because I
+
+
+made it three years
+
+
+ago. So there was really no time. Uh but
+
+
+yeah, this basically
+
+
+uh just has a more explicit uh message
+
+
+about what failed in a loop, which you
+
+
+would not get if this was just Ruby test
+
+
+that runs a
+
+
+loop. And yeah, there's some code I have
+
+
+50 seconds, so I won't show it. Uh but
+
+
+you can ask me about it if you want
+
+
+later on. So yeah, closing thoughts.
+
+
+Aerpec is a tool for specs, not tests.
+
+
+and to leverage it. The forer is a quote
+
+
+from one of the main aerospec
+
+
+maintainers that it's a very what when
+
+
+you install it, it's a very bare bones
+
+
+thing and you have to expand it to
+
+
+actually use it correctly. If you just
+
+
+install it and kind of try to write
+
+
+tests with it, not specs, you're just
+
+
+kind of failing at using it correctly.
+
+
+And that's
+
+
+it.
+
+
+Yeah. Okay. Hi everyone.
+
+
+going okay so I want to show you some
+
+
+process managers in the at the code
+
+
+level it was mentioned today several
+
+
+times although mat mat calls this
+
+
+automation for some reasons uh so at the
+
+
+high level process managers they kind of
+
+
+implement business processes so they are
+
+
+very important in domain design and they
+
+
+orchestrate departments and in the code
+
+
+it's let's say domains or bonded context
+
+
+at the technical level and this is where
+
+
+we focus right now uh it's a mapping
+
+
+from events to commands so we listen to
+
+
+some acts that happen in different
+
+
+departments and then we say okay please
+
+
+another department please do something.
+
+
+Um so at this technical level this is
+
+
+the schema how it works. We get event at
+
+
+the beginning or events we build a state
+
+
+uh from events we make a decision and
+
+
+this outputs a commands some commands
+
+
+and I will use an example of reservation
+
+
+process which is non-trivial because it
+
+
+uh orchestrates pricing or maybe better
+
+
+name would be sales fulfillment of an
+
+
+order and inventory where you reserve or
+
+
+dispatch stuff from the inventory. Um so
+
+
+on the left side you can see the three
+
+
+events that we are interested in. It's a
+
+
+pricing offer accepted, order confirmed
+
+
+and order cancelled. And then we built a
+
+
+state which can be in three different
+
+
+states according to the events. And then
+
+
+actually there are five possible
+
+
+commands to be issued which so it this
+
+
+makes it uh not so trivial in general.
+
+
+Um so what are the five main parts of
+
+
+what process managers looks like in the
+
+
+code? Uh first of all we need to
+
+
+subscribe to those events. So we need to
+
+
+have this section
+
+
+somewhere. Um then we build the state
+
+
+which here in the code looks like this.
+
+
+We basically take the event uh one by
+
+
+one and we build the we use the the data
+
+
+sorry the order object here and we
+
+
+create the status and we pass along this
+
+
+uh the order lines just to be used
+
+
+later. So that's the building the state.
+
+
+The actual state is a data object. So it
+
+
+has uh just the status and order lines
+
+
+and we can know what is the reserved
+
+
+product
+
+
+ids and then we there is this act so
+
+
+making the decision that's the fourth
+
+
+part where we decide based on the status
+
+
+what we do right now so in the
+
+
+reservation process we can you know
+
+
+reserve we can reject the order based on
+
+
+the state or we can accept the order we
+
+
+can release the stock we can dispatch
+
+
+the stock so we orchestrate those three
+
+
+different domains of uh pricing,
+
+
+fulfillment, and
+
+
+inventory. And the commands are returned
+
+
+and then they are passed to the command
+
+
+bus to be
+
+
+executed. And this is how calling a
+
+
+command bus looks like. So you can see
+
+
+four different commands here which are
+
+
+very trivial where we just pass the you
+
+
+know product ID or order ID. That's the
+
+
+simplest ones. Uh but the most more
+
+
+complex one is uh reserve stock. So this
+
+
+is where we try actually to make the
+
+
+most happy scenario let's say and but we
+
+
+also want to ensure because that's the
+
+
+process of we want to ensure whether the
+
+
+order actually can be you know whether
+
+
+the reservation succeeded or not. So
+
+
+maybe meanwhile when we created the
+
+
+order someone else took some items and
+
+
+when we confirmed the order maybe we
+
+
+want to actually reject it at the end.
+
+
+Um so you can see that there is some
+
+
+logic here where we go through all the
+
+
+order lines and uh we iterate and we try
+
+
+to reserve and if inventory succeeds
+
+
+with all of them and then everything is
+
+
+fine. Uh but if not we have to kind of
+
+
+revert everything back because we treat
+
+
+it almost like a transaction. So in a
+
+
+way a process manager is also can be
+
+
+treated as a transaction here. So that's
+
+
+some code that's the five main parts. Um
+
+
+this is the hidden part thanks to which
+
+
+we don't need to
+
+
+um you like write it every time. So this
+
+
+is basically some helper methods to
+
+
+build the state from events and that's
+
+
+the constructor we pass event store and
+
+
+command bus because we listen to events
+
+
+and we issue commands and um this code
+
+
+is taken from this repository where you
+
+
+can also learn other parts of domain
+
+
+driven design and event sourcing. It
+
+
+lives in the rails event store
+
+
+organization under e-commerce project
+
+
+and this particular class is implemented
+
+
+in this u reservation process
+
+
+file. So that's it. Thank you very
+
+
+much. So hi I'm Guiney. I work for go
+
+
+hiring and actually we are hiring so it
+
+
+will be advertisement in the end.
+
+
+Hopefully I'll have time. So let me
+
+
+share a bit of our story. Uh so it's
+
+
+best to instrument on the network level.
+
+
+You'll get much of that and actually you
+
+
+can get service maps like this if you
+
+
+use some new stuff that's available
+
+
+there or something like that and there
+
+
+is actually already kernel libraries
+
+
+uh why it's taking so long like ebpf and
+
+
+core root. So if you have operational
+
+
+steam just tell them about that and you
+
+
+can instrument without actually on the
+
+
+kernel level. So without actually
+
+
+instrumenting your applications uh okay
+
+
+so let's go with open source backend. So
+
+
+for what kind of backends to use I
+
+
+prefer to choose open source
+
+
+alternatives like elastic and graphana
+
+
+and with open telemetry standard you can
+
+
+actually
+
+
+switch. Uh another good practice is to
+
+
+walk to est out and you don't need to
+
+
+care about threading processing network
+
+
+errors and back pressures if you
+
+
+implement the client or use the hotel
+
+
+libraries that actually take care of all
+
+
+of that.
+
+
+Uh in general library walks in Ruby
+
+
+ecosystems are pretty useless but you
+
+
+need to monitor warn and error messages
+
+
+for walks. And one thing we have done is
+
+
+actually we set a specific walker on a
+
+
+warn level for all library
+
+
+walks. Okay, give me some time. Another
+
+
+interesting topic is canonical walk
+
+
+line. You can actually read more about
+
+
+it and instead of having a lot of walk
+
+
+lines, you actually have one that
+
+
+getting all the knowledge and it's much
+
+
+easier to find. Uh the trace ID concept
+
+
+this is what in the previous
+
+
+presentation is about tracing. It allows
+
+
+you to actually manage all of the things
+
+
+that happen and we have went crazy and
+
+
+implemented that in our work. So
+
+
+basically we have instrumentation and
+
+
+uh you set the trace ID then you can
+
+
+actually see everything that's
+
+
+happening. So right now this is in
+
+
+elastic and I can see everything that
+
+
+happened from that request with all of
+
+
+the walks. Uh open telemetry implements
+
+
+that in their tracing. So it's a better
+
+
+to use them but there is a problem. Uh
+
+
+so yeah best practices learn from the
+
+
+giants like open termly they're trying
+
+
+to solve that in Ruby ecosystem is not
+
+
+very mature in that and you can use chat
+
+
+GPT I mean it's pretty good if you ask
+
+
+me what is the best practices what can I
+
+
+walk and what makes sense um some other
+
+
+advices there is the concept of red
+
+
+metrics basically rate throughput how
+
+
+much request you have the errors the
+
+
+duration of the errors and another
+
+
+important thing that's not there is Q
+
+
+time which you should think about like
+
+
+how many workers are waiting in the
+
+
+queue, how many requests are waiting in
+
+
+the world balancer or in the Puma queue,
+
+
+it will give you some information. If
+
+
+you actually have too much W and the
+
+
+system is not coping and if you want to
+
+
+care about problems then monitor the
+
+
+error and the warning works.
+
+
+And another thing that we have found is
+
+
+more of an organizational problem is
+
+
+that observability is actually a
+
+
+developers problem. So not is not
+
+
+something that you can delegate your
+
+
+your operational team. Uh and if you
+
+
+have 20 developers and then four ops
+
+
+teams, it's just not going to scale. So
+
+
+try to push it as
+
+
+a first class citizen. So think about
+
+
+what it makes for your feature to work.
+
+
+uh how you monitor that in production
+
+
+regularly. Scan the errors and the
+
+
+warning cos try to build some alarms of
+
+
+top on the box that might scale or maybe
+
+
+not depending on your volume. And what I
+
+
+have found is that I think open
+
+
+telemetry is the way of the standard but
+
+
+I'm not sure it's too mature at the
+
+
+moment. It's not well recognized in the
+
+
+Ruby community in a way and actually
+
+
+yeah I know I know and actually why we
+
+
+have written all of this code is because
+
+
+that by default the libraries actually
+
+
+don't work the things that we need and
+
+
+currently work uh but I think we need a
+
+
+better support for observability as part
+
+
+even from the frameworks and even from
+
+
+the libraries so that is not it's not
+
+
+something that you have to think about
+
+
+but there is always people that have
+
+
+spent 10 20 years on that topic and can
+
+
+help you. This is the best
+
+
+practices. Uh yeah, I would be happy to
+
+
+speak with anyone that is interested.
+
+
+And here is our app. If you're searching
+
+
+for a job, you can contact our mission.
+
+
+And thank you very much.
+
+
+[Applause]
+
+
+Uh hi, for some of us the job market
+
+
+still looks a little bit like that. um
+
+
+not for all of us, but you can still
+
+
+find a job, but maybe a promotion or a
+
+
+raise is a little bit higher uh more
+
+
+difficult to find.
+
+
+Um so, um I have some bad news. Uh a lot
+
+
+of you are kind of senior um and know
+
+
+how to code. That's that much is clear.
+
+
+Um, but the bad news is that like even
+
+
+if your code is super performant and
+
+
+even if your code is clean, um, that's
+
+
+usually not going to get you a promotion
+
+
+at most companies beyond a certain
+
+
+point. So maybe you're going to get to
+
+
+senior, but maybe not further beyond.
+
+
+Um, and I'm here to talk to you about
+
+
+uh, how to get beyond that. And um, I
+
+
+don't know about you, but for me being
+
+
+an engineering manager, which is like
+
+
+the natural progression, that kind of
+
+
+sucks. Um, I prefer to stay, you know,
+
+
+closer to the computer and maybe solve
+
+
+more technical problems and kind of
+
+
+impact through my work, uh, rather than
+
+
+through, you know, other people, even
+
+
+though that's cool as well. Um, so I'm
+
+
+here to tell you about a story that kind
+
+
+of helped me progress a little bit like
+
+
+that. Um, and, uh, we had every company
+
+
+has like a a haunting problem. So like
+
+
+some issue that they're unable to solve.
+
+
+Um and you know maybe that has been a
+
+
+problem for years and different teams
+
+
+have tried to fix that problem uh with
+
+
+maybe not so much success. Um and we had
+
+
+one as well uh that for us it was like
+
+
+billing so it's kind of ridiculous but
+
+
+uh when we were invoicing our clients um
+
+
+a lot of times the invoices would be
+
+
+kind of incorrect and you would have to
+
+
+like rerun them three months uh after
+
+
+the invoice was executed. Um and our
+
+
+clients would not be very very happy uh
+
+
+with paying um more or sometimes they
+
+
+were happy when they were paying less.
+
+
+Uh that depends. So um there was like
+
+
+executive buyin to uh fix that problem
+
+
+and we found like the best engineers to
+
+
+work on that um that looked a little bit
+
+
+like that and then um we said okay you
+
+
+guys go and fix it. And they had like a
+
+
+broader skill set and you can kind of
+
+
+imagine how it w how it went. Um maybe
+
+
+you can guess it kind of ended up like
+
+
+sort of like that. Um so we had this
+
+
+amazing team but they were not uh very
+
+
+successful at that. And like why is it
+
+
+the case? Well because no matter what
+
+
+they tell you it's always a people
+
+
+problem. So you can take all the tech
+
+
+skills you might have um but if you
+
+
+don't focus on like what the actual
+
+
+problem under the problem is you're not
+
+
+going to be successful. Okay. But some
+
+
+of you might ask isn't this like what a
+
+
+PM would do? Um, and I would argue that
+
+
+for some problems, APM is actually not
+
+
+going to be uh the most effective tool
+
+
+to solving large organizational
+
+
+problems, especially when these problems
+
+
+are within company problems, right? So,
+
+
+not about developing a new product of
+
+
+some sort, um, but rather about solving
+
+
+something that is maybe intractable and
+
+
+also has a severe technical aspect. All
+
+
+right. Um
+
+
+so this is a situation uh an
+
+
+illustration a basic illustration of
+
+
+this uh situation that we're in. There
+
+
+is somebody that is unhappy and then you
+
+
+have to figure out how to make that
+
+
+person happy and then hopefully you get
+
+
+some profit at the end. Um so how do you
+
+
+get that? Um well I'll try to be quick.
+
+
+Um first what I did because then I was
+
+
+tasked to kind of solve that problem on
+
+
+my own and I made some progress and then
+
+
+I had one extra person to help me out
+
+
+but what I did is basically like you
+
+
+need empathy. Yes. Um we had a talk
+
+
+about domain driven design and that's
+
+
+awesome and eventtorming is cool but
+
+
+like if you're not going to understand
+
+
+sometimes there is no expert because you
+
+
+don't really know what the problem is
+
+
+and why the different efforts have
+
+
+failed. Uh so you have to speak with
+
+
+like first identify all the people that
+
+
+are affected um and then speak to all of
+
+
+these people interview them talk to them
+
+
+one-on-one and then understand what is
+
+
+the problem and then once you understand
+
+
+kind of what is the surface level
+
+
+problem so what people tell you then you
+
+
+have to kind of understand okay what is
+
+
+the common theme between behind all of
+
+
+these problems that people are facing
+
+
+and then why have we not been able to
+
+
+solve it in the past and um then you
+
+
+have to come up with sort of a vision
+
+
+about uh of the world in which this
+
+
+problem is solved and then also what is
+
+
+the smallest policy iteration that will
+
+
+uh restore somebody's faith in humanity.
+
+
+So like small fixes um that you can
+
+
+start delivering and uh get to the
+
+
+solution. So in the end it took us like
+
+
+6 months uh but we wrote a new billing
+
+
+system from scratch. Uh we rolled it out
+
+
+to like 70% of our customers and then
+
+
+everybody well it was a bumpy road but
+
+
+everybody was happy ever after. Um if
+
+
+you want to learn more about that kind
+
+
+of approach read this book the staff
+
+
+engineers path. It's a great book.
+
+
+There's also um a nice uh article
+
+
+everything is important. So what to do
+
+
+and everything is important. Um and then
+
+
+if you want to contact me, my name is Ko
+
+
+Lefcho. You can email me. I have nothing
+
+
+to sell. So just to say hi or you can
+
+
+also find me on LinkedIn. Thank you.
+
+
+Hello, I'm Pavo Pavo. Uh I was working
+
+
+for a quite time on my own tool really
+
+
+which is uh Ray spotlight uh and I would
+
+
+like to show you because I was working
+
+
+on that and I thought okay maybe maybe
+
+
+it's useful not only for me but maybe on
+
+
+someone else will uh have a chance to
+
+
+really uh use it and uh and yeah what
+
+
+this is this is a chrome extension And
+
+
+um and
+
+
+it's because we are adding let's say
+
+
+um gem to our application race
+
+
+application of course uh we can use that
+
+
+chrome extension extension and it's
+
+
+really giving us a lot of information.
+
+
+We can do some things with uh that like
+
+
+um let's say uh we have some breakdowns.
+
+
+We can see how fast our app is. We can
+
+
+check uh let's say uh parameters uh we
+
+
+can check the headers we can filter them
+
+
+uh we can check local
+
+
+uh local variables and some our own
+
+
+metadata
+
+
+uh which we would like to really push in
+
+
+in in each of the
+
+
+request also if there are some active
+
+
+record uh queries We can fit. We can go
+
+
+and check that query. We can even
+
+
+execute and check the
+
+
+results. We can ask AI on something
+
+
+really about that particular query. We
+
+
+get answer
+
+
+hopefully.
+
+
+Uh yeah, it's working. And uh we also
+
+
+can execute well whatever we can get
+
+
+from from the AI. Of course, if you
+
+
+would like, we would like to do that,
+
+
+but not recommend that. Anyway, we can
+
+
+create some, you know, snippets just for
+
+
+us for some reason.
+
+
+Yeah.
+
+
+So this is one part also we can have a
+
+
+really cool
+
+
+uh I call that
+
+
+uh console. We can ask for example on
+
+
+some you know uh on some like we can
+
+
+call Ruby code to our application where
+
+
+we will that that code will be executed
+
+
+and we will have a uh
+
+
+response and what is really interesting
+
+
+we can have a full information about
+
+
+that that particular uh instance and
+
+
+even we and uh run some our scripts
+
+
+which we prepared
+
+
+before. Uh let's say we would like to
+
+
+change out.
+
+
+uh it's automatically getting the
+
+
+attributes of that that uh that object
+
+
+and detecting what
+
+
+it's coming from the app and that's why
+
+
+we can execute that and in this
+
+
+case John Smith will be
+
+
+changed to me let's say uh so we can
+
+
+have our own scripts for everything what
+
+
+we would like to to use
+
+
+as
+
+
+well. There is a editor
+
+
+which in the browser we can edit
+
+
+wherever we would like. Of course, it's
+
+
+not recommended in some cases, but um
+
+
+it's really working nice when uh we have
+
+
+something like
+
+
+um let's say vit with some nice uh views
+
+
+and we would like
+
+
+to play around a little
+
+
+bit with it. So for
+
+
+example change color of the
+
+
+button. So we see that the button
+
+
+changed automatically which is
+
+
+really
+
+
+cool. I added some notes so you can add
+
+
+some notes in the way that's al also
+
+
+it's
+
+
+um it's kind of a to-do list.
+
+
+Thank you. If anyone would like to
+
+
+really no
+
+
+more, you can find me after the
+
+
+meetings. Thank you. Uh okay. So uh we
+
+
+have now like tough job market. So uh we
+
+
+talked today whole day about the code
+
+
+but no job means no code. So uh let's
+
+
+worry about this. Uh we have to change
+
+
+job or we have don't contract.
+
+
+Uh so we go to recruitment process. We
+
+
+have initial talk. We have like uh soft
+
+
+tech talk. We have tech talk and then we
+
+
+get validation. You get validated. You
+
+
+get contract or you don't get contract
+
+
+but you don't know what to improve. Uh
+
+
+so
+
+
+uh actually yeah
+
+
+uh so yeah let's talk about the no part.
+
+
+How to get no into something meaningful?
+
+
+Uh it's
+
+
+hard. So
+
+
+uh yeah it doesn't
+
+
+work. Okay. Yeah. Uh so in case you
+
+
+don't get the job, they don't they don't
+
+
+tell you the truth. Uh
+
+
+yeah. Yeah. Somehow. So
+
+
+uh yeah, they negotiate with you. Uh
+
+
+they don't tell you what they think
+
+
+about you. uh in case you post something
+
+
+on linkit or there here uh on Ruby
+
+
+conference. So yeah.
+
+
+Uh yeah, but what do you get? Uh you get
+
+
+how to sell yourself. Uh you get to how
+
+
+to learn. You get like sabatical entrum
+
+
+resume. Uh you reach out to your old
+
+
+folks. Uh yeah, but that's not enough.
+
+
+uh sometimes it's like I mean getting
+
+
+job is to showing that you can uh
+
+
+deliver value right so uh let's old to
+
+
+your old folk like old
+
+
+mentor old team leader someone who knows
+
+
+you and uh who could tell you the true
+
+
+uh yeah and uh giving feedback is
+
+
+actually quite hard. My uh friend Carol
+
+
+uh we spoke about it today. Uh giving
+
+
+negative feedback is very hard for
+
+
+people you don't know. You don't know
+
+
+how they react and if they
+
+
+uh if they don't react, you don't want
+
+
+to. I mean it's
+
+
+unpredictable. So,
+
+
+uh, yeah, flavor. Reach out to someone
+
+
+who knows how to get the flavor out of
+
+
+you. And,
+
+
+uh, yeah, that's all. Thanks.
+
+
+[Applause]
+
+
+Tomato.
+
+
+Tomato. Okay. So, the the lead vocalist
+
+
+in the song Rappers Delight, one of the
+
+
+very first rap songs ever, was a guy who
+
+
+was distracted from making pizza
+
+
+pies. I was distracted from improving
+
+
+Legacy app to share what I've learned
+
+
+with
+
+
+you. So, uh preparing a conference talk
+
+
+is a ton of work, but you can ship it in
+
+
+a infinite time.
+
+
+It's actually 300 uh 3,600 words to
+
+
+speak for 30 minutes and with a tempo of
+
+
+100 to 120 words per minute. This tempo
+
+
+is especially preferred for non-native
+
+
+speakers so you can sound
+
+
+smart. We're all smart people. So don't
+
+
+be
+
+
+afraid. We don't need to act.
+
+
+Everyone has its own very unique
+
+
+experience and
+
+
+perspective. Pav already had a
+
+
+presentation on drug meetup touching
+
+
+very different piece of our rewrite than
+
+
+the one I've presented to you
+
+
+today. So discover your strengths. I
+
+
+recommend you going to gallop and taking
+
+
+uh 34 talent. uh
+
+
+uh
+
+
+one those are teams identified through
+
+
+50 years of of
+
+
+research. Uh and people
+
+
+who take this uh test and discover they
+
+
+their uh strengths actually are more uh
+
+
+confident and they they act better.
+
+
+Simply simple as that just
+
+
+to because of knowing yourself better.
+
+
+So in fact I miss typical skills for to
+
+
+be a conference
+
+
+speaker. It turns that out uh turns out
+
+
+I like usual skills for that.
+
+
+Communication talent is placed lower in
+
+
+my strength profile but input which is
+
+
+about gathering information and
+
+
+analytical uh is in the top. So I can
+
+
+synthes synthesize the knowledge and
+
+
+present complex
+
+
+things. Strategic talent allows me to
+
+
+present topic which I have expertise
+
+
+in. So pick the team you're feel good
+
+
+with. I felt confident about my topic.
+
+
+So it
+
+
+happened. Learn storytelling. Uh I don't
+
+
+know go to Toastmasters meeting, go to
+
+
+local Ruby user group. Uh learn it on
+
+
+YouTube. Whatever works for you. There
+
+
+are so many options
+
+
+today. A lot of time.
+
+
+Thanks. So, uh practice in front of the
+
+
+mirror. Uh I especially recommend this
+
+
+one not to make this weird moves.
+
+
+Uh and look like uh I don't know who.
+
+
+So, we all are nervous when we we all do
+
+
+those things when we're nervous. And
+
+
+you'll be much more confident uh if you
+
+
+practice and boost your brain.
+
+
+You know what's the deal? Take creatine.
+
+
+Not for your
+
+
+muscles, but too muscles are cool, but
+
+
+mainly for your brain. It's the best
+
+
+tested supplement available. It improves
+
+
+short-time memory and boosts
+
+
+intelligence. I took mine in the morning
+
+
+at least to at least feel that I am
+
+
+smarter.
+
+
+So uh single dose creatine improves
+
+
+cognitive performance and induces
+
+
+changes in several high energy
+
+
+phosphates during sleep
+
+
+deprivation. We all know that. So if you
+
+
+went to sleep after guiding the
+
+
+conference folks to keap up joint at
+
+
+3:00 a.m. I dedicate this one to you.
+
+
+So uh the thing is that community will
+
+
+thank
+
+
+you and uh I think organizers will be uh
+
+
+also
+
+
+thankful uh especially
+
+
+that yeah the more call for papers
+
+
+uh are performed yeah it's it's the the
+
+
+wider choice you can pick something more
+
+
+interesting
+
+
+maybe the talk which is uh which have
+
+
+never been had before. I had 40 seconds.
+
+
+I'm improvising right now. I'm not very
+
+
+good at
+
+
+that. Uh what I won't tell a joke
+
+
+because not to violate code of conduct.
+
+
+Thank
+
+
+you. I decided another shot. Um okay. So
+
+
+Ruby is mature now. How how do I know?
+
+
+There are at least I see at least two
+
+
+signs. one I turned 40 this this week
+
+
+and I'm not even the oldest developer in
+
+
+this room so like we are definitely
+
+
+mature right now right
+
+
+uh second thing is how Ruby companies
+
+
+right now are structured like like there
+
+
+are HR departments marketing
+
+
+departments budgets for different
+
+
+activities and the richer actually they
+
+
+are it's even harder to get any money
+
+
+from them so it's definitely a major um
+
+
+sign. So that's why I would like to give
+
+
+a special shout of applause for tuency
+
+
+and raceware who supported us this year
+
+
+and without their support probably this
+
+
+conference will not happen. So thank you

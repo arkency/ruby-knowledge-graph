@@ -1,0 +1,68 @@
+<div class="page-header-row">
+  <h1 class="page-title">Extractions <span class="count"><%= @extractions.size %></span></h1>
+  <% if params[:hide_failed] %>
+    <%= link_to "Show failed", extractions_path, class: "filter-link" %>
+  <% else %>
+    <%= link_to "Hide failed", extractions_path(hide_failed: true), class: "filter-link" %>
+  <% end %>
+</div>
+
+<% if @extractions.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Status</th>
+        <th>Ingestion</th>
+        <th>Model</th>
+        <th>Tokens (in/out)</th>
+        <th>Duration</th>
+        <th>Cost</th>
+        <th>Nodes/edges</th>
+        <th>Read set (nodes/edges)</th>
+        <th>Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @extractions.each do |ext| %>
+        <tr class="clickable-row" tabindex="0" data-href="<%= extraction_path(ext) %>">
+          <td><span class="badge badge-<%= ext.status %>"><%= ext.status %></span></td>
+          <td><code><%= link_to ext.ingestion_id&.slice(0, 8), ingestion_path(ext.ingestion_id) %></code></td>
+          <td><code><%= ext.model_id %></code></td>
+          <% case ext.status %>
+          <% when "queued" %>
+            <td colspan="5" class="text-muted">Waiting in queue...</td>
+          <% when "started" %>
+            <td colspan="5" class="text-muted">In progress...</td>
+          <% when "failed" %>
+            <td colspan="5" class="text-muted"><%= ext.error_class %>: <%= truncate(ext.error_message.to_s, length: 80) %></td>
+          <% else %>
+            <td class="tokens-cell">
+              <div class="tokens-total">
+                <span style="color: var(--green)"><%= number_with_delimiter(ext.input_tokens.to_i + ext.cached_tokens.to_i + ext.cache_creation_tokens.to_i) %></span>
+                /
+                <span style="color: var(--yellow)"><%= number_with_delimiter(ext.output_tokens) %></span>
+              </div>
+              <% if ext.cached_tokens.to_i > 0 || ext.cache_creation_tokens.to_i > 0 %>
+                <div class="tokens-detail">
+                  <%= [
+                    ("#{number_with_delimiter(ext.cached_tokens)} cached" if ext.cached_tokens.to_i > 0),
+                    ("#{number_with_delimiter(ext.cache_creation_tokens)} write" if ext.cache_creation_tokens.to_i > 0)
+                  ].compact.join(" · ") %>
+                </div>
+              <% end %>
+            </td>
+            <td><%= ext.duration_ms ? "#{(ext.duration_ms / 1000.0).round(1)}s" : "-" %></td>
+            <td><%= format_cost(extraction_cost(ext)) %></td>
+            <td><%= ext.nodes_count %> / <%= ext.edges_count %></td>
+            <td><%= ext.node_reads_count %> / <%= ext.edge_reads_count %></td>
+          <% end %>
+          <td><%= ext.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="empty-state">
+    <p>No extractions yet. Ingest some transcripts first.</p>
+  </div>
+<% end %>

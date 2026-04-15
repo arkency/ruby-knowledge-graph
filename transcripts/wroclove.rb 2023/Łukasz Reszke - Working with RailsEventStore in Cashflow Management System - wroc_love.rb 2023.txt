@@ -1,0 +1,3286 @@
+yeah there is one fun fact about wukash
+
+
+uh
+
+
+who can guess what was the programming
+
+
+language that Lucas used two years ago
+
+
+yeah so ukash was a dotnet developer two
+
+
+years ago and I'm really happy that I
+
+
+helped him to convert to Ruby so
+
+
+um
+
+
+yeah so ukash will talk about a real
+
+
+world project that is happening where uh
+
+
+relative and store was introduced or
+
+
+more more in general even driven
+
+
+architecture was introduced so really
+
+
+practical situation I I hope some of you
+
+
+will
+
+
+um yeah do something like this as well
+
+
+in your projects sooner or later so yeah
+
+
+let's welcome mukash and good luck
+
+
+thanks Andre yes I have to admit two
+
+
+years ago I was addicted to.net and so
+
+
+he took me out of this
+
+
+I'm really grateful uh yeah so uh it's a
+
+
+big pleasure to be able to speak as the
+
+
+first here in this conference I'm first
+
+
+time here guess why
+
+
+also.net developer uh but yeah I will
+
+
+tell you about how we work with res
+
+
+event store in cash flow management
+
+
+system
+
+
+you already know my name so I can skip
+
+
+this slide I work in Arkansas company on
+
+
+a daily basis we save Regis Legacy
+
+
+projects so if you have any issues you
+
+
+know where to hit us and in this talk
+
+
+I'll tell you about six stories about
+
+
+how we work with race event store in
+
+
+trezy the cash flow management
+
+
+application
+
+
+and uh it's good to start with with what
+
+
+this cash flow management application so
+
+
+this is the application which helps your
+
+
+small business to take care of your cash
+
+
+flow you can check out your bank account
+
+
+balances in one places we also do some
+
+
+accounting for you so we don't have to
+
+
+wait for your our content to do it once
+
+
+or twice a year which is usually the
+
+
+case and the race event store is an open
+
+
+source implementation of even store for
+
+
+Ruby and rails established in 2014 and
+
+
+it acts as a library for publishing
+
+
+consuming storing and retrieving events
+
+
+and in this talk I'll be mostly talking
+
+
+about even sourcing in combination with
+
+
+event driven architecture and also there
+
+
+will be a tactical domain driven design
+
+
+pattern and also tests tests will be
+
+
+really important actor of this
+
+
+presentation
+
+
+so is anyone of you familiar with this
+
+
+picture please raise your hand do you
+
+
+ever see it yes some of you will not
+
+
+talk about that so with this background
+
+
+set let's go to the first story which is
+
+
+called the one with the open banking
+
+
+provider
+
+
+as I told you we are cash flow
+
+
+management applications so we need your
+
+
+bank account data right but we don't
+
+
+write the integrators on our own we use
+
+
+third-party providers so-called open
+
+
+banking services
+
+
+and those Services send us the data so
+
+
+for example we can show you the balance
+
+
+of your all accounts but also your
+
+
+transactions and so on
+
+
+based on this the data this information
+
+
+we can calculate useful reports for the
+
+
+small businesses that use strategy and
+
+
+the banking providers integrate with us
+
+
+through so-called web hooks so they
+
+
+basically hit our API and they send us
+
+
+some data in the payload and there are
+
+
+at least two approaches that one can
+
+
+follow to process a web hook first one
+
+
+will be synchronous approach so when we
+
+
+receive a web Hook from the banking
+
+
+provider into our rest API we can pass
+
+
+the payload from that webhook like a hot
+
+
+potato until in Lance in the loving
+
+
+cameras of the database but and it works
+
+
+it's good but the question is what if
+
+
+something fails on the way to the
+
+
+database for example in the application
+
+
+layer
+
+
+and there's a lot of things that could
+
+
+go wrong here for example well we just
+
+
+may violate some index the schema of the
+
+
+database might change we may have
+
+
+processing logic error and so on
+
+
+so what is what if there was another
+
+
+solution and for example instead we
+
+
+could store the payload as a technical
+
+
+event so there is the first uh relation
+
+
+to even sourcing right instead of just
+
+
+saving it into the regular database we
+
+
+store it in the event store and once we
+
+
+store it we also can publish it to the
+
+
+queue and process this process it
+
+
+asynchronously so this is how it would
+
+
+look like so when we would um when the
+
+
+banking provider send us a web hook it
+
+
+of course goes to our rest API and then
+
+
+we store and publish technical event
+
+
+then there is a queue that well takes
+
+
+this and then there is an event handler
+
+
+that would be interested in processing
+
+
+this and getting the payload into the
+
+
+database together with some calculations
+
+
+and making useful reports
+
+
+and there are certain benefits in that
+
+
+approach first of all is that we have
+
+
+external system audit log right so we
+
+
+have all the payload information stored
+
+
+as our technical events and we can
+
+
+basically access them whenever we need
+
+
+or we want to this is very useful for
+
+
+debugging and troubleshooting we also
+
+
+have improved performance so the
+
+
+responses to the third-party systems are
+
+
+super fast because we don't process any
+
+
+data right there is no call to the
+
+
+database we just well there is to the
+
+
+event store but we simply store it and
+
+
+then do nothing else we also published
+
+
+the event but that just takes the
+
+
+milliseconds and later on we can process
+
+
+it asynchronously based on the
+
+
+processing units availability and what
+
+
+is really cool about that is that we can
+
+
+scale our web server which is receiving
+
+
+the web hooks right independently from
+
+
+from the web jobs so we'll probably have
+
+
+more web jobs processing the web Hooks
+
+
+and not the like many web server
+
+
+instances and the last but not least we
+
+
+don't have to rely on the third party
+
+
+retry mechanism because once we have the
+
+
+payload stored if something goes wrong
+
+
+I can always access this right it's
+
+
+already mine I could say so if there is
+
+
+a bug I need to reply my code I can do
+
+
+it whenever I want I can try as many
+
+
+times as I want and
+
+
+and I don't rely on the third party
+
+
+provider and when they send me a retry
+
+
+payload and because they may never do
+
+
+that or they may do that in couple of
+
+
+hours and I may need it as fast as
+
+
+possible
+
+
+so this is helpful and keep that in mind
+
+
+as in the next stories I'll be referring
+
+
+to that
+
+
+and let's go back to the open banking
+
+
+provider once again so I said that we
+
+
+decided to move processing of web hooks
+
+
+into US async processes right so one
+
+
+question pops up in mind what could
+
+
+possibly go wrong here right
+
+
+because there is no such a thing as a
+
+
+free lunch there are a few awesome
+
+
+benefits that we have but also there is
+
+
+a drawback the problem is that the web
+
+
+hooks that are now represented by events
+
+
+May Come Out of Order
+
+
+right
+
+
+it may change it's not guaranteed so and
+
+
+the order matters and consider following
+
+
+example
+
+
+when there's a web hook received with a
+
+
+balance of bank account for 100 and then
+
+
+we start we publish it as a technical
+
+
+event we also store this information
+
+
+and we failed processing this webcook
+
+
+and then another one comes for the same
+
+
+bank account with other balance
+
+
+we publish it as a technical event and
+
+
+we started processing it we processed it
+
+
+successfully and then we start once
+
+
+again processing the first one
+
+
+we just overwrite the data
+
+
+we don't want to overwrite the data so
+
+
+we need to solve this problem and I
+
+
+think it's also a good moment to stop
+
+
+for a second or maybe for a minute as
+
+
+the slide says and I want to tell you
+
+
+about the project that we work with
+
+
+because some of you may think that well
+
+
+I it's a green field but no it's not
+
+
+it's a code written in a startup way and
+
+
+I think that a picture explains more
+
+
+than a thousands of words so sometimes I
+
+
+feel like this well I want to change one
+
+
+really small thing I have to watch out
+
+
+do not lose do not just you know break
+
+
+some other house electricity
+
+
+um
+
+
+so what does it mean in the code reality
+
+
+for the most of the concepts in the
+
+
+system there is one relational data
+
+
+model that represents this entire
+
+
+concept we call it logical coupling
+
+
+right and I will not fool you it's a
+
+
+common think interesting and that is
+
+
+fine because it did the job it earned
+
+
+the money it made us go forward but now
+
+
+when we know it extending that model at
+
+
+this point of time would be wrong
+
+
+because we already knew that it is too
+
+
+big and uh
+
+
+now when we need to add another column
+
+
+and another information to it it
+
+
+wouldn't be good solution so
+
+
+instead of we decided to go on with a
+
+
+new moment model and after a few
+
+
+iterations and we came up with something
+
+
+like this so
+
+
+um basically the white boxes is the
+
+
+information that the class needs so it's
+
+
+quite not so many right because it's
+
+
+only external provider timestamp the
+
+
+status and ID of course we always need
+
+
+an ID right
+
+
+and it has three operations so I will
+
+
+start from your right side so the open
+
+
+method which basically opens the bank
+
+
+account it's used when it's created as a
+
+
+new one close method which closes the
+
+
+bank account meaning that we shouldn't
+
+
+process any more web hooks in here and
+
+
+perform an operation and there you can
+
+
+see Yellow Boxes the yellow boxes are
+
+
+the rules so once again we used even
+
+
+storming notation here and the first
+
+
+rule is saying that I can perform an
+
+
+operation when the bank account is not
+
+
+closed
+
+
+the other one says and this is the
+
+
+problem that we are serving initially is
+
+
+that I cannot process this web hook if
+
+
+the timestamp is older than the
+
+
+currently applied right so this is going
+
+
+to protect us and this is how it looks
+
+
+like in the Ruby code so some of you
+
+
+have attended the workshop may be
+
+
+already familiar with that but what you
+
+
+can see here is that this is a very
+
+
+simple Ruby class
+
+
+it contains
+
+
+the it includes the aggregate route game
+
+
+but you don't necessarily need that but
+
+
+it allows us to use the on and apply
+
+
+methods which are used to deal with the
+
+
+events on method is kind of applying the
+
+
+event state to the class itself apply is
+
+
+storing the event and later on it's also
+
+
+used to published so as you can see this
+
+
+class is even sourced and it has one
+
+
+simple task to do
+
+
+it only checks whether the operation can
+
+
+be performed or not and that's it
+
+
+but I have to admit something we had to
+
+
+be really pragmatic here and but because
+
+
+we didn't have time to rewrite half of
+
+
+the system and you know do it by the
+
+
+book as with the first picture that I
+
+
+told you that we'll not talk about
+
+
+where you normally have to write to the
+
+
+aggregate or in your right model
+
+
+basically in one transaction and your
+
+
+read model should be updated like in
+
+
+eventual consistent manner right we
+
+
+didn't do that we didn't have time for
+
+
+that so what we did instead
+
+
+we have to be pragmatic and you write to
+
+
+the bank account this is the top sorry
+
+
+to the new model which is on the top you
+
+
+can see the stream and ifra infra
+
+
+aggregate route where we instantiate
+
+
+this class and then perform the
+
+
+operation should look common and then
+
+
+there's this block of code where we just
+
+
+add the read model information
+
+
+and in my opinion this is good because
+
+
+it's hard to always be perfect in real
+
+
+project not in a demo one and to follow
+
+
+all the patterns from the books that we
+
+
+see at least from the scratch eventually
+
+
+we may get there but those things evolve
+
+
+and sometimes it's just not possible to
+
+
+do it from the scratch and
+
+
+there are so few assumptions here the
+
+
+assumption is that the stream will
+
+
+always tell us the truth because there
+
+
+may be multiple reasons to change the
+
+
+bank account state for example if we use
+
+
+a soft delete with actors paranoid game
+
+
+which we unfortunately unfortunately do
+
+
+then it may be deleted for multiple
+
+
+reasons right but when we see in the
+
+
+Stream the information that bank account
+
+
+is closed then we know it's closed and
+
+
+we shouldn't do anything with this bank
+
+
+account
+
+
+so
+
+
+there's another story with the bank
+
+
+account which I call the one with the
+
+
+close bank account and missing events so
+
+
+you can see already that perhaps we
+
+
+introduced some problem in the previous
+
+
+story when we implemented the aggregate
+
+
+that keeps track of this performing
+
+
+operation
+
+
+and
+
+
+so this is what actually happened so
+
+
+when we receive the web hook and then
+
+
+the web was published as a technical
+
+
+event you already know this pattern then
+
+
+we started processing it but it failed
+
+
+and the error said it failed to save the
+
+
+record
+
+
+I was really surprised
+
+
+because there was no problems with this
+
+
+code so
+
+
+I take a look at the Stream
+
+
+looks healthy
+
+
+like the bank account is not closed
+
+
+all right so I took a look at the code I
+
+
+did some static analysis based on the
+
+
+bug and I noticed that it passed this
+
+
+line everything was fine here weird and
+
+
+then it failed on the save
+
+
+and as I mentioned it only happens for
+
+
+specific bank accounts
+
+
+yeah that's the true story best thing to
+
+
+debug ever and to reproduce with test so
+
+
+what I do
+
+
+I harnessed the most advanced debugging
+
+
+techniques
+
+
+and I reply the event because I can
+
+
+right it's in my even store and it
+
+
+turned out that the reef model was
+
+
+self-deleted for some reason but there
+
+
+was no close bank account event right
+
+
+and we should have it because we just
+
+
+said the stream will tell the truth
+
+
+so I was thinking like where's this
+
+
+event and uh remember it was into the
+
+
+bank account aggregate was introduced to
+
+
+keep track of that so closing should
+
+
+always go through the bank account and
+
+
+in the healthy stream it looked like
+
+
+this you can see the event on the top I
+
+
+hope you can see it it says that bank
+
+
+account is closed
+
+
+and then nothing is after it because
+
+
+that's the intention
+
+
+so I took a quick look around the code
+
+
+it looked fine
+
+
+test screen
+
+
+and you remember that we didn't
+
+
+separate the recent rights at least not
+
+
+separately right so it was always going
+
+
+together in one bank account transaction
+
+
+and that's actually what happened
+
+
+someone was introducing a new feature to
+
+
+kind of close the bank account meaning
+
+
+that we should ignore all the web hooks
+
+
+for the coming data why they would do
+
+
+that because sometimes the banking
+
+
+provider sends it too much information
+
+
+sometimes you have your bank account but
+
+
+also your credit card you don't want
+
+
+your credit card but hey you cannot
+
+
+configure that on their end so we have
+
+
+to ignore it on our own
+
+
+and uh this feature was introduced but
+
+
+someone just forgot to add the second
+
+
+class into the equation so they didn't
+
+
+write to the Aggregate and right must go
+
+
+through the aggregate right we said that
+
+
+it's the source of Truth for this part
+
+
+of the logic
+
+
+and one of you could say that it's wrong
+
+
+that that we kind of have two source of
+
+
+Truth and I would say in the like most
+
+
+of the content like in the depends on
+
+
+which context but you would be right
+
+
+however we made a conscious decision
+
+
+that our goal is to keep the source of
+
+
+Truth in the Stream
+
+
+therefore there is surprise but human
+
+
+errors happen right so now it was the
+
+
+time to fix it and in order to fix it
+
+
+well first part was really simple right
+
+
+write a test make it red at the at this
+
+
+bank account class write to it make it
+
+
+green
+
+
+but you can publish it to deploy it to
+
+
+production okay but now you have to
+
+
+backfill the data right it's also very
+
+
+important step in this pattern
+
+
+and I call it a cost at the point in
+
+
+time because
+
+
+like previously I said we couldn't
+
+
+afford rewriting half of the system so
+
+
+we used only the part we needed from the
+
+
+pattern to have this visibility
+
+
+and
+
+
+the startup word and the application the
+
+
+starter what they there's a kind of fast
+
+
+pace of moving right so there was just
+
+
+no time and basically the business
+
+
+wouldn't allow to us to to do such a
+
+
+modification and introduce full cqs with
+
+
+two databases and so on and that's fine
+
+
+because the system doesn't have to
+
+
+follow one pattern entirely
+
+
+it can just use the best of it in
+
+
+current context
+
+
+oops okay
+
+
+I didn't touch anything guys
+
+
+okay
+
+
+um
+
+
+so bear with me this is not the only
+
+
+aggregate we'll talk about uh but first
+
+
+I want to tell you about the story
+
+
+with pending transactions yet another
+
+
+issue that I had to solve uh and where
+
+
+events helped me so having events in the
+
+
+system that is asynchronous but also
+
+
+depends on the external provider data is
+
+
+very helpful
+
+
+but first let me explain you what is
+
+
+what are the pending transactions so one
+
+
+of the our banking providers notified us
+
+
+about new feature that hey
+
+
+there are we can send you transactions
+
+
+that are not fully processed by by the
+
+
+bank so your customers can see them
+
+
+really early on but when we send you a
+
+
+new batch you are supposed to remove
+
+
+those transactions
+
+
+and it's your responsibility it's like
+
+
+okay let's use it and
+
+
+after a couple of weeks when there this
+
+
+was on the production we got the bug
+
+
+reported by a customer
+
+
+and they said that they don't see new
+
+
+transactions the bank account balance is
+
+
+not right it looks like the old bank
+
+
+account balance and there was a time
+
+
+where I was hearing this two or three
+
+
+times a week and I was like yeah so
+
+
+another guy that doesn't understand that
+
+
+we are not a bank but we only act as a
+
+
+third third party right because we are
+
+
+not even third party
+
+
+but
+
+
+I checked our events I fetched the data
+
+
+and I noticed that there was a really
+
+
+huge delay because there was two weeks
+
+
+of delay 700 transactions missing
+
+
+and I felt like wow
+
+
+this is really cool
+
+
+not so I went to the open banking
+
+
+provider page it has this nice console
+
+
+well some of them and then I checked and
+
+
+they actually sent us those events and
+
+
+send us those who I put workbooks which
+
+
+we then persisted as an event so I did a
+
+
+little bit of debugging I also took a
+
+
+look at our monitoring system and I
+
+
+noticed that once again it failed to
+
+
+save the record
+
+
+so my first thought
+
+
+not again but then I was like yeah okay
+
+
+so someone must have broken it so I get
+
+
+blame right another even sourcing thing
+
+
+but it was there was no changes so I'm
+
+
+like okay they must have changed the
+
+
+payload
+
+
+payload look healthy
+
+
+so once again most advanced the
+
+
+debugging techniques and I replied the
+
+
+event and then it was quite easy because
+
+
+I found it
+
+
+so as I said provider required us to
+
+
+remove those spending transactions right
+
+
+and that's what we did we followed the
+
+
+documentation we follow the instruction
+
+
+however those words of deleted
+
+
+and thanks to the actors paranoid game
+
+
+which I really hate but it's not so easy
+
+
+to remove from the project
+
+
+we run into a small issue
+
+
+so how do we fix that well first what I
+
+
+like to do and I encourage all of you to
+
+
+do when you fix it back write a test to
+
+
+confirm that you really understand the
+
+
+bug
+
+
+then of course you can fix it
+
+
+then deploy it and now for some of you
+
+
+it will end you here but I can replay
+
+
+the event
+
+
+make it right I don't have to wait for
+
+
+another web hook right normally I would
+
+
+have to wait until the bank provider
+
+
+decides to send it to us and I can make
+
+
+the customer happy
+
+
+which leads us to another story with
+
+
+transactions once again and
+
+
+this one I called the one with two large
+
+
+transaction model and classification
+
+
+so as I told you we have transactions in
+
+
+the system
+
+
+and we need to classify those
+
+
+transactions to calculate accounting to
+
+
+calculate cash flow and other usable uh
+
+
+wrap reports for the customer so one way
+
+
+of categorizing your transaction is to
+
+
+do it manually so as you can see here I
+
+
+can select whichever transaction
+
+
+category I like for my traffic car
+
+
+transaction traffic R is the car that
+
+
+you can rent in Poland
+
+
+so once I do that I checked and I
+
+
+selected the travel expenses and you can
+
+
+hopefully see that the first one is
+
+
+green and the other one is just a border
+
+
+of green and those means that those
+
+
+transactions are automatically
+
+
+classified for the user right
+
+
+because well we don't want them to do it
+
+
+on their own that's not the purpose of
+
+
+buying software so
+
+
+as usual in monoliths this was built in
+
+
+the beginning and there was a one model
+
+
+that keep growing and growing and it
+
+
+became too large at certain point point
+
+
+in time and there was a lot of business
+
+
+logic spread around
+
+
+like everywhere and the worst part of it
+
+
+was that it was spread in even handlers
+
+
+so it was asynchronous
+
+
+um
+
+
+and the model it was very flexible
+
+
+because well you know the just a simple
+
+
+database model right it doesn't protect
+
+
+you from doing any rules so it's just a
+
+
+like blank sheet of paper when you can
+
+
+basically write anything it will accept
+
+
+it so it's a DDD at its finest database
+
+
+driven development of course and
+
+
+yeah I told you already trade of trade
+
+
+of trade-offs we are this was a startup
+
+
+they had to do it quickly and but at
+
+
+certain point in time we need to adapt
+
+
+the system to be more scalable and
+
+
+maintainable so
+
+
+at this point we had quite a lot of bugs
+
+
+regarding the transaction classification
+
+
+some of them were wrong some of them
+
+
+felt like there should be override by
+
+
+another method and it came clear for the
+
+
+business that this is important part
+
+
+first of all customers keep complaining
+
+
+about this
+
+
+second of all it's like a base for all
+
+
+the reports that we have so it has to be
+
+
+right right
+
+
+so when we understood it and they
+
+
+understood it we could start a project
+
+
+so we decided to give it a shot and try
+
+
+to rewrite this part in order to make it
+
+
+more stable but also more predictable
+
+
+so
+
+
+luckily also a few weeks before that
+
+
+happened and I think that was also one
+
+
+of the reasons there was new
+
+
+classification method introduced like a
+
+
+automatic one so I wrote some
+
+
+exploration tests for that POC that
+
+
+became a permanent solution
+
+
+never happens right and the one thing is
+
+
+that without tests this project will be
+
+
+too risky and I think I wouldn't do that
+
+
+I would start with the test anyway
+
+
+um
+
+
+those were integration tests and they're
+
+
+really helpful because with the even
+
+
+driven architecture well it's sometimes
+
+
+unpredictable how the system will behave
+
+
+if you put the events in different order
+
+
+and uh
+
+
+yeah right test why there was no test
+
+
+for the POC why did I have to write that
+
+
+I can tell you of the record but anyway
+
+
+uh the project the project was about
+
+
+respecting classification rules
+
+
+so I told you we can classify
+
+
+transaction right and then once we
+
+
+classify one then the algorithm will
+
+
+learn based on that knowledge and it
+
+
+will automatically classify others of
+
+
+them and so on and let's focus on three
+
+
+classification methods so one is manual
+
+
+classification this is the one that I
+
+
+showed you the previous Slide the rule
+
+
+classification is
+
+
+it's based on the wording so you can say
+
+
+that if transaction contains certain
+
+
+wording then use this category and
+
+
+automatic ones there's a couple of them
+
+
+but they can learn either from your
+
+
+account or other accounts and other
+
+
+other stuff and then
+
+
+as I told you they were spread around in
+
+
+the code in multiple event handlers
+
+
+and our project was to encapsulate those
+
+
+business rules right we saw that there
+
+
+is a lot of if statements some of them
+
+
+looked very familiar and similar and
+
+
+also sometimes it felt like the if
+
+
+statement is missing in this and that
+
+
+place and because of that we have many
+
+
+bugs so
+
+
+we decided to introduce an aggregate to
+
+
+fully encapsulated this is how it looks
+
+
+like there's a couple of methods I think
+
+
+there's more race calls than other code
+
+
+but this is how we decide to protect the
+
+
+rules
+
+
+by throwing in an exception
+
+
+and as you can see once again it's very
+
+
+simple Ruby object right it doesn't have
+
+
+any external dependencies it doesn't
+
+
+depend on the active record
+
+
+should be easy to unit test right
+
+
+because you don't interact with the
+
+
+database
+
+
+and once once it was developed with 100
+
+
+of mutant coverage we felt like it's
+
+
+good to start adding it into the current
+
+
+process
+
+
+and there is a test for that class so I
+
+
+really hope this looks easy for you
+
+
+because it's just a pleasure to write
+
+
+such a test with the events based
+
+
+assertions are definitely really simple
+
+
+um but before we started using this
+
+
+class in production we decided to extend
+
+
+the existing test and once again
+
+
+we use the streams for that and the
+
+
+events in that stream so you can see
+
+
+that this is the screen from actual git
+
+
+log and here you can see that we added
+
+
+just added some assertion that will
+
+
+check if the correct events were
+
+
+published
+
+
+or stored actually in the event store
+
+
+the next step is to pass those tests
+
+
+right in order to do that well that's
+
+
+simple we have to start writing to both
+
+
+sources
+
+
+and once again once we do that this code
+
+
+is ready to go to the production but you
+
+
+have to be aware that you should start
+
+
+start the life cycle of the Aggregates
+
+
+right or basically this right model in
+
+
+order to do that you need to once again
+
+
+backfill the data we use a pattern
+
+
+called migration event
+
+
+um and like it's really also good to
+
+
+consider having like separate event that
+
+
+is not normally used in the aggregate
+
+
+because then you can actually see when
+
+
+this migration had occurred
+
+
+okay but then
+
+
+we didn't stop here like with the bank
+
+
+account because we decided that this
+
+
+part of the system is too important to
+
+
+have the same issues once again so we
+
+
+really wanted to separate those two
+
+
+concepts the read model and the right
+
+
+model so we also decided to implement
+
+
+the rich part almost like in this first
+
+
+picture that I showed you with the cqrs
+
+
+and
+
+
+it was quite simple I thought it's going
+
+
+to be harder this is just a simple event
+
+
+handler like we did in the workshop that
+
+
+listens to events and then based on that
+
+
+updates the read model
+
+
+the read model is just the old table
+
+
+that we used to have is still there and
+
+
+only actually two columns are now
+
+
+considered the read model and you can
+
+
+see that it's a very simple class you
+
+
+could split it to four classes I guess
+
+
+um
+
+
+all it does it just updates the model
+
+
+nothing else
+
+
+yeah
+
+
+Okay so
+
+
+once we did that we deployed it to
+
+
+production of course and shortly after
+
+
+we got the slack notification that I was
+
+
+really happy about
+
+
+it says that there is an error saying
+
+
+that we cannot override rule classified
+
+
+transaction category with account
+
+
+classification and as you remember from
+
+
+the one of the previous slides the rule
+
+
+classification is more important than
+
+
+the automatic one right so it cannot
+
+
+override it the automatic cannot
+
+
+override the rule rule can override the
+
+
+automatic
+
+
+so it's basically this right right
+
+
+manual is more important than rule it
+
+
+can override it rule cannot operate the
+
+
+manual and so on
+
+
+so it seemed like it wasn't enough
+
+
+and this is how we imagine the system
+
+
+works so when the bank account send us
+
+
+the bank accounts sync event and later
+
+
+on there were three handlers that were
+
+
+listening for that event and they were
+
+
+processed doing some processing of the
+
+
+data later on WE rebuilt the cash flow
+
+
+models
+
+
+those three cash flow models are the
+
+
+same ones so this is how we imagine it
+
+
+but that's like how how it looks like in
+
+
+the reality
+
+
+once again more I think this picture
+
+
+says more uh about this so we talked to
+
+
+a business
+
+
+and we kind of wanted to know how this
+
+
+thing should work in what order should
+
+
+we
+
+
+play those event handlers to get those
+
+
+errors gone so we came up with this
+
+
+solution that when the bank account sent
+
+
+us the event
+
+
+of course the sync one then we first
+
+
+classified by rule because rule from the
+
+
+automatic classifiers is highest in the
+
+
+hierarchy then we use the account
+
+
+classifier which is lower than rule but
+
+
+it's higher than Global classifier and
+
+
+once it's done we rebuild the cash flow
+
+
+model once not three times
+
+
+at the same time so
+
+
+did we just discover a process
+
+
+this is a very similar process to the
+
+
+ones that we did at the workshop right
+
+
+and
+
+
+after we looked at the code and we saw
+
+
+how the Aggregates are used how what
+
+
+kind of Errors we get from production
+
+
+this is kind of a breakthrough
+
+
+it might not sound so exciting to you
+
+
+because you don't work with me in this
+
+
+domain but for us it was like oh finally
+
+
+and once we understand that we notice
+
+
+that there are three processes that we
+
+
+had to implement
+
+
+sorry for that
+
+
+let's do it like we did today in the
+
+
+workshop let's even Source those as well
+
+
+so we can see that where the process is
+
+
+hanging if it is on which stage it is
+
+
+you can see how long each state takes
+
+
+it's also really good for debugging and
+
+
+troubleshooting
+
+
+um also what's really cool about the
+
+
+processes I hope that you saw that in
+
+
+the workshop but if not then you have to
+
+
+trust me that adding a new step is a
+
+
+pleasure I actually showed you the
+
+
+production code that we are using the
+
+
+first process implementation and later
+
+
+on right adding a free steps it wasn't
+
+
+really hard and um this is how the bank
+
+
+accounts aggregate looks like sorry the
+
+
+transaction classification algorithm
+
+
+looks like you can see that first I
+
+
+classified it by account classification
+
+
+then by rule and manually and those
+
+
+results are solid it's not possible to
+
+
+override for example the row classifier
+
+
+with the account one and for the proof
+
+
+you had the error on the previous slide
+
+
+and this is how this stream of the
+
+
+process looks like so we can see exactly
+
+
+when it happened and how much time it
+
+
+took well you cannot actually see that
+
+
+but on the um on the right hand side we
+
+
+have more columns normally I just cut it
+
+
+so it's better visibility
+
+
+and uh
+
+
+to those who of you who were in the
+
+
+workshop uh you already seen this but
+
+
+this is how the code for the process
+
+
+looks like so this is just a bunch of if
+
+
+statements and first of course it builds
+
+
+the state based on that state it knows
+
+
+which Step should be now executed
+
+
+of course there is the load method that
+
+
+you can use which loads the events from
+
+
+the Stream
+
+
+then there is the apply method that well
+
+
+in this case it just simple Flex it
+
+
+applies the information on which step we
+
+
+are
+
+
+and later on there is a method to store
+
+
+the process after it's completed and of
+
+
+course the method to answer hey are we
+
+
+done or not should I go for the with the
+
+
+next step or not it also prevents you
+
+
+from a situation when an event comes and
+
+
+the process should be stopped so it's
+
+
+not repeated twice
+
+
+and this is how you test processes
+
+
+in the async word so we did a little bit
+
+
+differently in the workshop here we you
+
+
+might not be familiar with the drain and
+
+
+cyclic drop clear all but the the
+
+
+processes in this project are
+
+
+asynchronous and that's why we kind of
+
+
+need to use this fake sidekick to be
+
+
+able to test it
+
+
+but in this case it's not a problem
+
+
+because it's always ordered right events
+
+
+May come out of order but they will not
+
+
+be processed out of order
+
+
+benefits
+
+
+there are a couple of benefits both for
+
+
+the dev team but also for the business
+
+
+so when it comes to the business so
+
+
+there is a possibility to learn about
+
+
+our algorithm accuracy right because
+
+
+consider following situation if the
+
+
+customer
+
+
+has Auto classified transaction
+
+
+and then they change it manually by
+
+
+manual classification
+
+
+we can learn from that fact that hey our
+
+
+algorithm didn't work well and we have
+
+
+more learning data right we can just
+
+
+extract this information from the events
+
+
+business rules are encapsulated so no
+
+
+mistake will go to the database yes the
+
+
+user may see the error yes we may see
+
+
+honey badger notifications but it will
+
+
+not go to the database and all of you
+
+
+who worked in production environment you
+
+
+know how costly it is to
+
+
+fix the data that is already in the
+
+
+production in the database right
+
+
+sometimes it just takes a lot of time to
+
+
+figure out what to do with it should we
+
+
+delete the record updated work hard
+
+
+decisions so basically it saves us the
+
+
+time and money because we don't have to
+
+
+debug for so long
+
+
+um
+
+
+also
+
+
+in this case
+
+
+you saw that we implemented like almost
+
+
+the full pattern there's only the second
+
+
+database missing but we don't need that
+
+
+and
+
+
+we did it because the business told us
+
+
+that this part is important and it has
+
+
+to work
+
+
+without any issues that's why we decided
+
+
+to do that we started from a Crut right
+
+
+we added some events on top of it
+
+
+then we extracted and separated the
+
+
+models we call it for now event driven
+
+
+crowd hybrid All rights reserved
+
+
+I think that's not a final name but
+
+
+we'll see
+
+
+um all right and this leads us to
+
+
+another story and if you have a feeling
+
+
+that the previous one it was complex to
+
+
+implement then I won't fool you it
+
+
+indeed consumes some glucose but
+
+
+sometimes it's just way easier
+
+
+than that
+
+
+and a couple of months ago I grabbed the
+
+
+ticket
+
+
+and the business asked to get a feedback
+
+
+from the user when they cancel
+
+
+subscription
+
+
+my first idea
+
+
+let's just add a column into
+
+
+subscription table
+
+
+and save the data from the UI here
+
+
+and I could do that but then I started
+
+
+asking myself okay but what's next
+
+
+what's the goal why do you need this
+
+
+feedback I actually started discussing
+
+
+with the business and I asked them
+
+
+exactly the same questions and when we
+
+
+were talking it just came clear that
+
+
+you know we just want this data for now
+
+
+so we're able to follow up on the
+
+
+customers when they cancel subscription
+
+
+maybe you can offer them something maybe
+
+
+you can prolong it
+
+
+a lot of things can be done if you have
+
+
+information so
+
+
+they ask what's the simplest can you do
+
+
+slack notification
+
+
+yeah
+
+
+so it's just a notification of a
+
+
+feedback
+
+
+and after that I realized okay so I can
+
+
+utilize the race events or
+
+
+publish method which will both persist
+
+
+the event in the event store and then it
+
+
+will publish the event to the queue I
+
+
+can simply make a Handler that will
+
+
+fetch this event and then publish a
+
+
+notification to Slack
+
+
+really easy
+
+
+and after that if they decide that yeah
+
+
+but we would like to have a like grouped
+
+
+feedback by some category or reason or
+
+
+whatever yeah sure we can do that right
+
+
+we have this information in events we
+
+
+can always access that read a stream and
+
+
+fetch that information but also what is
+
+
+really cool is that
+
+
+we can link this event to the tenant
+
+
+stream
+
+
+this is my test tenant so maybe there is
+
+
+not so many exciting things but what you
+
+
+can see is that what you can imagine
+
+
+also is that if I cancel subscription
+
+
+maybe I did it because of something that
+
+
+I did previously maybe it didn't work
+
+
+maybe I got bad report results
+
+
+maybe something just blow up and I don't
+
+
+like the application anymore right but
+
+
+what is also interesting
+
+
+is that you can track when people come
+
+
+back
+
+
+because you can also see when the
+
+
+subscription is resumed and uh this will
+
+
+be it's really funny because I just have
+
+
+this thought right now that right now
+
+
+we're launching a new campaign in which
+
+
+we prolong every user's uh without
+
+
+account sorry without active
+
+
+subscription we give them additional
+
+
+seven days to try out the application
+
+
+because we introduce a new feature and
+
+
+we want to see how many of them will
+
+
+stay so this will help us calculate
+
+
+which ones canceled and then which one
+
+
+come back and we can also
+
+
+uh on the timeline we can kind of align
+
+
+it with it was the feature effect or
+
+
+something else
+
+
+I need to tell my friends from business
+
+
+um and this is how the subscription
+
+
+payload looks like right so this is the
+
+
+feedback I told you about we have this
+
+
+information right we can always come
+
+
+back to that fetch it from the event
+
+
+store and use this information and this
+
+
+is the
+
+
+slack notification that I used
+
+
+really beautiful
+
+
+um
+
+
+but it's enough in this case there are
+
+
+more important things to work on than
+
+
+sending notifications beautiful
+
+
+notifications
+
+
+okay and so this is the end of my story
+
+
+so now I have to admit something so
+
+
+no they're not fake but a couple of
+
+
+years ago
+
+
+when I learned that there are more
+
+
+important Concepts in programming than
+
+
+latest JavaScript framework
+
+
+such as secure stomach driven design
+
+
+even driven architecture they got me I
+
+
+really like them I bought the sales
+
+
+pitch I saw a lot of value in them I'm
+
+
+still exploring and seeing more and more
+
+
+value but
+
+
+I have I had this feeling that I need to
+
+
+master all of them to start even
+
+
+sourcing I don't know why maybe I read
+
+
+the wrong books maybe I read the wrong
+
+
+resources but even sourcing is just a
+
+
+persistence pattern right we store an
+
+
+information into an event store
+
+
+so
+
+
+I thought it's very hard and especially
+
+
+I thought that I need to learn this
+
+
+I need additional database I need to
+
+
+learn how to manage an event store
+
+
+maybe I need to vendor lock in but
+
+
+and really scared me
+
+
+besides that you know DDD I need to have
+
+
+perfect class because then the streams
+
+
+get too long and I need to deal with
+
+
+snapshots and whatnot I need to do right
+
+
+testing I need to know secure s
+
+
+no you don't have to know that well
+
+
+besides tests you better Master test or
+
+
+I will Hound you but it doesn't have to
+
+
+be hard and complex
+
+
+interest you rely on well-known
+
+
+components such as monolithical
+
+
+architecture yes
+
+
+and it's a 50 50 big ball of mud and
+
+
+more or less
+
+
+organized code we have a jobs you're all
+
+
+familiar with jobs right we use sidekick
+
+
+and there's single postgres database
+
+
+driven by race event store so
+
+
+nothing fancy right no micro Services no
+
+
+kubernetes no whatever the buzzword is
+
+
+so my message to you is that don't be
+
+
+afraid of even sourcing
+
+
+for me it turned out not to be that
+
+
+complex actually it's the easiest one
+
+
+from the patterns that I just mentioned
+
+
+I really love combination of even
+
+
+sourcing and even driven architecture
+
+
+but
+
+
+even driven architecture don't run can
+
+
+be really hell and can break your
+
+
+application so just use it wherever it
+
+
+makes sense and be aware of that and
+
+
+watch out for no order guarantee and if
+
+
+you run into an order guarantee I have a
+
+
+solution for you this blog post by Rapha
+
+
+which is available somewhere here
+
+
+it's really good it answers the question
+
+
+how you can deal with those
+
+
+so also when it comes to introducing
+
+
+event sourcing as you hopefully so you
+
+
+can do it gradually step by step and you
+
+
+don't have to do that in Greenfield you
+
+
+can do it in startup you can do it in
+
+
+well sometimes which is a green field
+
+
+but after you join after some time it's
+
+
+not so green anymore you can also do
+
+
+that in Legacy projects that everyone
+
+
+hates and if you ask me that's the most
+
+
+satisfying to work with
+
+
+and as you saw once again sorry for
+
+
+repeating myself so many times but we
+
+
+started from krat introduced events
+
+
+where it made sense right and once you
+
+
+understood the business concept better
+
+
+we went through with the patterns
+
+
+sometimes we stopped we didn't Implement
+
+
+all of them but sometimes it's just
+
+
+worth it
+
+
+it doesn't have to be perfect from the
+
+
+start we need to adapt to the stage of
+
+
+business we are in and then we need to
+
+
+improve and improve
+
+
+event-driven hybrid crud it's a thing or
+
+
+rights reserved and remember even
+
+
+sourcing DDD like none of those patterns
+
+
+I uh addressed are their notes silver
+
+
+bullets
+
+
+like every every pattern has its meaning
+
+
+and its purpose
+
+
+they won't solve every problem and you
+
+
+have to watch out because there are
+
+
+traps
+
+
+thank you that will be all
+
+
+foreign
+
+
+[Applause]

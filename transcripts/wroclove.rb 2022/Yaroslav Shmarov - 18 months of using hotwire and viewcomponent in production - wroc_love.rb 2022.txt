@@ -1,0 +1,2818 @@
+yeah so hello thank you for having me
+
+
+i'm going to talk about hot wire and
+
+
+view component
+
+
+that we can use to build a
+
+
+modern front-end well a modern monolith
+
+
+application in rebound rails so a couple
+
+
+of words about me my name is jaroslav
+
+
+schmarov i'm from ukraine i speak a few
+
+
+languages you might have seen me on
+
+
+twitter you might have seen
+
+
+my youtube channel super rails
+
+
+there are quite a lot of videos about
+
+
+hot fire there
+
+
+or my blog that has been visited by
+
+
+around 200 driven rails developers daily
+
+
+and
+
+
+maybe on udemy
+
+
+so
+
+
+i work at a french startup named bearer
+
+
+and i was hired to do a really specific
+
+
+job i was hired initially to be kind of
+
+
+a
+
+
+frontend
+
+
+or
+
+
+let's say yeah kind of a front-end
+
+
+developer so like to work with tailwind
+
+
+with stimulus with the hot fire
+
+
+and previously like the company is a few
+
+
+years old but around the year 2020 the
+
+
+company made the a private previously
+
+
+they were using the rails graphql and
+
+
+react and uh when pivoting they decided
+
+
+that they don't really like need the
+
+
+stack and anyway they're right in the
+
+
+application and the this new hot thin
+
+
+hot wire came out so why not give it a
+
+
+shot
+
+
+and the
+
+
+basically the company decided to try
+
+
+hotwire and view component instead of
+
+
+having a separate front end and a
+
+
+separate backend
+
+
+and before i continue like a couple of
+
+
+thoughts about uh react versus hot fire
+
+
+so
+
+
+[Music]
+
+
+i think that hotwire is really great
+
+
+when you
+
+
+are just iterating when you're just on
+
+
+early stages when there aren't so many
+
+
+developers uh
+
+
+and generally like uh
+
+
+i would be building a react application
+
+
+when i
+
+
+have to have an api that i would still
+
+
+be sending to a mobile application
+
+
+hotwire i mean you can build desktop
+
+
+experiences really fast and thinking
+
+
+further from this like
+
+
+react would be something i would be
+
+
+using for like
+
+
+a b2c uh product so like when there are
+
+
+lots of consumers consumers usually
+
+
+uh can consume something from their
+
+
+phone and uh like web is mostly for b2b
+
+
+for people who use uh laptops uh at work
+
+
+so like at desktop experience and
+
+
+generally like uh
+
+
+i don't think it's really right to
+
+
+compare like hotwire is better or
+
+
+wrecked is better there's like different
+
+
+tools for different jobs for example
+
+
+uh i mean hotwire is just like
+
+
+server-side rendering it's at the core
+
+
+and the
+
+
+like with hot wire you can't build a
+
+
+mirror clone uh
+
+
+you just can't do it with server side
+
+
+rendering you can't build a figma you
+
+
+can't build
+
+
+an online version of photoshop
+
+
+you can't build a good like i would say
+
+
+notion clone or something but you can
+
+
+build still a lot like you can
+
+
+definitely build some kind of jira like
+
+
+any kind of information management
+
+
+system you can build the
+
+
+twitch i mean there are like uh
+
+
+different components that get updated uh
+
+
+separately from each other
+
+
+you can build an amazon
+
+
+a sales force you can build the
+
+
+uh
+
+
+facebook at least the desktop experience
+
+
+funny that like facebook uh
+
+
+create a track but you can build a
+
+
+facebook at least by version using using
+
+
+modern hot fire
+
+
+and coming back to the company where i
+
+
+work in and to our stack so
+
+
+on the front end we've got hot fire
+
+
+we've got view component we've got
+
+
+tailwind and just recently we moved away
+
+
+from web packer to css and js bundling
+
+
+and this is uh maybe my favorite uh
+
+
+pr that was merged in the last year so
+
+
+you can have a look at like the files
+
+
+added and files chain
+
+
+removed it is awesome and the build time
+
+
+decreased from around like 40 seconds to
+
+
+i know
+
+
+uh
+
+
+well maybe five but like
+
+
+you don't even already notice it so
+
+
+it really made the developer experience
+
+
+much better it wasn't uh an easy
+
+
+migration it took some time to figure
+
+
+stuff out but it was 100 worth it
+
+
+okay and uh now
+
+
+talking about uh like structuring the
+
+
+front-end in rebound rails like you've
+
+
+got helpers you've got the decorators
+
+
+you've got partials you've got templates
+
+
+uh i would say that there are some
+
+
+problems with helpers and the creators
+
+
+like the creators are object specific
+
+
+and helpers are global like you define
+
+
+anything in application helper or in
+
+
+like uh events helper whatever you can
+
+
+access it anywhere you can have like a
+
+
+created at uh
+
+
+in that would be conflicting between two
+
+
+helpers and the creators like you to
+
+
+create an object
+
+
+and uh
+
+
+it doesn't really solve the problem of
+
+
+uh like uh having the components in your
+
+
+front end like you would have i know
+
+
+indirect for example
+
+
+and uh
+
+
+going back once again like
+
+
+how does it start how does the
+
+
+cooperation between
+
+
+the
+
+
+design team and the frontend team work
+
+
+like the design team can possibly
+
+
+provide some kind of figma designs for
+
+
+example here is a screenshot of like the
+
+
+design team
+
+
+at our company who created the some
+
+
+badges so you see there are a lot of
+
+
+different variants of badges and how
+
+
+would you implement it in like real
+
+
+spatials or templates
+
+
+well that can get kind of
+
+
+a bit tricky but view components can
+
+
+make it really easy
+
+
+so here is actually how we implemented
+
+
+it uh
+
+
+using the components uh and it is uh
+
+
+like on our staging environment so like
+
+
+the designers can see what we've
+
+
+actually achieved so here's the design
+
+
+and here is uh the design that we
+
+
+actually implemented
+
+
+and here is how it looks on the
+
+
+background so we have a
+
+
+viewcomponent.ib file that
+
+
+kind of describes what can be in the
+
+
+batch component different sizes
+
+
+different rent variants we've added some
+
+
+validations we've got a
+
+
+css file that describes the css that
+
+
+should be rendered
+
+
+based on different variants and you see
+
+
+we've got a really small html file like
+
+
+the html file for
+
+
+all these uh
+
+
+variants it's just 10 lines
+
+
+and uh
+
+
+looking more at this html file here is a
+
+
+really interesting kind of finding and
+
+
+learning that made the using view
+
+
+component like you can have a fixed
+
+
+set of variants like black green blue
+
+
+like big small
+
+
+medium whatever but you will always
+
+
+have the
+
+
+you'll always want to add some kind of
+
+
+custom css at some point and instead of
+
+
+adding like additional variants you can
+
+
+just like append the css classes to your
+
+
+current classes
+
+
+so
+
+
+here for example we've got like this
+
+
+collection of css classes there are some
+
+
+uh classes that
+
+
+are taken from the css file some classes
+
+
+that you can add manually and i think
+
+
+this is like a great learning same with
+
+
+data attributes like every component can
+
+
+have some default data attributes from a
+
+
+stimulus controller but you can extend
+
+
+it to
+
+
+have additional data attributes so you
+
+
+don't have to like rewrite the component
+
+
+or create an additional component this
+
+
+makes these view components more
+
+
+flexible
+
+
+and another interesting observation when
+
+
+working with your component like
+
+
+there can be
+
+
+object specific
+
+
+components and there can be like global
+
+
+v components for example this uh batch
+
+
+component like
+
+
+i would pass a lot of different
+
+
+parameters like color green size medium
+
+
+and so on
+
+
+but in some few components i want to
+
+
+just pass an object so here i have like
+
+
+an inventory component i pass an
+
+
+inventory component and based on this uh
+
+
+like record different stuff gets
+
+
+rendered so you see inside that dot ib
+
+
+file i have a lot of like conditionals i
+
+
+might have some kind of collections and
+
+
+so on and the this rb file defines what
+
+
+gets what gets rendered in the html so
+
+
+it kind of encapsulates the logic the
+
+
+rendering logic of
+
+
+this object and you don't have to like
+
+
+store it uh
+
+
+mixed with other logic in your decorator
+
+
+for example and definitely not the modal
+
+
+so
+
+
+i would select the component it's really
+
+
+important for
+
+
+structuring your
+
+
+front-end and creating like front-end
+
+
+components
+
+
+yeah and another thing like you can
+
+
+definitely place a few components inside
+
+
+view components so
+
+
+here uh these two things like you see
+
+
+i've got a v component and i render
+
+
+other components inside this component
+
+
+and again like
+
+
+to emphasize like there are general view
+
+
+components here i pass a color and it
+
+
+can be like anything label anything or
+
+
+i can just pass a record it's like
+
+
+another type of view component and i
+
+
+would already have like different stuff
+
+
+from this particular record inside the
+
+
+html file
+
+
+now
+
+
+should you write css files specific to
+
+
+each view component really it depends
+
+
+you can have all your css file in
+
+
+application css you can structure it any
+
+
+way you want but
+
+
+in some cases when you have like a lot
+
+
+of
+
+
+css specific to a specific
+
+
+component it might be just more
+
+
+comfortable for
+
+
+file structure and to create a separate
+
+
+css file for a specific view component
+
+
+so the answer is it depends
+
+
+and i would say the biggest challenge uh
+
+
+when like
+
+
+actually building front-end components
+
+
+is creating the form inputs so here i
+
+
+have a couple of examples where i have
+
+
+like a custom drop down or like mld
+
+
+select where i have an option to select
+
+
+all they have an option to search so
+
+
+on the background there's like a big mix
+
+
+of uh
+
+
+uh
+
+
+of
+
+
+stimulus and uh of a view component
+
+
+so
+
+
+yeah this was a real challenge to build
+
+
+these like
+
+
+form inputs in the background there is
+
+
+like a hidden
+
+
+form
+
+
+and this is like
+
+
+stuff is submitted to this form
+
+
+through this fancy kind of front and
+
+
+thin via stimulus
+
+
+and again uh you don't have to make all
+
+
+uh
+
+
+uh like you don't have to say okay i'm
+
+
+not using uh templates i'm not using
+
+
+partials i'm just using view component
+
+
+uh it really depends on the use case and
+
+
+not everything has to be a view
+
+
+component but it's possible like here is
+
+
+an example a regular show action
+
+
+usually would have a template but you
+
+
+would also
+
+
+have a view component instead of this
+
+
+template so it's possible to kind of
+
+
+replace templates and partial
+
+
+with your component if you really want
+
+
+to
+
+
+and the second part of the talk
+
+
+hotfire
+
+
+so
+
+
+i think everybody has heard that okay
+
+
+hot fire is like turbo frames
+
+
+streams stimulus js
+
+
+and regular turbo
+
+
+so
+
+
+an important thing about hot wire it's
+
+
+not like rails specific
+
+
+so it can exist outside of rails and can
+
+
+be used by other frameworks you can just
+
+
+like plug in stimulus
+
+
+or
+
+
+to the streams into an html page
+
+
+whatever and as a nice example there is
+
+
+like turbo laravel
+
+
+it's kind of an extension of hot wire
+
+
+for being used inside the laravel
+
+
+so
+
+
+like hot fire is not rail specific and
+
+
+it's really important to understand
+
+
+that's why it's also like branded
+
+
+differently and marked differently and
+
+
+so
+
+
+on and looking further at the hot fire
+
+
+when the
+
+
+thing that people often get mixed with
+
+
+so in into the streams there are
+
+
+basically like two different things
+
+
+there are http tuple streams and there
+
+
+are broadcasts that are going via web
+
+
+sockets and the the websocket broadcasts
+
+
+are kind of rail specific so
+
+
+this part of top streams does not uh
+
+
+just work out of the box with the other
+
+
+stuff but
+
+
+the http part does work with the other
+
+
+stuff
+
+
+and going back like five years back i
+
+
+think many of you have uh
+
+
+tried using kind of ajax and the js.erb
+
+
+templates so in a way the streams
+
+
+uh the http top streams are kind of
+
+
+rebranded the
+
+
+gs.erb templates where you could like
+
+
+get an element by id and replace it with
+
+
+some kind of html or with some kind of
+
+
+partial
+
+
+so
+
+
+again double streams http and websocket
+
+
+funds and now
+
+
+i would like to show a live demo so like
+
+
+in the last
+
+
+over a year we've developed a lot of
+
+
+really fancy stuff using hotfire and i
+
+
+would like to show you like some
+
+
+capabilities of what you can build
+
+
+so
+
+
+here for example is just an index page
+
+
+where i have a list of records i will
+
+
+refresh the page
+
+
+and you see
+
+
+each record gets loaded
+
+
+asynchronously
+
+
+if i go to inspect element let's go to
+
+
+the network tab
+
+
+and i refresh the page
+
+
+okay let's scroll down and you see as i
+
+
+scroll new requests
+
+
+are received from the server and your
+
+
+records have been loaded
+
+
+so this way you don't load a heavy page
+
+
+uh
+
+
+just uh
+
+
+with all the records but like as you
+
+
+whenever you need the records like when
+
+
+the the element gets visible in the
+
+
+screen then it gets loaded and
+
+
+there isn't like one point of failure
+
+
+like for example if there is a problem
+
+
+with loading one of the records it will
+
+
+just not load but it will not like block
+
+
+the whole page and uh
+
+
+again instead of like having one really
+
+
+heavy request you can have like 20
+
+
+smaller requests
+
+
+then on the same page for example uh
+
+
+let me try to search for something so i
+
+
+try searching
+
+
+and you see
+
+
+the reset filters button got
+
+
+appeared because some filters have been
+
+
+applied and the url has been updated and
+
+
+there was no page refresh
+
+
+i keep typing and the stuff gets updated
+
+
+i try to add some kind of filter and you
+
+
+see the button appears uh in the future
+
+
+slides i'm going to show a bit of the
+
+
+background how it works and uh just in
+
+
+comparison this is like a new design
+
+
+we've done and previously like a year
+
+
+ago we had another another kind of index
+
+
+page
+
+
+where we had the similar functionality
+
+
+but it wasn't built that nicely and like
+
+
+here for example the url does not update
+
+
+so in this case we built it just using
+
+
+turbo streams and in this case we used a
+
+
+beautiful mixture of turbo streams and
+
+
+turboframes
+
+
+uh going further so here for example
+
+
+i've got a page and whenever you open
+
+
+this page if the user sees this page for
+
+
+the first time then a model is going to
+
+
+pop up so you see i like load this page
+
+
+i like made it all this uh to pop up but
+
+
+a model gets popped up whenever you load
+
+
+the page
+
+
+then here it's kind of uh like typeform
+
+
+like survey so i can select something i
+
+
+click done
+
+
+and it brings me to the next step stage
+
+
+i click done and brings me to the next
+
+
+stage well
+
+
+i should switch off this like model
+
+
+re-rendering but
+
+
+like a multi-step form
+
+
+where you can select different stuff and
+
+
+uh
+
+
+here for example i can add something i
+
+
+can like search i have multiple tabs and
+
+
+you see it's all built with the
+
+
+frames and top streams and
+
+
+you don't have to like have
+
+
+page refreshes models so
+
+
+it really creates a seamless experience
+
+
+here for example uh i've got a form with
+
+
+a few nested attributes and let's say i
+
+
+change the record
+
+
+okay
+
+
+so whenever i change something
+
+
+it updates whether it was like
+
+
+automatically classified or you've
+
+
+changed something
+
+
+so
+
+
+let me click review
+
+
+so here again i've already submitted the
+
+
+form and let's say i
+
+
+try to change something and only if
+
+
+something has changed the submit button
+
+
+gets
+
+
+visible so
+
+
+you can also make it like this that like
+
+
+submit button gets visible only when
+
+
+something actually gets changed in the
+
+
+form and on the background each time i
+
+
+click something in this form it sends a
+
+
+request to the server the server sees
+
+
+whether the new attributes are different
+
+
+from the previous attributes and if they
+
+
+are different then it re-renders the
+
+
+update button
+
+
+that would be not disabled
+
+
+uh going further for example multi-step
+
+
+forms so here i create
+
+
+well i select
+
+
+one of these i click next
+
+
+i get
+
+
+some conditions i can
+
+
+render form errors
+
+
+i go next so again multi-step forms
+
+
+without any page refreshers that work
+
+
+really seamlessly using the turbo
+
+
+frames or for example here i've got like
+
+
+an api tokens page the idea is that you
+
+
+give a token a name and then you click
+
+
+generate token and
+
+
+it shows this token only once you won't
+
+
+have the possibility to see this token
+
+
+again and what i do i just render
+
+
+to the stream with the this uh
+
+
+information that you see only when you
+
+
+create this new record and there's no
+
+
+way to see it again
+
+
+and uh here is one of my favorite ui's
+
+
+kind of a folder like structure so you
+
+
+can search
+
+
+you can go from
+
+
+one folder to another folder to another
+
+
+folder and select something
+
+
+so again
+
+
+you can build a lot of different stuff
+
+
+for
+
+
+using top streams and tube frames and
+
+
+stimulus and let's go
+
+
+through
+
+
+what i've just showed a bit deeper
+
+
+so
+
+
+i think one of the greatest
+
+
+killer features of turbo frames are like
+
+
+asynchronous loadings of different parts
+
+
+of the page so as i've showed previously
+
+
+you load the page and different
+
+
+elements can load separately so again
+
+
+i keep scrolling and the new requests uh
+
+
+get sent to the server and you get new
+
+
+records visible
+
+
+and here's how it works on the
+
+
+background
+
+
+basically on the index page i've got
+
+
+like a list of risk events well a list
+
+
+of records and for each record
+
+
+there is a url
+
+
+that like go to the
+
+
+show page and render the show page over
+
+
+this record and inside the the
+
+
+controller i've got like render this uh
+
+
+[Music]
+
+
+render this uh view component and inside
+
+
+the view component i have it over frame
+
+
+with this id of this record and the data
+
+
+so really quite simple like you write
+
+
+just a couple of lines of code but you
+
+
+have this like really strong feature of
+
+
+being able to
+
+
+have each record loaded in a separate
+
+
+request
+
+
+go next
+
+
+uh with tubber frames you can create
+
+
+models really easy so uh
+
+
+models can be above your content they
+
+
+work separately they don't make full
+
+
+page refreshes everything happens inside
+
+
+the
+
+
+the context of this kind of tube frame
+
+
+model
+
+
+and
+
+
+again like uh with double frames you can
+
+
+have a lot of kind of iframes so here
+
+
+for example on youtube as an example
+
+
+there is a video that has been played
+
+
+there is a chat and there is a comment
+
+
+section and each of them can be updated
+
+
+separately and you can potentially
+
+
+navigate inside of each section
+
+
+separately without having a page refresh
+
+
+so only the stuff inside this frame
+
+
+gets refreshed based on what you do
+
+
+and uh
+
+
+when working with tuba streams there are
+
+
+a lot of things that you will
+
+
+like 99
+
+
+do inside your application so there are
+
+
+a few kind of defaults that you will
+
+
+most likely have basically a tuba stream
+
+
+for current user to be able to push some
+
+
+kind of notifications to a specific user
+
+
+like somebody has dm'd you or you've got
+
+
+a new message or
+
+
+something like that then adobe stream to
+
+
+send like some kind of notification to
+
+
+everybody who has uh
+
+
+the application on so kind of global
+
+
+notifications you'll you'll want to have
+
+
+a
+
+
+an empty tag for a tuber frame model and
+
+
+potentially an empty tag for flash
+
+
+notifications
+
+
+and
+
+
+yeah like some stimulus controllers that
+
+
+i see in the each uh
+
+
+hot wire application that i touch is
+
+
+like drop downs tabs check boxes
+
+
+de-bounds so like submit after a few
+
+
+milliseconds
+
+
+copy paste and hotkey is like click
+
+
+enter to submit or something like that
+
+
+and uh
+
+
+importantly like to the frames to the
+
+
+streams and stimulus they can be used
+
+
+absolutely separately from each other so
+
+
+like uh you don't need the
+
+
+frames to make the streams work and it's
+
+
+really important because when i was
+
+
+studying and i've noticed that many
+
+
+people like
+
+
+you tend to think that like you need
+
+
+to
+
+
+render a stream inside the turbo frame
+
+
+or something like that so these are like
+
+
+kind of separate technologies that are
+
+
+kind of part of one stack but they don't
+
+
+really need each other to work
+
+
+but
+
+
+if you
+
+
+learn how to mix them correctly you can
+
+
+build really beautiful things so here
+
+
+for example is an example
+
+
+from this first page
+
+
+let me
+
+
+from this page basically whenever i type
+
+
+something here
+
+
+this main content section gets reloaded
+
+
+so it is inside the tuber frame tag
+
+
+there is a tube action advanced that
+
+
+updates the url
+
+
+and there are a couple of two streams
+
+
+that update this reset filters that is
+
+
+not part of this tube of frame
+
+
+and that
+
+
+updates the filters count that is also
+
+
+not part of the tuber frame
+
+
+uh yeah another example is with the
+
+
+infinite pagination so here inside a
+
+
+turbo stream i render tuber frame in the
+
+
+previous examples we have rendering the
+
+
+streams inside frames and here i've run
+
+
+the frames inside streams and it's like
+
+
+just a few lines of code that lets you
+
+
+add infinite pagination to your
+
+
+application
+
+
+and uh
+
+
+again like uh
+
+
+i know many ruby on rails developers
+
+
+don't want to use
+
+
+js or like try to like okay i'm a
+
+
+back-end developer i don't use js
+
+
+but just a couple of lines of gs uh
+
+
+can really take you a long way when you
+
+
+use the hotwire stack and like the
+
+
+stimulus.js framework is
+
+
+really simple to learn and i'm really
+
+
+enjoying it and
+
+
+it can really
+
+
+make your
+
+
+two
+
+
+free frames and streams uh
+
+
+work on a whole new level so here for
+
+
+example
+
+
+again with this like model that pops up
+
+
+whenever you open the page on the
+
+
+background it works like this there is a
+
+
+stimulus controller that
+
+
+conditionally
+
+
+clicks on a link and here on the bottom
+
+
+is the link
+
+
+to a path
+
+
+i say that i want to open in the modal
+
+
+and i conditionally click on this link
+
+
+so whenever a user
+
+
+opens the page
+
+
+the stimulus controller loads and on
+
+
+connect it clicks on this hidden link
+
+
+and that's the way this model is being
+
+
+rendered
+
+
+or
+
+
+another thing i really like
+
+
+is like dynamic forms like uh
+
+
+there's always the problem a classical
+
+
+problem i would say that like country
+
+
+city-state select and you can really
+
+
+easily solve it using the uh
+
+
+hot fire so here in this example i've
+
+
+got the
+
+
+notice controller that clicks on a
+
+
+specific link
+
+
+and here i have a form so in the form
+
+
+there is a hidden button
+
+
+that
+
+
+re-renders this new action with the
+
+
+params that i have submitted
+
+
+and i've got a tuber frame
+
+
+and basically whenever you
+
+
+select country
+
+
+it clicks on this hidden button and
+
+
+re-renders
+
+
+the form or at least this part of the
+
+
+form with the parameters that you have
+
+
+submitted
+
+
+so whenever i select country it
+
+
+re-renders
+
+
+the country city and state with the
+
+
+params that i have submitted
+
+
+and it makes like this multi-step forms
+
+
+really easy to create
+
+
+um yeah another
+
+
+funny thing uh or like challenge i've
+
+
+had is uh let's say i've got a form and
+
+
+conditionally i want like new fields to
+
+
+be added to this form and how can i like
+
+
+define
+
+
+the form like there is a form text field
+
+
+for example and like i need to send it
+
+
+to a specific form
+
+
+so
+
+
+i would provide the a unique id to the
+
+
+form and
+
+
+in the like top stream action i would uh
+
+
+have form text field and like
+
+
+for the form not to be undefined i
+
+
+specified that the form should be the
+
+
+new post form and i've got a placeholder
+
+
+this body placeholder where i would
+
+
+render this
+
+
+text field with the body
+
+
+so again going back how much gs do you
+
+
+need
+
+
+not much but it can really take you a
+
+
+long way
+
+
+and well some challenges that uh
+
+
+we've had than like starting to work
+
+
+with hotfire first of all like we've got
+
+
+a couple of designers that previously
+
+
+used to work on the wrecked and they
+
+
+have this kind of wrecked uh
+
+
+framework in their head and like
+
+
+they knew what can be achieved with
+
+
+direct or like how it would look
+
+
+interact and they had to kind of change
+
+
+their mindset a bit so for example like
+
+
+interact you can have like uh beautiful
+
+
+animations and transition from one page
+
+
+to another whatever and uh that would be
+
+
+a bit more tricky to implement
+
+
+in the hot fire
+
+
+then again a problem with any new
+
+
+technology like how far can you go with
+
+
+it what can you actually achieve what is
+
+
+the limit
+
+
+and uh
+
+
+i would say like the default frames
+
+
+streams uh
+
+
+uh and stimulus
+
+
+they are quite limited but
+
+
+when you use them in a beautiful
+
+
+combination as i've showed previously
+
+
+then
+
+
+their functionality becomes much more
+
+
+extended
+
+
+and uh a funny thing like about stimulus
+
+
+about
+
+
+uh turbo
+
+
+frames
+
+
+and streams uh what can and can't be
+
+
+inventive so for example here i've got
+
+
+like a
+
+
+search field on top and i've got some
+
+
+like
+
+
+status select origin select on the
+
+
+bottom and
+
+
+in the red part i've got like some other
+
+
+parts that should not be part of this
+
+
+form
+
+
+so
+
+
+if you just like try to structure the
+
+
+html somehow then
+
+
+like you would want to
+
+
+search and add to be
+
+
+like inventive and
+
+
+the lower part to be in another div and
+
+
+you would need to like find the right
+
+
+way to build this so you should also be
+
+
+aware a bit of like what should be in
+
+
+what div and how can it uh play with
+
+
+each other and in this specific example
+
+
+on the bottom
+
+
+with all these like filters status
+
+
+origin type we had a form and this
+
+
+search component is just a text field
+
+
+tag that targets this form so it's not
+
+
+uh in the html it's not part of the form
+
+
+but
+
+
+it targets the specific form
+
+
+and
+
+
+takeaways i didn't find a better picture
+
+
+for takeaways
+
+
+yeah so view component is uh really
+
+
+an important uh part of this like
+
+
+rubin rails monolith stack and it really
+
+
+helps you to structure your front end
+
+
+and also to communicate with the design
+
+
+team
+
+
+then the hotfire is not trail specific
+
+
+and it can exist outside of rails
+
+
+frames and streams
+
+
+uh you don't have to use them together
+
+
+like to do the same thing on the
+
+
+beginning i actually encourage you like
+
+
+to try to use frames and streams
+
+
+separately
+
+
+there are things that both of them can
+
+
+do well
+
+
+you will learn for yourself that there
+
+
+are some things that are better done
+
+
+with streams some things that are better
+
+
+done with frames and uh already later
+
+
+when you like try to kind of fill
+
+
+feel each of them you can learn how to
+
+
+combine them to build like really
+
+
+beautiful interactions
+
+
+and again like the name is the naming is
+
+
+always a bit confusing but like there
+
+
+are http and web socket
+
+
+tube streams and these are kind of quite
+
+
+different technologies like the http
+
+
+ones uh respond to requests
+
+
+that you send and like you get updates
+
+
+on your screen and the web socket funds
+
+
+like get
+
+
+uh send these updates to anybody who is
+
+
+listening to the same channel as uh
+
+
+you
+
+
+and
+
+
+like uh a bit of stimulus yes like
+
+
+i've shown you a couple of controllers
+
+
+that have just like two or three lines
+
+
+in them and they can really massively
+
+
+like
+
+
+extend the functionalities of
+
+
+your tube of frames
+
+
+to the frames and the streams
+
+
+and
+
+
+let's say like okay you
+
+
+just took everything you can out of like
+
+
+hot wire and
+
+
+you still need more well there is more
+
+
+there are other technologies that can
+
+
+further extend
+
+
+the capabilities of what you can achieve
+
+
+building a
+
+
+side rendering monolith there is
+
+
+stimulus reflex and
+
+
+any cable that
+
+
+really
+
+
+really extends the functionality of
+
+
+action cable
+
+
+and well in a world where hot wire
+
+
+doesn't exist there are still other
+
+
+server-side rendering technologies some
+
+
+of them are like hdmx or as many of you
+
+
+have heard like phonics live view
+
+
+and the in the world the view component
+
+
+wouldn't exist possibly i would try
+
+
+something like flex
+
+
+so it's a kind of a new
+
+
+thing that is developed
+
+
+to
+
+
+be a potential substitute to like view
+
+
+component uh and stuff so there are
+
+
+alternatives
+
+
+and uh that's basically it
+
+
+so
+
+
+[Music]
+
+
+feel free to find me on twitter and uh
+
+
+india thank you
+
+
+hi thanks for your talk uh i really like
+
+
+the slide where did you where you
+
+
+compared
+
+
+the
+
+
+hot wire with react that was really
+
+
+insightful
+
+
+i'm curious how it is about testing
+
+
+uh because for example with racked code
+
+
+base i have this experience that okay
+
+
+you can test like that you know you have
+
+
+this component on your page and you can
+
+
+test it but you always
+
+
+supply you have to supply it with some
+
+
+data with some you know information to
+
+
+that component and this is often
+
+
+artificial it can get get out of sync
+
+
+with what is provided by the backend
+
+
+and i imagine that because i assume that
+
+
+it's possible to test these view
+
+
+components from like from rails it's
+
+
+maybe easier to like have like real data
+
+
+put somewhere inside like inside these
+
+
+components right yeah so
+
+
+you can make regular assertions like you
+
+
+can
+
+
+create a
+
+
+spec file
+
+
+and add some kind of assertions like uh
+
+
+you can add a factor with some kind of
+
+
+object and
+
+
+like based on this object have different
+
+
+assertions of like what you want or you
+
+
+don't want to see also you can do
+
+
+snapshot testing so like you can create
+
+
+automatic snapshots of
+
+
+your view components and kind of see if
+
+
+anything has changed based on what
+
+
+you've
+
+
+done
+
+
+also
+
+
+like system tests you can use regular
+
+
+rail system tests to
+
+
+test flows of like uh
+
+
+data that you
+
+
+received from a
+
+
+stream request so
+
+
+or like a tuber frame request
+
+
+yeah so it's quite easy to test like uh
+
+
+system tests uh for flows and the
+
+
+specific components can be tested with
+
+
+the assertions or snapshots
+
+
+so like i assume that you have worked
+
+
+with react code bases before and so that
+
+
+you can you compare like uh
+
+
+what in your opinion is like
+
+
+better or easier to test or something
+
+
+like that like react code base
+
+
+in rails somewhere versus the view
+
+
+component one
+
+
+i mean
+
+
+[Music]
+
+
+for me
+
+
+i like writing the ruby and it's uh
+
+
+easy to write
+
+
+just like ruby assertions for view
+
+
+components and that's what i feel
+
+
+comfortable with personally
+
+
+okay guys thanks a lot i hope
+
+
+yeah i hope you got inspired by these
+
+
+like uis that we've built uh and that
+
+
+i've demoed and you'll give a try to
+
+
+this kind of server-side rendering and
+
+
+exploring yourself the limits of
+
+
+what hotwire can offer
+
+
+you

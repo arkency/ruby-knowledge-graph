@@ -1,0 +1,167 @@
+<div class="node-header">
+  <%= link_to "&larr; Extractions".html_safe, extractions_path, class: "back-link" %>
+  <h1 class="page-title"><%= @extraction.title %></h1>
+  <% if @extraction.summary.present? %>
+    <p class="node-description"><%= @extraction.summary %></p>
+  <% end %>
+</div>
+
+<% if @extraction.status == "failed" %>
+  <div class="flash flash-alert">
+    <strong><%= @extraction.error_class %></strong>: <%= @extraction.error_message %>
+  </div>
+<% end %>
+
+<div class="attrs-grid">
+  <div class="attr-card">
+    <div class="attr-key">Model</div>
+    <div class="attr-value"><code><%= @extraction.model_id %></code></div>
+  </div>
+<%= link_to ingestion_path(@extraction.ingestion_id), class: "attr-card attr-card-link", style: "text-decoration: none; display: block;" do %>
+    <div class="attr-key">Ingestion</div>
+    <div class="attr-value"><code><%= @extraction.ingestion_id&.slice(0, 8) %></code></div>
+  <% end %>
+  <div class="attr-card">
+    <div class="attr-key">Input tokens</div>
+    <div class="attr-value"><%= number_with_delimiter(@extraction.input_tokens.to_i + @extraction.cached_tokens.to_i + @extraction.cache_creation_tokens.to_i) %></div>
+    <dl class="attr-breakdown">
+      <% if @extraction.input_tokens.to_i > 0 %>
+        <dt>fresh</dt>
+        <dd><%= number_with_delimiter(@extraction.input_tokens) %></dd>
+      <% end %>
+      <% if @extraction.cached_tokens.to_i > 0 %>
+        <dt>cached</dt>
+        <dd><%= number_with_delimiter(@extraction.cached_tokens) %></dd>
+      <% end %>
+      <% if @extraction.cache_creation_tokens.to_i > 0 %>
+        <dt>cache write</dt>
+        <dd><%= number_with_delimiter(@extraction.cache_creation_tokens) %></dd>
+      <% end %>
+    </dl>
+  </div>
+  <div class="attr-card">
+    <div class="attr-key">Output tokens</div>
+    <div class="attr-value"><%= number_with_delimiter(@extraction.output_tokens.to_i) %></div>
+  </div>
+  <div class="attr-card">
+    <div class="attr-key">Duration</div>
+    <div class="attr-value"><%= @extraction.duration_ms ? "#{(@extraction.duration_ms / 1000.0).round(1)}s" : "-" %></div>
+  </div>
+  <div class="attr-card">
+    <div class="attr-key">Roundtrips</div>
+    <div class="attr-value"><%= @extraction.roundtrips.to_i %></div>
+  </div>
+  <div class="attr-card">
+    <div class="attr-key">Tool calls</div>
+    <div class="attr-value"><%= @extraction.tool_calls.to_i %></div>
+  </div>
+  <div class="attr-card">
+    <div class="attr-key">Cost</div>
+    <div class="attr-value"><%= format_cost(extraction_cost(@extraction) || 0) %></div>
+  </div>
+  <div class="attr-card">
+    <div class="attr-key">Nodes/edges extracted</div>
+    <div class="attr-value"><%= @extraction.nodes_count.to_i %> / <%= @extraction.edges_count.to_i %></div>
+  </div>
+  <div class="attr-card">
+    <div class="attr-key">Read set (nodes/edges)</div>
+    <div class="attr-value"><%= @extraction.node_reads_count.to_i %> / <%= @extraction.edge_reads_count.to_i %></div>
+  </div>
+</div>
+
+<% if @extraction.nodes_count > 0 %>
+  <div class="edges-section">
+    <h2>Nodes (<%= @extraction.nodes_count %>)</h2>
+    <% @extraction.node_extractions.each do |ne| %>
+      <details class="extraction-row">
+        <summary>
+          <span class="badge badge-<%= ne.kind %>"><%= ne.kind %></span>
+          <%= link_to ne.node.name, node_path(slug: ne.node.slug), class: "row-title" %>
+          <span class="badge badge-kind badge-kind-<%= ne.node.kind %>"><%= ne.node.kind %></span>
+        </summary>
+        <% if ne.diff.present? %>
+          <div class="diff-section">
+            <% ne.diff.each do |field, (before, after)| %>
+              <div class="diff-entry">
+                <span class="diff-field"><%= field %></span>
+                <span class="diff-before"><%= before.present? ? truncate(before.to_s, length: 120) : "(empty)" %></span>
+                <span class="diff-arrow">&rarr;</span>
+                <span class="diff-after"><%= truncate(after.to_s, length: 120) %></span>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <div class="diff-section diff-empty">No changes recorded.</div>
+        <% end %>
+      </details>
+    <% end %>
+  </div>
+<% end %>
+
+<% if @extraction.edges_count > 0 %>
+  <div class="edges-section">
+    <h2>Edges (<%= @extraction.edges_count %>)</h2>
+    <% @extraction.edge_extractions.each do |ee| %>
+      <details class="extraction-row">
+        <summary>
+          <span class="badge badge-<%= ee.kind %>"><%= ee.kind %></span>
+          <span class="row-title">
+            <%= link_to ee.edge.source_node.name, node_path(slug: ee.edge.source_node.slug) %>
+            &rarr; <strong><%= ee.edge.relation %></strong> &rarr;
+            <%= link_to ee.edge.target_node.name, node_path(slug: ee.edge.target_node.slug) %>
+          </span>
+        </summary>
+        <% if ee.diff.present? %>
+          <div class="diff-section">
+            <% ee.diff.each do |field, (before, after)| %>
+              <div class="diff-entry">
+                <span class="diff-field"><%= field %></span>
+                <span class="diff-before"><%= before.present? ? truncate(before.to_s, length: 120) : "(empty)" %></span>
+                <span class="diff-arrow">&rarr;</span>
+                <span class="diff-after"><%= truncate(after.to_s, length: 120) %></span>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <div class="diff-section diff-empty">No changes recorded.</div>
+        <% end %>
+      </details>
+    <% end %>
+  </div>
+<% end %>
+
+<% if @extraction.node_reads_count > 0 || @extraction.edge_reads_count > 0 %>
+  <div class="edges-section">
+    <h2>Read set</h2>
+    <% if @extraction.node_reads_count > 0 %>
+      <h3 class="read-set-anchor"><%= @extraction.node_reads_count %> nodes</h3>
+      <div class="read-set-nodes">
+        <% @extraction.node_extraction_reads.each do |ner| %>
+          <%= link_to node_path(slug: ner.node.slug), class: "read-set-chip" do %>
+            <span class="badge badge-kind badge-kind-<%= ner.node.kind %>"><%= ner.node.kind %></span>
+            <span class="read-set-chip-name"><%= ner.node.name %></span>
+            <span class="read-set-chip-tools"><%= Array(ner.tools).join("+") %></span>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+    <% if @extraction.edge_reads_count > 0 %>
+      <h3 class="read-set-anchor"><%= @extraction.edge_reads_count %> edges</h3>
+      <div class="read-set-edges">
+        <% @extraction.edge_extraction_reads.each do |eer| %>
+          <div class="read-set-edge">
+            <%= link_to node_path(slug: eer.edge.source_node.slug), class: "read-set-chip" do %>
+              <span class="badge badge-kind badge-kind-<%= eer.edge.source_node.kind %>"><%= eer.edge.source_node.kind %></span>
+              <span class="read-set-chip-name"><%= eer.edge.source_node.name %></span>
+            <% end %>
+            <span class="read-set-edge-relation"><%= eer.edge.relation %></span>
+            <%= link_to node_path(slug: eer.edge.target_node.slug), class: "read-set-chip" do %>
+              <span class="badge badge-kind badge-kind-<%= eer.edge.target_node.kind %>"><%= eer.edge.target_node.kind %></span>
+              <span class="read-set-chip-name"><%= eer.edge.target_node.name %></span>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

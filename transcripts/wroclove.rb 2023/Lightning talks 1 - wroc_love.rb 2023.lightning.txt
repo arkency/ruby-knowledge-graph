@@ -1,0 +1,2389 @@
+hi guys uh I'm Pavo and I have just five
+
+
+minutes so so I won't tell any more
+
+
+about myself
+
+
+guys uh the last topic was about games
+
+
+and it was awesome it was tested mine
+
+
+are aren't but have you ever wanted to
+
+
+write a game
+
+
+like actually one ah so you're just as
+
+
+me failed gay in developers awesome I've
+
+
+done that in every technology I've ever
+
+
+written in from
+
+
+IRC bot actually uh to Java Unity with
+
+
+the c-sharp and so on but eventually I
+
+
+figured I haven't written a game in Ruby
+
+
+on Rails
+
+
+so have you ever tried with Ruby on
+
+
+Rails
+
+
+awesome I have to say that okay I'll
+
+
+catch you later on so let's see how it
+
+
+could look like
+
+
+is there awesome so we have a night and
+
+
+it has to avoid the dragons and to find
+
+
+the Beloved Ruby awesome score one
+
+
+so this is a simple game you can all
+
+
+imagine how it works but let's try the
+
+
+fun one
+
+
+now still we have this Dragon but now
+
+
+the world is going forward as in real
+
+
+life and just FYI it's not JavaScript
+
+
+it's all generated on backend and I'll
+
+
+show you how
+
+
+so how does it work of course it has
+
+
+endpoints for movements we all know that
+
+
+but on top of that there is a game Loop
+
+
+that keeps the game status and makes the
+
+
+state progress what's the game Loop is
+
+
+just the process it's a continuous
+
+
+process that calculates the state and
+
+
+calculates what the next state should be
+
+
+based on the moves based on the on the
+
+
+world that is modeled in a game
+
+
+so how to run such a process for myself
+
+
+I'm using this gem respawn and permanent
+
+
+job well it's mine so you can figure
+
+
+I'll use it it's again a gem for running
+
+
+robust processes easily I will show you
+
+
+in a second how but actually uh credit
+
+
+is not mine because it's just a wrapper
+
+
+for something called server engine and
+
+
+that's a framework for implementing
+
+
+robust multi-process server
+
+
+and it has been presented in rubikagi in
+
+
+2014 by masahirona Kagawa all credit to
+
+
+him and you can watch this presentation
+
+
+in here it's awesome it's in Japanese uh
+
+
+so there is there are two two
+
+
+presentations on server engine the other
+
+
+one is in English in fact so go watch it
+
+
+it's an incredible piece of software and
+
+
+it's used exactly to implement robust
+
+
+multiple servers why why robust because
+
+
+they work like this you define workers
+
+
+you can Define them as processes or by
+
+
+ours or as threads you can add a server
+
+
+uh on top of that that you can
+
+
+communicate with for example you can
+
+
+make soft restarts you can reconfigure
+
+
+your server and there is a supervisor
+
+
+mechanic that means if ever your worker
+
+
+fail fails and it will because of memory
+
+
+issues because of network issues
+
+
+anything it will just restart it again
+
+
+an awesome piece of logic go watch the
+
+
+presentation how you it well I'm not
+
+
+showing the server engine itself but for
+
+
+a raise permanent job you just have to
+
+
+create a class with a call method
+
+
+and syntax made due to Nick Sutter from
+
+
+Terry Blazer or props to him and for uh
+
+
+just inspiration and you create yourself
+
+
+for example a rake task you just put a
+
+
+call raise permanent job you put the job
+
+
+you want it to handle and you run it and
+
+
+you just Define on how many workers it
+
+
+should be so uh what what you get here
+
+
+is the supervision you don't get that
+
+
+with rake but with respawn and permanent
+
+
+job and with server engine for the most
+
+
+part you get the supervision included
+
+
+you can put it in a multi-threaded mode
+
+
+and it's really really awesome and how
+
+
+does this work well we have a game Loop
+
+
+iteration which so is this is the job
+
+
+that's going is going to be processed so
+
+
+it just loads the board progresses the
+
+
+state and saves the board therefore it
+
+
+can show you that board on your screen
+
+
+and as there task well game start means
+
+
+reset all the boards put it in the race
+
+
+permanent job and just sleep for 0.3
+
+
+seconds between the iterations and here
+
+
+you go here we have a game guys before I
+
+
+muted
+
+
+if you have a phone just scan this QR
+
+
+code and join me in this game you can
+
+
+click on the white port and you can move
+
+
+yourself left light left right up and
+
+
+down thank you very much that's all from
+
+
+me
+
+
+[Applause]
+
+
+I also started my timer thank you thank
+
+
+you everyone
+
+
+thanks and organizers for this
+
+
+conference that was recognized here and
+
+
+I'm here the second time and it is great
+
+
+okay so now today we are talking about
+
+
+uh one specific problem that you can
+
+
+encounter when you actually develop a
+
+
+Ruben rails application when you switch
+
+
+to some branch that has a
+
+
+data immigration the changes schema and
+
+
+the schema gets inconsistent is
+
+
+inconsistent in terms of another Branch
+
+
+like from Master use which
+
+
+to some branch that adds not null column
+
+
+then switch back and you start your test
+
+
+for example and start all starting using
+
+
+application and you finally get some
+
+
+weird exception
+
+
+uh inside today so just in real time and
+
+
+basically it's a frustration issue uh
+
+
+specifically for junior developers
+
+
+developers because they don't understand
+
+
+what what exactly happened
+
+
+so in order to solve this problem
+
+
+uh
+
+
+what we actually need to do is just to
+
+
+get rid of
+
+
+from the database this Phantom migration
+
+
+that was supplied on the branch
+
+
+so and this should look like and
+
+
+my point is that why not to create an
+
+
+automatic solution that would do that
+
+
+for us like of course you can manually
+
+
+solve this issue
+
+
+sometimes but drop in database and
+
+
+renamating it with a data dump but my
+
+
+point is uh
+
+
+easy just to keep track of this run
+
+
+migration migrations inside the temp
+
+
+folder and
+
+
+every time when you switch to some
+
+
+Branch you just have history of all
+
+
+these migrations and just it's easy to
+
+
+roll back them
+
+
+uh so this is just Jam that I have
+
+
+created and so feel free to use it
+
+
+uh so installation and configuration not
+
+
+needed is easy
+
+
+uh I already discovered what is this
+
+
+it's uh the implementation details uh we
+
+
+keep the Run migration and sub inside
+
+
+temp folder and so every time when you
+
+
+switch to some another Branch you just
+
+
+run as usually do rails DB immigrate and
+
+
+you get actual database so of course
+
+
+there are some limitations
+
+
+like it assumes that all migrations are
+
+
+reversible
+
+
+so sometimes you know that it will not
+
+
+be possible to roll back as easy as is
+
+
+but uh
+
+
+yeah so mostly
+
+
+this implementation will work so just
+
+
+keep in mind that you have to keep your
+
+
+migrations uh reversible
+
+
+so yeah
+
+
+this is the link to this gem feel free
+
+
+to use it and if you have some questions
+
+
+and maybe someone already used it I
+
+
+would appreciate uh for receiving your
+
+
+feedback and talking about it in real
+
+
+time today at party thank you
+
+
+[Applause]
+
+
+hey guys
+
+
+um so today I'm gonna show you something
+
+
+that you have definitely never seen
+
+
+before and that will blow your mind so
+
+
+um probably you don't know that if you
+
+
+have rails application you can do
+
+
+something like rail C
+
+
+which opens the console where you can do
+
+
+something like a profile that's all so
+
+
+you can inspect all the data you have in
+
+
+the database I know no one knew about
+
+
+that
+
+
+um
+
+
+and
+
+
+um
+
+
+yeah okay I know everyone knows that
+
+
+um but
+
+
+um a lot of people like the
+
+
+um like that and and uses that a lot and
+
+
+likes the output
+
+
+um however I don't I actually
+
+
+um hate the the default output of
+
+
+um of IRB and
+
+
+active record in in particular thus I
+
+
+created a gem
+
+
+which
+
+
+um well hopefully makes makes the DD
+
+
+output a little bit better
+
+
+um
+
+
+so it supports different layouts if you
+
+
+have like a wide
+
+
+um
+
+
+White model white table
+
+
+um
+
+
+it swaps to a horizontal layout which
+
+
+displays every uh every item on a on a
+
+
+new line and each
+
+
+each item is separated with those green
+
+
+fancy fancy lines so
+
+
+um it also displays the total count here
+
+
+and you can customize it and add more
+
+
+data there if you if you really want
+
+
+um yeah that's also
+
+
+um here is the
+
+
+uh here's the QR code with the link to
+
+
+the repository if you want to use it
+
+
+then go ahead and don't forget to like
+
+
+And subscribe I mean start the Ripple
+
+
+story right
+
+
+[Applause]
+
+
+[Music]
+
+
+okay hey everyone do you recognize yeah
+
+
+Queen's Gambit right one company made
+
+
+chess popular in the whole world by
+
+
+creating a fictional character this is
+
+
+the real character Magnus Carson the
+
+
+Norway world champion
+
+
+and I actually played him last year he
+
+
+beaten me it was online but still I was
+
+
+surprised anyway chess became cool
+
+
+recently I'm surprised I'm in my chest
+
+
+word for the last 30 years and suddenly
+
+
+everyone plays chess that's great even
+
+
+those guys play chess and he gets paid
+
+
+for this even more than just players
+
+
+probably so I want to present you some
+
+
+tips for programmers and why it's worth
+
+
+to be
+
+
+to start playing chess it's very
+
+
+scientific it's very meritocracy driven
+
+
+let's say if you are wrong or right
+
+
+let's play I will prove you there is
+
+
+measurable progress so this is my feeder
+
+
+rating since 2003 you can see okay the
+
+
+moments where I played better Wars I can
+
+
+analyze what would good what went wrong
+
+
+you see two years ago something went
+
+
+really wrong but
+
+
+then I kind of re reinvented myself
+
+
+there are many ways to improve this is
+
+
+online tooling you can see after every
+
+
+online game you can click learn from
+
+
+your mistakes and the engine will tell
+
+
+you what you did wrong it's
+
+
+fantastically now improved automized
+
+
+there's fantastic support their books
+
+
+courses playing you can just play or
+
+
+hire coaches so lots of ways to improve
+
+
+uh of course online play is the thing
+
+
+that was mostly popular especially covet
+
+
+helped here uh there are two main
+
+
+websites chess.com and leeches both are
+
+
+both are amazingly good on both mobile
+
+
+and web so whichever you choose is great
+
+
+leeches is fully open source you can
+
+
+actually try to tweak it if you want in
+
+
+Scala and chess.com no one knows but
+
+
+it's actually implemented by a police
+
+
+guy from pos9 peel to doctora
+
+
+chess is usually the first battlefield
+
+
+for AI so when we purchase players see
+
+
+some AI uh you know improvements in
+
+
+progress in other areas we are like well
+
+
+we've seen this in 1997 when Kasparov
+
+
+was beaten by AI we've seen with Alpha
+
+
+zero so we are usually somehow the big
+
+
+companies also always choose chess to
+
+
+prove that they invented something great
+
+
+so that's amazing for chess So currently
+
+
+the we call them actually engines
+
+
+instead of AI but they are neural
+
+
+networks it's the most two popular ones
+
+
+it's stockfish and Layla both open
+
+
+source and both can be node we can tweak
+
+
+them
+
+
+this is what what it looks like this is
+
+
+my game for with Grandmaster Christopher
+
+
+koboskis from the last weekend in
+
+
+katowita uh withdrew uh that was a good
+
+
+result for me because he's a Grandmaster
+
+
+and you can see I can come back to home
+
+
+because we played we played real but on
+
+
+a digital chessboard there's such things
+
+
+right now it's all connected immediately
+
+
+transmitted to the Internet so I'm
+
+
+coming back home I just click the engine
+
+
+you can see with the this is the output
+
+
+of the chess engine I can see the moves
+
+
+that chess engine recommends it was
+
+
+actually a draw because the chess engine
+
+
+says zero zero zero and it says the
+
+
+depth was 51 so it's actually calculated
+
+
+51 uh halif moves ahead the same problem
+
+
+with AI we have with in Chester in other
+
+
+areas it will tell us what is the best
+
+
+move but it doesn't tell us why
+
+
+um some tips for you if you're starting
+
+
+with chess always start with E4 so the
+
+
+pawn from the kings move uh two pawns
+
+
+two pawns had don't try to experiment at
+
+
+the beginning then develop the Knight
+
+
+and develop the bishop
+
+
+that's usually leads you to the best
+
+
+setup and immediately
+
+
+um you know you can actually look as a
+
+
+professional player I will not recognize
+
+
+if you play like that that you are not a
+
+
+chess player then Castle so you hide
+
+
+your king you castle of the king
+
+
+polishes rashada so hide your king
+
+
+because King should be safe and also
+
+
+control the center those are the main
+
+
+squares
+
+
+uh that we need to control at least two
+
+
+or three from those squares put your
+
+
+pieces very close to there because they
+
+
+have most capabilities when they're
+
+
+around there so don't put your Knights
+
+
+on the edge that's that's not a good
+
+
+idea you can see the Rooks they're
+
+
+always laid to the party but they should
+
+
+be centralized
+
+
+um learn design patterns are cut chunks
+
+
+so we have this kind of let's say
+
+
+patterns in chess so every chess player
+
+
+will recognize the green Niche part of
+
+
+this young Chateau we call it fanchetto
+
+
+and everyone knows the middle teeth by
+
+
+the one look at of either this is
+
+
+vancetta we don't remember this bishop
+
+
+G2 there is Castle there's neither free
+
+
+this vancetta also the pink the pink
+
+
+setup is called London setup everyone
+
+
+knows so a chess player when he looks at
+
+
+the chessboard we recognize in chunks
+
+
+instead of really big small pieces so
+
+
+that's a that's something that is worth
+
+
+learning also there is even sourcing in
+
+
+chess of course and use reuse release
+
+
+even store
+
+
+um yeah chest notation is basically even
+
+
+sourcing so after during each game we
+
+
+write the chess moves on real board or
+
+
+if we play online it's automatically
+
+
+there
+
+
+it's even you can see it's even
+
+
+um storing the time of the moves but the
+
+
+real fun in chess is actually to meet
+
+
+life with Magnus or others and uh you
+
+
+can play in chess clubs in Poland there
+
+
+is a website called Club you can go and
+
+
+find Club in a club in your real world
+
+
+and also you can play with me if you
+
+
+want uh on chess.com thank you
+
+
+foreign
+
+
+hi everybody how are you doing this talk
+
+
+is not about procrastination
+
+
+and like yeah I procrastinated on this
+
+
+talk and I didn't know what to call it
+
+
+so I called it procrastination
+
+
+um but yeah you know I'm procrastinating
+
+
+even during this talk I'm talking about
+
+
+what this talk is not about during the
+
+
+five minutes so you know I have a
+
+
+problem I need therapy and it's there's
+
+
+a great opportunity to have like therapy
+
+
+in front of um in front of I don't know
+
+
+60 people it's great thank you for the
+
+
+opportunity
+
+
+um I'm not like if you think you
+
+
+procrastinate you ain't seen nothing yet
+
+
+I'm really good at it like I mean I put
+
+
+the pro in procrastination right if you
+
+
+do something a lot you get good that's
+
+
+that's me and um yeah one of the things
+
+
+that procrastinators do is um they they
+
+
+avoid feeling bad about putting off
+
+
+their actual work by doing something
+
+
+that they kind of can justify is kind of
+
+
+useful and one of those things that are
+
+
+kind of useful is um oh yeah
+
+
+procrastinators will take over the world
+
+
+when they unite tomorrow
+
+
+um that's me in 2018. uh yeah so one of
+
+
+the things that I progressed that you
+
+
+that I discovered was um when I was like
+
+
+kind of trying to work on something and
+
+
+not feel bad about not doing my actual
+
+
+work was to set up some human friendly
+
+
+um aliases shell aliases in my favorite
+
+
+shell which is fish
+
+
+um you will see you will see in a second
+
+
+what I mean fish is a command line uh
+
+
+shell it stands for friendly interactive
+
+
+shell I really like it because unlike
+
+
+any other shells I could actually script
+
+
+in it I don't know it somehow clicked
+
+
+for my brain uh bash scripts I find
+
+
+horrible and absolutely unreadable fish
+
+
+script I can read and write which is
+
+
+great so like whatever whatever works
+
+
+for you use it so
+
+
+um you know git right sometimes you need
+
+
+to make a new branch procrastinators do
+
+
+that a lot because before I can start
+
+
+work I first have to make a new Branch
+
+
+right and then I think to myself get
+
+
+switched there see come on I don't want
+
+
+to type all that I need to make an alias
+
+
+I need to make it faster and easier for
+
+
+me to do so that's like my
+
+
+procrastination Loop so I go to git
+
+
+config and I add an alias NB for New
+
+
+Branch so it's a mnemonic easy to
+
+
+remember NB great now it's git NB my
+
+
+Branch awesome life is great however
+
+
+um I do want to type git space that's
+
+
+four characters I wanted to just type
+
+
+one single G and B get new Branch that's
+
+
+it that's what I want to type that's why
+
+
+I make a shell Alias uh technically in
+
+
+fishes called shell abbreviation but
+
+
+that's details I don't have time for the
+
+
+details
+
+
+um so yeah life is great right now now
+
+
+it's not on not only a git Alias now
+
+
+it's a shell Alias or shell abbreviation
+
+
+in the case of fish now I type three
+
+
+characters and I'm happy
+
+
+now there's two problems with that one
+
+
+is the list of aliases goes really long
+
+
+and I don't remember them all but that's
+
+
+fine because if I don't remember then I
+
+
+don't use it and I don't need it and I
+
+
+don't need to remember that's fine but
+
+
+the real problem is um for some of them
+
+
+I only had I only have like gigates the
+
+
+git Alias set up like git P forgetful
+
+
+for the other I have shell Alias set up
+
+
+GP for gitball and now I don't remember
+
+
+which one was it so obviously the
+
+
+solution is why not both
+
+
+so I wrote a little script that runs in
+
+
+my shell initialization that just parses
+
+
+my git config takes every git Alias
+
+
+turns it into shell Alias so I can type
+
+
+either of those things I can type git WC
+
+
+for what changed it's a less little
+
+
+known uh useful command in git uh or I
+
+
+can type gwc it doesn't matter get what
+
+
+changed
+
+
+so life is good but what does this what
+
+
+does this have anything to do with fish
+
+
+like any any of this you could do in any
+
+
+other shell you could do it in Z shell
+
+
+in bash even if you're not cool and
+
+
+still use bash sorry that was a joke
+
+
+um so the problem is here
+
+
+um I pair program a lot in my company we
+
+
+have like a convention repair program on
+
+
+many things and especially when I pair
+
+
+program with you with the junior
+
+
+developer with the or with a newbie or
+
+
+if even
+
+
+um show my screen to some non-technical
+
+
+person if I type this if I type the
+
+
+thing on the left git NB they're like
+
+
+what are you doing what is this
+
+
+um so in in fish what fish allows me to
+
+
+do is this I type my abbreviation but
+
+
+um it expands so as soon as I hit space
+
+
+it expands it types it out for me it
+
+
+types out the full command and the
+
+
+command build can be arbitrary length of
+
+
+course it types out the full command
+
+
+like rebase abort rebase none whatever
+
+
+and yeah
+
+
+fish is love and this is the
+
+
+um documentation for the fish
+
+
+abbreviation command thank you very much
+
+
+Happy procrastinating
+
+
+[Applause]
+
+
+all right everyone hello uh I promised
+
+
+myself that I would do at least one
+
+
+conference talk this year and it's
+
+
+already September so I kind of have to
+
+
+do it now uh so build your own and turn
+
+
+on command line tools uh before I begin
+
+
+uh hello this is me yes mihao and this
+
+
+is my cat uh I'm working on help link my
+
+
+card doesn't
+
+
+um just to give you a brief overview of
+
+
+help link uh we have like two full stack
+
+
+developers six back-end developers two
+
+
+Swan Junior and six front-end developers
+
+
+and this will be a bit important for the
+
+
+rest of the story uh and help link
+
+
+actually runs in multiple countries and
+
+
+each of those countries we are running a
+
+
+separate application it's not
+
+
+multi-tenant and for each of those
+
+
+countries we actually run two
+
+
+applications because we run the
+
+
+client-side in the admin separately
+
+
+um
+
+
+and when we are running this code
+
+
+locally when we're developing we used to
+
+
+use vagrant but then we converted to
+
+
+Docker and Docker compose for all the
+
+
+great reasons that I'm not gonna go into
+
+
+right now because I don't have time
+
+
+um so vagrant was just a VMS it was easy
+
+
+to just connect there to vagrant SSH and
+
+
+then treat it like it's your local
+
+
+machine so not a problem you can run all
+
+
+your race commands but Docker is a bit
+
+
+more complicated it has multiple
+
+
+containers it have different syncing
+
+
+strategies on Mac and on Linux you we
+
+
+need to pass the country environment
+
+
+flag because as mentioned all those
+
+
+countries run differently
+
+
+um and we also have like our test
+
+
+container in a separate configuration
+
+
+file so we are not starting them
+
+
+automatically when we are starting
+
+
+everything else
+
+
+probably it can be simplified now it
+
+
+could have it couldn't be simplified
+
+
+when we're setting this up initially
+
+
+um so because Docker is more complicated
+
+
+we had a documentation with a bunch of
+
+
+huge commands that you had to copy paste
+
+
+or actually do anything and uh
+
+
+you can probably guess that copy pasting
+
+
+commands from Confluence is not a good
+
+
+developer experience
+
+
+so we created our own internal tool
+
+
+called helpling tool Bolt
+
+
+and for the version 1.0 we use we use
+
+
+thaw and then we migrated to dry CLI
+
+
+because it allows it allowed us to have
+
+
+a slightly better
+
+
+we could have made the commands read
+
+
+better basically because it's uh easier
+
+
+to do complicated stuff there compared
+
+
+to so
+
+
+and we are also using TTY toolkit we are
+
+
+not using their uh command line uh
+
+
+runner but we are using a lot of tools
+
+
+from them like progress boss and
+
+
+everything it's really great you should
+
+
+really try this out
+
+
+so the two was very simple at the
+
+
+beginning we just copy pasted stuff from
+
+
+the documentation and gave them nice
+
+
+names but it started growing we started
+
+
+extending it we started adding more
+
+
+logic there we started adding some
+
+
+automated fixes for the common problems
+
+
+and it kind of grew pretty nicely this
+
+
+is from the latest version I actually
+
+
+run this made the screenshot like an
+
+
+hour ago I guess and these are not all
+
+
+commands because as you can see it also
+
+
+has sub commands so we can do a lot of
+
+
+stuff with this and we also have support
+
+
+for just starting stuff and you can see
+
+
+that there are some extra options that
+
+
+you can do we can make it easier to run
+
+
+a profiler we can run it with like a
+
+
+production version I believe oh sorry
+
+
+it's not here yet uh yeah but basically
+
+
+we can like do a lot of nice stuff
+
+
+and we also support front-end and our
+
+
+front-end users both webpack and Expo so
+
+
+we have to support both uh regular
+
+
+JavaScript and also native so we also
+
+
+have a lot of nice scripting to make
+
+
+sure that all of that works properly
+
+
+so before the hopelink tool belts uh it
+
+
+was a massive pain in the ass to
+
+
+actually work with that stuff like
+
+
+manually copying those commands was
+
+
+horrible front-end developers had no
+
+
+idea how to actually run rails commands
+
+
+so they needed constant help back-end
+
+
+developers had no idea how to run
+
+
+JavaScript commands so they needed
+
+
+constant help as well
+
+
+and after the tool belts like all the
+
+
+commands now they have a nice
+
+
+description there is a in built-in
+
+
+documentation because dry uh CLI
+
+
+actually uh like it
+
+
+it makes it very easy to add
+
+
+documentation to your command line tool
+
+
+it actually tries to talk you into doing
+
+
+that all the time uh also because of the
+
+
+recovery of the most common issues we no
+
+
+longer have to worry about front-end
+
+
+developers not understanding what the
+
+
+database migration is or backends
+
+
+developers not understanding that they
+
+
+need to install the node modules again
+
+
+because there was some update and as a
+
+
+bonus because we moved all the handling
+
+
+and all this logic we were able to
+
+
+actually run our end-to-end test as well
+
+
+using a test rail server that is running
+
+
+on the CI and it basically reuses 90 of
+
+
+what we are already doing for the local
+
+
+development and this way we can have our
+
+
+end-to-end test hit the real API server
+
+
+even with the front-end applications
+
+
+so time recovered money saved Hotel I'm
+
+
+not gonna do an advertisement here so
+
+
+build your own internal command line
+
+
+tools save your time save your team time
+
+
+it's gonna be great
+
+
+thank you all
+
+
+[Applause]
+
+
+hi I'm highly competitive person if you
+
+
+are too and this is a talk for you so I
+
+
+always wondered like whenever I do I
+
+
+want to be there like the best in the
+
+
+world or the top best so and here I want
+
+
+to share some findings around uh how to
+
+
+get the best in anything you do and here
+
+
+is a little story like how to get into
+
+
+the top six percent of the richest
+
+
+person people in Poland actually it's
+
+
+not so hard because the 44 of Polish
+
+
+people according to the research do not
+
+
+have any savings so if you have one
+
+
+dollar of savings you are in the like
+
+
+top 60 percent of the richest people so
+
+
+only 35 percent of um of people in
+
+
+Poland have like more than 10k of
+
+
+dollars of savings so you know top 30
+
+
+percent of the richest people in the
+
+
+world most of you probably are or will
+
+
+be uh after this talk
+
+
+so only six percent of Polish around
+
+
+have more than like uh 25k of savings so
+
+
+just do it and you will be in the top
+
+
+six or at least top 10 percent of the
+
+
+richest people
+
+
+so here are my findings can we apply
+
+
+that
+
+
+to other fields can I be the best in
+
+
+Ruby or in top 10 top five percent in
+
+
+Ruby just by applying such similar steps
+
+
+simple steps and actually yes you have
+
+
+so
+
+
+um yeah whatever
+
+
+first of all all you can read you can
+
+
+read technical books
+
+
+um in Poland average reading is like
+
+
+less than one book per year so if you
+
+
+are reading One technical book per year
+
+
+yeah you are actually quite high already
+
+
+and then if you can stay in the job like
+
+
+for few years you will already beat
+
+
+majority of Junior people like probably
+
+
+50 of all developers have less than two
+
+
+years of experience so just beat that
+
+
+and you will be in like top 30 percent
+
+
+of of the best people in the world in
+
+
+Ruby and then
+
+
+start teaching and this scares this is
+
+
+hard but actually when you teach you can
+
+
+you need to understand the topic well
+
+
+you need to expose yourself to critique
+
+
+you need to sometimes make a stage as I
+
+
+do like right now without preparation
+
+
+and then it will be really hard so
+
+
+crossing your boundary is actually
+
+
+pushes you way harder so this is my also
+
+
+like one of the advice
+
+
+then meet people smarter than you but
+
+
+the meeting people smarter than you
+
+
+usually are like you know they have
+
+
+pretty expensive time so they will not
+
+
+want to talk to you but if you have a
+
+
+YouTube channel or a podcast or a Blog
+
+
+and the story is a little bit different
+
+
+so yeah I don't have the the image right
+
+
+now
+
+
+because something goes wrong but I
+
+
+showed I heard that in the Jason Harding
+
+
+show and that blew my mind because when
+
+
+you have
+
+
+a podcast actually people start reaching
+
+
+out to you if they can be guests in your
+
+
+podcast they are usually smarter than me
+
+
+so I have opportunity to talk to them
+
+
+and that blows my mind
+
+
+then find a mentor
+
+
+how many of you have mentally in Ruby
+
+
+cool
+
+
+so yeah
+
+
+you're beating the competition here on
+
+
+rostov and we are all in rostov so
+
+
+attending the conferences is also a step
+
+
+ahead like there are a lot of rubies in
+
+
+Poland and there are not all of them on
+
+
+um Ruby conferences and even if they are
+
+
+not all of them have Mentor like
+
+
+seriously so yeah
+
+
+these are the steps I already talked
+
+
+about this experience at the beginning
+
+
+uh but yeah
+
+
+that's my talk thank you very much
+
+
+[Applause]
+
+
+all right so this was prepared as a
+
+
+response to a previous lightning talk so
+
+
+not a lot of thought put into it like
+
+
+have you ever wanted to write the game
+
+
+but did not want to do is do it in rails
+
+
+maybe
+
+
+um
+
+
+I did and uh I found the framework uh
+
+
+for writing like roguelikes uh
+
+
+so I decided to have a look at the
+
+
+documentation and it all looks quite
+
+
+nice uh well except there's one maybe
+
+
+tiny little problem of that it's written
+
+
+in kotlin
+
+
+um so what can we do
+
+
+uh turns out we can do a little trick
+
+
+called
+
+
+J Ruby and I'm gonna just show you I'm
+
+
+just
+
+
+file admittedly it's not very fast uh at
+
+
+least especially at boot but yeah it
+
+
+booted uh
+
+
+the game is called Game Hunter and you
+
+
+are hunting for games so you just have a
+
+
+your character and you walk around the
+
+
+cave and you are supposed to find this
+
+
+this these blue gems here uh which is
+
+
+not always easy because they are blocked
+
+
+so you can you know a set of some bombs
+
+
+uh
+
+
+you can collect the uh the gems
+
+
+sometimes when you destroy the the wall
+
+
+the new jumps show up so it's just like
+
+
+little very simple example I can even
+
+
+show you that it has a box so when you
+
+
+actually walk into the fire you're
+
+
+supposed to die but you don't and
+
+
+instead there's like a quite familiar
+
+
+Ruby output so it's like it proves that
+
+
+it's actually Ruby uh to to prove it
+
+
+even more I can show you uh how the
+
+
+files look like so it uses a concept of
+
+
+entity component system so you have
+
+
+components entities such systems and
+
+
+some other stuff and also in lip we have
+
+
+like uh
+
+
+integration with with this kotlin uh
+
+
+Slash Java libraries uh
+
+
+so yeah as you can see by the way uh not
+
+
+only Android test Randomness but I don't
+
+
+test anything here uh maybe this will
+
+
+come in the future and uh yeah so
+
+
+apparently you have to have a QR code
+
+
+now in your presentation so this is a
+
+
+link to the repository you can clone it
+
+
+play around with that uh sample request
+
+
+if you want thank you
+
+
+[Applause]

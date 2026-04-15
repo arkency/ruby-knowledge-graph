@@ -1,0 +1,2935 @@
+Our first speaker today, Chica Hiro, he
+
+
+will tell us about how to deal with gut
+
+
+objects, gut models in Ruby on Rails.
+
+
+And I think that everyone had an
+
+
+experience working with beautiful user
+
+
+class that has at least 50 columns,
+
+
+right? Raise your hand or your
+
+
+coffee. Yeah. So, we got really nice
+
+
+audience. Please welcome Chikahiro.
+
+
+[Applause]
+
+
+Hello. Uh he already leaked that one
+
+
+information but let's go.
+
+
+Okay. It's okay. So it's good you wake
+
+
+up, right? So welcome. So I hope you
+
+
+will have enjoy something. So my name is
+
+
+Chikah. I will talk about for the
+
+
+monolith. My topic my topic is it's a
+
+
+monolith a problem.
+
+
+So let's
+
+
+go. So I think for the last decades the
+
+
+monolith was often blamed for several
+
+
+reasons. Let's say it's not scalable or
+
+
+it's too slow for the deployment and
+
+
+then it's a it can be very bottleneck
+
+
+for
+
+
+that. Um
+
+
+or it's a boundary is not clear. So you
+
+
+don't know what what is this object or
+
+
+what's the system doing for the
+
+
+internally
+
+
+um and also it's difficult to maintain
+
+
+or it's very complex and it's hard to
+
+
+debug right and then this is a people
+
+
+complaining about
+
+
+it and often micros service is a good
+
+
+solution for it. This was told for many
+
+
+years. Let's say I would argue about it.
+
+
+Let's see some
+
+
+fact. So this is a tweet from the
+
+
+Shopify from Toby the CEO co-founder and
+
+
+it's a monolith is not scalable in the
+
+
+Shopify in the black Friday in the 2023.
+
+
+They claim that they can process 145
+
+
+billion requests on Friday and peak 60
+
+
+million requests per
+
+
+minute. Is this not scalable
+
+
+enough? The other example deployment
+
+
+might be too slow. There's a many many
+
+
+large application in the world. So
+
+
+Facebook, Shopify million uh sorry
+
+
+Instagrams they are claiming Facebook
+
+
+they are releasing new version every 75
+
+
+minutes Shopify 30 40 times a
+
+
+day is it too slow for us
+
+
+um and microser said it's a simple and
+
+
+very easy to maintain so this is a
+
+
+typical diagram of the microservices um
+
+
+you know you may have Micros service
+
+
+hell micros service
+
+
+fue it is really easy and
+
+
+simple. The other
+
+
+thoughts sometimes technologies or
+
+
+something
+
+
+for they have that trend or cycles like
+
+
+a pendum in the between two different
+
+
+opposite directions go and back. This
+
+
+can be found not only for software
+
+
+engineering. Let's say for the
+
+
+fashion. Um I'm not fashionable person.
+
+
+I'm just happy to be having this orange
+
+
+burger. So I cannot tell well. But you
+
+
+can see that for in the decays the time
+
+
+scen for the our industry. Now we are in
+
+
+2025. So let's see in that time scale of
+
+
+decades.
+
+
+10 years ago it was one of like
+
+
+significant book was published building
+
+
+microservices from some I believe it's
+
+
+new um pronunciation might be wrong but
+
+
+from some and same year kubernates was
+
+
+published which is significant
+
+
+infrastructure for the microservices and
+
+
+this is not the same year it's kind of
+
+
+gradual but net freaks was was claimed
+
+
+as a very the example of the
+
+
+microservices and even they are doing
+
+
+very well and also they are later
+
+
+sharing very nice interesting ideas like
+
+
+chaos engineering or testing production.
+
+
+So that was happening for the this
+
+
+decade. Let's go back 10 more
+
+
+years. 2004 rails was
+
+
+invented. That time was not famous yet.
+
+
+But um I think after two years 2006 I
+
+
+think Twitter was bootstrapped by Rails.
+
+
+I think this is a one of first major
+
+
+applications by the way Twitter later on
+
+
+I think after two three years 2008 or n
+
+
+they move to scala you know that time
+
+
+people what people say that oh oh ladies
+
+
+is not scalable enough so ladies is gone
+
+
+so this popular it's a hype can you tell
+
+
+me was it
+
+
+true
+
+
+2008 GitHub was founded by lubon
+
+
+rails. We go a little further more old
+
+
+decades. It's not 10 years but
+
+
+1998 XML RPC was published. It become
+
+
+later down SOAP which is basic
+
+
+information basic basic technology of
+
+
+the service oriented architecture S OA
+
+
+and that time especially for enterprise
+
+
+applications so they are brooming about
+
+
+S
+
+
+SOA the example there's a famous leak
+
+
+document from Amazon that 2002 they
+
+
+moved from monolith to be
+
+
+serviceoriented architecture and they
+
+
+succeed and later on they make this API
+
+
+to the public. This become
+
+
+AWS. So now you can see that there's a
+
+
+wave we are in the
+
+
+2025. So what's going to happen right
+
+
+now? There's a report from thought
+
+
+works. They are a consultancy and then
+
+
+they are also very well known for the
+
+
+tech leaders and um you know multi
+
+
+followers. So multif followers is here
+
+
+they published report for the last year
+
+
+macro trends in the tech industry and it
+
+
+sets model seats rise again.
+
+
+The other example
+
+
+2023 Amazon Prime
+
+
+Video they are saying that they move
+
+
+from micros service to be monies and
+
+
+then they claim they reduce cost by
+
+
+90%. A bit fair I heard they are moving
+
+
+from serverless lambdas to
+
+
+mon even further for the microservices.
+
+
+Oh, this is so dramatic but but anyway
+
+
+this is a direction what they
+
+
+took. Um the another might be more
+
+
+specific for us. This is a trend of the
+
+
+sorry Google search trend of the Ruby
+
+
+and layers. You can see time scale is
+
+
+like you know 10 years like from 2004
+
+
+and Ruby and Rails you can easily
+
+
+imagine that they are very tightly
+
+
+coupled for the trend
+
+
+and in
+
+
+2025 we can see Rails is
+
+
+spiking and probably not sure the reason
+
+
+but probably late a was published on
+
+
+November in
+
+
+2025 might be the reason Um this might
+
+
+be just more latest specific because if
+
+
+you see other like for the frameworks
+
+
+let's say spring or nextjs or jungles
+
+
+but you can see that it's spiking is a
+
+
+layers and spring goes a little bit but
+
+
+but this is for your
+
+
+information. So back to the topic we all
+
+
+have to know in my opinion there's no
+
+
+silver
+
+
+bullet monies micros service are
+
+
+architectures which has own pros and
+
+
+cons. We go a little bit deep deep look
+
+
+into it. So okay we have two
+
+
+architectures languages for sure uh
+
+
+monis is monolingual and micros service
+
+
+can be multilingual I mean you can use
+
+
+for the different languages per services
+
+
+this is one of significant benefit for
+
+
+the
+
+
+microservices and c and deployment the
+
+
+tendency is modist is slower because
+
+
+it's a bigger system and microservices
+
+
+one service is tend to be simple and
+
+
+small. So it can be
+
+
+fast but if you think about for the
+
+
+infrastructure this is a comparably
+
+
+monies can be also complex but compared
+
+
+with
+
+
+microservices it's a simpler and
+
+
+typically you need kubernates for the
+
+
+infrastructure which is also very heavy
+
+
+to
+
+
+maintain
+
+
+latency microservices they need to
+
+
+communicate something API maybe network
+
+
+might be involved over something message
+
+
+bus. So latency is higher than
+
+
+monolith scaling. This is a typical
+
+
+strategy for the scaling. Um monolith is
+
+
+uh typically using for the scale up.
+
+
+It's a particles other word is a
+
+
+particle. This means like for okay you
+
+
+have one machines make it bigger. This
+
+
+tend to be high cost and
+
+
+limited microservices they tend to use
+
+
+for the or typical scenario for the
+
+
+scaling is a scale out horizontal you
+
+
+can put m machine as much as possible.
+
+
+So it's tend to be low cost and
+
+
+unlimited
+
+
+tracing. Um so mon is a single instance
+
+
+but for the microservices it's a
+
+
+multiple instances I always show you for
+
+
+the diagrams it's it's often you need
+
+
+something for the
+
+
+special
+
+
+boundary
+
+
+tendency mod can be vague
+
+
+um micros service can be clear or you
+
+
+have to define otherwise you maybe API
+
+
+contract or payroll contract otherwise
+
+
+you can't make it so boundary is
+
+
+here and one thing for the micros
+
+
+service maybe to understand
+
+
+microservices probably I think it's a
+
+
+good thing it's it's to be considered is
+
+
+a con way low simply say that it's um
+
+
+the system architecture is reflecting
+
+
+that your organizational
+
+
+communication microservices can be a
+
+
+more solution for the autonomy for
+
+
+scalability of
+
+
+organization and this is for also I
+
+
+quote some like some note from the
+
+
+building microservices second version
+
+
+from again sum and he also said that
+
+
+microservices it's often a bad choice
+
+
+for brand new products or
+
+
+startups I quote another example from
+
+
+Christian from Euro there are startups
+
+
+out that they have more microservices
+
+
+than
+
+
+customers. Yeah, that's a nice
+
+
+situation,
+
+
+right? So, and uh I would give another
+
+
+aspect for the microservices. Um this is
+
+
+um coming from my friend in order to use
+
+
+my in order to use another
+
+
+component my moni is a just method call
+
+
+for sure and micros service can be API
+
+
+call which can be
+
+
+failed that means you have to implement
+
+
+retry mechanism or even further socket
+
+
+breakers monist never failed you don't
+
+
+need it for
+
+
+The question is is it essential
+
+
+complexity my friend he worked for the
+
+
+micros service company for the for a
+
+
+while I think it's uh four five years in
+
+
+the end he hates it because of this so
+
+
+and he didn't find fun or he didn't find
+
+
+this is a essential thing to be he's
+
+
+doing for
+
+
+work microservices is coming with
+
+
+infrastructure
+
+
+cost so back to The first question is
+
+
+the monolith a
+
+
+problem? I don't think so.
+
+
+No. But what's the
+
+
+problem to think about for for it? And
+
+
+then there's another interesting tweet I
+
+
+would
+
+
+quote. It is from the GitHub XCO JSON
+
+
+and they tried to break down monies to
+
+
+be micros service and then he said he
+
+
+really regret about it. It's one of the
+
+
+biggest mistake instead he suggest on
+
+
+this order monis app service and
+
+
+microservices what does it mean?
+
+
+So there might be
+
+
+between maybe we know it as modular
+
+
+monies. Um what's a mon modular monies?
+
+
+I picked some like for presentation from
+
+
+Sam and he's alo explaining modular
+
+
+monies is having the kind
+
+
+of advantage of the micros service as
+
+
+well but it's like deploy in one object
+
+
+so it's not not deploying via services
+
+
+but inside of the mon system they have
+
+
+the clear boundaries and he also
+
+
+mentioned that it is often
+
+
+underestimated it can be good
+
+
+option and for us Shopify they have nice
+
+
+gems. I think you might know it called I
+
+
+believe parkwork but this is essentially
+
+
+you can put the modularity or boundary
+
+
+inside of your applications. This is
+
+
+kind of llinter. So it can define like
+
+
+you know if you're violating for the
+
+
+packages then so then it can tell you
+
+
+are violating
+
+
+boundaries and now back to little for
+
+
+the trend. So we are seeing that you
+
+
+know this trend is go and
+
+
+b I think so for the next decade would
+
+
+be the era of modular
+
+
+monies and it already mentioned that for
+
+
+the report which I already referred that
+
+
+for the thought works it said monies
+
+
+lies again
+
+
+particularly modular monolithic
+
+
+approach. So then now now we know what
+
+
+to do. Yay. So everything can be
+
+
+solved. So there's no silver bread last
+
+
+year in the rails world from
+
+
+Shopifying and she shared a very nice
+
+
+presentation. I would recommend to see
+
+
+it the mice of the modist. So it doesn't
+
+
+solve problem not always.
+
+
+And if you we want to go for monolith to
+
+
+be modular modist high cohesion it's
+
+
+necessary but
+
+
+instead what I seen in many many project
+
+
+is actually this got object and if you
+
+
+have it actually you can't
+
+
+move I think this is a
+
+
+problem what's a good object or can
+
+
+class it is a
+
+
+antipatter single object nodes does too
+
+
+much as a characteristic it's tight
+
+
+coupled poor
+
+
+cohesion it's hard to
+
+
+maintain can be not clear boundary
+
+
+because it knows so so many things it is
+
+
+simply the ball of
+
+
+mud and the story maybe I can share
+
+
+So you want to change the user
+
+
+registration logic and somehow it breaks
+
+
+payment
+
+
+feature. So because it's nodes so much
+
+
+maybe you just change a user object then
+
+
+somehow it affects another things
+
+
+because it is tightly coupled. This is
+
+
+kind of for the symptom of the got
+
+
+object. So example of got object by
+
+
+code. So you may have a lot of concerns
+
+
+to be
+
+
+included and so many another model was
+
+
+uh
+
+
+related. You have a lot of
+
+
+callbacks more than thousands of
+
+
+lines a lot of the field on the
+
+
+database. Uh for me it's very horrible.
+
+
+So uh back to the first slide we saw
+
+
+some like complaints about all the model
+
+
+is not scalable I don't think so maybe
+
+
+it's enough for the 140 billion for
+
+
+request in the in the one day deployment
+
+
+book bottlenecks yeah every like every
+
+
+30 40 minutes it's pretty enough but
+
+
+still remain this problems or
+
+
+complaints those are can be
+
+
+characteristic of got object
+
+
+So and even another aspect even if you
+
+
+want to go for the microservices but if
+
+
+you have got object you can't instead
+
+
+you can get very very dependent
+
+
+dependent services you may have you may
+
+
+have to deploy together with those
+
+
+services and it's hard to
+
+
+maintain there's a name for this pattern
+
+
+so does anyone knows
+
+
+Great. Yes. Distributed
+
+
+monolith even worse. So you don't get
+
+
+you don't get solve original problems
+
+
+and then even you get much harder
+
+
+infrastructure cost and burden for the
+
+
+deployment. To be honest I saw many
+
+
+praise in this one. They claim to the
+
+
+microservices but this is
+
+
+mess. Um so if you want for for the
+
+
+defactoring to the got object to be high
+
+
+cohesion I would say like there's just
+
+
+simply two steps so better model design
+
+
+and
+
+
+defactoring so let's discuss for the
+
+
+first one the first step for for for
+
+
+here but where the got object come from
+
+
+I saw again I saw many project and it's
+
+
+so common but
+
+
+why I think one thing it's
+
+
+uh think is a dry or I would say
+
+
+understand dry better don't repeat
+
+
+yourself I think everyone
+
+
+knows this is the idea coming from the
+
+
+the programmatic programmers from Andre
+
+
+Hunt and David Thomas and just for the
+
+
+quote for the definition every piece of
+
+
+knowledge must have a single ambiguous
+
+
+oh sorry my pronunciation so
+
+
+authoritative representation within a
+
+
+system
+
+
+The point
+
+
+is
+
+
+knowledge not for the
+
+
+code. I was lucky because in the last
+
+
+year ago Dave Thomas was there. I had a
+
+
+chat with him and he is actually legal
+
+
+about it for this dry explanation
+
+
+because he thought he did poor
+
+
+explanation and people
+
+
+misunderstood. By the way I've met him
+
+
+the 10 years back in the Tokyo. So that
+
+
+I was happy to talk with him more
+
+
+because that time I couldn't speak
+
+
+English well. So then now I could more
+
+
+communicate with it. So then yeah maybe
+
+
+I can see him next 10 years hopefully
+
+
+much earlier. But anyway okay so back to
+
+
+the topic what does means for the
+
+
+knowledge take the
+
+
+example you have customer and invoice
+
+
+and received. So this is our modeling
+
+
+and here this is code looks like and you
+
+
+can see the duplicated
+
+
+code
+
+
+H let's go for dry up for this duplicate
+
+
+code.
+
+
+So for instance then you can introduce
+
+
+for the SDI to be here and you introduce
+
+
+document object and then it with type
+
+
+and then now see the code now there's no
+
+
+duplicate duplicate code. Yeah
+
+
+great and but business told you that ah
+
+
+receipt it's should issued after invoice
+
+
+was paid for sure. Okay, then let's
+
+
+implement this logic now. So receipt is
+
+
+here and then you override for the like
+
+
+super class of the issue and then put
+
+
+the validation for it and also in the
+
+
+invoice invoice model. So you put for
+
+
+the paid and also you can put for the
+
+
+here for the document. So you can put
+
+
+for the new column for the paid out and
+
+
+then now next
+
+
+requirement invoice can only be issued
+
+
+for company not for the
+
+
+customer. Okay let's introduce next one.
+
+
+So
+
+
+now makes more like adding another
+
+
+differences to the company of company
+
+
+model and also puts the valation as well
+
+
+because invoice is only for the company
+
+
+and then receipt for the customer. So
+
+
+let's put a validation here in the
+
+
+model. Now next requirement after
+
+
+issuing invoice it should generate
+
+
+PDF. Okay fair enough let's introduce
+
+
+yeah so and now PDF is here module is
+
+
+here. So then now invoice having the
+
+
+difference with it and also override for
+
+
+the issue again and then build a PDF
+
+
+method and also now so PDF have the
+
+
+references to the invoice but actually
+
+
+this is a document because the SDI yeah
+
+
+nice so but see for this document
+
+
+object doesn't look
+
+
+like
+
+
+object so so back to the first one
+
+
+customer invoice receipt. What I say
+
+
+it's
+
+
+knowledge invoice and receipt are
+
+
+different. This is the knowledge
+
+
+particularly more I can said domain
+
+
+knowledge because they are different
+
+
+papers they are different time of the
+
+
+different time to the issue.
+
+
+This code duplication might be
+
+
+coincident this is a
+
+
+similarity if you keep as it is don't do
+
+
+try for the this for the duplicate code
+
+
+then so it is another implementation
+
+
+what I showed so but now it's clear
+
+
+relationship is only for the invoice and
+
+
+then also probably at the most you can
+
+
+do maybe for the put is the concerns for
+
+
+the just for
+
+
+issuing feature but this is maybe at the
+
+
+most even also depends on context but so
+
+
+this is might be you can do for the dry
+
+
+and then so compare these two this
+
+
+diagrams and
+
+
+then you can see for the last one
+
+
+there's a clear modules and
+
+
+boundaries I would say modularity or
+
+
+cohesion or boundary
+
+
+They appear
+
+
+naturally. Some said modular model is
+
+
+something you are not going to pass. If
+
+
+you do modeling properly then it may
+
+
+come. So it will be passive
+
+
+result. So for understanding more better
+
+
+model design. So this is actually for
+
+
+the drive but also domain driven design
+
+
+it's also helping. So this is coming
+
+
+from the Matias I he's also I think it's
+
+
+a good person for the DDD. I took once
+
+
+his workshop and it was mind blooming or
+
+
+it's eye opening. Yesterday also was a
+
+
+nice nice talk for the DDD as well. So
+
+
+DDD but I think it is really helpful to
+
+
+the understanding about the model
+
+
+design. I'm also learner so I cannot say
+
+
+I'm the expert but this blog post is
+
+
+also like recommend to read it. It's
+
+
+very simple.
+
+
+So another example for the mix model you
+
+
+may not put the invoice on the receipt
+
+
+for the STI but
+
+
+user don't you have it I saw many
+
+
+place it can be different
+
+
+model another example the article and it
+
+
+has a author and the article has a
+
+
+status draft scheduled and published
+
+
+That can be different models. Maybe
+
+
+article and draft articles. They may
+
+
+have very very similar attributes but
+
+
+they are different behaviors and
+
+
+schedule might be just relationship.
+
+
+Just
+
+
+example. Another example like you have
+
+
+the order which is related with customer
+
+
+product and order has a status accepted
+
+
+and shipped.
+
+
+order and shipment can be different
+
+
+domains. So it knows maybe too
+
+
+much. Um now we saw a little bit for the
+
+
+how to see the better modeling and and
+
+
+go to defactoring code object. So and if
+
+
+you have
+
+
+but it takes really time because if you
+
+
+already have so and maybe you have to
+
+
+maintain for the backwards comp
+
+
+compatibility or many things already
+
+
+accumulated it's a typical like for the
+
+
+tech depth and what you see in the in
+
+
+the surface might be
+
+
+only little
+
+
+bit therefore I in the practical ad
+
+
+practical advice I would recommend to go
+
+
+with clear business
+
+
+merit maybe you don't go for the
+
+
+refactoring in sake of refactoring maybe
+
+
+you cannot go for say to that okay six
+
+
+months I we need refactoring it's maybe
+
+
+not sounds good and it might be I mean
+
+
+the reality it might be
+
+
+trouble therefore example
+
+
+um I had application which already have
+
+
+like type with users and okay so this is
+
+
+not not the words as a super good object
+
+
+but it was there and then there's
+
+
+another requirement from the business we
+
+
+want to have another new application
+
+
+with single sign
+
+
+on let's take it as a chance for the
+
+
+refactoring with this clear business
+
+
+goal so for instance so the application
+
+
+a Now so let's say so for the single
+
+
+scan authentication matter there's a two
+
+
+um significant column for it first
+
+
+application a extract this columns to
+
+
+the another model inside application
+
+
+user o it's nothing special like for
+
+
+that here so just put it here and then
+
+
+so put for the uh relationship here but
+
+
+at least one responsibility from user
+
+
+was extracted did and next step what I
+
+
+did in that time is uh sorry so that's
+
+
+some application level so you can have
+
+
+like more like little move for the
+
+
+responsibility as well and next step
+
+
+what I did
+
+
+is go with layers engine I extract the
+
+
+layers engine for the same one for the
+
+
+user also and having different
+
+
+databases because I need for the mount
+
+
+for
+
+
+new application and then so extract some
+
+
+logic to be module to the concerns and
+
+
+then so application is mounting to the
+
+
+latest
+
+
+engine and next step is easier so just
+
+
+for the new application
+
+
+it's mounting the engine again so this
+
+
+is like one architecture I did to be
+
+
+fair I worked this project for I think
+
+
+almost 10 years ago so that time l was
+
+
+not supporting for the multiple
+
+
+databases
+
+
+I think it's latest 7. It's already
+
+
+support for the multiple database. So
+
+
+you may not need it. So but it is a one
+
+
+of example what you can do and it
+
+
+worked. Um so this might be the example
+
+
+of the another modular model. Modular
+
+
+modules can have multiple databases. So
+
+
+it it it should not it is not should be
+
+
+uh sorry it is not always one database.
+
+
+So and this option also like not so many
+
+
+company does it. Um then for another
+
+
+example the order has a lot of status
+
+
+new ordered paid fulfilled shipping
+
+
+finished etc etc. So it's a mixing
+
+
+domains it's a order processing payment
+
+
+fulfillment shipment. It has a lot of ex
+
+
+problems but for just pick some more
+
+
+problem for instance order cannot track
+
+
+multiple shipments that's a problem for
+
+
+the business and related order needs
+
+
+another order to be tracked another
+
+
+problem and changing order needs
+
+
+repayment because may you in the order
+
+
+needs to
+
+
+recreate so this can be like for the
+
+
+Another example like to be defactor how
+
+
+can model can
+
+
+be the another tips if you want to for
+
+
+defactoring
+
+
+um I would not recommend for the big
+
+
+quantities you know it can be really
+
+
+risky and then so don't go for like
+
+
+everything in
+
+
+once
+
+
+instead I would recommend for the
+
+
+slicing the future with ka business made
+
+
+it. And for instance, now we have this
+
+
+order. Maybe next step you can just
+
+
+track multiple shipments and then you
+
+
+put extract like one of responsive from
+
+
+order and and the next step maybe you
+
+
+can make multiple orders from the
+
+
+basket and in the last you don't need to
+
+
+repayment with slicing with clear
+
+
+business merit and it makes easier for
+
+
+the to the convince to the business side
+
+
+as well.
+
+
+uh for example like for the first step
+
+
+order can trap multiple segments okay
+
+
+let's say you have for the in the order
+
+
+that this is related for the fields and
+
+
+for the method obviously there's much
+
+
+much more but just for the
+
+
+simplified and then here so you can make
+
+
+for the make the relationship to be here
+
+
+so this like this field to be moved to
+
+
+the shipment probably Address states for
+
+
+the duplicated because order also needs
+
+
+address and shipment also needs address
+
+
+but tracking number shipped at might be
+
+
+just go to created art for the
+
+
+shipment and also this order ship method
+
+
+might be just initialized method.
+
+
+Wonderful example. So um and also the
+
+
+other things again for the big band for
+
+
+the lowout not only for the feature but
+
+
+if you go for the release also it's not
+
+
+recommend to the big one because it is
+
+
+really
+
+
+risky instead I recommend for the
+
+
+incremental release maybe you can use
+
+
+this really intense pattern to use it's
+
+
+a strangler fig it is from Martin follow
+
+
+it's basically like for you don't go for
+
+
+you don't go for one time it's switch
+
+
+you make for the like proxy or something
+
+
+here and gradually move
+
+
+um and unfortunately I don't have that
+
+
+much time to be explain to be here but
+
+
+there's a really nice post blog post
+
+
+from the Shopify how they can do in the
+
+
+real life and this is really explaining
+
+
+with real good real code and and with
+
+
+huge applications you may not have to
+
+
+maybe you don't have the database
+
+
+downtime. It's often your case and also
+
+
+you have like sient bigger data like
+
+
+let's say migration takes like days then
+
+
+but this is this is short example allows
+
+
+you to how to
+
+
+do so
+
+
+recap in some
+
+
+problem no I don't think so
+
+
+um there's a tendency that to blame
+
+
+technologies let's say oh ladies is bad,
+
+
+Java is bad, mon is bad, cobalt is bad.
+
+
+But was it true? Are you really saying
+
+
+about for the real
+
+
+problem? What I seen my opinion the
+
+
+problem is often got object. It is a
+
+
+issue of modeling.
+
+
+to fix cut object. The first step is a
+
+
+no star modeling understanding dry plus
+
+
+DDD will
+
+
+help and then go to refactoring with
+
+
+incremental release with clear business
+
+
+merit for the techniques. techniques for
+
+
+the incremental release is I already
+
+
+mentioned for the strong graphic um I
+
+
+didn't I didn't explain but probably you
+
+
+can use for the feature frag for the
+
+
+gradual roll out
+
+
+or there's a technique called shadow
+
+
+traffic which is actually we had a nice
+
+
+talk from uh Simon yeah so the what he
+
+
+mention about his technique it's it's
+
+
+actually shadow traffic do you remember
+
+
+for the for the recording for the
+
+
+traffic and for the or do the put it for
+
+
+the new module. This is a technique
+
+
+called shadow
+
+
+traffic. So this kind of technique you
+
+
+can
+
+
+use. Thank you so much. So I hope you
+
+
+have something interesting. So that I'm
+
+
+also like I think you have also many
+
+
+many experiences as well. I'm very happy
+
+
+to have a chat with you. I'm also be
+
+
+learner. So thank you so much.
+
+
+[Applause]
+
+
+Thank you. Great talk. Any questions?
+
+
+So Q&A is not my best time. I'm very
+
+
+very
+
+
+Have a question. Thanks for the talk. It
+
+
+was very interesting. Uh I think that uh
+
+
+splitting uh models into like like big
+
+
+models like document into separate
+
+
+models like invoice and received is
+
+
+generally a good idea. But when trying
+
+
+it, I often found uh like a problem
+
+
+where there was a requirement where the
+
+
+business said, "Oh, but I want to see
+
+
+all my documents in uh like in a table
+
+
+and if I have a separate receipt and
+
+
+invoice, then it makes it kind of hard
+
+
+to display all the documents and potent
+
+
+what's worse they need sorting it
+
+
+pagination and this sort of stuff."
+
+
+Okay. So do you have like any thoughts
+
+
+on solving this kind of problem? Yes. So
+
+
+um this is um another reason probably
+
+
+there's many got objects it's it's
+
+
+common because for the it's what me it
+
+
+can be denormalization for the database
+
+
+level like for because for the
+
+
+requirement for the lead operations so
+
+
+like pagination or like let's say for
+
+
+recept and invoice like you want to have
+
+
+the search so this kind of stuff yeah so
+
+
+I would say this is a separate concerns
+
+
+with the modeling so but understand for
+
+
+lead So read operation and write
+
+
+operation they can have the different
+
+
+requirement. So what I saying is more
+
+
+like for the modeling and write
+
+
+operation is important is the database
+
+
+data integrity and consistency but read
+
+
+operation often you need for this kind
+
+
+of performance issues to be here then
+
+
+maybe you can use for the materialized
+
+
+view or maybe elastic search but this is
+
+
+a separate concerns with modeling. So
+
+
+and also like what to put what to put
+
+
+here in attributes it's really depends
+
+
+on context. So like it I in this example
+
+
+is a one of example but maybe in the
+
+
+business case might be the case that you
+
+
+know something for the there some
+
+
+another model you can find but this is
+
+
+particular finding this kind of for the
+
+
+modeling it's maybe DDD it's useful so
+
+
+but does it make does it answer your
+
+
+question? Great.
+
+
+Thank you. Any other questions?
+
+
+Thanks for the talk and I have a more
+
+
+business maybe related question. So in
+
+
+your experience uh have you found some
+
+
+kind of metrics or measurements so that
+
+
+you can
+
+
+say that the refactoring you're making
+
+
+and the changes in the modeling you're
+
+
+making are actually having impact on the
+
+
+product or on the business basically the
+
+
+business merit maybe in a way so
+
+
+I see okay yeah uh yeah I explain for
+
+
+the career business made but this is
+
+
+more of product features but probably
+
+
+for the refactoring so I mean uh metrics
+
+
+is a it's a very good question I believe
+
+
+and to be honest I don't have the good
+
+
+answer yes and good answer yet and I
+
+
+also like interested but some I just
+
+
+share my some idea for instance
+
+
+refactoring so in theory and maybe we
+
+
+all know that you know uh not refactored
+
+
+code and refactor compared with
+
+
+refactoring refactored well refactored
+
+
+code and not refactored code. So the
+
+
+time of the change it's significant
+
+
+different. So this is maybe but it's a
+
+
+for the new feature. So because if you
+
+
+new feature and if the code is already
+
+
+messed then you need more time and also
+
+
+maybe it's a time for the let's say the
+
+
+random metric is a time for the new
+
+
+feature and the another another metric
+
+
+can be the bug. So if you have the mess
+
+
+then it can be unstable.
+
+
+And the another metrics uh I had a close
+
+
+but come across but sorry I
+
+
+forgot. Yeah. So but so sorry in the in
+
+
+the answer is I also don't know and I
+
+
+would happy to discuss if you have any
+
+
+idea. Yeah. Thanks.
+
+
+Hey thanks thanks for the talk was
+
+
+really nice. Erh going back to the got
+
+
+objects do you think that they are a a
+
+
+consequence of inheritance? So let's say
+
+
+we have a project without inheritance
+
+
+where inheritance is forbidden. Would
+
+
+that prevent God object from appearing?
+
+
+What do you think? Uh inheritance in
+
+
+means a more object-oriented
+
+
+perspective. Yep. Uh
+
+
+yeah in my opinion so inheritance is
+
+
+really limited. Yes I agree. So and and
+
+
+I think it's Sandy Mates mentioned that.
+
+
+So um ded delegation is better than
+
+
+inheritance or something like that. I
+
+
+mean I put I didn't explain well but
+
+
+it's a concerns I put in one example.
+
+
+It's a it isn't inheritance but it's a
+
+
+delegation or like for extract of data.
+
+
+So um yeah I think so inheritance is one
+
+
+of might be uh programmatic and it's
+
+
+it's it's not so often at least for me I
+
+
+mean in the text book you can say that
+
+
+if you have the common to be having like
+
+
+let's say cat and dog you can introduce
+
+
+the like parent class of the I don't
+
+
+know animal or something but in the
+
+
+reality it's not so often I agree
+
+
+inheritance can be careful Oh.
+
+
+Yeah. Thank you for the talk.
+
+
+understanding uh how to split the things
+
+
+into modules and seeing the boundaries
+
+
+of what is one big thing but the other
+
+
+big thing is educating the team on the
+
+
+same stuff and uh I wonder if you have
+
+
+such experience and how did it
+
+
+go yes
+
+
+so and
+
+
+so I think this is like one of four
+
+
+point and that's why I wanted to make
+
+
+this presentation by the way so you know
+
+
+the for the dry so and
+
+
+like I no this is not about knowledge
+
+
+but it's sometime I feel like for okay I
+
+
+think this is a separate object but
+
+
+sometime I had also like very conflict
+
+
+you know like oh no this is like you
+
+
+know you can be you know it is a
+
+
+duplicated something and this
+
+
+is yeah I also sometimes struggle and um
+
+
+if you have a if you ask me about you
+
+
+have a experience or not yes I have an
+
+
+experience and you know how then
+
+
+uh I don't know yet it's sometimes hard
+
+
+but I but to be honest I also having
+
+
+this kind of mistake a lot so then then
+
+
+slowly slowly I noticed and then so then
+
+
+now I come to be here but
+
+
+this I I cannot say I'm like expert so
+
+
+but at least like you know this is it
+
+
+was my process I was not understanding
+
+
+well if I sent 10 years back and if I
+
+
+see this slide I may not be understand
+
+
+so yeah maybe
+
+
+I would just add to that just invite
+
+
+your friends next year to the conference
+
+
+can learn together and then discuss the
+
+
+ideas. Uh okay, we have time for one
+
+
+more
+
+
+question. Thank you for your great talk.
+
+
+Um from my experience I would say that
+
+
+we had one big monolith and it was
+
+
+decided by the team and by the technical
+
+
+management to uh apply uh modular
+
+
+monolith like split it into the domains
+
+
+and have
+
+
+boundaries and uh you mentioned one
+
+
+interesting gem um
+
+
+packwork but um I would say from our
+
+
+experience
+
+
+um if We would like to apply
+
+
+such splitting
+
+
+uh and applying modular monolith and use
+
+
+specwork. Uh it comes difficult with
+
+
+ruby on rails because we have you know
+
+
+such things like inheritance. Uh someone
+
+
+already mentioned that we have this uh
+
+
+rails things has one has many belongs
+
+
+to. And if we say
+
+
+that we would like to ensure that for
+
+
+example payment domain and all service
+
+
+classes uh inside this payment domain
+
+
+will uh call subscription domain only
+
+
+through one class through through one
+
+
+point maybe some g uh gateway if we
+
+
+specify the
+
+
+dependencies. Uh how would we ensure
+
+
+that uh on the fly
+
+
+um Ruby uh doesn't call objects
+
+
+um from one domain
+
+
+um to to uh another because if we use
+
+
+static analyzers like backwork we can
+
+
+ensure that only constants right um not
+
+
+calling each other because it's a static
+
+
+analyzer but how to deal with uh object
+
+
+to object calls. If we split into the
+
+
+domains and uh we want to ensure that
+
+
+one domain doesn't call another domain
+
+
+and how to deal with these things like
+
+
+has many belongs to and in inheritance
+
+
+if we
+
+
+uh would like to say that um these two
+
+
+domains cannot call each other directly
+
+
+they should do it through one point.
+
+
+Thank you.
+
+
+So your question is like like okay you
+
+
+have like one of like big big module and
+
+
+so it's coding and it's hard even pacqua
+
+
+cannot detect for this kind of for the
+
+
+violate. Yeah
+
+
+okay
+
+
+so yeah it's a I can I can say can I
+
+
+answer this? Oh yeah sure go ahead. So
+
+
+one thing that we did in my project was
+
+
+that um we put active boundary on active
+
+
+record uh not statically but dynamically
+
+
+meaning that if one engine is trying to
+
+
+make changes in a domain that belongs to
+
+
+another engine it can only do it via its
+
+
+public API. So if you try to directly
+
+
+you you can read whatever you want
+
+
+whatever is exposed by active record but
+
+
+if you try to change it uh it's detected
+
+
+that you didn't go through the service
+
+
+layer for this engine that you depend on
+
+
+and the change is rejected and you don't
+
+
+even need to have that enabled in
+
+
+production it's enough if you have it
+
+
+enabled in test to detect it and
+
+
+basically you say nope like you're not
+
+
+going through public API for changes so
+
+
+you We could forget to synchronize
+
+
+indexes uh publish kafka etc etc. You
+
+
+need to do it through a different layer.
+
+
+Um yeah just send an exception. It's
+
+
+it's doable.
+
+
+Uh yes yes extend your objects and they
+
+
+basically
+
+
+um you you check a couple of things at
+
+
+the beginning of methods like save
+
+
+update and all of those that make
+
+
+changes in active record objects.
+
+
+Oh, better than me.
+
+
+All right. Uh, thank you for telling us
+
+
+how to deal with this sharp rails knife.
+
+
+Chica, thank you. Thank you so
+
+
+much. Ah, by the way, so you can find my
+
+
+SNS LinkedIn here in my website. So
+
+
+then, yeah, if you want, let's connect.
+
+
+Thank you so much.

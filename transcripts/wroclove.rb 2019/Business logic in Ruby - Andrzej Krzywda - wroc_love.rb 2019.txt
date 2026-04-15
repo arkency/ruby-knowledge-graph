@@ -1,0 +1,1972 @@
+all right I think I'll just introduce
+
+
+myself my name is Andre Gupta
+
+
+today I am in two roles because I'm I'm
+
+
+one of the organizers here and I will
+
+
+have my talk so as an organizer I would
+
+
+like to welcome all of you and as in
+
+
+every edition I'm very very grateful and
+
+
+very happy that you have come here and
+
+
+that we can meet with so many passionate
+
+
+Ruby programmers I think this shows the
+
+
+power of Ruby so thank you very much for
+
+
+coming my talk is kind of like a story
+
+
+about my journey in my in my programming
+
+
+hobby passion and programming career and
+
+
+they want to show you how I think about
+
+
+code how I will have I think about
+
+
+business logic and I want to show you
+
+
+some examples of the code and I would
+
+
+like to invite you also to share some of
+
+
+your ideas with me so just to give you
+
+
+some context and warn you the next slide
+
+
+can be offensive in the Ruby community
+
+
+so this is a warning because it contains
+
+
+Java and this is my introduction to you
+
+
+and this is my coming-out I was a Java
+
+
+developer and I was part of the Java
+
+
+community before I started doing Ruby
+
+
+and I was part of this specific part of
+
+
+the Java community which was all about
+
+
+agile but agile 20 years ago didn't mean
+
+
+meetings yet it meant more about caring
+
+
+about the code and expressing the
+
+
+business rules in the codebase nicely
+
+
+and about unit testing and so on so it
+
+
+was all about really very code specific
+
+
+things and I'm talking about the Java
+
+
+background because there was a very
+
+
+strong thing in the Java community so ok
+
+
+the warning was there let's look at some
+
+
+code Java who can tell me what is on
+
+
+this code what this code is about or
+
+
+what is there what is the example it's
+
+
+implementation of a post class right
+
+
+similar almost to what DJ's shown in the
+
+
+initial rails applications what is
+
+
+specific here is that this Java code
+
+
+doesn't use any framework or any library
+
+
+do you know how in Java community we
+
+
+called those kind of classes poor Joe
+
+
+plain old Java objects that was an
+
+
+important thing in the Java community
+
+
+and the idea is that we have business
+
+
+classes which are not bogged down by
+
+
+framework extensions and 20 years ago
+
+
+there's really not much about frameworks
+
+
+in the programming communities it was
+
+
+more like libraries but it was
+
+
+considered to be a smell or a bad design
+
+
+if your business classes had imported in
+
+
+Java or used any kind of extension that
+
+
+was coming from the outside the business
+
+
+classic classes were meant to be pure
+
+
+and not infected by any library
+
+
+so when rails appeared when Ruby on
+
+
+Rails appeared in 2004 a big part of the
+
+
+Java community was excited and I was
+
+
+part of this of this of this Java switch
+
+
+as well and I was one of the Java people
+
+
+who switched to to Ruby we've got
+
+
+excited because Ruby community was so
+
+
+much about testing unit testing care
+
+
+about code quality the languages syntax
+
+
+was so elegant that it was almost like
+
+
+we wanted to do Ruby in Java all the
+
+
+time but we just didn't know Ruby
+
+
+existed but the problem is that when the
+
+
+age age was selling us the idea of rails
+
+
+and we kind of got seduced to Rails from
+
+
+the Java community we bought all the
+
+
+nice things that were coming with rails
+
+
+and Ruby what we also bought one thing
+
+
+that was probably just by accident or we
+
+
+were believing that it's not a big deal
+
+
+we bought inheriting from active record
+
+
+base so when DHH was showing this code
+
+
+and that was kind of like like this but
+
+
+shorter we were all like oh my
+
+
+this is shorter so this is better so now
+
+
+we can our communication with the
+
+
+business requirements even with the
+
+
+business people is easier because they
+
+
+they can even look at the code and
+
+
+probably understand maybe apart from the
+
+
+active record base part but what did
+
+
+ehh nicely hid from us was this because
+
+
+this is actually what the code is there
+
+
+may be without the inheritance part so
+
+
+we have we have readers in Java we we
+
+
+call them Gators there is some setters
+
+
+as well there's a constructor and at the
+
+
+end there is a this is like more like
+
+
+pseudocode this is not exactly what
+
+
+active record does but this is more like
+
+
+what we actually do when we inherit from
+
+
+active record base and at the end we
+
+
+have the coupling to the database that
+
+
+was a big deal that was a big deal for
+
+
+the initial range developers that it's
+
+
+so easy to use that the that the
+
+
+database is already part of the active
+
+
+record but we bought it and we were like
+
+
+quite excited it's not a big deal it's
+
+
+not a big deal that was always the the
+
+
+something that we have repeated is not a
+
+
+big deal where we're depending on
+
+
+database but it's okay because because
+
+
+this code is so cool and then we
+
+
+understood that we can write even nicer
+
+
+code so if the post has many comments we
+
+
+can say it like that and the validations
+
+
+are super easy to implement so we were
+
+
+like excited that it's all there and we
+
+
+didn't realize probably at some point
+
+
+that we can split those objects so each
+
+
+active record object and that was kind
+
+
+of my this is now part of my journey I
+
+
+switch to rails I really liked and enjoy
+
+
+to the Ruby code I didn't like the
+
+
+active record dependency more and more
+
+
+over time but I still wasn't prepared
+
+
+really how can I rescue how can I escape
+
+
+from the active record dependency so it
+
+
+was a long process actually many many
+
+
+years of experiments discussions what
+
+
+like what I can do with with this code
+
+
+because obviously if the code is so
+
+
+simple then everything is great but we
+
+
+all know here this those models never
+
+
+end like that they always end like 500
+
+
+lines at least so my one of the biggest
+
+
+realizations I don't want to go too deep
+
+
+into the splitting between the reads and
+
+
+writes but
+
+
+my next part of my talk is based on just
+
+
+the business logic so which means only
+
+
+making a decision in the codebase I
+
+
+don't want to be bothered about guitars
+
+
+which are actually this is what is
+
+
+active record about it has two roles
+
+
+reads and writes and reads so writing
+
+
+data is making the decision so are you
+
+
+accepting this as a new title for the
+
+
+blog post yes validations are passing so
+
+
+this is fine we're accepting this and
+
+
+reading the data so for example has many
+
+
+comments this is an association in most
+
+
+of the situations where you use
+
+
+associations you use them for actually
+
+
+showing the data on the screen later on
+
+
+than making the decision you don't care
+
+
+if you are changing the title you don't
+
+
+care how many comments are for the blog
+
+
+post you're not making a decision based
+
+
+on the comments but now with the has
+
+
+many comments you have quite a big
+
+
+dependency and coupling to comments and
+
+
+I think it was Marcus who just run the
+
+
+mutation testing workshop who first told
+
+
+me so I'm quoting him now that active
+
+
+record has an infinite API so once you
+
+
+even heard from active record base your
+
+
+models has done a really infinite number
+
+
+of methods available so your interface
+
+
+is huge so how can we get rid of that
+
+
+the algorithm is more like that split
+
+
+active records into two objects readings
+
+
+disappear for the for one of the objects
+
+
+the one is about writing second is about
+
+
+reading the readers disappear so
+
+
+including associations and only odd
+
+
+logic is left and publishing events and
+
+
+introduced read objects just for the
+
+
+sake of displaying data more or less how
+
+
+does it look in the code you start with
+
+
+this then you implement the business
+
+
+logic in a separate objects now note
+
+
+that there is no active record
+
+
+dependency anymore and you just have for
+
+
+example the part where we say that okay
+
+
+we are not accepting a post without
+
+
+without a title so just raise an
+
+
+exception and the second part is is
+
+
+about publishing events because that's
+
+
+the only way those two parts can be
+
+
+connected in easy way where you make a
+
+
+decision you publish an event and the
+
+
+rich object can accept it and I'm
+
+
+showing the rich object and the rich
+
+
+object actually is active records
+
+
+because active record is very nice for
+
+
+displaying data so that is okay
+
+
+it's very nice for using associations
+
+
+for that if you like so if you just want
+
+
+to display one single blog post with
+
+
+their comments this is a really good
+
+
+code and now connecting together you say
+
+
+subscribe post drafted so the part that
+
+
+happened in the rights on the
+
+
+decision-making process now
+
+
+influences the object in the active
+
+
+record object and this is more or less
+
+
+the algorithm to to just make your
+
+
+active record immediately smaller by 80%
+
+
+because you no longer need the readers
+
+
+okay what does this is a trivial example
+
+
+let's try to think about some more
+
+
+complicated situations and it happened
+
+
+that our can see we've had many many
+
+
+hours years of internal discussions how
+
+
+to implement the business logic so now
+
+
+I'm focusing only on business logic here
+
+
+and we've had many discussions with
+
+
+everyone who was willing to talk about
+
+
+how to implement business logic we
+
+
+adopted domain driven design and we call
+
+
+them the business logic classes we call
+
+
+them aggregates but it doesn't really
+
+
+matter this is not a talk about domain
+
+
+driven design at all and it happened
+
+
+that at some point we have started a
+
+
+race architect master class it's a class
+
+
+for people who want to understand the
+
+
+DVD and secure s and so on and thanks to
+
+
+this I wrote a new repository was
+
+
+created internally at our concealers a
+
+
+private repository and that was a
+
+
+repository created by Pavel from our
+
+
+concei and pavo decided ok enough
+
+
+talking about different ideas how to
+
+
+implement business logic let's actually
+
+
+implement it and let's see how the
+
+
+different implementations can look like
+
+
+so
+
+
+Pavel created a repository called
+
+
+aggregates and started implementing some
+
+
+techniques how aggregates can look like
+
+
+and I really like the idea and the
+
+
+repository was really nicely constructed
+
+
+that you can easily add a new
+
+
+implementation there are tests which are
+
+
+shared for all the implementations and
+
+
+and you can easily add a new one and
+
+
+just see the tests are passing or not
+
+
+and just finish the implementation so
+
+
+for the same example we have different
+
+
+example with different codes overall so
+
+
+all the structure is there and but the
+
+
+nicest thing was that Pavel discovered a
+
+
+really nice requirement which we which
+
+
+we now started using for non-trivial
+
+
+situations so we don't want to talk
+
+
+about
+
+
+blog post because they are not really
+
+
+about business object that much we want
+
+
+to talk about who can guess where it is
+
+
+from JIRA we all love JIRA right so this
+
+
+is JIRA this is actual implementation of
+
+
+JIRA and what can be more realistic than
+
+
+JIRA to implement business logic right
+
+
+and business people love it so even if
+
+
+you want to share this codebase to some
+
+
+business people they will understand
+
+
+what this JIRA about and zerah zerah
+
+
+issue has those states and you can this
+
+
+is the life cycle of a JIRA issue and
+
+
+you can transition between the states so
+
+
+business logic he relies on a state
+
+
+machine and actually this is kind of my
+
+
+thinking right now that business logic
+
+
+is almost always about state machines
+
+
+and I see state machines now everywhere
+
+
+so yeah I will not go okay anyway there
+
+
+are some rules about the state to the
+
+
+state changes so we can see it's not a
+
+
+trivial example it's a realistic example
+
+
+so how can we implement this and one of
+
+
+the first implementations was based on
+
+
+aggregate route for those of you who
+
+
+don't know right we have released a
+
+
+rails even store as a as our like
+
+
+library for using events and there is
+
+
+this aggregate root gem which comes you
+
+
+building even sourced aggregates however
+
+
+we are not really caring that much today
+
+
+about even source so it's all about even
+
+
+sourcing so it's all about just I want
+
+
+to show an example how how the
+
+
+implementation of the requirements would
+
+
+look like we've aggregate route and I
+
+
+will start by showing this slide with
+
+
+with a code I hope will be clear which
+
+
+just shows how the aggregate is called
+
+
+how it is used from outside can you see
+
+
+it from this far not really okay I will
+
+
+not this is just you know a comment
+
+
+Hallel slash service object of using the
+
+
+aggregate dot whatever method but I hope
+
+
+this code will be clearer so this is the
+
+
+actual aggregate and my aggregate is so
+
+
+big that it fits into three slides so
+
+
+this is just the first part of the
+
+
+aggregate class and it's called so okay
+
+
+we have the class issue we have the
+
+
+public methods for creating resolving
+
+
+closing reopening stuff all the
+
+
+transitions that are possible in the
+
+
+diagram are represented here as public
+
+
+methods and there are certain there is a
+
+
+certain structure we raise an exception
+
+
+unless it's possible to do this thing
+
+
+it's possible to do this thing and the
+
+
+implementation actually lives somewhere
+
+
+in other methods methods called like
+
+
+Kenna Claus can resolve can create right
+
+
+and then we publish an event we publish
+
+
+an event because as I shown before we
+
+
+need to have the data available
+
+
+somewhere else to just display the data
+
+
+so we need this for the read objects for
+
+
+the read models so this is the second
+
+
+part of the aggregate now there are the
+
+
+private methods where we actually check
+
+
+when things are possible and as you can
+
+
+see it's mostly about relying on what is
+
+
+the status field so we have an instance
+
+
+variable called status and now we know
+
+
+whether we can do something or not so
+
+
+that's the second part the actual
+
+
+implementation of those steps and then
+
+
+there is a third step and this is this
+
+
+is just a logic for saying how the issue
+
+
+can be built from the events so when we
+
+
+are changing the state of the events and
+
+
+we want to bring the state again of this
+
+
+object to the same level we are building
+
+
+this using those events and we know that
+
+
+first this event we are changing the
+
+
+state to this to this value one problem
+
+
+with this code so I'm going back to
+
+
+slides is that we are including
+
+
+aggregate route and even though it's our
+
+
+gem one of the problems which I showed
+
+
+you I come from the Java community we
+
+
+cared about plain old Java objects no
+
+
+imports now libraries no frameworks
+
+
+would infect our code bases so even
+
+
+though I prefer this code to implement
+
+
+business logic more than typical active
+
+
+records in typical rails way I would
+
+
+always go with this code over there
+
+
+active record I knew that there must be
+
+
+something better where we don't have to
+
+
+infect our code with the aggregate route
+
+
+even if aggregate root is actually I
+
+
+don't know four methods we are just
+
+
+injecting four methods still it's a
+
+
+library we shouldn't use it in business
+
+
+objects so that was my challenge how we
+
+
+can do it and it was nice because last
+
+
+year maybe some of you remember night
+
+
+Nathan came here and Nathan has had a
+
+
+really interesting talk about aggregates
+
+
+and he was talking about the problems
+
+
+with aggregates and he was showing that
+
+
+this pattern is maybe not the most
+
+
+elegant pattern to that we are coupling
+
+
+the business logic with events and that
+
+
+gave me quite a lot of thinking I spent
+
+
+a lot of time discussing this with
+
+
+Nathan this guy discussing this with
+
+
+Pavel discussing with Robert so we were
+
+
+we've had many discussions how we
+
+
+and maybe avoid this situation okay so
+
+
+what is the summary of this
+
+
+implementation it's a one class the
+
+
+issue class
+
+
+it contains the decisions making process
+
+
+though the the logic
+
+
+it contains publishing the events it
+
+
+contains sourcing from events the last
+
+
+part and we also keep the state we have
+
+
+the status instance variable all right
+
+
+so I'm gonna show you now so we've had
+
+
+in the repository we've had like I know
+
+
+seven different examples how we are
+
+
+approaching this and we were influenced
+
+
+by there is a programmer from Poland
+
+
+from the dopant community Shimon
+
+
+culottes and he's had a nice series of
+
+
+blog posts how we can implement
+
+
+aggregates in a functional way so we
+
+
+were also experimenting how we can do it
+
+
+in a functional way but then one of the
+
+
+inspirations which was also like for me
+
+
+from Shimon was the idea of of a
+
+
+polymorphic implementation so I went
+
+
+with the polymorphic implementation and
+
+
+what is specific about polymorphic so
+
+
+here is again the so maybe here is more
+
+
+visible the comment handler but it's
+
+
+like in all of the implementations is
+
+
+the same how we call the aggregate so
+
+
+there is nothing really interesting that
+
+
+much however in the previous implement
+
+
+in the previous aggregate implementation
+
+
+in the code which was so small that you
+
+
+didn't see that much it wasn't it didn't
+
+
+have the part about events here so now I
+
+
+moved the events to be part of the
+
+
+comment handler so that I don't have
+
+
+those events as part of my business
+
+
+class and at the end so I already I'm
+
+
+always calling the issue that start or
+
+
+issue disclose and then if everything is
+
+
+fine I'm just returning an event that
+
+
+was something that actually for a long
+
+
+time I didn't know how to solve because
+
+
+I wanted to decouple my business logic
+
+
+from events but I just didn't know how
+
+
+can I communicate when from something
+
+
+worked or not but then I realized that
+
+
+if I just call a method on aggregate
+
+
+let's take the first one issue that
+
+
+opened issue that open it didn't raise
+
+
+an exception it would execute the next
+
+
+line so I know it's successful I just
+
+
+know it by not raising an exception
+
+
+so then I know that it happened and then
+
+
+I can actually publish the event okay so
+
+
+this is the even sourcing part because
+
+
+now it's not part of the aggregate it's
+
+
+now part of the common handlers
+
+
+infrastructure code so for each like the
+
+
+changes of the state I'm now calling the
+
+
+the building the object from delight
+
+
+from the outside this time it has some
+
+
+limitation if it has some drawbacks I
+
+
+will come back to this so this is the
+
+
+implementation now this is the
+
+
+polymorphic implementation so now
+
+
+instead of one class called issue I now
+
+
+have a class for for each of the
+
+
+possible states so that was a new
+
+
+discovery for me that I don't have to
+
+
+have I didn't to have one class I can
+
+
+implement it using several different
+
+
+classes the second influence from a bit
+
+
+from functional programming was that I
+
+
+don't have I can return when I'm
+
+
+changing the state I can return a new
+
+
+instance
+
+
+that's what functional people do they
+
+
+don't mutate the state then they return
+
+
+new data which is already changed so
+
+
+when I when I have just the issue in the
+
+
+initial State I can call open and I
+
+
+return the open issue implementation so
+
+
+I'm not sure if the naming is good like
+
+
+maybe I should call it open issue
+
+
+instead of open but as I liked it to
+
+
+have it short so but when you have the
+
+
+open issue you can start a resolved or
+
+
+closed but other operations are not
+
+
+possible so I'm raising an exception
+
+
+right and then then this works so there
+
+
+are five states which means I have five
+
+
+classes and they all allow me to see the
+
+
+code and the changes in one place I
+
+
+don't care about events so I'm not
+
+
+bothered by events anymore I'm not
+
+
+bothered about building from events
+
+
+anymore so what happened
+
+
+I've have now one class per state and
+
+
+each state has their own decisions right
+
+
+they what is possible to do then in the
+
+
+comment handler I'm publishing events
+
+
+and building and sourcing from events so
+
+
+now I have moved the responsibilities
+
+
+and you could say that I'm complicated
+
+
+the comment handlers at the cost of the
+
+
+business logic in the
+
+
+in the business class but this is what I
+
+
+care mostly about I care about the
+
+
+business objects being pure and not
+
+
+infected by anything else I just want to
+
+
+see the business logic in one place not
+
+
+be bothered about events or anything or
+
+
+persistence or anything like that
+
+
+and what is now also interesting this is
+
+
+the functional influence here oh is that
+
+
+the state as in it was previously it was
+
+
+called status this field this instance
+
+
+variable it disappeared it now the state
+
+
+actually became part of the type so
+
+
+using the type system I have now
+
+
+encapsulated what is the what what is
+
+
+actually the state right now and I
+
+
+really like this this the last thing
+
+
+that I can now use it like this but if
+
+
+you look at this kind of code and your a
+
+
+Ruby programmer then kind of screams
+
+
+what would you do with this code base
+
+
+delete it's not Java 2d meta programming
+
+
+yeah what kind of meta programming can
+
+
+we approach here
+
+
+given your laughing now I'm scared to
+
+
+show you what I did and the other ideas
+
+
+maybe I can quickly change direction DSL
+
+
+yeah what would DHH do in Terezin sir
+
+
+act as invalid transition maybe okay I
+
+
+called my next implementation duck
+
+
+typing this is the common handler part
+
+
+not really that's different from the
+
+
+previous one it contains the events so
+
+
+it's very similar but there is this new
+
+
+line I actually in my original
+
+
+implementation I went for the no method
+
+
+error but then I ended up implementing
+
+
+this and for those of you who didn't see
+
+
+it exactly there is something like race
+
+
+invalid unless issue
+
+
+response to stop so I'm using the
+
+
+response to method and checking if there
+
+
+if this Ruby object knows how to respond
+
+
+to this method that I'm going to call my
+
+
+first implementation was trying to call
+
+
+the method and then rescuing from no
+
+
+method error checking if no method error
+
+
+actually failed because of this specific
+
+
+method doesn't exist and not because of
+
+
+some typos and it was also working but
+
+
+then I thought it will be too
+
+
+controversial so I went with respond to
+
+
+edge I'm not like super happy about but
+
+
+it's a probably ok so just a reminder
+
+
+this is just my Academical experiments
+
+
+I'm not suggesting we should use it we
+
+
+just I want to show you what is my
+
+
+journey in discovering what is the
+
+
+business how the business logic can be
+
+
+implemented and extracted from
+
+
+everything else ok so what is now the
+
+
+the business logic how does it look this
+
+
+is like still the common hunger part and
+
+
+now this is the whole implementation of
+
+
+this diagram so now we have five states
+
+
+for simple classes instead of those
+
+
+methods which raise exceptions I just
+
+
+they just disappeared I don't think we
+
+
+can call it polymorphic any longer
+
+
+because polymorphic means that you have
+
+
+different objects using the same
+
+
+interface but now we have classes which
+
+
+don't have the same interface and this
+
+
+brought me to thinking when I started
+
+
+doing Ruby it was all about learning
+
+
+about duck typing but when I work with
+
+
+Ruby code bases I either don't see any
+
+
+kind of duck typing or I see a really
+
+
+really wrong usage of duck type of duck
+
+
+typing so I wonder how much we really
+
+
+want to adopt duck typing as a technique
+
+
+in the Ruby community like and they're
+
+
+very controlled environment like this
+
+
+state machine for example I am okay
+
+
+after a long struggle after long
+
+
+thinking I'm okay with this code but I
+
+
+know some people were laughing I
+
+
+remember who was laughing actually and I
+
+
+know that this is not exactly something
+
+
+that can be easily accepted and it's
+
+
+also it's something that I'm still not
+
+
+sure I will not hate myself one year
+
+
+from now so maybe in one year we'll meet
+
+
+again and I will tell you this is wrong
+
+
+but this is like this is where why I
+
+
+went and I'm showing this example and I
+
+
+and now it's overall simple but a
+
+
+reminder business logic is mostly about
+
+
+state machines all state machines can be
+
+
+implemented like that it doesn't require
+
+
+in a library I'm not selling you in a
+
+
+library any framework so if we can start
+
+
+and explore how we can implement state
+
+
+machines in Ruby without libraries and
+
+
+frameworks how we can make it even nicer
+
+
+without any no not feeling right about
+
+
+it maybe I'm using duck typing and this
+
+
+is wrong
+
+
+so I think it's worth it because if we
+
+
+can reduce all the problems to state
+
+
+machines and we can implement state
+
+
+machines like that and we can attach our
+
+
+persistence later either via events or
+
+
+just traditional relational database
+
+
+persistence using active record it
+
+
+doesn't matter I can I can just plug it
+
+
+connect it later and that's what I what
+
+
+I wanted to get the last thing I told
+
+
+you that the repository was private and
+
+
+was used for the race architect master
+
+
+class I've made the repository public
+
+
+just one hour ago so I would like to
+
+
+invite you to go to github and arrogancy
+
+
+aggregates look at the implementation
+
+
+I'm really and honestly I really open
+
+
+for for new ideas and contributions if
+
+
+you know how to implement it better I
+
+
+would like to see a different
+
+
+implementation and it's very easy to add
+
+
+a new implementation just go there and
+
+
+copy one directory with the
+
+
+implementation look at the make file in
+
+
+the make file just copy one section to
+
+
+create for the new implementation and
+
+
+just try to explore how you could do it
+
+
+with passing tests as a bonus this
+
+
+reporter is also set up to use mutation
+
+
+testing so there is a script for
+
+
+mutation testing so if you enjoyed the
+
+
+mutation testing workshop you can write
+
+
+run mutation testing against your
+
+
+implementation what was really nice
+
+
+about this implementation the last one
+
+
+so the duck typing one we can probably
+
+
+agree that it's the code is quite
+
+
+abstract and high-level and using a
+
+
+mutant on this code base was really
+
+
+interesting experience because it showed
+
+
+me a lack of test coverage obviously but
+
+
+actually what it showed me that is that
+
+
+certain of those states are actually
+
+
+kind of duplicate it basically mutants
+
+
+told me that JIRA is wrong the whole
+
+
+state machine is not correct so it was a
+
+
+nice experience to run it against mutant
+
+
+and me your implementation maybe can
+
+
+also you can you can use mutant and see
+
+
+how it works yeah so please contribute
+
+
+implementations and also if I was wrong
+
+
+somewhere if you see that you can
+
+
+correct correct me feel free to come to
+
+
+me during the conference I'm open for
+
+
+new ideas and thank you very much again
+
+
+for listening to this talk and thank you
+
+
+for coming to the conference and enjoy
+
+
+the conference thank you very much
+
+
+[Applause]

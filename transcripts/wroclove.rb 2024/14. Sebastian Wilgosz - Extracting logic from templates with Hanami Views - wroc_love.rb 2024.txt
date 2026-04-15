@@ -1,0 +1,1522 @@
+[Applause]
+
+
+hi thanks for being here so today I will
+
+
+talk about some very common problem in
+
+
+rice ecosystem uh which is something
+
+
+that I don't really experienced on my 9e
+
+
+um Nye long career as a rise developer
+
+
+which is logic freev viiew
+
+
+use um and I have tried to when I
+
+
+prepared to the presentation for today I
+
+
+tried to take the shoes of the speaker
+
+
+imagine how I would feel on the stage
+
+
+and I realized
+
+
+that how long how much of you actually
+
+
+use r on the daily
+
+
+basis yeah so uh I realized that I will
+
+
+try to go to the 99 9% of ri's audience
+
+
+I will try to not only say that you have
+
+
+problems
+
+
+guys but only be crazy enough to aim
+
+
+that I have some kind of solution and
+
+
+yeah so
+
+
+this this image came to my mind already
+
+
+like immediately that I will be like a
+
+
+sheep along among the wolves but then I
+
+
+read that if you present yourself or
+
+
+introduce yourself as a ship among the
+
+
+the the the crowd of wolves they will
+
+
+just eat you so I asked the AI generator
+
+
+to give me another image and I will
+
+
+present myself like this instead to gain
+
+
+some
+
+
+confidence uh I'm Sebastian I'm already
+
+
+uh introduced so I will not repeat
+
+
+myself um yeah let's go into the topic I
+
+
+will talk about Hanami today and but
+
+
+what is Hanami Hanami a ruby
+
+
+framework um R alternative if you may
+
+
+say some cool facts about about Hanami
+
+
+is that if you present The View layer in
+
+
+the diagram it will appear as a ruby
+
+
+shape the architecture is so well
+
+
+thought Ruby Market is not very
+
+
+much um in the whole web ecosystem
+
+
+and like we G we all of here right uh we
+
+
+are kind of like a two maybe 3% of whole
+
+
+web applications
+
+
+market
+
+
+and Rise has like 95% of Ruby market in
+
+
+terms of web so Hanami Roa Sinatra
+
+
+Bridgetown and whatever else you may
+
+
+imagine it's
+
+
+like around 5% so pretty
+
+
+Nisha um
+
+
+those are very small projects but very
+
+
+important
+
+
+ones Hanami is a framework that if you
+
+
+will choose to um write about like have
+
+
+a Blog about I will be your only
+
+
+competition if that's not temp I don't
+
+
+know what
+
+
+is but it is also an example of
+
+
+Courage it is easy to me to just start a
+
+
+blog about Hanami because I already know
+
+
+that there
+
+
+are projects companies that earn
+
+
+millions millions of dollars per year um
+
+
+and are backed in Hanami they are
+
+
+careers built around it even though this
+
+
+is sonisha so it's easier but outs of
+
+
+Hanami when they decided to go against
+
+
+the main stream of working the right way
+
+
+and they decided to set publicly that
+
+
+they have something to to do better or
+
+
+different but still good still well that
+
+
+is pretty pretty brave so Hanami is a
+
+
+result of Courage I would
+
+
+say
+
+
+and today I will talk about H one
+
+
+particular issue but we'll uh mention a
+
+
+few of them uh because rice has issues
+
+
+rice is great
+
+
+uh it proved to be great over years it
+
+
+has still a very stable community it has
+
+
+um very very impactful it impacted like
+
+
+the whole web ecosystem um like it BR
+
+
+tons of creativity Sparks and then
+
+
+explosions across all different kind of
+
+
+um languages so there is no doubt that R
+
+
+is great but it it still has um some
+
+
+issues and some of them are very
+
+
+specific
+
+
+uh to the extent that before R I almost
+
+
+didn't hear about them and N plus one
+
+
+queries is one example it's an example
+
+
+of I heard about it at University but
+
+
+nobody spent too much time on this
+
+
+because nobody said thought thought that
+
+
+this is like important
+
+
+enough but in rice ecosystem this is
+
+
+actually an isue we get like a whole ton
+
+
+of project that uh I a to resolve that
+
+
+or help resolving that the bugging and
+
+
+so on and we still didn't like manage to
+
+
+just Escape of
+
+
+it tools like app signal have the
+
+
+dedicated part in the UI to just monitor
+
+
+about n plus1
+
+
+queries um and this is really not very
+
+
+complex issue from the uh database
+
+
+design or query build
+
+
+design um rise has some problem problems
+
+
+in terms of lack of abstractions there
+
+
+is the MVC pattern there are helpers um
+
+
+and not much more obviously as a
+
+
+community we developed more um
+
+
+sophisticated approaches and invented
+
+
+some additional building blocks like
+
+
+service objects that we had today um
+
+
+or the view objects form objects
+
+
+decorators that there is like absolutely
+
+
+ton of it but but nothing is like backed
+
+
+by Rise philosophy uh in Rise there is
+
+
+like a MVC and this is like very very
+
+
+old picture that I spent a lot of time
+
+
+to actually find because this is
+
+
+something I saw like dozen year year
+
+
+back for the first time um and in in
+
+
+general there is a philosophy that there
+
+
+is like a skinny controller skinny views
+
+
+and and the rest reminds in models so
+
+
+obviously there are endless in
+
+
+discussions around the
+
+
+architecture rice is also All or Nothing
+
+
+we waited multiple years
+
+
+to get to the point where the r cour
+
+
+team decided to allow us to build API
+
+
+only applications where you can disable
+
+
+some key components like disable Vier or
+
+
+disable the persistence um but you still
+
+
+need to install it still need to have it
+
+
+and because of
+
+
+the monkey patches of the Ruby uh system
+
+
+Ruby language itself it's really hard to
+
+
+replace the whole active record with
+
+
+something else or don't use active
+
+
+support um or use the custom um router
+
+
+for example I'm not sure if that is even
+
+
+possible and in Hanami this is a little
+
+
+bit different the whole philosophy is
+
+
+that to allow you a complete flexibility
+
+
+more like a Roda when you have the
+
+
+plugin system you can install each
+
+
+functionality separately and in Hanami
+
+
+and this is the similar approach where
+
+
+you can just completely disable the
+
+
+router controller you if you don't need
+
+
+validations or you don't need
+
+
+persistence you don't need views you
+
+
+just get rid of them completely and and
+
+
+don't even include that in the G
+
+
+[Music]
+
+
+file and because of that because of
+
+
+Hanami is so modular uh I came up with
+
+
+this topic to the RS
+
+
+Community because um
+
+
+Hanami came with an interesting approach
+
+
+to solve the view
+
+
+liar and recently the 2.1 release had
+
+
+been um published and it is officially
+
+
+done so we now have the Hanami View modu
+
+
+gem that can be used that is framework
+
+
+agnostic and can be used in any Ruby
+
+
+application
+
+
+really and I will show it to you as an
+
+
+inspiration I don't expect that you will
+
+
+all just replace your default templates
+
+
+and start implementing Canam views but
+
+
+uh some of them can be uh can
+
+
+be taken as an inspiration to improve
+
+
+your existing projects
+
+
+okay oh this is the
+
+
+difference I
+
+
+wish I would know that before I ended
+
+
+all my funny
+
+
+section so logic L
+
+
+views I have here the Forum the simple
+
+
+reg registration forum
+
+
+and nothing fancy a few text Fields one
+
+
+checkbox two buttons few icons some
+
+
+placeholders and and that's it but still
+
+
+if you check the HTML it will be pretty
+
+
+blown up to make it looking
+
+
+good and yeah this is the those are the
+
+
+text fields and here are the uh checkbox
+
+
+and the
+
+
+buttons and when you click there is like
+
+
+a validation presentation logic here
+
+
+where you highlight the input Fields you
+
+
+present the control field errors like
+
+
+like field specific errors and show some
+
+
+some information at
+
+
+top so this simple this simple form
+
+
+actually hides a lot of logic and I will
+
+
+show you that
+
+
+even though you know that um not
+
+
+everything is
+
+
+obvious and Hanami came up with this
+
+
+liar this this uh this uh concept of not
+
+
+only have templates on your view lers
+
+
+but also provide additional tooling like
+
+
+optional tooling to extract some um
+
+
+additional logic to Ruby like
+
+
+encapsulate uh the parts of the logic in
+
+
+the Ruby objects that are easily
+
+
+testable and that can be and that can
+
+
+keep your views um very
+
+
+clean
+
+
+so um yeah I will go through it very
+
+
+quickly so there is actions actions just
+
+
+go to um just rent calls the views and
+
+
+the view is an object a ruby object that
+
+
+can that that the side
+
+
+what is available in the template like
+
+
+nothing really is available until the
+
+
+view decides to do it to enable that if
+
+
+this uh this variable that will is going
+
+
+to be available in the template to be
+
+
+rendered uh needs some decoration then
+
+
+it's decorated via the parts class you
+
+
+can you can name it decorators if you if
+
+
+you
+
+
+wish and then if there are multiple
+
+
+partials
+
+
+um to be rendered and they need some
+
+
+calculations of the locals H there are
+
+
+also another um Ruby objects that allow
+
+
+you to calculate this logic and those
+
+
+are scopes helpers are you know just
+
+
+helpers so first let's go with the
+
+
+rendering field errors I will go with
+
+
+with um creating a view uh this will
+
+
+expose to my template a form object and
+
+
+usually as you can see it would be just
+
+
+a hash a hash that will have value skis
+
+
+and the error
+
+
+skis but to make it more pretty um I
+
+
+will decorate this hash without this
+
+
+decoration in the template I will just
+
+
+just have like a hash under the form
+
+
+variable but I will decorate that using
+
+
+the registration form
+
+
+part and in the part the registration
+
+
+form part I will have an error method so
+
+
+instead of just H um treating the form
+
+
+as a hash I will have an errors key
+
+
+errors method that accepts the form
+
+
+input a name and that will fetch the
+
+
+errors to my uh to my template the cool
+
+
+thing is that you will not have a Neil
+
+
+here you will Al always have an ARR
+
+
+empty array or whatever because this
+
+
+logic is extracted and it's easy to do
+
+
+so in Ruby object so now our form field
+
+
+would look like
+
+
+this so if at the Top If there are
+
+
+errors I can use the form variable that
+
+
+I exposed and I can use the errors
+
+
+method that accept the username as an
+
+
+input it will fetch from the uh from the
+
+
+parameters the errors uh for the
+
+
+particular
+
+
+field and then I can just render those
+
+
+fields also passing the errors um into
+
+
+the
+
+
+partial the error partial would be quite
+
+
+Sim simple it will just have some
+
+
+exclamation uh icon and some messages in
+
+
+the uh in the uh loop so you can see
+
+
+here that here messages
+
+
+we don't need to have any additional uh
+
+
+like um two 2 a to R transformation
+
+
+because uh we have guaranteed that the
+
+
+messages are AR
+
+
+already
+
+
+so that solves the error um error
+
+
+presentation logic now let's go to the
+
+
+form input logic extraction because on
+
+
+showing errors is only one thing but
+
+
+there's a lot of more logic hidden in a
+
+
+single field I will work now with a
+
+
+single field only I will
+
+
+extract the text field as a separate
+
+
+partial and for from now on I will only
+
+
+I will try to make it
+
+
+unified so the goal is to have a partial
+
+
+um that can be applicable for multiple
+
+
+use cases and like all three fields in
+
+
+my form were pretty much the same they
+
+
+they just need some identification to be
+
+
+passed in as a local so assuming that
+
+
+like having the field name and the label
+
+
+text um this is like only thing that is
+
+
+really
+
+
+required and then the rest can be
+
+
+calculated but so let's find all the
+
+
+dynamic variables here uh anything that
+
+
+behaves differently um
+
+
+and that can be extracted out definitely
+
+
+the field name and the label text are
+
+
+the first things that come to my mind
+
+
+but there is also this icon here the
+
+
+icon span and this icon the f a user
+
+
+icon this is exactly the same as what we
+
+
+had just before in the errors field the
+
+
+only difference is that the name and the
+
+
+uh alignment of this is different so we
+
+
+can easily EX that to a partial as well
+
+
+it will be something like
+
+
+this but then um you can see
+
+
+that
+
+
+the um the control class the diff class
+
+
+um that wraps around my field does not
+
+
+have the has icons
+
+
+right um um CSS class and this will
+
+
+break the rendering of the of the errors
+
+
+uh icon so we have just discovered a
+
+
+back we need one more Dynamic thing and
+
+
+this is the um control control class
+
+
+names that can include has icons right
+
+
+in case of the Air
+
+
+Field
+
+
+and
+
+
+then when I go further I can get rid of
+
+
+the um field specific name when I pass
+
+
+errors to the partial to the error
+
+
+partial by um by also extracting this as
+
+
+a a part of dynamic logic and I can just
+
+
+pass the errors variable instead to the
+
+
+errors so we are going
+
+
+somewhere there are a few things only to
+
+
+left left and this is the next step
+
+
+which is um whenever partial has
+
+
+whenever the the form field has an icon
+
+
+then I have the has icon right CSS class
+
+
+if there is no icon if there is icon
+
+
+empty I don't want that class so I will
+
+
+also include that in the dynamic control
+
+
+class names and have something like a h
+
+
+ion um condition which will check if the
+
+
+icon name is Neil or not
+
+
+finally I can add some placeholder and
+
+
+some input field classes which is adding
+
+
+the the dunger like like like like
+
+
+styling some more styling in case the
+
+
+error the error
+
+
+appears and that's it like this is all
+
+
+that is extracted out from just a single
+
+
+form field that you want to reuse in
+
+
+your forms
+
+
+pretty lot but you most likely don't
+
+
+want to calculate any of this inside of
+
+
+your
+
+
+templates and you don't want to pass all
+
+
+those
+
+
+variables as a locals your
+
+
+partials
+
+
+so this is
+
+
+where we can use Scopes in harami
+
+
+Scopes will allow you to render a form
+
+
+input field partial passing only
+
+
+minimal set of locals and scope is an
+
+
+object in Hanami that will do the
+
+
+calculation of the locals and figure out
+
+
+how to render the
+
+
+partial
+
+
+so um this is how it would
+
+
+Implement how it would look this is a
+
+
+ruby class um not not much is happening
+
+
+here it really uh gets like I have only
+
+
+extracted uh those variables those
+
+
+variable
+
+
+calculations as an in as a uh
+
+
+methods um to just um control the logic
+
+
+better find out bugs and un need test
+
+
+the whole
+
+
+thing now did this would be the
+
+
+usage
+
+
+I in my within my partial I would need
+
+
+to use the scope method Define which
+
+
+class of the uh scope I would like to
+
+
+use it would be like the input scope and
+
+
+then pass the username the field name
+
+
+errors placeholder in
+
+
+label
+
+
+um then I uh called the render on this
+
+
+like
+
+
+which uh partial should be rendered with
+
+
+those locals as an input and my scope
+
+
+will take this text field partial and
+
+
+pass in all the locals it it
+
+
+needs
+
+
+so but it doesn't look very nice really
+
+
+so what could we do to
+
+
+to uh really benefit from the
+
+
+Scopes uh we could use parts we could
+
+
+use the decoration to hide the rendering
+
+
+rendering logic even more like all those
+
+
+variables can be also figured out just
+
+
+by uh by uh by hardcoding something so
+
+
+like defining the username definition uh
+
+
+decoration um sorry I got lost so if I
+
+
+have a registration form I can define a
+
+
+few methods like a
+
+
+separate method for the username input
+
+
+the password input or the checkbox input
+
+
+the terms of condition input and just
+
+
+pass the form Builder uh to the the
+
+
+better to to the to to to the method I
+
+
+can also in in this first form I assume
+
+
+that my username scope method will
+
+
+return the scope instance and then I
+
+
+would still need to call render with the
+
+
+passing which partial should be
+
+
+rendered but I can even hide that in the
+
+
+decoration if
+
+
+needed so now as a final step I will set
+
+
+up the part to decorate this this final
+
+
+piece of
+
+
+logic in my registration form part this
+
+
+decoration that I have uh mentioned um I
+
+
+will just Define
+
+
+which uh which scope class should be
+
+
+used and then Define few methods like
+
+
+the username input we'll use the prepare
+
+
+scope with the username and the password
+
+
+input would um would prepare scope with
+
+
+the password field and all that will
+
+
+render the same
+
+
+partial then my form view my
+
+
+registration view gets to this form when
+
+
+I only call the decoration Logic the
+
+
+username input password input password
+
+
+confirmation input and Toc uh TC um
+
+
+input and that's it the form still works
+
+
+the
+
+
+same
+
+
+hello depending on the fact if you want
+
+
+to keep the information of which
+
+
+particular partial is rendered you can
+
+
+go with the first or second approach to
+
+
+um to work with those
+
+
+inputs depending on how you how much
+
+
+respect you have to frontend
+
+
+developers and want
+
+
+to either make their life easier or a
+
+
+little bit
+
+
+harder but that's
+
+
+it and this is all the logic that I have
+
+
+found and that could be extracted and
+
+
+while we are familiar with the view
+
+
+objects in R ecosystem even now and
+
+
+while we have the um need for decorating
+
+
+some objects some values to have
+
+
+presented in the logic um the concept of
+
+
+having a
+
+
+separate Ruby class to take care of
+
+
+calculation of locals is pretty
+
+
+new and before I jumped into the Hanami
+
+
+I didn't realize that I needed that so
+
+
+it proved to be useful uh already a few
+
+
+times in my uh daily
+
+
+work so but the cool thing is that all
+
+
+of that is optional like you can work
+
+
+with templates directly you can work
+
+
+with the views you can have some
+
+
+decoration in parts and you have you can
+
+
+have Scopes if your um partials gets too
+
+
+much to too
+
+
+complicated and this is this is
+
+
+it the conclusion is that working with
+
+
+templates is pretty hard and I thought
+
+
+that was never
+
+
+easy um but Han enriches you with the
+
+
+complete tooling and I think this is the
+
+
+most complete tooling um available on
+
+
+the web right now there are pretty good
+
+
+Solutions out there like uh view
+
+
+components um or Flex even that are
+
+
+pretty cool and are pretty uh in
+
+
+Innovative and all of those projects try
+
+
+to buy the view logic extraction problem
+
+
+from different
+
+
+perspectives and I wish if in RI
+
+
+ecosystem we would pay more attention to
+
+
+those um different approaches and get
+
+
+expire ired to optimize our code bases
+
+
+like don't be scared to use non non R
+
+
+way in the rice
+
+
+applications thanks any
+
+
+[Applause]
+
+
+questions any
+
+
+questions
+
+
+anyone I really like the part where you
+
+
+grilled rails that was nice
+
+
+all right uh if no questions then once
+
+
+again thank you Sebastian
+
+
+vgos
+
+
+e e

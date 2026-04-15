@@ -1,0 +1,4081 @@
+thank you
+
+
+so did anybody hang out with Nathan last
+
+
+night
+
+
+yeah
+
+
+so what's the does anybody have a bet on
+
+
+what time he's going to wake up today
+
+
+based on an estate when he left
+
+
+yeah he won't
+
+
+my bet is that he's in Berlin
+
+
+right as Andre shed I'm Scott belware
+
+
+I'm the founder or co-founder of
+
+
+Eventide which is a toolkit for evented
+
+
+autonomous components
+
+
+and like I said yesterday we're finally
+
+
+able to take the word services and
+
+
+microservices out of the tool name now
+
+
+that that's no longer popular
+
+
+um
+
+
+Eventide is a toolkit for building
+
+
+invented systems it's Pub sub autonomous
+
+
+components event sourcing
+
+
+and we just came back from our first
+
+
+Summit or mini conference that we held
+
+
+in British Columbia Canada
+
+
+where a bunch of us got together and
+
+
+planned the next version the next major
+
+
+version of Eventide uh went and uh and
+
+
+planned some of the work and we also did
+
+
+a contributor boot camp so uh as well as
+
+
+doing project planning
+
+
+um we invited anybody who wanted to
+
+
+start being an open source developer to
+
+
+come and then we spent time with them
+
+
+giving them as much training and help
+
+
+that we could to uh to get people
+
+
+started
+
+
+we work on a product called neuron which
+
+
+is
+
+
+um a legal process automation toolkit
+
+
+for one of the leading venture capital
+
+
+law firms
+
+
+in uh well in the world it's one of
+
+
+those big companies it's in San
+
+
+Francisco London Sydney Hong Kong you
+
+
+name it
+
+
+and we build all of that all of that
+
+
+back end on Eventide all the CoreLogic
+
+
+is event tied all the front end is rails
+
+
+what's Eventide well it's an open source
+
+
+product or project
+
+
+um
+
+
+also
+
+
+our community is a big part of
+
+
+everything that we do
+
+
+it's a mindset methodology and also a
+
+
+school so when we talk about the
+
+
+Eventide framework we're not really
+
+
+talking about just the software tools we
+
+
+refer to that as a toolkit the framework
+
+
+really is something that informs our
+
+
+thinking
+
+
+and the big part of that
+
+
+one of the big parts of that is not only
+
+
+building software but teaching and one
+
+
+thing that we're very proud of is
+
+
+winning the Ruby award in 2019
+
+
+for social impact which was given for
+
+
+our our
+
+
+engagement with community and how we
+
+
+engage with our community and the
+
+
+commitment that we have for uh for
+
+
+teaching and mostly when we're talking
+
+
+about software we're teaching
+
+
+object-oriented development we also
+
+
+teach methodology we also teach
+
+
+management
+
+
+UI ux testing all the rest of it but
+
+
+when it comes down to code we're focused
+
+
+on object oriented
+
+
+there's an old saying you know that
+
+
+object orientation allows advantages but
+
+
+doesn't provide advantages this is going
+
+
+to be a bit of a key thing to keep in
+
+
+the keep in the back of your mind as we
+
+
+go through this presentation today
+
+
+which is going to be about design
+
+
+and the fundamentals of design
+
+
+so let's talk a little bit about
+
+
+um a little bit about people first
+
+
+um programmer people
+
+
+um
+
+
+this this shape hopefully hopefully is
+
+
+familiar
+
+
+uh it's a normal distribution curve or a
+
+
+bell curve
+
+
+a bell curve is usually can be divided
+
+
+into standard deviations
+
+
+um one common way of doing an analysis
+
+
+of a population or a group of people is
+
+
+to look at six standard deviations or
+
+
+six sigmas
+
+
+each one of those segments is a sigma
+
+
+and one of the things that we can
+
+
+observe in a normal distribution is that
+
+
+typically
+
+
+about 70 percent of the population
+
+
+exists Within
+
+
+Sigma 3 and sigma 4. that's the that's
+
+
+the average so you know if you took
+
+
+average height average weight
+
+
+average income or you know population
+
+
+height weight income whatever you want
+
+
+um it's not always going to be exactly
+
+
+these numbers but it's going to be more
+
+
+or less reflective of this that the
+
+
+middle part of the bell curve has always
+
+
+has the largest number of people in it
+
+
+the same curve has been used to to
+
+
+describe adoption
+
+
+um
+
+
+Roger's adoption curve is is uh an
+
+
+exploration of
+
+
+um how any kind of Technology moves
+
+
+through human society
+
+
+uh in terms of it being invented all the
+
+
+way through to it to it being uh in its
+
+
+later stage in life and the numbers add
+
+
+up to the same too it's it's about 70
+
+
+percent of the people
+
+
+um are in the middle
+
+
+um so what we have is average or common
+
+
+in the middle part of the curve and
+
+
+exceptional out on the edges
+
+
+typically it's oriented from left to
+
+
+right the the axis is oriented from left
+
+
+to right from low to high but in the
+
+
+adoption curve it's it's represented
+
+
+differently
+
+
+so if you if you took uh like knowledge
+
+
+or capability or skill and put it on a
+
+
+curve or classroom grades it would it
+
+
+would look like this it would be low on
+
+
+the left hand side and high on the right
+
+
+hand side with most people being in the
+
+
+middle
+
+
+so let's go back to the adoption curve
+
+
+again
+
+
+the fascinating thing about this curve
+
+
+is this this uh this Chasm that was a
+
+
+great a cause for a great deal of
+
+
+conversation uh uh in uh in recent
+
+
+decades there was uh I don't know if
+
+
+you've heard the term crossing the chasm
+
+
+but this was a big
+
+
+um
+
+
+discussion in product development and it
+
+
+has to do with with how difficult it is
+
+
+to get a technology adopted
+
+
+by everybody but the early adopters so
+
+
+the innovators are the inventors
+
+
+obviously they use their technology the
+
+
+early adopters very easy to get that
+
+
+technology in their hands and then
+
+
+getting to the early majority or to the
+
+
+majority or middle majority uh proves
+
+
+very difficult getting across that chasm
+
+
+um is a big Challenge and the reason is
+
+
+or one of the reasons is that the chasm
+
+
+seems to eat knowledge it seems to eat
+
+
+understanding
+
+
+so the people in the early majority
+
+
+these people
+
+
+they don't communicate with these people
+
+
+they don't know them they don't share
+
+
+Social Circles
+
+
+they don't work together
+
+
+they're part of fundamentally different
+
+
+social units
+
+
+and then these people of course don't
+
+
+communicate with these people again
+
+
+they're separate
+
+
+so the knowledge that the people in the
+
+
+early adopter Community have are on the
+
+
+left-hand side of the curve have is very
+
+
+very rarely or very difficultly received
+
+
+by the people in the majority because
+
+
+these people
+
+
+follow
+
+
+the people who are even more exceptional
+
+
+than they are the are the inventors and
+
+
+the innovators and these people
+
+
+follow each other
+
+
+that's the big challenge
+
+
+this is meant to be a little bit of a
+
+
+shocking statement
+
+
+um
+
+
+hopefully
+
+
+it is and it isn't
+
+
+active record objects are data
+
+
+structures
+
+
+built in an object-oriented language
+
+
+if you're in an object or any language
+
+
+all your data structures are going to be
+
+
+built in an object-oriented language
+
+
+that doesn't mean they're object
+
+
+oriented it means that every language
+
+
+needs data structures if you're in a
+
+
+functional language your data structures
+
+
+will have a flare of a flavor of
+
+
+functionality if you're procedural look
+
+
+it'll look procedural
+
+
+so if you learn software development by
+
+
+working in rails chances are you haven't
+
+
+learned oo yet
+
+
+and that's
+
+
+a reason why many rails systems and
+
+
+applications are struggling
+
+
+because object orientation
+
+
+allows for advantages but it doesn't
+
+
+provide advantages
+
+
+and you can just say well does it really
+
+
+matter
+
+
+you're making progress your company is
+
+
+a working company your team is a working
+
+
+team
+
+
+but the underlying issue is it's
+
+
+supposed to be a lot easier than it
+
+
+usually is in the wild
+
+
+so let's talk about the fundamentals
+
+
+these will both explain why things are
+
+
+difficult and and also what you can do
+
+
+uh hopefully in the future
+
+
+first afference and efference these are
+
+
+two the two different kinds of coupling
+
+
+generalization and specialization
+
+
+this is
+
+
+um how abstract
+
+
+or concrete some unit of design is these
+
+
+are things we're going to get into by
+
+
+the way I'm just going to throw these up
+
+
+and then and then we'll dig into them
+
+
+having software having a single purpose
+
+
+if you know single responsibility
+
+
+principle same thing same idea some unit
+
+
+of software should should be should be
+
+
+interested in doing one thing not a
+
+
+whole bunch of things
+
+
+and tell don't ask which is an
+
+
+expression of encapsulation or it's it's
+
+
+an expression of
+
+
+um having software not become entangled
+
+
+with other pieces of software
+
+
+all right so here's the coupling
+
+
+Dimension this is afferent coupling it's
+
+
+calls into an object and efferent
+
+
+coupling is calls out of an object
+
+
+afferent and efferent
+
+
+here's an object with a whole lot of
+
+
+afferent coupling so a whole lot of
+
+
+other objects use this object and call
+
+
+into it
+
+
+here's an object with just a little bit
+
+
+of afferent coupling so out of these two
+
+
+scenarios
+
+
+um
+
+
+which would be the one
+
+
+that is less Troublesome to make a
+
+
+change to
+
+
+it would be the one on the right
+
+
+because when you change a highly
+
+
+afferent unit of software you also have
+
+
+to change or at least investigate and
+
+
+validate all of the other pieces of
+
+
+software that are entangled with it
+
+
+so let's look at the coupling Dimension
+
+
+as a continuum
+
+
+from African to efferent
+
+
+and let's look at the conceptual
+
+
+Dimension also as a Continuum vertically
+
+
+and just to give you some examples
+
+
+um for what is afferent and what is
+
+
+efferent you you can know these things
+
+
+by some of the things you already work
+
+
+with something that is afferent is is
+
+
+like a rails model
+
+
+it's very Central it's very core to your
+
+
+application and something that is
+
+
+efferent is usually something that's out
+
+
+on the edge of the system so if you
+
+
+think of concentric Rings the afferent
+
+
+stuff is in the middle the model's in
+
+
+the middle the efferent stuff is on the
+
+
+edge
+
+
+you know all kinds of things use uh use
+
+
+a model class or a model object but a
+
+
+controller is is a thing that uses other
+
+
+objects nothing uses it you don't have
+
+
+code that invokes your controllers only
+
+
+the only the front controller or the web
+
+
+framework uses your controllers
+
+
+so if we put these things on top of each
+
+
+other
+
+
+we get four quadrants
+
+
+the things on the top change rarely
+
+
+we expect them to change rarely
+
+
+and the things on the bottom change
+
+
+frequently
+
+
+so this is one of the happy quadrants
+
+
+afferent
+
+
+and general
+
+
+rubies
+
+
+basic object object and kernel or any
+
+
+system Java c-sharp whatever
+
+
+system.object
+
+
+highly afferent because everything
+
+
+descends from it everything is coupled
+
+
+to it
+
+
+and highly General it doesn't really do
+
+
+anything specific it doesn't post a
+
+
+payment system.object doesn't do a
+
+
+business transaction it's very abstract
+
+
+it's very utilitarian in what it offers
+
+
+the same thing is true I'm sorry not the
+
+
+same but the other happy quadrant is
+
+
+efferent and and special this is like a
+
+
+controller class it orchestrates other
+
+
+objects it coordinates other objects
+
+
+so its calls are mostly outbound
+
+
+and it's special every controller action
+
+
+represents one specific kind of business
+
+
+scenario
+
+
+create an order update an order it's
+
+
+very very specific stuff it's it's not
+
+
+general purpose
+
+
+then we've got the sad quadrants
+
+
+highly General
+
+
+or general and efferent this is kind of
+
+
+an absurdity this would be like if basic
+
+
+object
+
+
+also had all of the other methods from
+
+
+all of the other objects on it
+
+
+it would be in it would be an inversion
+
+
+of abstraction you don't tend to see
+
+
+this because it's it's quite it's quite
+
+
+absurd and the other said quadrant is
+
+
+afferent so a lot of inbound calls
+
+
+but special
+
+
+but also special meaning a lot of things
+
+
+are calling into it
+
+
+but it does
+
+
+things
+
+
+that are like individual business
+
+
+transactions it's also a bit of an
+
+
+absurdity
+
+
+so this one's fun
+
+
+if anybody has has an idea shout it out
+
+
+but in terms of fat model skinny
+
+
+controller the dominant ideology of rail
+
+
+software design that has been kicking
+
+
+around the community since the article
+
+
+was written 15 20 years ago which one of
+
+
+these quadrants would represent a fat
+
+
+model
+
+
+yeah
+
+
+it's one of the Absurd ones
+
+
+the fact of the matter is
+
+
+that it's been known and provable this
+
+
+is measurable through through static
+
+
+analysis that fat model skinny
+
+
+controller is one of the most
+
+
+fundamental mistakes that you can make
+
+
+in software design
+
+
+because it takes something that's highly
+
+
+afferent a model object and puts very
+
+
+specific business transaction code on it
+
+
+so you can have your user object and it
+
+
+can have code on there that's only used
+
+
+by One controller
+
+
+what does it mean
+
+
+if you have code on a Model that is only
+
+
+used by One controller
+
+
+go ahead and shout it out it's okay we
+
+
+can if you got an answer a guess
+
+
+except I can't hear you
+
+
+it's the universal controller well I'm
+
+
+talking about let's talk about the model
+
+
+if the model has all of this like
+
+
+specific business code on it
+
+
+it means the model has controller code
+
+
+the code was supposed to stay on the
+
+
+controller
+
+
+why didn't we do that
+
+
+because you can't test rails controllers
+
+
+and then we were told that tdd is dead
+
+
+but if tdd was applied to this to the
+
+
+design and the development of rails
+
+
+you would have never had an outcome
+
+
+where a controller could not be tested
+
+
+easily simply merely by instantiating it
+
+
+the outcome of tdd would be to prove
+
+
+that the design is easy to manipulate
+
+
+easy to exercise easy to instantiate
+
+
+easy to set up
+
+
+not only
+
+
+was like tdd is not dead in rails it was
+
+
+just never born
+
+
+this is like
+
+
+when you break both of your feet and
+
+
+then all of a sudden you're a big fan of
+
+
+orthopedic shoes
+
+
+it's retrofitting a rationale to a
+
+
+mistake
+
+
+so here's a
+
+
+a handy acronym to remember this this
+
+
+quadrant by and if you'd like there's a
+
+
+write-up on this on my blog that you can
+
+
+take a look at I didn't invent any of
+
+
+this I may have
+
+
+in the spirit of yesterday's
+
+
+conversation I may have changed the
+
+
+names a little bit to make it hopefully
+
+
+a little bit more understanding this
+
+
+metric is you is is originally called
+
+
+distance from the main sequence
+
+
+which
+
+
+the reason why you don't know about it
+
+
+is probably the name is so
+
+
+abstract that you would never have
+
+
+thought that it meant anything or was
+
+
+meaningful to you
+
+
+okay single purpose an object does one
+
+
+thing
+
+
+and therefore
+
+
+only has to change in rare circumstances
+
+
+tell don't ask this is an expression of
+
+
+encapsulation what's encapsulation we
+
+
+decrease afference
+
+
+inbound coupling by allowing objects to
+
+
+perform some work
+
+
+in response to a method invocation
+
+
+and we Shield that object State we
+
+
+Shield that object state from access by
+
+
+the outside world that also reduces
+
+
+afference
+
+
+so
+
+
+we can't eliminate change
+
+
+but we have a duty
+
+
+to limit the effect radius or the blast
+
+
+radius of any change
+
+
+so there's a common theme in all this
+
+
+it's changed
+
+
+Doctorate of useful objects
+
+
+everything we do in software design
+
+
+every design principle you've ever heard
+
+
+everything in solid
+
+
+everything else liskoff substitution
+
+
+um
+
+
+well I'm not going to get it I'll get
+
+
+into that later
+
+
+um but everything that you've heard dry
+
+
+all of it the only thing these things
+
+
+are concerned with are managing change
+
+
+or dealing effectively with change
+
+
+putting things that change in places
+
+
+that change and things that aren't that
+
+
+don't change in places that aren't
+
+
+expected to change so that we're not
+
+
+accidentally causing change in places
+
+
+that have incredible costs so
+
+
+what's a useful object
+
+
+uh well the doctrine is how we develop
+
+
+all of our all of our all of our
+
+
+software and object-oriented systems is
+
+
+how we in the event type project the
+
+
+Eventide school do things Eventide
+
+
+itself the toolkit is built this way all
+
+
+of our all of our customer projects are
+
+
+built this way all of our personal
+
+
+projects are built this way there's
+
+
+nothing Innovative or or radical about
+
+
+it it's just an amalgamation of of you
+
+
+know 40 Years of object oriented
+
+
+design methodology
+
+
+but the thing about a useful object
+
+
+and why it's
+
+
+why it's called that is that when an
+
+
+object is instantiated
+
+
+none of its dependencies can be can be
+
+
+allowed to be nil
+
+
+because that would cause that object
+
+
+to raise nil errors nil reference errors
+
+
+anytime it was used that's not very
+
+
+useful
+
+
+that's a useless object that's an object
+
+
+you call nuon and as soon as you try to
+
+
+do something it just fails
+
+
+so there's more to this and and to this
+
+
+uh and to this methodology so
+
+
+um we've already went over the the the
+
+
+dependency issue
+
+
+um but furthermore what we add on to
+
+
+this
+
+
+is that an object's initializers are
+
+
+primitive they don't have any logic in
+
+
+them except accepting and recording The
+
+
+Primitives that are passed to them and
+
+
+we we differentiate and initialize our
+
+
+logic
+
+
+um
+
+
+from things like like Setters and
+
+
+Getters which we use for dependencies
+
+
+um and we we try to isolate and insulate
+
+
+the initializer from those concerns
+
+
+uh it doesn't require
+
+
+a
+
+
+extravagance like an inversion of
+
+
+control container
+
+
+just to set up its dependencies to be
+
+
+operational
+
+
+and it's designed so that you don't have
+
+
+to pass Nils or dummy values
+
+
+into an initializer in order to use the
+
+
+object
+
+
+as a result of all this
+
+
+we don't have to use test doubles
+
+
+to disconnect the dependencies of an
+
+
+object
+
+
+from operational connections to
+
+
+operational resources like databases
+
+
+networks and so forth and we rely on
+
+
+Telemetry more than more than test
+
+
+doubles more than uh
+
+
+spies and mocks and steps
+
+
+the reason for that is
+
+
+your test code needs to be sacred and
+
+
+filling it up with the setup of mock
+
+
+objects is a way to make your test code
+
+
+less immediately understandable so we
+
+
+get all of that stuff out of the test
+
+
+code it's a very Brute Force thing to do
+
+
+to impose a mock object or a stub or a
+
+
+spy onto your system under test
+
+
+it's kind of like
+
+
+it's like toxic masculinity as a
+
+
+software design methodology it's
+
+
+incredibly Brute Force thing to do it
+
+
+violates your system to do this stuff
+
+
+but you can do it
+
+
+it's just not very elegant
+
+
+all right let's get to some code
+
+
+here's a little here's a little
+
+
+test sample system or not a test but a
+
+
+sample system very very simple thing the
+
+
+key thing here is the is the sign up
+
+
+class this is just going to sign up a
+
+
+user it's got an HTTP client
+
+
+so ostensibly it's going to do this
+
+
+operation over HTTP it's not using Json
+
+
+we decided to use our own protocol
+
+
+um just for the fun of it
+
+
+and um
+
+
+there's a there's a user there's a model
+
+
+class it's not active model we're just
+
+
+using a struct just to represent a data
+
+
+structure so it's more appropriately
+
+
+just called a data structure
+
+
+the initializer for the sign up should
+
+
+look fairly straightforward signing up a
+
+
+user
+
+
+and it receives an HTTP client that's
+
+
+dependency injection
+
+
+why do we do that because dependencies
+
+
+have to be controlled should be
+
+
+controlled externally
+
+
+otherwise if you can't control them
+
+
+externally
+
+
+you can't control them from tests
+
+
+and a test that doesn't have control
+
+
+isn't a very good test at all
+
+
+a test that can't control is basically
+
+
+showing you that your system can't be
+
+
+controlled and that you as a developer
+
+
+are not don't have your system under
+
+
+control
+
+
+straightforward straightforward callable
+
+
+object as um
+
+
+um
+
+
+and Jessica was saying is that how you
+
+
+say that name
+
+
+Anushka
+
+
+I should have practiced
+
+
+um she was saying yes as she
+
+
+demonstrated yesterday there there's uh
+
+
+multiple ways of invoking
+
+
+um callables and Ruby putting a call
+
+
+method on any object allows it to be
+
+
+invoked
+
+
+and uh this is this is how it's used
+
+
+this is how it's exercised
+
+
+substantiated User it's all
+
+
+straightforward instantiated HP client
+
+
+pass them both in to the initializer and
+
+
+invoke it
+
+
+so there's a disadvantage to this test
+
+
+design
+
+
+and it's right there in the test setup
+
+
+in order to exercise what I want to
+
+
+exercise as business logic
+
+
+I've got a ad setup of infrastructure
+
+
+to my test code this obscures the the
+
+
+meaning of the test code I can't look at
+
+
+this at a glance our our bar for for for
+
+
+well-written code is not that it's
+
+
+readable but at that it's scannable one
+
+
+of the fundamental principles of user
+
+
+interaction is that we tend to scan
+
+
+first for knowledge and then we don't
+
+
+get the knowledge then we've got to
+
+
+start reading so readability isn't
+
+
+really as important at all it's not that
+
+
+it's unimportant but it's not as
+
+
+important as scannability not by a long
+
+
+shot
+
+
+so this is no better because we're
+
+
+passing Nils into the initializer and um
+
+
+that's completely artificial this isn't
+
+
+a natural thing that you would do with
+
+
+this with this system you this is not
+
+
+something you would see in nature so it
+
+
+shouldn't be represented in code in test
+
+
+code or exercise code because test code
+
+
+is demonstrating the nature of the
+
+
+system
+
+
+and of course it'll throw a nil error
+
+
+and back to the first
+
+
+the first law of
+
+
+useful objects a useful object is usable
+
+
+immediately upon initialization without
+
+
+any null reference errors resulting from
+
+
+uninitialized
+
+
+dependencies
+
+
+it would be more ideal or more
+
+
+preferable
+
+
+if we didn't have to deal with the HTTP
+
+
+client object at all that we could just
+
+
+exercise this object without any regards
+
+
+to it and without doing anything
+
+
+unnatural without changing the design of
+
+
+the test so that we pass in dummies or
+
+
+Nils
+
+
+having overrideable methods or optional
+
+
+arguments in an initializer you could
+
+
+see that as a warning sign for your
+
+
+design
+
+
+if you only have to pass in if you're if
+
+
+your initializer has like well named
+
+
+arguments or optional arguments that
+
+
+could be uh that could be a flag
+
+
+so
+
+
+so we're gonna we're going to allow the
+
+
+initializer to express Essential
+
+
+Knowledge knowledge That's essential to
+
+
+the business
+
+
+um operation happening here and not
+
+
+express to something really mechanical
+
+
+like dependency injection this is what
+
+
+we're looking for
+
+
+the sign up
+
+
+object the sign up class has an
+
+
+initializer IT receives the user you can
+
+
+glance at that and understand what's
+
+
+going on you don't have to look twice
+
+
+and understand why is it a user and an
+
+
+HTTP client you can just get an idea at
+
+
+a glance
+
+
+we would do that by turning the
+
+
+dependency
+
+
+into an attribute
+
+
+but there's still a problem with this
+
+
+that attribute is still initialized to
+
+
+nil
+
+
+and if it's invoked it's going to throw
+
+
+a nil reference error
+
+
+so what we'd like to do
+
+
+is to change that attribute into a null
+
+
+coalescing
+
+
+attribute which is what the name of that
+
+
+pattern is
+
+
+when you see the or equals that's null
+
+
+coalescence
+
+
+if that value is no nil
+
+
+then it will be coalesced into something
+
+
+else but the problem here is into what
+
+
+we said we want to disconnect we want to
+
+
+be able to control the dependencies we
+
+
+want to be able to disconnect the sign
+
+
+up object from live Network stuff
+
+
+as we as we as we as we see fit
+
+
+but if I just set that to hpclient.new
+
+
+that's a
+
+
+hard wired coupling of a dependency that
+
+
+can can no longer be controlled that's
+
+
+when you see really Brute Force
+
+
+mechanisms like stubs and meta
+
+
+programming and hacking
+
+
+um
+
+
+it's like using a jackhammer to scratch
+
+
+your back it can be done but it it
+
+
+demonstrates lack of control over the
+
+
+design
+
+
+so we're going to do something like this
+
+
+this is uh and there's there's other
+
+
+libraries obviously we're going to show
+
+
+or I'm going to show the libraries that
+
+
+are in the event type toolkit we have a
+
+
+library called mimic if you pass a class
+
+
+to mimic it returns an object that
+
+
+implements that classes interface
+
+
+and that object is inert
+
+
+the name for that pattern is null object
+
+
+I should have put a link up to Wikipedia
+
+
+but look for the null object pattern
+
+
+um the significance here
+
+
+for design
+
+
+is that when you have a behavioral
+
+
+object
+
+
+with dependencies
+
+
+its dependencies should be initialized
+
+
+by default
+
+
+to an implementation of the dependencies
+
+
+interface
+
+
+where that implementation does nothing
+
+
+you might feel shocked at that because
+
+
+you could sort of conclude well if
+
+
+that's the case it can construct that
+
+
+object and instead of you know
+
+
+instead of posting the sign ups to the
+
+
+whatever to wherever the sign up message
+
+
+is going
+
+
+the thing does nothing
+
+
+but that's not relevant to design
+
+
+the rules for object orientation in this
+
+
+case are stated by the liskov
+
+
+substitution principle
+
+
+in liskov substitution principle
+
+
+in the liskoff substitution principle
+
+
+Barbara liskoff's genius what she gave
+
+
+to us
+
+
+is the understanding that as long as two
+
+
+objects have the same interface
+
+
+it doesn't matter
+
+
+whether they do the right thing the
+
+
+wrong thing or do something or do
+
+
+nothing the only thing that the sign up
+
+
+class is concerned with is that whatever
+
+
+HTTP client is conforms to the same
+
+
+protocol as every other HTTP client
+
+
+that's all that the sign up object
+
+
+that's that's all the obligation that
+
+
+the HT that the sign up class has
+
+
+that's called substitutability
+
+
+and so the thing that's a that's
+
+
+assigned to hdb client
+
+
+can be a real one can be a fake one it
+
+
+can be one that uses Json could be one
+
+
+that uses L7
+
+
+these are all substitutes for each other
+
+
+if you've ever heard the term in in
+
+
+the misapplied
+
+
+definition of inheritance in oo that
+
+
+subclasses are have have an is a
+
+
+relationship that's largely a misnomer
+
+
+the more correct way to look at at
+
+
+inheritance is that the relationship is
+
+
+a is substitutable for relationship
+
+
+but when we look at oh oh merely as a
+
+
+way to procedurally achieve reuse
+
+
+we lose the whole point of of why
+
+
+substitutability exists yes you can get
+
+
+reuse out of it yes you can have base
+
+
+classes and you can you can you know
+
+
+have utility classes that you mix into
+
+
+other utility Cloud other classes
+
+
+but the point is substitutability that's
+
+
+the magic okay so you can find out more
+
+
+about uh more about mimic here if you'd
+
+
+like
+
+
+so we get with him with mimic when this
+
+
+class when this sign up is instantiated
+
+
+HTTP client
+
+
+is an instance not of the HTTP client
+
+
+operational class but of this mimic
+
+
+thing this inert substitute
+
+
+and by using that we don't we never get
+
+
+a null reference error that means that
+
+
+sign up never has to have anything
+
+
+special done to it in order to be to be
+
+
+usable
+
+
+I'm going to do one more little uh one
+
+
+more little tweak here
+
+
+I'm going to pass
+
+
+another argument
+
+
+to
+
+
+the instantiation of the mimic record
+
+
+shoe basically means that that mimic is
+
+
+now going to record which means that
+
+
+um in test code
+
+
+by instantiating the sign up class
+
+
+I can ask if the HTTP client was was
+
+
+interacted with
+
+
+from the sign up basically asking
+
+
+did sign up interact with HTTP clients
+
+
+and if so how and I'm not really it
+
+
+doesn't really go into great detail here
+
+
+um you can find out more about that
+
+
+um on the on on the
+
+
+the GitHub homepage for uh for the mimic
+
+
+library or any number of resources that
+
+
+that demonstrate both the null object
+
+
+pattern and diagnostic substitute
+
+
+patterns
+
+
+yeah that's not a mock object
+
+
+a mock object is a violation
+
+
+this is part of the design
+
+
+this object is built
+
+
+so that it can be inspected
+
+
+when it's put into a certain disposition
+
+
+that thing can be used in a test it
+
+
+doesn't cause invocation of live
+
+
+Services elsewhere in the organization
+
+
+and it also has telemetry
+
+
+that can be used to determine what
+
+
+happened to it
+
+
+I make that a little bit shorter a
+
+
+little bit
+
+
+more clear
+
+
+a little bit more concise
+
+
+I'm going to use I'm going to change the
+
+
+the previous implementation
+
+
+which had this hard-coded null
+
+
+coalescing attribute and I'm going to
+
+
+change that to the use
+
+
+of a macro
+
+
+called dependency
+
+
+which is in this Library called
+
+
+dependency
+
+
+it's it's
+
+
+the same thing
+
+
+plus plus
+
+
+so you can find out about dependency at
+
+
+its GitHub repository
+
+
+one of the things that we can do with
+
+
+dependency is is add to that diagnostic
+
+
+substitute that gets constructed so by
+
+
+default it's just in an instance of a
+
+
+recordable null object pattern
+
+
+but if we want to put more methods on
+
+
+there specialized methods we can do that
+
+
+by putting inside HTTP client there's a
+
+
+module here called substitute that's
+
+
+part of this protocol is part of the
+
+
+dependency Library there's all kinds of
+
+
+other things as well but this is the
+
+
+simplest thing that I could possibly
+
+
+show and the reason that that's there is
+
+
+I'd like this substitute to interact and
+
+
+negotiate meaning in terms of its domain
+
+
+language not invoked which is the
+
+
+language of telemetry
+
+
+but the language of this HTTP client
+
+
+which speaks in terms of
+
+
+posting getting patching the HTTP stuff
+
+
+and I can shorten the interface down so
+
+
+it's just concerned with whatever
+
+
+content is going in so when you look at
+
+
+the test
+
+
+that's the line now just saying HP
+
+
+client
+
+
+did you post anything was it this
+
+
+content
+
+
+right let's clean up a couple more
+
+
+things in this class
+
+
+this initializer is cherry picking
+
+
+it's receiving an object user and then
+
+
+cherry picking values on it putting
+
+
+putting logic in the initializer that is
+
+
+more than just recording primitive
+
+
+values that are sent to it
+
+
+the sign up class wants username and
+
+
+password
+
+
+we're passing user and then cherry
+
+
+picking off the user that also
+
+
+disencapsulates the user
+
+
+we're expressing we're exposing a state
+
+
+well it's a state object so that's kind
+
+
+of what it's for but still I don't have
+
+
+to do this I can limit afference once
+
+
+again by limiting the use of an objects
+
+
+by the object's data interfaces
+
+
+so instead of doing this
+
+
+the initializer is going to receive
+
+
+The Primitives
+
+
+we'll get back to that this is also a
+
+
+bit of a setback because it's super
+
+
+convenient when you've got a user and
+
+
+you want to sign up that user that you
+
+
+just passed the user into it that's
+
+
+convenience
+
+
+this is design principles this is this
+
+
+is mechanical correctness
+
+
+we still need the we still need to solve
+
+
+the convenience thing because we don't
+
+
+just get to adopt mechanical correctness
+
+
+and tell our co-workers you know
+
+
+deal with the crap
+
+
+we still have to make usability part of
+
+
+this interface we'll return to that in a
+
+
+second
+
+
+and if we have a primitive initializer
+
+
+it's easy enough to just
+
+
+reduce that code to a generalization
+
+
+this is a macro
+
+
+I'll initializer it's an initializer
+
+
+library and it forces the initializer to
+
+
+be as primitive as it can be because it
+
+
+only takes in values
+
+
+and Records those values in the object
+
+
+and it also defines
+
+
+Getters for those for those um symbols
+
+
+jumping ahead
+
+
+this is the
+
+
+implementation
+
+
+that respects both mechanical
+
+
+correctness or Essence or essential
+
+
+correctness
+
+
+and convenience
+
+
+the class interface
+
+
+is the convenience interface the class
+
+
+interface is the utility interface the
+
+
+instance interface doesn't have to
+
+
+provide convenience or utility so the
+
+
+instance interface is free to be the
+
+
+best mechanically correct implementation
+
+
+that it can be
+
+
+so we don't make the mistake of mixing
+
+
+needs of convenience with the instance
+
+
+interface which is what happens when you
+
+
+have when you look at just the
+
+
+initializer as the only way to construct
+
+
+an object you're free free
+
+
+you're free as programmers
+
+
+to do programming
+
+
+that build method right there that's
+
+
+that's uh that's a factory method
+
+
+Factory methods our way of doing
+
+
+construction of objects that are more
+
+
+specialized
+
+
+and then here
+
+
+is the actuator
+
+
+that takes an instance of user instead
+
+
+of the less convenient username and
+
+
+password so what you have in hand is a
+
+
+user's data structure you can pass this
+
+
+to the class interface that represents
+
+
+the convenience interface
+
+
+the instance interface is still
+
+
+mechanically correct the initializer is
+
+
+still mechanically correct and then
+
+
+we've got the class interface that
+
+
+allows us to have more
+
+
+um
+
+
+yeah convenience usability stuff
+
+
+so
+
+
+primitive initializer
+
+
+plus a class Constructor
+
+
+we have both of those
+
+
+if I invoked the initializer
+
+
+by the way
+
+
+the dependency HTTP client
+
+
+would be a mimic
+
+
+so we have a convenience interface which
+
+
+is the class
+
+
+and the mechanical interface
+
+
+which is the instance interface
+
+
+if I invoke the initializer the HTTP
+
+
+client
+
+
+is a mimic well that's not good in a
+
+
+production system obviously
+
+
+so all the production code
+
+
+uses the Constructor
+
+
+and in the Constructor
+
+
+we will set dependencies
+
+
+to truly operational instances of those
+
+
+dependencies
+
+
+if you use the initializer you get
+
+
+something that's good to that's that's
+
+
+that can be used for Diagnostic purposes
+
+
+tests are a diagnostic use case
+
+
+the mechanical interface offers the
+
+
+maximum of control that's what you want
+
+
+in diagnostic circumstances
+
+
+the class interface
+
+
+gives us what we want for operational
+
+
+systems
+
+
+for production systems
+
+
+foreign
+
+
+dependencies
+
+
+diagnostic substitutes a couple more
+
+
+little pieces of terminology
+
+
+so for everybody working in rails and
+
+
+just because I work in Eventide doesn't
+
+
+mean I work in rails like I'd be kind of
+
+
+crazy to go and build a rails
+
+
+you know we we have a we have a A system
+
+
+that has users it has user interface
+
+
+it's web we use rails
+
+
+for the user interface but we look at
+
+
+rails as a web server
+
+
+I said that I believe in our dialogue
+
+
+yesterday
+
+
+we get in in and out of rails as quickly
+
+
+as possible
+
+
+I have a favorite expression to explain
+
+
+some of this give under rails that which
+
+
+is rails for everything else you have
+
+
+the lib folder
+
+
+if you've come up through rails you
+
+
+probably don't sort of have a you may
+
+
+not have experience building libraries
+
+
+but it's the most important thing you
+
+
+can learn
+
+
+well it's one of two of the most
+
+
+important things you could learn
+
+
+obviously learning rails but
+
+
+understanding how to develop libraries
+
+
+understanding how to be
+
+
+a ruby developer
+
+
+in rails
+
+
+in addition to being a rails developer
+
+
+understand how rails itself is built
+
+
+understand what the lib folder is
+
+
+understand that when you build your own
+
+
+business logic code that's your asset
+
+
+that's your company's asset that's the
+
+
+money that's your special sauce
+
+
+don't entangle that code
+
+
+with somebody else's framework
+
+
+keep that asset as clean and as
+
+
+unencumbered by somebody else's
+
+
+infrastructure as you possibly can how
+
+
+do you do that
+
+
+you program
+
+
+you create objects
+
+
+so here's a suggestion
+
+
+put a model directory in your lib folder
+
+
+encapsulate every operation that you
+
+
+have that touches the database
+
+
+in a class
+
+
+build those classes to be callable
+
+
+objects
+
+
+that are also easily testable
+
+
+in ways that the test setup code
+
+
+isn't a morass
+
+
+of mock objects stubs spies and all that
+
+
+other kind of stuff
+
+
+and I would recommend just to keep
+
+
+things clear and this might be heresy if
+
+
+you're if you're really
+
+
+in the rails Camp rename the model
+
+
+directory app models or app model to app
+
+
+data and do nothing with those classes
+
+
+other than scaffold generate them
+
+
+and everything else
+
+
+is an external concern
+
+
+validation
+
+
+well I was gonna say callbacks but avoid
+
+
+try to avoid callbacks
+
+
+the only thing that we do
+
+
+the only thing that we do in our work
+
+
+with rails models is let them do exactly
+
+
+what they do out of the box before
+
+
+anybody adds any code to them
+
+
+because the minute somebody starts
+
+
+adding code to them
+
+
+they're going to start creating low
+
+
+cohesion
+
+
+putting all kinds of stuff in it
+
+
+usually stuff that should have been in a
+
+
+controller but because you can't test
+
+
+controllers you start putting it in
+
+
+model classes that increases the surface
+
+
+area that things can stick to it's like
+
+
+velcro it's like when you walk through
+
+
+the walk through a field and you end up
+
+
+with all kinds of things stuck to your
+
+
+pants
+
+
+that's what that's what a large surface
+
+
+area does it increases the potential for
+
+
+afferents you have higher afferents
+
+
+you're basically that's like stepping on
+
+
+the stepping on the brakes it's like
+
+
+having a Formula One car
+
+
+as your team
+
+
+and you take it out on the track and you
+
+
+ride with your foot on the brake
+
+
+the doctrine of useful objects is
+
+
+there's a there's a there's a rather
+
+
+lengthy article on implementing this
+
+
+stuff it actually uses it a lot more
+
+
+elaborate things the Telemetry
+
+
+mechanisms we use in that article are
+
+
+are more more rigorous not really
+
+
+probably not appropriate for this you
+
+
+know one hour talk we use the mimic
+
+
+instead of the the
+
+
+more elaborate implementation of
+
+
+telemetry that we have that we use
+
+
+inside the the event I toolkit
+
+
+um but should give it a decent overview
+
+
+and that's it
+
+
+and I had tried to do this in a way that
+
+
+I would run out of time without having
+
+
+anybody object to it but now there's at
+
+
+least six minutes left so
+
+
+if there's any questions comments
+
+
+criticisms objections
+
+
+um Rebellion please have at it
+
+
+he's on
+
+
+okay so any questions yes me uh so I
+
+
+have first question yesterday I think
+
+
+you've talked about that
+
+
+um you can judge test usefulness by the
+
+
+amount of setup and dependencies it has
+
+
+something like that I think the quality
+
+
+the quality of design okay yeah but in
+
+
+your case with the sign up the HTTP like
+
+
+there is uh when you are testing the
+
+
+sign up you have a dependency on the
+
+
+HTTP client despite that you probably
+
+
+only rely on its interface not the
+
+
+implementation
+
+
+um
+
+
+yeah sort of like well that's yeah and
+
+
+here it's the nature this is what's
+
+
+being tested in this test
+
+
+it's test it's an interaction test so
+
+
+the purpose of this test is to prove
+
+
+once we've done sign up that the HTTP
+
+
+client was properly and properly
+
+
+interacted with
+
+
+so it does reference the HP client but
+
+
+that's what this test is for
+
+
+okay and it's probably described in the
+
+
+reference documentation of the mimic but
+
+
+how do you approach when the HTTP client
+
+
+has like the return value it's a turn
+
+
+yeah yeah so
+
+
+it's it's like I prompted you before
+
+
+you would put them there's many
+
+
+different there's a bunch of different
+
+
+patterns that are supported by the
+
+
+dependency Library it's not actually in
+
+
+mimic mimic is just the part of the
+
+
+system that will that will
+
+
+um inspect an interface and create a
+
+
+mimic dependency is the thing that
+
+
+allows this to happen this substitution
+
+
+um you could put a method in here
+
+
+okay set return value or whatever you
+
+
+want
+
+
+that's the worst case scenario for a
+
+
+diagnostic substitute when you start
+
+
+putting stuff on it like
+
+
+it's way better in a scenario where
+
+
+everything is tell don't ask
+
+
+but that's impossible because sometimes
+
+
+you have objects that return data so in
+
+
+those cases where you have an object
+
+
+that returns data which is always the
+
+
+case when you're building HTTP clients
+
+
+or client libraries or anything like
+
+
+that
+
+
+we would have these these diagnostic
+
+
+substitutes would have another method on
+
+
+them set the return value and then and
+
+
+then we would actually implement
+
+
+over over top of it
+
+
+um
+
+
+where would I
+
+
+do that
+
+
+he says is it this one
+
+
+yeah so
+
+
+that's not what the substitute is
+
+
+okay
+
+
+so I would Implement a specialization
+
+
+special General
+
+
+same same here we are back at that
+
+
+terminology I would implement the
+
+
+specialization that that does something
+
+
+more for the for the diagnostic purposes
+
+
+and if I needed to use this for
+
+
+if I needed to do something that was
+
+
+like still I want to make sure that
+
+
+because there's still a test here that
+
+
+says was was posted invoked or what did
+
+
+was did I posted did post it happen
+
+
+um in this case I could change
+
+
+that implementation here
+
+
+to this
+
+
+and it would both override and provide
+
+
+it would actually execute and provide
+
+
+Telemetry recording
+
+
+you could actually I wouldn't recommend
+
+
+this but just to say like just to sort
+
+
+of give you an idea of maybe maybe this
+
+
+gives you an idea how this works but you
+
+
+could put that in any in any class it
+
+
+doesn't have to be a substitute I don't
+
+
+think that's a good idea but just to say
+
+
+it's just it's just Ruby it's just
+
+
+programming
+
+
+okay
+
+
+I don't know
+
+
+uh so could you go back to the file 130
+
+
+RB the previous one yeah so in this test
+
+
+you said that the HTTP client posted is
+
+
+um it's not a mock
+
+
+right right yeah so and then you said
+
+
+right now in the language of Mark stabs
+
+
+and also this would be a spy
+
+
+but you just said that you check out the
+
+
+interaction right what's that you check
+
+
+the interaction with the HTTP client
+
+
+yeah so is it a definition of the mooc
+
+
+no okay so okay it's the Spy but
+
+
+um I I see what you're saying but it's
+
+
+the same it's the same Spirit right you
+
+
+you accomplish the same things yeah but
+
+
+the the thing
+
+
+um yeah so I just got that uh you said
+
+
+that it's not a mock but to me it's just
+
+
+like checking the interaction still
+
+
+because this is how the class is
+
+
+designed mocks yeah mocks check
+
+
+interactions yeah buys check
+
+
+interactions stubs base stubs decouple
+
+
+heart tightly coupled code yeah digital
+
+
+Stuff how to behave and these diagnostic
+
+
+substitutes also do something similar to
+
+
+a mock or a spot yeah so but it's
+
+
+important not to see them that way
+
+
+sorry it's important not to see
+
+
+substitute diagnostic substitutes as
+
+
+mock objects
+
+
+mock objects are something that you do
+
+
+to your design after you finish the
+
+
+design and realize you needed another
+
+
+requirement transparency and then you
+
+
+retrofit transparency by force by
+
+
+writing that transparency not in the
+
+
+class itself but in the test file
+
+
+that's the this is not the point you're
+
+
+making at all I'm just yeah I'm
+
+
+exploiting your moment to make my point
+
+
+um the point I'm getting is that
+
+
+um the difference between the solution
+
+
+that you presented as the like end goal
+
+
+with the one with the Constructor
+
+
+um it's not so much different in my
+
+
+opinion it's just that in both cases we
+
+
+could check the interaction and of
+
+
+course also we could remove the HTTP
+
+
+client from the Constructor and also
+
+
+um kind of inject it through rails
+
+
+configuration as well and only if you're
+
+
+using rails yeah in this way yeah but
+
+
+here's the thing I like one of one of
+
+
+the objectives of the of of one of our
+
+
+design objectives
+
+
+is to not use any mechanism for
+
+
+construction or dependency configuration
+
+
+other than the class's own
+
+
+implementation
+
+
+so I don't want to move that stuff out
+
+
+to rails configuration
+
+
+or needle
+
+
+or any other any other dependency
+
+
+configuration framework
+
+
+because a class
+
+
+is supposed to be able to configure its
+
+
+own dependencies
+
+
+yeah but when it's too reliant on
+
+
+external thing like a mimic Gamma or
+
+
+rails right but not for not for the
+
+
+setup of its own of its own dependencies
+
+
+let's say this is not this is not
+
+
+something that's that's let's say this
+
+
+is an H this isn't a library that
+
+
+interacts with Twitter
+
+
+formerly Twitter
+
+
+doesn't have rails configuration
+
+
+so to get
+
+
+the right dependent oh are you saying to
+
+
+inject the operational dependency
+
+
+is that what you mean you could just do
+
+
+this right yeah yeah you'd still be
+
+
+dependent on Rails like that's way over
+
+
+there like completely in a foreign like
+
+
+an alien world so I've got this class
+
+
+sign up and for some reason it ha it
+
+
+needs to have some some infrastructure
+
+
+from some web framework
+
+
+these two things are not supposed to be
+
+
+not supposed to have any knowledge of
+
+
+each other
+
+
+because I would have to set up I would
+
+
+have to set up rails configuration
+
+
+before I could even run my test or if
+
+
+before I could exercise that code if
+
+
+sure same problem
+
+
+you know we learned this in the 2000s
+
+
+like we moved on from dependency
+
+
+injection containers
+
+
+um angular didn't
+
+
+but those guys it's another one of those
+
+
+things where they they found a they
+
+
+found a poorly buried corpse dug it up
+
+
+and and and revived it uh and you know
+
+
+the intention was yeah we tried this we
+
+
+moved on the reality is
+
+
+is that a class this class
+
+
+this sign up class
+
+
+it should be responsible for configuring
+
+
+its own operational dependencies and
+
+
+there's no good reason for it not to
+
+
+there's no significant advantage to
+
+
+taking a dependency on an ioc container
+
+
+there's no lack of of well-established
+
+
+patterns for establishing the the
+
+
+operational values of a dependency like
+
+
+every reason you could come up with for
+
+
+an ioc container or configuration tool
+
+
+I would probably argue is just
+
+
+an interesting experience with with some
+
+
+technological fun things
+
+
+and doesn't really have a justification
+
+
+in the in design fundamentals
+
+
+it's a it can be done but should it be
+
+
+done
+
+
+this is probably a much longer
+
+
+conversation that would be fun to have
+
+
+over a code editor though because I
+
+
+think because I'm in the front of the
+
+
+room with a microphone that I get to
+
+
+just dictate with the what the
+
+
+conclusion is
+
+
+uh yeah sure let's talk later
+
+
+okay I think
+
+
+it is time so we start 10 past 11. with
+
+
+the next one yeah thanks thank you
+
+
+[Applause]

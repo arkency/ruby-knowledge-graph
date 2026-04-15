@@ -1,0 +1,2326 @@
+hello a little bit nervous and this is
+
+
+where I need to check this clicker I
+
+
+think all works and I want to say it's
+
+
+really complicated conference because I
+
+
+was on three different after parties on
+
+
+the last three days and it was hard but
+
+
+I hope we did it and I'm happy that
+
+
+today's last party and the city is
+
+
+really nice because when I walk around
+
+
+the city I found this one and I can say
+
+
+it's looked like previous of two parties
+
+
+and usually I manage her were also of
+
+
+hashtag on Twitter and I found that the
+
+
+dog can drink a beer so hello Roscoe
+
+
+Furby it's my first time in pond and
+
+
+before I come here I know only two
+
+
+things about Poland the first one it's a
+
+
+lot of great ideas and engineers here
+
+
+I'm working a lot with drive system and
+
+
+ROM and usually a little blog post from
+
+
+our concea and the second one the
+
+
+Poland's it's a place with some nice
+
+
+games I really love this game full of
+
+
+this game - Wow awesome
+
+
+so and what I what I studied now as the
+
+
+first and the most important part it's a
+
+
+pure gear in Russia we have Apple many a
+
+
+pair I give is me awesome and vareniki
+
+
+is a pure guru skier and I tried
+
+
+yesterday was on Tantra gear it was
+
+
+yesterday yeah oh no it was two days ago
+
+
+no I know it was yesterday
+
+
+and it was funny because usually in
+
+
+Russia we have a really small - raggy
+
+
+it's like something like this but
+
+
+yesterday it was something like this and
+
+
+it's nice and also I found the best
+
+
+implementation of state mission thanks
+
+
+for this conference it's look like this
+
+
+[Music]
+
+
+just five lines of court and I have
+
+
+everything so also I found the is
+
+
+popular here I checked on dogs and found
+
+
+that we have six talks about even
+
+
+sourcing or maybe mentions to and
+
+
+sourcing but unfortunately memes is not
+
+
+popular because I found only three dogs
+
+
+ship with sound routes and names and one
+
+
+more important thing it's after load
+
+
+it's still good
+
+
+and of course are some people and
+
+
+community I'm happy to be here and thank
+
+
+you everyone my name is Anton I'm from
+
+
+Moscow I'm Russian developer and usually
+
+
+you can meet with me when everyone say
+
+
+Konami so okay I'm software developer
+
+
+and the hippo it's American startup
+
+
+open-source even released economic or
+
+
+developer I try to make some products
+
+
+and also technical consultant I love
+
+
+stickers you can check my laptop and you
+
+
+will see that I really love stickers and
+
+
+if you want to talk with me we can talk
+
+
+on some different terms for example
+
+
+about coffee and I am really happy to
+
+
+see it's obvious it's the first
+
+
+conference where I can drink coffee a
+
+
+lot because it's a great coffee some
+
+
+beer and I'm happy to see a lot of craft
+
+
+beer here some psychology and I have
+
+
+Nintendo's wish we can play if you want
+
+
+but when I come to Moscow and also I
+
+
+love drawing and rest for my
+
+
+presentations that's where we can talk
+
+
+about it and all images here it's drawed
+
+
+by me and so and also a lot of bad
+
+
+stories and when I preparing to this
+
+
+presentation the first time I tried to
+
+
+make a story and when I did it I
+
+
+expected that I'll be like this guy I'll
+
+
+create a cool story about something here
+
+
+and although ok but I fortunately
+
+
+reality was different
+
+
+and
+
+
+I go to health I got to help from my
+
+
+friend it's awesome friend and his name
+
+
+is Jia Jie and he's quiet and really
+
+
+loved ask some questions since this why
+
+
+he helped me a lot and it's a flower but
+
+
+anyway to do talk about events events in
+
+
+school I draw this event and events
+
+
+everywhere like state machines but
+
+
+events too and sometimes we need to
+
+
+catch these events and do something with
+
+
+it and the first example I really love
+
+
+this example I imagine it a few days ago
+
+
+ask some people and it's a good for
+
+
+example digits in okay one more question
+
+
+who know what is it and who use it
+
+
+awesome
+
+
+so each committin get it's something
+
+
+which was happening for example we have
+
+
+a repository with a list of comets and
+
+
+each commit contain description and some
+
+
+changes for example I found the commit
+
+
+from my friend and he described what
+
+
+happen it and create a sample load which
+
+
+will update a state the next example
+
+
+it's a list of items which usually
+
+
+delete it or edit for example it's
+
+
+useful for order scenario commerce some
+
+
+activity I did when someone tried to say
+
+
+what happened before and what will do
+
+
+with it and my favorite example who
+
+
+deleted not deleted data
+
+
+I mean who have this field in database
+
+
+ok I think you understand my problem I
+
+
+and I fortunately in programming we
+
+
+usually work increase the current state
+
+
+of application I mean we have web
+
+
+applications and in our web applications
+
+
+our actions in controllers it's some
+
+
+events which says that something
+
+
+happened
+
+
+and our dating database it's a current
+
+
+state and always so yeah sometimes ask a
+
+
+questions and I don't know how to answer
+
+
+on this question because he asked what
+
+
+will happen with it and I think if we
+
+
+will do this stuff we will get something
+
+
+like this and what the general idea is
+
+
+the general idea it's stored in your
+
+
+persistence layer it can be anything
+
+
+what happened instead of current state
+
+
+of your application and after that you
+
+
+can get state a state of your
+
+
+application anytime anywhere without any
+
+
+problems and the first question where we
+
+
+need to store all the stuff and usually
+
+
+in some ecosystems is call it event
+
+
+storage it can be anything like Oracle
+
+
+MongoDB Kafka to make anything possibly
+
+
+has radius if you want an in-memory and
+
+
+we have some rules about it the first
+
+
+rule event was happened the second one
+
+
+it's immutable objects I mean you can't
+
+
+delete or update event and what does
+
+
+mean when you put some when you have a
+
+
+rest or it's like a list for example and
+
+
+you put something in through table can't
+
+
+create you can't update this event you
+
+
+need to create one more event which will
+
+
+update a state for your application and
+
+
+that's why you need to put only a valid
+
+
+data into events and for example you
+
+
+have this situation you have user web
+
+
+application some store and user creative
+
+
+and from real world you need to validate
+
+
+it and say ok I can store it and user
+
+
+roles ok or you need to say sorry it's
+
+
+wrong data I can do it the next
+
+
+important stuff it's because we have
+
+
+immutable system with immutable data we
+
+
+can't update it or maybe rename
+
+
+something or delete something we need to
+
+
+think about data evolution and what is
+
+
+mean for example we have a story
+
+
+and you have a small start-up and e27
+
+
+sourcing like general architecture for
+
+
+some parts of your system and you store
+
+
+some information about users and you
+
+
+store first name and for example it's
+
+
+Anton but so but after some time for
+
+
+example some years someone from
+
+
+management say hey we don't know we
+
+
+don't need to store our first name we
+
+
+need to store full name and in this case
+
+
+we'll go to problem but because we can
+
+
+break application and how we can do it
+
+
+we can use optional fuels binary data
+
+
+structures with different versions and
+
+
+also we can find more in this book I'll
+
+
+show this book five times on my talk I
+
+
+think because it's a really great book
+
+
+about data how to work with data and
+
+
+cells etc also you can find some
+
+
+information about data by this and
+
+
+others interesting stuff so we can store
+
+
+some events and we don't have the
+
+
+current state how we can get a state
+
+
+from our list of events we need to
+
+
+calculate it every time using events
+
+
+which we get now and usually it's called
+
+
+projections and it looks like this it's
+
+
+a function will which take three
+
+
+different parts three different
+
+
+arguments the first one it's a function
+
+
+usually it's like a block which we used
+
+
+in mob function and Ruby method or each
+
+
+as the second one it's events and
+
+
+initial state and as you can see we can
+
+
+so it's a it's a perfect peel function
+
+
+because when you put events an initial
+
+
+state here will always get on you state
+
+
+every time it will be same and how how
+
+
+it works usually we have events store we
+
+
+put something new
+
+
+about user for example and his name and
+
+
+after that she understands that we need
+
+
+to update this name to something else
+
+
+and we updates name and we start we have
+
+
+a list of events we don't have a current
+
+
+stage we don't know that user have a new
+
+
+name but we know what happened to his
+
+
+user on this time and we start from
+
+
+empty initial state and we go by events
+
+
+go go go take name in Sandton take a new
+
+
+event that name was updated update the
+
+
+name in our current state and return a
+
+
+new state and of course this looks slow
+
+
+and the problem here we compile current
+
+
+state every time and it's hard if our
+
+
+application lives two years maybe ten
+
+
+years it will be extremely slow and I
+
+
+know again I'm Syria he really loves
+
+
+some questions and I didn't know how to
+
+
+answer it again but how we can fix this
+
+
+problem with faster calculating stem
+
+
+state the first idea is streams and for
+
+
+explain what is it I I drove this party
+
+
+bus it's a two different party bus where
+
+
+you can take some ice cream and for
+
+
+example we have a system which say us
+
+
+how to sell some ice cream to children's
+
+
+maybe not children's we have a list of
+
+
+events and for calculating how many ice
+
+
+creams with so result in the first bus
+
+
+we need to calculate all events for all
+
+
+bus party bus and can get a state for
+
+
+one maybe or all buses in our system and
+
+
+instead of this we can say event for bus
+
+
+one have a stream bus one and all events
+
+
+which related to second bus will have a
+
+
+stream bus to and after that when we get
+
+
+events we can say please give me a rest
+
+
+for specific stream in my case it's a
+
+
+bus number one and instead of all
+
+
+streams we will get only related to
+
+
+stream and
+
+
+- boss events and after that instead of
+
+
+calculating 6 or maybe 10 events we will
+
+
+calculate only 3 and the second bus you
+
+
+can use it to you can take events so for
+
+
+second bus two and one positive side you
+
+
+can process less events and it will be a
+
+
+little bit faster for example an
+
+
+e-commerce system when you work with
+
+
+orders I'm not sure that order can make
+
+
+more than a thousand four two thousand
+
+
+events for only one order usually it's
+
+
+around 10 maybe 20 or maybe more but
+
+
+it's violating you obstruction you need
+
+
+to think about streams and how to work
+
+
+and process with it you need to update
+
+
+you events start to work with it and the
+
+
+second idea how to improve the situation
+
+
+we can use snapshot for current data
+
+
+state what is mean our project function
+
+
+is superior function will take function
+
+
+events and state and it can be empty
+
+
+state or can be state from previous day
+
+
+for example and again we have a user we
+
+
+have a web store we have application and
+
+
+use your put event to event store we
+
+
+take all events I'm sorry I forgot s
+
+
+here I will take all events in our
+
+
+application calculate estate put the
+
+
+state into cash and after search and
+
+
+stand of recalculate state again in
+
+
+again where you can use cash and send it
+
+
+to user and for this you can use any
+
+
+databases like my sequel
+
+
+Redis again Oracle Cassandra and the
+
+
+interesting idea here our cache database
+
+
+is not a source of true and we can set
+
+
+up any state here and we can use a
+
+
+different databases for different
+
+
+functions for example we can use
+
+
+relation database for search for example
+
+
+and index
+
+
+and index patient on our web application
+
+
+but when user click on show action will
+
+
+use the comment orientated database with
+
+
+full object of physicians and such
+
+
+researcher and instead of calling a lot
+
+
+of drawings we just send just one and
+
+
+it's all so let's talk about real world
+
+
+where it can be useful I found some part
+
+
+of the systems where it can be useful
+
+
+first of all its e-commerce system when
+
+
+you have orders and you work with orders
+
+
+it's something which happen you need to
+
+
+make advance you need to add or maybe
+
+
+delete some items in the cells etc
+
+
+Shekau flow is really important stuff
+
+
+because you work with money and I don't
+
+
+like to lose some money and with the
+
+
+rent sourcing you can calculate state
+
+
+and check what happen I'm sorry
+
+
+so also it's a good idea to use events
+
+
+or synchronous systems where you need to
+
+
+version control for example Google Docs
+
+
+who use Google Docs instead of updating
+
+
+concurrent the commands you can create
+
+
+someone updated and edit something else
+
+
+or deleted some something and calculate
+
+
+a state for current moment for all users
+
+
+or if you need to check a history like
+
+
+indeed you can just go back by history
+
+
+and see what happened so and also some
+
+
+demands depend on events usually it's a
+
+
+tracking system for example if your life
+
+
+if you like cube or sport or something
+
+
+like this you can create it you need to
+
+
+create a system which will store what
+
+
+happened when someone play to dot our
+
+
+cares go you can use event sourcing for
+
+
+stores these events and process it and
+
+
+calculate the state every time and after
+
+
+that for example show shown in real time
+
+
+what happened before and no I don't
+
+
+think the tree alex is a good idea
+
+
+because you need to understand that when
+
+
+sourcing can avenge our energy check
+
+
+sure it's the same because they have
+
+
+event in the name as it's all
+
+
+but they use events in different ways in
+
+
+event sourcing system you say that ever
+
+
+happened and I'll store it and we'll use
+
+
+in future in event-driven and it's
+
+
+actually usually something happened and
+
+
+usually your queue or something else say
+
+
+okay I'll say it everyone's something
+
+
+was happened and yeah my blockchain is a
+
+
+good solution to here I don't know so
+
+
+some good parts about event sourcing
+
+
+it's easy to communicate is the main
+
+
+experts because instead of creating
+
+
+connections you can create the main
+
+
+related event and understand the order
+
+
+if order was check out you might check
+
+
+out flow for the stuff also you will get
+
+
+a login code from the box because you
+
+
+have a list of event you can check what
+
+
+happened time-traveling restore state if
+
+
+you a drop Postgres like github you can
+
+
+easily take current state for current
+
+
+moment and just restore the system
+
+
+without any and troubles and streams in
+
+
+a search et cetera
+
+
+also it will not to work with tables you
+
+
+work with events and changes and what
+
+
+happens in your system it's little bit
+
+
+different and you need to change your
+
+
+mind for this and in this case you can
+
+
+use experimental data structures for
+
+
+displaying information maybe store this
+
+
+information and you can easily change
+
+
+[Music]
+
+
+sketch database implementation and of
+
+
+course even sourcing contained a lot of
+
+
+problems I think it's more than positive
+
+
+size was the first problem it's really
+
+
+hard to understand the stuff because you
+
+
+need to change your mind from our saving
+
+
+and updating current state to work
+
+
+increase state in different way it's
+
+
+another popular in Ruby now but after
+
+
+Roscoe Furby I don't think so so and
+
+
+developers need the programming they
+
+
+need to spend more time understanding
+
+
+time for in time for new developer
+
+
+before before starting can distance what
+
+
+happened here and new feature will be
+
+
+increase decrease and so the next
+
+
+problem it's really hard to get state so
+
+
+if you have a simple crude application
+
+
+sometimes it's really hard to get a
+
+
+state for this application you need to
+
+
+understand all chains for grants for
+
+
+example have created one event this
+
+
+event will create other events and as a
+
+
+etc it can be a really big graph and it
+
+
+will be hard to understand it's another
+
+
+type of architecture you need two
+
+
+different database structure you need to
+
+
+think about versions and versions
+
+
+compatibility about data evolutions is
+
+
+more about distribution problems it's
+
+
+really hard to updating and deleting
+
+
+events and I'll talk about it later and
+
+
+some advising topics maybe it will be
+
+
+interesting how to display data as soon
+
+
+as possible for example we have orders
+
+
+someone create events that orders added
+
+
+something to order for example item and
+
+
+I know two solutions for this
+
+
+the first one is instead of displaying
+
+
+that you can cheat user how it looks
+
+
+like I have a client you have web
+
+
+application and events store clients say
+
+
+okay I want to add something to my order
+
+
+you will data state and after that you
+
+
+put event and return success result and
+
+
+client will show what user added on the
+
+
+on client side
+
+
+I mean user don't need to take
+
+
+information about new item because he
+
+
+has it in a client it's like
+
+
+opportunistically right so the second
+
+
+solution is WebSockets and long pooling
+
+
+but here I know one really terrible
+
+
+problem it's how to make an order of
+
+
+events for example you web application
+
+
+second law application one application
+
+
+put event to
+
+
+second port I went to one store but we
+
+
+have a net splitting the first
+
+
+application and what happened is the
+
+
+situation and I want to say hello
+
+
+distributed systems are a little of it
+
+
+because it's challenged usually and the
+
+
+more you can find here because it's more
+
+
+about distributed system and data and
+
+
+also here if you can travel in time you
+
+
+can go back and listen it again but the
+
+
+second topic how to delete an user
+
+
+related data for example if in Europe
+
+
+and someone say ask you to delete
+
+
+everything about him and I found two
+
+
+ways to do it three ways the first way
+
+
+it's reactive why to end it was
+
+
+described by Martin Fowler
+
+
+unfortunately I I don't read it this way
+
+
+I can't explain it now but maybe later
+
+
+the second one it was from NJ he told me
+
+
+that they encrypted data and after that
+
+
+you can just lose a key for decrypting
+
+
+this stuff and the last wave was about
+
+
+Kafka you can just explore some stuff
+
+
+but it's not true way but you can do it
+
+
+sometimes too so how to use seven
+
+
+sources in Caen rubia so we have a
+
+
+simple way in Ruby is the gems the first
+
+
+one it's a real civil store who uses
+
+
+German production the second one it's
+
+
+this one and you can check a lot of
+
+
+interesting information and also an
+
+
+entire project which has more features
+
+
+and more information so but also we also
+
+
+have brave way we can build this stuff
+
+
+myself and for example you can use Kafka
+
+
+7 storage and use Kafka craft code was
+
+
+developed by this guy who know him
+
+
+and usually when I talked to him he told
+
+
+me that Kafka's great
+
+
+the second way we build hanami events
+
+
+hanami events it's it won't drive and
+
+
+transport layer just for this event
+
+
+versions and types you can create a type
+
+
+of event it's just a pops up and also we
+
+
+have our connections with all global
+
+
+stage what is mean you need to you can
+
+
+create instance of each stuff myself and
+
+
+after that so now we have only three
+
+
+adapters it's a memory to two memory
+
+
+adapters one for sync and synchronous
+
+
+way in one for radius you can easily
+
+
+change it by changing instance of your
+
+
+aryans and also we use dragon trainers
+
+
+that's why we can easily register a new
+
+
+one adapter
+
+
+I know folk he created Google pops up
+
+
+stuff based on random events and you can
+
+
+just register a new stuff and after that
+
+
+use it and in this way you don't need to
+
+
+load all adapters on your memory every
+
+
+time instead of this you just take
+
+
+adapter and take all data around it into
+
+
+memory so broadcasters subscriber and
+
+
+yes sourcing looks cool and the common
+
+
+question how I can be created and for
+
+
+examples some user add something to cart
+
+
+I hope I made right example you have for
+
+
+hanami for example who use hanami in
+
+
+production oh I found you so you know
+
+
+what is it much better
+
+
+okay so we have action in hanami we have
+
+
+action and separate classes which method
+
+
+call and in this class we use terrible
+
+
+logic like you check repository and
+
+
+after that you create a new item and
+
+
+repository or create copy of this item
+
+
+and after that are called some analytic
+
+
+stuff like Cygnet or something like this
+
+
+and the first step you need to some
+
+
+stuff from ddd it's ren storming you
+
+
+need to detect important business
+
+
+in the system in your system not in our
+
+
+code in system in general and in my case
+
+
+we can create two different events first
+
+
+one is item added and the second one
+
+
+it's a corporate item item added and so
+
+
+we need to apply restore at that store
+
+
+it's look like this we just put it here
+
+
+and after that we will refactor it but
+
+
+now we have a problem how to validate
+
+
+item was it created or not
+
+
+I mean how we can implement this line of
+
+
+code and we need to calculate State for
+
+
+understand can be adding you item or we
+
+
+need to add a copy of item for this we
+
+
+can use so what's the first we need to
+
+
+take events for specific stream in my
+
+
+case it's order ID in your case it can
+
+
+be anything after that you'll get a list
+
+
+of events and you can use projections
+
+
+for for calculate state for items in my
+
+
+order usually projections in dotnet and
+
+
+if sharp looks like this in other
+
+
+libraries it can be something else but
+
+
+general idea
+
+
+you take event you take event and you
+
+
+can you take a state and after that you
+
+
+always return a state and after that you
+
+
+check type of event do some stuff you
+
+
+can check type of all the event and make
+
+
+other stuff and instead of calling
+
+
+repository you take state you can check
+
+
+can be at this stuff and the soul and
+
+
+after this we just set a new events and
+
+
+so so but we have a problem we have one
+
+
+terrible analytics call and for this we
+
+
+can use subscribers it's not about
+
+
+events or sync in general but we can do
+
+
+it for example we can create some
+
+
+subscribers and detect what happened
+
+
+with our item it was added it was a
+
+
+mobile channel such etc and creates some
+
+
+stuff and analytics logic around just
+
+
+around this and in our case new course
+
+
+will look like this and the last step
+
+
+which moves a steerable logic to other
+
+
+place for example to model so what's the
+
+
+profit
+
+
+of this I'm sorry it's it's a profit
+
+
+it's our profit it's not a profit of
+
+
+this it's just profit so and some small
+
+
+chip we can use it once or think like
+
+
+only one small part of our system for
+
+
+example don't create a resourcing system
+
+
+for users or some other stuff but
+
+
+created for orders or maybe a game or
+
+
+something like this and what next and
+
+
+the next is Sega oh I'm sorry it's the
+
+
+saga
+
+
+it's a sucker pattern who know what is
+
+
+it Wow awesome so it's a business
+
+
+transaction for example you try to order
+
+
+order Hotel on the booking it's a long
+
+
+way and I found this image high so it's
+
+
+about how to order a business trip and
+
+
+these funny situations that you need to
+
+
+process all the stuff and if you fail on
+
+
+one of the step you need to roll back
+
+
+and the interesting stuffs that saga
+
+
+it's state machine you can implement it
+
+
+it by state machine so what's the next
+
+
+next it's sqs it's about you have read
+
+
+model right model and work with it and
+
+
+also i really suggest suggest looking
+
+
+outside the review world because you can
+
+
+find a really interesting github project
+
+
+its OS almond ddd awesome ddd and if you
+
+
+check it here I try to find something
+
+
+about Ruby and as you can see I found
+
+
+nothing in all this project so this is
+
+
+why sometimes I'm looking to some
+
+
+implementations and for example I have a
+
+
+repository you can check it I trying to
+
+
+understand how F sharp guys might even
+
+
+sourcing can build something similar in
+
+
+rubia take some ideas from this
+
+
+implementation to my presentation and
+
+
+the next step its DDD who know what is
+
+
+it and I think Georgie know what is it -
+
+
+so we we can use the ddr4 store business
+
+
+for detect what kind of events we can
+
+
+store
+
+
+we can split system by domains and make
+
+
+it easily and of course how suggest this
+
+
+book I remember that I when I read this
+
+
+book the first time my facebook was like
+
+
+this I'll say if you like f-sharp
+
+
+language and calm dotnet you can read
+
+
+this book it's good book too and also
+
+
+usually if you think that even sourcing
+
+
+it's more about a synchronous way you
+
+
+need to understand her distributed
+
+
+systems and problems and I'll suggest
+
+
+this book again I'll suggest this book
+
+
+again and some conclusions it's just
+
+
+small conclusions sometimes even based
+
+
+architecture convene and sometimes not
+
+
+it's not a silver bullet it's just idea
+
+
+how to process your state of your
+
+
+application
+
+
+eversource ink is simplest conception
+
+
+because for example we use git every day
+
+
+and for us it's simple when you use it -
+
+
+or maybe here three years but when some
+
+
+junior developers will come to new
+
+
+project and never tried it before
+
+
+he will get some troubles and that's why
+
+
+this conception it reduce a lot of
+
+
+practical problems data evolution
+
+
+ordering kindness etc and of course
+
+
+events or sink is really expensive and
+
+
+expensive with money expensive in
+
+
+understanding and developers and etc etc
+
+
+and I think it's the most important part
+
+
+events or sync is not about distributed
+
+
+seems systems and it's not about how to
+
+
+communicate with different micro
+
+
+services it's about only state and I
+
+
+think even sourcing could be a trend in
+
+
+the future in the Ruby world and if you
+
+
+don't trust me I made this slide and
+
+
+thank you this hole
+
+
+[Applause]
+
+
+hi there thanks for my stock I have more
+
+
+like an unknowing to what to what she
+
+
+said because you presented how to comply
+
+
+the right to be forgotten when you have
+
+
+an event sourcing system and you've
+
+
+mentioned that you can just encrypt the
+
+
+data and just lost your keys and once
+
+
+I've heard from one lawyer that it's
+
+
+also not a good approach because it is
+
+
+very possible that in the future the
+
+
+computer performance will increase like
+
+
+let's say quantum computers or something
+
+
+like that that it will be even possible
+
+
+to the crypto those data so it's still
+
+
+not sufficient way to to handle the
+
+
+right to be forgotten yeah I agree
+
+
+but if quantum computers will decrease
+
+
+anything will get more problems raises
+
+
+and deleted user but anyways it's good I
+
+
+agree just the comments the blockchain
+
+
+guys had another idea to do it they have
+
+
+the same problem you can modify
+
+
+blockchain inside and they actually do
+
+
+it in banking systems in production in
+
+
+Poland so I believe it's is correct you
+
+
+store the payload separately from the
+
+
+blockchain so you can store fingerprints
+
+
+in your events to be sure that payload
+
+
+is immutable and you can always delete
+
+
+the payload and if you find the event
+
+
+you just just say sorry is deleted good
+
+
+ideator
+
+
+I think I need to check your chain for
+
+
+better understanding sister
+
+
+hey nice dog thank you so my question is
+
+
+I know when you want to have a current
+
+
+state you make a snapshot right and so
+
+
+what about the searching how would you
+
+
+search for like I know and most
+
+
+attractive items when you need to
+
+
+process like millions of events to get
+
+
+the real table it's a good question
+
+
+you can create anything you can
+
+
+calculate state and make a super slow
+
+
+system every time you can try to catch
+
+
+this stuff and try to find something by
+
+
+in difficut
+
+
+for example you have elastic search put
+
+
+all the stuff into elastic search every
+
+
+time updated and use elastic search only
+
+
+for searching and after that you'll take
+
+
+some information and after that you can
+
+
+for example get stayed for example you
+
+
+you try to search some orders you have a
+
+
+lot of orders you need to find something
+
+
+you need to find some order buy
+
+
+something you will find this from
+
+
+elastic search take stream idea and
+
+
+after that take list of events and
+
+
+process state current state or something
+
+
+like this I'm not sure that's right way
+
+
+but it's a just idea from my brain now
+
+
+two questions really one is that you
+
+
+said that event sourcing systems would
+
+
+be more expensive do you think that is
+
+
+the case also in the long run but like
+
+
+is it a it's short term it's more
+
+
+expensive but in the long run maybe it's
+
+
+less and then also how do you think we
+
+
+could get that cost down I'm obviously a
+
+
+big proponent of building systems this
+
+
+way but how do we make that lower cost
+
+
+okay I understand the question so the
+
+
+first part I think if you're small
+
+
+startup and you try to find some money
+
+
+and to the next round or something like
+
+
+this you can live without it because
+
+
+really you need to spend more time for
+
+
+building horizon
+
+
+usual crude you just need to prototype
+
+
+and take and check any features to
+
+
+understanding will it make can you make
+
+
+some money with this new feature or not
+
+
+and in this case it can be slow to use
+
+
+events or sync and I think that company
+
+
+which switch to the stuff they know that
+
+
+it will be they notice problems and
+
+
+usually say ok we know these problems we
+
+
+know how much we will pay for this
+
+
+but we can pay for this and in future it
+
+
+will be better for us and usually is
+
+
+funniest funny stuff about even sourcing
+
+
+I know some folks one of this is my it's
+
+
+my friend from Russia he work with Java
+
+
+before and I explained all the stuff for
+
+
+preparing the presentation and he told
+
+
+me oh it's call it event source and we
+
+
+use the same thing but you don't know
+
+
+what is it and usually I think some
+
+
+developers for example if you work
+
+
+increase not not iterating to you
+
+
+working creates a tracking system it
+
+
+track what happened on a game for
+
+
+example you're working a similar way you
+
+
+store events and try to work with it and
+
+
+I think in some parts it will be costs a
+
+
+lot but you can pay for this but in
+
+
+other parts it will be cost a lot and
+
+
+you don't need to pay for this it's like
+
+
+a blockchain you can use it everywhere
+
+
+but I here sure that you need to use it
+
+
+and the second question how to how to
+
+
+make it less costs I think it's a
+
+
+problem in in two maybe three different
+
+
+ways the first one it's learning they
+
+
+love what are can see do with it they
+
+
+made a lot of blog posts they made
+
+
+workshops conference and talk about it
+
+
+and for example if
+
+
+you don't know what is it and start
+
+
+working crazy at the time before you're
+
+
+understanding what what happened in the
+
+
+system and first Fisher you'll be less
+
+
+or I will be more eyes than developer
+
+
+who know what is it and teaching can
+
+
+it's a good idea to decrease cost for
+
+
+sourcing also I think it's a good
+
+
+tooling too because sometimes you need
+
+
+to spend a lot of time for debug the
+
+
+system and understand what happened and
+
+
+this why I think to link it's a good
+
+
+idea to decrease the cost - and I don't
+
+
+know any I think I need to think more
+
+
+about it transfers the question and
+
+
+other questions thank you thank you
+
+
+[Applause]

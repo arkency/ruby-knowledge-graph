@@ -1,0 +1,2908 @@
+So this is last speaker of this year's
+
+
+conference. Um and um I asked him
+
+
+because I know him already for a since I
+
+
+started to work in the Ruby community
+
+
+and u he's um he's one of the most funny
+
+
+guys out here.
+
+
+Sorry. But I asked him, Adam, will it be
+
+
+fine fun today? and he said that there's
+
+
+a little this little line thin line
+
+
+between fun and cringe. Uh so so we'll
+
+
+see. It depends. He's not a consultant.
+
+
+And that's actually the other thing I
+
+
+wanted to tell you because whenever Adam
+
+
+is introducing a person, he's uh going
+
+
+into some personal story. I had a lot of
+
+
+stories about Adam since I joined the
+
+
+community. But um I couldn't just pick
+
+
+one. So I did as everybody does today. I
+
+
+asked Chad GPT and uh it told me that
+
+
+Adam asked how would you summarize Adam
+
+
+Sarinvki and they it said well it's a
+
+
+very prominent Ruby developer very
+
+
+prominent person uh in the community
+
+
+he's a sailor CEO of twit but also uh in
+
+
+2019 at this very conference he gave a
+
+
+lighting talk um in which u he tell he
+
+
+gives a tip very important one for
+
+
+people like us and it's how to get for
+
+
+free to the conference you have to be um
+
+
+like sorry now I forget the word damn
+
+
+it you have to volunteer so u ladies and
+
+
+gentlemen Adam Petrovski business born
+
+
+[Applause]
+
+
+entrepreneur probably know so I wanted
+
+
+to start that I always loved ros for
+
+
+only having techn presentations only
+
+
+meat code samples uh nice examples of
+
+
+new technologies or fancy technologies
+
+
+or new
+
+
+approaches and uh Adam was about to give
+
+
+you one but he's not there he asked me
+
+
+to say cheers for all of
+
+
+you and instead of that here I am with
+
+
+my nontechnical presentation
+
+
+um being a little bit sad about that but
+
+
+I hope you like
+
+
+So what this presentation is not about
+
+
+um I will probably not inspire you to
+
+
+you know use some new technology you
+
+
+will probably learn nothing from that if
+
+
+it comes to any technology any coding
+
+
+related stuff uh and so on but I think
+
+
+all the speakers before me were great
+
+
+with providing their content so you are
+
+
+full of new ideas and
+
+
+u inspirations
+
+
+But what I also don't want to do is make
+
+
+you sad
+
+
+about Monday because tomorrow you go
+
+
+back to your shitty
+
+
+project. Uh and you won't be able to use
+
+
+any of those that you probably heard of
+
+
+during last days. Maybe one of those if
+
+
+your boss will be uh in the good mood.
+
+
+Uh but you have two days and then forget
+
+
+about it. Uh, and to be honest, I
+
+
+realized that sometimes it's really like
+
+
+that. Like you hear a lot of great
+
+
+stories and you are like pumped up,
+
+
+inspired by them, but then you go back
+
+
+to your project and you are a little bit
+
+
+sad about it. How it looks like, how the
+
+
+whole organization looks like, how hard
+
+
+is to enforce on your approaches and
+
+
+stuff like that.
+
+
+And it's easy to forget about the pros
+
+
+about your work, your project, your team
+
+
+and stuff like that. Especially if
+
+
+you're Polish people because we love to
+
+
+complain uh about how sad our projects
+
+
+in life are. Uh which is funny for me
+
+
+because often when I see people
+
+
+complaining about their code base, they
+
+
+are maintaining it for I don't know five
+
+
+years and that's basically git blame is
+
+
+saying that's their fault. But still
+
+
+they complain.
+
+
+uh but maybe I will try to you know by
+
+
+giving you some examples of really
+
+
+strange situations or just like
+
+
+pathologies and different fuckups. I
+
+
+will help you to be a little bit
+
+
+inspired about okay maybe my project
+
+
+could be improved if I will change a
+
+
+little bit of my approach maybe I will
+
+
+remember um help you to remember that
+
+
+grass is always greener you know where
+
+
+maybe yeah that's what I just was saying
+
+
+about that your code is not so bad or
+
+
+maybe there are some ways to improve it
+
+
+without complaining just doing stuff uh
+
+
+maybe your team is Cool. Basically, they
+
+
+only sometimes annoys you, but you can
+
+
+you can do worse. Uh or maybe you'll
+
+
+help me to get some lessons from what we
+
+
+experienced, but we didn't taught what
+
+
+lesson is
+
+
+there. So that's the schedule. I think
+
+
+we will do like 70
+
+
+uh% of hashing uh 20% of reflections and
+
+
+10 like realization sadness of the
+
+
+universe and their lives. And I have one
+
+
+sentence that I live by lately
+
+
+uh and I think most of the people from
+
+
+Eastern Poland are that life is either
+
+
+bad or decent. So if it's decent, it's
+
+
+great. So if you realize that, it helps
+
+
+you a lot in your life and projects
+
+
+especially. So I'm the two NIT CEO. I
+
+
+organized some events. Uh I was a
+
+
+speaker on dozen of meetups but never at
+
+
+the conference. So happy to be uh here.
+
+
+Uh even though I'm not replacement
+
+
+uh I love networking and hearing about
+
+
+other people fuckups. Uh I have some
+
+
+experience but I'm not coding anymore.
+
+
+So that's also why this presentation is
+
+
+not technical. Uh I wasn't still in I'm
+
+
+still involved in more than 70 projects.
+
+
+Uh some I was coder then I was some
+
+
+leader then I'm like more like managing
+
+
+stuff. And as a CEO of the company that
+
+
+does a lot of team augumentations, I was
+
+
+involved in a lot of recruitment
+
+
+processes that me and my guys uh go
+
+
+through and man that [ __ ] is [ __ ] up.
+
+
+I mean the recruitment process in most I
+
+
+will talk about it later. Uh so I'm not
+
+
+also so hyped driven anymore I think. So
+
+
+basically I'm not I'm no more ashamed at
+
+
+least so much of making mistakes until I
+
+
+learn on them. But I prefer to learn on
+
+
+other people's mistakes. So I'm really
+
+
+happy to talk about your mistakes or
+
+
+fuckups or whatever you encounter. Maybe
+
+
+I can learn on them or just modify my
+
+
+examples because not all of them are
+
+
+really they could be better. Like I know
+
+
+there are much more pathologies and
+
+
+fuckups in the industry that I
+
+
+encounter. Um yeah and I don't even own
+
+
+that t-shirt. It's not mine. It's much
+
+
+because I forgot to take any t-shirt
+
+
+with me. I don't know it's related to
+
+
+the [ __ ] stories but I wanted you to
+
+
+think sink in that I'm too nit co and I
+
+
+don't even own t-shirt to wear like I'm
+
+
+to talk about business here and I cannot
+
+
+afford t-shirts so I hope this
+
+
+presentation would be good anyway first
+
+
+case [ __ ] th Dominic if you want to
+
+
+uh give me your his last name I'm happy
+
+
+to beside the scenes because probably
+
+
+here he could sue me but uh once we
+
+
+projects. We still have it where we had
+
+
+one developer then three developers. The
+
+
+senior developer that was like Ruby tech
+
+
+leader there wanted to switch projects.
+
+
+So we wanted we needed to find new one.
+
+
+I mean we had one to replace him but the
+
+
+company that was our partner because
+
+
+that was big pharma uh client. We were
+
+
+only hired them to our partner to be a
+
+
+Ruby team. The rest of the team was from
+
+
+our partner. So they figure out that
+
+
+they will hire from someone from outside
+
+
+and
+
+
+um and he will be be the senior. So it's
+
+
+okay but let me talk with him before he
+
+
+will start to go work with our guys so
+
+
+we can double check if like there is a
+
+
+vibe here and we can work together and
+
+
+he was really cool. He he knew his uh
+
+
+his stuff. He was really communicative
+
+
+and knowledge was uh on the proper
+
+
+level. So we were quite happy about
+
+
+that. Uh but I did one thing that I love
+
+
+to do. I stalked him like Googled him,
+
+
+check his LinkedIn and stuff like that
+
+
+and I saw he was working we in one of
+
+
+the company of my friends. So I asked
+
+
+him why they are not working together
+
+
+anymore and the answer was well we don't
+
+
+have proofs but we assumed that he was
+
+
+like doing few jobs at the same time not
+
+
+doing as much as he claimed and stuff
+
+
+like that. So calmly and silently we we
+
+
+say goodbye to him. So I was like yeah
+
+
+okay should I you know go to my partner
+
+
+and tell them that I don't have any
+
+
+proofs that's uncool to you know
+
+
+spreading this rumors and stuff like
+
+
+that but I asked my guys to like be
+
+
+really aware of the possibility that
+
+
+there is something like that and
+
+
+communicate as soon as they will see
+
+
+that it's hard to communicate with him
+
+
+the replies are long waiting for code
+
+
+review is long and stuff like that after
+
+
+3 months they communicated that it's
+
+
+really getting really worse and worse
+
+
+day by day as soon as was ready to
+
+
+contact my partner to tell him about it.
+
+
+Uh he contacted me that they found out
+
+
+the same thing and basically they fired
+
+
+him. About one week later uh my other
+
+
+partners called us that they have
+
+
+project to inherit after some guy that
+
+
+was about to deliver the project two
+
+
+months ago but he didn't manage.
+
+
+Basically he did nothing. maybe two or
+
+
+three comets which we checked and who
+
+
+was the owner of those commits? The same
+
+
+guy that was uh supposed to be working
+
+
+there as team leader for
+
+
+full-time. So that was okay that's
+
+
+that's quite clear. Two weeks later we
+
+
+got another project that was quite
+
+
+simple. So there was only some migration
+
+
+from one server to other. I I don't
+
+
+remember the details but basically I
+
+
+remember there was some issue with admin
+
+
+users table and there was basically 20
+
+
+records there. So instead of fixing it I
+
+
+decided to maybe delete them and add the
+
+
+only one actual admin that is existing
+
+
+now. And the last admin added there two
+
+
+weeks or three weeks earlier was of
+
+
+course the mix. So the same person doing
+
+
+three projects at once during the same
+
+
+time. Uh well three that I am aware of.
+
+
+So uh yeah that's basically the story.
+
+
+Not not so hashing yet but I I I figure
+
+
+out the strangest things in it lately is
+
+
+we don't use any reference. Like did you
+
+
+ever heard
+
+
+that someone is asking someone's
+
+
+like if anyone is hiring any developers
+
+
+they're asking their current employers
+
+
+about
+
+
+referrals not often because they are
+
+
+probably trying to steal the employees
+
+
+especially two or three years ago. Uh
+
+
+but I think we should do that why not
+
+
+like if the employer is cool and
+
+
+employer is willing to switch the jobs
+
+
+he will still do that. So employer
+
+
+probably should give good referrals if
+
+
+he's good. We should pay program more uh
+
+
+especially at the beginning of the
+
+
+journey as soon as we have any doubts if
+
+
+the new person is
+
+
+honest. We should be more transparent
+
+
+about those issues. But to be honest, I
+
+
+have question for you. I I don't know if
+
+
+I should tell my partner about what I
+
+
+knew from the beginning or it would
+
+
+wouldn't be cool. I'm I'm really asking
+
+
+till today. I'm not sure if it would be
+
+
+cool because this like rumor
+
+
+only. Yeah. I mean now we we work
+
+
+together for seven years and we know
+
+
+each other better. I would do it
+
+
+immediately but then it was like first
+
+
+few months of the work. So but okay I
+
+
+get it. It
+
+
+depends. Yeah.
+
+
+What I mean what what's are more I mean
+
+
+there is one more maybe thought instead
+
+
+of lesson. Please don't be that guy.
+
+
+It's so much easier to work with people
+
+
+when you can trust them. And that's it.
+
+
+Okay, let's move to maybe more more
+
+
+funny parts. So yeah, that's a cool
+
+
+definition. Uh I love it because I
+
+
+believe it's the only proper definition
+
+
+right now. Especially if you talk
+
+
+business with business people and you
+
+
+like no one can define what senior is.
+
+
+maybe he will deliver faster than me or
+
+
+his uh he have strong ownerships
+
+
+attributes and stuff like that. But
+
+
+yeah, let let me give you that story. So
+
+
+there was and still is a big software
+
+
+house in Poland. Uh they have no Ruby
+
+
+division but at some point they
+
+
+identified that there was a strong
+
+
+market need for Ruby developers. So
+
+
+their idea was to uh start Ruby division
+
+
+of course without having any Ruby
+
+
+knowledge. So somehow they were
+
+
+recommended uh we were recommended to
+
+
+help them start new division. Uh so me
+
+
+and Rafa guy from like our current CTO u
+
+
+agreed to help them with interview and
+
+
+we got two uh CVS that they picked for
+
+
+new Ruby tech lead for like few hundred
+
+
+people company. One of those guys had
+
+
+one year of experience but but but also
+
+
+two years of experience with talking
+
+
+with
+
+
+developers. That was cool. And the
+
+
+second one was really ambitious and uh
+
+
+basically everything was fine with her.
+
+
+Uh but she had three years of experience
+
+
+in one person
+
+
+project and that was it. like she was in
+
+
+the one project that she was running
+
+
+alone by herself probably few hundred
+
+
+users than see that's it few features or
+
+
+modules and that's it infrastructure was
+
+
+uh like simple monolith and nothing
+
+
+fancy so even though she knew much more
+
+
+than usual three
+
+
+years experienced person like the
+
+
+position that they were she was applying
+
+
+and having senior in her CV already we
+
+
+basically at the end of the conversation
+
+
+We asked her okay let's say Z Sophia uh
+
+
+why are you senior already like what
+
+
+happened there when it happened and how
+
+
+like explain it to us because we don't
+
+
+know the definition and she was working
+
+
+for well-known Polish Ruby company uh
+
+
+name is not needed you will figure it
+
+
+out uh so they had that strategy that if
+
+
+developer is like managing project sure
+
+
+he is probably senior yeah that makes
+
+
+sense especially if you can charge for a
+
+
+senior and you charge clients two times
+
+
+more for a senior. So that's it. She was
+
+
+senior then. So that's my story about
+
+
+naming seniors meet developers and
+
+
+juniors and uh I'm I'm not sure how
+
+
+exactly deal with it. Uh but I think if
+
+
+it comes to business I get it. It helps
+
+
+to communicate faster and we are
+
+
+basically talking about the rate and if
+
+
+someone will deliver. But as a
+
+
+developers when we talk with which with
+
+
+which sorry when we talk with with
+
+
+ourselves we should uh you know be a
+
+
+little more strict about what we are
+
+
+trying to say like what means to be a
+
+
+senior in that particular context what
+
+
+what area of expertise we are talking
+
+
+about because I believe there are areas
+
+
+of expertise if I know we have really
+
+
+good people in our company that I am
+
+
+calling seniors but if it will come to I
+
+
+don't know using rails even store or
+
+
+doing some um
+
+
+um sorry even sourcing uh coding some of
+
+
+them didn't even have any experience
+
+
+with that so I wouldn't call them like
+
+
+uh eventuh sourcing seniors even though
+
+
+I'm calling them them seniors not
+
+
+because of their age um so yeah I don't
+
+
+exactly know how to deal with it but I
+
+
+really I think that's a big problem of
+
+
+our industry right now and maybe any of
+
+
+you have any thoughts about
+
+
+it? Not yet. Okay, cool. Okay, that was
+
+
+uh that was strange. So as a small
+
+
+company, we started with uh how most of
+
+
+the company starts with one big client
+
+
+that was was our only
+
+
+um client for a few
+
+
+years and he had a lot of
+
+
+issues. But at some point it was like we
+
+
+needed more developers to help him with
+
+
+his needs, then less then more than
+
+
+less. And of course we were struggling
+
+
+with it, finding some small projects to
+
+
+fill those gaps when he didn't have
+
+
+enough needs. But at some point he had
+
+
+like really a lot of different needs and
+
+
+we couldn't deliver as soon as possible
+
+
+and we communicated about that. So he
+
+
+decided to hire the second company with
+
+
+us and okay that that was cool great
+
+
+idea you know we can uh combine some
+
+
+ideas exchange knowledge and stuff like
+
+
+that but uh I asked and raised few
+
+
+questions or doubts about how it will
+
+
+look like uh how will we agree on
+
+
+deployment process like the development
+
+
+process code review process and stuff
+
+
+like that and my client told me I don't
+
+
+give a [ __ ] about it uh handle it
+
+
+together or I fire both of
+
+
+uh that was mature and helpful. Uh so we
+
+
+spoke we agreed on some uh rules uh that
+
+
+they never followed. Um like for example
+
+
+let's test our code. Uh we didn't agree
+
+
+on rules like don't merge code that is
+
+
+with with unnot resolved uh conflicts.
+
+
+So why they shouldn't? Uh so there were
+
+
+there was some misunderstandings there
+
+
+but we really hoped that they will
+
+
+follow like basic
+
+
+rules. So for 3 months there were no
+
+
+commits from them nothing came up and
+
+
+because there was a big insurance agency
+
+
+and their main business target were
+
+
+schools. So like 28 of August uh by the
+
+
+way thank you Norbert. Now I know
+
+
+everything about mons
+
+
+uh they they told us that okay so uh Mr.
+
+
+let's call him I know radic uh prepared
+
+
+uh the new module can you please take a
+
+
+look because we talked about code review
+
+
+at the beginning and give him some
+
+
+comments about what we do or what uh
+
+
+should he do to to make it happen on
+
+
+production. So we take a look on those I
+
+
+don't know 200 files uh per p per p per
+
+
+
+
+p per p per p per p per p per p per p
+per p per requests per request uh
+
+
+without any tests of course uh that uh
+
+
+branch was created three months before
+
+
+that uh review so it wasn't update to
+
+
+master at any point so like most of the
+
+
+code was so such outdated that there was
+
+
+so many conflicts that we were like okay
+
+
+when you want to have it on production
+
+
+of course in three is uh and we were
+
+
+like okay you should add test but you
+
+
+probably won't we know that you will
+
+
+merge it anyway so please at least fix
+
+
+those conflicts uh that was Friday
+
+
+evening and uh he got those comments he
+
+
+so he followed them by as it's later we
+
+
+he told us uh he followed them by being
+
+
+on the party opening GitHub uh the
+
+
+interface like 10 I don't know seven
+
+
+years ago. Uh so he was at the part at
+
+
+the party uh on his cell phone. He
+
+
+opened it like
+
+
+GitHub removed all the conflicts that he
+
+
+we he found by scrolling all those few
+
+
+hundred files and clicked merge and it
+
+
+was
+
+
+deployed and Kristoff my brother is
+
+
+there. He the the guy from Bazooka with
+
+
+kids and stuff like that. So we spent
+
+
+[ __ ] weekend trying to figure it out
+
+
+and fix it. Somehow it
+
+
+worked and guess how many complaints uh
+
+
+client gave us for that and if any thing
+
+
+changed in the project and approach of
+
+
+client why why you should
+
+
+sorry why didn't revert because they I
+
+
+mean we reverted it but still had to
+
+
+deliver it till Monday. Yeah. uh and he
+
+
+wasn't
+
+
+beh okay. So my thoughts there I had
+
+
+some thoughts there. Uh so be assertive
+
+
+that's that's for starters. I mean the
+
+
+more we get paid I think the that rate
+
+
+have more of uh part that we are being
+
+
+paid for being assertive and knowing
+
+
+that some parts or some things we
+
+
+shouldn't do and I think we shouldn't
+
+
+uh agree on working on that p request at
+
+
+all like we shouldn't touch it at all we
+
+
+should let them drown and I don't know
+
+
+fire us whatever but that I mean you you
+
+
+need to get more context about how many
+
+
+times they didn't paid us for the task
+
+
+that we delivered because I don't know
+
+
+they fired the person who asked us to
+
+
+deliver some feature or stuff like that
+
+
+but that [ __ ] went too far and but we
+
+
+were we were still too attached to big
+
+
+client to to be assertive enough uh I
+
+
+think we also should propose them at the
+
+
+same beginning some other solutions like
+
+
+then two different teams are working on
+
+
+their own without any communication uh
+
+
+there were probably many different ways
+
+
+to do that but we just agreed that we
+
+
+agree and that's did uh we should uh
+
+
+move from the client much more quicker.
+
+
+Basically, until we had that client, I
+
+
+was really poor man. Uh and the potatoes
+
+
+and onion was my main dish. Uh but I
+
+
+love them. So,
+
+
+um and I think we yeah again we
+
+
+shouldn't agree on that. uh because even
+
+
+if we I mean some in some cases I
+
+
+believe if you won't agree on some
+
+
+approaches and they will explode you
+
+
+will be the one uh that people will
+
+
+remember that yeah he told us so that
+
+
+probably now he's the person to
+
+
+introduce the proper approach but in
+
+
+that company probably it wouldn't happen
+
+
+and yeah that as a CEO I learned the
+
+
+hard way that you have to sign more
+
+
+agreements and have much more things on
+
+
+paper so we can basically sue people and
+
+
+get the money
+
+
+finally. Yeah.
+
+
+Yeah. Sure. Sure. I mean the tool to
+
+
+tools were fine that the problem was
+
+
+somewhere else. But yeah, I I get
+
+
+you. Uh okay. Yeah, that's it. Uh that's
+
+
+about cultural differences, I would say.
+
+
+Um so we had small project uh one of our
+
+
+juniors were managing it maintaining it
+
+
+and maintaining was mostly related
+
+
+to fixing some broken production data
+
+
+because validation was broken too and
+
+
+stuff like that. Uh [ __ ] work but you
+
+
+know decent and it's good if it's
+
+
+decent. So
+
+
+uh so at some point the client that was
+
+
+really short on money decided that uh he
+
+
+needs some savings and there is only one
+
+
+way to make savings uh move uh
+
+
+development to
+
+
+India. Um and I'm not trying to make any
+
+
+generalization that's just that one case
+
+
+probably no one have other same
+
+
+experience that I have. So uh they we
+
+
+called like meeting for project
+
+
+handover. Uh
+
+
+uh and
+
+
+um it was supposed to be one maybe one
+
+
+hour for we explain and show everything
+
+
+and maybe one hour for questions. So
+
+
+Wukash was really stressed because it
+
+
+was like his basically his first
+
+
+production pro commercial project. Um he
+
+
+was expecting you know really technical
+
+
+questions and stuff like that.
+
+
+Um he prepared whole presentation he
+
+
+presented it on the call with six people
+
+
+plus client
+
+
+uh it spent uh one hour for that he
+
+
+spent one hour and then he asked if
+
+
+there are any questions and it wasn't
+
+
+complex if it comes to code complexity
+
+
+but it was complex if it comes to I
+
+
+don't know domain of
+
+
+uh why those data is so strange or why
+
+
+why you you for it.
+
+
+And also those fixes are really
+
+
+repeatable. So if they could ask proper
+
+
+questions, they will probably have next
+
+
+90% of issues solved already just by
+
+
+asking those questions now. And no one
+
+
+asked any question. So we ask them again
+
+
+if there are any questions and then the
+
+
+I reminded them and the client that you
+
+
+remember that the last time we have call
+
+
+and then probably you won't call us
+
+
+because you don't want to pay us. So
+
+
+please ask your six people from India to
+
+
+ask us any technical questions because
+
+
+that's really valuable for you. And he
+
+
+started to ask those people by name if
+
+
+do you have any question and every one
+
+
+of those people tell us exactly that.
+
+
+I'm not technical but it will be
+
+
+recorded. So I think we lost those two
+
+
+hours of eight nine people and I have no
+
+
+clue why we even had that
+
+
+call. Uh and I think sometimes we should
+
+
+get agenda and whatever information
+
+
+about who you will speak with because
+
+
+that matters
+
+
+apparently. Uh maybe you should I mean
+
+
+maybe I shouldn't blame the team. Maybe
+
+
+it's like cultural difference that they
+
+
+don't ask question. They got ordered to
+
+
+be there and listen even though they
+
+
+don't understand anything because the
+
+
+presentation was only about technical
+
+
+stuff and u you know maybe maybe it's
+
+
+problem with me because maybe I should
+
+
+organize it in better way that we were
+
+
+uh ensure that people that are there are
+
+
+needed there they understand their roles
+
+
+and stuff like that. Not sure who should
+
+
+do that in in that particular case, but
+
+
+why not me or one of us
+
+
+uh or maybe we just sometimes need to
+
+
+accept that okay do it your way that's
+
+
+my invoice and see you later maybe or
+
+
+maybe not. Uh yeah and I think we should
+
+
+also be more clear about why we are on
+
+
+that meeting and uh what you can expect
+
+
+from us and what I expect from you. Um
+
+
+yeah and about meetings I have that
+
+
+great saying I don't know if you know it
+
+
+anyone because it's only the first part
+
+
+of the
+
+
+sentence that's the whole sentence uh so
+
+
+yeah meetings are uh meetings are not so
+
+
+valuable maybe uh maybe other thoughts
+
+
+about you know how to avoid it or I
+
+
+don't know how to deal with that kind of
+
+
+situations I can hear it later if you
+
+
+wish wish okay another part of cultural
+
+
+differences
+
+
+So we were involved in I believe back
+
+
+then the biggest uh
+
+
+cryptocurrency uh market in
+
+
+China and uh they also had some well
+
+
+there's a lots of stories about that
+
+
+project
+
+
+uh also corruption involved I believe
+
+
+because there is no way that it would be
+
+
+up so long with so many fuckups. Uh but
+
+
+yeah, let's focus on that one particular
+
+
+story or two screenshots that I got from
+
+
+Slack at some moment from my guys. So
+
+
+they decided uh to hire some internal
+
+
+team on site to make
+
+
+some retry of uh not rewriting but
+
+
+retrying to refactoring the v2 of
+
+
+authentication module something like
+
+
+that and uh the person who was in charge
+
+
+the CTO is really like really busy
+
+
+really smart guy and was really caring
+
+
+about those guys
+
+
+who like he really quickly realized that
+
+
+why they are cheaper. Uh so he was
+
+
+really caring about them documenting
+
+
+what they're doing and documenting their
+
+
+new API for
+
+
+authentication. And at some point I got
+
+
+like that screen of two screens of Slack
+
+
+messages when he is talking with on the
+
+
+general channel with those guys from
+
+
+your team about uh updating docs docs
+
+
+like he was using docs all in all the
+
+
+communication and they were like yes of
+
+
+course we will update it. Yes, of course
+
+
+we understand why it's important. And it
+
+
+was like the whole conversation back and
+
+
+forth when everything is clear and it
+
+
+will be done. And after those two
+
+
+screens like maybe two days, I don't
+
+
+know how long it took, I don't remember.
+
+
+He asked one of them to send uh him the
+
+
+current version of the docs based on
+
+
+what they did during the last days. The
+
+
+answer was okay fine, but what are those
+
+
+dogs?
+
+
+So I mean communication is quite
+
+
+important I believe and I think again
+
+
+there was a big issue with understanding
+
+
+that some people won't tell you that
+
+
+they don't know. I think we have no
+
+
+issue with that. Yeah I don't understand
+
+
+it. It's your issue. You are not
+
+
+explaining it good enough. Yeah. But in
+
+
+some cultures maybe your teams
+
+
+uh the here he is how it is and you
+
+
+don't argue with your boss. He's saying
+
+
+that you have to update something. Yeah,
+
+
+you will. You have no idea how but uh
+
+
+you have to agree because I don't know
+
+
+he will cut your head or whatever.
+
+
+Uh and I think as soon as we see that
+
+
+there are problems with communication,
+
+
+if we have someone in company that could
+
+
+try to deal with it or think about
+
+
+dealing with it, probably we should tell
+
+
+people about it sooner than later. Uh
+
+
+but yeah, again, not not too many
+
+
+lessons from that. Um yeah, maybe
+
+
+someone had similar
+
+
+Uhhuh.
+
+
+Oh, cool. Again, how is
+
+
+called? Culture map. Okay. By
+
+
+Eric
+
+
+Arin. Okay. Cool. Uh, so yeah, I will
+
+
+try to remember
+
+
+this. Okay. And that one is probably the
+
+
+story that most of you have better one
+
+
+like the amounts that uh client burn
+
+
+there is not so big in comparison of
+
+
+many stories about the cloud that I
+
+
+heard but well that that is mine that I
+
+
+can tell you about and it's quite
+
+
+recent. Uh so there was CTO of the
+
+
+that's the same pharma company that I
+
+
+told you. So uh so there was CTO he was
+
+
+then he was managing the whole setting
+
+
+the cloud and stuff like that at some
+
+
+point he left the company uh and uh but
+
+
+they didn't change the email of the
+
+
+person to be contacted uh if anything is
+
+
+happening for example with the pricing
+
+
+or stuff like that and as soon as the
+
+
+posgress was outdated due to uh
+
+
+AWS principles they sent him email that
+
+
+they now they are changing ing them
+
+
+€10,000 monthly because uh the posgress
+
+
+is too old. Uh I mean it's not too old.
+
+
+They are still maintaining it. But now
+
+
+we are charging you for it because you
+
+
+don't read emails. So after one year
+
+
+someone noticed the strange uh transfers
+
+
+from account and started asking
+
+
+questions. It took like two hours to
+
+
+identify the problem and fix it. Uh but
+
+
+yeah, 100 euros were burned out uh
+
+
+because uh we used cloud without
+
+
+thinking exactly what can go wrong. By
+
+
+the way, cool pricing.
+
+
+Uh so there are a few lessons about us
+
+
+not thinking about money too often, but
+
+
+I think we are getting better about it.
+
+
+Even Voytech presentation was touching
+
+
+the topic at least and not only his but
+
+
+I think we are doing that much more
+
+
+often and at school but still we need to
+
+
+remind that for you younger generation
+
+
+and for ourselves I strongly believe
+
+
+that there is a possibility that
+
+
+sometimes if we can save some money
+
+
+maybe part of that money will goes to us
+
+
+but probably that's wishful
+
+
+thinking until we are project owner or
+
+
+stuff like
+
+
+uh but yeah still I think it's worth to
+
+
+be proactive ask about how exactly our
+
+
+code is giving us some uh income what
+
+
+part of code uh brings value but also
+
+
+what cost us the more because I know we
+
+
+know that I don't know I won't write too
+
+
+many tests about contact form it doesn't
+
+
+bring too much value well maybe it does
+
+
+uh but uh still you know if we're
+
+
+thinking about costs and income I mean
+
+
+cost of writing code and income from
+
+
+that code. We I think we are in a good
+
+
+place. But we are thinking about how
+
+
+much uh some parts of our code costs us
+
+
+later. Maybe there is more more more
+
+
+room to
+
+
+improvement. Um yeah, I think
+
+
+documenting
+
+
+uh the whole infrastructure there by
+
+
+the former CTO could be better. So
+
+
+people would know that there is his
+
+
+email there. But that's not so easy easy
+
+
+to say at but uh and yeah I think uh if
+
+
+there's at least one person who didn't
+
+
+saw the last latest DHH uh keynote about
+
+
+moving from cloud I really enjoyed
+
+
+it. Yeah maybe other ideas I mean if it
+
+
+comes to that area I I'm sure that I
+
+
+could pass the mic and for next 10 hours
+
+
+we would have many similar or even
+
+
+funnier stories. Yeah, right. Maybe
+
+
+let's raise hand who don't have that
+
+
+kind of
+
+
+story. Yes, your hands.
+
+
+Okay. Okay. So, integrations and
+
+
+estimations of integrations again
+
+
+insurance agency company my lovely
+
+
+company. So, they asked us to integrate
+
+
+uh with some insurance
+
+
+uh company uh API. They gave us their
+
+
+documentation. There was something that
+
+
+uh you probably the older folks will
+
+
+know which is sap protocol who who used
+
+
+soap
+
+
+protocol. Yeah. So you you know how
+
+
+lovely it is. Uh but we happily uh
+
+
+estimated it to I believe 160 hours.
+
+
+700 hours later. Uh we were quite
+
+
+annoyed that nothing works as intended
+
+
+in
+
+
+documentation. Uh but we were quite
+
+
+annoyed that client probably won't pay
+
+
+at us at all if we want to finish it.
+
+
+And I'm not sure if and I'm always with
+
+
+him. I wasn't sure if he will pay if I
+
+
+will finish it. But uh like not sure how
+
+
+you say in English but it was too much
+
+
+when for two weeks straight we were
+
+
+getting the response from uh API that
+
+
+something went wrong with our file uh
+
+
+XML file uh because you sent XML files
+
+
+through SOAP uh and we were asking them
+
+
+what exactly is wrong. They were trying
+
+
+to give us some hints but after two
+
+
+weeks someone replied us guys you know
+
+
+because you send that file for one
+
+
+server but the other server ne after
+
+
+that server is uh transforming that file
+
+
+and giving you the response to the
+
+
+server that is uh that you are talking
+
+
+with and the second one is not working
+
+
+for two weeks. No one told
+
+
+you. Yeah.
+
+
+So every time when I got question about
+
+
+how much it will cost and integration is
+
+
+involved, I'm quite scary. Uh and I'm
+
+
+trying to explain that I can estimate
+
+
+everything that you want but not the
+
+
+integrations because it's I it's not on
+
+
+me. It's first on you
+
+
+to be sure that
+
+
+uh you and your API vendor are on the
+
+
+same page that you are sure that the
+
+
+documentation is uh fine maybe check if
+
+
+other people are already integrated with
+
+
+him like other businesses not exactly
+
+
+developers but businesses to see how the
+
+
+cooperation looks like in the terms of I
+
+
+don't know SLA or uh
+
+
+whatever uh if it comes comes to
+
+
+estimations. Um I know that at the
+
+
+beginning it's really hard to make
+
+
+clients to agree to time and material
+
+
+but maybe it's good to tell him okay
+
+
+let's do the other work on fixed price.
+
+
+You will see how we work, how we are
+
+
+transparent and stuff like that and then
+
+
+we will do the integration but button
+
+
+time
+
+
+material agreement because in other ways
+
+
+someone will overpay for what we are
+
+
+doing. Um yeah and checking if AP API
+
+
+vendor have some SLR I don't know how to
+
+
+call it English SLA maybe uh is if
+
+
+they're if they feel responsible for
+
+
+what they are doing for updating
+
+
+documentation or they don't care about
+
+
+it they they say deal with it it's our
+
+
+API now
+
+
+um yeah investigate if API errors are
+
+
+clear and you can deal with them
+
+
+uh and yeah don't agree
+
+
+on just following orders. If someone
+
+
+will tell you estimate integrating with
+
+
+that API, don't be so sure that it's a
+
+
+good idea to accept it because you will
+
+
+be blamed at the end
+
+
+probably. Okay, that is the last one and
+
+
+the quick one. Uh so once we were
+
+
+inheriting uh some project uh and uh
+
+
+firstly doing some code review and I
+
+
+found
+
+
+that non model service object or
+
+
+whatever we found had like unhappy part
+
+
+like there were no way to no one is
+
+
+catching any errors checking if I don't
+
+
+know validation went wrong or whatever.
+
+
+So I asked the main developer of that uh
+
+
+application how you handle
+
+
+errors and he told me our code is so
+
+
+good that we don't have errors and that
+
+
+was
+
+
+it. So uh yeah I don't know what to say.
+
+
+So I will just give you my last the
+
+
+favorite one uh because yeah it's my
+
+
+favorite one. So we got some reference
+
+
+to Norwegian client. So of course we
+
+
+were excited because you know Norwegian
+
+
+money is probably should be big. Uh and
+
+
+but they had for the starters they have
+
+
+a really small application for some old
+
+
+like magazine. I don't know five
+
+
+employees of that magazine is using that
+
+
+are using that application. They are
+
+
+mainly maintaining it for many years.
+
+
+they have they want to have some small
+
+
+feature but uh they asked to estimate it
+
+
+and give them some fixed price. Okay, I
+
+
+took took a look on the project. It
+
+
+wasn't big but it was like I don't know
+
+
+Ruby one rails 2 or whatever. So I told
+
+
+them that I won't touch it before like
+
+
+upgrading the version to I don't know
+
+
+something stable. I gave them rough
+
+
+estimation for I don't know one or two
+
+
+weeks because it's like it was a big
+
+
+upgrade but the application wasn't
+
+
+big but of course they didn't have
+
+
+budget for that application so they
+
+
+rejected it day later after they
+
+
+rejected it they're calling me why I
+
+
+broke the
+
+
+application and I was like what the [ __ ]
+
+
+I didn't touch the production I only
+
+
+reviewed the code and what
+
+
+happened updated uh the minimum CentOS
+
+
+version that was somehow related to
+
+
+minimum Ruby that they can run and the
+
+
+whole application blew up and they sent
+
+
+them chain logs, articles, whatever I
+
+
+could find about it to prove that that I
+
+
+didn't broke it that Heroku just that is
+
+
+[ __ ] coincidence that it happened day
+
+
+after they rejected my
+
+
+estimation. But but guess what? They
+
+
+never called me back. And uh my favorite
+
+
+favorite slide and quote from my
+
+
+favorite uh TV series is the lesson that
+
+
+I get from that
+
+
+one. So yeah,
+
+
+that's I think that's
+
+
+it. Uh and last uh thing before any
+
+
+questions or thoughts uh I just wanted
+
+
+to remind you that there are two
+
+
+supporters and two of those are
+
+
+organizers so we don't care about them
+
+
+but I think we should
+
+
+uh make big I I don't mean uplouse now
+
+
+or shout now if you can remember or
+
+
+write some to-do to I don't know send a
+
+
+message somewhere that they're basically
+
+
+the on oh yeah I know what I wanted to
+
+
+say I have fun story about that one
+
+
+because uh when I asked them to be a
+
+
+supporter of the conference uh Stas
+
+
+asked me about few things like what they
+
+
+can get and stuff like that. So I told
+
+
+them what they can get one post on
+
+
+Twitter logo here uh like on the page
+
+
+and yeah and that's it one ticket and he
+
+
+asked me can we at least have rollup and
+
+
+I told them of course not and he told me
+
+
+okay where to send money so I think we
+
+
+should appreciate it uh especially
+
+
+knowing how many companies they are and
+
+
+are not so willing to support community
+
+
+right now and I think you talk with your
+
+
+boss or whatever to support community
+
+
+more your local meetups, conferences or
+
+
+whatever because after co I feel
+
+
+like communities are slowly getting
+
+
+smaller and it's bad because during the
+
+
+community meetups we can hear [ __ ]
+
+
+stories and yeah that's me. If you have
+
+
+any thoughts that would be cool but if
+
+
+not yeah I I'm aware I'm replacement
+
+
+with soft talk so yeah I get
+
+
+[Applause]
+
+
+it any
+
+
+questions we did questions in between
+
+
+right okay so I have one question but
+
+
+that's that's not for you that's for
+
+
+audience uh was it bad or was it decent
+
+
+so it was Great. Thank you, Adam. Thank
+
+
+you. One last
+
+
+thing, if anyone would love to join us
+
+
+on our sailing uh trip uh like nerds on
+
+
+Lakes, contact me. We are always happy
+
+
+to meet new people and talk about some
+
+
+more fuckups. Thank you. Thank you.

@@ -1,0 +1,286 @@
+hello everybody my name is Alina Lova
+
+
+I'm a ruby developer from softswiss and
+
+
+today I have uh a topic fixed blockers
+
+
+fast and Stressless actually it's a
+
+
+reference to today's speech about the
+
+
+buing like a data scientist and I have a
+
+
+real example to you how can we do it
+
+
+fast if we are not
+
+
+stressed
+
+
+um
+
+
+okay so yeah my name is Alina Lova I'm a
+
+
+ruby developer and why do I present this
+
+
+speech because I usually fix blockers on
+
+
+my
+
+
+component and imagine a situation that
+
+
+our clients came to us and said that
+
+
+they cannot upload files and you will
+
+
+ask me why why is it blocker it's like
+
+
+normal situation no uh our component is
+
+
+content management system and if people
+
+
+can't update their files so they can't
+
+
+update content and content management
+
+
+system can't deliver new content so it's
+
+
+actually critical issue which should be
+
+
+fixed right now because our company is
+
+
+losing uh money and uh they also provide
+
+
+us some photos like they're clicking the
+
+
+button and n happens at all and all
+
+
+management is stressed and when I uh
+
+
+took look at this on their video I just
+
+
+found out that uh you still can use drag
+
+
+and drop option if you need to upload
+
+
+any file and you think it's critical uh
+
+
+you can try it try to do it another way
+
+
+and maybe it will be not as hot as it
+
+
+was 5 minutes ago uh so let's imagine
+
+
+like I'm taking my investigation notes
+
+
+and uh I have files upload here and the
+
+
+the real point is I have screenshots
+
+
+from two different applications from uh
+
+
+content management system one and two
+
+
+they're different and there's something
+
+
+really strange about it because I don't
+
+
+want to go into dat into code bases and
+
+
+fix this issue I think it's not our
+
+
+problem so I suggest that it the fix is
+
+
+not on our side
+
+
+and what can be common between two
+
+
+applications uh they can be in one
+
+
+browser so our testers checked is it
+
+
+isue actually present for all the
+
+
+browsers and they found out that it
+
+
+present only for Chrome and only for
+
+
+Mark
+
+
+system which actually looks strange and
+
+
+it will not be CAU issue I hope so uh
+
+
+and our product owner also suggest our
+
+
+clients to use drag and drop option it
+
+
+works and here now it looks like we have
+
+
+some clue here so whenever the
+
+
+application is if you're using ma OS
+
+
+system and you are trying to do or to
+
+
+open your file system through the Chrome
+
+
+uh it it is no option to do it so is is
+
+
+the main bu uh and it feels like it's
+
+
+clean side and actually it feels like
+
+
+it's going to be permissions so what did
+
+
+I decided to do uh I decided to make the
+
+
+most human request I can actually
+
+
+produce uh and I wrote ma can choose
+
+
+file in Chrome and I actually got an
+
+
+answer uh I open it and I totally copied
+
+
+it and sent to our management that guys
+
+
+maybe you can try to update your system
+
+
+preferences uh and yes it was actually
+
+
+our final fix
+
+
+uh it was totally approved by our team
+
+
+I'm in love with my team so we work
+
+
+together testers deaths our even po
+
+
+checked it so it was great and we just
+
+
+fixed it less than in 15
+
+
+minutes so in conclusion what I want to
+
+
+say to you if you have a blocker it's a
+
+
+little bit different from a bu so first
+
+
+of all you need to accept this situation
+
+
+because it's really stressful uh then
+
+
+you you can suggest any options to your
+
+
+management uh so they can actually
+
+
+suggest these options to your clients
+
+
+and just focus ask all questions you
+
+
+want to ask and the issue will be
+
+
+resolved so actually that's all from my
+
+
+side if you want let's stay connected
+
+
+and if you have any questions or
+
+
+comments I'm ready to discuss
+
+
+[Applause]

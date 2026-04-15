@@ -1,0 +1,2983 @@
+hello okay my talk today is about
+
+
+applying events or seeing sick us
+
+
+together on the res project I will start
+
+
+like kind of the round trip showing you
+
+
+like how looks like each piece of this
+
+
+so Who I am I am the city of the Berlin
+
+
+biased fin tech startup right now I am
+
+
+on departure to the Zen cargo I am
+
+
+interested in the domain driven design
+
+
+even sourcing secures functional
+
+
+programming many languages many
+
+
+technologies over the many years I have
+
+
+twitter Aachen and I am using it okay so
+
+
+this is agenda for today what all the
+
+
+topics which I would like to mention I
+
+
+will not go too much in the details
+
+
+because there is lots of them but I will
+
+
+show you like real examples of the code
+
+
+and how we are dealing with it with it
+
+
+and how you can use it first of all I
+
+
+would like to mention again about even
+
+
+storming which was mention it yesterday
+
+
+and to be honest I believe this is like
+
+
+most important part of doing domain
+
+
+drive and design in your company you can
+
+
+try to make like make domain design in
+
+
+your company but without really
+
+
+cooperation from the business side this
+
+
+will not work at all the best way to
+
+
+make it working is like invite business
+
+
+people to like cooperate with you
+
+
+directly and in order to make it you
+
+
+need to have some tools which they can
+
+
+use it if you will use UML and show them
+
+
+they will not really enjoy using it and
+
+
+then like there are two different levels
+
+
+of understanding we are talking our
+
+
+technical jargon they have own domain
+
+
+language we not understand each other so
+
+
+the idea behind behind of the event
+
+
+source storming is that you taking
+
+
+various simple tools sticky notes with
+
+
+different colors you taking pen huge
+
+
+space probably wall with like sheet of
+
+
+the paper and then everybody have owned
+
+
+pen everybody have own stickers or each
+
+
+speakers have different meaning the most
+
+
+important one is the event sticker
+
+
+and then how you starting the whole
+
+
+workshop together with the business
+
+
+people so you starting first by
+
+
+explaining them that what is the purpose
+
+
+of this meeting you're showing them okay
+
+
+we have here timeline and we choosing
+
+
+one domain experts to give us one
+
+
+example event which happened in the
+
+
+business process we're not talking about
+
+
+like all technical details we are asking
+
+
+them about the business process even
+
+
+which happen it once they make it we are
+
+
+able to ask questions what happened
+
+
+before what happened after or in the
+
+
+same time with it we are collecting one
+
+
+by one all of these events sticky notes
+
+
+there is more and more of them we are
+
+
+doing this in the parallel everybody
+
+
+have own sticky notes so we can not non
+
+
+interrupt each other they can put lots
+
+
+of them and then even if there are some
+
+
+questions about like open topics you can
+
+
+use different colors for questions and
+
+
+notes you will write it down and leave
+
+
+it later for discussion without breaking
+
+
+the flow of thinking of other people
+
+
+which are like preparing themselves to
+
+
+express the domain in sticky notes so
+
+
+when you have lots of different sticky
+
+
+notes for the events you like have
+
+
+chance slowly to identify your main
+
+
+subject in the around of the tickets
+
+
+when you have it you can start thinking
+
+
+more about like move their cards think
+
+
+about it what will be the order what
+
+
+will be the relation between one event
+
+
+and another one and then by putting more
+
+
+questions you can dive deeper about
+
+
+understanding of each event of each
+
+
+conditions which are inside of your
+
+
+business process then you are adding
+
+
+more and more you have different sticky
+
+
+colors for external services you can
+
+
+different colors for even expressing UI
+
+
+if you need it so there is no limit here
+
+
+and color also are like you can choose
+
+
+any only if you all agree on the same
+
+
+colors and all that on the same meaning
+
+
+of it so this is a for example like how
+
+
+looks like result of the simple session
+
+
+when you added multiple sticky notes
+
+
+other to ask it more lot lots of
+
+
+different questions and put them on the
+
+
+wall the the true is that you cannot
+
+
+make all of all of it in one step making
+
+
+even storming is like iteration in the
+
+
+like you need to make multiple iteration
+
+
+to make it happen this is like revealing
+
+
+the understanding of the domain and you
+
+
+making like multiple iterations multiple
+
+
+steps in order to get go to the state
+
+
+and what is really important is like
+
+
+like what's mention it you cannot like
+
+
+force people to think about it too long
+
+
+because they will be they're motivated
+
+
+and start escaping important part of it
+
+
+which was mentioned it already is that
+
+
+you need to make it without chairs
+
+
+comfort zone they need to like interact
+
+
+and for you as person who will like try
+
+
+to introduce you introduce it you need
+
+
+to like really observe them there will
+
+
+be some people who are actively giving
+
+
+you lots of information they are just
+
+
+throwing away all of the knowledge they
+
+
+have it about the business process on
+
+
+the table but there would be like just
+
+
+people who are like trying hide them
+
+
+behind of the scenes and like don't
+
+
+interact with it so you need to respond
+
+
+in different ways for each this kind of
+
+
+people so the result of such even
+
+
+storming can looks like that this was
+
+
+already mention that yesterday we are
+
+
+using a real-time board for that this
+
+
+let's just work in the parallel together
+
+
+everybody have open that screen and this
+
+
+is working as well remotely of course
+
+
+you cannot observe how they will react
+
+
+if they are like unhappy of women or not
+
+
+but they can not interrupt each other by
+
+
+just doing on sticky notes in one place
+
+
+and later on move it and then use it
+
+
+correctly
+
+
+you can also use different colors to
+
+
+show which questions were already
+
+
+answered and or you can just remove them
+
+
+but I would say that it's better to keep
+
+
+them to see
+
+
+what was the question already I'll ask
+
+
+it than just removing them
+
+
+so even storming is alternative for this
+
+
+one so I saw so many times tickets which
+
+
+have like multiple pages of their
+
+
+business requirements explaining what
+
+
+are the expectations from what like for
+
+
+your work and what you need to do but
+
+
+the problem is like if I will take these
+
+
+requirements I will choose randomly five
+
+
+different people from this room then you
+
+
+will have five different implementations
+
+
+because everything is about perception
+
+
+how you will understand what is written
+
+
+here and then you will have like five
+
+
+different limited employment ations if
+
+
+you have let's say one conventions how
+
+
+you are doing it it's let's say okay but
+
+
+if you believe in different frameworks
+
+
+different libraries different solutions
+
+
+approaches this will be the nightmare so
+
+
+if you need more information about even
+
+
+storming again go back to this book it's
+
+
+really good and there is multiple
+
+
+presentations of the albertov Brandolini
+
+
+about it so definitely go to the YouTube
+
+
+and watch this about Tommy and drive in
+
+
+design I will not tell you too much
+
+
+because there was like mentioned so many
+
+
+times already there are like at least
+
+
+four books about it the books which was
+
+
+forgotten yesterday is the domain driven
+
+
+race if you need more information about
+
+
+what you really don't mind driving
+
+
+design is its again I am asking you to
+
+
+go back to YouTube and just watch past
+
+
+movies from the presentations about
+
+
+domain about mountain context was also
+
+
+mentioned multiple time I will tell you
+
+
+my definition of how i understanding
+
+
+bounded context for me bounded context
+
+
+it's not only encapsulation of the whole
+
+
+logic in like in separation from other
+
+
+logic but it's also like the border
+
+
+which telling you that there is one
+
+
+unique meaning of the single things so
+
+
+for example if you have application
+
+
+which have customers b2b and b2c there
+
+
+are two different kinds of customers
+
+
+they will never land in the same bounded
+
+
+context so this is the way how your
+
+
+thinking is having only one meaning in
+
+
+the bounded context of each none in
+
+
+your system so we are using grace even
+
+
+store I would like to give you some
+
+
+reasoning about it why I choose this
+
+
+platform so first of all like you see it
+
+
+here there's really good documentation
+
+
+on it so you can easily start with it
+
+
+there is actively done and maintenance
+
+
+supported by our can see people and also
+
+
+other people who are right now
+
+
+maintenance of this of these gems the
+
+
+nice thing about cooperation with I can
+
+
+see is that they give me immediately
+
+
+after making pull request access to just
+
+
+manage my own staff without like
+
+
+babysitting me and and like tell me how
+
+
+to do this they just give me the access
+
+
+and they give me the access for slack
+
+
+and then I was able to start
+
+
+contributing to this project from like
+
+
+day one when I have it so I would like
+
+
+to also today talk today about like how
+
+
+to describe the domain you can like lots
+
+
+of the sticky notes but the sticky like
+
+
+events are not only the things you have
+
+
+lots of types in your system which are
+
+
+part of the domain so for this purpose
+
+
+we are using dry types dry struct and
+
+
+drive validations we are slowly leaving
+
+
+drive validations the problem with such
+
+
+libraries is that their strongly
+
+
+opinionated and very often
+
+
+implementation is directed only in one
+
+
+way which supporting other frameworks
+
+
+other libraries so this is example how
+
+
+domain types can be collected together
+
+
+to just Express what is inside of your
+
+
+domain what are the types and so on the
+
+
+nice thing about dry types like they
+
+
+behaving kind of like static types by
+
+
+just definition of the constraints you
+
+
+can define Union types and so on and and
+
+
+you can express all of the let's say
+
+
+values in your domain by defining them
+
+
+in the dry types you can define your own
+
+
+constructor for example for the money
+
+
+which will wrap existing type in the dry
+
+
+type that you can reuse it later in in
+
+
+the dry dry straw
+
+
+which are representing for us comments
+
+
+and events so this is like another
+
+
+domain with showing like all the
+
+
+different types and constraints from
+
+
+another application so this is overview
+
+
+slide which is showing all of the parts
+
+
+which I will show you today to explain
+
+
+like how to use even sourcing like even
+
+
+sourcing is not something simple which
+
+
+you can start doing it day one without
+
+
+understanding that's why I would like to
+
+
+show you how each piece of this of the
+
+
+software and also explain you what we
+
+
+added to libraries which were provided
+
+
+by our can see just for for our
+
+
+happiness and our requirements which we
+
+
+headed if you want to again dive more
+
+
+about even sourcing I think that there
+
+
+was like lots of good questions great
+
+
+answers about that today but definitely
+
+
+again go back watch presentations from
+
+
+people who really know it there will be
+
+
+tons of different examples and there is
+
+
+no single true they have all of them
+
+
+different opinions about it and it's
+
+
+difficult we need to decide what which
+
+
+one which one is really better or which
+
+
+we like more or not so let's start from
+
+
+user interface we developed something
+
+
+which is comment forum also a dimension
+
+
+that forms our comments I would disagree
+
+
+with that because comments are something
+
+
+different for me and forms as well so we
+
+
+developed the piece of the software
+
+
+which behaved from outside like regular
+
+
+active model form object the nice thing
+
+
+about it like you can put any nested dry
+
+
+struct type inside of it and he will
+
+
+like convert it in the nested active
+
+
+model which lets you build any complex
+
+
+form by just using fields for for it and
+
+
+then you will you will have it working
+
+
+for you important thing about common
+
+
+form is that you can define multiple
+
+
+commands on the command form for example
+
+
+you have one huge form which have lots
+
+
+of different fields but
+
+
+would like to have intention revealing
+
+
+from such common form this means that
+
+
+for example if big form you just enter
+
+
+the new password the only command
+
+
+responsible for change new password will
+
+
+be triggered because we are able to
+
+
+detect which fields change it in the
+
+
+command forms from like actual estate by
+
+
+input provided by the user so if there
+
+
+is like 10 on 10 or 20 different
+
+
+commands which can be super atomic we
+
+
+get we know exactly which one we should
+
+
+dispatch to our system there is also the
+
+
+way to define weak fields some of them
+
+
+some fields are like appearing on two
+
+
+different commands and there are more
+
+
+like references and then you don't want
+
+
+to trigger a command dispatching when
+
+
+the reference just appear sorry so this
+
+
+is example again of current we are using
+
+
+dry structs to implement our commands
+
+
+and we are we are defining here schema
+
+
+type this means that if you will use
+
+
+this as comment input as a form input
+
+
+and you will not provide some
+
+
+information nothing will happen
+
+
+we will let you enter the empty value
+
+
+here for the events we are feeling all
+
+
+the informations we don't want to lose
+
+
+any informations about the fact which
+
+
+happen in our system that's why events
+
+
+are not schema type are like strict
+
+
+which have all of the informations to
+
+
+not mistakes that we didn't supply one
+
+
+example field ok so this is example how
+
+
+controller with event sourcing looks
+
+
+like we have here our command form we
+
+
+calling update with all the all of the
+
+
+patterns which can match a particular
+
+
+comments and then we are providing the
+
+
+context which can be for example email
+
+
+of the user information about location
+
+
+information about IP address and so on
+
+
+and then we just calling safe on
+
+
+calm and firm impairment implementation
+
+
+of the safe is super simple there is
+
+
+just checking a validation past and then
+
+
+we are dispatching all of the Comanche
+
+
+commands which detect the changes inside
+
+
+of the form then we have validations in
+
+
+the previous implementations we used
+
+
+write validations and validations were
+
+
+defined on the comments by we come up
+
+
+with the solution when validations is
+
+
+defined on the command form because
+
+
+comment form belongs to the view and
+
+
+those validations are not really a
+
+
+business logic validation those are like
+
+
+data input validations this is what I
+
+
+chose you before that you can define
+
+
+multiple nested validations so if you
+
+
+have one type and another value object
+
+
+you can nest them how many times you
+
+
+want and all of the standard validations
+
+
+from active model active record are
+
+
+available for you okay let's talk about
+
+
+common handlers this is example of the
+
+
+most of our common handlers we have here
+
+
+information about what is the aggregate
+
+
+what is the aggregate ID and then we've
+
+
+aggregated helper taking creation of the
+
+
+comment and sorry of aggregate and
+
+
+refrigerating of it with all the past
+
+
+events and then returning to us just
+
+
+instance of aggregate with on which one
+
+
+we are calling later
+
+
+like comment method this is example of
+
+
+this helper which I shows you
+
+
+so first step is just great creation of
+
+
+the aggregate class with passing
+
+
+aggregate ID as the finished value then
+
+
+we are yielding aggregate instance which
+
+
+is already a hydrated because built is
+
+
+also creating the stream name and
+
+
+loading all of the past events from the
+
+
+store and then giving you a hydrated
+
+
+aggregate here so then you can execute
+
+
+any business method on it
+
+
+what is aggregate there are like
+
+
+multiple definitions what is aggregate
+
+
+or aggregate root from one side
+
+
+aggregate root when we're talking about
+
+
+event sourcing is like the main objects
+
+
+which have constrains to run although
+
+
+your business logic with like
+
+
+transaction borders and have all of the
+
+
+events serialize in the event store but
+
+
+from other point of view like more like
+
+
+domain driven design
+
+
+it's like aggregate root is like your
+
+
+public contract for whole the tree of
+
+
+the objects which are connected to each
+
+
+other for example if you have invoice
+
+
+model then you will have multiple
+
+
+positions inside you will have
+
+
+information about the v-very address
+
+
+about about payments of this such
+
+
+invoice and so on with Raceway you can
+
+
+just modify all of these things directly
+
+
+but with aggregate root you should just
+
+
+use all methods which are public
+
+
+contract you should never modify objects
+
+
+in the tree directly you cannot like
+
+
+change mode like objects in sight you
+
+
+cannot add more items to relations or
+
+
+not or not so this is example how looks
+
+
+like simple constructor of aggregate we
+
+
+have two kinds of methods on aggregate
+
+
+one kind is just comment methods which
+
+
+are taking the commands requests and
+
+
+another one are callbacks for mutating
+
+
+of the state of aggregates so this
+
+
+distinction between distinguish between
+
+
+between command methods and event is
+
+
+here because you don't want to execute
+
+
+again some code which will make
+
+
+side-effects
+
+
+when you are regulating the aggregate
+
+
+from scratch this is example of commands
+
+
+form a sort of commands a method we have
+
+
+like set up note here we are validating
+
+
+business conditions we are applying
+
+
+events which happen it on
+
+
+the aggregate instance then when this is
+
+
+done the next callback method is called
+
+
+with the event which we apply it here
+
+
+and then we are mutating the state of
+
+
+the aggregate if error happened we will
+
+
+never reach this point which means
+
+
+aggregate will be not persisted the
+
+
+aggregate have all informations about
+
+
+all unpublished yet events which were
+
+
+applied since last refrigeration one of
+
+
+one of the interesting patterns which we
+
+
+just make some research and
+
+
+experimentation was like having nested
+
+
+aggregates very often can happen that
+
+
+your aggregates are growing bigger and
+
+
+bigger and then you just wonder okay if
+
+
+this is not like too big how to split it
+
+
+how to extract then one of it one way of
+
+
+doing it will be implementing of nested
+
+
+aggregate roots which will have multiple
+
+
+aggregates inside to be honest I am NOT
+
+
+super happy with this solution I sing
+
+
+like alternative for that so extracting
+
+
+code two strategies and policies so
+
+
+extract the logic to some code which can
+
+
+be tested without making instance of the
+
+
+aggregate which will let you define the
+
+
+business constraint to verify if action
+
+
+can happen or not here you have a
+
+
+example of how to pass book builder and
+
+
+book building policy to the aggregate
+
+
+and then how you can reuse it this is
+
+
+example book builder how can looks like
+
+
+and example policies or strategy which
+
+
+you can define and pass to your
+
+
+aggregate okay let's talk about
+
+
+aggregate root again without even
+
+
+sourcing aggregate root can be done
+
+
+without doing event sourcing on it just
+
+
+by having root object in this case for
+
+
+example if you do in Raceway active
+
+
+record model
+
+
+and then all of the like rules still
+
+
+apply
+
+
+you should have public contract to
+
+
+access of all of the three of the
+
+
+objects but the problem with Ruby is
+
+
+that there is no interfaces which making
+
+
+for you the scoping if you giving
+
+
+instance of aggregate you can still call
+
+
+on it destroy you can call directly
+
+
+relations on it and you are not able to
+
+
+give it as the instance of specific
+
+
+interface so I make small research and
+
+
+prepared like a very simple wrapper
+
+
+which like giving you kind of interfaces
+
+
+in Ruby this is how they can be used so
+
+
+you're defining just simple module which
+
+
+defining the methods you telling the
+
+
+specific objects implementing specific
+
+
+interface and then when you are
+
+
+returning the objects you can tell okay
+
+
+return as this guy this this type
+
+
+exactly this means that even if there is
+
+
+are more informations in the active like
+
+
+aggregate route like relations all
+
+
+active record methods there will be not
+
+
+unavailable they are close by the scope
+
+
+of the of the interface so only these
+
+
+methods will be available for you to be
+
+
+executed okay let's talk about what will
+
+
+happen when the fact we would like to
+
+
+change our system it's never like that
+
+
+that we are preparing system and
+
+
+changing nothing in it there is multiple
+
+
+iterations we are a revealing domain we
+
+
+are making multiple changes in it so how
+
+
+we can deal with the changes in our
+
+
+domain in the classes and so on
+
+
+so the best thing for aggregates was
+
+
+just define small mixing which would let
+
+
+us define aggregate name this means that
+
+
+if I would like to have refractor at
+
+
+this aggregate to the better proper name
+
+
+I can still leave the name which is used
+
+
+to building the stream name here very
+
+
+simple method which let us rename code
+
+
+properly but without rewriting all of
+
+
+the events in the stream or changing the
+
+
+the event store which is in which should
+
+
+be immutable by design
+
+
+next thing he's our sagas and process
+
+
+managers so what is the purpose of it
+
+
+like very often aggregate have like wide
+
+
+scope but still it's not enough to make
+
+
+cooperations between multiple of them
+
+
+and this will happen that you need to
+
+
+coordinate to work of it so the name for
+
+
+is like sagas and process manager sagas
+
+
+because are like long-running processes
+
+
+like verification of purchases and so on
+
+
+and process managers because they need
+
+
+to cooperate together in order to
+
+
+achieve the business goal this is
+
+
+example how we are implementing the
+
+
+sagas in our system we choose as
+
+
+implementation the same direction like
+
+
+aggregate root in our case we
+
+
+implemented saga as kind of aggregate
+
+
+root which have all of the events
+
+
+internally about about what is going on
+
+
+in the saga so we know how saga reacted
+
+
+for the specific context this is how we
+
+
+are defining sagas in our configuration
+
+
+about sagas and process managers are
+
+
+recommending again going back to the
+
+
+previous talk of Robert it's really good
+
+
+one and explaining a whole that all of
+
+
+the topics we mention right now also
+
+
+really good presentation from OD about
+
+
+sagas and and problems with if
+
+
+statements in your business logic ok
+
+
+let's talk about events this is example
+
+
+event we have multiple attributes
+
+
+definitions not all of them are just
+
+
+simple values some of them like value
+
+
+objects which have more information
+
+
+inside you can nest them in order to
+
+
+used rice tracked in rice event store we
+
+
+provided our own class which let us use
+
+
+dry tub dry types and also let us define
+
+
+way how we are making versioning of the
+
+
+events here we have also small examples
+
+
+how we are using
+
+
+Rubi contracts library to verify that
+
+
+our infrastructure code working in some
+
+
+constraints that will fail quickly in
+
+
+place when you are passing some objects
+
+
+in which is not matching the contract of
+
+
+the method the nice feature of the Ruby
+
+
+contract is also implementation of the
+
+
+simple pattern matching this method new
+
+
+is a pattern matching implementation we
+
+
+find out that we need to support three
+
+
+different use cases and implementing
+
+
+without support of the pattern matching
+
+
+was super difficult like code was not
+
+
+really telling what's happened what are
+
+
+the use cases splitting this in the
+
+
+three different methods make it more
+
+
+clear much more is it easy to understand
+
+
+there is some penalties with using
+
+
+contracts because this is another
+
+
+tooling which is which needs to be
+
+
+executed that's why ruby contracts by my
+
+
+design are not turn it on on production
+
+
+but only in the test and development but
+
+
+this doesn't mean that pattern matching
+
+
+stops working this is really nice that
+
+
+we can still use the pattern matching we
+
+
+have disabled it fully Ruby contracts
+
+
+this is what I mentioned before so our
+
+
+events have strict schema with defaults
+
+
+which means that if you will forget
+
+
+about providing one filter in the events
+
+
+this will fail immediately and then you
+
+
+will know on early stage that you miss
+
+
+something okay events versioning so very
+
+
+quickly we find out that we changing the
+
+
+events we are the we forgot about one
+
+
+field this needs to be done so how we
+
+
+can do this we implemented very simple
+
+
+way how to upcast events from one
+
+
+version to another one because we forgot
+
+
+about something or our domain
+
+
+understanding changes how the versioning
+
+
+is working so on the event you can
+
+
+define version number by default you
+
+
+have first version and then you need to
+
+
+supply the event with the callbacks
+
+
+about how to emigrate from one version
+
+
+to another one of course this logic can
+
+
+be extracted to the separate module
+
+
+which will later on like define how to
+
+
+make migrations properly important fact
+
+
+about making such migrations is that you
+
+
+should avoid calling here or fetching
+
+
+external state because if you will start
+
+
+relying in this cold mix on the view
+
+
+models then you will have a huge problem
+
+
+later on because view models can be like
+
+
+deleted refresh or rebuild it and then
+
+
+you will have no informations when you
+
+
+will reiterate the aggregate and then in
+
+
+the event store there will be previous
+
+
+version and you will start up casting it
+
+
+additional thing which can happen as
+
+
+well is support is problem with changing
+
+
+the event name we have old class if we
+
+
+will like Ruby Ruby Ruby arrays even
+
+
+store persisting this information in
+
+
+database then this mean that we need to
+
+
+keep this class forever
+
+
+but by implementing the event mapping we
+
+
+are able to tell that the old class name
+
+
+now is supported by new class name with
+
+
+different name another problem when
+
+
+you're doing lots of development in race
+
+
+with with race and even sort of thing is
+
+
+that by using race race even store you
+
+
+have lots of configuration like event
+
+
+handlers common handlers and you want to
+
+
+still have ability to be just call rail
+
+
+out in the race if you will not make
+
+
+your own configuration which will handle
+
+
+it properly then reload will trigger
+
+
+again registration of the event handles
+
+
+and then you will have multiple
+
+
+subscriptions on the same events so
+
+
+that's why you need to take care about
+
+
+configuration of this part this is
+
+
+example configurations we had which we
+
+
+have it here you have you can see also
+
+
+information about even hundreds handler
+
+
+strategy I will talk about it soon
+
+
+this is one example how you can
+
+
+implement configuration of your common
+
+
+handlers and even handlers it's not the
+
+
+only one there is no default way of
+
+
+doing it
+
+
+you have full freedom how you will make
+
+
+it another example of implementing it's
+
+
+just simple map you don't need to have
+
+
+the SL it's up to you what which way you
+
+
+prefer the approach with with this the
+
+
+SL code is that I have on the register
+
+
+method specific contracts which will
+
+
+fail in case when I am providing wrong
+
+
+type of the objects to it or class to it
+
+
+another examples of the configuration
+
+
+for the view models or sagas even
+
+
+handlers ok so let's talk about even
+
+
+handles and de-normalize errs the
+
+
+normalizes are made to take the series
+
+
+all of the events which are app which
+
+
+were published after applying on the
+
+
+aggregates and then you are listening
+
+
+for them and in the response of the such
+
+
+event you just building your read models
+
+
+the nice thing about using event
+
+
+sourcing is that your actual state which
+
+
+is skipped in aggregate root and way how
+
+
+you are displaying your data in your
+
+
+system are totally decoupled you can
+
+
+have multiple read stores you are not
+
+
+forced to use only let's say active
+
+
+records or Postgres you can just operate
+
+
+on them so this means that you can use
+
+
+data storage which is optimized for your
+
+
+specific view or like page if you if you
+
+
+want to search for the data which are
+
+
+stored as as graphs you just choosing
+
+
+different storage not active record with
+
+
+Postgres you choosing something which is
+
+
+optimized for the view or elastic search
+
+
+for searching data important things
+
+
+about when you building creepy-like
+
+
+read mother's view models is that again
+
+
+you can make some view model which don't
+
+
+have all of the data which is which are
+
+
+necessary to display specific page in
+
+
+this case you will need to add this
+
+
+field but how to proceed with that how
+
+
+to take this informations from the past
+
+
+events and update you review the best
+
+
+and safe weight of doing it is just
+
+
+deleting all of the information in the
+
+
+view model
+
+
+nothing will happen this is just let's
+
+
+say projection of the actual state of
+
+
+the system and then rebuilding the whole
+
+
+view model with model from scratch based
+
+
+on the past events with additional
+
+
+information which you added in the event
+
+
+handler the normalizer okay even handles
+
+
+the normalizes and even hundreds looks
+
+
+like almost the same the difference is
+
+
+here that here you this is the way how
+
+
+you will connect one bounded context
+
+
+with another one by just waiting for own
+
+
+events from unbounded context and then
+
+
+calling the public contract of another
+
+
+bounded context so this is not the way
+
+
+that you always can subscribe to the
+
+
+events of one domain from another
+
+
+abundance context because then you will
+
+
+have coupling again about current
+
+
+implementation of the event which can
+
+
+happen that will be changed many times
+
+
+even handle this error strategy so I
+
+
+find out that I don't know if this is
+
+
+still like current state but
+
+
+implementation of the race even star
+
+
+which I am using it's not taking care
+
+
+about error handling strategy what will
+
+
+happen in if there is mistake in my hand
+
+
+error handler s or not in the reach
+
+
+model or even handler this means that
+
+
+the code will fail and will not execute
+
+
+all of the other subscriptions of the
+
+
+same for the same event I will lose
+
+
+information how to reveal the other
+
+
+events because one in the chain was
+
+
+broken so now I am able to define
+
+
+strategy how I should how the code
+
+
+should behave in case when error will
+
+
+happen
+
+
+I will get notification on the air break
+
+
+but other even handlers will be still
+
+
+executed view models and queries so when
+
+
+you have feed models those are in this
+
+
+case very simple active record models
+
+
+and additional abstractions because of
+
+
+the cqs is just queries when we are like
+
+
+wrapping them in the same way like
+
+
+repositories we are just fetching data
+
+
+from the rich model but still this
+
+
+queries can be can fetch data from many
+
+
+sources
+
+
+not only possibly it's not only active
+
+
+record this can be searching in elastic
+
+
+search taking data from cassandra and so
+
+
+on about learning process which happened
+
+
+through this implementation this is not
+
+
+super super simple way to just
+
+
+understand how even sourcing is working
+
+
+it's super complex process of learning I
+
+
+watch multiple presentations are written
+
+
+many blogs about how to make the things
+
+
+there are a few books about the topic
+
+
+but every book showing you some piece of
+
+
+information and you need to think about
+
+
+it how to combine with existing the
+
+
+existing knowledge which you have it
+
+
+when you're just reading post by post
+
+
+you very often losing inform I like not
+
+
+losing but forgetting about what you
+
+
+read before what is what was the state
+
+
+of art from the previous article and how
+
+
+to combine these informations together
+
+
+so in my case I just i am using like
+
+
+mind map which is like taking all of the
+
+
+informations in one place I can show you
+
+
+maybe closer how how such mind map looks
+
+
+like so like you see there is many
+
+
+different use cases how to handle
+
+
+different things and then I didn't
+
+
+describing all of them all of the use
+
+
+cases all of the ways how I can deal
+
+
+with different things about all of the
+
+
+patterns which I found it
+
+
+all of them collected in one place I am
+
+
+using this as reference later on to talk
+
+
+with my team about how to make
+
+
+improvements if we like it or not which
+
+
+things can be better and
+
+
+to make different let's say prototypes
+
+
+of it without having huge mind map about
+
+
+how to deal with all of the subjects I
+
+
+will be totally lost or I will always
+
+
+rely on the latest blog post whole video
+
+
+which I watched it's not super easy and
+
+
+I would like to always reflect what were
+
+
+the decision how not maybe not what but
+
+
+how decision was driving from which data
+
+
+so if you take a look on it I have
+
+
+information not only what is the
+
+
+questions but also about the data about
+
+
+example blog posts about videos telling
+
+
+about specific things I am linking them
+
+
+with specific topics which I extracted
+
+
+from it to have one huge knowledge base
+
+
+about even sourcing and and secures
+
+
+together this is view of our current
+
+
+infrastructure plumbing code which we
+
+
+developed in order to use rice events
+
+
+store it's not like that but you need
+
+
+all of them but this those are just our
+
+
+patterns which we discovered when we
+
+
+implemented the application from scratch
+
+
+were using grace event store because
+
+
+like I said I have access to slack from
+
+
+our K and C about rice rice even store
+
+
+we discuss it already many of these
+
+
+parts some of them are already match to
+
+
+like event remapping already matching
+
+
+the rice event store that's it
+
+
+any questions
+
+
+[Applause]
+
+
+so I have two questions the first one is
+
+
+could you estimate how many time or what
+
+
+percentage of time you need to maintain
+
+
+that infrastructure and what's the
+
+
+percentage in what percentage it is done
+
+
+like you have 50 percent of what you
+
+
+need and you need you know that you need
+
+
+to continue or you are just ok with the
+
+
+stuff you have right now ok so this
+
+
+looks like that
+
+
+I didn't start at like with repairing
+
+
+the signal in advance when we started
+
+
+implementing we come up with few open
+
+
+questions with few issues which we need
+
+
+to solve and address in our
+
+
+infrastructure code then we started
+
+
+implementing this part of the code so
+
+
+how much time this took out for example
+
+
+implementation of the simple 4 simple
+
+
+sort of the commands form took me around
+
+
+2-3 days to just make it working with
+
+
+the fields version with the second
+
+
+version which is like a fully active
+
+
+model which is necessary it's far more
+
+
+advanced took me only one and half day
+
+
+this was not done only by me this was
+
+
+done in the pairing with my friend and
+
+
+we make it together as like pairing
+
+
+session I cannot imagine if I would be
+
+
+able only doing this by myself without
+
+
+brainstorming about how to make it what
+
+
+are the edge cases and so on super
+
+
+important thing for that was like having
+
+
+good use cases and describing them in
+
+
+the air' spec in order to start
+
+
+verifying the tessie's and check if this
+
+
+is working like we assumed ok thanks any
+
+
+other questions
+
+
+[Music]
+
+
+I was wondering because I was struggling
+
+
+with the same architecture and later on
+
+
+when the system is is growing then a
+
+
+really simple task like adding releases
+
+
+small thing makes you a lot of sort of
+
+
+boilerplate like you
+
+
+- at commands commands handler is even
+
+
+handlers the normalizer x' all the older
+
+
+stuff and I was wondering if you tried
+
+
+to solve this problem by for instance
+
+
+right sort of generators like
+
+
+scaffolding stop Popo debt or or you
+
+
+will or you just once
+
+
+okay so domain-driven design topics are
+
+
+not fresh think like when was born the
+
+
+main reason why i immediately rejected
+
+
+it as interesting idea was that
+
+
+everybody in the java community talk
+
+
+about how to take the diagrams for the
+
+
+domain driven design and convert them
+
+
+automatically in the code this was
+
+
+something unnatural for me to just have
+
+
+huge diagrams and then just generate the
+
+
+code from it and then how to maintain
+
+
+such code how to think about like
+
+
+different like different issues which i
+
+
+will have it with mixing the code which
+
+
+is generated and code which is wrote in
+
+
+by me so I don't think so that they are
+
+
+a huge problem for me like you see there
+
+
+are a few patterns there are commands
+
+
+queries command handles even handles
+
+
+those things are super simple when we
+
+
+recently hired new guy and we show him
+
+
+how the architecture looks like I just
+
+
+makes same round trip with him to
+
+
+explain how the system is working we
+
+
+leave him alone to implement the new
+
+
+features of course he asked questions
+
+
+about like missing points and so on but
+
+
+the feedback from him after using this
+
+
+kind of the let's say architecture of
+
+
+this building blocks was like now
+
+
+everything's looked simple
+
+
+I have well-defined that building blocks
+
+
+I know where put the things in which
+
+
+parts so this makes more easy to start
+
+
+with it and then there is no such thing
+
+
+that for example when you have an old
+
+
+race application if you will open
+
+
+different parts you will see different
+
+
+styles because developer read about
+
+
+interesting topics he try it in one
+
+
+place this this approach in another this
+
+
+approach and then when you're jumping on
+
+
+such code you have huge problem with
+
+
+understanding
+
+
+how this code is working and really
+
+
+understand applied patterns there when
+
+
+you have standardization about like how
+
+
+the things are implemented is much much
+
+
+easier to start for the new developers
+
+
+and then follow the same pattern I have
+
+
+simple questions so I think you can
+
+
+safely assume that most people here
+
+
+worked with small up to medium sized
+
+
+startup right and you did it on
+
+
+production so we have some experience um
+
+
+so basically how would you convince a
+
+
+product manager from medium-size
+
+
+start-up to invest some of his resources
+
+
+to start you know building his product
+
+
+using even sourcing so nuts may be sold
+
+
+it may be I will partially answer it and
+
+
+then we can give the microphone to Iain
+
+
+like from my points back if this looks
+
+
+like that if maybe with me move it back
+
+
+most important part of it
+
+
+sorry is this one right they need to see
+
+
+value of it I in my case which was like
+
+
+a fin tech startup
+
+
+I had like lots of people telling about
+
+
+the idea for the securitizations of the
+
+
+loan and they wants to build the product
+
+
+I try to understand the domain on the
+
+
+beginning and then I invite all of them
+
+
+for such meeting we make multiple
+
+
+iterations on the on the event storming
+
+
+the most surprising thing was like when
+
+
+you seeing like two co-founders which
+
+
+have like strong vision about our
+
+
+business have disagreement in the front
+
+
+of this page about how business will
+
+
+work I make this exercise on the
+
+
+beginning they start discussing that
+
+
+they have different understanding and
+
+
+immediately they demand such meeting
+
+
+every week to have next iteration next
+
+
+iteration because this give them
+
+
+information another side effect of
+
+
+having event storming was that when like
+
+
+new people coming to us like I don't
+
+
+know for example investors or companies
+
+
+which will be our partners because we
+
+
+need to cooperate with providers of the
+
+
+loans with banks and so on when they
+
+
+come up to our office and ask me okay
+
+
+tell me how this will work you know what
+
+
+my boss did you just go to the this
+
+
+board and start telling okay no problem
+
+
+in one-one-one-one explaining how the
+
+
+domain going by true day all of the
+
+
+notes he can answer all of them because
+
+
+I force him to think about it before we
+
+
+started development exactly this took
+
+
+this took a while but like what's
+
+
+mention it if you make it in advance
+
+
+this saves you a lot of mistakes later
+
+
+on because you didn't understand the
+
+
+domain this is about perceptions you can
+
+
+talk with them you will have some
+
+
+perception of what they need you will
+
+
+build it and then you need to rebuild it
+
+
+to rebuild iterability when you make
+
+
+design designs faced with simple tools
+
+
+on the beginning is much easier still
+
+
+you will need to refactor this will
+
+
+happen always but this is making things
+
+
+much easier thank you thank you

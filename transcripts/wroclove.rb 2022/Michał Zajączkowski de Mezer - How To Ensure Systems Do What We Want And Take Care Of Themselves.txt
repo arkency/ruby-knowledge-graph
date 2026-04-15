@@ -1,0 +1,3673 @@
+okay hi everyone
+
+
+my name is Michael zandrovski the mother
+
+
+I'm here from naguro and my first
+
+
+takeaway is that no matter how much you
+
+
+prepare you always get some technical
+
+
+issues so but the guys are amazing here
+
+
+so uh have some Applause for them
+
+
+uh I feel really
+
+
+privileged and honored to be here to
+
+
+have the chance to share my thoughts and
+
+
+perspective with you
+
+
+especially that my presentation doesn't
+
+
+have a single Ruby line of code and in
+
+
+fact it doesn't even have code at all in
+
+
+itself
+
+
+it's language agnostic
+
+
+and Gathering all these thoughts were
+
+
+was very useful to me and I hope that at
+
+
+least some of you wonderful people will
+
+
+find at least some useful or fresh bits
+
+
+in it
+
+
+uh
+
+
+let's see
+
+
+and before I start I would like to give
+
+
+special thanks to Mikhail bronikovski
+
+
+here who uh contacted me to give the
+
+
+speech so I wouldn't be here without him
+
+
+[Applause]
+
+
+exactly once
+
+
+how to ensure systems do what we want
+
+
+and take care of themselves
+
+
+sounds bold right
+
+
+stability heaven
+
+
+it is in fact
+
+
+I would really like to know your
+
+
+experiences but in my career as a
+
+
+back-end engineer more often than I
+
+
+would like to I found myself or my
+
+
+colleagues operating production and hot
+
+
+fixing production manipulating
+
+
+production data ensuring everything goes
+
+
+smoothly through
+
+
+it's bad for many reasons and
+
+
+I think these issues can actually be
+
+
+avoided by Design
+
+
+at least some of them because
+
+
+what I often see people struggle with is
+
+
+not
+
+
+respecting or not providing certain
+
+
+processing guarantees
+
+
+and of course bugs have many issues I
+
+
+won't give you any silver bullets but I
+
+
+hope to give you a bag of hints and
+
+
+I hope a useful perspective to think
+
+
+about systems that will
+
+
+that will
+
+
+bring you forward to this goal so let's
+
+
+start with a broad view
+
+
+any systems we built with we built are
+
+
+made from many components and these
+
+
+components
+
+
+process data and they communicate with
+
+
+each other
+
+
+and here right away comes my first
+
+
+advice when you connect these components
+
+
+use
+
+
+this recipe
+
+
+so it's a kind of simple abstract
+
+
+pattern that will help you design and
+
+
+code components that take care of
+
+
+themselves and we have various
+
+
+backgrounds so as these elements May
+
+
+sound a bit vague to some of you let's
+
+
+drill down into details
+
+
+and I won't be saying anything new it's
+
+
+like coming from wiser people from many
+
+
+experiences
+
+
+and for the sake of Simplicity I will
+
+
+use an obstruction of message passing
+
+
+message passing
+
+
+past okay so we have various actors they
+
+
+send or receive messages they also
+
+
+process data in between and very
+
+
+important thing is that failures can
+
+
+happen at any time anything can break
+
+
+that's uh the most true thing in this
+
+
+world
+
+
+and very important to remember and this
+
+
+message passing is
+
+
+can actually be applied to basically
+
+
+anything so we have we had great talks
+
+
+before about many things we had a
+
+
+sidekick right so queuing jobs dqing
+
+
+jobs that's message passing we had event
+
+
+sourcing so many times I was so inspired
+
+
+by previous talkers so events passing
+
+
+events this is also message passing
+
+
+so to move forward we need a few more
+
+
+terms
+
+
+and
+
+
+we have three terms where to remember
+
+
+there they are most of execution you can
+
+
+see processing guarantees delivery
+
+
+semantics
+
+
+[Music]
+
+
+very very wise names but
+
+
+let's go through them you will see
+
+
+they're not too difficult so the first
+
+
+one is at most once it means that
+
+
+whenever I want to do something I
+
+
+trigger it just once and
+
+
+you have to be a bit paranoid about uh
+
+
+what you know about what you did to
+
+
+understand what it actually means so if
+
+
+I don't know if I actually did something
+
+
+but I have some traits that I might have
+
+
+done it I won't try again
+
+
+so in some cases it might mean
+
+
+that
+
+
+the thing actually didn't happen and
+
+
+that's the risk
+
+
+the other mood of execution is at least
+
+
+once and that's uh the other side of
+
+
+being paranoid so if I don't know if
+
+
+something actually got finished got
+
+
+executed I will try as many times as
+
+
+long as needed
+
+
+until I'm sure about it and here as you
+
+
+may imagine the risk is that well
+
+
+something can happen multiple times
+
+
+that's also not good and what we
+
+
+actually all uh would like to have is
+
+
+this exactly once so when
+
+
+a sender sends a message they mean to
+
+
+send it once and the receiver when they
+
+
+receive a message and there can be
+
+
+various
+
+
+technical issues in between they mean
+
+
+they they want it to be processed only
+
+
+once
+
+
+that's like
+
+
+99.99999
+
+
+cases of what you actually want
+
+
+and the problem is that uh well it's
+
+
+challenging it's uh hard to achieve as
+
+
+an underlying mechanism without
+
+
+like uh
+
+
+without having something some helpers
+
+
+something leaking to your application
+
+
+code usually to achieve this you you
+
+
+have to like somehow take care of it
+
+
+uh but we have the recipe so let's see
+
+
+the first uh
+
+
+the first thing in the recipe is at
+
+
+least once so what does it mean in
+
+
+action
+
+
+it means retry
+
+
+our message is super important so we
+
+
+don't want to lose it so we send a
+
+
+message something broke okay we retry we
+
+
+get them
+
+
+confirmation that it succeeded great
+
+
+but what if the receiver is actually in
+
+
+trouble and the sender doesn't know how
+
+
+can the sender know
+
+
+right so uh the but the sender still
+
+
+wants the message to be delivered and
+
+
+the important thing to remember is that
+
+
+every message you send is at least a
+
+
+tiny bit of resources on the other side
+
+
+so whenever you send a message the
+
+
+receiver has to
+
+
+own something they reserve some CPU they
+
+
+reserve some memory whatever and if they
+
+
+are already in trouble if they're just
+
+
+like below the out of memory limit
+
+
+your messages may actually cause
+
+
+problems and if we try uh hard enough
+
+
+like with very frequent messages we
+
+
+actually can kill the receiver
+
+
+and the popular solution for this is
+
+
+using backup strategies so it goes like
+
+
+this
+
+
+instead of using constant retries where
+
+
+we have this very dense uh
+
+
+retry scheme we
+
+
+issue a couple of retries maybe one
+
+
+maybe two at the beginning and we want
+
+
+them to be
+
+
+well at least usually of course we want
+
+
+them to be sent pretty quickly because
+
+
+sometimes the problem is like trans and
+
+
+DNS problem then or maybe it's like
+
+
+another kind of connection problem and
+
+
+many times sending a subsequent message
+
+
+uh actually solves your issue
+
+
+but if the issue is not solved then
+
+
+sending a very
+
+
+uh
+
+
+many messages one after another and
+
+
+we'll probably not help anymore because
+
+
+well there is some longer problem
+
+
+so we still want to retry because we
+
+
+want our message to get delivered but we
+
+
+might want
+
+
+to wait a little bit longer and so we
+
+
+use a backup strategy every time we wait
+
+
+a little bit longer and popular one is
+
+
+called exponential Buck off that's a
+
+
+term you can usually meet out there if
+
+
+you get to see some backup strategy
+
+
+so highly recommend it
+
+
+and that's not the only caveat let's
+
+
+move to the next one
+
+
+with enough traffic and with enough
+
+
+errors we get situation like this that's
+
+
+every time something breaks we get
+
+
+errors produced right and
+
+
+whenever our arrows are produced we have
+
+
+this error monitoring tool I don't know
+
+
+what to use maybe roll bar maybe a
+
+
+Sentry or whatever and this tool
+
+
+produces some warnings for the team
+
+
+right so the things go wrong your teams
+
+
+go to these exceptions they have to
+
+
+examine it it takes developer Cycles
+
+
+so your team is busy with them
+
+
+and if there is enough traffic you get
+
+
+so a lot of job to do just with these
+
+
+exceptions that you could maybe even
+
+
+hire one developer to go through them
+
+
+and fix them and it turns out that many
+
+
+times there's nothing to fix actually
+
+
+because
+
+
+we get a different kind of errors
+
+
+there are these expected ones and there
+
+
+are unexpected ones
+
+
+now
+
+
+let's park here for for a minute because
+
+
+it's I think very useful to understand
+
+
+it that these can even be the very same
+
+
+thing
+
+
+so let's imagine a third party we
+
+
+integrate with a new third party
+
+
+and they may not have the best
+
+
+documentation so you have some
+
+
+information in there but
+
+
+there is maybe not enough information
+
+
+about exceptions so something goes wrong
+
+
+and
+
+
+[Music]
+
+
+um
+
+
+how do you know what's how do you handle
+
+
+it what's like the body of the error
+
+
+response so maybe you experiment right
+
+
+you have your ways but then in
+
+
+production things break and in such case
+
+
+I imagine you might want to know about
+
+
+every single error because
+
+
+you're in this exploration phase
+
+
+but then time passes by your
+
+
+third party
+
+
+is more and more known to your team
+
+
+and so
+
+
+then these exceptions which were
+
+
+previously unknown now you know how to
+
+
+handle it then so there is no uh not a
+
+
+big sense in still treating Venom as
+
+
+unexpected well they do happen so what
+
+
+there is nothing to fix so why do you
+
+
+have them in your air reporting
+
+
+and my advice here is don't report
+
+
+issues that are expected only do this
+
+
+for the unexpected ones
+
+
+and I imagine maybe some of you would
+
+
+ask
+
+
+at this point uh wait why do we ignore
+
+
+exceptions well exception is like when
+
+
+things go wrong and what if this whole
+
+
+third party is down if we ignore
+
+
+exception how do we know about it being
+
+
+down if we don't react on exceptions
+
+
+and in some cases you might be right
+
+
+but it's worth to think about what
+
+
+triggers you to act on them
+
+
+is it like a single exception or is it
+
+
+for example a lot of exception but what
+
+
+means a lot
+
+
+maybe some percentage maybe you can
+
+
+think of some threshold which means
+
+
+things are going wrong
+
+
+and to be able to capture this tendency
+
+
+you use
+
+
+metrics you have to collect some metrics
+
+
+about your traffic and then based on
+
+
+these metrics you implement alarms
+
+
+um so my advice here is don't kill your
+
+
+team
+
+
+and react only on the unexpected ones
+
+
+so in the topic of retries I would like
+
+
+to talk about one more thing
+
+
+and it's uh when to actually finish
+
+
+retrying
+
+
+and I would suggest to think about the
+
+
+sender who is the actor that engages in
+
+
+the communication is it uh is it me
+
+
+or is it some computer is it some
+
+
+machine uh some inner part of the system
+
+
+that engages
+
+
+because
+
+
+I'm kind of impatient so if I engage in
+
+
+the communication after 5 or 15 seconds
+
+
+I'm already so bored and annoyed that if
+
+
+you don't give me an answer I will just
+
+
+smash my phone and don't use your app
+
+
+so for uh if if it's a human user
+
+
+experiences much more important and
+
+
+giving the feedback to the user than
+
+
+this long retry scheme because the user
+
+
+has all the manual power to do manual
+
+
+retrines as well so we should take this
+
+
+into account and on the other hand
+
+
+sometimes not retrying at all may also
+
+
+be not a good user experience if we have
+
+
+flake internet connection if we don't
+
+
+give anything to the user they will get
+
+
+errors like every single action you
+
+
+execute and then
+
+
+it's also not the best
+
+
+but we should
+
+
+keep it to the minimum like one two
+
+
+maybe five it's uh it's something you
+
+
+should think about
+
+
+on the other hand if you connect
+
+
+some machines together some components
+
+
+they are very patient they don't care
+
+
+and you might care not to care about
+
+
+them so it's good to think of how much
+
+
+time would you like them to repeat and
+
+
+it's the answer is usually days or weeks
+
+
+so that when you go to vacation and
+
+
+things may be done go wrong but
+
+
+uh the system somehow works and you come
+
+
+back you apply the fix right and
+
+
+you deploy to production and then your
+
+
+system self-health that's uh pretty much
+
+
+the idea or maybe you do not go to
+
+
+vacation but it's weekend and or you're
+
+
+already after work
+
+
+whatever
+
+
+applying fixes takes time so it's good
+
+
+to cover for various kinds of outages
+
+
+so to recap this part uh in a nutshell
+
+
+I suggest to use retries but don't kill
+
+
+your dependencies use a backup strategy
+
+
+also don't kill your team so use metrics
+
+
+and alarms for the expected parts
+
+
+and decide when to stop based on the
+
+
+actors involved
+
+
+so of course there are more things
+
+
+related to retrying if your problem is
+
+
+more complicated you should also think
+
+
+about timeouts and there are more
+
+
+complex patterns you can use it's easily
+
+
+to find some information about them so
+
+
+maybe that's inspiration to some of you
+
+
+and there are also things like fail fast
+
+
+circuit breaker back pressure rate
+
+
+limiting
+
+
+maybe this will solve your use case
+
+
+so that was the first part of the recipe
+
+
+and the other part is
+
+
+idempotence
+
+
+Hardware right
+
+
+uh let's maybe demystify it and
+
+
+understand what it is say if if you
+
+
+don't know yet
+
+
+I would suggest to think about water
+
+
+if
+
+
+I have a glass of water or
+
+
+this container of water you may ask if
+
+
+this water is boiled
+
+
+well if I don't know I can boil it right
+
+
+but if it was boiled if I boil it it's
+
+
+still boiled so boiling is item potent
+
+
+if I boil water it becomes boiled
+
+
+that's pretty much it
+
+
+and
+
+
+for this part I will use an abstraction
+
+
+of
+
+
+HTTP protocol because I assume that it's
+
+
+known to most of us or all of us
+
+
+and I hope it's then it's simple and
+
+
+to
+
+
+to implement item potents there are
+
+
+actually many things to do and today I
+
+
+will concentrate only on the Proto
+
+
+protocol part of it and there are more
+
+
+things to mention but it's too long for
+
+
+just one presentation
+
+
+so I will just show you some
+
+
+and to understand
+
+
+uh what's what's in it about about the
+
+
+protocol we need to exercise some
+
+
+protocol thinking
+
+
+and by protocol thinking I mean
+
+
+application protocol
+
+
+because that's the protocols that we
+
+
+built of course their HTTP protocol TCP
+
+
+protocol IP protocol whatever protocol
+
+
+but the ones that we care the most are
+
+
+the application protocols because
+
+
+these are the meanings of the community
+
+
+of the communication this is what you
+
+
+mean when you contact components with
+
+
+each other
+
+
+so it's you who design the protocol
+
+
+so or it's your colleagues or it's your
+
+
+third party who designed the protocol
+
+
+and
+
+
+let's maybe see what we can do in action
+
+
+about this let's warm up with this
+
+
+protocol thinking because I would like
+
+
+people to in general to move on from the
+
+
+happy path thinking that's far too
+
+
+common at least for me and let's warm up
+
+
+what's the simplest communication
+
+
+pattern you can see out there in the
+
+
+wild
+
+
+the read operations
+
+
+so these are
+
+
+this could be get
+
+
+requests or these could be a post
+
+
+requests as well whatever
+
+
+if they read data if they just read data
+
+
+there read operations
+
+
+so it goes like this
+
+
+uh
+
+
+the sender sends a message the receiver
+
+
+has to receive and process the message
+
+
+then they prepare some data in return
+
+
+they send the data and one thing that is
+
+
+still important is that the sender has
+
+
+to acknowledge this data acknowledge
+
+
+means maybe the sender wants to save the
+
+
+data on their site or the sender may
+
+
+want to display the data on their site
+
+
+if it doesn't happen
+
+
+you know already the sender will want to
+
+
+retry so this acknowledgment is
+
+
+important so that the sender knows that
+
+
+the communication is finished
+
+
+and let's exercise the protocol thinking
+
+
+let's put some failure somewhere and
+
+
+let's ensure that both sides finish in
+
+
+some expected outcome whatever the
+
+
+outcome is to be let both sides know
+
+
+what the outcome is
+
+
+so let's maybe try to put a failure
+
+
+Maybe
+
+
+here the message is kind of
+
+
+received but uh
+
+
+it doesn't get to the sender so we know
+
+
+the sender can retry and here it's again
+
+
+simple now this time things work
+
+
+the receiver processes the message sends
+
+
+back the data there is acknowledgment
+
+
+great
+
+
+and if the processing happened in the
+
+
+meantime
+
+
+it's good nothing bad happens because
+
+
+the receiver
+
+
+has only a read operation to perform so
+
+
+nothing change on the on the receiver
+
+
+side
+
+
+so we have no complications no side
+
+
+effects out of it
+
+
+so
+
+
+that's solved one retry and things work
+
+
+let's put this failure somewhere else
+
+
+where can we put it maybe here on the
+
+
+sender side so the request was sent but
+
+
+the sender crashed or there was some bug
+
+
+or some temporary issue in the
+
+
+acknowledgment
+
+
+so what can the sender do well
+
+
+they can still retry and
+
+
+of course it may fail second time
+
+
+sometimes maybe you have a fix applied
+
+
+in the meantime and then when things are
+
+
+to work with the retry they work and
+
+
+what's important for the receiver
+
+
+it's still the same
+
+
+so the conclusion is
+
+
+read operations are item potent
+
+
+I assume this may be simple
+
+
+because read operations are kind of
+
+
+simple so let's move on to something
+
+
+more complicated which is delete
+
+
+operations
+
+
+but if you look at the happy case
+
+
+the only difference here on the diagram
+
+
+is this delete right
+
+
+Let's uh Worth to remember happy case is
+
+
+always simple
+
+
+uh let's uh so then let's look what can
+
+
+be tricky when we actually start failing
+
+
+if things fail before the processing
+
+
+the sender
+
+
+does what the sender do right the sender
+
+
+retries we get this delete message again
+
+
+and then with the processing for the
+
+
+receiver it is as if the communication
+
+
+never happened so it is kind of simple
+
+
+because they just respond with the same
+
+
+thing
+
+
+foreign
+
+
+but if the resource was deleted the
+
+
+first time and the failure happened
+
+
+afterwards so on the sender side
+
+
+somewhere or during the communication
+
+
+bug
+
+
+and the situation is quite different for
+
+
+the receiver and the receiver has to
+
+
+recognize the situation that the
+
+
+resource is not there
+
+
+so sometimes it's simple
+
+
+but
+
+
+I assume uh you might also see in bugs
+
+
+like this that
+
+
+someone didn't took this into account so
+
+
+it's uh important to take it into
+
+
+account and then
+
+
+the interesting part is that the
+
+
+response might be quite different so
+
+
+depending on the year on your use case
+
+
+you may see like a not found error or
+
+
+it's gone or whatever else and it's
+
+
+important that the sender knows the
+
+
+protocol and they know this message
+
+
+and usually what the sender wants to do
+
+
+is just just to acknowledge okay it's
+
+
+gone great let's move on great let's not
+
+
+crash
+
+
+but let's move on
+
+
+so the takeaway from it is that uh
+
+
+delete operations are also item potent
+
+
+but there is this gotcha that you have
+
+
+to know this already processed message
+
+
+and there are also some
+
+
+small points that I would like to come
+
+
+back later to but to do this I need to
+
+
+go to a next type of communication so
+
+
+what do you have in this HTTP spec you
+
+
+have like get you have delete and you
+
+
+have put
+
+
+so boot messages are said to be item
+
+
+potent if you read the spec you see okay
+
+
+put is item potent
+
+
+well it's kind of true
+
+
+but
+
+
+[Music]
+
+
+I would argue that under certain
+
+
+assumptions because if you want to use
+
+
+put to design your application protocol
+
+
+there are some tricky Parts in it I will
+
+
+show you just in a minute let's go just
+
+
+quickly through this happy case the
+
+
+difference is that now the sender knows
+
+
+the ID of the resource but the rest is
+
+
+pretty much the same the receiver
+
+
+upon this message either creates the
+
+
+resource or updates the resource or if
+
+
+the state is the same the same it's just
+
+
+no operation
+
+
+but if something fails well
+
+
+seems like the HTTP spec is kind of
+
+
+right because wherever we put this fail
+
+
+we got
+
+
+the same
+
+
+um the same result afterwards
+
+
+so what's all the fuss right
+
+
+the problem is that
+
+
+when you change something when you want
+
+
+the
+
+
+your other part of communication to
+
+
+change something on their side
+
+
+you may have situations when
+
+
+there are more than one senders in your
+
+
+system and if this happens to you they
+
+
+may actually operate on the same entity
+
+
+they may operate on different ones but
+
+
+if they do operate on the same entity
+
+
+you get race conditions
+
+
+let's maybe put it on the on the diagram
+
+
+and now it's uh much more complicated
+
+
+sorry for this but it's impossible to
+
+
+draw anything smaller
+
+
+um so
+
+
+one important thing about this is that
+
+
+how a sender knows what to uh what state
+
+
+to put on the other side well
+
+
+the truth is that before any update
+
+
+request there is usually some
+
+
+read operation so how do I know what I
+
+
+want to save on the other side if I
+
+
+don't know what is there
+
+
+so most of the time there is some get
+
+
+operation and
+
+
+the decision about the operation usually
+
+
+comes somewhere here and it's based on
+
+
+that state
+
+
+so if there are two parties who make a
+
+
+decision at the same time roughly at the
+
+
+same time and they try to communicate
+
+
+about changing the state at the same
+
+
+time we get race condition and this
+
+
+particular race condition is called Lost
+
+
+update problem
+
+
+or you can also see mid-air Collision
+
+
+term
+
+
+um and there is a pretty simple solution
+
+
+for this particular problem that is
+
+
+quite easy to implement it's optimistic
+
+
+locking you can apply it to protocols
+
+
+and it goes like this
+
+
+uh
+
+
+we add one more special parameter which
+
+
+is called version
+
+
+and whenever
+
+
+whenever we send
+
+
+some data we attach
+
+
+aversion to that data so a sender gets
+
+
+version one of the resource and then
+
+
+when they want to change something they
+
+
+say okay I base my decision on this
+
+
+version
+
+
+and if the receivers is okay that's the
+
+
+current version great you can do this
+
+
+and now the version is two and if the
+
+
+other sender does the same at the same
+
+
+time and they send a stay version
+
+
+it's pretty easy for the receiver to say
+
+
+that's not the up-to-date version so I
+
+
+can tell you
+
+
+you're making a decision on a wrong
+
+
+assumption
+
+
+and if you do I can
+
+
+give you an opportunity to change your
+
+
+decision I can tell you well it won't
+
+
+work like this and if this happens
+
+
+we can just retry and it will work but
+
+
+the tricky part is that we should
+
+
+start the whole thing from the beginning
+
+
+otherwise
+
+
+uh we're kind of at the same point uh
+
+
+here right so we need to go the
+
+
+beginning and we need to uh
+
+
+get a new version of the resource
+
+
+so I said that there were some
+
+
+um I'm omitting some points uh when I
+
+
+talked about the delete operations
+
+
+and let's come back to them
+
+
+because this particular problem also
+
+
+applies to delete operations
+
+
+because delete
+
+
+is
+
+
+also a change request
+
+
+so let's imagine a situation when one
+
+
+party wants to make an update on the
+
+
+resource and the other is kind of about
+
+
+to delete it so they get the state they
+
+
+see 100 now
+
+
+this cannot be I will delete it but the
+
+
+receiver site says but your assumption
+
+
+is wrong
+
+
+so
+
+
+the the other party can retry and now
+
+
+maybe this the decision will be
+
+
+different because maybe this update
+
+
+actually
+
+
+changes uh the game
+
+
+so the takeaway from this is that uh
+
+
+when you design application protocol uh
+
+
+you should recognize situations when
+
+
+there is concurrent access to the same
+
+
+resources
+
+
+but concurrent access to that change
+
+
+actions change end points and whenever
+
+
+you see such situations you can apply
+
+
+optimistic locking optimistic is cool
+
+
+because it's optimistic of course
+
+
+but it's also cool because it can be
+
+
+really easily applied to protocols and
+
+
+it actually is the best solution for
+
+
+many communication patterns
+
+
+and there is one more case that you can
+
+
+see
+
+
+roughly one more which are the posed
+
+
+endpoints I left them at the end because
+
+
+to me they are most important and that's
+
+
+these are the usual culprits and they
+
+
+get generate the most problems because
+
+
+they are also most generic so they're
+
+
+very often these do stuff
+
+
+end points
+
+
+and post usually means create me an
+
+
+entity I don't know the ID just give me
+
+
+a new ID and I want to just create these
+
+
+things with this data
+
+
+so the receiver creates
+
+
+the data in the happy case and answers
+
+
+to the sender and gives a new ID and as
+
+
+you can see the happy case is again very
+
+
+simple so
+
+
+what happens when there is a failure
+
+
+that's a very difficult question because
+
+
+what can actually the sender do
+
+
+if they retry this post as we learned so
+
+
+far
+
+
+what is the outcome well the sender
+
+
+doesn't know if they just do this retry
+
+
+because well how do they know they get
+
+
+no information about the state on the
+
+
+other side so the resource might be
+
+
+already there it might not be there
+
+
+and one popular convention to solve this
+
+
+protocol problem is to use item potency
+
+
+keys
+
+
+it looks like this
+
+
+the sender needs this one more special
+
+
+Step At the beginning
+
+
+and it means to
+
+
+either
+
+
+retrieve or generate
+
+
+a unique
+
+
+key a unique token
+
+
+and this token is attached to the
+
+
+operation
+
+
+maybe a field maybe a header whatever
+
+
+doesn't matter and then the receiver
+
+
+has some different job to do they
+
+
+usually Implement some kind of I don't
+
+
+know index on this key so that it's easy
+
+
+to find so then they drill in the
+
+
+storage and check do we have a resource
+
+
+with this key
+
+
+and if we do
+
+
+then we can say
+
+
+it's there and if it's not we know it's
+
+
+the first time so if it's the first time
+
+
+the receiver gets to know about this
+
+
+message gets to process the message and
+
+
+they can create it and that's how the
+
+
+Happy Puff looks so let's see how the
+
+
+failures look
+
+
+I have to point it at the computer
+
+
+that's the trick so uh the sender
+
+
+does this token generation that I
+
+
+attached to the to the message and then
+
+
+failure happens but this time it's
+
+
+before creation so upon a retry the very
+
+
+important thing is to get the same key
+
+
+why the same
+
+
+because it's the same intent
+
+
+the sender has some intent in this
+
+
+communication and this token
+
+
+identifies the intent
+
+
+if it's a different intent if I actually
+
+
+want to create a second resource the key
+
+
+would be different
+
+
+but this time it's the same so we make
+
+
+this
+
+
+request again we send this message again
+
+
+and now on the receiver side we see
+
+
+it's not there so I created I answer now
+
+
+it's created and upon acknowledgment the
+
+
+communication is finished
+
+
+but
+
+
+if we look at the other case so when a
+
+
+sender fails or when something with the
+
+
+communication fails
+
+
+upon data retrieval
+
+
+if we send the Sun the same key now the
+
+
+receiver can find it and tell okay
+
+
+it's there so now
+
+
+I can tell you it is there
+
+
+and you can see I've
+
+
+written down so many options here
+
+
+because you can see so many options out
+
+
+there
+
+
+and if you get to this point with your
+
+
+team you will
+
+
+pretty often get to the conversation
+
+
+what should we reply or you implement
+
+
+this and at some point uh
+
+
+several teams gather and they discuss
+
+
+well what should be what in our company
+
+
+should we answer in these situations so
+
+
+that we all do the same
+
+
+to me it happens so many times so I can
+
+
+tell you what
+
+
+uh what I think about this so to me it's
+
+
+as long as as it's consistent it usually
+
+
+doesn't matter as long as it works for
+
+
+the use cases and the use cases are
+
+
+usually that the sender usually doesn't
+
+
+care the sender wants just the resource
+
+
+to be created so if it wants the
+
+
+resource to be created it can be
+
+
+something oh it's just created or
+
+
+well okay
+
+
+I'm not telling you that it's created
+
+
+it's something different so it means
+
+
+that it was there but it's still a
+
+
+successful response the advantage of
+
+
+this successful response is that
+
+
+if the sender doesn't care they don't
+
+
+have to do separate handling for it
+
+
+so that's this tiny
+
+
+um maybe Advantage but the advantage is
+
+
+so tiny that it usually doesn't
+
+
+change the stakes and the discussions
+
+
+can be long so sometimes you can see
+
+
+like conflict response or
+
+
+it's not processible
+
+
+whatever as long as it's consistent and
+
+
+you clearly state that it's not that
+
+
+it's actually not well not created that
+
+
+this is this use case
+
+
+it's fine
+
+
+and uh here's a funny story
+
+
+I've just told you about this item
+
+
+potency keys
+
+
+but
+
+
+you can also use put for creations and
+
+
+you can also see a pattern where it's
+
+
+the sender who decides about the ID
+
+
+and if this ID is in the space of let's
+
+
+say uuid version 4 which is a bloody
+
+
+long random string then it actually
+
+
+works because it's more probable that
+
+
+meteor right now Falls here then you get
+
+
+a conflict in the IDS so it's fine you
+
+
+can do this and
+
+
+because it's so similar these two cases
+
+
+you actually get to sometimes see either
+
+
+this or that
+
+
+foreign
+
+
+there may be times when you don't own
+
+
+this receiver part you're not the team
+
+
+who implements the API you're not
+
+
+in the same company and you can't
+
+
+influence it and you don't have these
+
+
+item potency key
+
+
+and at this point we come back to this
+
+
+heart problem again
+
+
+that
+
+
+yeah we don't know if resource is
+
+
+created or not right
+
+
+and maybe you have an index endpoint and
+
+
+you can use
+
+
+this
+
+
+read check write strategy find or create
+
+
+and you first query what are the
+
+
+resources
+
+
+I seek for my data and then I decide
+
+
+it's there or it's not there if it's not
+
+
+there I proceed with creation
+
+
+so
+
+
+if we have a failure before things are
+
+
+created
+
+
+then we retry the whole thing this whole
+
+
+protocol and then
+
+
+we make a get request we see oh it's not
+
+
+there
+
+
+so I create it and this time it works
+
+
+right
+
+
+but let's look at the other case if it
+
+
+was created actually
+
+
+then important we repeat the whole
+
+
+operation again
+
+
+and now we can see the data that's
+
+
+somehow
+
+
+unique enough data that the sender is
+
+
+able to recognize that it's it is there
+
+
+and upon this step it decides I don't
+
+
+need to create anything
+
+
+so
+
+
+I just acknowledge the communication is
+
+
+finished
+
+
+and uh
+
+
+that's very nice and useful I think
+
+
+pretty much
+
+
+everybody gets to use this pattern in
+
+
+some form at least at some point
+
+
+but it comes with a couple of caveats
+
+
+so the first one is that just in this
+
+
+form
+
+
+uh
+
+
+it's uh
+
+
+Pro prone to race conditions if we have
+
+
+multiple senders working on the same
+
+
+data if they plan to create the same
+
+
+entity
+
+
+uh
+
+
+it's uh you you will have some
+
+
+duplicates
+
+
+sooner or later and the other one is
+
+
+even more tricky because uh it deals
+
+
+with consistency so the receiver
+
+
+might not have a consistent workflow on
+
+
+their side and if you don't own the
+
+
+receiver it may happen that
+
+
+they trigger something during a failure
+
+
+um that fails but the resource creation
+
+
+works and the whole workflow might not
+
+
+be successful but the resource itself
+
+
+gets created so you get it in the index
+
+
+endpoint right
+
+
+so then the sender doesn't retry the
+
+
+communication
+
+
+and if that happens
+
+
+you usually don't know it at the
+
+
+protocol level because how do you know
+
+
+it that information is not there that's
+
+
+some internals of the other party
+
+
+and
+
+
+you may say that's a problem of receiver
+
+
+and that's usually how this conversation
+
+
+ends when it goes to the upper level and
+
+
+you meet people and say what is your
+
+
+problem because some other feature out
+
+
+there doesn't work
+
+
+for you you don't get the value from
+
+
+like other side of that party
+
+
+and uh
+
+
+that's usually how it goes but it's
+
+
+still kind of problematic from the
+
+
+protocol side because
+
+
+you can imagine another situation when
+
+
+you actually
+
+
+are on the receiver side and you would
+
+
+actually want that other party to repeat
+
+
+if they get an error
+
+
+you may say you know guys but if you get
+
+
+a 500 just shoot these other request to
+
+
+us that that can be some uh some
+
+
+solution but it requires
+
+
+consistency or it requires item potency
+
+
+key again so we get back to this first
+
+
+problem so you see
+
+
+it can be problematic
+
+
+but in some cases it's the best thing
+
+
+you can get so if if that's all you have
+
+
+just go for it and the problem comes
+
+
+when you have neither
+
+
+uh this nor that and if that's your case
+
+
+well you kind of get a problem
+
+
+and you might come back to negotiation
+
+
+board and uh
+
+
+well say you know guys but it's really
+
+
+hard for us to move from this point
+
+
+without this item potency key feature uh
+
+
+when would you be able to implement this
+
+
+for us and you may actually get a
+
+
+response well yeah we can actually do
+
+
+this and that was my recent case
+
+
+it worked the other time maybe you
+
+
+would like to change the API provider
+
+
+because maybe if they are not responsive
+
+
+to your feature requests and it's really
+
+
+hard to work with them and
+
+
+well maybe you can find something else
+
+
+that does your job
+
+
+or you just have to
+
+
+accept the duplicate right
+
+
+so that's
+
+
+pretty much it for today let's wrap up
+
+
+oh no come on how can we wrap up if
+
+
+real-life implementations are way more
+
+
+complicated than just these simple crowd
+
+
+operations right
+
+
+where is all the talk about like
+
+
+consistency about side effects about all
+
+
+other beasts are there which are
+
+
+actually difficult
+
+
+that's true
+
+
+it's not like all that you have to do to
+
+
+achieve this item potent's property it
+
+
+has a couple of more things
+
+
+um into it and they are actually on this
+
+
+receiver side I briefly touch it just a
+
+
+minute ago with this consistency so
+
+
+that's one of the things you have to
+
+
+consider but as you see it's just not
+
+
+possible to put it everything in just
+
+
+one talk
+
+
+uh so maybe another time
+
+
+but I would argue that on this protocol
+
+
+side of things that's like this first
+
+
+thing you have to do about item photons
+
+
+that's roughly about it that's roughly
+
+
+what you have to do to at least enable
+
+
+the parties to get their workflows right
+
+
+so
+
+
+to wrap up now I presented you like a
+
+
+bag of hints and
+
+
+some perspective but actually coming
+
+
+back to my main thought for today that's
+
+
+this recipe
+
+
+if you were to remember one thing from
+
+
+this presentation I would be very happy
+
+
+if you remember this
+
+
+um
+
+
+because
+
+
+well it's not a silver bullet so what
+
+
+does it actually give you
+
+
+well it enables the system
+
+
+to resume communication when problems
+
+
+happen and take care of the workflows
+
+
+that you have in there and eventually
+
+
+you enable the system to self-heal when
+
+
+the problem is gone
+
+
+so you will have much less this
+
+
+babysitting with your systems if you use
+
+
+it
+
+
+thank you
+
+
+[Applause]
+
+
+thank you very much was quite helpful
+
+
+and
+
+
+viewable on on this schemas could you go
+
+
+back and show this schema where we had
+
+
+this grade and this independency key
+
+
+sure let me just find the slide
+
+
+this one
+
+
+yes exactly and the case when we
+
+
+retry it when we retry it okay
+
+
+we have two slides because we have two
+
+
+cases
+
+
+yeah in this case I want to really know
+
+
+when we retry
+
+
+potentially if we
+
+
+post with some parameters that depend on
+
+
+some entity right and
+
+
+potentially
+
+
+the state of end is equal change right
+
+
+entity can be updated
+
+
+when we're doing retry we could have new
+
+
+parameters for this entity and the
+
+
+question for me uh what is more correct
+
+
+if we're making a retry and the this
+
+
+um source of Truth has changed on the
+
+
+sender side I mean this entity was
+
+
+updated
+
+
+um yeah it's it's columns
+
+
+should be directly change
+
+
+uh post data on retry and make it an up
+
+
+to date with this entity updated uh
+
+
+fields or should we
+
+
+make two queries one of this is post
+
+
+with all data and probably put with new
+
+
+changed kind of attributes what do you
+
+
+think
+
+
+um so
+
+
+that's already much more advanced
+
+
+situation because it
+
+
+[Music]
+
+
+um
+
+
+as far as I understand it assumes that
+
+
+the state of the resource can change in
+
+
+the meantime so we have some other party
+
+
+here right that can influence the the
+
+
+state in the meantime and again that's a
+
+
+race condition
+
+
+so if we have a race condition situation
+
+
+we can apply again the optimistic
+
+
+locking so how would it work in this
+
+
+case well we can for example attach
+
+
+version 0 here
+
+
+and if we do that then the receiver can
+
+
+recognize the situation that the
+
+
+resources will Fresh then it answers
+
+
+with one and the other side can well
+
+
+depends on what they do but if they
+
+
+manage to well that's actually the other
+
+
+case maybe then I will
+
+
+it's created right so at this point in
+
+
+if
+
+
+an update comes and uh well I get an
+
+
+update and here we have this other
+
+
+version already at this point when we
+
+
+get this version 0 again we can say
+
+
+well you know what that's no longer
+
+
+valid
+
+
+so you can you are able to recognize
+
+
+this situation with optimistic locking
+
+
+and depending on your case you would
+
+
+probably discard this or you or you
+
+
+would say well that was already created
+
+
+or already modified and you are able to
+
+
+handle this on the sender side usually
+
+
+probably the sender was just about to
+
+
+create this resource so if they if it
+
+
+was to create it and it wanted to finish
+
+
+its workflow at some point they probably
+
+
+they for example might have here some
+
+
+events to produce more or some side
+
+
+effects to fire so they might want to
+
+
+continue this workflow and so they have
+
+
+to acknowledge it in a way that doesn't
+
+
+make them crash
+
+
+that would be my assumption
+
+
+thank you very much
+
+
+yes please okay um first of all uh you
+
+
+have a very interesting surname
+
+
+um I would love to know the story but
+
+
+the question is um
+
+
+let's say you're working with a third
+
+
+priority API which doesn't support item
+
+
+points either potency keys and you can't
+
+
+really use that technique you showed
+
+
+when you are get all the entries and
+
+
+brows them because it's really
+
+
+inefficient if there are thousands of
+
+
+entities and it's as you said it's also
+
+
+prone to race conditions so I'm
+
+
+wondering
+
+
+are there any other Solutions you know
+
+
+to that problem to make sure you can
+
+
+create only one item uh in the third
+
+
+party API
+
+
+so one other way is this put I've showed
+
+
+you with this if you can choose the ID
+
+
+but you might also not have this one
+
+
+and if not then
+
+
+that's this
+
+
+negotiate state where you uh you know
+
+
+you have kind of a problem you have to
+
+
+somehow compensate for this if you have
+
+
+to stay in the situation in that's
+
+
+um that's for me that's a wrong protocol
+
+
+that's a protocol that doesn't save you
+
+
+from edge cases which are difficult to
+
+
+handle
+
+
+and if you cannot do anything about this
+
+
+well sometimes maybe you can compensate
+
+
+for this but it's uh difficult and
+
+
+costly because you may still end up in a
+
+
+situation when you have to query for the
+
+
+state somehow you have to somehow find a
+
+
+way to validate was it successful or not
+
+
+it's will be painful
+
+
+I would say negotiate that would be my
+
+
+first go to point go and say you know
+
+
+what that's
+
+
+that's not good really not good
+
+
+so now you're really putting on the spot
+
+
+to ask a good question and it's terrible
+
+
+because I didn't have a really good
+
+
+question I have more of a sinking
+
+
+feeling and I want you to confirm or
+
+
+deny it okay and the problem is that uh
+
+
+as soon as you have this idle iron
+
+
+potency keys and so forth which I
+
+
+totally agree is what you want to do the
+
+
+thing is if you're failing and on the
+
+
+receiver end because you're only going
+
+
+to have these issues because you're
+
+
+failing on the receiver end usually the
+
+
+problem is that the receiver is
+
+
+overworked so they need to scale out the
+
+
+more they scale out the harder it is to
+
+
+implement item implementancy on their
+
+
+side because
+
+
+fundamentally the only way to implement
+
+
+an item potent system from their
+
+
+perspective is they need a central place
+
+
+to you know they need like a one
+
+
+transactor or one locking mechanism they
+
+
+need some place where they can actually
+
+
+guarantee that Atomic operation so I
+
+
+have this syncing suspicion that the
+
+
+more you have race conditions the more
+
+
+the receivers are overworked the more
+
+
+they need to scale out the less likely
+
+
+they are to actually allow this kind of
+
+
+thing so is that your experience as well
+
+
+that's a very valid point and
+
+
+that's a point actually about
+
+
+um
+
+
+this cap theorem right there's like
+
+
+consistency availability and
+
+
+partitioning
+
+
+so that problem is about this
+
+
+partitioning because at some point to
+
+
+still be able to process data you have
+
+
+to somehow divide it you have no other
+
+
+way to ensure that things don't slow
+
+
+down and
+
+
+for this specific problem the solution
+
+
+is well kind of simple because you can
+
+
+apply it's called sharding I think so
+
+
+for example based on some hash function
+
+
+you decide to which partition
+
+
+that entity goes and you may
+
+
+for example have
+
+
+50 partitions right but based on this
+
+
+hash key which is which always gives you
+
+
+the same result you say oh when this
+
+
+resource gets created it goes to
+
+
+partition number 30.
+
+
+and that partition will then do this job
+
+
+and because this relationship for
+
+
+created by the hash function or another
+
+
+method is deterministic you will always
+
+
+get the same result so these partitions
+
+
+will be disjoint
+
+
+they won't have the same part so I
+
+
+assume that would be the solution for
+
+
+this particular problem and I assume
+
+
+that's not the only problem you have to
+
+
+solve eventually
+
+
+thank you very much for the question
+
+
+[Applause]

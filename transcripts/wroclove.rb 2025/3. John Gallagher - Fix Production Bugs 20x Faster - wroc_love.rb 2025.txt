@@ -1,0 +1,3373 @@
+Today our first speaker is John and u
+
+
+John currently works at bigger pockets
+
+
+but this journey is soon coming to an
+
+
+end and he'll be working at Dina trace
+
+
+and he'll be developing the best Ruby
+
+
+age client for you so you can use it
+
+
+freely and u improve your observability
+
+
+because John is one of the observability
+
+
+experts in our community and he'll tell
+
+
+us about how to fix production bugs 20
+
+
+but also heard 25 times faster. So,
+
+
+John, please give it warm welcome and
+
+
+the stage is
+
+
+[Applause]
+
+
+yours. Thank
+
+
+you. So, I'm going to talk about how to
+
+
+fix your production bugs 20 times
+
+
+faster. So, I work for a real estate
+
+
+company called Bigger Pockets based in
+
+
+the US. The following is based on a true
+
+
+story. names have been changed to
+
+
+protect the innocent or in some cases
+
+
+guilty. So, stop me if this sounds
+
+
+familiar. It's Friday afternoon and I'm
+
+
+on
+
+
+call and I get a Slack
+
+
+notification. H, that's a bit strange.
+
+
+It's from support. What's going on here?
+
+
+Um, okay. And another
+
+
+one. Ah, uh, there's a bit of a problem.
+
+
+We've got an emergency on our hands. So,
+
+
+we'll search the
+
+
+logs and we'll um Oh, that's a bit
+
+
+weird. H, that's not very good. Uh, but
+
+
+we'll check the code. It'll be obvious
+
+
+what's going wrong. Um, emails are not
+
+
+getting through. Password reset emails
+
+
+not getting through. So, let's check.
+
+
+Um, and that looks kind of okay, which
+
+
+doesn't really help me.
+
+
+Meanwhile, things are
+
+
+escalating. Customers are complaining.
+
+
+They're taking to Twitter and they can't
+
+
+get their password reset
+
+
+emails. They're actually locked out of
+
+
+their accounts. So, this is a bit of an
+
+
+emergency.
+
+
+So, I'm doing something else, but I'll
+
+
+drop everything I'm doing because we all
+
+
+like context switching, right? It's
+
+
+brilliant. So, I'll pair with a
+
+
+colleague and we'll add some error
+
+
+logging to the background
+
+
+job that sends these password reset
+
+
+emails. And while we're
+
+
+waiting for it to deploy,
+
+
+what it's fixed, it's okay. I mean, that
+
+
+seems a bit weird, but we'll fix it
+
+
+later. We'll add it to the
+
+
+backlog. Um, actually, that's not the
+
+
+backlog. This is the backlog. It's a bit
+
+
+in fact. No, that's not the backlog.
+
+
+That's the backlog. Um, so as I was
+
+
+saying, we'll add it to the
+
+
+backlog just there. And that will get
+
+
+done. I don't know when that will get
+
+
+done. Um, probably really soon. And
+
+
+after all, it's only a one-off issue,
+
+
+right? It's not going to happen again.
+
+
+And
+
+
+um, yeah. Okay. Uh, it's happening
+
+
+again. So, we've got the same problem.
+
+
+and the support team are completely
+
+
+overwhelmed at this point. But it's no
+
+
+no worries at all because we added that
+
+
+that uh background job logging. So,
+
+
+we'll just search the logs and
+
+
+um
+
+
+no, not again. Okay, it's fine. We'll uh
+
+
+we'll go to the sidekick background job
+
+
+Q processing admin dashboard and that um
+
+
+what does that tell me? It's got some
+
+
+processed
+
+
+Not really sure what that really tells
+
+
+me. Not much. And so at Bigger Pockets,
+
+
+we were in this vicious cycle. We'd add
+
+
+a little bit of extra logging, kind of
+
+
+guess what the problem was, and then it
+
+
+would kind of go away and then it would
+
+
+come back and customers were getting
+
+
+annoyed and it was just really a bad
+
+
+experience for everybody and we were
+
+
+banging our head against a brick wall.
+
+
+So when I come across a problem like
+
+
+this, I think, well, maybe it's just us.
+
+
+Let's go a bit wider. So I asked 50
+
+
+engineers this
+
+
+question. Basically, how often do you
+
+
+encounter issues that you don't have
+
+
+visibility on? And the results kind of
+
+
+surprised me. It turns out turns out
+
+
+about half engineers I surveyed say once
+
+
+a month and another third say once a
+
+
+week. Okay. So not just us then. And
+
+
+next I want to talk about feelings. As
+
+
+engineers, we maybe don't want to talk
+
+
+about feelings too much. We like data
+
+
+and we like hard things, but feelings
+
+
+are also obviously very important. So
+
+
+the first feeling I have is just
+
+
+annoyed. Like seriously, in 2025, this
+
+
+is what we've got to go through to just
+
+
+understand what our app is
+
+
+doing. And then I'm just start to get a
+
+
+bit bored. Like I'm going through the
+
+
+logs. I'm looking at stack trace. I keep
+
+
+going through the same three tabs in
+
+
+Google Chrome over and over again
+
+
+expecting some
+
+
+revelation and then the pressure kicks
+
+
+in. Maybe it's been an hour, two hours
+
+
+since this production outage and I still
+
+
+can't fix
+
+
+it. And then I start to think, hang on,
+
+
+maybe the problems with me. Maybe I'm
+
+
+the problem here. Maybe I'm just not a
+
+
+very good engineer. But hang on. I've
+
+
+been I've been working with Rails for 15
+
+
+years now, and I've got to go to my boss
+
+
+and say, "Oh, I know you're paying me
+
+
+all this money, but sorry, I can't
+
+
+figure it out." It's not a great look,
+
+
+is it
+
+
+really? So, if this sounds familiar,
+
+
+I've got some good news. It's not you,
+
+
+and you're not
+
+
+alone. And while I've been at Bigger
+
+
+Pockets, I've developed a five-step
+
+
+process to help with this problem. First
+
+
+of all, we talk about what question we
+
+
+want answered. Then we decide on the
+
+
+data we want to gather. We build the
+
+
+instrumentation. We use the graphs and
+
+
+then we improve. And if you turn it on
+
+
+its side, it looks like some steps. So I
+
+
+call it the steps to observable software
+
+
+or
+
+
+SOS. So let's walk through these steps
+
+
+with the example that I've just given.
+
+
+First of all, we want to talk about the
+
+
+question we want answered. Now the
+
+
+obvious question is why are these
+
+
+password reset emails not being sent? So
+
+
+that's pretty vague. We can't create any
+
+
+graph that's going to answer that
+
+
+directly. So instead of that we need to
+
+
+come up with some
+
+
+hypothesis. Why might it be going wrong?
+
+
+It could be failing. The jobs could be
+
+
+timing out. They might be
+
+
+delayed. So we know it's not failing
+
+
+because we checked in Sentry. nothing
+
+
+there. They're not timing out. So maybe
+
+
+they're delayed and they may or may not
+
+
+be. This is just a guess. Let's try and
+
+
+prove the guess correct or incorrect. So
+
+
+just to recap, here's the theory. Here's
+
+
+what an healthy queue might look like.
+
+
+The green jobs are our password reset
+
+
+email
+
+
+jobs. And here's what we think is
+
+
+happening in the queue. We think these
+
+
+green jobs are being pushed down and
+
+
+being delayed by a whole slew of other
+
+
+jobs that are coming in before them,
+
+
+right? So let's try and figure out if
+
+
+that is what's going on or not. So in
+
+
+order to do that, we need to find a more
+
+
+specific question. The specific question
+
+
+is what jobs are taking time in the
+
+
+within five minutes queue? That is
+
+
+something we can answer.
+
+
+So let's decide what data we want to
+
+
+gather to answer that
+
+
+question. And when I think about this, I
+
+
+think in terms of roughly four
+
+
+dimensions. What event do we want to
+
+
+gather? What do we want to filter that
+
+
+event by? What do we want to group it
+
+
+by? And what do we want to plot the
+
+
+values of? So the event is when any job
+
+
+has been performed.
+
+
+We want to filter by the job queue. So
+
+
+we want to see all the jobs performed
+
+
+within a certain queue. We want to group
+
+
+it by job class and we want to see the
+
+
+aggregates of the duration. So that
+
+
+means we can see the duration per job
+
+
+class in that
+
+
+queue. And if all of this seems a bit
+
+
+kind of
+
+
+overwhelming, I like to convert it to
+
+
+SQL. It's really just a SQL statement
+
+
+that you're writing on events.
+
+
+Okay, so much for that. Now we come to
+
+
+the actual building of the
+
+
+instrumentation. So I'm going to cover
+
+
+these four
+
+
+things. Um, and the first thing I'm
+
+
+going to cover
+
+
+is why logs like what should we use?
+
+
+Should we use traces, logs, metrics?
+
+
+There's a lot of confusion out there
+
+
+about this. If anybody says to you these
+
+
+are the three pillars of observability,
+
+
+run a mile because they're not pillars.
+
+
+They're different data types and in my
+
+
+take traces are the best and metrics are
+
+
+essentially the worst. There's use cases
+
+
+for all three of them. We're going to
+
+
+start with logs because logs are most
+
+
+familiar to developers and uh big
+
+
+improvements are coming in Rails 8.1 for
+
+
+structured
+
+
+logging. Okay. So the next question is
+
+
+do we use plain logs or structured logs?
+
+
+Well, the title of the talk is power of
+
+
+structured logging. So, I'm all sure you
+
+
+can guess what we're going to use here,
+
+
+but I want to explore why we use that
+
+
+and what are structured logs
+
+
+anyway. Here's what a plain text log
+
+
+looks like. Hopefully, this looks fairly
+
+
+familiar. It's a string goes to the
+
+
+logs. No big deal. But you can
+
+
+see the um the data here is just smushed
+
+
+into the string. Okay.
+
+
+Here's what it would look like in your
+
+
+observability tool of choice. It would
+
+
+be a single column just saying performed
+
+
+action mailer mailer job in whatever.
+
+
+So, how do we find all the action mailer
+
+
+jobs? Well, we have to use a regular
+
+
+expression because it's just a plain
+
+
+string. Okay, so far so good. What about
+
+
+if I want to see anything that's over a
+
+
+second in duration?
+
+
+How are we going to do that with a
+
+
+regular expression? Oh, that's right. We
+
+
+can't. So, this is not very useful. And
+
+
+I still see people running Rails apps
+
+
+with plain old logs without any
+
+
+structure to them. It blows my mind. How
+
+
+you do it, I don't know because I've not
+
+
+figured out how to do that. So, this
+
+
+isn't very good. This isn't great.
+
+
+Here's a structured log. Now, the first
+
+
+thing you'll notice is it looks really
+
+
+weird. I don't see many logs in my
+
+
+codebase looking like this. Um but this
+
+
+is the way
+
+
+forwards. Why? Because you can show
+
+
+those attributes as a column. So the
+
+
+attributes are just in just in
+
+
+essentially a
+
+
+hash. But what you're doing here is
+
+
+building up attributes of data a little
+
+
+bit like a database. So you can show
+
+
+those attributes as columns and then you
+
+
+can filter by any attribute. You can
+
+
+group by it. You can sort by it. And the
+
+
+tool understands this is a specific data
+
+
+type and it's a specific attribute. So
+
+
+this is nice. We like this. Next of all,
+
+
+I want to talk about what logging
+
+
+library to use. There are many, many
+
+
+improvements coming in Rails 8.1, but
+
+
+they're not here yet. And obviously,
+
+
+many of you in this room may be using
+
+
+Rails prior to
+
+
+8. So here are my criteria. They're
+
+
+pretty
+
+
+subjective. Some of them are not. Um, so
+
+
+can it log structured payload? Does it
+
+
+integrate with Rails? Is there some
+
+
+great documentation? That bit is quite
+
+
+subjective. And is it
+
+
+mature? So before I go through all the
+
+
+options, I just want to say thank you to
+
+
+everybody who works on open source
+
+
+software in any way, shape, or form. Our
+
+
+community would not exist without you
+
+
+all, obviously. So massive thank you.
+
+
+Having said all of that, here's how it
+
+
+shakes out.
+
+
+So semantic logger is the best one that
+
+
+I've come across. I've also excluded
+
+
+anything from this slide that is maybe
+
+
+less than a year old. So there are some
+
+
+logging tools that are coming up that
+
+
+are quite promising, but they're just
+
+
+not quite mature enough yet for
+
+
+production use. We've been using
+
+
+semantic logger for three years now at
+
+
+Bigger Pockets in production and it
+
+
+solid as a rock.
+
+
+So, um, let's actually use semantic
+
+
+logger. And so, you install Rails
+
+
+semantic logger. Install semantic
+
+
+logger. Uh, it's got Rails bindings, of
+
+
+course. You set the format as JSON. And
+
+
+it gives you some automatic logging out
+
+
+of the box. So, here are all the
+
+
+libraries that it works with. I'm just
+
+
+going to focus on active job because
+
+
+we're doing background job processing.
+
+
+So here is what the output might look
+
+
+like from semantic logger. You'll see
+
+
+it's nicely structured. We have our
+
+
+event name
+
+
+here. We've got the job class and Q
+
+
+here, which are the other attributes we
+
+
+care about. And finally, we have the
+
+
+duration. Okay, so we're all good. We
+
+
+just install that. And like all these
+
+
+observability vendors say, including
+
+
+Dino Trace, you click a box, you install
+
+
+our library, then everything just works.
+
+
+That's the dream, right? Well, not
+
+
+quite. There are a few things that this
+
+
+does not do and many more besides, but
+
+
+these are the main main three. So there
+
+
+is three weaknesses. The first thing is
+
+
+no conventions. We're all sat here
+
+
+because Rails compelled us with the
+
+
+convention over configuration idea,
+
+
+right?
+
+
+However, that principle hasn't been
+
+
+brought through to logs
+
+
+yet. And so, all of these things are
+
+
+equivalent for attribute names. Choose
+
+
+whatever you like. If I'm working on a
+
+
+team with somebody else, um, it's fine.
+
+
+We'll just work in our little silos and
+
+
+you create your attribute and I'll
+
+
+create mine and then they won't work
+
+
+with each other. No, that doesn't sound
+
+
+like such a good plan, does it? So,
+
+
+enter open
+
+
+telemetry. This is um a set of
+
+
+standards. It's one of the fastest
+
+
+growing projects and it's now overtaken
+
+
+Kubernetes
+
+
+um one of the fastest CNCF projects I
+
+
+should
+
+
+say. So the hotel library for Ruby isn't
+
+
+that mature yet. I wouldn't suggest
+
+
+using it directly in production. Some
+
+
+people are um but what we can use from
+
+
+open telemetry is the semantic
+
+
+conventions which don't require you to
+
+
+install anything. They're a set of
+
+
+naming conventions for attributes.
+
+
+And so here you can see this is the
+
+
+official name for job Q name. It's a bit
+
+
+weird. It's like messaging destination
+
+
+name
+
+
+um for reasons that uh will remain
+
+
+nameless. Uh open the open telemetry
+
+
+community has decided background jobs
+
+
+are a messaging protocol. So it's the
+
+
+same thing as CFKA reddis um not reddis
+
+
+sorry cfka rabbit mq. So anyway, that's
+
+
+a name and so out of the box, this is
+
+
+what semantic logger will give you. And
+
+
+when you format it for open
+
+
+telemetry, this is what you get. So the
+
+
+names are all standard and you can now
+
+
+start to switch between different
+
+
+observability tools and we've got a
+
+
+convention that everybody can agree on.
+
+
+So let's change the code. And to do
+
+
+this, it's a little bit hacky, so just
+
+
+bear with me. We find the code inside
+
+
+semantic logger that does this work. We
+
+
+copy that class into our
+
+
+codebase. We need to change the payload
+
+
+event of the event
+
+
+formatter. And then finally, we swap out
+
+
+our subscriber for the semantic logger
+
+
+subscriber. I can go through this in
+
+
+detail. Come and come and speak to me
+
+
+afterwards, but the point is it's a bit
+
+
+messy, but it can be done.
+
+
+And so with that, semantic not logger
+
+
+now spits out something like this, which
+
+
+is great. The next problem is we've got
+
+
+missing attributes. So whole things, a
+
+
+whole load of things that semantic
+
+
+logger does not give you out of the box
+
+
+that are kind of essential. So these
+
+
+kind of things it doesn't give you out
+
+
+of the box. So headers, it doesn't
+
+
+automatically log any HTTP headers. Now,
+
+
+I don't really understand how anyone can
+
+
+run an app in production and not have
+
+
+these things logged. It It's kind of
+
+
+critical, but people do it. So, I just
+
+
+want to show you a very small way of
+
+
+logging some of these things. And we're
+
+
+just going to focus on two, the headers
+
+
+and the user
+
+
+agent. And we do this thing called
+
+
+config.log tags. In our application RB,
+
+
+we can define a hash. And these are tags
+
+
+that get included in every request and
+
+
+they get sent to semantic logger and
+
+
+therefore they get sent to your
+
+
+observability tool. As you can see here,
+
+
+we've got two different ways of doing
+
+
+this. We've got a lambda syntax. It
+
+
+passes in the request and then you can
+
+
+call methods on the on the request. Then
+
+
+secondly, you've got a a more compact
+
+
+format and this essentially calls user
+
+
+agent as a method on request. So it's
+
+
+less flexible, but it's more compact.
+
+
+This is just for a straight
+
+
+mapping. And when you do this, here is
+
+
+the output in the logs. You can see
+
+
+we've got some HTTP request headers and
+
+
+we've got a user agent. So that's nice.
+
+
+The final thing I'm going to talk about
+
+
+is API requests are missing. So to
+
+
+simplify this, I'm going to assume
+
+
+you're all using Faraday, which as we
+
+
+all know is the best HTTP client, right?
+
+
+Yeah. Okay, good. Uh glad I've got you
+
+
+on board with that one. And we're going
+
+
+to define some
+
+
+middleware. That middleware essentially
+
+
+logs when a when a response comes back
+
+
+from any API request you make. It will
+
+
+log all these kind of attributes. the
+
+
+URL and the duration, all sorts of other
+
+
+useful things. And then we can register
+
+
+that and use it in any API requests we
+
+
+make. And this means we get to see all
+
+
+the API requests are coming into our app
+
+
+and all the ones that are leaving our
+
+
+app, which is incredibly
+
+
+useful. And here's what it looks like in
+
+
+the
+
+
+logs. So, we've covered three of the
+
+
+biggest weaknesses. There are a lot more
+
+
+that I won't go into
+
+
+today. And the final step of building is
+
+
+actually to send it. So, we've logged
+
+
+all our stuff internally. Now, it's time
+
+
+to send it to our observability tool.
+
+
+Semantic logger here has you covered.
+
+
+This is one of my favorite features of
+
+
+semantic logger. This idea of appenders.
+
+
+So, you can set up an appender here. I'm
+
+
+going to go off and work for Dinatrace
+
+
+as mentioned before. So we will create a
+
+
+little HTTP appender and this will batch
+
+
+all our logs make an API request to
+
+
+Dinatrace that will ingest the logs and
+
+
+it's all good to
+
+
+go. And this is what it might look like
+
+
+in Dinatrace. So you can see the logs on
+
+
+the left there and then on the right
+
+
+here you can see like the structured
+
+
+version of each one of those individual
+
+
+logs and then you can s sort and search
+
+
+and filter by it in the top
+
+
+bar. Okay, so that was a lot um bit of a
+
+
+whirlwind tour of how to build this QR
+
+
+code will give you a link to my link
+
+
+tree and you can get slides just come up
+
+
+and speak to me afterwards. I'll show
+
+
+the the QR code at the end as well, but
+
+
+come and speak to me afterwards if you
+
+
+want any more detail on any of that. So,
+
+
+the final thing we need to do is the
+
+
+actual exciting bit. We've done all the
+
+
+boring work of coding and all rest of
+
+
+it, which we all agree is incredibly
+
+
+dull. Maybe not. Um, but we get to
+
+
+actually use the graphs now. So, here's
+
+
+a reminder of all the
+
+
+attributes. And we're going to set the
+
+
+time
+
+
+range.
+
+
+Okay. And now we're going to see all the
+
+
+jobs performed. So you can see up here
+
+
+we're searching for everything within
+
+
+that
+
+
+queue.
+
+
+Okay. Next, we're going to group by the
+
+
+duration of job
+
+
+class.
+
+
+Okay. And here's what we
+
+
+get. This is nice. We can actually see
+
+
+which jobs take most
+
+
+time. Final step is to improve. So
+
+
+there's a whole bunch of things that
+
+
+we've already done that are not ideal,
+
+
+but generally speaking, I find it's
+
+
+helpful to criticize the work I've
+
+
+already done. I'm a bit of a
+
+
+perfectionist, so I get a whole load of
+
+
+improvements from that. I show
+
+
+colleagues what I've done. Um, and I get
+
+
+to learn what they want. So very often
+
+
+I've had the experience of, oh, I've
+
+
+made this cool graph in Data Dog. And
+
+
+people's eyes just kind of glaze over.
+
+
+Um, and they say, well, I don't really
+
+
+care about that. and say, "Oh, okay.
+
+
+What do you care about?" "Oh, well,
+
+
+we've got this thing in production and
+
+
+we can't figure out what it is." And so
+
+
+then we can apply those same principles
+
+
+to their problem, and this is how you
+
+
+get buyin from other people at your
+
+
+company to improve this stuff. Show them
+
+
+what's possible in a tiny little slice
+
+
+and then give them the tools to make
+
+
+what they care about
+
+
+observable. And so we might want to add
+
+
+other attributes at this point. We might
+
+
+want to add job latency or IPs or
+
+
+request ids. We've gone around this
+
+
+cycle a lot at Bigger Pockets. I've been
+
+
+working on this for about two years now.
+
+
+And I want to revisit our original real
+
+
+example with what's our experience now
+
+
+if this were to happen. So I'm still on
+
+
+call sadly. It's it's still Friday.
+
+
+However, I now
+
+
+get a different Slack message and it's a
+
+
+lot earlier. It's in on Friday morning
+
+
+now. And this message is from our
+
+
+monitoring tool. That's a bit strange.
+
+
+So, I click the link and here's what I
+
+
+see. It sends me to a graph. What is
+
+
+that blue line doing? That's really
+
+
+strange. Oh, wow. The within five
+
+
+minutes job queue has now a latency of
+
+
+15 minutes. So, it's breached its SLA.
+
+
+H. So, what's a question I want to
+
+
+answer? Okay. Um, which jobs are taking
+
+
+the most
+
+
+time? So, we'll go to the logs. We'll
+
+
+search for jobs performed within that
+
+
+queue. We'll group by job class. We'll
+
+
+plot the duration. And here it
+
+
+is.
+
+
+Okay. So, it's clearly the analytics
+
+
+update user visits job that's taking all
+
+
+the time. What the heck is that? That's
+
+
+interesting. I've just learned something
+
+
+about my software in seconds, not even
+
+
+minutes. Okay, that's the answer. So,
+
+
+what's in queuing those jobs? I'm
+
+
+curious. We search for the event jobs
+
+
+encued within that queue. Let's group by
+
+
+HTTP resource which is combination of
+
+
+the controller and the
+
+
+action. And here's what we
+
+
+get. What's that? That's that green bar
+
+
+looks
+
+
+interesting. It's the profile show
+
+
+controller. So it's the show action in
+
+
+profiles control. That's a bit strange.
+
+
+I wasn't expecting that. Okay. Um what
+
+
+IP address is hitting that action which
+
+
+is then queuing the jobs? Hm. So, let's
+
+
+show the number of HTTP
+
+
+requests to that same resource and we'll
+
+
+group it by IP
+
+
+address. Oh, wow. That's a lot of IPs in
+
+
+that light blue
+
+
+region. Oh, that's the IP address. Okay,
+
+
+I've got it. So, let's just recap.
+
+
+There's a scraper at that IP address.
+
+
+It's hitting profiles show. It's
+
+
+flooding the queue with these jobs and
+
+
+that delays our password reset emails.
+
+
+This is actually what happened. Real
+
+
+life
+
+
+example. And the fix is pretty simple.
+
+
+We now block that IP in our
+
+
+infrastructure. And now we've blocked
+
+
+it. Takes a few seconds. We can check,
+
+
+is it fixed? We go back to the
+
+
+graph. Oh, it's back to normal. And
+
+
+we're done. Just another Tuesday at the
+
+
+office.
+
+
+So that was maybe five minutes, seven
+
+
+minutes in total. No real disruption to
+
+
+production work, no tickets, no backlog,
+
+
+just a few little graphs, a few little
+
+
+queries, and we can actually understand
+
+
+what's really going on. How does this
+
+
+feel? Well, as you can imagine, it feels
+
+
+joyful. Feels like I have a superpower.
+
+
+Any bug that comes onto that backlog, I
+
+
+can start to have confidence. I can
+
+
+actually gather data to understand what
+
+
+the heck is going on. And what I didn't
+
+
+anticipate on this journey is it becomes
+
+
+addictive. I start to go into logs. I
+
+
+answer one question and I'm done with
+
+
+the the question. I've got all the data
+
+
+I want. I get my answer. I go back to
+
+
+the codebase. I fix it. I push it. I
+
+
+deploy it and it's all good. I can see
+
+
+it go back down. But in the process, I
+
+
+maybe see something else in another
+
+
+graph unrelated to this and I start to
+
+
+get curious. As an example of this,
+
+
+recently I went into a dashboard that
+
+
+we've made and I saw we've got actually
+
+
+quite a chunk of big chunk of 404s. I
+
+
+wonder why that is. Like two minutes
+
+
+later, I had my answer. It turns out
+
+
+there's yet another scraper going
+
+
+through all our usernames from a a aaa
+
+
+to a to zed
+
+
+essentially guessing at
+
+
+usernames. And so it's scraping our
+
+
+entire site occasionally hoping it'll
+
+
+find somebody with a valid username. So
+
+
+again, I blocked those. Our request time
+
+
+dropped by I think it was
+
+
+7.1%. Just from that one change. And
+
+
+again, that would have just gone
+
+
+unnoticed if we hadn't have hadn't have
+
+
+had observability. So yeah, it gets
+
+
+addictive and you start to ask questions
+
+
+that you didn't even know you had
+
+
+before.
+
+
+So, what's the results of this? Over the
+
+
+last 18 months, we've been able to
+
+
+reduce our downtime by 98%. We now have
+
+
+regular pizza parties where we don't
+
+
+have any downtime at all. Um, our 500
+
+
+errors have dropped by 83%. We've still
+
+
+got a lot of errors, but they've
+
+
+improved massively. And most of all, we
+
+
+can now fix bugs 20 times faster.
+
+
+So, if any of this sounds interesting to
+
+
+you, feel free to scan the QR code.
+
+
+There's a whole bunch of articles I've
+
+
+written on there, videos I've done. Um,
+
+
+and there's one or two little paid uh
+
+
+things, but most of the stuff is free.
+
+
+And if any of this stuff sounds
+
+
+interesting, please grab me. I'm
+
+
+actually going to be leaving today at
+
+
+400 p.m. sadly uh to catch a flight
+
+
+back. But yeah, thank you for your time.
+
+
+[Applause]
+
+
+Yeah, thank you for the talk. Uh quick
+
+
+one about the bills for the logs. Uh and
+
+
+a long one about the your approaches or
+
+
+rules of thumb when uh you log stuff on
+
+
+the application side like um operations
+
+
+that run or maybe changes that happen in
+
+
+the database or something like this. I
+
+
+didn't quite understand that last
+
+
+question so you may have to repeat it.
+
+
+Yeah. Yeah, you've covered the Rails
+
+
+part with all the controllers, jobs and
+
+
+stuff. Uh, but there is also business
+
+
+logics and sometimes you want to log
+
+
+some actions on the business logic side
+
+
+and you didn't cover it I guess because
+
+
+everybody does this differently but I am
+
+
+curious how do you do this? Fantastic
+
+
+question. Both really good questions. I
+
+
+like when you were handed the
+
+
+microphone, I just had this sense he's
+
+
+gonna talk about
+
+
+cost. Um because cost is such a a big
+
+
+issue with zero zero interest rates
+
+
+going away and we've heard this a lot,
+
+
+haven't we? So in terms of cost, there's
+
+
+no silver bullet with cost. Sadly, I
+
+
+wish there was. Um there are a few
+
+
+things to say. Number one is by using
+
+
+open telemetry and starting to embrace
+
+
+the standards way of doing this you can
+
+
+chop and change between vendors. So if
+
+
+one vendor is getting expensive you can
+
+
+move to another. That's the first thing
+
+
+to say. The second thing to say is
+
+
+realistically a lot of people are locked
+
+
+into a vendor. Um and it's actually not
+
+
+the open telemetry thing that's hurting
+
+
+them. It's the fact they're locked into
+
+
+alerts, dashboards, um, and obviously
+
+
+the UI for every one of these tools is
+
+
+different. So there's a big there's a
+
+
+big switching cost even if you are on
+
+
+open telemetry. So open telemetry is
+
+
+going to make it easier and more cost-
+
+
+effective for people, but there's still
+
+
+a switching cost. That's first thing to
+
+
+say. Second thing is I looked at our
+
+
+logs and I did an audit. Generally
+
+
+speaking, I've done this kind of journey
+
+
+towards observability in two or three
+
+
+companies before my current company and
+
+
+the pattern is very similar. They
+
+
+they're paying a nominal amount of money
+
+
+for some observability tool. Nobody's
+
+
+using it. Um which absolutely boggles my
+
+
+mind. Um at a one company I worked at, I
+
+
+said to them, "What's this cabana
+
+
+thing?" And they were like, "Oh yeah,
+
+
+nobody uses that." I said, "How do you
+
+
+know when things are going wrong?" They
+
+
+were like, "Oh, we just I mean, we added
+
+
+a bit of logging and then we" They were
+
+
+literally like taking a card, there was
+
+
+a problem. They would add three lines of
+
+
+logging and then just move it back into
+
+
+the backlog. And they would do that like
+
+
+six times. And and they're like, "Well,
+
+
+let's see if it comes up again. Let's
+
+
+see if it comes up again. No, let's not.
+
+
+Let's actually fix it, shall we?" But
+
+
+anyway, sorry, that's a bit of a
+
+
+tangent, but the point is they start out
+
+
+with a tool. They're paying a little bit
+
+
+of money for it. nobody's using it. And
+
+
+then we start to induce some
+
+
+observability and it's all going well
+
+
+and then people go crazy and start
+
+
+adding logging for this and logging for
+
+
+that and traces just in case. Just in
+
+
+case. And then the costs go out of
+
+
+control and then you get a call from the
+
+
+finance department. Um yeah, we're
+
+
+spending like $7,000 a month on this. Do
+
+
+you think you could kind of rein it in a
+
+
+bit? And one of the craziest things I
+
+
+would think we do as a as a as a
+
+
+community is we don't connect engineers
+
+
+to the costs. Engineers don't see the
+
+
+costs of so you never get to see the
+
+
+implications of your decisions at least
+
+
+the financial implications anyway. So um
+
+
+and then they say right can you kind of
+
+
+calm it down a bit. So then there's
+
+
+normally a phase of um I kind of look at
+
+
+logs and see what's being logged and try
+
+
+and reduce it down. So um I did a little
+
+
+bit of work at Bigger Pockets to do this
+
+
+and over 3 days I reduced the logging
+
+
+bill by
+
+
+41%. And it turns out we were logging
+
+
+the text
+
+
+okay about 231 million times a
+
+
+month. Not great. So I think a little
+
+
+bit of common
+
+
+sense and this is why grouping and
+
+
+structured logging is amazing because
+
+
+you can group by the uh the content key
+
+
+and some observability tools will show
+
+
+you patterns in your messages and then
+
+
+you just work down from the top like wow
+
+
+you're logging this 231 million times
+
+
+what's going on and then you can
+
+
+eliminate that. There's a little feature
+
+
+in semantic logger where you can pass a
+
+
+proc which filters out certain logs. So
+
+
+I use that. You can also exclude it from
+
+
+the the
+
+
+collector. Um the second the final thing
+
+
+to say on the cost thing is only add
+
+
+what you actually need. And this is why
+
+
+this cycle for me is so important
+
+
+because you're adding something that is
+
+
+an issue for you right now. You're not
+
+
+guessing. I see these companies say,
+
+
+"We're going to take three months to add
+
+
+observability to our product. We're
+
+
+going to add all these logs and then
+
+
+nobody uses them." Not a good idea.
+
+
+Start with a problem that you're
+
+
+interested in now and add just enough to
+
+
+answer that
+
+
+problem. So that's the cost thing.
+
+
+Anything any other questions from people
+
+
+about cost before I move on to the
+
+
+domain stuff?
+
+
+Um so the domain stuff um I've developed
+
+
+quite a lot of ideas I've not shared in
+
+
+this talk uh about how to do this. In
+
+
+short
+
+
+um I find it really useful to log or
+
+
+trace domain objects. So let's say
+
+
+you're um invoicing a customer. You're
+
+
+creating a new invoice. So I would uh
+
+
+create a structured version of that
+
+
+invoice object. I like to formatted H.
+
+
+So every domain object in our codebase I
+
+
+try to make it respond to to formatted H
+
+
+which means it responds with a hash.
+
+
+Then I can take that hash and log
+
+
+it. Which means then you get all the
+
+
+details about the invoice, the ID, the
+
+
+customer, the address. And now you can
+
+
+start to search your logs. Show me all
+
+
+the issues that happened with a specific
+
+
+customer, a specific invoice ID. Uh and
+
+
+then in terms of the actual logic, I
+
+
+mean you and I can have a chat later
+
+
+about the the details of your question
+
+
+because don't want to spend too much
+
+
+time. Uh hi, thanks for your talk. I
+
+
+have a follow up question for this what
+
+
+just said. uh when you log domain object
+
+
+uh how do you deal with privacy with
+
+
+sending data to vendor? Yeah, great
+
+
+question. There is a um a rails feature
+
+
+for this um called filter
+
+
+attributes. It's not filter
+
+
+attributes filter parameter filter.
+
+
+Thank you. Yeah. Um so uh you can new up
+
+
+um a standard Rails class and pass these
+
+
+attributes through that class and it'll
+
+
+redact anything. You have some kind of
+
+
+config where you can pass an array of uh
+
+
+regular expressions or strings for
+
+
+attributes that are private. So things
+
+
+like email address, credit card numbers,
+
+
+all this kind of stuff. And so um as
+
+
+part of me sending as part of our
+
+
+observability pipeline, everything we
+
+
+send to our observability tool gets
+
+
+passed through that through that call.
+
+
+But it
+
+
+is it's not obvious how to do that and
+
+
+nobody really talks about it. So again,
+
+
+come and speak to me afterwards for the
+
+
+details on that. But
+
+
+um yeah, it's difficult because you
+
+
+don't want to pepper all your code with
+
+
+all these filter parameters everywhere.
+
+
+So I try to do it in one place. Um and
+
+
+that's just before it goes to the
+
+
+observability
+
+
+tool. I should also say depending on the
+
+
+observability tool you use very often
+
+
+there's red acting functions on their
+
+
+side but ideally you don't really want
+
+
+to be sending any PII over the wire.
+
+
+Good. Uh so I have two questions. uh one
+
+
+is that when you start to walk
+
+
+structured walking and then you have a
+
+
+lot of attributes then in your
+
+
+experience can you handle that? So in
+
+
+the back end you don't specify a schema.
+
+
+So you allow the application to actually
+
+
+send what the what the developers want
+
+
+to send as different attribute but then
+
+
+you allow them to aggregate and group
+
+
+based on the type and
+
+
+can you solve that without forcing some
+
+
+kind of a scheme on the back end or on
+
+
+the front end and in general in short no
+
+
+um so there's schema and then schemalus
+
+
+um it's Great question. It's something
+
+
+I've thought an awful lot about because
+
+
+if you are logging these domain objects,
+
+
+these domain objects by definition are
+
+
+going to be different depending on the
+
+
+different application. So you can't have
+
+
+one set of standards and to rule them
+
+
+all. Now I am confident and hopeful that
+
+
+open telemetry will start to move into
+
+
+this area of domain objects maybe in 10
+
+
+years or something when they've like
+
+
+tackled all the really gnarly problem
+
+
+all the other really gnarly problems.
+
+
+Schema.org or is a way of marking up um
+
+
+web pages with standard attributes based
+
+
+on kind of business objects. So I've
+
+
+been looking at how I could use
+
+
+schema.org
+
+
+um in for observability basically. But
+
+
+schema.org is a little bit loosey goosey
+
+
+with things. It's a little bit generic.
+
+
+Uh in short, I haven't found a good
+
+
+answer to uh the problem you're
+
+
+proposing. However, um uh you may have
+
+
+seen these tools like segment and post
+
+
+hog and Google Analytics. All these
+
+
+analytics tools, analytics overlaps with
+
+
+observability a lot more than people
+
+
+realize. Analytics is really just
+
+
+observability and it's the same kind of
+
+
+thing. So, uh for these events in our
+
+
+codebase, I've started to introduce um
+
+
+JSON schemas to validate the attributes
+
+
+of domain objects. And that's actually
+
+
+working really well. Uh it means that
+
+
+anything that we're trying to log or
+
+
+trying to it's not logging actually it's
+
+
+for the event side of things but
+
+
+anything we try to send to our segment
+
+
+instance is blocked if it doesn't have
+
+
+the correct attributes and we get an
+
+
+error in sentry and then we can fix it.
+
+
+So, no more nils. Um, but of course the
+
+
+cost is everybody needs to agree on the
+
+
+schema. You need to version the schemas.
+
+
+Everybody needs to be in sync with that.
+
+
+And how do you create that? I've had to
+
+
+create a like massive notion documents
+
+
+and train people on how to do that. So,
+
+
+as we say, nothing comes for free,
+
+
+right? But it's a really interesting
+
+
+topic and area and I would love to get
+
+
+more into that.
+
+
+Thank you. That's my experience as well.
+
+
+So uh and the other one is that you
+
+
+showed that when you change you now have
+
+
+alarms based on some criteria on the
+
+
+walks. In your experience what is the
+
+
+volume of walks that you can use to
+
+
+create alarms compared to metrics?
+
+
+Because metrics are basically like
+
+
+optimization for that. So how long can
+
+
+you go with walks for alarms?
+
+
+How long can you go with logs for for
+
+
+using walks to actually trigger
+
+
+alarms? Have experienced that you need
+
+
+to go to metrics because it's too slow
+
+
+to actually query all the walks at 5
+
+
+minutes. I don't know at 1 minute. So
+
+
+what's the volume that you have
+
+
+experienced?
+
+
+I
+
+
+like I I find a lot of the logging that
+
+
+we do is very high volume. So we have uh
+
+
+3 million members on our platform. So if
+
+
+we're logging pretty much anything
+
+
+that's in common use, we'll get hundreds
+
+
+of thousands of logs. So I I don't tend
+
+
+to find that problem. Um I tend to find
+
+
+that the logs rack up and then I can do
+
+
+aggregations based on the last five
+
+
+minutes of like the group and sort by
+
+
+stuff that that you saw there. And I set
+
+
+some thresholds. What I will say is
+
+
+despite showing you alerts in here, I'm
+
+
+quite reticent to add alerts. Um, they
+
+
+can be really noisy and then you and
+
+
+sometimes noisy alerts are worse than no
+
+
+alerts at all because then you start
+
+
+ignoring them and then when there really
+
+
+is a problem, it's the boy who cried
+
+
+wolf syndrome. So alerts are kind of a
+
+
+double-edged sword. I much prefer to
+
+
+explore things and actually build the
+
+
+tools to allow you to ad hoc explore
+
+
+things and just use like alerts as kind
+
+
+of a little bit of seasoning here and
+
+
+there for really really critical things
+
+
+like we're not getting any events
+
+
+through to our segment instance for
+
+
+example our logs are about to breach
+
+
+their their quotota for the month things
+
+
+like that but yeah we can talk more
+
+
+about the details later thank you
+
+
+okay very aware aware of time here.
+
+
+So, thank you for your talk. You
+
+
+mentioned that traces are the best and
+
+
+yet your talk is all about logs. So, I'm
+
+
+I'm curious like what are your thoughts
+
+
+on traces and uh why for for example for
+
+
+this problem is it possible to use
+
+
+traces instead of locks? Um great
+
+
+question. Thank you. Um I really
+
+
+wrestled with this a lot when making uh
+
+
+this presentation. I have a workshop
+
+
+that I delivered in crackoff earlier
+
+
+this year where we started out with
+
+
+logging and then moved on to tracing. So
+
+
+we saw the comparison with both of them.
+
+
+I chose logging because it feels a bit
+
+
+more pragmatic. Tracing feels more
+
+
+magical to developers and I would I
+
+
+reasoned that there was a lot more to
+
+
+explain when I say to people structured
+
+
+logging. they generally say, "Oh, what's
+
+
+that? Yeah, that sounds interesting."
+
+
+Whereas when I say tracing to people,
+
+
+generally I get dead air, dead eyes. Um,
+
+
+yeah. So, I do think tracing is the most
+
+
+powerful.
+
+
+Um, the reason is because traces capture
+
+
+context. So in traces you have a
+
+
+structured tree of events whereas logs
+
+
+you have a series of events and there's
+
+
+no nesting. You can't say show me all
+
+
+the logs that happened in this specific
+
+
+context. I mean you kind of can but it
+
+
+it gets it gets super involved. Whereas
+
+
+with traces you can um you can query at
+
+
+any level of the tree. So you can say
+
+
+show me all the events that were nested
+
+
+inside this other event essentially. So
+
+
+it gives you that hierarchy. That's
+
+
+really as I'm as you're de as I'm
+
+
+demonstrating now it's very difficult to
+
+
+explain. Well, that was a terrible
+
+
+explanation. So I do apologize. So
+
+
+again, come up to me afterwards and we
+
+
+can chat more about it in detail.
+
+
+Um yeah, this this is all possible with
+
+
+traces as well. Uh the other thing with
+
+
+traces is generally speaking they're a
+
+
+lot more expensive than
+
+
+logs and they are a lot slower than logs
+
+
+as well. Um again a lot of people in the
+
+
+S sur community would take issue with
+
+
+what I've said being so blanket. There's
+
+
+times when logs are more expensive than
+
+
+the traces, blah blah blah. But in
+
+
+general, they're slower and more
+
+
+expensive because the the the code has
+
+
+to capture all of this context. And then
+
+
+you run into issues around head
+
+
+sampling, tail sampling. How do you keep
+
+
+your tracing costs under control? And
+
+
+that's an even bigger problem than
+
+
+logging costs. So generally speaking, I
+
+
+find logs are the sweet spot if you've
+
+
+not done observability before. That's
+
+
+like the gateway drug to traces. start
+
+
+out with logs, add little bits of logs
+
+
+here and there to answer your actual
+
+
+questions that you have today and then
+
+
+graduate to traces. But yeah, you and I
+
+
+can talk more after and I can give you
+
+
+the full rundown. Okay, John, the last
+
+
+one. Yes, absolutely.
+
+
+So just like a small follow-up question
+
+
+to that because um so I realize that
+
+
+this is about logging and tracing and
+
+
+stuff is out but since you mentioned you
+
+
+evolved several times through this
+
+
+process have you jumped to something
+
+
+like the conclusion I've like sort of
+
+
+jumped to at some point was that um it's
+
+
+more of a question of instrumentation
+
+
+versus appending versus like the what
+
+
+you call the appenders and in fact you
+
+
+could just instrument one thing that is
+
+
+just this is an event that happens and
+
+
+it's independent of if it ends up in a
+
+
+log in a trace or a metric later on,
+
+
+which is why it's kind of funny because
+
+
+you see like you have you have a very
+
+
+structured payload and then you still
+
+
+have like that content message thing
+
+
+which is like an interpolated string
+
+
+which really wasn't necessary at that
+
+
+point anyways, right? Yeah. So I'm
+
+
+wondering is that is that sort of the
+
+
+way you went forward where basically
+
+
+your codebase is just instrumented with
+
+
+events independent of what you actually
+
+
+end up that's exactly it. Exactly it.
+
+
+And um I really like charity majors take
+
+
+on this whole observability thing which
+
+
+is at the root of everything. It's
+
+
+events. It's events all the way down.
+
+
+This is why event source systems would
+
+
+be an absolute dream to instrument and
+
+
+to to be observable because you just
+
+
+listen to CFKA. You shove all of that in
+
+
+your traces or logs and everything's
+
+
+good. The only caveat to that is when it
+
+
+comes to traces, as I mentioned before,
+
+
+you do need the higher levels of
+
+
+context. So when you're talking about
+
+
+that, it's not quite as simple as just
+
+
+events because you need some context to
+
+
+pass into that event. It's still still
+
+
+very possible. Um that's the only slight
+
+
+nuance to that that I would add but
+
+
+absolutely and in fact um I started
+
+
+making an architecture such that we
+
+
+could have a value object which is
+
+
+represented by it's essentially just a
+
+
+basic value object to represent an event
+
+
+and then we have an event.publish
+
+
+publish that puts it onto an active
+
+
+support notifications queue and then
+
+
+there's a listener that listens to that
+
+
+that can send it to data dog or segment
+
+
+or post hog or any of these things any
+
+
+observability tool and any analytics
+
+
+tool and that would be my dream if we
+
+
+could pull that off man we'd be in such
+
+
+a great place because you could just
+
+
+have this stream of events and say I
+
+
+want to fire these off to data dog or
+
+
+dino trace or any other observability
+
+
+tool and we could have these other
+
+
+events firing them off to analytics. Um,
+
+
+again, that's a really big discussion,
+
+
+but thanks for a great
+
+
+question. Okay, thank you very much,
+
+
+John Calagher, ladies and
+
+
+gentlemen. Thank you. Great talking.

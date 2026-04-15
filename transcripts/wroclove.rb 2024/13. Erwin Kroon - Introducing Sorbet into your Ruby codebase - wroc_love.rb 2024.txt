@@ -1,0 +1,1945 @@
+[Applause]
+
+
+good afternoon thank you for sticking
+
+
+with me this is recorded I want to note
+
+
+this is super packed here it's it's
+
+
+great best conference
+
+
+really so who am
+
+
+I I I think I'm a do Walker and I have a
+
+
+nice side job writing Ruby at GitHub
+
+
+it's uh it's nice uh I started writing
+
+
+react there as a fullstack developer and
+
+
+I switched my way into the issues
+
+
+platform team so uh if issues is not
+
+
+working very well you can hit me up on
+
+
+uh on Twitter and I will try to make it
+
+
+better so uh that to serve
+
+
+um so as I said I was a fullstack
+
+
+developer
+
+
+um this is like the this is the road I
+
+
+took I this is all the languages I paid
+
+
+for celery um I'm now doing two years
+
+
+Ruby and before that python closure
+
+
+typescript cotlin C Java everything so
+
+
+I I don't really have a strong opinion
+
+
+about what is better static type
+
+
+languages or dynamic it depends a bit on
+
+
+on the I guess on when you ask me yes I
+
+
+am super happy and Ruby be now but maybe
+
+
+you ask me in one year I going to be
+
+
+like no never again uh probably not I
+
+
+having a good
+
+
+time so now a quick
+
+
+check um please raise your hands who
+
+
+knows what survey
+
+
+is okay that's like that's like a decent
+
+
+amount that's that's over half that's
+
+
+great uh and who use or is using surve
+
+
+currently T also so that's like a little
+
+
+bit less but still more than zero and I
+
+
+think more than five so that's
+
+
+great so what is
+
+
+survey uh short shortly surve is like a
+
+
+gradual type checker for Ruby that's
+
+
+like it yes you can add typing to your
+
+
+Ruby but you can do it in such a way
+
+
+that you don't have to really do all or
+
+
+nothing you just add a bit of typing and
+
+
+that's it
+
+
+so why why would you use survey so I'm
+
+
+going to get give like the short opinion
+
+
+from like why I was doing it at at work
+
+
+um in general it is like I am just the
+
+
+engineer on the team and we have like a
+
+
+quite old uh code base it's like 10
+
+
+years old what I'm working on and it is
+
+
+entangled to everything and we would
+
+
+like to just refactor this better and we
+
+
+think that by implementing survey this
+
+
+is going to get like like better it's
+
+
+going to get easier refactoring and so
+
+
+on and I was like I don't have a strong
+
+
+opinion I I I I have never used so so
+
+
+let me give a shot at it
+
+
+um like I I was like I'm probably not
+
+
+going to like it that much
+
+
+because well I don't know we'll get to
+
+
+the syntax in a bit but it is quite in
+
+
+there
+
+
+but why did we do it we want to make
+
+
+refactoring a code is easier so we can
+
+
+add more features and also make sure
+
+
+that G giup get more performance that we
+
+
+can break the deployment off of and so
+
+
+on so this is why we're doing it there
+
+
+might be more reasons but this is our
+
+
+reason so let's get to the
+
+
+syntax
+
+
+um top of the line if you want to use S
+
+
+you have to use this command like just
+
+
+above or below your Frozen string
+
+
+literal that's always there yes uh um
+
+
+and then we can choose different options
+
+
+now it's strict it can also just be true
+
+
+it can be false and it can be strong
+
+
+which we will not see anymore because
+
+
+it's not recommended but in this case
+
+
+strict means every method has to have a
+
+
+signature so uh we'll get there in a
+
+
+moment so then you require the subway
+
+
+runtime because the subway is uh either
+
+
+a static cheer Checker and we also check
+
+
+it at run time so we can enable it or
+
+
+disable that
+
+
+um we have to always include
+
+
+some um well
+
+
+module
+
+
+and then we get to like the the
+
+
+signature part uh which is just normal
+
+
+Ruby code uh which is like good and bad
+
+
+at the same time like here it's not that
+
+
+bad you see uh well I have to I have a
+
+
+method bar and it has one uh param X
+
+
+peram and it takes integer integer and
+
+
+it returns a string so that's easy and
+
+
+then we also can say hey I don't really
+
+
+care this is just a method that doesn't
+
+
+work it has no pars and there's a
+
+
+special
+
+
+synex and then we have to way in Sor to
+
+
+get out of this typing as I said it was
+
+
+gradual typing um in this case there is
+
+
+like uh the The Bar Method gets
+
+
+called but we say this is unsafe I want
+
+
+to put a string even though it had to be
+
+
+an integer yes we we said it above so
+
+
+when we call this
+
+
+currently if we execute this code it
+
+
+would crash runtime exception because it
+
+
+is not a string but we can also turn off
+
+
+surb the run time checking and then it
+
+
+would not crash because well it would
+
+
+just work yes string to S is also going
+
+
+to be give something so this is like the
+
+
+short Syntax for sub it is gradual you
+
+
+have Escape hatches that's
+
+
+it alternative ly instead of adding the
+
+
+types in line we have RBI fails so this
+
+
+is actually just normal Ruby but we will
+
+
+not type any uh method imple method uh
+
+
+definition only definitions but no imple
+
+
+implementations so in this case oh well
+
+
+we're no highlighting uh we have
+
+
+a a small method uh that says hey I'm
+
+
+typed in RBI so then we have a companion
+
+
+uh RBI file part is on the screen and we
+
+
+Define there uh what how is it what is
+
+
+the signature that is like also use this
+
+
+way for ex if you have gems that are not
+
+
+typed and
+
+
+so um so let's continue with uh how are
+
+
+we now using uh
+
+
+surr um so as I said I was just learning
+
+
+this on the goal I was like I got the
+
+
+the assignment make sure that all our
+
+
+owned files at least get level true okay
+
+
+fine let's get started so this was my
+
+
+first like weird situation with survey
+
+
+survey is actually um doesn't know that
+
+
+the module will be included and has
+
+
+access to the raise me uh method so this
+
+
+is like you have to include already
+
+
+kernel before you can call raise
+
+
+otherwise you will get a an error from
+
+
+the static uh Checker from uh Subway
+
+
+with highlighting so there we go um as I
+
+
+said you you have to include kernel
+
+
+because otherwise this will not
+
+
+work um so in Ruby we actually use
+
+
+modules for like different like ways yes
+
+
+so for example we can have a module that
+
+
+is like an defining some kind of
+
+
+interface because we include this two
+
+
+string
+
+
+method um as shown here we have a
+
+
+signature that says hey I need a two
+
+
+string and and then we include it in the
+
+
+user class and then we can say hey two
+
+
+string a string and we can give the user
+
+
+that's like normal yes if a user
+
+
+includes a module well it can pretend to
+
+
+be that thing what the model is
+
+
+representing so that's quite quite quite
+
+
+good um but then we get like into more
+
+
+diff difficult situation there is like a
+
+
+module that acts like a dependency yes
+
+
+we just do use to have our Cod like
+
+
+break up yes our user class or issue
+
+
+class has like 5,000 lines of cod if it
+
+
+is one fil it's bad so we we split it up
+
+
+in five files but then it means that we
+
+
+cannot really we
+
+
+cannot really include the file anymore
+
+
+so then there is a feature in uh in so
+
+
+that that is experimental and I would
+
+
+say if you use survey just enable this
+
+
+because it is like life is so much
+
+
+harder without it so you can just say
+
+
+hey uh enable experiment require
+
+
+ancestor feature and now I can say this
+
+
+module needs the require uh needs
+
+
+require ancest a user so this module
+
+
+needs a
+
+
+user and then you can oh go back then we
+
+
+just can call do something that is
+
+
+defined in the user dependency so that
+
+
+makes it like way easier and otherwise
+
+
+you already have to start casting or you
+
+
+have to like typing in RBI files I don't
+
+
+know actually this is just you need this
+
+
+other is so
+
+
+is yeah it's not usable I would
+
+
+say so then we get into like a a harder
+
+
+uh problem is that if you have a module
+
+
+it will not uh be able to change uh the
+
+
+the type so what you see here we have um
+
+
+an authorizer that
+
+
+needs a user then we have this like
+
+
+dependency that is included in the user
+
+
+requires
+
+
+ancestor but when you call this
+
+
+authorizer uh
+
+
+new it will not be your user type
+
+
+because if you don't type this T bind
+
+
+self
+
+
+user because it will be user dependency
+
+
+so this is already like getting a little
+
+
+bit annoying because now you you see
+
+
+this kind of patterns all over the place
+
+
+you have to bind yourself to something
+
+
+else and you just have to like figure
+
+
+out what it is it crashes okay try
+
+
+something else figure out fire up the
+
+
+console and just find out the type this
+
+
+is a lot of going on and and yeah we do
+
+
+this to get better like typing but it
+
+
+is it's annoying you have some
+
+
+Alternatives here you can cost it
+
+
+instead of binding this is just more of
+
+
+the same
+
+
+um pick your poison
+
+
+um
+
+
+alternatively you could also just create
+
+
+a RBI file and say
+
+
+um I will redefine
+
+
+itself
+
+
+I I thought about it only when I was
+
+
+writing this presentation I haven't
+
+
+tried to get it merged yet I think it is
+
+
+a good solution um because you can just
+
+
+say way easily hey um I want to
+
+
+authorize
+
+
+authorize something and I want to just
+
+
+use itself and itself is then
+
+
+overwritten in the RBI file so now the
+
+
+static type checking will just be okay
+
+
+and on runtime it's all just fine
+
+
+because that also satisfies this same
+
+
+dependency because we know that it will
+
+
+be okay because this code also work
+
+
+without
+
+
+Sway and now we get to the part
+
+
+where things get just wonky and not
+
+
+super cool anymore in my opinion
+
+
+um so this is like type inference this
+
+
+like this is a simple uh Simple Thing uh
+
+
+if something that's never true it
+
+
+doesn't really matter then a sign so now
+
+
+this is nillable because sometimes it's
+
+
+maybe nil sometimes not of course you
+
+
+get more difficult code in your own
+
+
+application but this is like the the G
+
+
+of it so now if it's a loop because of
+
+
+imple implementation detail it is not
+
+
+possible for
+
+
+surve to figure out the
+
+
+type so now we have to just do the TL
+
+
+nil T nillable we have to define the
+
+
+type which is like yeah not really
+
+
+great so then we can write the method
+
+
+yes with because we have generics in in
+
+
+surve but seriously at this point my
+
+
+eyes bleed because it is like what is
+
+
+going on this is what you have to
+
+
+type so get so I we can get to it so so
+
+
+as generics so in this case I want to
+
+
+just instead of writing this let
+
+
+definition I don't want that so let's
+
+
+make a random re retry method that takes
+
+
+a block then we have a type parameter uh
+
+
+U then we have the param and then there
+
+
+is a special syntax in surb
+
+
+to uh works with blocks the the standard
+
+
+block not any block but like the
+
+
+anonymous block it works that you can
+
+
+use with
+
+
+yield and then we can say okay uh the
+
+
+return value will be this generic type
+
+
+but nillable so this is
+
+
+fine but what is bad about it is that
+
+
+you don't want to have this in your file
+
+
+because you have to look at it and it's
+
+
+longer than implementation almost all
+
+
+the time that's quite
+
+
+bad um
+
+
+so what we see is that a lot of time we
+
+
+disc cuss in this situation uh because
+
+
+it just nobody thinks about it when you
+
+
+start using suret you don't think like H
+
+
+let's figure out if we have some exot
+
+
+exotic feature that we can
+
+
+use so then we have tapioca this is uh
+
+
+made by
+
+
+Shopify and what tapioca does it is it
+
+
+is a replacement for some RBI generation
+
+
+feature or maybe downloading feature
+
+
+that was normally in sway itself but now
+
+
+it's ex external like like like CLI
+
+
+application and what it can do is it can
+
+
+download already pre-generated gems for
+
+
+a certain selection of gems and it can
+
+
+also uh generate uh RBI files this is
+
+
+for example super useful if you have
+
+
+like active record models and this kind
+
+
+of active support like all the meta
+
+
+programming stuff you can like generate
+
+
+uh the you can generate like your RBI
+
+
+files instead of writing them by
+
+
+hand
+
+
+um so let's let's get to the the more to
+
+
+the Practical side of this like we did
+
+
+this in implement we did this
+
+
+implementation and I think we are quite
+
+
+far at at GitHub
+
+
+um but we use type through as a lower
+
+
+bound we didn't use strict
+
+
+because well I don't know actually
+
+
+because it was like this is like above
+
+
+my pig right decision and also I had no
+
+
+clue about this at the point I started
+
+
+working on this but because the lower
+
+
+bound was typed through it means that we
+
+
+don't have to write
+
+
+signatures but we still have
+
+
+to do some mangling and so on so we
+
+
+ended
+
+
+up using a lot of debinded De must deard
+
+
+and TB bind is I showed you you can like
+
+
+assign it to the self uh variable if you
+
+
+must it is must is like specific for
+
+
+nailable you say hey this is not nil and
+
+
+casting we also saw we can just say no
+
+
+it's not that type it's that it's some
+
+
+other type so the thing is this is all
+
+
+runtime only so if you do this you have
+
+
+almost no signatures and you
+
+
+have um a lot of this cost you only have
+
+
+overhead because you you don't have any
+
+
+static guarantees and still your your
+
+
+codes will just as easily crash so you
+
+
+don't have a lot of extra confidence so
+
+
+I think in
+
+
+hindsight just having strict as the
+
+
+lower level would be way better for us
+
+
+but this is
+
+
+me coming to this Con conclusion like
+
+
+right creating this presentation and
+
+
+thinking like I was not happy with what
+
+
+I was doing how can I so I think I will
+
+
+go back and like hey we have to probably
+
+
+increase this to strict and go from
+
+
+there um we also use a lot of uh unsafe
+
+
+which is even worse it's basically it's
+
+
+only overhead because unsafe says hey I
+
+
+don't care about what it is it doesn't
+
+
+give you anything it's it's not just
+
+
+useful and but it is
+
+
+like what you get if you do the best of
+
+
+your
+
+
+effort but you also have like uh just
+
+
+get it done yes and
+
+
+because our assumption was if we get
+
+
+everything to true so just so type true
+
+
+then
+
+
+we're in a good
+
+
+place but I think we have like 6,000
+
+
+times unsafe we do like 3,000 times uh
+
+
+uh casting and so on so this is like not
+
+
+adding a lot
+
+
+of yeah it's not adding a lot of
+
+
+features uh and also not
+
+
+confident
+
+
+um so the thing about signatures is that
+
+
+signatures can be uh disabled
+
+
+I I I showed it in the first slide um
+
+
+depending if how you configure your
+
+
+survey on
+
+
+Startup signatures just get like erased
+
+
+they they don't add any overhead at this
+
+
+point but type
+
+
+assertions they will get disabled but
+
+
+they're still in your code PL so and
+
+
+they cannot be easily
+
+
+optimized not even by y or for example
+
+
+so it just slows down your code and they
+
+
+don't really show up how much they slow
+
+
+down so
+
+
+run
+
+
+um soet either enabled and disabled and
+
+
+if I I check the the overhead we have
+
+
+like 2% or 1.5% overhead with soet
+
+
+enabled but if we disable it we still
+
+
+have those type assertions so we don't
+
+
+really know how much is the overhead
+
+
+really because 1.2 is 1.5% is very low
+
+
+but this might not be the true story and
+
+
+it doesn't give us that much extra com
+
+
+confidence at this
+
+
+point this is what I was saying about
+
+
+the signatures you can like never you
+
+
+can do always we can always run them in
+
+
+test and we can run them only like in a
+
+
+static check
+
+
+and normally you don't type this you
+
+
+could because then it will be
+
+
+overwritten by the default but it might
+
+
+be good if you have like something
+
+
+that's very expensive you can just hard
+
+
+code this to test because because you
+
+
+just say I don't want this to be ever
+
+
+run in production because it's like in a
+
+
+tight Loop or something I don't want
+
+
+this so then you can just Define it like
+
+
+this this we actually use uh for the
+
+
+tight Loops so that's that's quite good
+
+
+and otherwise we mostly run all our
+
+
+tests are run with subve enabled and
+
+
+production some percent of the machines
+
+
+I I am not 100% sure
+
+
+so what I was saying this so signatures
+
+
+you can write as much as you want and it
+
+
+will not cause any overhead because you
+
+
+can turn them off assertions you cannot
+
+
+write as much as you want because they
+
+
+will make it slower for yeah for as long
+
+
+they in your
+
+
+code we did a little bit of the small uh
+
+
+micro benchmarks and we we see that that
+
+
+all the assertions even t on Save which
+
+
+is like weird because it doesn't do
+
+
+anything is adding a four times overhead
+
+
+to not having them in the code which is
+
+
+quite a lot also if you take in
+
+
+consideration database overhead it's not
+
+
+that bad we don't use secal light so we
+
+
+are like we need like 150 millisecs I
+
+
+guess uh we are always slow I apologize
+
+
+for how slow we are sorry and
+
+
+um what is good about
+
+
+surve so what I really like before soet
+
+
+I could use like solar graph or some
+
+
+other LSP I could never click to
+
+
+anything we have such a big code base I
+
+
+couldn't see maybe if I restarted my
+
+
+code space Maybe for five minutes I got
+
+
+it then it was gone with to it's way
+
+
+better I can click a lot of course I
+
+
+also end up like I don't know if someone
+
+
+use typescript you click on something
+
+
+you get to the typescript definition
+
+
+file that are like generated or typed
+
+
+separately and then you don't you end up
+
+
+in nothing land but if you then add some
+
+
+nice documentation to your definition
+
+
+you can still get to the source code so
+
+
+this is actually quite good I I like it
+
+
+LSP is also super fast so that's all all
+
+
+good um and generating RBI files is also
+
+
+very powerful which is also super nice
+
+
+the problem with it this is a little bit
+
+
+that you don't get like oh let's start
+
+
+generating some RBI files this is this
+
+
+is quite it's quite difficult to get
+
+
+started this is why I didn't do it until
+
+
+very last moment I tried it a little bit
+
+
+like last week but so it's not that easy
+
+
+to get started but I think it's the
+
+
+where you want to be when you us obey
+
+
+don't write signatures just generate
+
+
+them because I don't know I don't want
+
+
+to see this like generics in my in my
+
+
+Ruby files this is like if I like that I
+
+
+would just write Scala or a rust or I
+
+
+don't know I'm writing Ruby I don't want
+
+
+all this like it's almost like it's crap
+
+
+yes you write a new
+
+
+feature oh I created a new file oh now I
+
+
+have to do type through oh now I have to
+
+
+write sber signatures and you leave the
+
+
+it's not it's not fun it's it's really
+
+
+not fun but I see the value if you have
+
+
+them so what's not so
+
+
+good so generating the RBA files for
+
+
+your dependencies is really is really
+
+
+slow sometimes you start a new project
+
+
+you for got to disable the rubocop jam
+
+
+in the config of tooga and you can wait
+
+
+10 minutes get a coffee maybe it's done
+
+
+and then it also generated some errors
+
+
+in the in the in the RBI file so you
+
+
+cannot even use them so you waited 10
+
+
+minutes and then you disable it still
+
+
+this is this is not a good spot to be in
+
+
+um as I said writing this tapioca comp
+
+
+compiler is not easy but I think it's
+
+
+good so maybe we can make this easier or
+
+
+something
+
+
+because that would make it so much
+
+
+better
+
+
+um also reaching for assertions instead
+
+
+of like signatures is maybe just too
+
+
+easy because you start implementing
+
+
+surve you start writing it now it
+
+
+doesn't work H will I write the
+
+
+signature or will I write the assertion
+
+
+I I know it's correct I would just say
+
+
+it's correct but this is exactly what is
+
+
+the problem why you don't why you want
+
+
+to use survey you want want to
+
+
+not you you want to let the compiler do
+
+
+this thing instead of knowing it better
+
+
+um and then I I showed you the require
+
+
+ancestor uh example and I think the
+
+
+compiler can be better but so B is
+
+
+written in C++ so I tried to add this
+
+
+feature but I got I I don't know I have
+
+
+a lot of languages I tried but C++ is
+
+
+not on this list and I don't want to add
+
+
+it to list I think so that's yeah yeah
+
+
+you're laughing but but I really wanted
+
+
+to be better because this in my own I
+
+
+will benefit from it but yeah I don't
+
+
+know this going to be
+
+
+hard um
+
+
+verdict um so I talked about some people
+
+
+on on Friday night about Sur yeah it's
+
+
+like I think it's good but I cannot
+
+
+imagine that someone will start a new
+
+
+Ruby project and they going to say like
+
+
+let's let it Sur way I like typing so
+
+
+much let let's I don't think so this is
+
+
+not what I think will
+
+
+happen that
+
+
+said if it gets a little bit easier say
+
+
+it is gets added automatically to the to
+
+
+the reals uh the reals new and the setup
+
+
+is good it might be super nice for new
+
+
+reals
+
+
+developers because of all the magic that
+
+
+we all know yes we we type something we
+
+
+know this is generated this is what I
+
+
+can use and for new developers this is
+
+
+quite difficult but in the current state
+
+
+soet is not not going to help with that
+
+
+because you create so many more extra
+
+
+problems that it just just gets harder
+
+
+so maybe in the future but at this point
+
+
+I think survey is is good for big code
+
+
+bases that want to maybe refactor and
+
+
+get some more like like confident more
+
+
+confident about the
+
+
+changes that's it thank you for
+
+
+listening
+
+
+[Applause]
+
+
+okay there's one
+
+
+question could you it any
+
+
+further
+
+
+thanks um so I have I have a question
+
+
+because in our code base we have the
+
+
+also like pretty big projects and we use
+
+
+ROM types um a lot but we only validate
+
+
+types for the input parameter
+
+
+so we validate the actions uh the the
+
+
+parameters in the controller actions we
+
+
+validate the workers parameters the
+
+
+argument list and if we get the file
+
+
+from the client the CSV file that we
+
+
+need to process read rows out of it and
+
+
+then you know calculate and you know do
+
+
+all this magic then we validate what is
+
+
+in the row because we get that from the
+
+
+external system and this is mostly what
+
+
+we validate in as types and we use like
+
+
+like so um what is benefit of
+
+
+introducing this static or runtime
+
+
+typing for all your classes instead of
+
+
+validate types only for your input and
+
+
+then cover rest with unit tests like if
+
+
+if you have input in your system
+
+
+validated with types and you have unit
+
+
+tests um yeah what is the benefit of
+
+
+using sorbent in side or on top of
+
+
+it so I would say the benefit is that
+
+
+say you have a static type language you
+
+
+will pull forward a lot of potential
+
+
+errors that you get because certain
+
+
+types make sure that certain methods
+
+
+cannot be called and this kind of stuff
+
+
+so you you filter out a certain type of
+
+
+errors and what you try to do with
+
+
+survey is get some of those guarantees
+
+
+in
+
+
+Ruby so it's not about input validation
+
+
+I think you still have to do this but it
+
+
+is validation on the type level if you
+
+
+do this and this so you have validated
+
+
+input then this is the result I cannot
+
+
+call this certain thing yes I have filed
+
+
+something so I I have said this is a
+
+
+user I cannot a user cannot get a
+
+
+certain amount of billing because it's
+
+
+not an Enterprise or something so it can
+
+
+only be done if it's a organization so
+
+
+in that case it's good to know what is
+
+
+the type and this is the part of the
+
+
+benefits that
+
+
+you would like to
+
+
+get thank you for the great talk I was
+
+
+wondering if you know how the runtime
+
+
+checks are implemented is it perhaps on
+
+
+top of Trace Point
+
+
+API I have no clue okay because RBS does
+
+
+it on top of Trace point and I was
+
+
+wondering you mentioned the performance
+
+
+impact I was wondering if it's the
+
+
+slowness of Trace point or something
+
+
+else I wanted to get into that
+
+
+uh uh so John Harter yes he worked at
+
+
+get up he is
+
+
+like very much involved in everything
+
+
+like I like this typing but it is slow
+
+
+why are we using it okay don't it is
+
+
+recorded it's problematic but like but
+
+
+no but now but he's way more into this
+
+
+and there's a lot of great people there
+
+
+and I was trying to dive into it and I I
+
+
+think we will get more into it um hit me
+
+
+up if you want to know more and I glad
+
+
+to stay in touch but I don't know the
+
+
+answer now
+
+
+so uh thanks for the great talk uh do I
+
+
+am I doing a correct sentiment analysis
+
+
+uh uh that uh that you would prefer it
+
+
+to be way more automated and more like
+
+
+types being on the side of the actual
+
+
+code and not like obstru obstructing
+
+
+your your implementations yes yes
+
+
+yeah right any other
+
+
+questions okay ladies and gentlemen
+
+
+Arvin kunun
+
+
+[Applause]

@@ -1,0 +1,2716 @@
+good morning first of all this is going
+
+
+to be a bumpy ride
+
+
+so if you have any questions or if I
+
+
+miss something just raise your hand and
+
+
+ask question piece why our first web
+
+
+page is important the problem is that
+
+
+the slower web page is the more people
+
+
+are going to bounce from that web page
+
+
+so this graph shows you a little bit how
+
+
+that works you see the first three
+
+
+seconds that's page loading time the
+
+
+first three seconds are the most
+
+
+important like after two seconds you
+
+
+have a steep drop and if your page takes
+
+
+longer than like 10 seconds most of your
+
+
+users are gone well you have to remember
+
+
+this is not just for the good internet
+
+
+this is for the g3 internet mobile that
+
+
+too you will lose people if you have
+
+
+slower painters why is that there is the
+
+
+problem is that the human needs some
+
+
+sort of feedback from any kind of GUI
+
+
+these are the numbers like if something
+
+
+takes 0 to 100 milliseconds we feel it
+
+
+like instantly and then this the more
+
+
+time it takes the more we tend to get
+
+
+lost like everything over a second we
+
+
+have a mental switch we already think
+
+
+about something differently so we want
+
+
+to keep our web page loading time below
+
+
+one second and that's a very ambitious
+
+
+goal but it's possible to give you an
+
+
+idea why that's so important these are
+
+
+numbers from a Google experiment but
+
+
+that Google do they slow down their
+
+
+response time for a specific user group
+
+
+they are able to split their user groups
+
+
+and then they just pick one user group
+
+
+and said ok that slow down the
+
+
+for each search by for example 100
+
+
+seconds which is like nothing 100 second
+
+
+is nothing and let's see what happens
+
+
+and you see on the right column here
+
+
+these are numbers of people the
+
+
+percentage of people who dropped who
+
+
+bounced but it didn't happen right away
+
+
+it took these numbers of weeks for
+
+
+people to change their behavior so
+
+
+humans are not machines
+
+
+but humans need time to change their
+
+
+behavior but even these small numbers
+
+
+may people change their searching
+
+
+behavior so again to the whole
+
+
+discussion about Mobile's ions these are
+
+
+old numbers they are like three or four
+
+
+years old they are more extreme today
+
+
+these countries and these numbers show
+
+
+how many people are using their mobile
+
+
+phone as their only or as a primary
+
+
+Internet device and you always have to
+
+
+think about them because this is the
+
+
+slowest possible connection and you want
+
+
+to be able to deliver a page for them
+
+
+within that one second frame and that's
+
+
+again a tough thing to do was it tough
+
+
+because we have to think about the whole
+
+
+stack we deal with like first we have to
+
+
+do a DNS lookup then we have TCP
+
+
+connections we have a tiers a TLS
+
+
+handshake etc etc at the end of the day
+
+
+all we have left of that one
+
+
+once I was amazing is about 400
+
+
+milliseconds if everything goes perfect
+
+
+that's the best-case scenario so you
+
+
+want to be able to deliver your page
+
+
+from the server within these 400
+
+
+milliseconds actually it's inverse
+
+
+because the browser takes about 100
+
+
+milliseconds to render the page itself I
+
+
+mix up the a slide there we can
+
+
+six many of the problems within the
+
+
+Wraiths system but we cannot fix all of
+
+
+them so if you don't like three MB of
+
+
+JavaScript your aids application can be
+
+
+super super fast and yeah repetition
+
+
+will still be slow because it takes the
+
+
+browser forever to compile these three
+
+
+embiez again mobile phones are our worst
+
+
+problem here because they have very
+
+
+limited resources RAM and CPU was what
+
+
+does happen in a browser if it wants to
+
+
+render a page first it has a network
+
+
+connector and then it it downloads the
+
+
+HTML file
+
+
+it's always the HTML file which gets
+
+
+downloaded first and then the browser
+
+
+built a Dom the next thing is it
+
+
+downloads the CSS and it builds CS and
+
+
+then it downloads JavaScript and then it
+
+
+renders a tree and now it's the first
+
+
+time you see something on your school on
+
+
+your device on your screen not before
+
+
+this again takes at minimum 100
+
+
+milliseconds so we have to subscribe
+
+
+this 100 milliseconds actually from the
+
+
+1,000 so we are kind of left with about
+
+
+300 milliseconds so to understand the
+
+
+problems you have to understand how HTTP
+
+
+downloads work HTTP works on top of TCP
+
+
+and TCP the first thing TCP does is a
+
+
+three-way handshake and you see our big
+
+
+problem here is latency we cannot change
+
+
+the protocol that's TCP that's there for
+
+
+years there's no way of for us to change
+
+
+that so we have a 3-way handshake which
+
+
+always takes one round-trip from the
+
+
+device to the server and back and you
+
+
+see at this point here let's up with
+
+
+this point that's the first payload
+
+
+which gets transmitted and that's about
+
+
+about 12 KB of
+
+
+kinkabe this this is a site filete so
+
+
+this is the first round trip we get 14
+
+
+kb that's called slowstar tcp doesn't
+
+
+know how big the bandwidth is you have
+
+
+to get access to it so it always starts
+
+
+slow with a first picot then it doubles
+
+
+the amount to 29 and then next step
+
+
+again doubling doubling doubling until
+
+
+there are some sort of error and then it
+
+
+moves back one step that's the way TCP
+
+
+figures out how much bandwidth it has
+
+
+from the client to the server or the
+
+
+other way and there's no way we can
+
+
+increase the speed for that we cannot
+
+
+tell them okay we have this bandwidth
+
+
+like people always think just because
+
+
+they have fiber they can browse fast
+
+
+that's not the case it's five hours good
+
+
+if you have Netflix but fiber doesn't
+
+
+help you to open a single web page
+
+
+talking of web pages the waterfall is
+
+
+one of the major tools to analyze web
+
+
+performance this is what a fall of the
+
+
+homepage of this conference I took the
+
+
+screen talk yesterday and you see the
+
+
+red line it's a missing favicon you
+
+
+don't want to have red lines here it's
+
+
+it's it's always incredible oh I always
+
+
+do these these conferences and many
+
+
+times conference don't entry invite me
+
+
+so this is a URL of the web page test
+
+
+awk page where you can see these
+
+
+waterfalls and I will post the slides
+
+
+later on my Twitter account so let's
+
+
+dive in this is a connection where we
+
+
+use a 3G connection and you see the
+
+
+browser starts to render at 3.6 seconds
+
+
+and as I told before first we download
+
+
+the HTML file that's there in the
+
+
+study html5 and that already takes like
+
+
+more than two seconds just this one fart
+
+
+so we are already far away from our one
+
+
+second goal and then it downloads the
+
+
+CSS and then the JavaScript and then you
+
+
+see here work starts so this is what
+
+
+happens for this page and here's an idea
+
+
+or is this a friend prep to show you how
+
+
+that feels okay so the important thing
+
+
+to remember here is this is the first
+
+
+wizard wizard for this web page which is
+
+
+the most important wizard but if you or
+
+
+load this page you already have this
+
+
+image here in your cache so you don't
+
+
+see that problem anymore because your
+
+
+browser already cashed it and you kind
+
+
+of forgot about the first time you you
+
+
+hold it but the first wizard is always
+
+
+the most important one to give you an
+
+
+idea how that feeds on a de this is the
+
+
+same thing with ite now we start
+
+
+rendering with 2.1 seconds which is
+
+
+better still not good but better you get
+
+
+the idea that super important image here
+
+
+is kind of a problem and it's easy to
+
+
+fix to give you an idea how fast it
+
+
+should be this is my business home page
+
+
+with a my adesh consulting OTE this is a
+
+
+te and it starts renders at 500
+
+
+milliseconds and this is a waterfall
+
+
+so you see here about here that's half a
+
+
+second things get moving to give you an
+
+
+idea or that fields
+
+
+that's that's the intent instant feeling
+
+
+you want to have and again first with it
+
+
+second wizard would be even faster okay
+
+
+after scaring you let's dive into an
+
+
+example for rates five point two I guess
+
+
+more I guess more or less everybody
+
+
+knows how to use raids or okay just to
+
+
+be sure
+
+
+so we create a minimum minimal webshop
+
+
+here we have a scaffold for category we
+
+
+have a scaffold for a product a user a
+
+
+review this is a connection we have so a
+
+
+product belongs to category product has
+
+
+many reviews a user has many reviews and
+
+
+they are connected the product model has
+
+
+a method number of stars which
+
+
+calculates the number of stars which we
+
+
+display on the product page that on
+
+
+Amazon was a five star rating
+
+
+this is seat RB to feed it with some
+
+
+sample data I'm using fake the fake a
+
+
+gem to create this and this is the
+
+
+index.html for the product and this is
+
+
+all vanilla and the only difference is
+
+
+this part here where I create the stars
+
+
+depending on the rating I just added a
+
+
+little bit of to the bootstrap CSS to
+
+
+not hurt the eye too much guess how long
+
+
+that page takes to render on my laptop
+
+
+are we without but within our limit or
+
+
+not we have like four milliseconds are
+
+
+we talking like four milliseconds here
+
+
+of course development note I was waiting
+
+
+for that yes development mode and I'm
+
+
+not diving into that discussion
+
+
+it takes 497 milliseconds
+
+
+actually that's the second time I'm
+
+
+reloading that page the first time was
+
+
+worse so with this very very simple page
+
+
+we are already way above our hour speed
+
+
+limit speed budget yeah okay I'm I'm
+
+
+repeating that question for the video
+
+
+the question was why am i silly enough
+
+
+to do that in development mode we all
+
+
+know that production mode is faster it's
+
+
+way easier to measure our everything
+
+
+here in development mode and the point
+
+
+is the same in production mode Ruby is
+
+
+so it is just it that's just the case we
+
+
+still love Ruby everybody does here but
+
+
+it's so let's not kid ourselves so we
+
+
+are already above our limit here and now
+
+
+we have to think there's not much to do
+
+
+on a webpage where we can improve the
+
+
+webpage to make that faster here it's a
+
+
+very very simplistic webpage so the very
+
+
+first thing always is fragmentation
+
+
+that's kind of the lowest hanging fruit
+
+
+so we activate caching and development
+
+
+mode which isn't activated by default
+
+
+and we start with a single row so we
+
+
+implement a fragment cache for each row
+
+
+and that's pretty easy to do it's just
+
+
+two lines of code and now we have a
+
+
+fragment cache for that row or for each
+
+
+each row what is important we have to
+
+
+add touch true to the reviews because
+
+
+otherwise if somebody adds a review it
+
+
+wouldn't touch the product so we would
+
+
+deliver an old cache that's super
+
+
+important here
+
+
+and it's important not to play around in
+
+
+their SQL database without f to record
+
+
+you do not want to bypass actress record
+
+
+more questions so wonder now we are down
+
+
+to 79 so no we are good but dat edge
+
+
+always talks about Russian doll yeah
+
+
+that's done with the default for rates
+
+
+5.2 on the development system so they
+
+
+asked the room for improvement there and
+
+
+on production it'll be faster of course
+
+
+but this kind of worst case scenario
+
+
+here so everybody talks about Russian
+
+
+doors so let's empty implement Russian
+
+
+door on Russian doll means we are not
+
+
+only catching each row but the whole
+
+
+table so for that we add and two more
+
+
+lines like this and this so we have this
+
+
+Russian doll model of cashing it doesn't
+
+
+improve like the improvement we get from
+
+
+this it's not as big as the first step
+
+
+obviously the first step is the the the
+
+
+major improvement but still this is a a
+
+
+big one we just got like 80 30
+
+
+milliseconds more to play around with
+
+
+the next step is not only in and this is
+
+
+very important many of my clients I want
+
+
+to say waste but it's not PC so let's
+
+
+say invest a lot of the time in cashing
+
+
+and forgetting the simple things you can
+
+
+do in the database for example this
+
+
+number of stars when does it change that
+
+
+only changes when you have a new review
+
+
+or when you delete a review or when you
+
+
+update a review but let's say you only
+
+
+can create and delete reviews
+
+
+so why do we want to calculate this
+
+
+every time we create a new cache there's
+
+
+no need there's no need for that
+
+
+that's just weights in computing time so
+
+
+let's get rid of that and add number of
+
+
+stars filled in the products table and
+
+
+use the actor factored callbacks to set
+
+
+these values so whenever we create or
+
+
+destroy a review we recalculate the
+
+
+rating of the product and we add that
+
+
+information to the row in the table so
+
+
+we will never have to calculate that
+
+
+again and that is such a powerful
+
+
+mechanism it's we're not taking we're
+
+
+not talking about much here because
+
+
+that's a very simple calculation but if
+
+
+you think about that for complex
+
+
+calculations you'll save a lot of time
+
+
+and you should always think about do I
+
+
+have to calculate this once then I can
+
+
+store it in the database or do I have to
+
+
+calculate it every for every wizard then
+
+
+I have to do it at for every wizard but
+
+
+most times you don't so what is very
+
+
+important is fragment caching is always
+
+
+slower on the first attempt because you
+
+
+first have to or the system first looks
+
+
+up in the cache okay do I have this
+
+
+fragment cache and if it doesn't have
+
+
+the fragment cache then it's going to
+
+
+render the view and then it's going to
+
+
+write the cache so this always takes
+
+
+more time more time so you always have
+
+
+to think about that it's the next step
+
+
+you're proceeding like if you create a
+
+
+data set do you want to create a
+
+
+fragment cache after that further show
+
+
+view or is that something for just the
+
+
+current user but you might not want to
+
+
+use it so it's not my fragment caching
+
+
+is the Silver Bullet you still have to
+
+
+think and the next problem is the cache
+
+
+key shouldn't be too complicated I've
+
+
+seen many
+
+
+occasions where people went totally wide
+
+
+was the cash keys it took that it took
+
+
+them forever to calculate the cash key
+
+
+and it actually took longer to calculate
+
+
+the cash key then to render the view
+
+
+without the cash I've seen that many
+
+
+times
+
+
+so cash fragment caching is very very
+
+
+good very very powerful but you have to
+
+
+think a lot about it was that question
+
+
+or was it just a thumbs up cool
+
+
+now to spice things up I change the
+
+
+color HTTP caching that's the next step
+
+
+of caching that browsers and proxies
+
+
+don't want to download everything all
+
+
+the time
+
+
+they want to keep the download to a
+
+
+minimum so they use last modified and e
+
+
+tanks to what downloading stuff which
+
+
+they already have in their local cache
+
+
+and that's a very very powerful tool so
+
+
+the idea of ET XML as modifiers is the
+
+
+web browser contacts the web server and
+
+
+says ok my user went to your web page a
+
+
+week ago and I still have this page here
+
+
+in my cache is it still good and then
+
+
+the web server says yeah you're totally
+
+
+good I give you a three or four and you
+
+
+just take whatever you have in your
+
+
+local cache so this is good on many
+
+
+levels because it saves the browser time
+
+
+to download stuff and it saves the
+
+
+server time to render the view because
+
+
+we can do this mechanism in the
+
+
+controller we don't have to render the
+
+
+view this is an example for the e-tag on
+
+
+the command line was cool so this is the
+
+
+first time and you see the 8x changing
+
+
+are changing we are using the same URL
+
+
+but get different different attacks
+
+
+that's because of Redd's understands
+
+
+that these are different users
+
+
+so we have to use cookies to store the
+
+
+information to gives it to Red's so for
+
+
+that to work we include the fresh one
+
+
+each egg products from our index page
+
+
+though this is kind of the key we are
+
+
+using andreas does all the magic with
+
+
+that so at the end we gather in each egg
+
+
+for that so this time we download the
+
+
+file and we get the same cookie the same
+
+
+etek twice so what we can was that each
+
+
+egg is we can use that and every browser
+
+
+does that by default and to ask the race
+
+
+at occasion is my word is still good and
+
+
+then we get the answers three or four
+
+
+years it is so safe with all time for
+
+
+everybody I have the side here win-win
+
+
+for everybody we save on a server and we
+
+
+save on the con side so is that still
+
+
+not good enough because these are kind
+
+
+of the power towards the problem is
+
+
+writing the initial cash is a lot of
+
+
+waste of time if you have a big page
+
+
+this is going to be a problem so what we
+
+
+can do is because most of our webpages
+
+
+are regional located for like for one
+
+
+country or for one continent so we can
+
+
+use cron to preheat everything during
+
+
+the night the servers are running anyway
+
+
+so why not use that time to preheat the
+
+
+ of the cache just with prutte force
+
+
+if you need it or not I don't care if I
+
+
+have it and it doesn't cost me more
+
+
+because I already have the server and
+
+
+it's sitting there so there's one more
+
+
+step if you really want to get that
+
+
+super fast page the fastest page is the
+
+
+one we're engine eggs or Apache for that
+
+
+made us I just write everything with
+
+
+nginx so I use nginx for Morris nights
+
+
+is the one where nginx never contacts
+
+
+rubia trades at all so how can we do
+
+
+that we have the public directory where
+
+
+files are stored which are delivered by
+
+
+nginx without contacting rates at all
+
+
+normally these are files like the 404 or
+
+
+the 500 or the favicon or whatever but
+
+
+we can use it for our purpose it used to
+
+
+be in the rates frame set by default but
+
+
+it got dropped something like at version
+
+
+4 I'm not sure which wasn't exactly but
+
+
+about 4 but we can still use it we can
+
+
+create catch pages in the cache
+
+
+directory and use them in the future
+
+
+from the nginx and we already can we
+
+
+also can gzip them by default so when a
+
+
+user comes the entrant X doesn't even
+
+
+have to gzip them so we are super fast
+
+
+now we are talking the 500 milliseconds
+
+
+fast that's what I'm doing
+
+
+I have everything preset and pre compare
+
+
+pre compressed on my hard drive and
+
+
+again prude force is your friend the
+
+
+server is happy to do that work during
+
+
+the night the tricky part is how do we
+
+
+delete out-of-date swords because if we
+
+
+create a product we update the product
+
+
+in the table in the database but we
+
+
+still have the old HTML file and the
+
+
+gzip file so what we have to do there is
+
+
+we have to create this expire cache
+
+
+method and call that when we update or
+
+
+destroy something so that the file gets
+
+
+deleted
+
+
+this mechanism is not just good for
+
+
+anonymous users you can use it for
+
+
+current users too so it takes a little
+
+
+bit more thinking and a little bit more
+
+
+planning but it's totally good for that
+
+
+too
+
+
+I use these sides first time for
+
+
+Redskins talk important and they're stay
+
+
+good so I assume that we have a user
+
+
+base of 10 million people and we have
+
+
+this webpage here and let's assume it's
+
+
+customized so every user gets a
+
+
+different web page here so this web page
+
+
+is in gzip it's 28 K times 10 Millions
+
+
+we're at 0.26 terabyte which is nothing
+
+
+today so hard drive doesn't cost you so
+
+
+much don't be afraid of storing big
+
+
+amount of data there it's well worth it
+
+
+nginx can gzip to fight on the side but
+
+
+if you can you should always produce it
+
+
+them to save that little bit of extra
+
+
+time there and then you can use nginx
+
+
+and your cookie system to deliver the
+
+
+specific file to your specific current
+
+
+user this is getting a lot more work but
+
+
+it pays off because you will need a lot
+
+
+less CPU power you can make with fewer
+
+
+servers any questions to this area let's
+
+
+sir questions second okay yes okay the
+
+
+expires header you can tell the web
+
+
+browser how long your page is good and
+
+
+when it's going to expire that's the
+
+
+expire header so you can't you can tell
+
+
+it okay this page is that good for one
+
+
+minute or a day or a week or whatever
+
+
+very useful tool to so you but the
+
+
+problem is there if you make a mistake
+
+
+then there's no way of going back there
+
+
+so HTTP 1.1 there's some mistake inside
+
+
+sorry it's not one point two it's one
+
+
+point one versus hep-2 easy answer to
+
+
+that
+
+
+always use HTTP 2 it's an easy fix you
+
+
+get without any few any further
+
+
+improvements you get like 20%
+
+
+performance boost and it's an easy
+
+
+replacement not much work and then in
+
+
+the nginx config that's like one word
+
+
+you added it's HTTP 2 and one line and
+
+
+then you're on itv2 so you really want
+
+
+to do that I often get the question what
+
+
+about CD ends because Citians
+
+
+became popular in HTTP 1.1 area and they
+
+
+made an effort to make believe everybody
+
+
+that they are the central is a silver
+
+
+bullet to solve any web performance
+
+
+program and there are still very many
+
+
+cases where this is good like if you
+
+
+want to if you are Apple and you want to
+
+
+deploy a new firmware release and that's
+
+
+going to be downloaded worldwide by
+
+
+million and millions of users then you
+
+
+need a CDN but if you just have a local
+
+
+web shop with that sake let's say a
+
+
+million users
+
+
+and it only delivers content to your
+
+
+region to your land or maybe took to
+
+
+your continent then a CDN will not give
+
+
+you benefits and the HTTP to word
+
+
+because HTTP to term is best when you
+
+
+use one connections was HTTP one it was
+
+
+different there it was best to have like
+
+
+six or eight connections in parallel to
+
+
+get the maximum top download speed
+
+
+actually HTTP to does that for you
+
+
+already
+
+
+so you want to have one connection to
+
+
+one server and not many connections to a
+
+
+bunch of different city ends it's a very
+
+
+important thing to do active storage
+
+
+everybody talks about active search and
+
+
+ruby Allred's 5.2 it's a it's not like a
+
+
+new tool it's like more we had this
+
+
+discussion
+
+
+I liked the day before it's a little bit
+
+
+like reinventing the wheel but it's good
+
+
+thing because now everybody can use the
+
+
+same tool you want to use active storage
+
+
+for all your graphics and images because
+
+
+then you can create different output
+
+
+formats like if your if your user is
+
+
+using Chrome then you can deliver Pepe
+
+
+as a format and few sites do that
+
+
+already so that's a very easy win you
+
+
+can get it's more complicated to program
+
+
+because you have to ask your system
+
+
+which browser is it and then make the
+
+
+discussion a decision which traffic
+
+
+format I'm going to deliver but it pays
+
+
+off the next question is always okay
+
+
+should I use Apache or nginx and really
+
+
+it doesn't matter take the one you like
+
+
+most they're both equal good port the
+
+
+vs. jiseop everybody knows 40 here
+
+
+nope ok protti is a I don't want to say
+
+
+new because it's not new anymore it's
+
+
+it's a it's another compression
+
+
+mechanism which is supported now by all
+
+
+major browsers so Safari Chrome puts in
+
+
+Microsoft thing it is an explorer edge
+
+
+yeah so all the major browsers provide
+
+
+protein support right now and it's a
+
+
+better compression so you get another
+
+
+let's say 10 to 20% of performance boost
+
+
+just by using a different compression
+
+
+and there's no downside because if the
+
+
+browser doesn't support it the web
+
+
+server will use gzip so it's an easy
+
+
+solution and one thing it doesn't only
+
+
+save bandwidth depending on the
+
+
+compression level it also saves CPU
+
+
+power on the server so that's an easy
+
+
+win there - the next question
+
+
+as always should I go Haruko or I'm
+
+
+always using Hiroko because it became
+
+
+kind of the de facto standard but it's
+
+
+you can use other services - or bare
+
+
+metal and the answer for this is if you
+
+
+start Heroku is a good and quick way to
+
+
+start but if you want to be fast if you
+
+
+want to have a really fast webpage then
+
+
+there's no way around using bare metal
+
+
+this it's just the fastest way of doing
+
+
+it and as a as a benefit as a side
+
+
+benefit it's way cheaper Heroku and all
+
+
+the other services are pretty expensive
+
+
+once your page grows and then at that
+
+
+point most people don't want to invest
+
+
+time in moving their service so they
+
+
+just use that gooey feature where they
+
+
+say ok pay more pay more pay more let's
+
+
+say business model
+
+
+pre-loading and prefetching these are
+
+
+tools you can use on your HTML page
+
+
+which are very very powerful you set
+
+
+these in the header of the HTML page and
+
+
+you tell the browser for example DNS
+
+
+prefetch I am going to need the DNS
+
+
+record for this domain I already know
+
+
+that this is going to happen within the
+
+
+next let's say 300 seconds so go ahead
+
+
+and prefetch that please and then the
+
+
+browser does ed so you save like 20 or
+
+
+50 milliseconds for that and then you
+
+
+can also say okay you know what I know
+
+
+that I'm going to use that javascript
+
+
+file or CSS file or whatever file so
+
+
+please go ahead and fetch that store
+
+
+that in my in your cache and then the
+
+
+browser does that whenever it has time
+
+
+and you can do that for for the next
+
+
+page too like if you have an index page
+
+
+with your like a news page and you know
+
+
+that like 50% of your users click on the
+
+
+first product or news item then you can
+
+
+preload everything for that already and
+
+
+then it's just there when the user
+
+
+clicks on that you all you can do a pre
+
+
+render which I normally don't do
+
+
+but then the browser already has
+
+
+everything ready to go if somebody
+
+
+clicks on that link you can use you can
+
+
+tell nginx and I'm not sure about Apache
+
+
+but I guess Apache does a - to use these
+
+
+headers - for pushing stuff yeah HTTP -
+
+
+so HTTP - is the first time we a server
+
+
+can push farts without the client asking
+
+
+for them and that's a very powerful
+
+
+mechanism but with what the phrase was
+
+
+great power comes
+
+
+no great responsibility so ATP push very
+
+
+tricky area but powerful so we are
+
+
+coming to an end what is the most
+
+
+important tool for a good webpage the
+
+
+performance the most important tool is
+
+
+setting a time budget and that's
+
+
+something you have to do within your
+
+
+organization within your company within
+
+
+your group you have to sit together and
+
+
+say okay what is our aim
+
+
+we're not going to do that crazy stuff
+
+
+that winter my guided was a 500 second
+
+
+that's just crazy let's do something
+
+
+more reasonable like let's do something
+
+
+within two seconds then you have to keep
+
+
+to these two seconds because there will
+
+
+be the time somebody from marketing
+
+
+opens the door and says I need that
+
+
+pixel I do need that pixel here that's
+
+
+that's like for me that's super
+
+
+important and then you have to tell him
+
+
+ok if we if we use that magic JavaScript
+
+
+library which you are not going to use
+
+
+anyway then we will run out of our time
+
+
+budget so you have an argument within
+
+
+your argument within your organization
+
+
+where you can say ok we have to make a
+
+
+decision we don't want to go without our
+
+
+time out of our time budget so we have
+
+
+to skip features because otherwise we
+
+
+would go out of that and that's super
+
+
+important so it's leprechauns read so
+
+
+hard yeah it is so hard it's just what I
+
+
+display today
+
+
+is just like the tip of the iceberg just
+
+
+to give you an idea these are or
+
+
+low-hanging fruits
+
+
+it's very more complicated if you want
+
+
+to dive into it go to this webpage or
+
+
+buy the book
+
+
+that's kind of the web performance Bible
+
+
+it gets you all the information you need
+
+
+about the network stack the graphic
+
+
+formats
+
+
+caching etcetera etcetera very generic
+
+
+not depending on any raids or PHP or
+
+
+Java or whatever framework if you want
+
+
+to dive into raids 5.2 this is my new
+
+
+book and I don't know how many people
+
+
+are here this code is good for the first
+
+
+100 people so if you want to use it do
+
+
+it now and I didn't came out I didn't
+
+
+come up with the Ruby and raids that was
+
+
+some marketing guy from a press I post
+
+
+updates about raid stuff and web
+
+
+performance stuff and Q pictures of my
+
+
+kids on my Twitter feed so if you're on
+
+
+Twitter that's my Twitter feed and in
+
+
+case tomorrow you have a question just
+
+
+sent me an email
+
+
+I'm happy to answer questions just give
+
+
+me a little bit time to answer them so
+
+
+that's for today that's for their
+
+
+performance with raids any questions so
+
+
+far I guess we take the mark I'm just
+
+
+curious whether there are some other
+
+
+options to improve performance on the
+
+
+server side particular I I read about
+
+
+server-side components includes like
+
+
+when you cash a static page you could
+
+
+include a block to include a portion of
+
+
+that cached page and we rerender it from
+
+
+the backend service you didn't mention
+
+
+it and I just wonder if it's possible
+
+
+with rice and yeah if if so how ok
+
+
+caching wise there's a whole variety of
+
+
+things you can do it's more or less all
+
+
+the same it's all more or less the
+
+
+fragment caching idea you take pass and
+
+
+like a fragment and you catch that
+
+
+fragment what is always like performance
+
+
+was what it's always smart to do is use
+
+
+another the latest bubi version like
+
+
+Ruby 2 point 5 it was like far too
+
+
+10% speed gain for just updating your
+
+
+ruby version so that's an easy one
+
+
+do not underestimate coding box or
+
+
+whatever coding was work you do I often
+
+
+find that's how can I put that code
+
+
+which needs improvement which takes way
+
+
+longer than it needs to be and that's
+
+
+just because of people wrote something
+
+
+and didn't refactor it so I have to ask
+
+
+do you really use coal beds and touch
+
+
+inactive record in the complex websites
+
+
+because for me this is like those things
+
+
+should be removed completely from rice
+
+
+the best thing that the Alice family can
+
+
+do because it can give you like actually
+
+
+performance problem it's great when you
+
+
+have like one-to-one relations of
+
+
+touching my bees it's okay for that but
+
+
+if you have like has has money and you
+
+
+update the whole collection you are like
+
+
+touching like the parent objects many
+
+
+times and at the ring he's fine but
+
+
+later on when you're little gets big
+
+
+it's like gives you a lot of problems so
+
+
+yeah okay yes I do and for most
+
+
+companies that's that's the best way of
+
+
+doing it
+
+
+of course there always will be an edge
+
+
+case if you if your touch goes wide like
+
+
+you have to touch a million of records
+
+
+instead it doesn't make any sense but
+
+
+for most cases a touch doesn't you you
+
+
+know like like maybe it doesn't records
+
+
+or in this case just one so a touch is
+
+
+still a very very good way of working
+
+
+with fragment caching and keeping
+
+
+everything in sync but yes they are edge
+
+
+cases where it doesn't make any sense if
+
+
+you're in that environment I trust you
+
+
+that you can see these edge phases and
+
+
+just delete that piece of code any other
+
+
+questions
+
+
+hi isn't cache invalidation one of the
+
+
+hard problems computer science in
+
+
+general
+
+
+yeah like naming and the second question
+
+
+is I can see the scaling for a simple
+
+
+application but what about complicated
+
+
+applications with multiple of models
+
+
+okay then you know once you get over
+
+
+three models you're out of range
+
+
+now of course caching works for all
+
+
+kinds of applications and yes it is
+
+
+complicated it's that's the reason why
+
+
+that's one of the reasons why many
+
+
+people fall into a caching traps they
+
+
+don't he was catching on the development
+
+
+system and then they push the code in
+
+
+production and then they ran into all
+
+
+sorts of wrong cache keys and then they
+
+
+get strange mistakes in their production
+
+
+system and they cannot replace reproduce
+
+
+it on the development system because
+
+
+they don't use caching in the
+
+
+development but it's they're worth it
+
+
+let's face it Ruby is slow it just
+
+
+we will never be as fast as like Phoenix
+
+
+in the next year if I write the same
+
+
+application in in Phoenix it'll take
+
+
+like ten milliseconds or less without
+
+
+any cash but we are using Ruby so we
+
+
+have to work within our limitations and
+
+
+then caching is the best thing to do
+
+
+just afford to support civilian services
+
+
+most of them also offer not only as a
+
+
+parallel downloading which is not the
+
+
+case for TTP too but also the patient
+
+
+mechanism and you can just avoid
+
+
+spending time on building your own cache
+
+
+and think about Russian don't caption on
+
+
+samsung kies that you will just have fun
+
+
+any most visitors you just have the same
+
+
+think you described you have a new
+
+
+public holder yes servicing like static
+
+
+files for
+
+
+and for example Akamai Kish worked in
+
+
+pretty good updates pretty addict
+
+
+weights and okay but then we are again
+
+
+at at at the CDN discussion of course if
+
+
+you're using a service like from Akamai
+
+
+where what they do the hard work with
+
+
+compression the images and they deliver
+
+
+the optimal image for your use case
+
+
+that's a very good solution like it's a
+
+
+quick fix but it's not the optimal web
+
+
+performance motor wise so if you're good
+
+
+with that solution then it's ok but if
+
+
+you want to go to the extreme and wanna
+
+
+be without within the 100 1000
+
+
+milliseconds then you probably have to
+
+
+do it on your site on your server
+
+
+because you don't want to open the
+
+
+second connection to your CDN you want
+
+
+to push everything to the one pipe you
+
+
+already opened it's probably not up the
+
+
+most optimal way but like in Pareto law
+
+
+it may fix 80% of your issues with just
+
+
+20% of your efforts that's correct okay
+
+
+but they wanna ask something about that
+
+
+leaks you okay yeah so we know Alexia's
+
+
+why don't you just just Alex you know
+
+
+the real question is not not a question
+
+
+but maybe a remark is that there's some
+
+
+problems with caching of his problems
+
+
+like I don't know you maybe want to
+
+
+render it differently for different
+
+
+users etc you have to expire etc before
+
+
+you try caching it's usually good idea
+
+
+to try to optimize your queries do some
+
+
+pre all doing records etc and you might
+
+
+not need caching so that might be
+
+
+actually a very premature optimization
+
+
+in my opinion in our example which we
+
+
+discussed the index page their active
+
+
+record part took like I want to say 3
+
+
+milliseconds
+
+
+the other of 490 milliseconds we use in
+
+
+the view so in within Reyes within the
+
+
+rates word the active record part is of
+
+
+course we always have to look internet
+
+
+we want to include stuff there so
+
+
+there's still provement potential there
+
+
+but the big one is on the view of the
+
+
+side was a fragment cache it's kind of
+
+
+YC versa in in Phoenix word in Phoenix
+
+
+it's often like that the database takes
+
+
+way more time than the rest and just to
+
+
+to answer that not ask fashions if you
+
+
+have the choice and you are starting on
+
+
+a green field you really want to look
+
+
+into Phoenix she didn't say that I I saw
+
+
+it he feels like like mentally he just
+
+
+signaled it to me Ruby and race is is
+
+
+perfect for many teams because they are
+
+
+used to it and then it's it's the best
+
+
+way to go but if you have a fresh start
+
+
+and you have an open mind a team then
+
+
+really have a look into Alexia and
+
+
+Phoenix because it is super fast and
+
+
+it's super easy to test it's just it's
+
+
+it's beautiful
+
+
+add and buy my book first please but
+
+
+it's about right yeah yeah the testing
+
+
+you know I have to generate sales any
+
+
+more questions yeah last one yes we have
+
+
+[Music]
+
+
+I have a feeling that in the first
+
+
+example of the application there was a
+
+
+performance issue because we have n plus
+
+
+one problem yeah so we spend we spent
+
+
+the time in view because we were when we
+
+
+were looking through products for each
+
+
+product we had to query the database to
+
+
+count the reviews so probably that's the
+
+
+issue because you can see here we are
+
+
+wasting 34 milliseconds and we can get
+
+
+that down by including that but if we
+
+
+get that down to 1 milliseconds which we
+
+
+won't but that's assuming we can get it
+
+
+down to one milliseconds we still have
+
+
+the four and 60 millisecond for the
+
+
+renderings of the river view so it that
+
+
+saves our lives there the database is
+
+
+always we have to improve the database
+
+
+performance of course but it will not
+
+
+give us the time we need here because we
+
+
+just have maximum we can improve it by
+
+
+33 milliseconds okay thank you very much
+
+
+thank you and thanks for inviting me
+
+
+it's always a pleasure to be here it is
+
+
+a bit cold outside the weather is our
+
+
+speciality so okay thanks everybody
+
+
+thank you
+
+
+[Applause]

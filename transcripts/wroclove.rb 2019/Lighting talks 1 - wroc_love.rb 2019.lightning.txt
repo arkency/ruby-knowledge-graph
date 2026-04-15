@@ -1,0 +1,1366 @@
+hi hi my name is Pawel pokrovka and I
+
+
+love receiving spam I love receiving
+
+
+spam when the spam gets into my inbox I
+
+
+my heart beats faster and I will tell
+
+
+you why in a moment
+
+
+and a at first I would like to ask you
+
+
+something
+
+
+a well when I would like you to when I
+
+
+will ask you to implement authentication
+
+
+in rails for example how many of you
+
+
+would store user password in database
+
+
+inclined plain text yes please please
+
+
+raise your hands please raise your hands
+
+
+okay
+
+
+nobody ok ok so I can tell you that
+
+
+you're fantastic you are the best
+
+
+programmers in the world and I'm honneur
+
+
+to meet you because there was recent
+
+
+study among programmers and the tasks
+
+
+which the task in in involves
+
+
+implementing authentication simple
+
+
+authentication it was paid tasks it was
+
+
+that the study was based on freelancers
+
+
+and 40% of these participants
+
+
+implemented authentication using
+
+
+plaintext passwords in database when
+
+
+they were asked later to fix this to
+
+
+make it more secure many of them
+
+
+encrypted the password with base64 yeah
+
+
+so
+
+
+and imagine what will happen when
+
+
+database is such such protected database
+
+
+will we would leak to attacker a it it
+
+
+means that this data will can be used
+
+
+for criminal purposes right there will
+
+
+be account bridges at etc and the
+
+
+attacker could send spam to these people
+
+
+in this database
+
+
+so a I have another question to you a
+
+
+how many of you have online account
+
+
+somewhere please raise your hands okay
+
+
+many people are lazy and don't want to
+
+
+this raise hands and it please tell me
+
+
+how many of you please raise your hands
+
+
+we have 50 or more online accounts
+
+
+including newsletters social media
+
+
+everywhere where you put your email okay
+
+
+thanks many people so I can tell you now
+
+
+that each one who raised who raised his
+
+
+hand his data belongs to criminals
+
+
+because because it leaked some somehow
+
+
+why I am telling this it is based on my
+
+
+research for the last 12 years I was
+
+
+doing some experiment when I was
+
+
+registering force on some website I
+
+
+provided unique hard to guess email
+
+
+address this email was unique to the
+
+
+website and later when I started
+
+
+receiving spam on this unique hard to
+
+
+guess email I was sure this email leaked
+
+
+from this website and during this 12
+
+
+years experiment I receive
+
+
+I've registered for 800 sites and and 15
+
+
+of them licked it this includes LinkedIn
+
+
+then the DNS and one site which sells
+
+
+secure SSL certificates okay so if you
+
+
+do the math you can compute that every
+
+
+5th 50 registrations is giving your
+
+
+email address and other data to spammers
+
+
+and other criminals so I will so now you
+
+
+know have a nice day
+
+
+let's start you know we were talking
+
+
+about many hard things today so let's
+
+
+talk about something that's easy but
+
+
+before that let me remind two hard
+
+
+things to health problems in computer
+
+
+science there are caffeine validation
+
+
+yeah and naming things cache
+
+
+invalidation yeah of course constant
+
+
+validation is really hard and I don't
+
+
+want to talk about it so I will be
+
+
+talking about naming things or rather
+
+
+about naming people but it seems that
+
+
+sometimes it quite it's quite easy as
+
+
+some people says there is one simple
+
+
+thing in computer science so have you
+
+
+ever felt who of you are styled as
+
+
+senior developers or senior engineers or
+
+
+were you were styled as once yeah do you
+
+
+think it means anything
+
+
+what does it mean that someone is a
+
+
+senior developer is it that he's an uber
+
+
+coder what skills does he possess or
+
+
+maybe what responsibilities should he
+
+
+has and who can name one a senior
+
+
+developer and most of all should you
+
+
+care about it most of you are did not
+
+
+raise hand I guess you don't care so
+
+
+what skills should have sent your
+
+
+developer maybe it's an uber coder he's
+
+
+just a technological experts you know I
+
+
+used to be styled as selling a ruby
+
+
+developer I'm really proud of it
+
+
+it could be even worse I could have been
+
+
+sent your rails developer right or that
+
+
+what's what could be worse
+
+
+senior react developer senior closer
+
+
+Script developer right I know one but
+
+
+maybe maybe it's not about only about
+
+
+technical part maybe it's about about a
+
+
+language maybe it's more about it maybe
+
+
+about some maybe some computer science
+
+
+principles and require to be a senior
+
+
+maybe some domain knowledge or maybe
+
+
+some soft skills maybe what happens if a
+
+
+senior ruby developer as I used to be
+
+
+will transfer to a company that requires
+
+
+Python what if a web developer
+
+
+transferred to a company that does game
+
+
+dev or that that does some some control
+
+
+systems he is his senior and what should
+
+
+he do there and also what should seniors
+
+
+do what what should be the
+
+
+responsibilities maybe they should just
+
+
+code the most important part of the
+
+
+systems maybe they should refactor or
+
+
+the mess that regular or mediocre
+
+
+developers did or maybe they should talk
+
+
+to the client maybe they should yell at
+
+
+people and what should be the
+
+
+responsibilities and next who can name
+
+
+that someone is a senior maybe other may
+
+
+be his peers because only a hacker can
+
+
+could name someone a hacker but who is
+
+
+the first senior developer in the world
+
+
+and also it is it's a problem that
+
+
+someone can be a local senior see most
+
+
+the wisest person in really mediocre
+
+
+company yeah with sixth six months of
+
+
+experience and if it's all about its if
+
+
+someone I can name himself a senior
+
+
+developer and what about junior that
+
+
+with Kruger someone affect that things
+
+
+that that they if they think that they
+
+
+know everything
+
+
+or maybe what about people we
+
+
+imposter syndrome that will never call
+
+
+themselves senior developers right and
+
+
+they will never never applies in your
+
+
+developers and if our department calls
+
+
+someone senior developers they will find
+
+
+some strange metric to name someone a
+
+
+senior right like this one so who can
+
+
+name someone a senior and if it's all
+
+
+about years of experience and thanks
+
+
+should you care why why should I talk
+
+
+about it Iker because I think in naming
+
+
+things is important and see important
+
+
+computer science it's important even in
+
+
+our industry it's just a lot about our
+
+
+industry that is really not very well
+
+
+defined and also it's just a lot about
+
+
+the company you are in because if
+
+
+someone if there is there anything after
+
+
+the senior do they use the titles to
+
+
+give you impression that they care about
+
+
+your development
+
+
+maybe it's instead of giving you a raise
+
+
+they call it they will call you a senior
+
+
+so it also tells a little bit about your
+
+
+own goals if you want just to be a
+
+
+senior what does it mean what does it
+
+
+tell about you it's a conference
+
+
+conferences are for presentations not
+
+
+for presentation but for talking so
+
+
+let's talk I go to me and talk if you
+
+
+can hi
+
+
+that's not surprisingly me I was young
+
+
+and beautiful two years ago on broad
+
+
+swath I was talking about performance of
+
+
+distributed applications I was talking
+
+
+that I told you
+
+
+you may remember or not that I can model
+
+
+your distributed application I can
+
+
+describe what it does I can even model
+
+
+whatever infrastructure is your
+
+
+application deployed to even how this
+
+
+infrastructure is managed and what and
+
+
+then I can show you for example that
+
+
+recent changes in the way the
+
+
+infrastructure is managed it's not very
+
+
+good for performance of your application
+
+
+or I can show you that you should
+
+
+rescale your application because it will
+
+
+be good for your performance or you
+
+
+shouldn't rescale your application
+
+
+because you will just do a lot of work
+
+
+and gain nothing in terms of performance
+
+
+so that's what I can do
+
+
+long story short it is possible to
+
+
+predict performance of distributed
+
+
+applications performance changes of
+
+
+distributed applications without complex
+
+
+benchmarks just by creating some models
+
+
+performing simulation and getting
+
+
+results okay
+
+
+but that's what you can watch on YouTube
+
+
+from Road to have or be 2017 so if you
+
+
+want just watch it so what why why am I
+
+
+here what I might talking about if you
+
+
+can see it okay it was quite well
+
+
+received presentation it was always a
+
+
+very nice audience here but one of
+
+
+questions that was asked after the
+
+
+presentation it was asked in a very nice
+
+
+way but nonetheless it was this question
+
+
+and the only answer I could give you
+
+
+then was sorry I did it I implemented it
+
+
+I can talk about it and I can use it but
+
+
+I did it while I was still working on
+
+
+university so this code belongs to the
+
+
+University to my employer and I couldn't
+
+
+share it with you so that's why I'm
+
+
+talking here now two years later and not
+
+
+so much money later I can tell that I
+
+
+bought you a gift
+
+
+it's already on github so if you want
+
+
+see the code see the code but please
+
+
+don't be very critical it was a treat
+
+
+kidding to implement it I know I tried
+
+
+to do it three or four times before I
+
+
+managed to do it it was to implement it
+
+
+you know Ruby was necessary I know I
+
+
+tried it in Java like two times it's not
+
+
+possible
+
+
+so please don't be very critical but yes
+
+
+I will be happy to hear your thoughts
+
+
+about it
+
+
+it's of course a ruby gem so you can
+
+
+take it and install it here are the
+
+
+links the first one is to the tool
+
+
+itself it's quite extensive readme there
+
+
+below the hood there are Petri Nets so
+
+
+if someone wants to use Petri Nets for
+
+
+example to model some business logic
+
+
+more complicated than what Andre showed
+
+
+yesterday so the logic that can be
+
+
+modeled using the finite automata you
+
+
+can use Petri Nets so there's a tool for
+
+
+that and you can also use it it's also a
+
+
+ruby gem and if you want some support in
+
+
+whatever is related to this tool or to
+
+
+performance prediction that's how you
+
+
+can reach me thank you
+
+
+ok hello everyone I am Victor Chappell
+
+
+from Ukraine I have I'm a speaker for
+
+
+the conference so I'll have a big
+
+
+presentation on different topic tomorrow
+
+
+morning so I'm mostly here to say you
+
+
+don't oversleep I am I have a first
+
+
+presentation now now let's let's talk
+
+
+about something I do Ruby since like 15
+
+
+year my medium it happen at souls that
+
+
+for like first 12 year of my Ruby career
+
+
+I managed to avoid rails completely yeah
+
+
+[Applause]
+
+
+that so so I am one one of the guys who
+
+
+came to Ruby not because of rails and
+
+
+not from PHP it's like where story I was
+
+
+a simple C++ developer and really
+
+
+programming language geek and I love a
+
+
+drill bit once so I managed to find
+
+
+different kind of works that allowed me
+
+
+to work with Ruby but not with rails
+
+
+because I have my problems with of
+
+
+Israel's I didn't didn't didn't know it
+
+
+so
+
+
+and I even when I switch it to rails
+
+
+eventually and started to work on a
+
+
+regular array Lefkada base I still still
+
+
+look at for some things that will allow
+
+
+me to experiment with Ruby
+
+
+expressiveness to the new edges to some
+
+
+some new adventures and at some point I
+
+
+came to presentation by Stephen Wolfram
+
+
+of Wolfram Alpha wolfram mathematica
+
+
+about their Wolfram language that it's
+
+
+absolutely awesome its proprietary seen
+
+
+because it is mostly probably good for
+
+
+demos but for them as it's absolutely
+
+
+awesome it can do any any kind of same
+
+
+scientific stuff and then I decided here
+
+
+Ruby can do it and even more
+
+
+expressively and then I'll on the side
+
+
+truths that scene is already taken by
+
+
+Python and ever since that exists and
+
+
+this saw some involved from insects is
+
+
+created in Python in this one or that
+
+
+form but I didn't want to write Python I
+
+
+wanted to write Ruby so I started
+
+
+several open source projects you can
+
+
+look at my github there's a still there
+
+
+and I still have some hopes for them so
+
+
+not that that right but also if I find
+
+
+out that some brave guys are doing Ruby
+
+
+for science
+
+
+it it was called scientific room it is
+
+
+still called scientific Ruby communities
+
+
+they're still brave they still have some
+
+
+energy and for three years I was part of
+
+
+this community hoping to bring together
+
+
+the scientific development the
+
+
+expressiveness of Ruby and maybe make
+
+
+some breakthrough to the absolutely
+
+
+different area it was a very fun journey
+
+
+we did several google Summer of Code of
+
+
+code working with students where I
+
+
+eventually learned that known to maybe
+
+
+many of us with that
+
+
+for example Indian programmers
+
+
+I have these that flows it's it's
+
+
+completely not not true I work at with
+
+
+super bright Indian guys and was very
+
+
+happy to do that but the sad story is it
+
+
+led to no end
+
+
+why is it so it happens because I
+
+
+believe because of several things
+
+
+because of really really large head
+
+
+starts at Python head like currently we
+
+
+have some some tools in Ruby but even
+
+
+when I work it in large companies that
+
+
+need needed to make that some some data
+
+
+science from the platform and all the
+
+
+code base was in rails and elf was a
+
+
+three said pitoni stirs in the corner
+
+
+who said no no no we would not work with
+
+
+Ruby we will do data science and Python
+
+
+because data science is already taken by
+
+
+Python and when something is done in
+
+
+this direction by mostly by students who
+
+
+care who came in summer and do something
+
+
+it's ignored by the community except for
+
+
+some part of the community that is in
+
+
+Japan works only and communicates only
+
+
+in Japanese and also ignores ever since
+
+
+that english-language part of the
+
+
+community does and so we still have some
+
+
+hopes that some scientific Ruby
+
+
+scientific applications for Ruby will
+
+
+exist but again I keeps to prepare I
+
+
+keeps to pretend to be those guy from
+
+
+the front-end community but indeed I am
+
+
+the Ruby back-end developer so I am
+
+
+going to share my thoughts about
+
+
+outdated browser detection the Esha are
+
+
+very very familiar there are many
+
+
+browsers for many platforms and has many
+
+
+version and
+
+
+some version of this browser supports
+
+
+some features and some not some browser
+
+
+gots to be outdated and some browser I
+
+
+invented very fastly and gets update
+
+
+very early so dealing with all of this
+
+
+look some kind be challenging and you
+
+
+can say that detecting outdated browser
+
+
+is something about front end and the
+
+
+people from forum front end should care
+
+
+about it so if we see the statistics the
+
+
+most of the people used the modern
+
+
+browser and the small part of the people
+
+
+use outdated browser but the idea to
+
+
+support all the browser to let all the
+
+
+user to see to use your application is
+
+
+very lovely in case when business has
+
+
+unlimited amount of money and can spend
+
+
+it for unlimited amount of developer
+
+
+resource so most of you thinks that
+
+
+there is something about front end and
+
+
+front end people should care about it so
+
+
+I don't mind and they don't mind and
+
+
+they do it
+
+
+people from front end has the NPM
+
+
+package for simple configure the set of
+
+
+supported browser in such kind of the
+
+
+rules than these rules gots to be
+
+
+processed to the list of supporting
+
+
+browser because of this NPM package is
+
+
+updated very often it knows about all
+
+
+the versions of all the browsers for all
+
+
+platform and it looks like it works also
+
+
+for nonetheless there is another tool
+
+
+another package which made it match it
+
+
+validates the provided HTTP it really
+
+
+the provided HTTP header user agent to
+
+
+make the supported browsers and
+
+
+everything works
+
+
+great with the help of front-end tools
+
+
+until oh sorry so in case if the browser
+
+
+isn't supported with help of front-end
+
+
+tools we can show the message and task
+
+
+user for browser updation so on
+
+
+everything works well until we've faced
+
+
+the browser that do not support the
+
+
+JavaScript or the javascript is disabled
+
+
+in this case this problem goes to a
+
+
+back-end and here is the port of the
+
+
+original and PM package for Ruby it do
+
+
+the same it validates the user agent and
+
+
+find the matching of the supported
+
+
+browsers in this way we can do just the
+
+
+same render the alert with the pure HTML
+
+
+and it would be works with any browser
+
+
+but the issue is how to manage this
+
+
+config and let it be used with front-end
+
+
+and back-end and let it have the only
+
+
+one place if you have the usual rails
+
+
+project where front-end and back-end is
+
+
+lying on the same repository it is easy
+
+
+just share the browser JSON files and
+
+
+everything works great use this file for
+
+
+front-end tools use this file for
+
+
+back-end to identify the browser's own
+
+
+the outdated but if we have separated
+
+
+from tent when front-end solves all the
+
+
+requests and lies in another repository
+
+
+this problems solving this problem
+
+
+becomes a little bit tricky but here is
+
+
+the solution just do another HTTP
+
+
+request for every HTTP request looks
+
+
+very scary and unstable but it works and
+
+
+it is support it is
+
+
+possible to cash the response and not to
+
+
+do HTTP requests for every HTTP request
+
+
+that is all if you have any thoughts
+
+
+about it just write it here thank you
+
+
+very much okay hi sorry for those who
+
+
+were there last year and the year before
+
+
+maybe I'm just gonna play music for five
+
+
+minutes
+
+
+with Ruby it's it's an app that's called
+
+
+sonic pal you can install it and then
+
+
+there's a very nice tutorial inside if
+
+
+you want to learn how to play it's it's
+
+
+easy to begin and then and then it's
+
+
+like every musical instrument you have
+
+
+to practice a little bit to get good at
+
+
+it I'm not very good but I want to share
+
+
+what it's a lot of fun to play with it
+
+
+so let's go
+
+
+[Music]
+
+
+[Music]
+
+
+[Music]
+
+
+[Music]
+
+
+[Music]
+
+
+[Music]
+
+
+[Applause]

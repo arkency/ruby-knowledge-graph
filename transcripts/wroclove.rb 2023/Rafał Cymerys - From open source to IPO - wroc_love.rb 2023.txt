@@ -1,0 +1,3541 @@
+everyone my name is Rafael zamaris I
+
+
+work at upside which is a software
+
+
+consultancy slash software house
+
+
+whatever you name it uh and last year we
+
+
+took over an open source framework
+
+
+called spree as a lead maintainer so I'm
+
+
+going to share some interesting stories
+
+
+about
+
+
+maintaining that helping people scale
+
+
+and helping our users be like happy
+
+
+users
+
+
+so I saw the first part actually from
+
+
+like rails website because they claim
+
+
+that you know rails applications can
+
+
+scale from NDP to IPO with no problem
+
+
+and I put that into a context of like
+
+
+building an open source framework that
+
+
+the other companies use to scale from
+
+
+MVP to an actual IPO
+
+
+so a few words about spree
+
+
+um so spray is an e-commerce framework
+
+
+which is interesting because it's not
+
+
+only a developer tool but also it
+
+
+contains a huge bunch of business logic
+
+
+specific to a particular domain
+
+
+um
+
+
+it is built on top of rails like state
+
+
+of the art you know rails way of things
+
+
+for quite a lot of years and it's been
+
+
+out there since 2008 so we're
+
+
+celebrating our 15th anniversary we
+
+
+actually took spray over as the third
+
+
+maintainer in the line after two
+
+
+previous companies that were in charge
+
+
+of that
+
+
+and I don't have a QR code I didn't know
+
+
+that it was a trend these days but I
+
+
+think our like our GitHub handle is
+
+
+fairly easy to like type on your own uh
+
+
+so check it out if you haven't met it
+
+
+before
+
+
+um so maybe a bit of a story of how
+
+
+spree started so as you can imagine as
+
+
+any uh open source tool starts it starts
+
+
+with a commit in this case that was
+
+
+actually an empty dummy Comet uh three
+
+
+comments later that day uh we actually
+
+
+got a got something meaningful it was
+
+
+like the base of the Rails app I think
+
+
+at that time that was like rails 2 or
+
+
+something like that uh it's also quite
+
+
+interesting because if I
+
+
+so that correctly.com is actually
+
+
+predates GitHub because GitHub was
+
+
+launched in like I don't know April that
+
+
+same year at least publicly so quite a
+
+
+bunch of History
+
+
+um so that those were the humble
+
+
+beginnings right somebody is doing their
+
+
+uh like proof of concept trying to
+
+
+implement a an open source framework for
+
+
+e-commerce in
+
+
+the new call Trendy framework framework
+
+
+called rails
+
+
+how's it going
+
+
+um well we have GitHub these days uh
+
+
+we've had multiple releases ever since
+
+
+as I said we have the Third maintainer
+
+
+um
+
+
+we have plenty of contributors maybe
+
+
+it's not like the highest amount you can
+
+
+see out there but still pretty
+
+
+measurable
+
+
+um it is used by plenty of users and
+
+
+we've had like over 100 almost 200
+
+
+releases just in the car repository
+
+
+there's like a huge ecosystem of other
+
+
+extensions that build on top of spree uh
+
+
+like right next to it
+
+
+um
+
+
+what else well it Powers many successful
+
+
+businesses of all sizes so if you look
+
+
+at the landscape there are some like Mom
+
+
+and Pop shops that you know hired some
+
+
+developer just to launch a simple web
+
+
+shop because they didn't want to use
+
+
+like Shopify for whatever reason
+
+
+um you have some startups that use spree
+
+
+to grow their businesses and they also
+
+
+have those like multi-million multi
+
+
+hundred million dollar businesses of you
+
+
+know those huge Enterprises that use
+
+
+spree somewhere in their stack sometimes
+
+
+you don't even see that it's under the
+
+
+hood like you know used as for example
+
+
+order management system or say system
+
+
+for inventory so you get all sorts of
+
+
+combinations like that
+
+
+um what else well uh we also noticed
+
+
+that over the years one of the
+
+
+like spray-powered businesses that were
+
+
+using those like disruptive business
+
+
+models right so for example when there
+
+
+was this trend of subscriptions I think
+
+
+it started with Dollar Shave Club right
+
+
+this company that those white like one
+
+
+dollar
+
+
+um
+
+
+like shaving machines that they then
+
+
+sold to some like big Corporation
+
+
+that was for example the time when there
+
+
+was a huge growth of spree based uh
+
+
+applications because it was easy to
+
+
+customize to build on top of it and we
+
+
+of course a lot of that trails
+
+
+um but like if you if you go around and
+
+
+we did a lot of that over the last year
+
+
+and before that we were also an avid's
+
+
+pre-user helping many clients Implement
+
+
+that or maintain that uh this doesn't
+
+
+come without challenges right and I
+
+
+think that pretty much every open source
+
+
+product that gets a certain
+
+
+adoption faces similar set of challenges
+
+
+although it is also like the proportion
+
+
+of those challenges differ depending on
+
+
+what what that tooling does but we found
+
+
+like three major areas that tend to be
+
+
+challenging one is the general like
+
+
+roadmap vision and you know giving
+
+
+people
+
+
+giving users the certainty that this is
+
+
+going to be maintained and that is
+
+
+actually what they want to stick to
+
+
+the other thing is upgrades the obvious
+
+
+like maintenance problem and the third
+
+
+one is maintainability of
+
+
+um like custom code built on top of the
+
+
+framework which is also a pretty big
+
+
+area and I will cover that in more
+
+
+details later
+
+
+um and those three
+
+
+major challenges
+
+
+um also have a specific impact on the
+
+
+users but also on the like businesses
+
+
+using
+
+
+um on the developers and then the
+
+
+businesses that use a specific framework
+
+
+um of course if you don't have a proper
+
+
+roadmap or you know if you don't get the
+
+
+trust of people that the the tooling is
+
+
+going in the direction that makes sense
+
+
+um you'll suddenly become a business
+
+
+risk not only for developers but
+
+
+sometimes also for the higher ups who
+
+
+make business decisions because well
+
+
+nobody wants to stick to abandonware
+
+
+right or
+
+
+the tools that are obsolete or just
+
+
+don't make sense given newer given that
+
+
+there are newer Technologies
+
+
+uh with upgrades obviously one day
+
+
+um the team that uses that tool will get
+
+
+an email from their Like Chief
+
+
+Information Security Officer saying that
+
+
+there's like this big red flag because
+
+
+well you haven't upgraded your spree
+
+
+based application or like a rails based
+
+
+application and we can go for a like
+
+
+security audit or whatever so that
+
+
+becomes a uh an issue
+
+
+and the first the third thing is
+
+
+maintainability and that's where I think
+
+
+both rails but also spree struggles in
+
+
+multiple ways I think as somebody said
+
+
+during the previous discussion like
+
+
+rails boosts your productivity a lot
+
+
+because it gives you those powerful
+
+
+tools like meta programming all sorts of
+
+
+stuff that you know Java people don't
+
+
+have out of the box but at the same time
+
+
+if you go too far
+
+
+that is a problem right and what's
+
+
+interesting is that
+
+
+um sometimes you know you
+
+
+get to take over a code base that's for
+
+
+example using an ALT version of spree
+
+
+that wasn't very well maintained
+
+
+where the decisions made in the
+
+
+framework actually have
+
+
+um like directed developers to also make
+
+
+further bad decisions which is quite
+
+
+interesting and there's something that
+
+
+we get to fight with a lot
+
+
+um and then of course what happens if
+
+
+those things escalate too much right if
+
+
+we're building open source we want
+
+
+everybody to use opens or our open
+
+
+source because it's just great we're
+
+
+proud of it right and we want everybody
+
+
+to be happy but sometimes
+
+
+um if any of those free issues gets too
+
+
+far and we've also see seen some of
+
+
+those
+
+
+um some some of those issues escalate
+
+
+too much in the past even with spree uh
+
+
+where you think things happen right some
+
+
+at first like new users will be tempted
+
+
+to use other Solutions because they will
+
+
+hear from existing users that maybe it's
+
+
+not that great of a choice
+
+
+but sometimes
+
+
+if you're not
+
+
+um if you make your existing users angry
+
+
+enough they will start considering other
+
+
+options and this is also
+
+
+I think that's a huge red flag because
+
+
+like nobody red platforms things for fun
+
+
+right and there are many companies that
+
+
+just like when nearly went out of
+
+
+business because they were doing
+
+
+unnecessary rewrites Etc so if you hear
+
+
+that somebody changes like the car of
+
+
+their stack
+
+
+that means that the issue may be
+
+
+actually quite serious it's not
+
+
+something we do for fun
+
+
+uh and sometimes as heaven to Spring
+
+
+which I think is quite interesting
+
+
+sometimes the community will just do
+
+
+what open source can do so they will
+
+
+Fork your framework and they will start
+
+
+developing like a concurrent version of
+
+
+it so over like at some point when uh
+
+
+spree wasn't that actively maintained
+
+
+and it lacked this like Vision roadmap
+
+
+Etc some people from the community just
+
+
+created a fork of it and that's how we
+
+
+have solidos these days uh which is like
+
+
+a parallel version of a similar
+
+
+framework they even use the same modules
+
+
+inside the code base which is quite
+
+
+interesting uh and from what we've seen
+
+
+that
+
+
+causes multiple smaller issues right
+
+
+it's a bit confusing for newcomers like
+
+
+they have two options that are quite
+
+
+similar but not the same so there's this
+
+
+like you know internal war of which
+
+
+option is better which is quite a waste
+
+
+of resources and time
+
+
+um and then of course you have like two
+
+
+communities maintaining like using the
+
+
+same effort to pretty much build a
+
+
+similar thing but this can also happen
+
+
+uh it's at the same time beauty of Open
+
+
+Source but it can also be uh annoying in
+
+
+some situations
+
+
+um so
+
+
+I wanted to dive deeper into those
+
+
+challenges and just show you
+
+
+in detail what are the
+
+
+detailed problems that they create but
+
+
+also what are these steps that we've
+
+
+been historically and like we're working
+
+
+on those right now just to make those
+
+
+three major
+
+
+challenges a bit more smoother just to
+
+
+keep existing users to get keep getting
+
+
+new users and make sure that everybody
+
+
+is happy and that they can focus on uh
+
+
+their happy development work
+
+
+uh so first thing and that's been a bit
+
+
+of a problem for us was the roadmap it
+
+
+sounds like you know some open source
+
+
+projects heavy roadmaps some don't and
+
+
+they get away with it
+
+
+um but what we've seen is that like
+
+
+initially when you're doing those first
+
+
+comments to open source you're just like
+
+
+you know building your site project uh
+
+
+trying to experiment with some ideas it
+
+
+doesn't really matter right you'll be
+
+
+cranking up new features quite rapidly
+
+
+you may get a better sense of what you
+
+
+need and what the community needs
+
+
+but once you hit a certain adoption that
+
+
+actually becomes very important for the
+
+
+for all the users not only to show them
+
+
+that there's a particular
+
+
+uh vision of the project but also
+
+
+um to make it easier for them to to work
+
+
+with it and we've seen that
+
+
+uh if there's like no clear future of
+
+
+the project people start wondering like
+
+
+is this going to be maintained or maybe
+
+
+is it maintained even now right so that
+
+
+raises uh questions that slowly become
+
+
+an issue with the community
+
+
+um there's a cool feature with GitHub
+
+
+they did a lot of good work around those
+
+
+like small tools for communities where
+
+
+you can have discussions but you can
+
+
+also very easily build like projects out
+
+
+of GitHub issues and that's like the
+
+
+level of hanging fruit just to show you
+
+
+know what are the next Milestones what
+
+
+are the features that we want to build
+
+
+um and that's what we've adapted uh some
+
+
+time ago so far it's been just useful
+
+
+for having transparency with everybody
+
+
+to show them that there's a plan and
+
+
+also to give them an impression of what
+
+
+they can expect of the framework in the
+
+
+upcoming future
+
+
+um and what's also interesting with
+
+
+roadmaps because on one hand you know we
+
+
+can give people an assurance that a
+
+
+certain framework is going to be
+
+
+maintained uh the other thing is that
+
+
+it's also easier for people to
+
+
+contribute because if they see that hey
+
+
+there's this useful feature that's
+
+
+already like scheduled from what we've
+
+
+seen is that once we publish the roadmap
+
+
+we'll start actually getting engaged in
+
+
+specific items on the roadmap it's like
+
+
+trying to collectively think how to
+
+
+architect a certain solution or
+
+
+you know what are the improvements that
+
+
+can be made otherwise uh it's easy to
+
+
+get into this chaos where people
+
+
+obviously want to contribute but well
+
+
+they try to contribute all over the
+
+
+place and it's not necessarily uh
+
+
+aligned with what needs to be
+
+
+what we as the maintainer like you know
+
+
+see longer term
+
+
+so that was one thing regarding the
+
+
+roadmap which is more a communication
+
+
+issue but still very uh important in my
+
+
+opinion the second thing is upgrades
+
+
+and I was like
+
+
+if you talk to people they usually want
+
+
+to be on the newer version of things
+
+
+right nobody wants to stick to like
+
+
+rails free because you know all their
+
+
+friends use the shiny new thing whenever
+
+
+possible
+
+
+um unless it's of course like Windows
+
+
+Vista where you know you hear that
+
+
+somebody like the developer broke a lot
+
+
+of things so
+
+
+um but that's like an exception right
+
+
+um but at the same time from the
+
+
+from like business perspective it's not
+
+
+always a value added right especially if
+
+
+it's like maintenance kind of work
+
+
+upgrading some dependencies Etc so
+
+
+that is sometimes just hard to budget or
+
+
+to sell to your to your bosses uh
+
+
+especially if upgrading is very complex
+
+
+and if there are like multiple breaking
+
+
+changes during upgrades people just
+
+
+start delaying that and you end up in a
+
+
+situation where you do a
+
+
+brand new release where you've brought a
+
+
+lot of cool things that you know you
+
+
+know everybody needs but then you see
+
+
+the actual uh installations
+
+
+um of your users and they stick they
+
+
+still stick to like one year old or
+
+
+two-year-old versions
+
+
+just because well they don't have time
+
+
+and resources to perform the upgrade
+
+
+um and this is
+
+
+um this actually comes from the
+
+
+JavaScript Community which in my mind it
+
+
+was always very
+
+
+way more excited about adopting new
+
+
+things right where people shifted
+
+
+Frameworks every year and but it seems
+
+
+like even there there's people are
+
+
+starting to think like do we need to
+
+
+rewrite and keep rewriting things all
+
+
+the time
+
+
+uh and they are just getting tired of it
+
+
+because it blocks new development uh and
+
+
+well there's not that much value in
+
+
+rewriting the whole thing
+
+
+um so that's the kind of voice that I
+
+
+see a lot on Twitter these days from all
+
+
+sorts of communities
+
+
+um
+
+
+but there's also a well there are
+
+
+problems in upgrading right there are
+
+
+breaking changes in our our framework
+
+
+Scout which first pre is you know mostly
+
+
+business logic certain core e-commerce
+
+
+processes and that is fortunately
+
+
+something that we control and we can you
+
+
+know
+
+
+uh we can postpone some changes or
+
+
+spread them out throughout the time and
+
+
+there's unfortunately changes in rails
+
+
+where
+
+
+I think later versions were pretty good
+
+
+to be upgraded but sometimes you stumble
+
+
+upon like some changes in default
+
+
+Association options and things that you
+
+
+know can effectively break a lot of
+
+
+things for people or like getting rid of
+
+
+typescript support in Turbo and this
+
+
+kind of stuff
+
+
+um
+
+
+and that's something that we that by
+
+
+maintaining a rails based framework we
+
+
+rely on but we don't really have control
+
+
+over that right so we took this approach
+
+
+that
+
+
+preferably whenever possible we should
+
+
+just avoid making any like major
+
+
+breaking changes also given that people
+
+
+have quite dated installations that you
+
+
+know uh are hard enough for them to
+
+
+upgrade just to give them more room to
+
+
+upgrade rails and all sorts of other
+
+
+core Frameworks but to give them a
+
+
+fairly stable interface
+
+
+of spree that they can it that they can
+
+
+rely on
+
+
+of course we're not Microsoft and we
+
+
+cannot support
+
+
+um certain design decisions made I don't
+
+
+know that's like 50 years ago now turns
+
+
+out like Windows 10 still have some of
+
+
+those you know design decisions that
+
+
+were influenced by some
+
+
+uh some very old I think it's pretty dos
+
+
+kind of things
+
+
+um
+
+
+but still well
+
+
+we're trying we're we've learned that
+
+
+being more conservative especially with
+
+
+like older more established Frameworks
+
+
+is generally better because people don't
+
+
+complain about it that much
+
+
+um
+
+
+and sometimes you know we see that
+
+
+there's this like ugly piece of code
+
+
+that maybe it would make sense to
+
+
+refactor
+
+
+um it's not always the best idea just
+
+
+because you can break a lot of things
+
+
+for people who somehow rely on that
+
+
+um sometimes you even get some
+
+
+contributions from the community where
+
+
+somebody says hey you know he currently
+
+
+you can assign like Dimensions to a
+
+
+product but we know that you know
+
+
+sometimes those Dimensions can be
+
+
+assigned to a particular variant of a
+
+
+product so if like you have boxes of
+
+
+shoes and then you have shoes in various
+
+
+sizes right then they can have various
+
+
+size of boxes some like edge cases so
+
+
+technically that makes sense but then
+
+
+you evaluate that from the perspective
+
+
+of you know existing users and you can
+
+
+break a lot of things by just making the
+
+
+right decisions conceptually so
+
+
+we're trying to avoid those as much as
+
+
+possible
+
+
+uh of course it's not always possible
+
+
+and sometimes you need to get rid of
+
+
+some like Legacy behaviors or Reliance
+
+
+on some older libraries
+
+
+um
+
+
+but in that case
+
+
+um
+
+
+from our from our experience it's good
+
+
+to have like this the pressure the
+
+
+pressure depreciation schedule
+
+
+where you explicitly mention you add
+
+
+some like even like log warnings that
+
+
+something will be gotten rid of at some
+
+
+point so please start thinking about
+
+
+migrating that to the new Behavior Uh we
+
+
+had this kind of thing with apis so
+
+
+uh spree I think pretty much ever since
+
+
+the the beginning had some apis for
+
+
+performing administrative actions or you
+
+
+could access like your or like the
+
+
+overall order history users Etc but that
+
+
+was an API that was fairly poorly
+
+
+written especially by today's standards
+
+
+so you know it relied on some old gems
+
+
+for serializing jsons to jsons it wasn't
+
+
+very flexible and was quite heavy
+
+
+so for a couple of years we had a
+
+
+situation where we had two apis in
+
+
+parallel the trying to direct developers
+
+
+to always stick the new one unless
+
+
+absolutely necessary
+
+
+uh last year we extracted the old API to
+
+
+a separate gem that if you really need
+
+
+it you can still pull that back into
+
+
+your project but like we're not pushing
+
+
+that on people and we don't want people
+
+
+to to keep using that what's funny is
+
+
+that
+
+
+this old old API interface is used by
+
+
+for example Clayville which is a very
+
+
+popular email marketing tool so they
+
+
+have an integration inside their product
+
+
+or you can connect it to a spree based
+
+
+store and this is something that we know
+
+
+a lot of people need just because uh
+
+
+some external tools learn to rely on
+
+
+that so
+
+
+this needs to be taken into account
+
+
+um
+
+
+yeah so in general
+
+
+once the project matures our experience
+
+
+is that you just need to go a bit slower
+
+
+and that's okay because well it serves
+
+
+its purpose and at the same time just
+
+
+think about you know like making
+
+
+depreciations in a proper way rather
+
+
+than rewriting the whole thing between
+
+
+two even major versions that's
+
+
+not always a good idea but probably
+
+
+never a good idea
+
+
+and finally the interesting topic in the
+
+
+general context of rails and trails way
+
+
+as I said spree started in 2008 and it
+
+
+used a lot of like those rails way
+
+
+things right it used hooks for like
+
+
+after create before update and all sorts
+
+
+of things you can still find across the
+
+
+cloud base
+
+
+unfortunately for a long time it also
+
+
+relied on this like fat model thin
+
+
+controller kind of approach right
+
+
+um and that brought certain challenges
+
+
+and another thing is that like rails and
+
+
+Ruby they come with this promise that
+
+
+they are flexible right you have a I
+
+
+don't know third-party Library you don't
+
+
+like it because something works slightly
+
+
+differently that you would like you can
+
+
+still monkey patch everything right
+
+
+that's a like the ultimate measure
+
+
+um
+
+
+that
+
+
+for a fun fact was for quite a while the
+
+
+preferred method of customizing spree so
+
+
+you can think of that as just taking a
+
+
+race app putting that into a race engine
+
+
+and then telling people hey you can just
+
+
+monkey patch everything because that's
+
+
+rails right and people build really cool
+
+
+stuff on top of that so we cannot say
+
+
+that it didn't work it's just harder to
+
+
+maintain and I'm going to show you an
+
+
+example of that because it's
+
+
+actually quite
+
+
+uh interesting so
+
+
+um
+
+
+example for
+
+
+like in the usual e-commerce store when
+
+
+you add let's say per pair of shoes to a
+
+
+card right then you add the same pair of
+
+
+shoes to the card again
+
+
+it just usually just increases the
+
+
+quantity of the original item right so
+
+
+we have still one item in your cart but
+
+
+with quantity equal to two and what's
+
+
+interesting is as you dive deeper into
+
+
+all of those crazy like B2B or build to
+
+
+order kind of products sometimes
+
+
+two instances of the same product in
+
+
+heart can actually differ because they
+
+
+have some weird customizations some like
+
+
+requests from the customer
+
+
+uh sometimes you have like you know
+
+
+companies where you upload your photos
+
+
+that are then printed so uh we've seen a
+
+
+lot of those use cases where
+
+
+companies needed to override these
+
+
+different behavior and just every single
+
+
+time you add a product to a card it's
+
+
+like a new item in your cart so the old
+
+
+way and that's like spree from I don't
+
+
+know probably 10 years ago was that you
+
+
+just see the code of the controller
+
+
+inside spree right so this is called
+
+
+populate which adds an item to your cart
+
+
+you can see that well we're getting the
+
+
+current card from this session
+
+
+um then we're looking for the particular
+
+
+variant which is like a variation of a
+
+
+product
+
+
+uh we take the quantity from params and
+
+
+then we just add that to a card
+
+
+um that's
+
+
+kind of an abstraction on top of the
+
+
+order contents but this is like a fat
+
+
+model kind of approach so you have order
+
+
+contents that have an add method uh and
+
+
+you see it calls some private method
+
+
+called add to line item which then well
+
+
+it looks if there's an existing line
+
+
+item for that product and then increases
+
+
+its its quantity in that case if not it
+
+
+Just creates a new one
+
+
+so what people did and we've seen some
+
+
+implementations like that it was made
+
+
+sense at that time uh was that they just
+
+
+create a monkey patch inside their code
+
+
+base
+
+
+and they just overwrote a private method
+
+
+which is in well
+
+
+yeah I see a lot of people freaking
+
+
+their heads in disbelief but well it
+
+
+worked right those companies were fairly
+
+
+successful but from the maintenance
+
+
+standpoint as you can imagine it's a bit
+
+
+of a nightmare
+
+
+um
+
+
+yeah it is cool if you think about like
+
+
+short-term gains longer term not really
+
+
+uh what was funny is that last year we
+
+
+also learned that we're effectively a
+
+
+maintainer of a gem called deface which
+
+
+is this
+
+
+railsy piece of technology that what it
+
+
+does it
+
+
+allows you to overwrite like inject
+
+
+uh specific
+
+
+HTML markup
+
+
+into the markup that Ray is generated so
+
+
+you have like controllers inside spree
+
+
+they render for example like I don't
+
+
+know menu of the admin panel and then
+
+
+you have like your custom extension that
+
+
+I think in this case it's like
+
+
+configuration for printing invoices or
+
+
+something like that so you can just
+
+
+Define that you know insert bottom so
+
+
+below an item with this specific data
+
+
+attribute we should just index some
+
+
+custom HTML
+
+
+there was a lot of hacks like that used
+
+
+by extensions developers it worked but
+
+
+it was a bit nasty so in this case
+
+
+you'll just add like a new item on the
+
+
+left
+
+
+um
+
+
+yeah but good luck with upgrading that
+
+
+then you also well on the front and
+
+
+right you change the Upstream version of
+
+
+bootstrap that the core framework uses
+
+
+and you end up with like a lot of
+
+
+buttons that look weird or sometimes
+
+
+somebody just removes a data attribute
+
+
+or an element with a particular ID in uh
+
+
+in the Upstream code base
+
+
+and you may end up with like not seeing
+
+
+a button at all so
+
+
+that happened especially with upgrades
+
+
+that was a a lot of pain
+
+
+um for monkey patching well it's obvious
+
+
+right you make any kind of changes in
+
+
+the Upstream code base uh and then
+
+
+suddenly those monkey patches stop
+
+
+working
+
+
+um
+
+
+well that's a
+
+
+that's a terrible approach overall but
+
+
+I will tell a bit more about that
+
+
+how that was solved so
+
+
+um one takeaway from here is I showed
+
+
+you like patching private methods right
+
+
+so if you push if you don't people if
+
+
+you don't give people the right
+
+
+interfaces to customize certain parts of
+
+
+your application they will eventually
+
+
+start treating your private interfaces
+
+
+as well as The Binding interface right
+
+
+so it makes refactoring harder if you
+
+
+want to keep
+
+
+compatibility for old users
+
+
+um
+
+
+yeah so they will pretty much overwrite
+
+
+anything and of course
+
+
+that poses all sorts of challenges uh
+
+
+what's cool is and that's a pattern that
+
+
+I seen a lot of discussions in like Ruby
+
+
+Forums on like Reddit Twitter Etc
+
+
+where a lot of people were claiming like
+
+
+we don't need dependency injection right
+
+
+in Ruby you can just do it even like a
+
+
+stop a constant in your tests and it
+
+
+will just work just like dependency
+
+
+injection which is not the case
+
+
+um so at some point
+
+
+um
+
+
+priest maintainer at that time I think
+
+
+it was like five years ago they started
+
+
+rewriting
+
+
+um those core procedures and extracting
+
+
+that to like simple service objects and
+
+
+that brought maintainability to a way
+
+
+better level because instead of like
+
+
+writing over the internals people had
+
+
+people were able to Define their custom
+
+
+implementation so that that is that
+
+
+comes from I think Upstream spree
+
+
+where you have the same procedure for
+
+
+adding to a card but as you can see
+
+
+that's encapsulated into a separate
+
+
+class that has this call method with a
+
+
+fairly uh well-defined interface
+
+
+and the good thing is that any part of
+
+
+the core code base of spree that you
+
+
+know performs this action it uses a
+
+
+building dependency injection system to
+
+
+resolve that the implementation that the
+
+
+the end developer wants to use
+
+
+so if you would like to change that
+
+
+behavior instead of doing those crazy
+
+
+monkey patches all over the place
+
+
+uh you can just like create your own
+
+
+class uh make it confirm to the same
+
+
+interface uh and then just update the
+
+
+reference in the dependency injection
+
+
+system
+
+
+um
+
+
+besides obviously like Clarity of code
+
+
+right and avoiding some some mess in
+
+
+your code base you can also test that in
+
+
+isolation
+
+
+um and this this uh helped a lot in the
+
+
+overall like maintainability of projects
+
+
+so this is something we've been pushing
+
+
+for a lot and uh well that helps and
+
+
+people like it
+
+
+um what's also interesting is that
+
+
+technically
+
+
+um even when like doing those monkey
+
+
+patches
+
+
+some of the people who are more
+
+
+conscious about the structure
+
+
+object-oriented programming Etc they
+
+
+would already try to introduce this kind
+
+
+of patterns in their monkey patches
+
+
+right so their monkey patches didn't
+
+
+contain code directly but they were more
+
+
+like than calling their own service
+
+
+object just to perform the perform the
+
+
+logic but this this helps a lot
+
+
+um with the UI this is something that
+
+
+we're
+
+
+recently working on so instead of like
+
+
+you know telling people yeah you can
+
+
+just add those patches for for the front
+
+
+end and maybe they will be applied maybe
+
+
+they will render where you want them to
+
+
+be
+
+
+uh we also decided to decouple like
+
+
+rendering the actual template including
+
+
+custom actions that need to be uh shown
+
+
+especially in the admin panel where
+
+
+people just want to add some buttons to
+
+
+you know perform certain custom actions
+
+
+maybe new menu sections
+
+
+so instead of
+
+
+leaving it for developers to write their
+
+
+custom HTML code for those small
+
+
+customizations uh we can just give them
+
+
+this simple interface and even like a
+
+
+set of helper classes that help them for
+
+
+example
+
+
+execute specific permissions Etc and we
+
+
+can just let them modify that by code in
+
+
+for example their initializers so this
+
+
+um make sure that the UI is consistent
+
+
+and we have more control over how it's
+
+
+defined
+
+
+um so that's that's also something that
+
+
+we're looking at in terms of increasing
+
+
+maintainability of of the tool
+
+
+and then there's like working in Ruby
+
+
+and I know that's
+
+
+um
+
+
+that that is a topic that didn't have
+
+
+that much adoption I think uh but we
+
+
+rely on that typing right so everything
+
+
+that works like a DAC is a duck but
+
+
+um the question especially if we're
+
+
+giving a lot of like you know those
+
+
+behaviors inside the library is how
+
+
+should that duck quack so that you know
+
+
+it fits into the place uh
+
+
+and yeah this is a common problem like
+
+
+it's not only spring it's also in rails
+
+
+and in a lot of libraries where you have
+
+
+those parameters that can be pretty much
+
+
+anything right so even when adding to
+
+
+cart we have this like hash called
+
+
+options and it can be anything uh and
+
+
+what's funny is that when you look at
+
+
+implementations customizations people
+
+
+calling this service object on their own
+
+
+people sometimes put things there that
+
+
+don't really fit there just because I
+
+
+don't know well they thought it would
+
+
+work and you know there's nothing to
+
+
+prevent them from doing that
+
+
+um we can of course use docs and there's
+
+
+there are some like standards in how to
+
+
+describe those so that when you'll
+
+
+generate a documentation it will at
+
+
+least tell you what kind of options you
+
+
+can put it's also cool if you use like
+
+
+Ruby mine because it will show you those
+
+
+hints in your typing your code
+
+
+but still it's just like advisory and
+
+
+one of the issues we had with actually
+
+
+like doing upgrades of existing spring
+
+
+installations was that even interfaces
+
+
+in interface changes those advisories
+
+
+won't help you much right you would need
+
+
+to review the documentation of every
+
+
+single method call just to understand
+
+
+that somebody shift parameters or
+
+
+deprecated some options
+
+
+and I know that like using any sort of
+
+
+stronger typing is a bit of
+
+
+controversial topic right now
+
+
+but like
+
+
+observing and also working with some for
+
+
+example JavaScript projects I think the
+
+
+attitude that they have and the overall
+
+
+approach to typing uh is pretty cool
+
+
+because you can think of
+
+
+typing not as something that we you know
+
+
+enforce on everybody who wants to use
+
+
+our project but you can add those types
+
+
+just to support developers using our
+
+
+library so they first of all they can
+
+
+um
+
+
+so they can automatically verify their
+
+
+code if they want if not well that's
+
+
+fine right but at the same time it also
+
+
+gives more powerful IDE support for like
+
+
+interacting with code
+
+
+um so that's like something that I think
+
+
+is very
+
+
+well done by the typescript community
+
+
+where they just give those types and I
+
+
+think it became a standard that if you
+
+
+publish a typescript library you give
+
+
+type definitions and then well if
+
+
+somebody wants to use them that's cool
+
+
+if not that's also cool
+
+
+um
+
+
+but it's there to support everybody
+
+
+um yeah you can write automated checks
+
+
+uh your IDE just behaves better
+
+
+so we've been playing around with those
+
+
+two tools that we have right now we have
+
+
+sorbet that I think stripe created right
+
+
+um
+
+
+and there's also RBS and once again we
+
+
+have this dualism with two approaches
+
+
+people being a bit opinionated on
+
+
+certain implementation details
+
+
+in my experience survey it's a bit more
+
+
+mature whereas RBS claims to well it's
+
+
+closer to Ruby right so it's a hard
+
+
+Choice a good thing is that we can
+
+
+technically convert one to the other
+
+
+with some effort
+
+
+um this is like RBS docs and that's I
+
+
+think that will be blocking adoption for
+
+
+quite a while because it's very hard to
+
+
+find good examples for example how to
+
+
+define an interface in RBS so you have
+
+
+to go to those like abstract syntact
+
+
+trees uh and you know get an
+
+
+understanding of how those Works
+
+
+um which is good for you know like
+
+
+experienced developers or if somebody I
+
+
+don't know gets starts with Ruby doesn't
+
+
+have the full understanding of how this
+
+
+notation Works maybe a bit of like
+
+
+blocker for for adoption on the other
+
+
+hand sorbet has pretty good docs with a
+
+
+lot of examples
+
+
+they also have like an interactive
+
+
+playground that you can open in your
+
+
+browser and you know even without
+
+
+setting that up for your project you can
+
+
+at least get a grasp of how this works
+
+
+so this is pretty cool
+
+
+and with our example
+
+
+um
+
+
+we've been experimenting with sorbet
+
+
+this hasn't been merged yet and there's
+
+
+more work to be done but I wanted to
+
+
+share some experiences from adopting
+
+
+that inside an open source project
+
+
+uh so what's cool is if we have
+
+
+dependency injection
+
+
+uh we can Define interfaces and with
+
+
+sorbet from what what we've experimented
+
+
+with like defining modules that you know
+
+
+uh claim to be interfaces works pretty
+
+
+well uh you can type all the parameters
+
+
+a uh a method is supposed to call and
+
+
+then the implementation of course if the
+
+
+developer wants right because they can
+
+
+still use the good old duct typing and
+
+
+they can just extend your interface they
+
+
+can mark their file as typed
+
+
+and then they have to like repeat the
+
+
+signature this time saying that they
+
+
+override that signature
+
+
+uh and then they can just provide their
+
+
+own implementation of this of this logic
+
+
+and it's pretty cool because if for
+
+
+example the override that they put
+
+
+doesn't match what's in the interface
+
+
+they will get an a warning uh same if
+
+
+the interface doesn't match the method
+
+
+that they provide which especially if
+
+
+those like keyword arguments or you know
+
+
+hashes all over the place uh it is quite
+
+
+useful and on top of that if you use
+
+
+like Ruby mine or vs code
+
+
+even the IDE will highlight specific
+
+
+places in your typed code or you will
+
+
+see that I know you're calling a method
+
+
+incorrectly right so you get this faster
+
+
+feedback loop
+
+
+it's not that
+
+
+I mean for the ongoing development it's
+
+
+good but where we see it's like super
+
+
+helpful is for example when you're do
+
+
+when you're upgrading your stack so
+
+
+you're going to a newer version of spree
+
+
+you have some of those custom for
+
+
+example service Lot Service objects
+
+
+implemented
+
+
+and you know without doing a full like
+
+
+QA of the of the of your installation
+
+
+you would like to get some feedback
+
+
+whether the interfaces didn't break out
+
+
+of the sudden so that's pretty cool
+
+
+um yeah they are optional they can
+
+
+increase productivity at least in the in
+
+
+the longer term of course it comes with
+
+
+some trade-offs
+
+
+um first of all and that's especially if
+
+
+you rely on some like monkey patching
+
+
+meta programming Etc uh it can be a bit
+
+
+of a challenge to introduce types to the
+
+
+existing code uh so you may need to you
+
+
+know change some structures a little bit
+
+
+um
+
+
+the other thing is that it's just not
+
+
+that popular so even if you look for
+
+
+some resources online on how to define
+
+
+certain structures in for example zorbet
+
+
+even though it's well documented you may
+
+
+still struggle just to find some some
+
+
+good guidance and then
+
+
+not all developers will also understand
+
+
+how to you know verify their code
+
+
+against your types so this is still a
+
+
+bit of a blurry area
+
+
+um
+
+
+it also requires more structure and
+
+
+there are some
+
+
+sometimes you run into a situation where
+
+
+you for example cannot properly type an
+
+
+argument that's just like these
+
+
+open-ended options hash where you know
+
+
+what kind of values will be there uh
+
+
+what's cool is that it pushes you to
+
+
+also think of about like using structs
+
+
+inside of those hashes all over the
+
+
+place so this can be good but it is an
+
+
+effort
+
+
+uh and it's also like maintenance effort
+
+
+so summing up uh
+
+
+first of all from our experiences is the
+
+
+open source project growth the dynamic
+
+
+changes a lot and you need to adapt on
+
+
+multiple fronts just to support that
+
+
+um sometimes moving slower is actually
+
+
+good like we don't need to be on top of
+
+
+all the trends but you know
+
+
+it's good that the users are happy that
+
+
+the community is happy and that
+
+
+everybody can stay productive without
+
+
+rewriting the whole code base over and
+
+
+over again
+
+
+um
+
+
+and the last thing is that sometimes if
+
+
+you like look outside of what we see in
+
+
+the Ruby Community maybe lurk into like
+
+
+typescript uh with all of their problems
+
+
+or to java.net that can also bring some
+
+
+interesting questions that will help us
+
+
+like build better uh code better
+
+
+projects so
+
+
+that's also something I don't I think we
+
+
+should do a bit more instead of like
+
+
+sticking to those uh well-known patterns
+
+
+and that's it thank you very much
+
+
+[Applause]
+
+
+any questions
+
+
+um hey thank you for the talk it was
+
+
+very interesting
+
+
+um I was wondering how do you collect
+
+
+the information about how people are
+
+
+monkey patching spree what to how to
+
+
+decide what to
+
+
+refactor interdependence injection
+
+
+pattern for example yeah that's a that's
+
+
+a very good question like
+
+
+we do support a lot of existing users
+
+
+especially you know once they hit a
+
+
+point where they've grown with spring
+
+
+where they just contact us for some
+
+
+support with I don't know upgrades or
+
+
+refactoring their codes so that gives us
+
+
+a lot of data points around
+
+
+what kind of crazy things people do over
+
+
+the years
+
+
+uh we also get involved with the
+
+
+community although I think we should do
+
+
+more of that where people also bring
+
+
+that up right especially when they once
+
+
+they became more aware
+
+
+that you know um this monkey patching
+
+
+doesn't scale sometimes you just hear
+
+
+people saying that yeah you know it
+
+
+would be good if we could replace this
+
+
+Behavior without having to like replace
+
+
+the whole structure of instantiation of
+
+
+dependencies or something like that but
+
+
+it's mostly like one-on-one
+
+
+conversations and you know uh working
+
+
+with the tool on your own
+
+
+I actually have a question
+
+
+um
+
+
+because with the extension from the
+
+
+people that people were first doing with
+
+
+monkey patching and then you provided
+
+
+them with some more elegant solutions to
+
+
+this problem it seems like you are kind
+
+
+of going in the direction of events and
+
+
+probably you were considering events I'm
+
+
+wondering what was your conclusion in
+
+
+your internal discussions about it
+
+
+yeah that's I mean I think that could be
+
+
+too much of a breaking change for now so
+
+
+we're sticking to you know like those
+
+
+smaller steps we can
+
+
+make in order to support existing users
+
+
+without breaking too much with events
+
+
+you're introducing like more loose
+
+
+coupling right
+
+
+um so I think that may be a ABW problem
+
+
+but this is an interesting concept
+
+
+overall
+
+
+I think
+
+
+um there were some attempts with the
+
+
+fork of spree with soliders were people
+
+
+adding like editing events upon certain
+
+
+actions but still the car isn't even
+
+
+driven right so those events are mostly
+
+
+to notify
+
+
+like I don't know custom handlers that
+
+
+you may build next to the car logic
+
+
+okay thanks uh the add item example
+
+
+actually during the eurotalka it has
+
+
+like maybe just wrong Enlightenment
+
+
+moment
+
+
+um maybe when you implement cards which
+
+
+is very typical for tutorial also and
+
+
+even I'm also working on some very
+
+
+simple e-commerce projects
+
+
+um maybe instead of cards that add item
+
+
+we should have two methods at item which
+
+
+means add new item and increase existing
+
+
+item as a separate method because it
+
+
+seems like this is a common issue in all
+
+
+e-commerce platforms
+
+
+yeah I think it's a matter of like how
+
+
+far you expose that interface because I
+
+
+think in some I don't know if that's in
+
+
+the Upstream code or not I haven't
+
+
+touched the add item thing in a while
+
+
+but I think like internally it actually
+
+
+has those two paths so technically
+
+
+Within
+
+
+like you know the add item service
+
+
+object or whatever you call that you
+
+
+have two branches that are you know like
+
+
+separate private methods one adds to an
+
+
+existing item the other doesn't
+
+
+um but on on the interface level there's
+
+
+just like one item right maybe it will
+
+
+make sense to add two uh what I'm
+
+
+thinking about
+
+
+it's not this specific case but it's
+
+
+similar uh we have this thing that
+
+
+imagine you create a card as a guest
+
+
+user so it's identified by some like ID
+
+
+or token that you know people can
+
+
+interact with it through the API then
+
+
+somebody signs in for example during the
+
+
+checkout so we need to attach that card
+
+
+to that existing user
+
+
+uh and the current behavior is that you
+
+
+have an API and endpoint for that you
+
+
+have you know an internal default
+
+
+service object implementation that will
+
+
+just assign that card to your user now
+
+
+there's a case where somebody was for
+
+
+example logged in on a different
+
+
+computer and already had a card created
+
+
+there
+
+
+so there are two options right right now
+
+
+we just discard this all card not care
+
+
+about it and this new takes precedence
+
+
+um but when we were talking to community
+
+
+and even some of our clients they said
+
+
+it for them because of you know various
+
+
+business decisions it makes more sense
+
+
+to
+
+
+and just merge those two cards so the
+
+
+content of the guest card just be become
+
+
+gets added to your signed in card and
+
+
+then of course you continue with just
+
+
+one card
+
+
+um and what we're now looking at is just
+
+
+to provide for example two
+
+
+implementations and say that you know if
+
+
+those match your desired Behavior you
+
+
+can just call like you can just
+
+
+configure spree to use either this
+
+
+associate and just take the the new card
+
+
+or merge card that's up to you right as
+
+
+a as a matter of configuration and
+
+
+probably we could just have the two
+
+
+strategies of adding an item
+
+
+uh also provided as the card of the
+
+
+framework and then just tell users you
+
+
+know you can pick whichever makes most
+
+
+sense for you uh or you know if you
+
+
+don't rely on our standard endpoints for
+
+
+adding to a card uh you can just call it
+
+
+that uh that other service object
+
+
+directly whatever makes more sense for
+
+
+you
+
+
+okay thanks okay there's a lot of
+
+
+decisions like that and there's always
+
+
+the default behavior and then there's
+
+
+this second most popular behavior that
+
+
+at some point maybe makes sense to
+
+
+introduce the decor
+
+
+anyone else
+
+
+foreign
+
+
+okay thank you very much thank you
+
+
+[Applause]

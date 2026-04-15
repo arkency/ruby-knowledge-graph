@@ -1,0 +1,3496 @@
+All right. So, it's not uncommon to have
+
+
+a developer outside from the Ruby world
+
+
+at VROB. Uh, Mateosh Novak. He's um the
+
+
+daily basis working with Axon IQ IQ Axon
+
+
+Axon framework. Uh, which is a framework
+
+
+for event sourcing. But Matosh is also
+
+
+interested in event modeling and domain
+
+
+driven design which will he will talk
+
+
+about right now. So Matosh
+
+
+[Applause]
+
+
+Novak thanks a lot. Hello everyone. I'm
+
+
+from Bratzwaf so I wasn't far from it
+
+
+wasn't far from me to come here. And
+
+
+right at the beginning I'd like to show
+
+
+you the presentation slide which showed
+
+
+me a lecture on my studies that changed
+
+
+my entire life or at least programming
+
+
+part of it.
+
+
+Of course, there was no title game
+
+
+changer on it, but finally we get to
+
+
+games today, but it's about the blue
+
+
+book domain during design by Eric Evans.
+
+
+I was very lucky that I have met such a
+
+
+professor, especially at a Polish
+
+
+university. It's little weird to talk it
+
+
+in this room, but it wasn't my
+
+
+university, so I hope it would be good.
+
+
+where they in the Polish university they
+
+
+typically teach us that to design the
+
+
+application we need to find nouns
+
+
+enclose them into rectangles connect
+
+
+those entangles with arrows and you are
+
+
+done with your modeling you have your
+
+
+database design so what else do you need
+
+
+to do the
+
+
+application looking back I feel that
+
+
+it's such an entirely different approach
+
+
+from what is in the book that means
+
+
+either almost nobody at the university
+
+
+has heard about Eric Evans or somewhere
+
+
+in the corridors they refer to him as
+
+
+you know
+
+
+who so I've so I've read the book and I
+
+
+didn't understand
+
+
+anything yes it was very difficult to
+
+
+finish it especially I first first unit
+
+
+I bought in Polish it was totally mess
+
+
+yes it's better in English much
+
+
+So I began implementing some patterns in
+
+
+my code, but that probably wasn't the
+
+
+point. However, this was the beginning
+
+
+of my journey to discover many other
+
+
+methods and tools which the community
+
+
+sometimes refer to as an eventdriven
+
+
+thinking. So event-driven thinking is a
+
+
+term which contains things like DDD,
+
+
+event modeling, event sourcing and I
+
+
+will be talking about today. But it's
+
+
+not about a certain way of writing code
+
+
+but it's something has to shift in our
+
+
+minds. We need to change our way of
+
+
+thinking. This change of our focus in
+
+
+the application design from database
+
+
+tables to processes and behaviors.
+
+
+Putting it all together, a process of
+
+
+application design has emerged which I
+
+
+use in real commercial projects and I
+
+
+will present it to you today but on a
+
+
+fun example. And now just a few words
+
+
+about me. I have years eight years of
+
+
+experience in the industry. I've been
+
+
+working as a backend full stack as well
+
+
+as a technical leader. And now I have a
+
+
+contract with Axonic. This is the proper
+
+
+pronouncing of the company. Yes. and the
+
+
+companies responsible for Axon framework
+
+
+and our mission is to make event
+
+
+sourcing easy in the Java world whereas
+
+
+today of course I have code examples is
+
+
+in Ruby especially for you I made just
+
+
+one application in Ruby the sample which
+
+
+we will see but it doesn't matter
+
+
+because most of the things we are going
+
+
+to talk about are tech agnostic what is
+
+
+important is in which domains I've been
+
+
+working because it's where I've battle
+
+
+tested the process Yes, I haven't sent a
+
+
+rocket to Mars or I haven't implemented
+
+
+implants to brains. Not yet at least.
+
+
+But what is the purpose of our
+
+
+enterprise
+
+
+applications? Be honest, it's much
+
+
+simpler. We want to pay for our
+
+
+cheeseburger or order or for order to be
+
+
+shipped. There are the types of problem
+
+
+you like to tackle today. And I also
+
+
+like to share my knowledge a lot
+
+
+especially with my little son. And as
+
+
+you see even in the age of one it's
+
+
+possible to do an eventtorming
+
+
+workshop and there where we are
+
+
+organizing his birthday party and as I
+
+
+recall it correctly he was moving a
+
+
+sticky with cake served to be before
+
+
+grandparents arrived maybe he wants more
+
+
+for himself I don't
+
+
+know and beside that I'm also blogging
+
+
+on those sites the first one is my
+
+
+polish blog and DD heroes is the the
+
+
+English one and I current to visit um
+
+
+after the conference because uh there is
+
+
+more about the topics I will be covering
+
+
+today and there is also one more thing
+
+
+that has taken a lot of time in my life
+
+
+do I regret it I don't know so let it to
+
+
+take some of our time today as
+
+
+well and question to you who has ever
+
+
+played Heroes of Men Magic 3 raise your
+
+
+hands Okay, a lot of people I think
+
+
+especially from Poland uh thanks the
+
+
+game experience is not required to
+
+
+understand the presentation but
+
+
+definitely you will gain more fun from
+
+
+it. H so my mom used to tell me and I
+
+
+think also your moms probably don't see
+
+
+that the computer is so much you will
+
+
+never find a job
+
+
+but you know what we are doing right now
+
+
+it's exactly that but be honest for many
+
+
+of us fascination with games was the
+
+
+beginning of our programming journey so
+
+
+let's back to the beginning and play a
+
+
+little I also heard that it's possible
+
+
+to do a game in excel so why not
+
+
+powerpoint so this is our situation
+
+
+In the center there is a hero which want
+
+
+to capture the mine. We have the mine
+
+
+guards uh in front of and those are
+
+
+skeletons. They are almost the weakest
+
+
+creature in the game. And what do you
+
+
+think especially people experience in
+
+
+the domain? What do you think? Who will
+
+
+win the battle? The skeletons, the
+
+
+guardians or the hero which such army
+
+
+you can see in the corner?
+
+
+Okay, it depends. Yes, there is always
+
+
+the answer. And this was very very good
+
+
+answer. But our hero didn't check that
+
+
+and how it was. Yes, you were right.
+
+
+What just happened? We The hero didn't
+
+
+expect
+
+
+everything. He didn't expect how many
+
+
+skeleston there would be and it was too
+
+
+many. And in fact, this battle didn't
+
+
+end well. and our hero head was cut
+
+
+off. We has lost the battle and let's
+
+
+try to draw some conclusions from this
+
+
+situation. How to not to be like hero
+
+
+here? What should we do to keep our
+
+
+heads in place in IT
+
+
+projects? When a project goes wrong or
+
+
+gets delayed, we look for excuse. For
+
+
+example, I knew this map or for our our
+
+
+industry terms. Uh I've done a lot of
+
+
+projects like this or it was just a
+
+
+simple crat but real life can be tricky
+
+
+and what was missing in such a process
+
+
+of our hero. We're missing a phase of
+
+
+planning and it was good as you said in
+
+
+a game it's so easy because it's enough
+
+
+just to click on skeletons to see the
+
+
+estimation on how many of them is there
+
+
+and it was a legion so a lot. We could
+
+
+have checked if we had enough army to
+
+
+fight against them. For software
+
+
+projects, we need to check we have the
+
+
+right tools and methods for the job.
+
+
+Today we will learn how to do the
+
+
+planning in a rewarding way and this
+
+
+presentation is part of a series of
+
+
+article which I have described in detail
+
+
+on LinkedIn. Uh but today we'll cover
+
+
+just two topics from it and is the event
+
+
+modeling system boundaries and quality
+
+
+without co review.
+
+
+So for the beginning let's sort of the
+
+
+analogy from the presentation title.
+
+
+What do I mean by might and magic
+
+
+referring to a DDD? First of all we have
+
+
+the might or pattern and
+
+
+heristic the theory we can learn from
+
+
+books or presentation like this. But to
+
+
+be successful we need something more. We
+
+
+need a little bit of magic on top of
+
+
+that. And this is the experience and
+
+
+intuition. But it comes with practice.
+
+
+So how can we gain experience and train
+
+
+intuition every day? It would be nice to
+
+
+do it in your projects but even in your
+
+
+project Eric Evans is you who know you
+
+
+who you know who you can still do it and
+
+
+I'm going to tell you how right now to
+
+
+do this we must observe what happens
+
+
+around us. And in the 21st century we
+
+
+meet technology almost on every step.
+
+
+Have you ever ordered something like an
+
+
+Uber taxi? I'm sure you did. So, you
+
+
+know, it's obvious. The basic feature of
+
+
+the app is that you can order a ride for
+
+
+yourself. And the first step of the
+
+
+exercise is to model the domain. And in
+
+
+the second step, you need to wait for a
+
+
+new feature in your favorite app. And
+
+
+what could it be? And recently while
+
+
+shopping online I noticed that I could
+
+
+also choose a you Uber for shopping for
+
+
+shipping the product and they also
+
+
+advertise it. It will reach me in 90
+
+
+minutes. So super new feature that's it.
+
+
+So let's model the taxi domain again to
+
+
+support this new possibility is the next
+
+
+step.
+
+
+And it's good to do this with a real app
+
+
+because you don't shape the domain by
+
+
+yourself, but you react to changes in
+
+
+it. And when a new feature appears, it's
+
+
+time to assess your model. This is where
+
+
+the money is. You see the back with
+
+
+money. The emoji will appear more often
+
+
+in the presentation. And this is the
+
+
+time where you verify if your model was
+
+
+flexible enough to make changes easily.
+
+
+And let's ask yourself how many places
+
+
+did you need to modify? Have you been
+
+
+ready for the new requirements or did
+
+
+you couple the right with passenger too
+
+
+tightly in the first model? So if you
+
+
+done it uh have you end with passenger
+
+
+extend with without passenger extends
+
+
+passenger gel to support the package as
+
+
+a passenger maybe. I've seen it a lot in
+
+
+legacy applications and it's not good.
+
+
+So I'm going to show you how to do the
+
+
+exercise for business processes from the
+
+
+heroes free domain. How to model to be
+
+
+able to introduce changes fast
+
+
+enough and to keep our systems
+
+
+decoupled. And why why Heroes 3 or
+
+
+Heroes 3? Sorry, it was
+
+
+too I too often refer to it in
+
+
+Polish. I don't program games, but this
+
+
+is about the business processes that
+
+
+appear here. You will definitely see
+
+
+references to things from real life or
+
+
+on daily basis you use like e-commerce
+
+
+because if we just use a taxi
+
+
+application we don't know how it works
+
+
+under the hood and comp complexity
+
+
+usually hides where we don't see it
+
+
+quering drivers determining roads this
+
+
+part is most complex with heroes we have
+
+
+a lot of documentation and the real game
+
+
+which we may treat as a legacy
+
+
+application we also try to make it
+
+
+extendable so let's start the modeling
+
+
+And the first step in the modeling
+
+
+process is not coding but getting
+
+
+knowledge from domain experts but how to
+
+
+do it in a structured way. Just talking
+
+
+over a coffee is not enough. Why? So I
+
+
+have even an analogy from today. I don't
+
+
+feel well about this but I need to
+
+
+confess to you. Today while going to the
+
+
+conference I've met my friend who is
+
+
+from Mexico and she asked me how to get
+
+
+to Galia Dominica. I think she has about
+
+
+50% chance to not getting lost in the
+
+
+city because I gave her two Trump
+
+
+options and after saying goodbye I
+
+
+realized that I had given one of them
+
+
+incorrectly. We may say that I'm a
+
+
+domain expert of the city but I lived
+
+
+here since I was born but you see don't
+
+
+trust domain
+
+
+experts. What would be better? It would
+
+
+be better if I go with her the schedule
+
+
+and check it. uh with my help with her
+
+
+it what it's also what we should do in
+
+
+our project it's better to have
+
+
+everything on the whiteboard than just
+
+
+talk with the experts and because of
+
+
+that I start the process with event
+
+
+modeling event storming we reach event
+
+
+modeling also today we focus on events
+
+
+and behavior not jumping straight to
+
+
+active record I know you use it in Ruby
+
+
+at least this thing I aware of and to
+
+
+the database tables So is when we should
+
+
+listen to master Yoda. You must unlearn
+
+
+what you have learned. They taught us to
+
+
+do it in this way. It was age. It was a
+
+
+lot of years of programming when you
+
+
+started from databases and it was used
+
+
+to do by all the programmers. Our habit
+
+
+of focusing on databases is what we must
+
+
+find against. So when we overcome them
+
+
+and put the computer aside, we can start
+
+
+the design process.
+
+
+So about event storming there have been
+
+
+many conferences talk already and we
+
+
+have a great book on this topic by
+
+
+Alberto Brandolini the author of the
+
+
+methods. So we go through it quickly. We
+
+
+have started the workshop by doing
+
+
+brainstorming with domain expert and we
+
+
+found many events that occur in the
+
+
+domains of heroes 3. You've seen them
+
+
+even u on the example. First creature
+
+
+fainted, hero hired, creature
+
+
+attacked, the week started, creature
+
+
+moved, a lotment happened, combat
+
+
+finished. We see the combat results of
+
+
+our hero already.
+
+
+Later we have sorted them on the
+
+
+timeline and found some business
+
+
+processes and the experts pointed out
+
+
+that there is one important process that
+
+
+we should deal with first and that is a
+
+
+creature requirement creature
+
+
+recruitment in the
+
+
+game. The creatures in the domain are
+
+
+like the skeletons we saw at the
+
+
+beginning or members of the hero's army.
+
+
+you can recruit uh creatures into his
+
+
+army by paying for them and they use
+
+
+them in the battles. The process
+
+
+contains just two simple events.
+
+
+Available creatures changed so we know
+
+
+how many we can recruit and then when
+
+
+some are available the creature
+
+
+recruited may happen if we decided to do
+
+
+that. But now it's a movie time. So you
+
+
+have some snacks from the corridor of
+
+
+pop popcorn. You can take them out
+
+
+because we'll watch a video to make sure
+
+
+we are on the same page and know what we
+
+
+will be modeling today. And we can treat
+
+
+the video like we are analyzing an
+
+
+interactive mockup or a legacy
+
+
+application. And let's see how it works.
+
+
+But I need to change. Oh, okay. We have
+
+
+it here. First I will just show you the
+
+
+video and then I will explain what we
+
+
+see
+
+
+here. Okay, just just 7 seconds. So it
+
+
+looks so simple but a lot of things is
+
+
+happening there.
+
+
+It's not so easy to uh to operate the
+
+
+video with LS. Okay. But I hope I
+
+
+managed to do so. Okay. So, what we see
+
+
+on the screen? First of all, we have a
+
+
+dwelling. Dwelling is a place where we
+
+
+can recruit creatures. I even seen
+
+
+dwelling word on the previous
+
+
+presentation where you type apartment.
+
+
+It was when you was changing your slides
+
+
+so fast. I've noticed that uh and u you
+
+
+can see it's very similar to ecommerce
+
+
+system because we have cost per troop
+
+
+the price of our product. We may treat
+
+
+the creature as a product. In this case
+
+
+we can recruit angels. We see the
+
+
+availability. So we have one available.
+
+
+We choose one to recruit. We see the
+
+
+total price of it. And when we decide to
+
+
+buy the
+
+
+creature, so we click this recruit
+
+
+button, the creature appears here. So
+
+
+it's added to our
+
+
+army. And that's
+
+
+it. So after watching how it look like,
+
+
+can we start coding right away? We
+
+
+already have events, we have UIs, but
+
+
+not really. Although the front end is
+
+
+very very important, nobody was an ugly
+
+
+application of course, but we must
+
+
+remember that our process is a part of a
+
+
+whole settled in some domain and
+
+
+different context will be mixed in the
+
+
+UI. So don't get me wrong, good UI and
+
+
+UX are also makes money. So we have
+
+
+money emojis here. There is value here
+
+
+and we can't skip it during design
+
+
+phase. But UX designer won't do our
+
+
+modeling work for us and prepare us for
+
+
+future
+
+
+requirements. So we already have a UI,
+
+
+we have events. So it's time to connect
+
+
+them somehow somehow and craft our
+
+
+domain model. So to do that to so to do
+
+
+that we are going to use event modeling.
+
+
+I prefer it over process and design
+
+
+level event storming and event modeling
+
+
+is based on a natural people ability to
+
+
+tell the stories. We draw the business
+
+
+processes like a frames in a movie and
+
+
+in the notation we avoid very technical
+
+
+terms like policies or aggregates. The
+
+
+event modeling was coined by Adam Deitru
+
+
+in
+
+
+2018 on eventtorming summit. Initially
+
+
+it was called single flow event
+
+
+storming. I think there is something in
+
+
+the name and is it better than event
+
+
+storming? I don't know. I leave it for
+
+
+your judgment but I prefer that. So
+
+
+let's see it in
+
+
+practice. The beginning is very simple.
+
+
+We take events from the event storming
+
+
+and phrase them on the board. Events are
+
+
+the important business facts that may
+
+
+happen in our domain. But the name of
+
+
+the event is not everything to describe
+
+
+the fact. As we were taught in school,
+
+
+when we talk about some event, we want
+
+
+to announce something. We need to also
+
+
+specify what, where, and when. It's the
+
+
+same here. we must describe those
+
+
+events. So we use properties to do that.
+
+
+And for a vapor creature
+
+
+change, we may ask where in the dwelling
+
+
+with the given ID. Uh who was that? It
+
+
+was a creature with an ID and the ID is
+
+
+angel in this case and change to to two.
+
+
+Yes. And the following event is the in
+
+
+the process is creature recruited and in
+
+
+the same who was recruited what was
+
+
+recruited angel uh in where in the
+
+
+dwelling with ID how many recruited to
+
+
+uh what was the total cost and to which
+
+
+army we wanted the angel to be
+
+
+joined. Then the question appears what
+
+
+is the trigger of those events? how they
+
+
+may happen in the system and from where
+
+
+does this data come
+
+
+from. Then we add blue sticky notes.
+
+
+These are the commands our intentions to
+
+
+change the state and the result of the
+
+
+command maybe the event events
+
+
+uh events in this are the state changes
+
+
+itself.
+
+
+But still we need something more because
+
+
+when our user decides they want to do
+
+
+something they must do it based on some
+
+
+knowledge about the state the current
+
+
+state of the system. It's similar to
+
+
+e-commerce. One more time we see in the
+
+
+catalog what is the price on the of the
+
+
+product and if they are in stock only
+
+
+then we can make a decision if we'd like
+
+
+to buy something or not. So we have the
+
+
+green stickies to do the same what we'd
+
+
+like to show to the user and we
+
+
+described it also with
+
+
+properties and views change in reaction
+
+
+to events. So as you may notice after
+
+
+the event available creatures changed
+
+
+we'll see that two are available and
+
+
+after creature recruited so we recruited
+
+
+two so we see that zero
+
+
+remains and as I said before we cannot
+
+
+forget about the front end finally is
+
+
+also a part of the product that makes
+
+
+money sometimes it happens that back end
+
+
+developer do their work they close task
+
+
+in Jira and suddenly the front end
+
+
+developer says hey listen there was
+
+
+something on the UI we missed before.
+
+
+And please add me this API and that API
+
+
+and also that
+
+
+API. And thanks to event modeling, we
+
+
+can avoid this because based on the
+
+
+diagram, we can say where each piece of
+
+
+the data come from. If I had it on the
+
+
+event, where did it appear before? There
+
+
+are already even tools as mirrorboard
+
+
+extensions that help you with that and
+
+
+do the completeness check of the
+
+
+information flow for you.
+
+
+Right after the event storming, we said
+
+
+that these two events form one business
+
+
+process. It was just an intuition. But
+
+
+how can we prove that? Is this process
+
+
+complete already or should I have more
+
+
+events within it? Let's discuss now only
+
+
+one in my opinion the most useful
+
+
+approach to check if our model is an
+
+
+autonomous and complete module of the
+
+
+app.
+
+
+This approach is to ask a question. What
+
+
+happened after an event? So what
+
+
+happened after the creature recruited
+
+
+event? The answer and we saw in the
+
+
+video it was the creature was added to
+
+
+the army always.
+
+
+Period. But you can't recruit a
+
+
+creature. Of course you can can't
+
+
+recruit creature into nothing. So, looks
+
+
+like we should include this event into
+
+
+one module and and keep it as a whole.
+
+
+Sounds good. But can we be sure about
+
+
+that? So, let's ask even more questions.
+
+
+We can also ask what happens before
+
+
+before the creature added to the
+
+
+army. Thankfully, we did the event
+
+
+storming big picture session and we
+
+
+already have a wider view of the whole
+
+
+domain. We are able to answer this
+
+
+question, but there is no single answer.
+
+
+Depending on the domain experts who knew
+
+
+who know about that part of the system,
+
+
+you got different answers. Not only
+
+
+recruited creatures can join our army.
+
+
+For example, a a creature like the
+
+
+skeletons at the beginning they were
+
+
+fighting against us but they can also
+
+
+decide to surrender and join our army as
+
+
+well. And in this case uh when uh it
+
+
+also influence our army when the
+
+
+skeletons decide to surrender we we add
+
+
+it to the army. So the event creature
+
+
+added to the army may also happen after
+
+
+creatures surrender also when the battle
+
+
+finished its result also affects the
+
+
+army in the other way. We remove the
+
+
+creatures and it also influence the
+
+
+army.
+
+
+Knowing that the same thing doesn't
+
+
+always happen before adding to the army,
+
+
+we should separate these events with a
+
+
+thick line as you see as a separate
+
+
+model parts of another process. And
+
+
+there is also a money. Thanks to these
+
+
+experiments that we did on the
+
+
+whiteboard and have verified our
+
+
+assumptions about the model. We avoided
+
+
+wrong coupling between the parts that
+
+
+should be separated. It may have saved
+
+
+us hours of coding and refactoring if we
+
+
+connected wrong those parts.
+
+
+And what if we did ask didn't ask these
+
+
+questions? There is a high risk that we
+
+
+would connect it all together creating a
+
+
+big ball of m. We would end up with one
+
+
+model that would keep growing. It looks
+
+
+like connecting nouns with arrows. What
+
+
+we wanted to avoid. Suddenly it would
+
+
+turn out that battles affects the army
+
+
+and with battles comes a list of
+
+
+spellers that can be casted during the
+
+
+battle. So we also need to incorporate
+
+
+concept of sparse into the same module.
+
+
+We would reach the situation uh that
+
+
+someone would say sir this needs to be
+
+
+rewritten. So we avoided this huge
+
+
+smelly problem thanks to this approach
+
+
+to make our example complete. Let's
+
+
+focus for a moment on adding a creature
+
+
+to the army. So this event what is
+
+
+happening here? We already know that
+
+
+those two module two events will be in
+
+
+different modules. So we draw those
+
+
+modules as gray rectangles on the
+
+
+diagram and we enclose events inside
+
+
+them. Those modules do not know about
+
+
+each other existence at all but we don't
+
+
+operate in a void and we need to somehow
+
+
+communicate between
+
+
+them. It's where the process
+
+
+orchestrator comes into play. In event
+
+
+modeling we call it automation pattern.
+
+
+You can think about it like a robot
+
+
+which listens for future recruited
+
+
+events. Then the robot is keeping his
+
+
+own to-do lists of tasks that what I
+
+
+needed to do when the event occurs and
+
+
+when the event arrives the automation
+
+
+executes the next part of the higher
+
+
+level process. The automation is a form
+
+
+of a glue between those two modules.
+
+
+But should we care about that from that
+
+
+from a business
+
+
+perspective? Someone may say that
+
+
+dividing application into modules is
+
+
+just uh some fun for developers but it's
+
+
+not really influence the
+
+
+business because I think we should care
+
+
+because we have just defined our
+
+
+business capabilities. What can we do in
+
+
+heroes? We can fight battles, recruit
+
+
+creatures, manage armies. In the game we
+
+
+have just we have a basic mode which is
+
+
+called scenario just so that in the
+
+
+beginning it connects all those parts.
+
+
+We can explore the map we can capture
+
+
+mines do the battles
+
+
+etc. But in heroes 5 a different game
+
+
+mode was introduced. I have a theory
+
+
+that Heroes 3 might not be modular
+
+
+enough to do that because they done it
+
+
+just two vers two uh versions later. It
+
+
+was a dual mode when you just pick
+
+
+armies and do battle between them. There
+
+
+is no map exploring at all. This mode
+
+
+was composed based on the limited set of
+
+
+capabilities of the system. And what is
+
+
+even more important, the mode was only
+
+
+in a paid extensions for the game. So
+
+
+for a enterprise we can also use the
+
+
+advantage of modularity and create new
+
+
+projects based on existing parts or even
+
+
+do the pricing based on modules. In this
+
+
+way a programmer can be a real business
+
+
+partner and become an enabler for future
+
+
+business development or even new
+
+
+products. Okay, it's great. We already
+
+
+designed our system but there is still a
+
+
+question of how to build it and organize
+
+
+work in a
+
+
+team. First let's see what types of task
+
+
+we can prepare from event
+
+
+modeling. Event modeling can be splitted
+
+
+into vertical sizes that are on
+
+
+different types. First of them is a
+
+
+right size. You see it here. We have a
+
+
+command which is executed from the UI or
+
+
+rest API depends on the application
+
+
+we're developing and the command may
+
+
+trigger an event which cause a state
+
+
+change. Another type is a rich slice. We
+
+
+have events which influence the view. It
+
+
+doesn't change the state.
+
+
+And the last one for today is an
+
+
+automation size. When an event happens,
+
+
+we integrate it with another module and
+
+
+dispatch a command to orchestrate
+
+
+processes that span autonomous modules.
+
+
+It's a higher level of
+
+
+orchestration. And now please welcome
+
+
+our development team. Now we must
+
+
+organize their work. We have two
+
+
+developers. So not uh not a big team but
+
+
+a huge challenge to meet the project
+
+
+deadline. It would be nice to split the
+
+
+work into independent parts that can be
+
+
+done in
+
+
+parallel. So we are going to split the
+
+
+event modeling into slices. Every slice
+
+
+will be a separate unit of work which
+
+
+can be done but one developer.
+
+
+If your company use Gina, you may always
+
+
+uh refer to a slice in a task if your
+
+
+management didn't need that. So where to
+
+
+start the work? The first decision is
+
+
+very simple because we have two
+
+
+distinguished modules. Those models do
+
+
+not know about themselves, do not
+
+
+communicate to each other. So uh we
+
+
+assign developers to two distinguished
+
+
+model and they can work on their own in
+
+
+the same
+
+
+time. The sizes we are to do are marked
+
+
+in
+
+
+red. Yellow size is in progress and the
+
+
+green one is done. The modules doesn't
+
+
+know about each other. Uh so the
+
+
+developers started their work. They do
+
+
+not need to wait for anything.
+
+
+And when the slice on the left hand side
+
+
+is done, we have unlocked next slices to
+
+
+work on like levels in the game. We can
+
+
+do task that depends on the slice which
+
+
+is already done. So what we have
+
+
+unlocked, we unlock the read slice
+
+
+because it depends on the event from the
+
+
+previous slice. So it's the only
+
+
+contract between those slices. we can
+
+
+proceed with the
+
+
+development or if we follow the CQSF CQS
+
+
+pattern we can do the even the next
+
+
+parts of the command side because the
+
+
+command side doesn't depends on the
+
+
+query side still also events are the
+
+
+contract between slices so we can
+
+
+proceed proceed to the right slice which
+
+
+is the recruit creature because those
+
+
+right and it slices also independent
+
+
+thanks to the CQRS
+
+
+So there we can also work in the same
+
+
+time. There is no dependency. So we have
+
+
+two developers and when the next slide
+
+
+slice is done we can do the automation
+
+
+part
+
+
+because because as you see still the
+
+
+event is a contract. We know the event
+
+
+is already implemented. We when we
+
+
+publish the event the robot will handle
+
+
+the event a may and may dispatch a
+
+
+command. So we already have the command
+
+
+we have the event part. So we can do the
+
+
+glue between
+
+
+them and so we assign the developers
+
+
+here and when those sizes are done the
+
+
+whole process is done. And if you are
+
+
+thinking how does it look like in a real
+
+
+project you may see it from a helicopter
+
+
+view. This one was almost finished. So
+
+
+we don't have lead sizes there, but
+
+
+there is still a few of few of yellow
+
+
+sizes. Most of them are green. So it's
+
+
+almost done. But it's also a nice way to
+
+
+present the progress for company board
+
+
+because you it's easy to see how much we
+
+
+have to do and what we have done so far.
+
+
+Just you can minimize the view and look
+
+
+for the
+
+
+calls. Task are divided and our team
+
+
+completed them. But the question remains
+
+
+how they have done it. So let's move to
+
+
+what we like the most to the code. Be
+
+
+merciful for me because it will be in
+
+
+Ruby. So because of the limited time now
+
+
+we are going to focus just on the domain
+
+
+part. We don't want to touch database or
+
+
+HTTP right now. We are going to compose
+
+
+our domain logic using three pure
+
+
+functions. the decide, evolve and
+
+
+react. So on the model we've seen three
+
+
+different building blocks, commands,
+
+
+events and views. We translate them one
+
+
+to one into classes along with
+
+
+corresponding properties. So we have
+
+
+simple immutable data
+
+
+classes and as you see just rewrite
+
+
+those attributes.
+
+
+Later as always we start the
+
+
+implementation with the
+
+
+tests. So on the left hand side we see
+
+
+shorter notation from event modeling we
+
+
+call them given when
+
+
+specifications given are the
+
+
+preconditions and in case of the right
+
+
+model when we execute the command the
+
+
+given are the events that happened
+
+
+before the action. when is the action.
+
+
+So in this case is the command and then
+
+
+is where we assert expected result of
+
+
+the command. On the right hand side you
+
+
+have the code. So in the given part we
+
+
+uh define our dwelling which will be the
+
+
+aggregate in this case. uh in that
+
+
+wearing the name of it is portal of
+
+
+glory as you remember where angels may
+
+
+be recruited from the game and cost per
+
+
+troop given events is an array of events
+
+
+it means that we have two creatures
+
+
+available when we have the command we
+
+
+could creature create a new one and the
+
+
+aggregate decide if the command would be
+
+
+accepted or
+
+
+rejected based on the previous events
+
+
+And in this case we expect uh that ex
+
+
+that events as a result of the command
+
+
+would be just one creature recruited and
+
+
+at the end the simple assert
+
+
+equal. But to have some conditions in
+
+
+our implementation decide function we
+
+
+need at least two test cases. So let's
+
+
+add another one. And in this case we try
+
+
+to recruit two units but just one is
+
+
+available. So in this case we do we do
+
+
+not expect anything as a result. More
+
+
+precisely expect empty list of uh
+
+
+events. So nothing as you see as with
+
+
+the assertion at the at the end of the
+
+
+test and is an convention in a team. You
+
+
+may also rise an exception as
+
+
+well and translating event modeling
+
+
+specification to test is very boring and
+
+
+repeatable task. So it's better to give
+
+
+it to some junior or even LLM. And to be
+
+
+honest, I've put the event modeling to
+
+
+chat GPT along with some samples uh how
+
+
+I translate it just the first slice uh
+
+
+to the to the code and the AI done rest
+
+
+of the work for me. You may find the
+
+
+whole sample on my blog and it will be
+
+
+definitely easier to read it than on
+
+
+your machines than on this this slide of
+
+
+course. So how to fulfill those tests?
+
+
+Let's go to the
+
+
+implementation. The problem that appears
+
+
+here is what's between command and event
+
+
+on the event modeling. And on the event
+
+
+modeling it was just an arrow but in the
+
+
+implementation there is the decide
+
+
+function. It's responsible for business
+
+
+logic and guarding
+
+
+invariance. So it's a part of the
+
+
+aggregate. Someone familiar with event
+
+
+storming might might ask where is the
+
+
+yellow card? Where is the lure? And the
+
+
+answer is there isn't because business
+
+
+rules comes from the specification from
+
+
+the examples we've seen before. We think
+
+
+in examples. So, and this opens new
+
+
+doors in our minds because it's not like
+
+
+we write a lure on a yellow sticky note,
+
+
+put it on the wall and we have silent
+
+
+agreements about the L. But and then
+
+
+after some days suddenly when almost
+
+
+everything is implemented someone may
+
+
+say um okay listen there is a case when
+
+
+this doesn't apply and that's why we are
+
+
+doing something like TDD but before the
+
+
+implementation on the whiteboard with
+
+
+sticky nose and we constantly iterating
+
+
+our
+
+
+model and about the code yes in the
+
+
+decide function we have two parameters
+
+
+first is a command and the Second one in
+
+
+the state and first we assert the
+
+
+business rule. So we have if if the
+
+
+creature is this one which we can
+
+
+recruit in the dwelling in this case the
+
+
+angel and we also check if we are trying
+
+
+to recruit more than is available. In
+
+
+this case we return empty list. If we
+
+
+pass all those business rule checks we
+
+
+return uh a list with our business
+
+
+events. In this case just one creature
+
+
+recruited and the second parameter the
+
+
+state uh from where is it come from. So
+
+
+the answer is
+
+
+here we calculate the state using the
+
+
+evolve function. So in this case as you
+
+
+seen uh the events influences um green
+
+
+stickies. So the state stickies which
+
+
+may be used also so for uh for the state
+
+
+or for the views of your read models we
+
+
+keep the state same as before uh in
+
+
+reaction for the event. So you see that
+
+
+case event when available changed we
+
+
+just do the state on the data class with
+
+
+available creatures and we assign the
+
+
+new value in case of the another event.
+
+
+So creature recruited, we reduce the
+
+
+available creatures availability based
+
+
+on what we already
+
+
+recruited. And someone might think, oh,
+
+
+so much events here. So this must be
+
+
+event
+
+
+sourcing. I don't have event sourcing in
+
+
+my project. I do not use base event
+
+
+store something else. So I cannot follow
+
+
+this process. And it's not totally true.
+
+
+Let's look how it looks on the diagram.
+
+
+Indeed, I must admit that there can be
+
+
+even sourcing here and it's my preferred
+
+
+way of implementing that but it's not
+
+
+required. We if we compose those decide
+
+
+and evolve function in the following
+
+
+order as you see uh here. So we we load
+
+
+the events from the event store. We pass
+
+
+it to the evolve function. We have a
+
+
+state. Then we take the state and the
+
+
+command to the evolve function and as a
+
+
+result design result we have events
+
+
+which we store. So we have events at the
+
+
+beginning events at the end. So this is
+
+
+event sourcing. But we can treat it
+
+
+another way. If we compose it in this
+
+
+style. So we load the state from the
+
+
+database. We take the command to be
+
+
+executed. put both of them to the
+
+
+decides function. We have events as a
+
+
+result. But then we can put events to
+
+
+the evolve function and we have state as
+
+
+a result. So as you see state at the
+
+
+beginning, state at the end. So it's
+
+
+like storing a snapshot of a database.
+
+
+So the decider pattern I used it because
+
+
+one of the advantage is also it's
+
+
+persistent
+
+
+agnostic and we still have automation
+
+
+left here just the simplest possible
+
+
+implementation of it because we because
+
+
+of our limited time I describe it more
+
+
+on my blog. So uh in this case we react
+
+
+with a command on a certain event
+
+
+uh and we do case on event type when
+
+
+creature recruited then uh execute
+
+
+command in army module adders to the
+
+
+army as we saw on our uh on our video.
+
+
+So is the glue between
+
+
+modules and thanks to the pattern we
+
+
+achieved some standardization in our
+
+
+code. Why is it important? Does anyone
+
+
+reme remember what happened in heroes
+
+
+when you mixed two different fractions
+
+
+in one
+
+
+army? Yes. Yes. Good. I see domain
+
+
+experts here. So more are dropped and
+
+
+think about how developers more are
+
+
+dropped if we argue even how to
+
+
+implement an aggregate with our project.
+
+
+So it's better to avoid it with some
+
+
+standardization. What did uh and thanks
+
+
+to the standardization we achieve even
+
+
+more profits because it's efficient to
+
+
+oning new people if you use some uh
+
+
+patterns. Uh the implementation becomes
+
+
+boring. As you see the modeling phase
+
+
+was more important because uh during the
+
+
+implementation we just translated the
+
+
+stickies to the code. So we can even
+
+
+delegate the implementation parts to
+
+
+juniors or even to the AI and everything
+
+
+will go faster with that. So we save a
+
+
+lot of money and a lot of
+
+
+time. So the implementation is ready. It
+
+
+seems that this is the end. But then he
+
+
+appears again and asks what about code
+
+
+review and let's see how the software
+
+
+development process looks like. It's a
+
+
+simplified one but you may treat it is
+
+
+not a waterfall. We may assume that we
+
+
+build it for every task. So we have the
+
+
+planning at the beginning then in the in
+
+
+the parallel UX and UI designers may
+
+
+start the work. Then we do the
+
+
+implementation. After the implementation
+
+
+there is code review view and please not
+
+
+let's notice that the code view must be
+
+
+interrupted with the implementation
+
+
+because only then it makes sense if we
+
+
+add some changes from the commands we
+
+
+need to interrupt the phase and return
+
+
+to the implementation and at the end
+
+
+there is deployment of
+
+
+course but it would be better if we can
+
+
+think about the quality even before the
+
+
+implementation. Um let's see that the
+
+
+real battle for the quality happens
+
+
+during planning and experiments not be
+
+
+not during coding. We've avoided many
+
+
+mistakes thanks to that we uh do the
+
+
+exercise and we checked our assumptions
+
+
+about the model. We ask we ask uh good
+
+
+questions in a typical software
+
+
+development like cycle the code review
+
+
+is like thinking about battery stat but
+
+
+after our hero head was cut off. So
+
+
+there isn't much benefit in that and you
+
+
+probably don't have time to rewrite
+
+
+everything uh if needed because it may
+
+
+happen that all your assumptions were
+
+
+wrong after the code review. So what can
+
+
+we do instead? When someone ask in a
+
+
+project how to improve quality, the
+
+
+answer is often at least one code review
+
+
+per pest. Someone else will say at least
+
+
+two. But there is also an unpopular
+
+
+opinion which also mine maybe without
+
+
+code review and this could end badly in
+
+
+most of the teams. But let's assume you
+
+
+weren't thrown out of the window. I
+
+
+think these
+
+
+windows couldn't open. So we are safe
+
+
+here. Uh so how would the cycle look
+
+
+then? During planning we have an
+
+
+architecture review. We do the
+
+
+experiments. We verify our model and
+
+
+assumptions. This makes our planning a
+
+
+bit longer. But if the outcome is a
+
+
+model that we can translate onetoone to
+
+
+code, the implementation gets shorter.
+
+
+And I propose a replacement for code
+
+
+review. We can call it an architecture
+
+
+execution because we don't focus too
+
+
+much on the code now because we have the
+
+
+standards for the implementation. Uh and
+
+
+usually there won't be anything
+
+
+surprising here. Uh with that the code
+
+
+review becomes just a formality. We only
+
+
+executing executing what we have decided
+
+
+before and we verifying if our model is
+
+
+reflected in the
+
+
+code. So let's ask ourselves if the holy
+
+
+grail of design has been
+
+
+found. I don't know what matters is not
+
+
+the method used but the result which you
+
+
+can achieved. So you don't need to use
+
+
+what I showed here to achieve similar
+
+
+modularization standardization. But if
+
+
+something else works in your team, then
+
+
+continue that. But I'd be happy to
+
+
+exchange experience maybe during
+
+
+questions or after the
+
+
+presentation. If you want to make sure
+
+
+your project, your process of designing
+
+
+application is good enough. I wrote even
+
+
+more criteria in my article on LinkedIn.
+
+
+You can find it by scanning the query
+
+
+code, but I also give you the
+
+
+presentation after. So you would be able
+
+
+to find
+
+
+it and at the very end I would like to
+
+
+leave you with one thought. What was the
+
+
+main goal of of
+
+
+this? We must remember about that there
+
+
+is a quote that is not the expert's
+
+
+knowledge that is translated into the
+
+
+code but the developers understanding.
+
+
+So finally it's our responsibility how
+
+
+the system will operate and how easy it
+
+
+will be to introduce changes and do fast
+
+
+future inter
+
+
+iterations because the most important
+
+
+task of domain driven design is to
+
+
+overcome barriers between tech people
+
+
+and domain experts so that our code can
+
+
+refract the business and also evolve
+
+
+along with product of our or our
+
+
+company. If we manage to achieve this
+
+
+synergy, then we'll be able to respond
+
+
+quickly to domain changes and we will
+
+
+make money and our business will make
+
+
+even more money and we won't spend too
+
+
+much time solving just technical
+
+
+problems resulting from our past
+
+
+misunderstanding and then we done it. I
+
+
+hope that the astro astrologers of your
+
+
+project will announce that shared
+
+
+understanding has decreased the law of
+
+
+code review has decreased. speed of
+
+
+introducing changes increased and
+
+
+product offering and income has
+
+
+increased and then the population of us
+
+
+programmers uh real business partners
+
+
+will grow and that's it what I wish for
+
+
+all of you at the end thank
+
+
+[Applause]
+
+
+you and if you want to stay in touch
+
+
+there is my link in and also I promise
+
+
+you the presentation so you may scan
+
+
+this square code and your feedback is
+
+
+also very important for me. So there you
+
+
+will find a quick survey and after you
+
+
+uh submit the form you will receive the
+
+
+links for the presentation and sample
+
+
+code. That's it. Thank you Mosh. Any
+
+
+questions?
+
+
+Uh thanks for the presentation. Uh I
+
+
+really enjoy it. Um I have just one
+
+
+question about the part with the automat
+
+
+automation part I think. Okay. I
+
+
+expected that.
+
+
+Yeah. So uh in the example you showed
+
+
+that we like react to the event and send
+
+
+the comment right? Yes. H but also on
+
+
+the diagram you showed the let's say
+
+
+read model view uh that had the arrow to
+
+
+the automation. So is that kind of
+
+
+internal state for the for the process?
+
+
+Yes. Yes. So as I mentioned this example
+
+
+which I shown it was the simplest
+
+
+example possible. Uh so yes it depends
+
+
+on the process. If the automation is
+
+
+always react with this command to this
+
+
+event you don't need that. But most of
+
+
+the time you need some um internal
+
+
+process state. And even in the simplest
+
+
+example, I prefer to do not have the
+
+
+green sticky on the event model, but
+
+
+it's the the formality of the method
+
+
+needs that uh is that um I treat it
+
+
+because in this case on the simplest one
+
+
+you also need the state but the state is
+
+
+what events you have already processed.
+
+
+So it could be just an number on which
+
+
+event position in the store you are
+
+
+right now. Okay, thank you.
+
+
+Any other questions?
+
+
+Thanks for the talk. Um, so again about
+
+
+uh sometimes in the RIT models you need
+
+
+uh to update many RIT models you need to
+
+
+update the same let's say total value as
+
+
+in e-commerce systems, right?
+
+
+Um where is the calculation part in the
+
+
+event
+
+
+modeling terminology like where where
+
+
+does it happen in each read model
+
+
+separately or there is some automation
+
+
+that does the calculation how how would
+
+
+you where would you put it you mean the
+
+
+calculation uh okay you mentioned total
+
+
+value so I have let's for example I have
+
+
+an event I add products to the cart and
+
+
+I want to calculate uh the total and
+
+
+then you add a new product and okay So
+
+
+um as a business rule didn't uh place we
+
+
+didn't place business rule on the event
+
+
+model is the same as a calculations
+
+
+because uh you you see how the event how
+
+
+the event influence the view. So in an
+
+
+example you should prepare another
+
+
+example the given when then but for a
+
+
+view place three events be before the
+
+
+view and then uh and then say what
+
+
+should be the expected outcome. So the
+
+
+total value.
+
+
+All right. So even if you have to change
+
+
+it in many rich models you would repeat
+
+
+it basically. Ah okay. You ask about the
+
+
+implementation. Yes. Not about the
+
+
+diagram of event model itself. Yeah.
+
+
+Okay. So I think it depends on know the
+
+
+preferences conventions but I will do it
+
+
+uh more than once.
+
+
+Okay. Any other
+
+
+questions so uh I'm curious because uh
+
+
+in the automation code sample there was
+
+
+the um the result of that was a comment,
+
+
+right? So what was the return value was
+
+
+a comment?
+
+
+survivor was a command. Okay. So, um
+
+
+given that there's a long running
+
+
+automation or brothers a process. Um so,
+
+
+um who's executing those? How those
+
+
+commands are executed? Um okay, you mean
+
+
+wronging process? So, you need more
+
+
+events to match some condition and then
+
+
+do the command. Okay. So in this case
+
+
+you can um you can have more internal
+
+
+states. Yes. And
+
+
+pipe pipe the reactions along with even
+
+
+introducing some decide function in
+
+
+between. It's one approach but it's more
+
+
+for the purist of the functional
+
+
+implementation. So in my case I would
+
+
+normally introduce some for saga there
+
+
+and do it in one place. Okay. So then
+
+
+consume more. Yes. Consume more events
+
+
+than one. Okay. So then the decide
+
+
+function would just uh return some
+
+
+command that would be executed by a
+
+
+saga. Yes. Yes. So you need more and
+
+
+maybe some artificial command events for
+
+
+the programming process. Okay. Cool. Is
+
+
+that in the source code? Uh um I'm not
+
+
+sure if is it in Ruby code because I
+
+
+also have in Java and in Java there is
+
+
+something I hope I can read that
+
+
+although with pain. Uh thank you Matos.
+
+
+[Applause]

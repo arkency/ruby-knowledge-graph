@@ -1,0 +1,1819 @@
+Our next
+
+
+guest came to us from San Francisco
+
+
+yesterday and he's still a little bit
+
+
+jetlagged but he's ready to talk about
+
+
+authorization in Rails. Ladies and
+
+
+gentlemen, please welcome Yatish Meta.
+
+
+Cool. Um, thank you everyone and yeah,
+
+
+welcome to my talk, no pun intended,
+
+
+duple the power of rails authorization
+
+
+and yes, the pun is
+
+
+intended. Cool. Uh, before we start, I
+
+
+have a trivia simple trivia
+
+
+question. Uh, what should we put in the
+
+
+place of the question mark so that it
+
+
+prints both the
+
+
+statements? And I have a book giveaway.
+
+
+You could uh fork.
+
+
+Uh, no. Okay.
+
+
+It's It's way more simpler than you guys
+
+
+think.
+
+
+No, you want both the sentences to be
+
+
+printed. So the output should be both. I
+
+
+like Sernik, I like Paknik.
+
+
+Oh,
+
+
+I think you could do if puts I like
+
+
+Cernic and false.
+
+
+Yep, that is correct. But we had two
+
+
+people who answered that question. So
+
+
+I'll find another book for
+
+
+you. Uh,
+
+
+cool. Um, yeah, my name is Yatish Mata.
+
+
+Uh, I live in San Francisco, California
+
+
+in the States. Uh, I've been a Rubist
+
+
+for more than 10 years. I'm active on
+
+
+Twitter, GitHub.
+
+
+Um I'm the tech lead at Asana for
+
+
+authorization. Uh if you don't know what
+
+
+Asana is, Asana is a work collaboration
+
+
+platform to manage your projects, your
+
+
+tasks. Um
+
+
+uh we are based out of San Francisco as
+
+
+the HQ, but we have an engineering
+
+
+office in Warsaw and we are hiring. So
+
+
+feel free to talk to me uh after the
+
+
+session if you're
+
+
+interested. Cool. Uh let's start with
+
+
+authentication and authorization. Like
+
+
+these are the terms that people often
+
+
+get mixed
+
+
+up. So authentication deals with who you
+
+
+are. It makes sure the user is what they
+
+
+claim they
+
+
+are. Username, password, SSO, SAML.
+
+
+These are the terms that are related
+
+
+with
+
+
+authentication. In Rails, we'll use gems
+
+
+like device ra to manage
+
+
+authentication.
+
+
+Authorization on the other hand uh deals
+
+
+with what the user can do, what actions,
+
+
+permissions are allowed for this user.
+
+
+Now since I'm traveling a good example
+
+
+is passport is for
+
+
+authentication but the visa stamp is for
+
+
+authorization. So let's talk about
+
+
+authorization rails and like the
+
+
+different approaches uh with which we do
+
+
+authorization. Uh let's start with the
+
+
+basic implicit
+
+
+authorization. Um this is an example of
+
+
+an implicit authorization.
+
+
+We fetch the
+
+
+project. Okay. We fetch the project that
+
+
+is uh scoped to the current
+
+
+user and if the project exist we allow
+
+
+the user otherwise we render
+
+
+unauthorized.
+
+
+Technically there's no explicit
+
+
+authorization check but our query scopes
+
+
+make sure that the only the user who has
+
+
+access to the projects or projects that
+
+
+the current user owns are shown to that
+
+
+user. So there's no authorization as a
+
+
+framework or explicit check but a
+
+
+queries and scopes kind of take care of
+
+
+that. Again, it's simple to implement,
+
+
+but now we have a business logic and
+
+
+authorization rules combined
+
+
+together. As our app grows, it's
+
+
+difficult to manage your authorization
+
+
+logic this
+
+
+way. So, what's the next
+
+
+solution? You have the can can
+
+
+gem. Um, it allows you to create an
+
+
+ability.rb file where you define all the
+
+
+rules and permissions for the user.
+
+
+So in this example, we've defined the
+
+
+read permission for the post resource
+
+
+for the
+
+
+user and then you can check the
+
+
+permission in the controller
+
+
+um using like the authorize method and
+
+
+also
+
+
+uh check it on your
+
+
+views. Simple, right?
+
+
+But as your app grows, the ability rb
+
+
+file also grows and becomes totally
+
+
+unmanageable. This is a 60line snippet
+
+
+of code from an open-source ability.
+
+
+file. Now just imagine what would the
+
+
+whole file look like.
+
+
+This even if you can't read it is an
+
+
+example of a real production app ability
+
+
+file which can grow even from thousands
+
+
+of
+
+
+lines. Now your permissions you could
+
+
+also have permissions which depend on
+
+
+each other and that makes it really
+
+
+difficult to refactor them because you
+
+
+have to make sure that refactoring one
+
+
+permission doesn't affect the other
+
+
+unknowingly.
+
+
+So what do we get with can can we get
+
+
+separation of
+
+
+concerns all our authorization logic is
+
+
+in a single place but again as the app
+
+
+grows ability file keeps growing that's
+
+
+not something that's
+
+
+scalable so what's
+
+
+next pundit is the most popular
+
+
+authorization gem in Rails there's also
+
+
+action policy
+
+
+which is like a revised version of
+
+
+Pundit with additional features but it
+
+
+has the same structure the same
+
+
+philosophy. So uh Pundit provides the
+
+
+concept of policies. You can define a
+
+
+simple poro class with your resource to
+
+
+define the
+
+
+permission. Each instance method is a
+
+
+permission
+
+
+check. Since it's plain old Ruby, you
+
+
+can define any logic within the
+
+
+permission
+
+
+method. So this is an example of like
+
+
+the update uh permission and some some
+
+
+logic inside
+
+
+that again similar to can can you can
+
+
+use it in the controller and in views.
+
+
+So kind of let's build a policy uh for
+
+
+an actual kind of a real use case.
+
+
+Uh so
+
+
+uh let's build an authorization policy
+
+
+for a project management
+
+
+app. So the the features are you have to
+
+
+organize like work with projects and
+
+
+tasks. Tasks can be part of multiple
+
+
+projects. Um you can have users that get
+
+
+added to the projects with admin,
+
+
+editor, commenter roles.
+
+
+You can even add the whole teams to
+
+
+projects with the same rules. So either
+
+
+you add the users directly or you add
+
+
+like the whole team engineering or
+
+
+marketing to the project and then
+
+
+associate them with the same uh admin
+
+
+editor commenter
+
+
+roles and again users can be part of
+
+
+multiple teams. Just a
+
+
+[Music]
+
+
+Cool. Um, so this is kind of the visual
+
+
+representation of our use case. You have
+
+
+users, projects, task,
+
+
+teams. Task can belong to multiple
+
+
+projects. Your projects can have users,
+
+
+can have teams, and then your users
+
+
+belong to a team.
+
+
+Um let's define the permission for who
+
+
+can edit a task. The rules uh for this
+
+
+are if you're the creator of the
+
+
+task or if you're an admin or editor of
+
+
+the project, you can edit the task uh
+
+
+and you can be an admin or edit editor
+
+
+either directly or through a
+
+
+team. So how do you go about writing a
+
+
+task policy for this? Um and we want to
+
+
+write it for like who can edit the task,
+
+
+right? So you'll define an update uh
+
+
+permission. The first rule was to check
+
+
+if the task is created by the user. So
+
+
+you're checking for the
+
+
+creator. Uh then you'll check if you
+
+
+have admin or editor access
+
+
+um
+
+
+directly or then you have admin or
+
+
+editor access through a team. I mean the
+
+
+end of the code is cut off but that kind
+
+
+of the top uh uh method the public
+
+
+method gives you an idea that if any of
+
+
+these three conditions are true you are
+
+
+allowed to edit the
+
+
+task. Soon your PM comes in and decides
+
+
+to add a new use case. If the task is
+
+
+sensitive then only admins uh of the
+
+
+project can edit the task.
+
+
+So you go back to your code and be like
+
+
+okay I need to like modify my
+
+
+policy. Um you're going to like check
+
+
+first whether the task is sensitive.
+
+
+Then only allow for
+
+
+admin access either directly or through
+
+
+a team. If it's not you just use the old
+
+
+path. Um as you can see it's it started
+
+
+to increase complexity. And let's see
+
+
+what are the limitations of of pundit as
+
+
+the app
+
+
+grows. The first is refactoring. It's
+
+
+really difficult to refactor a
+
+
+permission since changing one permission
+
+
+can impact upstream and downstream
+
+
+permissions. You have to be very
+
+
+carefully navigate the code through the
+
+
+policies to make sure there's no
+
+
+unintended impact. Like for example, if
+
+
+you change the definition of editor
+
+
+access, uh there could be permissions
+
+
+upstream that are using it uh and you
+
+
+want to make sure like you don't have
+
+
+any unintentional
+
+
+impact. There's no automated way to find
+
+
+these dependencies. So you have to
+
+
+navigate through the code to see what it
+
+
+depends
+
+
+on. Next is performance.
+
+
+when calculating the permission you'll
+
+
+have to add our load like intermediate
+
+
+objects
+
+
+um you can optimize the code but it's
+
+
+easy to fall for N plus1 issue here I
+
+
+know we spoke about N plus1 as a feature
+
+
+but normally it's not
+
+
+um so uh you can still optimize the code
+
+
+but it's easy to fall for that trap
+
+
+um you cannot cache the result of the
+
+
+evaluation between requests. Since the
+
+
+permission logic is a black box, you
+
+
+have to evaluate evaluate the permission
+
+
+logic for every
+
+
+request. Fun fact, Figma recently
+
+
+mentioned in their blog that around 23%
+
+
+of their SQL queries are related to
+
+
+access
+
+
+control. So, how do you check why a user
+
+
+was not allowed? Normally you'll get
+
+
+into the Rails console, load the user
+
+
+object, load the task or the record and
+
+
+like run that permission to see which
+
+
+component was
+
+
+false. In the same situation, you need
+
+
+to know which is more dangerous need to
+
+
+know why the user was allowed if it's a
+
+
+bad actor or unintentionally if they got
+
+
+access. There's no easy way to audit or
+
+
+debug these permissions. There's no easy
+
+
+way to find out why the user got or did
+
+
+not get
+
+
+access. And finally, since Panda doesn't
+
+
+store any data,
+
+
+uh there's no way to identify
+
+
+uh what users have access to. So there's
+
+
+no way to request hey give me the list
+
+
+of users that have this permission to a
+
+
+resource or hey give me the list of
+
+
+users that can edit this task. I it's
+
+
+always the opposite where given a user
+
+
+given a task it's going to return
+
+
+whether I can edit or
+
+
+not. So what do we do? Is there a better
+
+
+way to model our authorization
+
+
+logic? And yes, there is. There's fine
+
+
+grain authorization
+
+
+FGA. It's also called as relationship
+
+
+based access
+
+
+control. This is based on Google's
+
+
+Zanzibar project. Um Google put out a
+
+
+paper about the Zanzibar project and how
+
+
+they manage authorization
+
+
+uh a distributed authorization across
+
+
+apps uh for all their
+
+
+products. Um so the way FGA or
+
+
+relationship based access control works
+
+
+is that you're storing relationship
+
+
+between entities as these
+
+
+pupils. Um they're also called as access
+
+
+control lists. So what you're storing is
+
+
+user A where A is the identifier has a
+
+
+relationship of editor with project
+
+
+X. So you're going to store these
+
+
+relationships in in like a subject
+
+
+relationship object
+
+
+format. Um and this is what your
+
+
+authorization data would look like,
+
+
+right? you would have a collection of
+
+
+these uh
+
+
+pupils and um and with the relationship
+
+
+with
+
+
+it. The other way to look at this data
+
+
+is it actually ends up being a graph
+
+
+because a subject in one pupil could be
+
+
+a resource or an object in another one.
+
+
+So it's a graph of entities connected to
+
+
+each other by
+
+
+relationship and the nodes being the
+
+
+entities and the relation being the
+
+
+edge. So this is your authorization data
+
+
+which is static which is
+
+
+stored. Then on top of this
+
+
+authorization data you define rules for
+
+
+your permissions.
+
+
+Um u again it doesn't matter if you can
+
+
+read this but this is like the rules
+
+
+which are defined for this graph uh on
+
+
+how to navigate this graph what parts
+
+
+are allowed for this permission. Uh
+
+
+there are multiple FGA providers and
+
+
+each one of them have their own DSL uh
+
+
+but the idea is the same where you're
+
+
+kind of defining a model defining a
+
+
+schema and defining rules uh for your
+
+
+permissions.
+
+
+So in this world uh checking a
+
+
+permission of whether user two has edit
+
+
+access to task
+
+
+one rather than checking hey does it
+
+
+have access what you're saying is is
+
+
+there a path from user two to task one
+
+
+in this graph based on the rules that we
+
+
+defined in the previous slide and if
+
+
+that path
+
+
+exists then uh user two is allowed to
+
+
+edit Task
+
+
+one. Uh, so how do we implement FGA or
+
+
+relationship based access control in
+
+
+Ruby or
+
+
+Rails? Um, I created a gem called
+
+
+granity to support fine grained
+
+
+authorization in Rails
+
+
+apps. So let's look at how it
+
+
+works. Um, you add the gem, you install
+
+
+the artifacts. Uh, it's going to create
+
+
+a migration and a model. Uh this is
+
+
+where you're going to store the
+
+
+pupils. Uh once you add the gem, we need
+
+
+to define the authorization model or the
+
+
+authorization
+
+
+schema. Um so you define this. It's
+
+
+going to be in your
+
+
+initializer. Um but this is how you
+
+
+would define. First you'll go through
+
+
+the entities of your app. So we're
+
+
+defining like resource type user which
+
+
+is one entity.
+
+
+Then you have another one which is team.
+
+
+So resource type
+
+
+team. And then you define a relationship
+
+
+between them. So for for this one I'm
+
+
+defining a member relationship. So what
+
+
+this says is the team object or the team
+
+
+entity and the user entity are related
+
+
+with the relationship name called as
+
+
+member. Similarly we define the project
+
+
+entity. uh it it's going to have a
+
+
+relationship with the user, a
+
+
+relationship with the team and like
+
+
+multiple types of relationship admin
+
+
+editor and again if you have more access
+
+
+controls you'll add them
+
+
+here. Um you define the task entity now
+
+
+it's a relation between project and a
+
+
+task and for the creator it's between
+
+
+the task and the user. So again you're
+
+
+taking those graphs and edges and you're
+
+
+defining that u in in the schema which
+
+
+is again Ruby code. So it generates a
+
+
+graph object out of
+
+
+it. Uh once you've defined the
+
+
+relationships you can define a
+
+
+permission. Um it it has like a DSL of
+
+
+include any and include all. So you can
+
+
+have like nested and and or logic to
+
+
+combine uh your rules. So what in this
+
+
+case it's saying that hey if any of
+
+
+these conditions or any of this
+
+
+relationships
+
+
+exist then you're allowed to edit the
+
+
+tasks in that
+
+
+project. In the same way you're defining
+
+
+one on the task object saying that hey
+
+
+if you're the creator or if you can edit
+
+
+the project tasks then you can edit this
+
+
+task. Again you can use either a
+
+
+relationship or you can use another
+
+
+permission. So in this case we're using
+
+
+a permission which was defined on
+
+
+projects. So once you've defined the
+
+
+schema it's time to create those
+
+
+relationships. It's time to create those
+
+
+tpples.
+
+
+Um, again, you're going to create those
+
+
+relationships based on your flow. So,
+
+
+every time a new user is added as an
+
+
+editor, you'll kind of call this in your
+
+
+code path. Again, if you add or remove
+
+
+or modify, you would do the
+
+
+corresponding changes. So in this case
+
+
+in my code path wherever I'm adding a
+
+
+user to a project as an editor I'm going
+
+
+to include this so that it creates that
+
+
+tpple for my authorization
+
+
+data. And finally how do I check my
+
+
+permission? Again it's a simple check
+
+
+permission where I pass in the user pass
+
+
+in the task pass in the permission name.
+
+
+It's going to use my rules, go through
+
+
+the authorization data, and if the path
+
+
+exists, it means yes, I'm allowed to do
+
+
+it. And uh if if no, then it's going to
+
+
+return
+
+
+false. Uh again like can can and ponder
+
+
+the helper methods so that you can kind
+
+
+of use it in a concise way uh rather
+
+
+than passing all of those attributes.
+
+
+So how does this win over the previous
+
+
+approach? Right? What are the advantages
+
+
+of FGA and granity over a previous
+
+
+approach? Um since the authorization
+
+
+model is defined as a schema, you can
+
+
+easily check for dependencies. You
+
+
+literally have a graph object. So you
+
+
+can query it, question it saying like,
+
+
+hey, give me the permissions that they
+
+
+are dependent on. So when you're
+
+
+refactoring, you're really confident
+
+
+about what other permissions would get
+
+
+impacted by
+
+
+it. Um
+
+
+performance there's no intermediate
+
+
+object loading. The tupils navigate
+
+
+through ids. So it's just when it's
+
+
+navigating, it's not loading the team
+
+
+object. It's not loading the user
+
+
+object. Uh it's just going through those
+
+
+tpples. Granity also has smart caching.
+
+
+So you can tell it to cache results
+
+
+between request since it knows the
+
+
+dependent
+
+
+nodes if uh it can cache the result and
+
+
+if there are no changes it's just going
+
+
+to return the result from the cache and
+
+
+if you add a new node add a new edge it
+
+
+knows it knows its dependencies and it
+
+
+can invalidate those
+
+
+results. So technically you don't need
+
+
+to evaluate the permission for every
+
+
+request.
+
+
+auditability. Now you can ask it along
+
+
+with the permission result to also
+
+
+return you the path. This makes debug
+
+
+debugging easier and you know why a
+
+
+particular user got access. So in this
+
+
+example uh you could get access to the
+
+
+task maybe through a team or maybe
+
+
+through direct access since you have the
+
+
+whole path you know why the user got
+
+
+access.
+
+
+um reverse lookups because you're
+
+
+storing these relationships. Uh you can
+
+
+actually ask the opposite question of
+
+
+like hey give me the subjects for
+
+
+permission edit for the uh this resource
+
+
+and it'll give you the list of users
+
+
+back. Again this is I I've put a star on
+
+
+this because there's a caveat. It
+
+
+doesn't have pageionation. So it depends
+
+
+on what your authorization model is. It
+
+
+could load all the users. So you want to
+
+
+be careful with
+
+
+this. Yeah. Finally, um we we spoke
+
+
+about uh FJ in Rails, but there are many
+
+
+external open-source authorization as a
+
+
+service providers for fine grain
+
+
+authorization. So you have uh open FGA,
+
+
+OZ, OSO, permit.io uh all of them are
+
+
+based on Google's Zanziba project.
+
+
+and they are pretty advanced. They have
+
+
+like a playground. You can set up the
+
+
+model uh test data. So I would highly
+
+
+recommend to like kind of go through
+
+
+these just to understand FGA uh
+
+
+understand authorization as a service um
+
+
+like just the concept of uh relationship
+
+
+based access
+
+
+control. If you have uh used or if you
+
+
+use an external service for this uh this
+
+
+is how the flow would look like. Your
+
+
+authorization data and model would live
+
+
+in the o as a service. So every request
+
+
+uh you would have to call that service.
+
+
+So let's say I call the update endpoint.
+
+
+It's going to first check hey this user
+
+
+this resource does it have access?
+
+
+returns me back the answer and then
+
+
+depending on that I'll either return the
+
+
+result or say it's you're unauthorized.
+
+
+Uh again these authorization as service
+
+
+projects are like really optimized
+
+
+cached they they kind of promise like
+
+
+singledigit millisecond latency but
+
+
+still it's it's an external service.
+
+
+This is very useful if you have like a
+
+
+distributed system microservices
+
+
+architecture.
+
+
+So yeah just to summarize you start
+
+
+simple with pundit you add something
+
+
+like granity for fine grained
+
+
+authorization and then once you reach
+
+
+like like a distributed a truly
+
+
+distributed system um you would consider
+
+
+something like uh the options that I
+
+
+gave before authorization as a service.
+
+
+Yeah that is
+
+
+it.
+
+
+Any questions?
+
+
+Yeah, thanks for the talk. Is it
+
+
+working? I just Yeah, thanks for the
+
+
+talk. I just didn't realize uh how
+
+
+exactly would you model the sensitive
+
+
+task case? Yeah. So you would create a
+
+
+new entity called as sensitive task and
+
+
+it would have a relationship with task.
+
+
+So if it's a sensitive task, you would
+
+
+have a relationship with the same
+
+
+ids. So on the left hand side you would
+
+
+have an entity called a sensitive task.
+
+
+Right hand side you would have the
+
+
+actual task and the relationship would
+
+
+be something like is
+
+
+sensitive. Even if it's not a model
+
+
+within your authorization model you can
+
+
+create a new entity out of it. Okay.
+
+
+Understood. Thanks. And the other one is
+
+
+um how actually difficult is it to
+
+
+uh to keep all this u relationships in
+
+
+sync. So that's a challenge um because
+
+
+technically what you're doing is you're
+
+
+taking your belongs to many to many
+
+
+foreign key relationships and you're
+
+
+moving it out or you're duplicating it
+
+
+from your model to this normalized entry
+
+
+attribute value kind of a table, right?
+
+
+Like imagine if all your foreign keys uh
+
+
+or all your many to many were in a
+
+
+single table. That's what you're doing.
+
+
+So either so that's you have to manage
+
+
+that explicitly where after create
+
+
+commit you have to make sure you're
+
+
+making an entry in in the authorization
+
+
+model as well. So yeah but at least if
+
+
+it's within the monolith it's within the
+
+
+single transaction when you use o as a
+
+
+service it has to be synced between your
+
+
+rails app and the external
+
+
+service. So yeah you have to manually
+
+
+manage those relationships. So you kind
+
+
+of have to have a logics that checks
+
+
+that yeah sorry you have to have a
+
+
+logics that duplicated logics kind of
+
+
+that checks if you do have this uh kind
+
+
+of yeah but you would do it only for
+
+
+relationships that you kind of care
+
+
+about for authorization.
+
+
+Yeah, great talk. I um I've seen some of
+
+
+these authorization as a service um
+
+
+providers and it's cool to see a a gem
+
+
+to do it locally. I was curious though
+
+
+in pundit you have the ability to define
+
+
+scopes in your policies as well when
+
+
+doing this relationship based access
+
+
+control. What is the pattern that you
+
+
+reach for to sort of define the the
+
+
+scopes for you know the different parts
+
+
+of the app right? Um that's something
+
+
+that's I mean when you have relationship
+
+
+based access control you don't have that
+
+
+but
+
+
+you're you have to like explicitly query
+
+
+it like that's something that's missing.
+
+
+Um in pundit again you could have like
+
+
+just a black box of logic that you can
+
+
+add where here you have to be like it's
+
+
+very constrained you have to define that
+
+
+relation. I can't just have any Ruby
+
+
+code to be checked. So those those are
+
+
+like constraints with this for sure.
+
+
+Any other questions?
+
+
+Okay, thank you very much. Awesome.
+
+
+Thank you.

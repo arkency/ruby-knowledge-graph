@@ -1,0 +1,3754 @@
+it's always lovely to be here um three
+
+
+signs oh can I move the microphone a
+
+
+little is that okay
+
+
+okay so three sides Brothers you've had
+
+
+way too much coffee not enough sleep and
+
+
+your voice you can hear it's been two
+
+
+days of partying
+
+
+so I apologize I am I may not be the
+
+
+speaker you deserve but you're it's the
+
+
+one that you're gonna get
+
+
+all right I see the presentations
+
+
+working let's just get into it
+
+
+functional programming so
+
+
+um
+
+
+I'm sure you've all heard of functional
+
+
+programming and I'm sure you've been
+
+
+told that it's about programming with
+
+
+pure functions without side effects
+
+
+right hands up great disagree
+
+
+I'm gonna need more from you guys I I
+
+
+need the energy in this room to go up
+
+
+because it's only going to get weird
+
+
+trust me
+
+
+um this is not true this is this is the
+
+
+worst possible explanation of what
+
+
+functional programming is and I'm here
+
+
+to set the record straight
+
+
+so we're going to learn three terms
+
+
+we're going to learn two of
+
+
+visualization techniques
+
+
+one programming concept and we're going
+
+
+to learn absolutely nothing about monets
+
+
+this is not that talk
+
+
+because I'm here to teach you functional
+
+
+programming not monad programming
+
+
+so meet Mr Chang uh he's your classic
+
+
+community college professor with the
+
+
+sombrero feet up in the air just
+
+
+chilling
+
+
+when this slide is up I want you to
+
+
+relax Lean Back breathe think about what
+
+
+you've just seen and sort of process it
+
+
+but that also means that when he is not
+
+
+up I need you to put your phone down
+
+
+lean forward and read between the lines
+
+
+because I am not here to teach you a
+
+
+bunch of buzzwords I want you to take
+
+
+every single slide you see and think
+
+
+about how it applies to your existing
+
+
+code base
+
+
+and I promise you if you put in the
+
+
+effort today you will wake up tomorrow a
+
+
+better Ruby developer
+
+
+this is my promise to you okay
+
+
+sounds good
+
+
+I'm gonna need more
+
+
+thank you
+
+
+let's start with some softballs no I'm
+
+
+going to
+
+
+try to not ask any rhetorical questions
+
+
+or trick questions this is not a
+
+
+interview
+
+
+so if I ask something and it seems
+
+
+obvious
+
+
+I want you to answer anyway just shout
+
+
+it out because this is going to help you
+
+
+process this information
+
+
+we're looking at something up on the
+
+
+screen can you take a wild guess what
+
+
+kind of application we're dealing with
+
+
+here
+
+
+yeah some kind of shopping cart
+
+
+e-commerce I think that would be a
+
+
+reasonable assumption can you tell me
+
+
+how many books are in this shopping cart
+
+
+three books can you tell me if any of
+
+
+them are on sale
+
+
+one which one
+
+
+the last one so the first two books
+
+
+that's from yesterday's law Inc talk the
+
+
+last book I threw it in there because
+
+
+it's a book I read recently like maybe
+
+
+half a year ago
+
+
+um it's about women in Computing in the
+
+
+beginning of the Computing field and it
+
+
+turns out that there's a lot of
+
+
+interesting anecdotes and I think not
+
+
+enough people like learn about our own
+
+
+history as a computer science field so I
+
+
+highly recommend it
+
+
+so that's our first slide
+
+
+sorry
+
+
+there was a typo I'm sure there's more
+
+
+than one
+
+
+okay so it's gonna be here too because I
+
+
+just copy pasted
+
+
+so this is our second slide and here I
+
+
+want you I want to ask you when was the
+
+
+pr uh the principles of philosophy
+
+
+published
+
+
+louder
+
+
+okay by whom
+
+
+by Descartes and how old is he when he
+
+
+published it
+
+
+48 years old yes so
+
+
+think about what's Just Happening Here I
+
+
+I gave you zero information but you're
+
+
+able to not only figure out meaningful
+
+
+information that was here you were
+
+
+actually able to do some graph
+
+
+traversals even though I didn't tell you
+
+
+those things are somehow joined together
+
+
+right
+
+
+so you've just learned what is data data
+
+
+is information at rest it means that
+
+
+it's meaningful without needing a
+
+
+computer to run it
+
+
+you are now a data data engineer
+
+
+the other interesting property about
+
+
+data except for the fact that you don't
+
+
+need a computer to have any meaningful
+
+
+information process from it and in fact
+
+
+new facts right because there was
+
+
+nothing about how old Descartes was this
+
+
+is something you figured out by joining
+
+
+other facts that were already there the
+
+
+other interesting thing so sorry first
+
+
+slide
+
+
+um
+
+
+Potter Stewart if you don't know who
+
+
+that is is a Supreme Court Justice and
+
+
+he famously when asked what is
+
+
+pornography
+
+
+said that I know it when I see it
+
+
+and that's how I want you to remember
+
+
+what data is next time anyone asks you
+
+
+what is data just smile and think I know
+
+
+it when I see it that's the first
+
+
+property of data it's information at
+
+
+rest it doesn't need a computer to be
+
+
+interpreted
+
+
+but the second important piece about
+
+
+data
+
+
+is that it has multiple interpretations
+
+
+this is a Sumerian clay tablet probably
+
+
+around 5000 years old
+
+
+the rough translation is that someone
+
+
+owes someone a bunch of barley uh is
+
+
+like a bunch of barley stocks and
+
+
+Promises to return like pay off the debt
+
+
+in some like 37 months or something like
+
+
+that
+
+
+so it's essentially an IOU that's like
+
+
+5000 years old and this was information
+
+
+right that was written down so they
+
+
+remember what it is
+
+
+but when we dig it up 5000 years later
+
+
+we don't care about who owes what whom
+
+
+because these people are long dead and
+
+
+this IOU will never be repaid
+
+
+what we care about is that we can take
+
+
+this kind of information and learn
+
+
+something about how these people like
+
+
+about their agriculture about their
+
+
+economy we can have new insights about
+
+
+what this Society looked like and this
+
+
+is something I want you to burn Into
+
+
+Your Brains it's that when we write a
+
+
+piece of data into our system we have no
+
+
+idea how it will be interpreted in the
+
+
+future so when you're building your
+
+
+event sourcing system and you're putting
+
+
+this Json in some database I want you to
+
+
+remember that you're putting it you have
+
+
+to put it in a way in such a way that it
+
+
+will be able to answer the questions you
+
+
+have right now and also that probably
+
+
+two years down the line your questions
+
+
+will be very different and you have
+
+
+absolutely no idea what those questions
+
+
+will be right
+
+
+and that's why it's important to think
+
+
+about how you're storing the kind of
+
+
+data you're storing and to store in such
+
+
+a way that it will be meaningful in
+
+
+three years down the line when maybe
+
+
+you're not even writing this in Ruby
+
+
+anymore you're writing this in Java
+
+
+Scala or some new fangled language but
+
+
+it still can read Json because as you
+
+
+noticed on those first two slides I'd
+
+
+even tell you what format that was
+
+
+it could have been Eden for all you know
+
+
+but you were able to interpret it
+
+
+anyways
+
+
+so those are the interesting properties
+
+
+about data
+
+
+foreign
+
+
+that's funny I forgot to start this
+
+
+timer but I'll figure this out
+
+
+so
+
+
+that's data
+
+
+what about this slide
+
+
+this is some Json
+
+
+this Json will actually not compile
+
+
+because there's this weird bar thing
+
+
+right Json can't have symbols so let's
+
+
+pretend it's not Json let's pretend it's
+
+
+Ruby so at least it'll compile
+
+
+do we have an idea what food could
+
+
+possibly represent just based on this
+
+
+slide
+
+
+yeah you you can't do anything so let me
+
+
+help you out let's say that
+
+
+it's actually called total and the bar
+
+
+is actually calculated total the do you
+
+
+now have some idea of what this
+
+
+represents
+
+
+you have some idea but can you tell me
+
+
+what the result would be
+
+
+42.
+
+
+that is that is that is the correct
+
+
+answer that's that's the secret answer
+
+
+yeah so the problem with this is this is
+
+
+no longer data because there's a
+
+
+function in there and we need to
+
+
+understand and what kind of runtime this
+
+
+function will run
+
+
+we can of course maybe look into the
+
+
+source code assuming we have access to
+
+
+source code
+
+
+now this source code
+
+
+um if you look at this can you guess it
+
+
+if I tell you what the items are will
+
+
+you be able to tell me what the result
+
+
+would be
+
+
+it seems reasonable right that you would
+
+
+so these are what we call calculations
+
+
+calculations are
+
+
+functions such that the output is
+
+
+dependent only on the input and nothing
+
+
+else
+
+
+now it's not entirely true that you can
+
+
+know what the answer will be because
+
+
+we're movie developers so maybe someone
+
+
+did something like this
+
+
+right but it is a reasonable assumption
+
+
+that we can analyze this code and say
+
+
+yes this result will always be the same
+
+
+and if I run it once or I run it 100
+
+
+times it'll always give me the same
+
+
+result
+
+
+that's the definition of a calculation
+
+
+that the output is only dependent on the
+
+
+input and it doesn't matter how many
+
+
+times you run it you'll always get back
+
+
+the same result
+
+
+okay
+
+
+in the real world the Enigma machine is
+
+
+a calculation because the Enigma machine
+
+
+is this complicated piece of Machinery
+
+
+that you feed it two things you feed it
+
+
+the encrypted message
+
+
+and you feed it a set of settings
+
+
+and when you get the result back the
+
+
+decrypted message it doesn't matter if
+
+
+you run it once or a million times
+
+
+you're always going to get back the same
+
+
+result
+
+
+the ending machine might be so
+
+
+complicated that you can't figure out
+
+
+what the message would have been
+
+
+decrypted without actually running the
+
+
+thing so you need to run it at least
+
+
+once for example but once you whether
+
+
+you're running once or a million times
+
+
+it's the same result and the way for
+
+
+example you can crack an ending machine
+
+
+is instead of trying to crack the
+
+
+algorithm you just Brute Force the
+
+
+settings for it for example right
+
+
+question so far or just
+
+
+accept Nick
+
+
+what's your question
+
+
+oh sorry oh wait sorry I can't
+
+
+swear
+
+
+you gave me one of the fizzy that's not
+
+
+cool
+
+
+all right
+
+
+um
+
+
+so we're back to the slides
+
+
+we have the same slide but this time we
+
+
+introduced to sales tax is this still a
+
+
+calculation
+
+
+it it would be reasonable to assume that
+
+
+yes this is still a collocation because
+
+
+why the output is dependent only on the
+
+
+inputs I want you to repeat this over
+
+
+and over in your head until it becomes
+
+
+second nature
+
+
+now
+
+
+what if I change the argument list is
+
+
+this a calculation
+
+
+maybe yes no I love it it's it's both
+
+
+it's destroying your calculation it's
+
+
+both a calculation and not a calculation
+
+
+it depends on what sales tax is because
+
+
+if sales tax is for example a constant
+
+
+in the class or a global or maybe even
+
+
+in the environment but you set it once
+
+
+during the runtime for the purposes of
+
+
+your understanding of what the system
+
+
+does this is a calculation because it
+
+
+won't change right but if the sales tax
+
+
+is an instance variable and anyone can
+
+
+change it at any time then you can no
+
+
+longer make predictions about what the
+
+
+value is without actually running it at
+
+
+a specific time
+
+
+agreed
+
+
+a more
+
+
+realistic example would be maybe if this
+
+
+was called current user Geo sales tax
+
+
+and then it would be a lot more obvious
+
+
+that yes this is no longer a calculation
+
+
+because we're assuming that users come
+
+
+from different geographies and so
+
+
+this will not always return the same
+
+
+result
+
+
+so
+
+
+we get to
+
+
+our next name ah sorry I messed up the
+
+
+slides that's okay
+
+
+these things that are not calculations
+
+
+are actions and as Miho showed yesterday
+
+
+uh there's a lot of ways we can think
+
+
+about the coordination between certain
+
+
+things right but all of these are
+
+
+examples of actions and the definition
+
+
+of action is following it's a
+
+
+computation that is dependent either
+
+
+when you run it or how many times you're
+
+
+on it
+
+
+that's all it is that's all you ever
+
+
+need to understand is the calculation
+
+
+output dependent input action it's
+
+
+dependent on when or how many times you
+
+
+run it
+
+
+so these are all examples of actions and
+
+
+notice ship items is you have to have a
+
+
+call exactly once semantics but if you
+
+
+have an idapon key order ID you can have
+
+
+call at least once operation but you
+
+
+need to call at least once because
+
+
+otherwise the shipping the shipment will
+
+
+never get sent right
+
+
+so those are our actions
+
+
+in the real world
+
+
+um there's this web service called hot
+
+
+bits uh where I think it's in fermilab
+
+
+and they've set up uh they've set up a
+
+
+geiger Muller tube hooked up to a
+
+
+computer and every time you ask this
+
+
+service give me random bits uh it will
+
+
+analyze the tube which is and so
+
+
+basically it's dependent on radioactive
+
+
+beta Decay and due to the way that
+
+
+quantum mechanics and physics works it's
+
+
+completely unpredictable so it's a true
+
+
+random number generator and so it's a
+
+
+perfect action because the only way you
+
+
+can get any information is to call it
+
+
+and every time you call it you always
+
+
+get a perfectly random bit that can
+
+
+annoy be predicted
+
+
+so those are our three terms which
+
+
+actually this is functional programming
+
+
+this is the essence of function formula
+
+
+the only thing that functional
+
+
+programmers do is that they understand
+
+
+these three things and they identify
+
+
+these three things in their own system
+
+
+and then everything else is just sugar
+
+
+it's more interesting ways of figuring
+
+
+out how to build complex coordination
+
+
+systems between these things or how to
+
+
+take things out or put things in but
+
+
+always comes down to this and what's
+
+
+amazing about this is that you don't
+
+
+need functional programming like you
+
+
+don't need to learn a specific language
+
+
+to identify these three things in your
+
+
+own system but the real question is why
+
+
+would you want to right
+
+
+this talk it won't teach you everything
+
+
+you need to know about programming that
+
+
+will take a lifetime of study but my
+
+
+point is that until you identify start
+
+
+identifying these three things in your
+
+
+own system
+
+
+you're gonna have a hard time like
+
+
+moving forward as it were
+
+
+one of those properties one of the first
+
+
+things you can do with this new
+
+
+information that you've just gleamed is
+
+
+tomorrow when you sit down at work and
+
+
+you identify what is the data and a
+
+
+calculation action
+
+
+you can take this I'm going to give I'm
+
+
+going to sell you one quick tip of what
+
+
+you can do with this information which
+
+
+is this this Matrix right here one of
+
+
+the interesting properties about these
+
+
+three things is that they have specific
+
+
+properties of composition if you take
+
+
+some data and you mix it with more data
+
+
+you get data back which means that it's
+
+
+still information at rest you don't need
+
+
+a computer to interpret it but as soon
+
+
+as you introduce a calculation like we
+
+
+introduced the sales tax into our Json
+
+
+payload it is no longer data so it means
+
+
+that anything that is dependent on this
+
+
+piece of thing is now also a calculation
+
+
+and similarly if you have an action then
+
+
+anything that is dependent on the output
+
+
+of this action since an action is
+
+
+dependent on when or how many times you
+
+
+call it by definition everything else
+
+
+that depends on this thing is also now
+
+
+an action because it's also dependent on
+
+
+when and how many times you call it
+
+
+right
+
+
+or another way of thinking this if you
+
+
+want a more visual visceral version is
+
+
+imagine you have a swimming pool and
+
+
+then someone contaminates it on one end
+
+
+it doesn't matter where they did what
+
+
+they did you're not going into that
+
+
+swimming pool
+
+
+and so every time so this is the the
+
+
+side effect you rent right this is like
+
+
+the FP people are like don't do side
+
+
+effects it's not about side effects it's
+
+
+about when you do something in the
+
+
+bottles of your system that is dependent
+
+
+on time on whenever how you call it then
+
+
+everything else that is dependent I
+
+
+think automatically also becomes an
+
+
+action and it's hard to reason about
+
+
+it's hard to reason about because you
+
+
+are now a big coordination machine and
+
+
+you sort of have to put them keep the
+
+
+entire thing in your head and wonder
+
+
+about all the different edge cases
+
+
+is that making sense
+
+
+all right
+
+
+so let's look at an example because I
+
+
+want because this is the most important
+
+
+thing right the the the fact that we
+
+
+have data's calculations actions but I
+
+
+want to leave you with a little more
+
+
+practical advice of how you can apply
+
+
+this to your daily work
+
+
+so one thing we can do is let's look at
+
+
+rails
+
+
+this is our first visualization it's a
+
+
+call graph
+
+
+it essentially shows a dependency
+
+
+between things right because you have a
+
+
+layer so each of these horizontal things
+
+
+is a layer so you have a layer of routes
+
+
+let's I just for you know for
+
+
+simplification I'll just show two of
+
+
+each but you can just imagine there's n
+
+
+so we have a route a route usually is
+
+
+dependent on the controller because it
+
+
+calls the controller a controller it
+
+
+calls a bunch of models and it calls a
+
+
+view
+
+
+right
+
+
+simple enough
+
+
+so what happens when you're building
+
+
+this rails application usually the first
+
+
+thing you do
+
+
+historically is you start putting more
+
+
+and more logic in The View
+
+
+until you have a couple of thousand
+
+
+lines of a view with a bunch of ifs and
+
+
+all this other stuff and you realize
+
+
+that this is not manageable so what do
+
+
+rails developers do always historically
+
+
+concerns
+
+
+concerns do not solve the problem as we
+
+
+know but this dependency graph this call
+
+
+graph shows why it doesn't solve a
+
+
+problem because concerns just take a Big
+
+
+Blob of
+
+
+code and move it into a bunch of files
+
+
+but in runtime it's still just one big
+
+
+dependency right it's split across
+
+
+multiple files so you're sort of hiding
+
+
+the complexity but in runtime that same
+
+
+exact complexity is still there and so
+
+
+the complaints you have about why
+
+
+concerns don't fix anything this is the
+
+
+reason why like this is a visualization
+
+
+of the problem versus just saying and
+
+
+writing that concerns don't do anything
+
+
+so once we've realized that this is not
+
+
+the solution usually the first thing
+
+
+that historically we did is we made
+
+
+decorator objects right let's move a lot
+
+
+of the logic of the view into a separate
+
+
+class
+
+
+but who creates that class
+
+
+the controller so now the controller is
+
+
+doing two things it's creating a
+
+
+decorator class and it's it's creating
+
+
+the actual View
+
+
+and every time the dependency this this
+
+
+call graph shows that you're pointing an
+
+
+arrow up
+
+
+that's an indication that something has
+
+
+gone terribly wrong
+
+
+and in practice how this ended up is
+
+
+once people started creating all these
+
+
+decorators
+
+
+they realize that whenever they want to
+
+
+change something in the view logic they
+
+
+usually had to change two things both
+
+
+The Decorator and the actual view
+
+
+because they were both dependent on each
+
+
+other so yes we moved some code out into
+
+
+a separate layer but it turns out that
+
+
+the the coupling is so strict that you
+
+
+didn't really abstract anything out you
+
+
+you still had two places there you could
+
+
+constantly touch and then keep
+
+
+synchronous
+
+
+so
+
+
+what else can we do well it turns out
+
+
+that some things you can actually
+
+
+modularize for example if we have some
+
+
+kind of date time concept and you have a
+
+
+library that takes this date time and
+
+
+makes a relative string you know like
+
+
+three minutes ago
+
+
+that is a self-contained thing it so if
+
+
+you have a library for example that can
+
+
+take a daytime and convert it into this
+
+
+kind of humanized string
+
+
+the call graph shows that this is in
+
+
+fact a simplification of your
+
+
+architecture because you are able to
+
+
+modularize and pull out something and
+
+
+the controller doesn't need to know
+
+
+about it all the controller just passes
+
+
+down in the daytime and then the view
+
+
+calls it and says I have this daytime
+
+
+but I'm really interested in this human
+
+
+string so that is an example of how some
+
+
+things were in fact a good way of
+
+
+modularizing rails code but there was a
+
+
+lot of code that wasn't able to be
+
+
+modularized in this way and that's
+
+
+because most of the view code was
+
+
+talking to models
+
+
+right you had a bunch of view logic that
+
+
+was iterating and touching models and
+
+
+again it took us a while to learn why
+
+
+this was a bad idea but if we had drawn
+
+
+this call graph we would have seen right
+
+
+away that this is going to end in
+
+
+disaster because again we have arrows
+
+
+pointing up
+
+
+okay
+
+
+so what's the next thing that happens
+
+
+when you have a bunch of views that are
+
+
+talking to a bunch of models
+
+
+what's the next blog post that people
+
+
+wrote
+
+
+move your view logic to where
+
+
+no no you're skipping a step
+
+
+to control in general there was this
+
+
+there was this movement of move
+
+
+everything from The View into the
+
+
+controller
+
+
+JavaScript yeah
+
+
+coffeescript if anything at this time
+
+
+this is like Circa 2015. so all the view
+
+
+logic went into the controller and then
+
+
+because it was in fact simpler because
+
+
+the controller is already talking to the
+
+
+models so it did simplify the view part
+
+
+because the view part no longer has
+
+
+these up arrows but what happened over
+
+
+time is obviously the controllers grew
+
+
+exponentially big and when rails
+
+
+developers looked at it they went
+
+
+I was told that functions must be small
+
+
+so what do we do and we make concerns
+
+
+but concerns don't solve the problem
+
+
+they just hide the problem
+
+
+so after we went through this entire
+
+
+phase of okay so concerns are not the
+
+
+answer there was an entire bunch of blog
+
+
+posts and conference talks about thin
+
+
+controllers fat models so now the
+
+
+controllers are thin but the models are
+
+
+complicated because instead of just
+
+
+being simple orms that are talking to
+
+
+the database and wrapping the database
+
+
+they now have all these weird
+
+
+dependencies and coupling because we
+
+
+moved all the logic there so in a way
+
+
+yes this is better than what we've had
+
+
+previously but I mean it's not great
+
+
+still not perfect and over time the
+
+
+models grew so classically what is the
+
+
+first thing rails developers do
+
+
+concerns and so now you have a model
+
+
+that's still complicated as it was but a
+
+
+bunch of logic hidden a bunch of files
+
+
+so everyone's happy and then over time
+
+
+we realized that no this doesn't
+
+
+actually solve the problem
+
+
+so we have service objects and service
+
+
+objects as you can see by this call
+
+
+graph actually solved a legitimate
+
+
+problem because they now you can argue
+
+
+what exactly is a service object is it a
+
+
+repository is an operation there can be
+
+
+multiple versions of this world right
+
+
+and we're constantly evolving this right
+
+
+this is an ongoing discussion of what
+
+
+are the appropriate layers my point here
+
+
+is
+
+
+I'm not here to give you the answer of
+
+
+how you're supposed to model your
+
+
+application I'm here to tell you that
+
+
+you need to start thinking about these
+
+
+layers because as Andre mentioned
+
+
+yesterday
+
+
+service objects are not the answer but
+
+
+that they're they're the right gateway
+
+
+drug
+
+
+my suggestion to you is don't wait until
+
+
+someone tells you what is the next
+
+
+pattern that you should be using your
+
+
+code instead start drawing these layers
+
+
+and think about which layers make sense
+
+
+in your system and make sure you don't
+
+
+have things pointing up and that the
+
+
+layers that you draw they're legitimate
+
+
+separate abstractions and not just ways
+
+
+of splitting out code so you have low
+
+
+you know you have like a good score and
+
+
+climate code
+
+
+by the way is climate code still a thing
+
+
+I feel old
+
+
+everywhere time
+
+
+ah
+
+
+maybe I should speed up stratified
+
+
+design certified design is is the end is
+
+
+sort of the name behind the thing we're
+
+
+talking about which is let's develop
+
+
+let's think in layers and let's make
+
+
+sure that the layers make sense
+
+
+so let's look at a version that's not
+
+
+you know application-wide but let's look
+
+
+at a version of stratified design
+
+
+function or method method scoped so
+
+
+here's a here's a function I took from a
+
+
+blog post which is essentially let's
+
+
+find the most unpopular book that was
+
+
+sold right I mean it's not I don't know
+
+
+if it's pretty Ruby but it is Ruby that
+
+
+you will see in the wild there's some
+
+
+iterating and there are some ifs and
+
+
+then there's some sorting and it's not
+
+
+rocket science so obviously
+
+
+everyone that sees this code goes we
+
+
+need to refactor this let's extract
+
+
+method and let's use pattern x y and z
+
+
+so you get a version that's more like
+
+
+this right we extracted out the is book
+
+
+because that's a domain specific
+
+
+knowledge maybe we replace the each with
+
+
+each with object and you know we did a
+
+
+couple nice things right
+
+
+I think this is pretty legitimate to say
+
+
+that this would be considered a
+
+
+refactoring process I would argue this
+
+
+because this is what the author of the
+
+
+blog post essentially said that this is
+
+
+the improved version now it's true I I
+
+
+do not doubt this because it is a better
+
+
+version but I I
+
+
+suggest that we can do better than this
+
+
+so here's the original version as a call
+
+
+graph
+
+
+notice that there's two orange arrows
+
+
+um I don't know about you but when I'm
+
+
+reading code there are certain functions
+
+
+there's certain operations that you get
+
+
+a spidey sensation
+
+
+you know when you see hash new or hash
+
+
+set
+
+
+I'm not saying it's wrong but you
+
+
+definitely slow down and read deeper
+
+
+because you've been bitten by bugs that
+
+
+are related to State and you realize
+
+
+that these functions they're potentially
+
+
+important to understand if there's some
+
+
+edge cases that we need to worry about
+
+
+agreed
+
+
+this is the improved version we see that
+
+
+there's an additional layer that is book
+
+
+is an additional domain layer that we
+
+
+have now
+
+
+and we change some functions around
+
+
+right we're no longer using each now
+
+
+we're using each with object and so
+
+
+forth but as you should see be able to
+
+
+see visually we're not fundamentally
+
+
+changing anything yet so when I was
+
+
+looking at this code
+
+
+my first thought was you know there's a
+
+
+bunch of this there's a bunch of code
+
+
+that's essentially what it's doing is
+
+
+it's talking about the semantics of I
+
+
+want a mapping of how of items I have in
+
+
+the system to how often they appear and
+
+
+there's a name for this it's called
+
+
+frequencies and so what I can imagine is
+
+
+I'll just write something that's called
+
+
+frequencies that takes this map and
+
+
+generates this map that says here are
+
+
+the items and for each of those items
+
+
+this is the number of times it shows up
+
+
+it's the exact same code as we saw
+
+
+before it's just that you hide it away
+
+
+in an abstraction because nobody cares
+
+
+how it's implemented if it if you give
+
+
+it a name right and similarly now that I
+
+
+have this concept of a frequencies map I
+
+
+can do things like maybe I should add a
+
+
+method called Min value that Returns the
+
+
+minimum amount from this map and what
+
+
+you notice is the color graph changed
+
+
+there's the is book that's a domain
+
+
+layer separate thing but then there's
+
+
+this layer that's not quite it's not
+
+
+exactly a ruby collection it has more
+
+
+specific semantics right and if I work
+
+
+on this more abstract layer I no longer
+
+
+have to care about the fact that it uses
+
+
+hash new and hash set and all this other
+
+
+stuff and notice how all the all the
+
+
+spidey sense logic went into this one
+
+
+dark corner that if I just verify it
+
+
+once that it works correctly when I'm
+
+
+reading other pieces of the code I don't
+
+
+have to worry about it and if I came up
+
+
+with maybe a better API for that middle
+
+
+layer I wouldn't have to do that call to
+
+
+first and then I could draw a hard line
+
+
+and say I don't have to no longer care
+
+
+about this bottom part
+
+
+is it okay if I run over time a little
+
+
+all right
+
+
+so
+
+
+obviously I can't teach you how to
+
+
+design your systems in a 40-minute talk
+
+
+but I pause it to you that if you start
+
+
+looking at the data the calculations and
+
+
+the actions in your own system you start
+
+
+building these call graphs
+
+
+and you I want to offer you some simple
+
+
+advice that things you could actually
+
+
+take home today and apply tomorrow so
+
+
+the first one is a straightforward
+
+
+implementation
+
+
+the stratified design says if you build
+
+
+your layers correctly it will be
+
+
+immediately obvious that there is some
+
+
+complicated thing here that you can
+
+
+simplify
+
+
+you as Ruby developers are very aware of
+
+
+this because this is all of those blog
+
+
+posts about refactoring and all the
+
+
+patterns for different ways of
+
+
+extracting information you're already
+
+
+good at this my suggestion to you is
+
+
+that if you look at it from a call graph
+
+
+perspective you'll get better at not
+
+
+doing it ad hoc but doing it
+
+
+systematically
+
+
+the abstraction barrier is this idea
+
+
+that
+
+
+can you in some way make sure that the
+
+
+layers are so good they're so they're so
+
+
+well separated that you can draw a fat
+
+
+line and say I never have to care what's
+
+
+under this part right like it's
+
+
+completely opaque to me
+
+
+for example you all use the things like
+
+
+the Ruby Ruby collection but you have no
+
+
+idea how they're actually implemented
+
+
+because you don't care it's a good
+
+
+abstraction
+
+
+Andre gave a talk yesterday and he he
+
+
+made this wonderful fat line between the
+
+
+application and the domain
+
+
+intuitively he can create an abstraction
+
+
+barrier without even knowing it right
+
+
+and that's how you know you you've got
+
+
+good design when you can do these kinds
+
+
+of things the minimal interface once
+
+
+you've got these layers you need to
+
+
+wonder are they the right abstraction
+
+
+are they the right layers apotonic gave
+
+
+a talk on Friday he accidentally came
+
+
+across minimal interface because he
+
+
+realized that the surface area of Reform
+
+
+had too many things going on that could
+
+
+potentially go wrong because there was a
+
+
+coupling there was a examples of
+
+
+coupling that weren't explicit in the
+
+
+API that the users were misusing and he
+
+
+realized that he could split into a
+
+
+bunch of separate classes right he took
+
+
+one big layer and he split into separate
+
+
+layers and then he hid those layers
+
+
+between behind like a single call to
+
+
+like create new object of Reform
+
+
+presentation
+
+
+that can't do anything except give you
+
+
+various kinds of information about the
+
+
+view part or the validation part
+
+
+so he applied this pattern of drawing
+
+
+figuring out what are the layers of
+
+
+Reform and then creating better layers
+
+
+with a minimal interface
+
+
+and the last one this is the most artsy
+
+
+fartsy in the sense that it's you know
+
+
+we don't exactly know what it is but
+
+
+it's this idea of
+
+
+be comfortable with your layers
+
+
+if there's too much going on a single
+
+
+layer you need to think about how to
+
+
+split it up but if you go overboard and
+
+
+you create too many layers
+
+
+and there's not enough cohesion behind
+
+
+between them
+
+
+that's also not good so don't so think
+
+
+about your team think about yourself
+
+
+don't create layers just for the heck of
+
+
+it so if someone comes along like with
+
+
+Trailblazer and says you need to have 20
+
+
+000 layers I'm not saying that
+
+
+Trailblazer does but if Trailblazer or
+
+
+you know some fail Blazer comes along
+
+
+and says you need 20 000 layers you need
+
+
+to question it always similarly if dhh
+
+
+comes along and says you don't need any
+
+
+layers and you need to question it also
+
+
+right you need to find the right amount
+
+
+of layers that you and your team are
+
+
+comfortable right now and
+
+
+maybe that'll change over time right
+
+
+this is this idea of just working
+
+
+towards building better intuition for
+
+
+good design and this is not something
+
+
+that can be taught
+
+
+but it's something you can learn
+
+
+over time
+
+
+and the thing is that these ideas
+
+
+they're
+
+
+applicable at various levels so we saw
+
+
+this example of how this will apply to
+
+
+how to structure a rails app but it also
+
+
+applies to for example on the global
+
+
+scale of how it applies to your
+
+
+microservices if you figure a lot of
+
+
+problems that I saw with how
+
+
+microsources have built is when you look
+
+
+at the call graph of these microservices
+
+
+and they're coupling they didn't create
+
+
+good abstractions good layers they just
+
+
+split up a bunch of modules into
+
+
+separate web servers and and prayed
+
+
+right and the same thing can be said for
+
+
+the layers where sometimes you need you
+
+
+have the wrong set of layers and and the
+
+
+same thing can be said for functions and
+
+
+this is the part where I feel Ruby
+
+
+developers are best at because they're
+
+
+used to all these kinds of extract
+
+
+methods and all these kinds of other
+
+
+options patterns but those are just
+
+
+names for specific things well this is
+
+
+sort of like a universal truth
+
+
+we're almost there
+
+
+this is the second visualization I
+
+
+wanted to show you
+
+
+imagine you have even sourcing and you
+
+
+have a shopping cart and you have this
+
+
+business rule that says we can't have
+
+
+more than three items in a shopping cart
+
+
+for some reason
+
+
+so you get a command that says add item
+
+
+and notice there's already one item in
+
+
+the shopping cart
+
+
+so we're processing this new command and
+
+
+we check the card no it doesn't have
+
+
+more than three items so we update the
+
+
+cart and we publish an event to the
+
+
+system
+
+
+now if we wrote this in a Handler in
+
+
+such a way that we can guarantee that
+
+
+these operations can't happen out of
+
+
+order and they're for example inside of
+
+
+a database transaction log or something
+
+
+we can simplify this visualization and
+
+
+basically say these three things happen
+
+
+and there's no way to sort of get in
+
+
+between them right simple enough now
+
+
+what happens if the user clicks again
+
+
+well then a second thing happens
+
+
+it's all fine so good but then business
+
+
+comes along and says oh we're publishing
+
+
+these events about items being added we
+
+
+have this new policy that if you add two
+
+
+items to the cart you get a free gift
+
+
+right
+
+
+so
+
+
+between the first publish event to the
+
+
+cart we realized that we're going to
+
+
+react to the event item added we check
+
+
+that the items are not you know we're
+
+
+not exceeding three items in the cart so
+
+
+then we add the gift and we publish an
+
+
+event and then the user clicks again but
+
+
+this time when we check the cart we
+
+
+realize that oh we're already at three
+
+
+events or three items so it's not going
+
+
+to fail we're not going to be in in a
+
+
+bad State it's just that that last item
+
+
+won't actually get added no harm no foul
+
+
+but
+
+
+from what I've heard this is not how you
+
+
+build event sourcing systems because
+
+
+this would this thing would probably be
+
+
+on a separate stream right
+
+
+you would have a separate Handler
+
+
+processing this information that
+
+
+information possibly
+
+
+and how would that look
+
+
+that would look more like this
+
+
+this is more realistic these things
+
+
+these are separate workers processing
+
+
+this information separately and now this
+
+
+visualization it doesn't say you have a
+
+
+race condition in your system but what
+
+
+it does say is that you need to analyze
+
+
+whether you have a race condition in
+
+
+your system because it's dependent on
+
+
+how these things are actually
+
+
+implemented
+
+
+so the second visualization because this
+
+
+is just a sneak peek is this timeline
+
+
+concept this timeline concept similarly
+
+
+to the call graph concept of
+
+
+visualization it doesn't give you the
+
+
+answers but it gives you a map of how to
+
+
+think about your system in such a way
+
+
+that you can identify this
+
+
+right because tests will not find this
+
+
+because this is analyzing your system
+
+
+not just randomly testing your system
+
+
+so this is a wonderful visualization
+
+
+that you can apply to your daily work to
+
+
+sort of figure out are there things that
+
+
+are possibly forking and if they're
+
+
+forking are we sure that they're
+
+
+emerging back correctly
+
+
+okay
+
+
+so next time someone tells you that
+
+
+functional programming is pure functions
+
+
+without side effects
+
+
+I hope you're going to set the record
+
+
+straight
+
+
+um fun fact
+
+
+uh if you have a function in your system
+
+
+that
+
+
+calculates something and then puts it in
+
+
+a cache because you don't want to
+
+
+calculate more than once but then you
+
+
+have this like try catch exception you
+
+
+know in case your redis is down so if it
+
+
+fail if like you can't connect to the
+
+
+network or it fails you'll just
+
+
+recalculate it and the caller will have
+
+
+no idea that something has went wrong is
+
+
+that a calculation or an action
+
+
+if you call it zero or if you call it
+
+
+one time you call it ten times and you
+
+
+get always the same result is it a
+
+
+calculation or action
+
+
+calculation it doesn't matter there's i
+
+
+o in your specific case for your
+
+
+specific context you're saying I don't
+
+
+care that there's i o sometimes the
+
+
+function takes longer run sometimes it
+
+
+takes slower but in this specific
+
+
+context I don't care so in your system
+
+
+this might be a calculation but from a
+
+
+purity perspective there's side effects
+
+
+because there's i o
+
+
+right but remember we don't care about
+
+
+this definition we care about the one
+
+
+that makes sense for understanding how
+
+
+our system works now think about the
+
+
+alternative case there's a calculation
+
+
+that is completely dependent only on the
+
+
+input
+
+
+but it takes really long time to run
+
+
+it's really CPU intensive
+
+
+so you want to control when it gets run
+
+
+it's an action but from a mathematical
+
+
+perspective it's a pure function
+
+
+right
+
+
+so it doesn't matter what things are
+
+
+pure and what things are side effects it
+
+
+only matters if
+
+
+which parts of your system the outputs
+
+
+are only dependent on inputs and it only
+
+
+matters which things are things such
+
+
+that you care about when or how many
+
+
+times it runs because those things need
+
+
+to be coordinated and once something is
+
+
+an action everything that touches it is
+
+
+also an action and you're trying to push
+
+
+all those things to the edges of the
+
+
+system because then a lot of the rest of
+
+
+your system becomes easier to understand
+
+
+so this is the most important slide that
+
+
+I need you to take out of this
+
+
+presentation
+
+
+stratified design is a really useful
+
+
+tool for thinking about how you build
+
+
+your systems
+
+
+these are all examples of architectures
+
+
+that if you ask me to right now I could
+
+
+draw how they map to what we just showed
+
+
+right like with the MVC thing and
+
+
+so but I don't have slides for all these
+
+
+architectures but I do have I made one
+
+
+for just for Andre because this is um
+
+
+this is your classic relational database
+
+
+right from router to controller to model
+
+
+to DB because the DB is side effecting
+
+
+that means that the models are side
+
+
+effecting which means that controllers
+
+
+side effecting which means the whole
+
+
+thing is what an action right and what
+
+
+did Andre do yesterday he showed how you
+
+
+know when there's a lot of code in the
+
+
+models and the controller and everything
+
+
+you can't think about you can't reason
+
+
+about anything because everything is
+
+
+dependent on time
+
+
+so he pulled things out right he said
+
+
+the models they should be simple or I'm
+
+
+kind of stuff right and all the domains
+
+
+they're not specific to a database
+
+
+there's no dependency on the database
+
+
+anymore and then he drew this nice fat
+
+
+line and separated the application part
+
+
+from the domain part but if instead of
+
+
+drawing a big fat line he drew circles
+
+
+he would essentially get the onion
+
+
+architecture
+
+
+right
+
+
+it's amazing how simple this idea is but
+
+
+how far you can apply it
+
+
+I'm done with my I'm done with my talk
+
+
+but I really suggest that if anything I
+
+
+said
+
+
+piqued your interest there's this book
+
+
+called grocking Simplicity by Eric
+
+
+Normand the title of this talk is based
+
+
+on this book and Eric goes into a lot
+
+
+more detail and explains all this stuff
+
+
+that I said but in a way that actually
+
+
+makes sense
+
+
+so I highly recommend you go check this
+
+
+book out it's no coincidence that it was
+
+
+written by closure developer but it's
+
+
+written in JavaScript because these
+
+
+ideas they're Timeless and they're
+
+
+irrespective of what actual programming
+
+
+language you use so if they can if Eric
+
+
+can show that you can apply all this
+
+
+stuff to JavaScript I am sure you can
+
+
+find ways to apply this stuff to your
+
+
+Ruby code
+
+
+that's my talk thank you
+
+
+[Applause]
+
+
+Nick is a question
+
+
+thank you for this beautiful talk
+
+
+um I'm wondering in the call diagrams
+
+
+you had how do you decide what direction
+
+
+an arrow goes because I didn't really
+
+
+understand how you can figure out
+
+
+if the view is asking a model or if the
+
+
+model is asking the view like you had
+
+
+this like when something goes up there's
+
+
+a problem but how do you know
+
+
+what's the direction uh I needed to
+
+
+simplify this just because I have a
+
+
+slide
+
+
+The View layer and the other layers are
+
+
+separate
+
+
+they're they're independent notice that
+
+
+there's no arrow pointing between the
+
+
+view and the model part so it's just
+
+
+important to show that they're on
+
+
+separate horizontal lines because
+
+
+they're completely around they're
+
+
+completely independent of each other
+
+
+yeah but in in a very early slide you
+
+
+had this um I think when you were
+
+
+talking about decorators this one yes
+
+
+okay so how do you know the yellow or
+
+
+orange arrows go up like what's the what
+
+
+would the code look like so you know
+
+
+something is pointing the wrong
+
+
+direction so
+
+
+when you think about it if if the layers
+
+
+were reversed and the views were on top
+
+
+right then the arrow there's one Arrow
+
+
+from the control to The View and then
+
+
+the models would have this situation
+
+
+where
+
+
+um it it's a little mind-bending but if
+
+
+you switch it you'll get back the same
+
+
+results mind-bending of course
+
+
+if you switch it turns out that it's
+
+
+irrelevant because if you switch layers
+
+
+you're still going to get arrows that
+
+
+are pointing in the wrong direction
+
+
+okay but is the view Changing State or
+
+
+something yeah in this specific case I
+
+
+was I was talking about how you
+
+
+sometimes have these views that are
+
+
+iterating over models right not even
+
+
+necessarily changing the models right
+
+
+but they have a dependency on the model
+
+
+so like that you're doing users that
+
+
+each and then inside you're doing a
+
+
+bunch of data okay but that's it so
+
+
+basically the view knows too much about
+
+
+the model the viewer knows too much
+
+
+about the model exactly okay
+
+
+um I see yeah I've seen those kind of
+
+
+views
+
+
+thank you when you've mentioned that uh
+
+
+frequency thing although that uh the
+
+
+whole talk was
+
+
+um heavily backed up by functional
+
+
+programming
+
+
+um I got a notion that the
+
+
+and please correct me here if I'm right
+
+
+or wrong you suggest that if we have
+
+
+some fishy piece of code that we should
+
+
+do something like come up with the
+
+
+method name or a message that we should
+
+
+be
+
+
+thinking in terms of rather than having
+
+
+that hash something
+
+
+it resembles to me something advocated
+
+
+by op design that um
+
+
+you're not having
+
+
+um
+
+
+method calls because you have objects
+
+
+or classes but you have those classes or
+
+
+objects and then the layers because you
+
+
+want to do a particular thing was that
+
+
+would you were trying to
+
+
+um
+
+
+I'm having trouble parsing your question
+
+
+oh but that's probably me not you okay
+
+
+sorry uh so maybe could you go back to
+
+
+the code with the frequencies
+
+
+um could you uh elaborate on the yeah
+
+
+okay how you come up with the free right
+
+
+okay perfect so
+
+
+um item sold filter returns a new
+
+
+array of things right now I did dot
+
+
+frequencies because I know how Ruby
+
+
+developers like to change their things
+
+
+if I was to write this code I would
+
+
+probably just write a frequencies
+
+
+function that took the array as its
+
+
+argument and returned a new thing that
+
+
+new thing you can think of it
+
+
+semantically as a subset of a hash map
+
+
+you can implement it as a hash map but
+
+
+you don't give it the entire API surface
+
+
+of a hashmap instead you give it an API
+
+
+surface that this represents
+
+
+semantically something that has a a key
+
+
+value Association of item to count
+
+
+and so you can imagine we could write
+
+
+like a frequency like if we implement it
+
+
+this way we would have implemented it
+
+
+that we would have added a new
+
+
+frequencies method to the array like
+
+
+active support would do right but we
+
+
+could have also done it in such a way
+
+
+that frequencies or if you call it as a
+
+
+function would have returned a new kind
+
+
+of class that new class could be called
+
+
+a frequency map and the frequency map
+
+
+would just have the semantics of being
+
+
+able to for example return Min value max
+
+
+value and nothing else so it's a
+
+
+question of
+
+
+do you can can you identify so every
+
+
+time you make something more less
+
+
+abstract and more concrete you're
+
+
+reducing the amount of the surface API
+
+
+so fundamentally you're making the class
+
+
+weaker uh
+
+
+you're giving it less features it can do
+
+
+less things but because it can do less
+
+
+things the things it can do it has it's
+
+
+more cohesive so instead of just having
+
+
+a hash map that can do everything you
+
+
+have now a frequency map and the
+
+
+definition of a frequency map is it's a
+
+
+mapping of item to freak uh to I to some
+
+
+kind of frequency count and that's all I
+
+
+can do right
+
+
+okay does that make sense yep thanks
+
+
+okay
+
+
+all right I think I think we're done
+
+
+thank you
+
+
+[Applause]

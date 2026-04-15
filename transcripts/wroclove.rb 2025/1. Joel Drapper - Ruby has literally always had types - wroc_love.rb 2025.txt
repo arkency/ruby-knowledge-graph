@@ -1,0 +1,3955 @@
+Yeah, that's all from the announcements
+
+
+and now let's welcome our first speaker
+
+
+Joel Drapper that will tell us about um
+
+
+that Ruby always has a types had the
+
+
+types and Joel himself enjoys meta
+
+
+programming and he likes to go into
+
+
+those dark places that usually don't
+
+
+explore and he's really passionate about
+
+
+that and also he's creator of flex and
+
+
+quick
+
+
+Thank
+
+
+you. Thank
+
+
+you. This is going to be pretty intense.
+
+
+Um hopefully we can cover all the
+
+
+material, but
+
+
+uh thank you for thank you for having
+
+
+me. It's great to be here. This is my
+
+
+first ever
+
+
+um France love RB. Is that okay?
+
+
+[Applause]
+
+
+Um, I practiced that like a hundred
+
+
+times and I I still can't do it. Um, so
+
+
+I'm here to tell you, well, actually,
+
+
+let me just introduce myself. Um, if you
+
+
+don't know me know me, my name is Joel
+
+
+Drapper. Uh, I created the view
+
+
+component library, Flex. Um, you find me
+
+
+on Blue Sky. I also blog at
+
+
+joel.drapper.me. Um, I also co-host the
+
+
+Rooftop Ruby uh podcast. Uh, and you can
+
+
+find me on GitHub. I do a lot of like
+
+
+open source stuff.
+
+
+So, so I want to convince you that Ruby
+
+
+has literally always had types. And you
+
+
+might have some very strong opinions
+
+
+about types. Types in Ruby. I know
+
+
+Rubists, we hate types.
+
+
+Um, this is the the other title I was
+
+
+considering. uh for this talk.
+
+
+Um write less code, have fewer bugs
+
+
+because ultimately like that's the goal
+
+
+of everything that we're trying to do
+
+
+here.
+
+
+Um but let's go with uh let's go with
+
+
+this because I want to convince you of
+
+
+this. Um oh [ __ ] my talks are broken.
+
+
+Oh no, that's part that's part of my
+
+
+talk.
+
+
+Um, so that's like actually genuinely
+
+
+really triggering whenever I see that.
+
+
+Uh, how many times have you seen this in
+
+
+in
+
+
+production? Like
+
+
+never.
+
+
+Um, I want to tell you a quick story
+
+
+about um, this piece of code right here.
+
+
+This isn't the exact code. It was a long
+
+
+time ago, but this this captures it. Um,
+
+
+this code is extremely extremely
+
+
+dangerous. Can anyone tell me why?
+
+
+Nope. Uh, that's not that's not SQL, but
+
+
+that's a very very good guess.
+
+
+Um, let's focus on this. So, yes, you
+
+
+got it. Um, when you interpolate a
+
+
+string like this, what you're really
+
+
+doing is this.
+
+
+Uh, and so if you got a method missing
+
+
+error in production, you're the lucky
+
+
+one, right? Because at least it's
+
+
+stopped. But nil responds to
+
+
+2s. Uh, and so let's look at this code
+
+
+again. We take an email address. Uh, we
+
+
+delete tickets. Um, we get the tickets
+
+
+by querying for email. Is this? So our
+
+
+our query is going to be this. if we
+
+
+have a null email
+
+
+address. And so, uh, when we send this
+
+
+to Zenesk, what are they going to
+
+
+do? They've basically got two logically,
+
+
+there's two things that they could do.
+
+
+They could give us no tickets or they
+
+
+could give us all tickets. Um, and of
+
+
+course, they gave us all the tickets.
+
+
+Um, so this this code combined with a
+
+
+bug in Rails, a bug in Pummer that was
+
+
+triggered by some weird race condition
+
+
+turned into a CVE in both of those. Um,
+
+
+this this basically caused us to delete.
+
+
+I think it was like maybe 4 to 10,000
+
+
+Zenes tickets at Shopify before we
+
+
+managed to stop it.
+
+
+Um, and it's all because um, we didn't
+
+
+have types, or at least that's what I'm
+
+
+going to try and convince you, right? So
+
+
+types are meant to fix this, right? Um,
+
+
+and you're a rubist, so you probably
+
+
+have a very strong opinion on this.
+
+
+Probably most of you hate the idea of
+
+
+types. Um, some of you might have tried
+
+
+TypeScript, and maybe you even like it.
+
+
+I happen to be one of those degenerates
+
+
+who who loves TypeScript. I think it's
+
+
+great.
+
+
+Um,
+
+
+and there have been a few attempts to
+
+
+introduce static type checking into
+
+
+Ruby. Um, Sorbet notably has has
+
+
+probably gone the furthest. Um, and this
+
+
+like this is where you kind of annotate
+
+
+using Ruby pseudo Ruby code that doesn't
+
+
+really execute and then they have a
+
+
+compiler or like a a static analysis
+
+
+tool that analyzes your code. Um,
+
+
+there's also RBS which is the official
+
+
+type annotation language and you can
+
+
+either do that in separate files or you
+
+
+can do it in
+
+
+uh inline comments next to next to all
+
+
+your methods. But RBS doesn't have a
+
+
+type checker. So the best one out there
+
+
+right now is steep um by Storo Matsum
+
+
+Matsumoto. And
+
+
+um like I applaud the effort that
+
+
+everyone has put into these tools. Um
+
+
+but I'm not entirely convinced that Ruby
+
+
+is comfortable being typed like this.
+
+
+Um I'm going to take a quick break.
+
+
+So what are the issues with trying to
+
+
+statically type
+
+
+Ruby? Uh limited ability to catch
+
+
+issues. So when you statically type um
+
+
+type check something, you kind of need
+
+
+to
+
+
+know what all of the types are in the
+
+
+entire system. Uh, so you basically need
+
+
+to either be able to infer the types or
+
+
+you need to actually have all of the
+
+
+types annotated to be able to track it
+
+
+through through the code. And Ruby, like
+
+
+there's just so much Ruby code out there
+
+
+that isn't already statically typed. And
+
+
+I just don't think that the community is
+
+
+going to fully get behind like writing
+
+
+type annotations for everything. I just
+
+
+don't think that's going to happen. So
+
+
+introducing one of these tools into your
+
+
+codebase um is a significant upfront
+
+
+effort. know that they've done a great
+
+
+job at Shopify um and I think is it
+
+
+Stripe that uses this as well. There's
+
+
+probably a few other big companies that
+
+
+have done like done well from from using
+
+
+Sorbet. Um I just don't think like the
+
+
+teams of like 10 people working on a
+
+
+reasonably large Rails app are ever
+
+
+going to be able to, you know,
+
+
+reasonably tackle this job of like
+
+
+putting static types into into their
+
+
+system. it's not compatible with
+
+
+metarogramming or at least it's very
+
+
+difficult to make it compatible. Um, and
+
+
+yeah, you have to write about twice as
+
+
+much code and the I don't know if this
+
+
+is true or not. Obviously, like this is
+
+
+like it's always the answer is always it
+
+
+depends. But um some some people say
+
+
+that um bugs are a function of code,
+
+
+right? So the more lines of code you
+
+
+have, the more likely that there are
+
+
+bugs. It doesn't really matter what kind
+
+
+of code you're writing, whether it's
+
+
+type checkers. Um, more more code equals
+
+
+more surface area for bugs to
+
+
+appear. Um, so let's get like let's kind
+
+
+of take a step back and think about like
+
+
+what what really is a type? What does
+
+
+that even mean? Um, and then think about
+
+
+like how how are they useful and how can
+
+
+we find some kind of like 8020
+
+
+principle where like we what is there a
+
+
+way that we can get the most out of
+
+
+types without well doing the least
+
+
+amount of work. Um, so my definition for
+
+
+a type is very abstract and maybe this
+
+
+is not technically correct but um I
+
+
+don't think models need to be
+
+
+technically correct to be useful. Um my
+
+
+definition of a type is that it is a
+
+
+description of a set of
+
+
+objects. So it is not a set of objects
+
+
+because you can have infinite types and
+
+
+you couldn't possibly have an actual set
+
+
+of infinite objects.
+
+
+Um but it is just a description of one.
+
+
+And working with a description of a set
+
+
+of objects, you can
+
+
+determine for some sets, some of them
+
+
+are impossible to to calculate, but for
+
+
+many sets, you can determine whether a
+
+
+given object fits inside that set. Like
+
+
+if this if this set did exist, would
+
+
+would this object exist inside it? Would
+
+
+this object be in that set?
+
+
+And if we think about
+
+
+uh this kind of like on the basis of
+
+
+this definition when we look at Ruby I
+
+
+think that Ruby has an interface that
+
+
+really captures this idea and it's the
+
+
+triple equals or case equality
+
+
+interface.
+
+
+In the context of Ruby, I think we can
+
+
+say that any object that responds to
+
+
+triple
+
+
+equals is a
+
+
+type. Let's look at a few
+
+
+examples. So here we have a couple of
+
+
+examples of classes. So with a class you
+
+
+send triple equals you pass it an object
+
+
+and it will tell you if the object is an
+
+
+instance of that class or an instance of
+
+
+a a subclass of that class. So this
+
+
+holds holds up to that standard. What
+
+
+about modules? Well, modules kind of
+
+
+work the same way. They will tell you if
+
+
+the uh if the object is either extends
+
+
+the module or is a instance of an of a
+
+
+class that includes the
+
+
+module. What about ranges? So ranges
+
+
+basically map this to their cover
+
+
+method. So the range will tell you if an
+
+
+object is covered by the
+
+
+range. What about regular expressions?
+
+
+They will check if the object matches
+
+
+the
+
+
+expression. What about procs? So procs
+
+
+map the triple equals method to the call
+
+
+method. Which means that you can
+
+
+actually use a proc to define any
+
+
+arbitrary predicate type. Right? A proc
+
+
+that takes an object one parameter
+
+
+returns truthy or falsy value. I would
+
+
+say by my definition that it is a type
+
+
+or at least it can be treated as a
+
+
+type. Um and then objects themselves. So
+
+
+strings. Let's go back. Um strings they
+
+
+triple equal to other strings that are
+
+
+equal in value to them. Um most other
+
+
+objects either triple equals means equal
+
+
+in value or the same object. The default
+
+
+implementation on object and on your own
+
+
+classes if you haven't overridden it
+
+
+will be uh that triple equals is same
+
+
+object. Um and actually that means that
+
+
+we can treat these um the like objects
+
+
+by default are what we would call um
+
+
+unit types. They're types of exactly one
+
+
+thing. Only one thing matches that type
+
+
+um and nothing else does. And you've
+
+
+actually already used these types. So
+
+
+when you when you write a case statement
+
+
+um you're not checking that the object
+
+
+is equal to the class integer, right?
+
+
+You're going to pass an integer. And so
+
+
+what what what Ruby is doing is it's
+
+
+going to send triple equals to um to
+
+
+integer. And if that is true, it's going
+
+
+to put I'm an integer. And if it's
+
+
+false, uh it's going to move on and
+
+
+check the next one. So you're already
+
+
+using types. We just have Ruby, we just
+
+
+didn't name these types. I think they're
+
+
+name I don't know what they're named in
+
+
+the Ruby source code, but
+
+
+um also innumerable any, right? Um you
+
+
+probably know that you can pass a block
+
+
+to a numeral any but did you know you
+
+
+can pass a type uses this
+
+
+interface. Um same with all you pass a
+
+
+type equals triple equals on the type
+
+
+with the
+
+
+object case statements um with pattern
+
+
+matching. In fact any any pattern
+
+
+matching is based on this as well. So in
+
+
+this um it's kind of a bit of an obscure
+
+
+example, but it's going to use the
+
+
+triple equals method on array string um
+
+
+to figure out
+
+
+like what what this is.
+
+
+Um now with this in mind that that we
+
+
+can actually think about a type as just
+
+
+being an object, that means that we can
+
+
+create types, right? We can create
+
+
+objects that their only purpose is
+
+
+really to represent some type. um they
+
+
+are their purpose is to describe a set
+
+
+of objects. So here's an example of uh a
+
+
+type calling array type that takes a
+
+
+parameter type um and it will check that
+
+
+the when you when you ask if something
+
+
+matches that description, it will check
+
+
+that it's an array and that all of its
+
+
+values match the type that it's
+
+
+parameterized by. So if we do this, we
+
+
+can make uh we can make a new type. So I
+
+
+can say I've got an array of strings or
+
+
+I've got an array of integers. And then
+
+
+we can use the triple equals on that
+
+
+object to make assertions about our
+
+
+objects. And we can define a shortcut
+
+
+for this, right? We can define the
+
+
+method. Um I like to use underscore and
+
+
+then the name of the class if if it's
+
+
+related to a class. The reason the
+
+
+underscore is here is because there's
+
+
+already a capital a letter um array
+
+
+method in Ruby. And so this kind of
+
+
+disambiguates, but it's also quite nice
+
+
+because when you're like it looks kind
+
+
+of weird at first, but you get used to
+
+
+it. And then when you press underscore
+
+
+um Ruby LSP like predicts all of your
+
+
+types, which is kind of useful. Um so
+
+
+this means that we can create this array
+
+
+of strings type just by using underscore
+
+
+array string and that also works with
+
+
+the triple equals interface. I should
+
+
+have given a false example here. Um so
+
+
+let me introduce my library literal.
+
+
+Um, literal is kind of it's got a bunch
+
+
+of different tools, but the you have to
+
+
+understand like how how literal
+
+
+understands types first of all to be
+
+
+already this thing that exists in Ruby.
+
+
+Um, this like first class thing and then
+
+
+it just introduces a bunch of these um
+
+
+kind of generics like like I showed you
+
+
+with the array. So, I'll just run
+
+
+through some of these really quickly.
+
+
+Um, union, this is the or type. So this
+
+
+is going to say um this type represents
+
+
+either a string or a
+
+
+symbol intersection. Um this is the and
+
+
+type. So this is going to be string and
+
+
+matches the regular expression of being
+
+
+a digit or one one or more digits. Um in
+
+
+fact uh you can pass to to union and to
+
+
+to intersection. You can pass as many
+
+
+subtypes as you want as parameters.
+
+
+contain uh constraint is like
+
+
+intersection um in in terms of its
+
+
+positional arguments but then it also
+
+
+takes keyword arguments and what it will
+
+
+do is it will call the keyword argument
+
+
+on the object and then it will take the
+
+
+return value and compare it to the type
+
+
+that you passed in uh as the value to
+
+
+that keyword argument. So here we've
+
+
+composed a type that says it must be a
+
+
+string. It must also be made up of
+
+
+entirely of digits and its length, the
+
+
+length of the string must be between
+
+
+three and
+
+
+255. And we've done that in one line of
+
+
+code, barely any characters. There's
+
+
+actually a um we implement underscore
+
+
+string to essentially be a a composition
+
+
+of this of a constraint that is already
+
+
+set to be a constraint of a string and
+
+
+then just pass everything through. I
+
+
+think you see that later on. Um there's
+
+
+also type interface. Um, so if you
+
+
+really want to do duct typing, uh, you
+
+
+can depend on interfaces. So you can
+
+
+say, I don't care what like kind of
+
+
+object it is. I just want to know that
+
+
+it responds to length and push. So this
+
+
+might be like a buffer or
+
+
+something. Um, so array user, we already
+
+
+saw this one. This is in literal. Tupole
+
+
+is a bit like an array uh,
+
+
+except uh, this is saying this is an
+
+
+array of exactly two items. The first
+
+
+item is an integer and the second item
+
+
+is a
+
+
+string. Um, hash takes key and value
+
+
+types. So, this saying this is a hash
+
+
+where the key is a symbol and the value
+
+
+is a string for all of all of the
+
+
+instances. This is a bit of a more
+
+
+tricky example.
+
+
+Um, the type we're looking at here is is
+
+
+the type called deferred. Um, but I had
+
+
+to do this big example to show you why
+
+
+you would even need it. So, this is a
+
+
+type that represents JSON data. So JSON
+
+
+data can be you know a union of nil,
+
+
+false, true, string, integer, float or
+
+
+an array of JSON data. And since we
+
+
+haven't yet defined JSON data, um using
+
+
+deferred, which takes a block, um is a
+
+
+way that we can actually create these
+
+
+infinitely recursive types um that
+
+
+reference themselves. So this is a I
+
+
+believe accurate uh type for for
+
+
+infinitely nested JSON data um because
+
+
+hashes in JSON can be have to be have a
+
+
+string as the key but then they can have
+
+
+any data as their
+
+
+value. Um but we have that one. So you
+
+
+don't need to define it yourself. It's
+
+
+just underscore JSON
+
+
+data. So let me take a drink.
+
+
+Okay, we're okay on
+
+
+time. Uh, so why are types
+
+
+useful?
+
+
+Um, I can't remember what my next slide
+
+
+is. Yeah, so types help us to make
+
+
+basically invalid states in our code
+
+
+impossible.
+
+
+um we if if we're using types at
+
+
+runtime, we're not going to be able to
+
+
+kind of know statically that there are
+
+
+no impossible states in our code, but
+
+
+but we can know that we it's very
+
+
+difficult for our code to get into
+
+
+impossible states. Like before it gets
+
+
+there, it's going to stop. So maybe
+
+
+you're going to get an exception in
+
+
+production. I talked about like how
+
+
+you're the lucky one if you got a no
+
+
+method error in production because
+
+
+actually if you don't get an error, it's
+
+
+much worse. Like something can actually
+
+
+happen. it can be silently deleting
+
+
+thousands and thousands and thousands of
+
+
+emails and you don't know why. So
+
+
+um two other tools that literal provides
+
+
+are literal strruct and literal data and
+
+
+we'll look at data
+
+
+first. So these work in a very similar
+
+
+way to the strruct and data objects that
+
+
+you get built into Ruby except they take
+
+
+props. So you uh you just subclass
+
+
+literal data or literal strruct
+
+
+depending on whether you want mutable or
+
+
+immutable um value objects and you
+
+
+define each property using this uh this
+
+
+prop macro. So the first argument is uh
+
+
+is the name of the property and then the
+
+
+second argument is the type and this can
+
+
+be any of the types we talked about any
+
+
+composition of any type anything that
+
+
+responds to triple equals. You could
+
+
+throw a proc in here um literally
+
+
+anything you want. Um, in this case,
+
+
+we've actually made um coordinates that
+
+
+cannot be invalid because we've we've
+
+
+constrained our latitude and longitude
+
+
+to floats and they're even constrained
+
+
+to specific values of
+
+
+floats. In fact, what I would do is
+
+
+break this down even further and name
+
+
+those types. So, latitude being a float
+
+
+of - 90 to 90, let's give that a name.
+
+
+Let's set it as a constant and then just
+
+
+use that in our property. So, if there's
+
+
+something else that references just one
+
+
+of these properties and needs to check
+
+
+it, like um I don't know why you would
+
+
+have a job or whatever that takes just
+
+
+the longitude, but you could you could
+
+
+reference coordinates longitude as a
+
+
+type somewhere else. I think I just find
+
+
+that like naming these things can really
+
+
+help. Um let's just look at some other
+
+
+things that this interface provides you.
+
+
+So by default um we use keyword
+
+
+arguments but you can pass a third value
+
+
+which is a symbol of positional if you
+
+
+want a positional argument or a star. My
+
+
+syntax highlighting is wrong but I
+
+
+promise this is valid Ruby. Um a star if
+
+
+you want to soak up a splat and that's
+
+
+going to have to be some kind of array
+
+
+type or it's going to error.
+
+
+um default keyword arguments um star
+
+
+star if you want a hash uh if you want
+
+
+the you know a keyword splat or amperand
+
+
+if you want to define the uh the block
+
+
+argument. Um you can also pass a default
+
+
+uh which makes these types uh these
+
+
+properties optional. You don't have to
+
+
+pass them in. Um the default has to be a
+
+
+frozen object or you have to pass it
+
+
+wrapped inside a proc. And the reason is
+
+
+in case you say like default and you put
+
+
+in an array or some an array literal and
+
+
+then every single instance of this is
+
+
+using the same array literal and now
+
+
+you've got like a nasty bug. So we don't
+
+
+let you do that. You have to wrap it in
+
+
+a proc. Um if you do want to reference
+
+
+the same unfrozen thing that's fine.
+
+
+Just wrap that reference in a proc point
+
+
+to a constant.
+
+
+Um otherwise these are optional if you
+
+
+explicitly use a type that is nilable.
+
+
+Now I've used the nillable type
+
+
+constructor here to make a type that is
+
+
+essentially a union of nil and string
+
+
+but you could use any type where it's
+
+
+triple equals with nil pass to it
+
+
+returns
+
+
+truthy and this is kind of intentionally
+
+
+ugly the nillable thing
+
+
+um because using nillable types is
+
+
+something that you want to avoid mostly
+
+
+like you sometimes you have to do it but
+
+
+at least it kind of like stands out to
+
+
+be at least that part is like kind of
+
+
+really ugly. One thing you can do you
+
+
+can define the method string question
+
+
+mark and point it to nilable string if
+
+
+you want. Um that looks really pretty
+
+
+but I almost don't want to make nillable
+
+
+stuff look
+
+
+pretty. So um okay so let's let's run
+
+
+through the rest of this. Uh you can
+
+
+also using the keyword arguments reader
+
+
+and writer you can you can set them to
+
+
+public, private, protected um or false
+
+
+if you don't want the readers on the
+
+
+writers. Um I switched to strruct here
+
+
+instead of data because you can't have a
+
+
+writer on a a data object. Um that's not
+
+
+a valid thing. Um so so literal struts
+
+
+literal data objects by default they
+
+
+have they both have readers and by
+
+
+default strrus have writers as well.
+
+
+Um, let me just turn this on so I can
+
+
+keep track of my time. So you can also
+
+
+pass a block and that block will be
+
+
+yielded the argument so that it can
+
+
+basically coersse that argument into
+
+
+your type. So say you want to call 2s on
+
+
+something that you want to require to be
+
+
+a string. You could do it like this or
+
+
+you could even do it in the nice clean
+
+
+way with um proc to uh proc to proc
+
+
+sorry symbol to
+
+
+proc.
+
+
+Um so literal
+
+
+properties that's like good for value
+
+
+objects properties let you bring this
+
+
+interface into other classes. So let's
+
+
+say you want to inherit you need to
+
+
+inherit from flex html you want to have
+
+
+properties you can just extend literal
+
+
+properties and then you get to do the
+
+
+same thing. So this is my uh my button
+
+
+component. I'm defining size to be a
+
+
+union of small, medium, large. Variant
+
+
+union of primary, secondary. Um and then
+
+
+just setting up my props. Um and you'll
+
+
+notice also I've used the proper class
+
+
+because this is a this is an HTML
+
+
+component. I want to pass in a CSS
+
+
+class, but class is a reserved keyword.
+
+
+So how does this work? The the code that
+
+
+it generates will actually knows about
+
+
+reserved keywords and it will use
+
+
+binding.local local variable get in this
+
+
+case in your in the initializer that it
+
+
+generates for you and then you can just
+
+
+reference it as at class and that's all
+
+
+that's always valid. So you don't have
+
+
+to worry about I've seen people like
+
+
+take star options and then grab the
+
+
+class out of that or like various hacks
+
+
+or like class names. I don't like that
+
+
+stuff. So um we just support it. There's
+
+
+also this other tool literal enums and
+
+
+these are constant enumerations. So um
+
+
+there's like there's like a few kinds of
+
+
+things that you can describe and like
+
+
+name. One is like when you make a class
+
+
+you kind of saying um like a regular
+
+
+class you're kind of saying that there
+
+
+can be almost like infinite instances of
+
+
+this thing. With a constant
+
+
+enumeration you might want to have an
+
+
+instance but you just want to have like
+
+
+a limited number of
+
+
+instances. So a good example is like
+
+
+status. Okay. So I have like a post
+
+
+status or something. Um, and maybe I'm
+
+
+saving this to the database and I'm
+
+
+precious about my database storage. So I
+
+
+want to I want to store like tiny little
+
+
+integers. Um, so I'm going to make this
+
+
+mapping from a constant name which is
+
+
+going to be an instance of the status
+
+
+class to an integer. And that's actually
+
+
+constrained by the the um the fact that
+
+
+we're inheriting from literal enum with
+
+
+integer in parenthesis. So it's going to
+
+
+make sure that those are always
+
+
+integers.
+
+
+Um, and what this gets you is like it's
+
+
+you're defining the constant like status
+
+
+draft, status pending review, status
+
+
+published. And they are instances of the
+
+
+status class. So you can define methods
+
+
+in there. Um, they have some default
+
+
+methods. So if I grab like status draft
+
+
+and ask it for its value, I get back
+
+
+zero. Um, oh
+
+
+uh I can also send it predicates. I can
+
+
+ask it is it draft? Is it published? Um,
+
+
+and it will it won't raise. it will
+
+
+return true or false um just based on
+
+
+the names. Um and I can also coersse uh
+
+
+either the um the value or the name as a
+
+
+symbol. Um, and this is there's a bunch
+
+
+of other things in in literal enum that
+
+
+you can do like you can actually have
+
+
+properties on your enums which is useful
+
+
+for like I don't know list of countries
+
+
+or something you want to store the name
+
+
+the key the uh the code um whatever and
+
+
+you can define methods on the class or
+
+
+even on instances of the class by
+
+
+passing a block and then defining
+
+
+methods I don't have an example
+
+
+um so with this status class remember
+
+
+that we can um use
+
+
+coercions
+
+
+uh with um by passing them as a block.
+
+
+So the the status enum actually responds
+
+
+to two proc um and it will basically use
+
+
+its coerc method. So you can make
+
+
+interfaces like this post when you
+
+
+create a new one you can pass in a
+
+
+symbol published and it will actually
+
+
+resolve via the coercion ampersand
+
+
+status into um status published the the
+
+
+constant
+
+
+instance and actually um these classes
+
+
+just going back um the class and the
+
+
+instances are always frozen so they can
+
+
+never change once you've created
+
+
+them. Um, finally, values and
+
+
+decorators. So, you could like sometimes
+
+
+you you end up creating a like a data uh
+
+
+a data object that just has one value in
+
+
+it like it's an email address or user ID
+
+
+or something like that. And for that,
+
+
+there's like an easier way to do it. You
+
+
+can kind of do it on one line. Um, I'm
+
+
+just creating a uh like user ID here. um
+
+
+capital U uh is a class and I can create
+
+
+new instances of it and it just wraps
+
+
+the string. Um what's nice about this is
+
+
+you could actually define um your user
+
+
+ID as this literal value put in whatever
+
+
+your um validation is there and then
+
+
+once you have one you know that it's
+
+
+safe or you know that it's frozen
+
+
+um and you can always get its value back
+
+
+out. You can also define it like this
+
+
+and you can say I want to delegate the
+
+
+this set of methods to the underlying
+
+
+object. And that's useful because it
+
+
+means that you can kind of constrain the
+
+
+interface. You're not saying like every
+
+
+single um every single method that's
+
+
+available on string should be available
+
+
+on user ID. Um you can like specify
+
+
+um exactly what you want to share.
+
+
+Um if you do want to just decorate,
+
+
+there's also um literal decorator which
+
+
+you can use in the same way. Um and this
+
+
+will just essentially use method missing
+
+
+to just pass everything down. Um
+
+
+speaking of method missing, let's talk
+
+
+about performance. Uh it's a question I
+
+
+often get about this. Um it's like we're
+
+
+doing loads of extra work. Is this going
+
+
+to be slow? Um it's not very slow. So
+
+
+because because we use code generation,
+
+
+we're not doing like um much at runtime.
+
+
+Um so when when you when you use the
+
+
+prop methods, you're actually defining
+
+
+the initializer um with code generation.
+
+
+So it's essentially as if you had
+
+
+written it yourself. Um it's just doing
+
+
+type checking and raising errors if if
+
+
+there's something wrong. All of the
+
+
+types that literal have do essentially
+
+
+zero runtime allocations. It's possible
+
+
+that for to generate a new inline cache,
+
+
+they will sometimes allocate. Um I think
+
+
+there the types that call a method on
+
+
+the object being passed in will will
+
+
+allocate if you um if you call them with
+
+
+one thing and then you call them with a
+
+
+different kind of thing. I think there's
+
+
+a there's like an inline cache that gets
+
+
+created but generally they don't do any
+
+
+runtime
+
+
+allocations. Um the types also highly
+
+
+optimized. So to give an example of this
+
+
+um let's look at the union type. So the
+
+
+union type is usually used maybe
+
+
+something like this. In this case um
+
+
+it's usually just a small set of things.
+
+
+If we what it's going to do is it's
+
+
+going to call triple equals on string
+
+
+with the value. And if that returns true
+
+
+um it's going to early come out because
+
+
+it knows like it's or it doesn't need to
+
+
+check symbol or array. Um if it's false
+
+
+it will need to check all of types. But
+
+
+let's say that you passed in you created
+
+
+a union of um primitives. So things like
+
+
+strings, integers, um I can't remember
+
+
+the full list symbols definitely. Um so
+
+
+it turns out that primitives triple
+
+
+equals is equivalent to their hash
+
+
+equality, right? Because they're
+
+
+essentially valuebased unit types. So we
+
+
+can when you create a union of
+
+
+primitives or if there are primitives in
+
+
+there the primitives will get put into a
+
+
+set. Um so you could have a union of
+
+
+like a million possible tags that are
+
+
+just simple primitives, strings or
+
+
+whatever and then you could check in 01
+
+
+time.
+
+
+Um it would it would it would be
+
+
+incredibly fast. It wouldn't make any
+
+
+difference. Um the other thing is types
+
+
+are flattened when possible. So, um,
+
+
+this example of, um, we've got like
+
+
+three unions and then we put all three
+
+
+unions into another union. Um, this
+
+
+isn't going D isn't actually going to be
+
+
+a union of three unions. It's going to
+
+
+be a union of nine primitives. Um,
+
+
+because it's going to automatically be
+
+
+like, okay, I'm going to try and flatten
+
+
+this. Um, and these also all happen like
+
+
+typically all of these types are being
+
+
+allocated at boot time. So, they happen
+
+
+once, you use the same thing again and
+
+
+again. it's frozen. Um, if you do eager
+
+
+loading, it's going to be copy on write
+
+
+shared between all of your processes.
+
+
+So, they're not going to take up much
+
+
+memory
+
+
+either. Um, so what's next in literal?
+
+
+Uh, collection objects. So, let's look
+
+
+at um an example. We've got a group that
+
+
+has members, and we're checking that
+
+
+when you pass in members, it's an array
+
+
+of users.
+
+
+But we want to add this method to add a
+
+
+new member. So what happens here is
+
+
+we're we check that when we get the
+
+
+array at the object boundary, it's
+
+
+definitely an array of users, but then
+
+
+we're able to add random things like we
+
+
+could call add member with an integer
+
+
+and it would be fine. It wouldn't
+
+
+complain. Um, so you could obviously
+
+
+like do your own little check. This is a
+
+
+short one that you can do. The error
+
+
+messages from these are not very nice.
+
+
+Um but this again because pattern
+
+
+matching uses triple equals we'll call
+
+
+triple equals on user um and check and
+
+
+that that works but um I don't think
+
+
+that group should be responsible for
+
+
+this actually think that that's um the
+
+
+array itself should be responsible um
+
+
+just like looking at this from a a kind
+
+
+of runtime perspective and so we're
+
+
+going to build u or we're in the process
+
+
+of building a literal array uh type that
+
+
+is parameterized. So you could create
+
+
+literal arrays as objects. Um you create
+
+
+them with the type and with the values
+
+
+and they ensure that you can't push
+
+
+incorrect values into
+
+
+them.
+
+
+Um does that make sense so
+
+
+far?
+
+
+Okay. So collection objects we're going
+
+
+to build we're partway through building
+
+
+array. Um and actually partway into
+
+
+tupil but very not very far. Um, we're
+
+
+going to build hash and set as well. Uh,
+
+
+and these will basically like work like
+
+
+their counterparts in Ruby. Mostly every
+
+
+method. The reason they're taking so
+
+
+long is like these these objects just
+
+
+have so many methods and like
+
+
+implementing them in a way where you
+
+
+can't corrupt the types is is quite a
+
+
+challenge. Um, that gets us on to oh
+
+
+yeah, let's take a quick detour. So I I
+
+
+think tomorrow Stephen is going to talk
+
+
+about this idea of like um an accordion
+
+
+of complexity which is like building
+
+
+interfaces that kind of flex and scale
+
+
+with with you and like with your use
+
+
+case and and how far you want to go. So
+
+
+um I just want to show like an example
+
+
+of this. So if you have you have this
+
+
+group takes property of members. The
+
+
+simplest thing you can just say that
+
+
+this should be an array, right? I don't
+
+
+need to think about generics. I don't
+
+
+need to think about anything else. This
+
+
+is going to give me a lot of safety,
+
+
+right? It's going to tell me it's not
+
+
+nil, it's not string, it's an array. The
+
+
+next layer is like I want to check uh
+
+
+that that it's a an array of users um
+
+
+initialization. And then like another
+
+
+layer is then I also want to make sure
+
+
+that you can't push invalid things into
+
+
+it. Um and the next layer would be like
+
+
+it doesn't make sense to have a group of
+
+
+one PE person or zero people. Um, so
+
+
+let's make sure that the the members
+
+
+must be two or
+
+
+more. And next layer up is like let's
+
+
+actually create like let's name that
+
+
+concept of group members um so that it
+
+
+can be referenced in other places or at
+
+
+least so that we know what it
+
+
+means.
+
+
+Um getting back to collections let's
+
+
+talk about variance for a second. Um,
+
+
+so let's imagine we have a class fruit
+
+
+and we also have these three classes
+
+
+that subclass fruit. Apple, banana,
+
+
+orange. This is the simplest example I
+
+
+can come up with. Um, we make a basket
+
+
+of fruit. Uh, we pass in a bunch of
+
+
+fruit and we make a basket of
+
+
+apples. And then we want to concat these
+
+
+together. Right? So in the first
+
+
+example, we we we have a basket of
+
+
+apples and we want to shove into it our
+
+
+basket of fruit. That is
+
+
+invalid. In the in the second example,
+
+
+uh we have a basket of fruit and we want
+
+
+to concat into it a basket of apples.
+
+
+That is valid. That shouldn't error. But
+
+
+we don't want to have to check every
+
+
+time
+
+
+um you know, every time I I shove my
+
+
+basket of apples into my basket of
+
+
+fruit. Uh we want to basically take a
+
+
+shortcut. If we can compare the types
+
+
+apple and fruit to each other, we won't
+
+
+have to check all of the items. So the
+
+
+other thing that we're doing uh right
+
+
+now is in order to support these
+
+
+collection objects is make it so that
+
+
+you can compare these types to each
+
+
+other. And actually like you can compare
+
+
+all sorts of things like you can say
+
+
+like the it knows that the class proc um
+
+
+is a subtype of the interface type call,
+
+
+right? because it it it's in the
+
+
+interface type call knows in order to
+
+
+determine if I am a super type of a
+
+
+class, I need to look at that class's
+
+
+instance methods. So there's all sorts
+
+
+of ways that we can like take shortcuts
+
+
+and and have performance better
+
+
+performance when working with these
+
+
+things. Um and ultimately it means that
+
+
+doing one quick operation just comparing
+
+
+the types themselves rather than the
+
+
+items um we can know that a certain kind
+
+
+of concatenation or operation on an
+
+
+array is
+
+
+safe. Uh the other thing that we're
+
+
+adding um is cross property validation.
+
+
+So this is the idea that you can
+
+
+stipulate
+
+
+um you can make stipulations about like
+
+
+um multiple properties kind of working
+
+
+together. So um sometimes the the
+
+
+validness of one attribute is actually
+
+
+determined by another attribute. And so
+
+
+the way that we're thinking of doing
+
+
+this, this is still kind of
+
+
+uh open to suggestions, um is that you
+
+
+can make these stipulations and you pass
+
+
+a block and we just look at what you've
+
+
+named the parameters on that block and
+
+
+then we generate the code that's able to
+
+
+pass the correct um attribute into those
+
+
+blocks. Um so it's the ordering doesn't
+
+
+matter. It's just that you have named
+
+
+the parameters correctly um and that
+
+
+they match up with the names of the
+
+
+properties. Um so
+
+
+here like we want to know that the name
+
+
+is between the lengths. We want to know
+
+
+that the min is less than max. We can do
+
+
+that. Uh and finally result objects. Um
+
+
+I'm not going to go too into detail on
+
+
+this but just this the idea of having a
+
+
+result monad in literal. I know there's
+
+
+like dry monads and stuff. Um, but I
+
+
+think that we can do a better like job
+
+
+of integrating that with literal type
+
+
+system. Um, so I'm going to look into
+
+
+doing that. Uh, another idea we had was
+
+
+that actually literal should be able to
+
+
+generate LLM schemas. Um, LLM scheas are
+
+
+uh, basically a way of telling LLMs like
+
+
+this is a a kind of shape of an object
+
+
+that I want you to generate. And so um,
+
+
+like I don't know, I'm looking for
+
+
+recipes. they look like this. Can you go
+
+
+to this website and find me recipes? And
+
+
+then it will do it and it will give you
+
+
+back JSON that matches that schema. Um,
+
+
+and we should be able to generate these
+
+
+and then validate these as
+
+
+well. So,
+
+
+um, let's just, um, kind of look back
+
+
+over what we've
+
+
+learned. Ruby has types and most Ruby
+
+
+objects are types. I think that like we
+
+
+might disagree
+
+
+on whether that's true or not, but
+
+
+um but whatever I'm calling types, it
+
+
+definitely does have right and you're
+
+
+definitely using them.
+
+
+Uh we looked at literal types, we looked
+
+
+at literal strruct and data um which are
+
+
+mutable, immutable uh data objects. We
+
+
+looked at little properties that let you
+
+
+do bring the same interface into your
+
+
+own objects. Um, enums let you have
+
+
+constant enumerations of um of objects.
+
+
+Uh, and value and and decorators let you
+
+
+wrap a single value like a user ID. And
+
+
+the advantage there, I probably should
+
+
+have talked about this is that you can
+
+
+make an interface that says I need a
+
+
+user ID. Like I I don't want any string,
+
+
+you need to give me a user ID.
+
+
+Um, for me, having used this for for a
+
+
+number of years now, um, it feels like
+
+
+the sort of Goldilock solution, right?
+
+
+Um, complete type safety in Ruby just
+
+
+for me has been unattainable. And I've
+
+
+tried a bunch of different tools. Um,
+
+
+but also just being like fully dynamic,
+
+
+everything's fine, don't check anything.
+
+
+At the end of the day, you have to check
+
+
+stuff. And so it's a case of like am I
+
+
+checking stuff by writing loads of code
+
+
+out manually or by using this um like
+
+
+composing these beautiful types together
+
+
+um in ways that I can like give them
+
+
+nice names and pass them around and call
+
+
+them. Um for me I much prefer to to
+
+
+write less code. Um so the benefits for
+
+
+me are um less typing like literally um
+
+
+I don't have to type as much on my
+
+
+keyboard. Um this concept of a property
+
+
+has been named
+
+
+So what was before maybe like six
+
+
+different things. Let's see. You've got
+
+
+your initializer that takes parameters.
+
+
+It assigns instance variables. It checks
+
+
+that they're valid. Then maybe you've
+
+
+got an at a reader separately in
+
+
+different part of the code. And then
+
+
+maybe you've overridden the atter writer
+
+
+to have a to check something or to
+
+
+coersse something. And that code has to
+
+
+stay in sync with your initializer.
+
+
+you can end up writing a lot of code to
+
+
+try to do do this. Um, but having this
+
+
+concept of a property as being like this
+
+
+one thing. Um, for me it just really
+
+
+simplifies that idea. Um, concept of a
+
+
+type, you're already using them, you're
+
+
+already using the concept. I'm just
+
+
+naming it a type. Um, a duck is a duck.
+
+
+Um, local documentation, right? So if I
+
+
+am in any class that uses this way of of
+
+
+writing Ruby, I can just scroll to the
+
+
+top and I know what everything is. Like
+
+
+it just tells me um and if I'm using
+
+
+Ruby LSP and I see like it has an array
+
+
+of users, I can just command click on
+
+
+user and I jump to that class, right? I
+
+
+don't have to be like, oh, what is a
+
+
+user in this case? Is it is it a because
+
+
+it could be JSON? It could be anything.
+
+
+Um, local documentation also is better
+
+
+for LLMs, right? Even if you have an
+
+
+like an agentic LLM tool that's able to
+
+
+go and look at like look up other files,
+
+
+it's not going to be able to look up all
+
+
+your files and find all of the different
+
+
+places where you've kind of defined what
+
+
+this what what this class is meant to do
+
+
+which are outside of the class, right?
+
+
+We want the the conventions to be owned
+
+
+by the class and enforced by the class
+
+
+and visible from the same file that that
+
+
+class is defined in, not defined in all
+
+
+of your code all over the place. Or at
+
+
+least that's that's what I want. Um, and
+
+
+LLMs do a really good job when they're
+
+
+able to have that context immediately.
+
+
+Um, we get to make invalid states
+
+
+impossible to some extent. I should put
+
+
+a star here. Like it is not a 100% type-
+
+
+safe system. It's it's not even
+
+
+Typescript level, but but adding these
+
+
+validations at the boundaries of objects
+
+
+gets you so far um in terms of like you
+
+
+run your tests and if there's something
+
+
+wrong, they're like they're going to
+
+
+pick it up straight away. Um I didn't
+
+
+add this, but actually like great error
+
+
+messages is a I would consider to be a
+
+
+feature. So our types are very um
+
+
+careful how they generate error
+
+
+messages. So if you have a type that's
+
+
+like array of string and you give it an
+
+
+array but like the third item is wrong,
+
+
+it won't just tell you that the whole
+
+
+thing was wrong. It will tell you the
+
+
+third item was this. We expected it to
+
+
+be one of these. Um and the errors are
+
+
+really nice. Um and the great thing
+
+
+about doing it at runtime is it's always
+
+
+compatible with existing code. Um you
+
+
+can use this and get value from it in 5
+
+
+minutes. And um you can keep using meta
+
+
+programming, which for me is what makes
+
+
+Ruby so great. Like I can move so fast
+
+
+in Ruby compared to TypeScript when I'm
+
+
+building certain kinds of things. Um I
+
+
+wouldn't give that up to have static
+
+
+typing. Um I already said your existing
+
+
+tests are more useful. Um, but even if
+
+
+something gets past development, gets
+
+
+past your tests, it makes it into
+
+
+production and some crazy bug in Pummer
+
+
+and Rails, um, means that one user is
+
+
+treated as a different user and so they
+
+
+don't have email addresses and they end
+
+
+up nil. You're not going to end up
+
+
+deleting 4,000 emails from Zendesk.
+
+
+Um,
+
+
+so I would say that Ruby has literally
+
+
+always had types. Um, it's just that
+
+
+we've been thinking about types in a too
+
+
+narrow a sense like as being like static
+
+
+types. Um, Ruby has runtime types and
+
+
+uh, and it has a great interface for
+
+
+working with them and for building
+
+
+them. And that is the end of my talk. I
+
+
+think I got it in 45.
+
+
+Let me just
+
+
+[Applause]
+
+
+uh All right. Any questions?
+
+
+Really?
+
+
+Hi, thank you for the talk. Very nice
+
+
+presentation. Could you tell me the
+
+
+difference between literal fun and dry
+
+
+types? for example. Yeah.
+
+
+Um, literal uses the triple equals
+
+
+interface um where dry doesn't. So,
+
+
+uh, dry types are like a specific thing.
+
+
+Um, they they also cover more than um
+
+
+more than type checking. Like a dry type
+
+
+can actually actually knows um how it
+
+
+can be coerced and what its default
+
+
+value is. And for me, that's like the
+
+
+wrong place to put that information. for
+
+
+me that belongs with the property the
+
+
+idea of a property and the type should
+
+
+be focused entirely on um basically it
+
+
+has two functions. Um one is determining
+
+
+um whether an object is described by it
+
+
+and then the other one which is optional
+
+
+is determining whether another type is a
+
+
+subtype of
+
+
+it. So it's just like being able to do
+
+
+that means that you can use like all of
+
+
+the objects in Ruby. they're already
+
+
+types. Like I can just use a string as a
+
+
+type or the class string as a type. I
+
+
+don't need to have this extra thing.
+
+
+Any other questions?
+
+
+Thank you for presentation. Um I had a
+
+
+question. this literal data u does it
+
+
+throw an error when you when you pass
+
+
+the wrong prop? Yes, I should have said
+
+
+that. Yes, that's literally what it
+
+
+does. Yeah. And so in production is the
+
+
+same. Yeah. So you have just exception
+
+
+and you have to deal with it. Yeah. So
+
+
+we
+
+
+um when I originally built this gem, I
+
+
+made it with the ability to disable type
+
+
+checking. So you could run it in
+
+
+production. you could turn type checking
+
+
+off. And the the reason that I did that
+
+
+initially was like I thought it was
+
+
+going to be a performance issue. Um but
+
+
+I ran it in production with type
+
+
+checking on and it was unnoticeable. Um
+
+
+and
+
+
+actually what you don't want to do in
+
+
+production even though it kind of seems
+
+
+um unintuitive is just keep going when
+
+
+something is wrong. Um because it's
+
+
+better to raise an error than to like
+
+
+keep deleting 40,000 4,000 emails. Um
+
+
+so what I found is it means that you're
+
+
+more likely to have errors like surface
+
+
+quickly, but then you can deal with them
+
+
+quickly. You've got a you've got an
+
+
+error that tells you exactly what went
+
+
+wrong. It tells you like what it got,
+
+
+what it should have been, and you can
+
+
+fix that. Um and actually like when when
+
+
+we deployed this at clear scope um they
+
+
+our error our production error rate went
+
+
+way down because we were just like
+
+
+running this locally running it in our
+
+
+test environments just brought it way
+
+
+down. So even though there are more
+
+
+opportunities for it to raise it didn't
+
+
+raise more in
+
+
+production. Thank you.
+
+
+Hi, thank you for the talk. I just like
+
+
+how people have the same questions as I
+
+
+do, but I have a third one. So, okay.
+
+
+Uh, yeah, when you're defining a public
+
+
+method, you usually want to specify the
+
+
+types of the attributes along with the
+
+
+definition. So uh as far as I understood
+
+
+the way you will do this is by adding a
+
+
+pattern matching string at the first
+
+
+line right? Yeah you could do that
+
+
+um
+
+
+where I've explored like different
+
+
+interfaces that you could use at runtime
+
+
+to do like type checking on the me at
+
+
+the method layer. Um and I haven't found
+
+
+any that I really love. Um,
+
+
+and I've like it's at the point where I
+
+
+you get so much value from just checking
+
+
+at object initialization the object
+
+
+boundaries. Um, that for the most part
+
+
+that works very very well. Um I think
+
+
+yeah if you're doing if you're if you
+
+
+want to check a type on a method um you
+
+
+either want to have that like create an
+
+
+object like if you have like a service
+
+
+object or something um or yeah do your
+
+
+own do your own types using
+
+
+um the the pattern matching. Thank you.
+
+
+May I ask another one? Uh yes do you
+
+
+think that this gem is a good uh fit to
+
+
+write a validation library? I mean when
+
+
+the user passes you some parameters and
+
+
+you return to them the list of errors.
+
+
+Yeah.
+
+
+Um I I would like I think so. Um right
+
+
+now it's not great for that because you
+
+
+just try to create it and it will raise.
+
+
+Um I think it would be useful if you
+
+
+could instead of trying to create it you
+
+
+could like call a like validate instead
+
+
+of new. Um and you could it would like
+
+
+do like a soft run. So it would like
+
+
+check it would it would check against
+
+
+its schema um the the parameters and
+
+
+then um it could give you back just like
+
+
+an array of errors or something rather
+
+
+than raising an exception because you
+
+
+don't want to raise as like part of
+
+
+everyday um everyday code. So yeah um I
+
+
+think it would be a good basis but it's
+
+
+not quite there yet.
+
+
+So you said that Ruby people don't like
+
+
+types. Um I think what Ruby people don't
+
+
+like is Ferose code. Yeah. Which usually
+
+
+is a result of you know describing the
+
+
+types. I think in RBS you can define the
+
+
+types outside of your actual class.
+
+
+Right. You can. Yeah. Have you
+
+
+experimented with this idea as well? Uh
+
+
+I haven't. No. Um I it's it's already
+
+
+the case that switching from like if you
+
+
+if you just switch from using um a
+
+
+standard initializer where you're taking
+
+
+parameters and you're assigning them to
+
+
+instance variables, you're already going
+
+
+to be writing fewer lines of code just
+
+
+by switching to to use literal. So I
+
+
+don't see it as being like having like a
+
+
+deficit there in terms of lines of code.
+
+
+Um, I personally really value being able
+
+
+to scroll to the top of any class and
+
+
+immediately see what everything is and
+
+
+click to jump to them and stuff like
+
+
+that. Um, yeah, I haven't explored like
+
+
+doing it in a in a separate file.
+
+
+All right, the last question and the
+
+
+rest of them. Joel, are you joining us
+
+
+after the after party? Yeah. Okay, there
+
+
+will be plenty of time to discuss
+
+
+something completely different. Do you
+
+
+think because you started with the
+
+
+problem that um it's a lot of code like
+
+
+yeah twice as much to describe the
+
+
+types. Do you think the code in
+
+
+production could be observed by some
+
+
+tooling like let's say cover band and
+
+
+that observation could be used to
+
+
+generate the types. So we would not
+
+
+write them assume user is user and then
+
+
+something we would observe that user is
+
+
+actually user and generate the types for
+
+
+you like separately maybe would this
+
+
+just be like part of trying to migrate
+
+
+to this rather than a long-term thing
+
+
+because I think the issue with that is
+
+
+um well it's it's a few things. So one
+
+
+is like let's say that always got
+
+
+um like I don't know your size is always
+
+
+like small, medium or large, right? it
+
+
+sees that in production, but does it
+
+
+know that it's a union of small, medium,
+
+
+or large, or will it have to assume that
+
+
+it's a string? Um, like that would be
+
+
+quite difficult to figure out. Um,
+
+
+also, if it ra like it it's only going
+
+
+to work one time. If it raises in
+
+
+production if it's not the types it
+
+
+expected, um, then it's never going to
+
+
+have any production data to be able to
+
+
+to inform what types they should be. So
+
+
+um unless you're thinking of it as like
+
+
+a kind of picks up anomalies like
+
+
+usually this is a string but but then I
+
+
+wouldn't want to have a system like that
+
+
+one person it was something else so and
+
+
+then you need to review it right like
+
+
+you would it would give you pull request
+
+
+saying you want this and then you say no
+
+
+that nil was actually not expected would
+
+
+be a bit too late I I wouldn't want to
+
+
+have that um raising errors in
+
+
+production personally because sometimes
+
+
+you have anonymous like it is valid for
+
+
+it to be this thing but it's unusual. Um
+
+
+so I I don't know if I would want that
+
+
+myself. Um I think someone has been I
+
+
+think Marco has been um doing some stuff
+
+
+on like analyzing apps in production and
+
+
+then generating like documentation
+
+
+that's that's I think would be useful.
+
+
+Um I just wouldn't want to have like
+
+
+that actually making exceptions raise in
+
+
+production on the basis of of that kind
+
+
+of thing. personally more like generate
+
+
+the types like RBS types.
+
+
+Yeah, but like you could you could do it
+
+
+you could have it generate the types but
+
+
+then they're not very useful if you
+
+
+can't exercise them. So if you had RBS
+
+
+types, even if you had a a static type
+
+
+analysis tool that worked, um which it
+
+
+wouldn't work with any meta programming,
+
+
+um you would still like what you'd still
+
+
+end up in a situation where you had to
+
+
+go and like adjust the types as you as
+
+
+you as they raised issues. Um so I don't
+
+
+I don't know if I would recommend like
+
+
+that even as a migration path. like the
+
+
+migration path that I would take would
+
+
+be um take some like simple objects or
+
+
+even better still find places where you
+
+
+should have had objects and you didn't
+
+
+extract small objects
+
+
+um and uh and make new objects and like
+
+
+you can use you can use the type never I
+
+
+think um that will make it always raise
+
+
+like never never basically just returns
+
+
+false always um and that will tell you
+
+
+like this attribute was wrong and and I
+
+
+got this instead and then it's quite
+
+
+easy to to track down that attribute and
+
+
+correct it. Thank you very much.
+
+
+Right. Big pause for Joel, please. Thank
+
+
+you.
+
+
+[Applause]

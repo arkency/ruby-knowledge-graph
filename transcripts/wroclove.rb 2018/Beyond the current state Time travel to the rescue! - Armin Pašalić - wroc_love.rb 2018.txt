@@ -1,0 +1,2380 @@
+so hello everyone as it was already
+
+
+mentioned my name is I'm Michele each
+
+
+you can find me on the Internet as
+
+
+Colette and I work in a company called
+
+
+Solaris Bank we are a banking company
+
+
+mostly tech company with a banking
+
+
+license actually we're half half mostly
+
+
+software engineers so if anyone is
+
+
+interested about the stuff we are hiring
+
+
+you can come talk to me after the talk
+
+
+or at the party later I have to say this
+
+
+today I would like to talk about few
+
+
+interesting concepts that I have picked
+
+
+up during the last few years I would say
+
+
+and found extremely useful when tasked
+
+
+with crafting resilient software systems
+
+
+so without further ado let me start with
+
+
+an application containing multiple
+
+
+modules implemented in a single code
+
+
+bases the approach to building
+
+
+applications such as this is also known
+
+
+as a majestic monolith well I'm kidding
+
+
+it's known as an interior architecture
+
+
+typically represented as a three layered
+
+
+architecture we mostly all know what
+
+
+this should mean and this is a very
+
+
+simplified representation of it in
+
+
+general when a client wants to make some
+
+
+changes our request is issued after
+
+
+which the client is put on hold
+
+
+application and validates the data does
+
+
+the processing and at the end persist
+
+
+the result all fine and dandy this
+
+
+result mutates the state or what was up
+
+
+to this point known as current state and
+
+
+additional query usually is performed
+
+
+against the database for some reason
+
+
+which fetches this mutated state and
+
+
+returns it to the client
+
+
+this is what some people would also call
+
+
+a request response cycle this is pretty
+
+
+straightforward and simple and for most
+
+
+applications is actually perfectly fine
+
+
+however in some situations when the
+
+
+application that we are building or
+
+
+actually a business domain that we are
+
+
+trying to describe our software is
+
+
+extremely complex or we just have built
+
+
+already a very complex application and
+
+
+we are finding it very hard to reason
+
+
+about our code or we situation also
+
+
+arises when we want to increase the
+
+
+scalability of our system or we just
+
+
+want the system with superpowers so the
+
+
+very easy thing we can do and one of the
+
+
+things we can notice immediately is
+
+
+something called readwrite disparity
+
+
+what this in essence means that for most
+
+
+applications we have much more reads
+
+
+than we have writes although some
+
+
+applications might have more rights than
+
+
+reads as well so we can structure an
+
+
+application in a way that commands are
+
+
+issued to the right or command endpoint
+
+
+which validates the user input and
+
+
+immediately responds with either a
+
+
+validation failure or allocation of our
+
+
+query or a read endpoint this is
+
+
+depending of course what kind of
+
+
+interface you are using for this example
+
+
+I'm using a typical HTTP interface but
+
+
+this actually doesn't have to be the
+
+
+case so but let's proceed with this
+
+
+response usually contains unique
+
+
+identifiers and our client is usually
+
+
+redirected to this read interface but
+
+
+this can happen at any time in the
+
+
+future because in most situations people
+
+
+clients that have sent you some payload
+
+
+to write already know what they have
+
+
+sent
+
+
+and they usually know what the previous
+
+
+state was so in essence there is very
+
+
+little reason for writer and reader to
+
+
+be the same except in situations where
+
+
+they are taught like that and they just
+
+
+want to check if this has error already
+
+
+has happened which is kind of something
+
+
+that we have been taught for for some
+
+
+time to do and might be not most correct
+
+
+thing to do but essentially at some
+
+
+later point in time this client might
+
+
+come and say okay I have this identifier
+
+
+and I would like to check what's the
+
+
+sate then the database query would be
+
+
+made and it would respond to our client
+
+
+to saying okay this is the state now
+
+
+this looks like a very simple thing to
+
+
+do and in essence it is and when we cut
+
+
+our extras we can actually see what the
+
+
+new application full of the data would
+
+
+look like and that's a bit different but
+
+
+the concepts behind this optimization is
+
+
+known as CQRS
+
+
+and we have been talking about it for
+
+
+the last couple of days and it has been
+
+
+mentioned but no talk has actually
+
+
+described it at least here and sorry if
+
+
+you'd already know about it but I just
+
+
+had to do it so what is Sakura
+
+
+senescence well there is another concept
+
+
+called command query separation or cqs
+
+
+which was devised by Bertrand mayor and
+
+
+described in a book object-oriented
+
+
+software construction in 1988 which is
+
+
+30 years ago but if you read the slide I
+
+
+think you should agree that this concept
+
+
+our principle still holds today as much
+
+
+as it held back in the day
+
+
+applying the very same principle on a
+
+
+service level is what secures is in
+
+
+essence is the term was coined by Greg
+
+
+yang and first publicly mentioned on his
+
+
+blog in 2009 if you have not heard about
+
+
+Greg young before which I seriously
+
+
+doubt if you're on this conference I
+
+
+would can only recommend that you go to
+
+
+youtube search his name and watch his
+
+
+videos you will definitely learn a lot
+
+
+and digging deeper we can notice that
+
+
+requirements we have of our right model
+
+
+can differ significantly from those that
+
+
+we have of our Reid model well right
+
+
+models tend to implement some complex
+
+
+business rules complex business logic
+
+
+read models are in essence just simple
+
+
+queries that you can do against your
+
+
+persistence and just display the state
+
+
+that you have previously prepared so
+
+
+these can be modeled to satisfy specific
+
+
+business sorry can you hear me well okay
+
+
+thank you this can be modeled to satisfy
+
+
+specific business requirements so you
+
+
+can have multiple views on the same data
+
+
+structure using for instance something
+
+
+called materialized views in the
+
+
+databases and with this we essentially
+
+
+can split our application into two
+
+
+self-contained parts now I would like to
+
+
+make clear that while this specific
+
+
+concept can be very useful in helping
+
+
+transition from monolith to some sort of
+
+
+the service-oriented architecture what
+
+
+we call Micro Services these days you
+
+
+can still look at this in a in a
+
+
+construct of a single application as a
+
+
+holic genius entity and this is
+
+
+perfectly fine but it doesn't really
+
+
+matter it's a just an implementation
+
+
+detail
+
+
+however if we decide to split our
+
+
+application physically into multiple
+
+
+parts we get one thing for as a very low
+
+
+hanging fruit so we have unlocked our
+
+
+first superpower it's called a raffle
+
+
+scale that's not much of a power though
+
+
+but before we proceed I think it's
+
+
+important to mention two things that
+
+
+some of us either take for granted or
+
+
+not spend much time thinking about one
+
+
+of them is the very idea of the current
+
+
+state in systems dealing what with data
+
+
+we commonly mutated this current state
+
+
+all the time but maintaining only the
+
+
+current state comes with some drawbacks
+
+
+the most obvious one is that every state
+
+
+mutation will effectively remove
+
+
+knowledge about prior state
+
+
+so in essence things get forgotten other
+
+
+interesting drawback becomes more
+
+
+apparent when dealing with distributed
+
+
+systems where it is a major challenge to
+
+
+atomically update databases and publish
+
+
+an event distributed transactions are
+
+
+possible but come at the cost of
+
+
+performance which ironically is usually
+
+
+the main motivator to move your
+
+
+architecture in a to a distributed
+
+
+system in the first place but there is
+
+
+another way to take a look at the
+
+
+current state if we look at how
+
+
+databases work in the background we will
+
+
+come across a term called a transaction
+
+
+log so I will just read from Wikipedia
+
+
+which is source of all knowledge it is a
+
+
+history of actions executed by a
+
+
+database management system used to
+
+
+generate guarantee as properties over
+
+
+crashes or hardware failure what we
+
+
+think of application current state seems
+
+
+to be in essence in systems that are
+
+
+supporting it
+
+
+just a product of sequence of events
+
+
+that introduce changes to the state in
+
+
+the first place kind of makes sense to
+
+
+some of us a concept of eventual
+
+
+consistency which is the other concept I
+
+
+would like to talk about is as a foreign
+
+
+thing but it's all around us real world
+
+
+is actually eventually consistent and
+
+
+once we start dealing with distributed
+
+
+systems we need to accept and embrace
+
+
+this fact let me give you an example in
+
+
+Germany where I work
+
+
+in order to deal with Texas there is a
+
+
+system called Elster so in order to do
+
+
+your taxes and to get this specific keys
+
+
+you go to that website and subscribe you
+
+
+enter your details and you get a
+
+
+response everything is fine
+
+
+you will get your username and password
+
+
+is seven or eight days we opposed and
+
+
+that's perfectly fine because it allows
+
+
+you for so it's secure their security
+
+
+feature but nevertheless the credentials
+
+
+are issued we are the other medium so
+
+
+this could have been if we had Google in
+
+
+I don't know 1900s and you type in a
+
+
+search at your local telegraph station
+
+
+then it would get processed by another
+
+
+Telegraph station at Google they would
+
+
+go search the books find something and
+
+
+say ok we will send this to you we are
+
+
+postal Express or something so in
+
+
+general I mean things have changed since
+
+
+1900 or earlier but we as software
+
+
+engineers take this immediate
+
+
+consistency bit too seriously it
+
+
+actually doesn't coincide with what the
+
+
+real world is about so once this becomes
+
+
+apparent and once you're fine with it
+
+
+you can do some stuff about it
+
+
+but let's just continue if we apply
+
+
+these concepts on the system that we
+
+
+have been developing or partitioning in
+
+
+this talk and instead of persisting a
+
+
+state every time some business relevant
+
+
+event occurs we just publish an event
+
+
+inside of some persistence layer which
+
+
+is capable of managing this and as
+
+
+events are facts that have already
+
+
+happened and this has been mentioned in
+
+
+this conference for the last two days
+
+
+they are immutable they are not supposed
+
+
+to be changed ever and thus our store
+
+
+only allows append and read event store
+
+
+can then trigger the projectors I have
+
+
+this thing yeah these are the projectors
+
+
+or maybe those who are looking on the
+
+
+other side
+
+
+these projectors can then project the
+
+
+desired state and now in the interesting
+
+
+fact this state can be projected into
+
+
+anything we can project the state in
+
+
+graph database or in memory or we can
+
+
+just use part of the state which is
+
+
+perfectly suitable for the specific
+
+
+business component that needs the state
+
+
+and I will not talk about event sourcing
+
+
+a lot here just the benefits that we
+
+
+gain from it essentially what would do
+
+
+every time is build a memory
+
+
+representation sorry I need some water
+
+
+of the state replaying events for the
+
+
+specific aggregate
+
+
+and yeah so sorry so if you look at the
+
+
+command part we have a domain model
+
+
+which is a command model and how this
+
+
+process works is has been already
+
+
+described by Natan yesterday but I will
+
+
+just repeat it for brevity's sake so
+
+
+essentially once you get a request as
+
+
+you can treat your HTTP request in this
+
+
+manner as a command or you can produce a
+
+
+value object which is a command it's up
+
+
+to you it gets into a command handler
+
+
+which takes all the previous states of
+
+
+based on this command says ok this is
+
+
+for the aggregate ABC ok ask the event
+
+
+store to give you all of the events that
+
+
+have been happening on ABC aggregate you
+
+
+replay them in order and essentially
+
+
+construct a current state in memory
+
+
+which you can use then to apply the new
+
+
+event which is produced from this
+
+
+command and if this event or this
+
+
+aggregate now satisfies the requirements
+
+
+of whatever business logic that you have
+
+
+then you can persist a new event and
+
+
+just go on with your system and we do
+
+
+this on every request now
+
+
+the question has been raised is the
+
+
+slope well let's take a look at the
+
+
+principle of a bank account so my bank
+
+
+account has maybe 100 200 entries per
+
+
+month if we take this in a 10 year
+
+
+period maybe we can reach 200,000
+
+
+entries how long does it take to do a
+
+
+left fold on this or in Ruby terms how
+
+
+long would it take to do inject on
+
+
+100,000 items I have measured
+
+
+approximately it's below 1 second and
+
+
+this is just on the right part so in
+
+
+essence this is not slow there are some
+
+
+domains business domains like advertise
+
+
+which actually process petabytes of data
+
+
+per day in these cases there are some
+
+
+optimizations and this has already been
+
+
+mentioned and these are called taking in
+
+
+the snapshot and I will not go deeper
+
+
+into it it has been explained yesterday
+
+
+essentially applying the concept
+
+
+empowered our system without one new
+
+
+superpower which is ability to time
+
+
+travel keeping all the business relevant
+
+
+facts for the lifetime of the system
+
+
+allows us multitude of things most
+
+
+obvious is ability to project state from
+
+
+any previous time want to know what was
+
+
+project state three weeks ago no problem
+
+
+we can construct a special projector
+
+
+which will satisfy the requirement and
+
+
+allow us to do temporal queries the
+
+
+second ability we have gained is ability
+
+
+to foresee the future otherwise and
+
+
+comic book world known as precognition
+
+
+one more ability system gained is
+
+
+features can be constructed as if they
+
+
+have been imagined on the first day as
+
+
+long as we have relevant events so
+
+
+imagine a situation if you work in a
+
+
+ecommerce business and one day a manager
+
+
+comes and says look we have a promotion
+
+
+and we would like to send an email with
+
+
+a promotion to every customer that has
+
+
+put a specific set of items in a cart
+
+
+and then took them out during the last
+
+
+year and in a classical system you go
+
+
+okay
+
+
+I need a drink and then you take a deep
+
+
+breath and explain to your manager that
+
+
+this is not possible he can have this
+
+
+feature for the next year if he wants
+
+
+but right now we have somehow lost all
+
+
+of this data however in this kind of
+
+
+system you just say okay no problem
+
+
+we'll just build a projection because we
+
+
+have all of the business relevant events
+
+
+they have already happened and we keep
+
+
+them in our system this is a quite a
+
+
+powerful tool for such a simple concept
+
+
+next is another superpower it's all
+
+
+about superpowers it's a total self
+
+
+reconstruction so if we take a look at
+
+
+the state I have read the article on
+
+
+reddit some time ago about junior
+
+
+developer when the first day came and
+
+
+dropped the production database so poor
+
+
+fellow was secretly fired by by CTO I'm
+
+
+not gonna go into it except to say I'm
+
+
+very much against that was a perfect
+
+
+learning opportunity which cost a lot as
+
+
+well but if you have your event store
+
+
+and you just keep events and this is
+
+
+protected and backed up then you
+
+
+generally have no reason to worry unless
+
+
+you're allow people to drop your event
+
+
+store which you definitely should not in
+
+
+any case but if this junior or this
+
+
+company had applied the principle of
+
+
+sourcing events reconstructing what was
+
+
+known as their current state would have
+
+
+been trivial and they would have a
+
+
+complete recovery within maybe a couple
+
+
+of hours it's bad for customers but
+
+
+still better than losing all of your
+
+
+data and not having any backups so
+
+
+this also brings other benefits in
+
+
+general when I was still working with
+
+
+rails which I thankfully don't there was
+
+
+this concept of migrations which is
+
+
+actually pretty great you write your
+
+
+code in Ruby you run the migration your
+
+
+scheme has changed some people use it
+
+
+also to populate the state I can tell
+
+
+you this is not a good idea but let's
+
+
+leave that for some other talk in any
+
+
+case if you have an event source system
+
+
+you don't do migrations I mean you don't
+
+
+have to you change the schema of your
+
+
+projection and you just build a new
+
+
+projection you populate a new projection
+
+
+you boot up your application and you
+
+
+will just redirect it to read from the
+
+
+new projection the end hole projection
+
+
+can just be abandoned destroyed or
+
+
+repurposed whatever if you have no need
+
+
+for it probably just destroyed and the
+
+
+last superpower is enhance charisma so I
+
+
+can come from regulated industry I work
+
+
+in that company that is a bank so we are
+
+
+very regulated and if you have
+
+
+regulators come in and say ok how do you
+
+
+build software and you say we have this
+
+
+thing that we call ledger and we project
+
+
+everything from the ledger and they are
+
+
+super happy
+
+
+so we've gained at least plus five
+
+
+versus the regulators so they're going
+
+
+to love you for this
+
+
+there are some other benefits as well
+
+
+debugging on an exact state again we're
+
+
+time traveling is actually very useful
+
+
+we had a situation whether he have had a
+
+
+race condition because several different
+
+
+systems were writing to event store
+
+
+actually business relevant events which
+
+
+we were synchronizing with external
+
+
+party and since we made a mistake it was
+
+
+it would have
+
+
+really hard to find this thing because
+
+
+race conditions are notoriously hard to
+
+
+debug we actually managed to do this in
+
+
+five minutes or less we just brought the
+
+
+state where it was before the bug has
+
+
+happened and just replayed event after
+
+
+event trying to figure out what happened
+
+
+it went without a hitch
+
+
+problem solved this is something I would
+
+
+have spent maybe a week previously just
+
+
+working the current state the second one
+
+
+is testing without updating and deleting
+
+
+things is very nice
+
+
+your tests become simpler and faster and
+
+
+just try it
+
+
+I can't just describe it now and last
+
+
+one is backing up your system on a per
+
+
+event basis is actually trivial you
+
+
+build a projection or reactor which can
+
+
+take every event that have has happened
+
+
+on a system of course you track the
+
+
+global identifier to see if every event
+
+
+is actually happening you have some
+
+
+things that the term managing these but
+
+
+it is like having multiple redundant
+
+
+backups and every time is becoming
+
+
+really really easy and this was me when
+
+
+I first heard about these concepts and
+
+
+my first reactions why has no one ever
+
+
+told me this exists why people don't
+
+
+teach this in schools I mean we are
+
+
+being taught techniques in software
+
+
+engineering that have been taught like
+
+
+this for I think last 40 years and this
+
+
+is not something new as Greg young would
+
+
+say double-entry bookkeeping which is
+
+
+essentially a ledger has been with us
+
+
+for 500 years or more I am Not sure I'm
+
+
+not very good with dates so why is no
+
+
+one teaching about this I think it's
+
+
+very useful if you
+
+
+this is a powerful yet very simple tool
+
+
+to have in your tool belt okay please
+
+
+note you can do we can apply secure as
+
+
+an event sourcing concepts separately
+
+
+where you feel the need for them however
+
+
+I would like to stress and this is my
+
+
+personal view which makes it no less
+
+
+correct
+
+
+while CQRS can fare quite well on its
+
+
+own event sourcing only makes sense if
+
+
+you intend to build a state for a query
+
+
+from a stream of events and by
+
+
+definition this is also a secure
+
+
+implementation I have had a good fortune
+
+
+to encounter a system where event
+
+
+sourcing was applied only for a reason
+
+
+of keeping records and state was updated
+
+
+and read directly from a command model
+
+
+we our transaction and the presumed
+
+
+reason for this was to reduce complexity
+
+
+what actually happened and what was the
+
+
+result after few months of engineering
+
+
+on this that complexity has actually
+
+
+significantly increased we had a huge
+
+
+huge logic in our workflows which is a
+
+
+concept we use in order to describe the
+
+
+orchestration layer of the things and
+
+
+while it resulted in less system objects
+
+
+complexity was increased so much
+
+
+removing the the immediate state and
+
+
+applying CQRS patterns to it
+
+
+proliferated proliferated yeah classes
+
+
+significantly so we had a lot of lots
+
+
+and lots of new system objects let's say
+
+
+but these were focused this these system
+
+
+objects had single responsibility
+
+
+they were super easy to test super easy
+
+
+to reason about and system was working
+
+
+flawlessly of course nothing in software
+
+
+engineering comes for free and there are
+
+
+always trade-offs I've heard this a
+
+
+couple of times during this conference
+
+
+one of this most significant one except
+
+
+ones that are mentioned by Jen Nathan
+
+
+where is a mind shift while this all
+
+
+looks easy and fine and dandy getting
+
+
+especially and I have to say the senior
+
+
+software engineers to shift their mind
+
+
+view from writing the current state to
+
+
+to projecting the state from a series of
+
+
+events is actually a major challenge
+
+
+it's really really hard and as a first
+
+
+example I will take myself it took me a
+
+
+while to completely and I mean idea was
+
+
+fine it looks so good on paper but
+
+
+actually in practice it's not so easy it
+
+
+takes time it takes practice I was lucky
+
+
+enough that the company I worked for has
+
+
+actually invested time in research we
+
+
+were not actually required to produce a
+
+
+live system for some time we were given
+
+
+time to research this thing and this
+
+
+helps immensely the second one is
+
+
+connected to the first one hiring and
+
+
+training engineers in these kind of
+
+
+techniques is not that easy especially
+
+
+finding engineers who have previous
+
+
+knowledge of the concept is really
+
+
+really hard so if you want to have a
+
+
+system that is going to work quickly and
+
+
+you are a start-up you are probably
+
+
+don't want to apply these things because
+
+
+and I haven't included this the curve is
+
+
+actually pretty weird you slow down
+
+
+significantly at the beginning if you
+
+
+have time to wait for this to realize
+
+
+actually your development speed is going
+
+
+increase significantly downline and it
+
+
+should I don't say it will and the third
+
+
+one is the eventual consistency or
+
+
+especially when dealing with legacy
+
+
+systems while eventual consistency is
+
+
+nice and if you embrace it should help
+
+
+you embracing it is not so easy
+
+
+especially if you're dealing with the
+
+
+external systems and that's why this
+
+
+concept of reactors that I mentioned we
+
+
+have a concept that projects the state
+
+
+but we also have a concept which will
+
+
+communicate with external systems and
+
+
+these are coal reactors and they react
+
+
+on certain events happening sometimes
+
+
+even by building the state so these two
+
+
+can be intermixed but still sometimes it
+
+
+helps to reason about your external
+
+
+systems as just another persistence
+
+
+repository these are not the problems
+
+
+you cannot overcome it just sometimes
+
+
+really hard in practice and I would like
+
+
+to offer some cheats that we discovered
+
+
+while developing systems like this first
+
+
+one is projectors and reactors should
+
+
+there I say must be idempotent
+
+
+idempotency is not that hard to achieve
+
+
+but at the same time can be tricky I
+
+
+will not talk about specific
+
+
+implementation Nathan mentioned some so
+
+
+he saved me some time the second one is
+
+
+aggregate scope sequence number so no
+
+
+one told me when I started that this is
+
+
+a requirement but in order to avoid
+
+
+weird stuff like events coming out of
+
+
+sync from different systems because you
+
+
+have multiple instances of your right
+
+
+model this can help you a lot especially
+
+
+if you use a store which supports
+
+
+constraints in general I would say
+
+
+Postgres is a quite a nice thing but you
+
+
+can use other systems
+
+
+and this is something you should know
+
+
+before you start practicing because
+
+
+every event has a global identifier
+
+
+global order number but it should also
+
+
+have a locally scoped number scope to
+
+
+the aggregate itself reuse command model
+
+
+aggregates for response when must I have
+
+
+no idea where I put this yeah so this is
+
+
+really a cheat so in essence when you
+
+
+when you build such a system you have
+
+
+your interface and underneath it usually
+
+
+is a message bus of sorts so just
+
+
+construct your command utilize your
+
+
+serialize it put it on the bus and
+
+
+there's a command handler somewhere down
+
+
+the line so you decouple your system and
+
+
+it's pretty nice but if you skip the
+
+
+step of having an command bus or event
+
+
+bus or whatever you can actually build
+
+
+your aggregate and if you're dealing
+
+
+with legacy systems you can guess what
+
+
+the response is going to be before you
+
+
+actually write the projection so you can
+
+
+construct your I exact response as it
+
+
+should be for your client which actually
+
+
+expects the response and this is a
+
+
+requirement of a system valued at the
+
+
+same time teach them not to expect it
+
+
+still it's a good sheet command UUID is
+
+
+good for DITA plication in our system
+
+
+commands carry unique identifier if you
+
+
+put it inside event as part of the
+
+
+metadata you can use this information in
+
+
+order to skip sourcing duplicate events
+
+
+as long as your commands and events have
+
+
+one-to-one relationship and lastly use
+
+
+saga to deal with a refactor
+
+
+synchronization error with reactor
+
+
+synchronization error there has been
+
+
+some talk about saga or distributed
+
+
+service manager
+
+
+I forgot the second name I'm bit nervous
+
+
+this is my first time speaking in front
+
+
+of the conference audience so saga
+
+
+pattern in something which enables you
+
+
+if you are dealing with external systems
+
+
+and you send something and this external
+
+
+system does not support any potency how
+
+
+do you deal with this request has timed
+
+
+out and you actually don't know what has
+
+
+happened
+
+
+you don't know if the external system
+
+
+got the command to do something or not
+
+
+or did it do anything so you have a
+
+
+whole system that actually just does
+
+
+this you have an external system which
+
+
+will go after a while check if this has
+
+
+been written if it has it will source an
+
+
+event if it has not it will re attempt
+
+
+or if this error persists it will do
+
+
+something like send an email to an
+
+
+actual person to go and ask call someone
+
+
+on the phone and ask what is happening
+
+
+in the system if it's a business
+
+
+critical system sometimes it's fine
+
+
+but you have a whole system that's
+
+
+actually just purposely built in order
+
+
+to deal with errors so that's it I'm
+
+
+done thank you very much
+
+
+in this command pattern if you implement
+
+
+a project with with with comments and do
+
+
+you actually save comments is in
+
+
+database like is this the because I'm
+
+
+the totally object-oriented developer
+
+
+right so I know what that users are in
+
+
+tables and so on right so you have
+
+
+something like abstraction in separate
+
+
+the data database for models like that
+
+
+like tables old old fashioned tables and
+
+
+also you need to actually store those
+
+
+events right like comments so in big big
+
+
+systems you will end up like with like
+
+
+table with millions of records is that
+
+
+okay there are multiple questions here I
+
+
+would say so first of all storing the
+
+
+commands to be honest I'm not storing
+
+
+the commands I log them into a logging
+
+
+system however speaking with Nate and
+
+
+they are actually sourcing the commands
+
+
+as well in event ID so it's up to you is
+
+
+this command something that's business
+
+
+like is storing the command itself
+
+
+something that's business relevant so if
+
+
+it's relevant for your business go ahead
+
+
+and do it if it's not events are
+
+
+actually what has happened commands are
+
+
+intent for something to happen it
+
+
+doesn't necessarily mean that if you
+
+
+said if I tell someone go get me a
+
+
+coffee that he will get up and get me a
+
+
+coffee so this command has gone away we
+
+
+don't actually care about it however
+
+
+there are some systems this we're
+
+
+recording this is actually important so
+
+
+again trade offs it's up to you and what
+
+
+was the second part sorry
+
+
+okay thank you very much any other
+
+
+questions
+
+
+okay the second part was storing a lot
+
+
+of events in the in the database so what
+
+
+will happen when there will be line in
+
+
+the right heavy system really really
+
+
+lots of even do you compact them or or
+
+
+do you somehow snapshot them and or do
+
+
+you keep them forever ever ever
+
+
+well there are multiple techniques about
+
+
+this so depending on how large traffic
+
+
+does your organization receive which is
+
+
+a business relevant so some companies
+
+
+would use for instance Kafka for storing
+
+
+events which I don't recommend to be
+
+
+honest I heard some horror stories about
+
+
+it and you can do a lot compaction on it
+
+
+some systems like financial institutions
+
+
+have obligation to essentially close
+
+
+their books at the end of the year and
+
+
+say okay this is done we can snapshot
+
+
+the entire system from this point on
+
+
+store this in some external s3 maybe or
+
+
+keep it like just get a harddrive and
+
+
+write it on harddrive and just continue
+
+
+from that point on it's important to
+
+
+have ability to build your state from
+
+
+the points that make sense in general
+
+
+financial institutions don't deal with
+
+
+this much data so for us it's fine
+
+
+discs are cheap but if you're dealing
+
+
+with mobile advertising industry
+
+
+advertising industry this might become a
+
+
+problem down the line so different
+
+
+strategies are employed based on what
+
+
+your business focus is does this answer
+
+
+your question yeah more more or less but
+
+
+maybe precise let's say you are in the
+
+
+advertisement business would you like
+
+
+try to pick a strategy like find a
+
+
+business relevant division strategy like
+
+
+you described in in in Bank or
+
+
+accounting when there is the end of the
+
+
+year
+
+
+would you like put this approach let's
+
+
+ask the business and let's figure out in
+
+
+which business
+
+
+eleven points we could snapshot or just
+
+
+let's find the database that is big
+
+
+enough so I can store all the events
+
+
+forever and discard cheap so you know so
+
+
+well you can go to Amazon they have some
+
+
+cheap discs but from what I know and I
+
+
+used to work in advertising industry but
+
+
+I had by chance so information about
+
+
+campaign is only relevant for the
+
+
+duration and after the campaign itself
+
+
+after you present a report to your
+
+
+customer information about clicksor
+
+
+visits becomes mostly irrelevant for you
+
+
+so you can do log compaction from that
+
+
+point on if you decide to do use event
+
+
+sourcing this kind of business when I
+
+
+was working in it we were not we were
+
+
+using something similar but still
+
+
+different enough to not call it event
+
+
+sourcing so you use Kafka we will be
+
+
+projecting things inside Kafka and we
+
+
+just compacted everything at the end
+
+
+providing report we provided real-time
+
+
+reports for our customers but after the
+
+
+campaign is done you just compact on
+
+
+this campaign and you say okay this is
+
+
+it again depends on the business case so
+
+
+it's up to you to figure out what and
+
+
+how okay so then the time-travelling
+
+
+works till the compaction well the time
+
+
+traveling for this specific campaign
+
+
+works for till compaction yes because
+
+
+once business decides data is really
+
+
+really not relevant anymore because we
+
+
+already got the money for it but again
+
+
+if you're in e-commerce business this is
+
+
+actually a different case you don't do
+
+
+this because even if you want to move
+
+
+those events out of your transactional
+
+
+system because it doesn't scale you can
+
+
+still archive all of those events
+
+
+separately and they can be used to
+
+
+generate reports and you can still gain
+
+
+the benefits it's just moving them out
+
+
+of your transactions any other questions
+
+
+so thank you very much as I have
+
+
+mentioned my name is Ivan partially
+
+
+China found an Internet Society
+
+
+come talk to me with about this because
+
+
+I really love talking about this and
+
+
+thank you for attention

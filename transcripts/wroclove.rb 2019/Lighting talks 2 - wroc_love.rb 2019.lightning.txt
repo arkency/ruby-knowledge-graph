@@ -1,0 +1,1225 @@
+okay so i'm adam and i want to remind
+
+
+android that five minutes of lightning
+
+
+talk our sacred so we can hate me for
+
+
+the next year i'm a ruby developer that
+
+
+for two years
+
+
+works mostly in alex here so i wanted to
+
+
+tell you something about it never mind
+
+
+so in the lecture we have if-else this
+
+
+is cool we also have something like
+
+
+ternary operators so we can write in
+
+
+line if al says we have al sleep oh
+
+
+sorry
+
+
+we do not have else ifs but this is like
+
+
+if-else are some things that Millennials
+
+
+only want we don't really need it oh
+
+
+that's better
+
+
+so you know why do you need if L see if
+
+
+if you can write something like this
+
+
+it's we also have switch cases we've
+
+
+default condition as true so if you
+
+
+don't have default condition it will
+
+
+just fail because in the legs here I
+
+
+don't know if you heard you want to fail
+
+
+very very quickly and the equal sign is
+
+
+not really an assignment operator
+
+
+even if it quacks like a duck it's
+
+
+really a match operator so you can see
+
+
+that it it can match two four four two
+
+
+three in this case but again will fail
+
+
+if you try to match it with anything
+
+
+else and you can see that you have maps
+
+
+which in Ruby you call hashes and you
+
+
+can access some attribute from this map
+
+
+but you also can pattern match it you
+
+
+have arrays not really you don't have
+
+
+arrays because you have lists and the
+
+
+structure you are familiar with with 1
+
+
+comma 2 comma 3 is really just a
+
+
+syntactic sugar in elixir for
+
+
+representation a for the representation
+
+
+where list contains a first element and
+
+
+the rest of the list so we have a head
+
+
+and so we have a head and the tail which
+
+
+you can also patter much so this is
+
+
+irrelevant you can patter much
+
+
+you can patter much an empty list and
+
+
+you can use pattern matching for
+
+
+something more interesting than just
+
+
+assigning to the variable so you have
+
+
+kind of conditionals weave pattern
+
+
+matching where you render some block
+
+
+based on what was matched and what was
+
+
+not matched it would it will also result
+
+
+in an error if something is not matched
+
+
+so this relevant yeah
+
+
+you can also use pattern matching with
+
+
+functions so not only with this
+
+
+condition conditionals but also you can
+
+
+just define multiple functions with the
+
+
+same name and their function will the
+
+
+function that that pattern matches will
+
+
+be evaluated you have guards and the
+
+
+poster tried of elixir is pipe operator
+
+
+where you can pipe the result of one
+
+
+operation to as the first argument to
+
+
+the next function so instead of writing
+
+
+for example this you can use pipelines
+
+
+which I guess is not really interesting
+
+
+for Ruby developers I guess you could
+
+
+write hunky-dory dot reverse dot split
+
+
+up case but never mind
+
+
+yeah so you have code that you can you
+
+
+have some operation that you might want
+
+
+to write with pipelines but it will not
+
+
+work very well it will break on
+
+
+protection so you can just write
+
+
+something like this using pattern
+
+
+matching with cases so kind of similar
+
+
+to the else if this is not really the
+
+
+prettiest solution and we have a whiff
+
+
+statement that this can be refactored to
+
+
+yeah okay thanks good let's go good
+
+
+evening
+
+
+so stay at my computer because so anyway
+
+
+I'm Tomas
+
+
+rails developer and I'm a pro to Rails
+
+
+developer and let me tell you why in a
+
+
+minute but also I need to tell you one
+
+
+more thing
+
+
+I'm not a day-to-day developer let's say
+
+
+well what that means is that in my
+
+
+day-to-day work I I stand on the product
+
+
+side but still firstly some disclaimers
+
+
+if know that this is not a Tech Talk
+
+
+it's also not a business talk to be
+
+
+honest and yes I am fully aware that
+
+
+this is a deaf conference I'm not lost
+
+
+I know where I am I still this this is
+
+
+what is that some diverse offer be a
+
+
+website so I just copy that one day for
+
+
+one definition I'm here to talk about
+
+
+number of organizations so what they are
+
+
+is usually you would think that there
+
+
+are some people at the amnesty
+
+
+international transparency internship or
+
+
+whatever but those are only the big ones
+
+
+they're also small ones and I will not
+
+
+talk about them the ones that two
+
+
+invisible jobs every day I borrowed this
+
+
+slide from from previous talk it's not
+
+
+very visible but you can you can realize
+
+
+it's as PHP or else one one zero real
+
+
+six and so on and so on
+
+
+this real 6-0 MPM PHP when I when I do
+
+
+it a little better PHP with WordPress or
+
+
+Tyler made real sick zero so most of
+
+
+most of the things that you know in
+
+
+profit organizations get is for present
+
+
+days and they spend three hours trying
+
+
+to set it up which if someone helped
+
+
+them with tailor-made application would
+
+
+cost you a couple of hours of your life
+
+
+and they would be super happy with it
+
+
+all right III could tell you I could
+
+
+tell you some vague statement like this
+
+
+behave like a change I did I brought
+
+
+down behave like you want everyone else
+
+
+to behave but there would be two to wake
+
+
+and what to do instead so you probably
+
+
+know already where I'm going but with my
+
+
+talk is in the past years I worked with
+
+
+some organizations and I wrote a couple
+
+
+of rails apps for them it's it's very
+
+
+scary but don't worry because mostly
+
+
+what they need is sunblock in 15 minutes
+
+
+like applications for several of their
+
+
+of their scaffold and rails is good
+
+
+enough for them and I showed the slide
+
+
+before still this is way better for them
+
+
+than having a WordPress today need to
+
+
+maybe also hire someone to to tell it
+
+
+Tyler made it for them but the initial
+
+
+idea of it which they had was the PHP
+
+
+and WordPress is gonna be easy so my
+
+
+advice to all of you is just as they say
+
+
+in an unnamed commercial airline sit
+
+
+back relax and maybe reach out to some
+
+
+of your local community or communities
+
+
+and they don't need to be local just
+
+
+spend some of your time help some
+
+
+fantastic people that are doing
+
+
+invisible jobs perfectly life's easier
+
+
+and if you're if you didn't enjoy this
+
+
+call if you didn't enjoy this talk don't
+
+
+worry this is my cut which is deploying
+
+
+for Capistrano thank you so I wanted to
+
+
+click quickly tell you something about
+
+
+Ruby and elixir interim interoperability
+
+
+but before my name is Adam I'm working
+
+
+at a recruiting company in Poznan I'm a
+
+
+ruby / elixir develop developer or
+
+
+exterior robe it depends so but moving
+
+
+on you may ask why should I bother what
+
+
+is the reason to make elixir and the
+
+
+Ruby cooperate each other let's assume
+
+
+this kind of situation when you building
+
+
+an app in elixir and you want to call
+
+
+some service external web service and
+
+
+elixir is not that major that have a lot
+
+
+of libraries that are wrapping those
+
+
+kind of api's and in the Ruby world
+
+
+probably if you choose a random API in
+
+
+the web I'm there is that there is very
+
+
+probable that you will find the gem for
+
+
+that and this was the case I needed to
+
+
+to connect to JIRA API and I didn't want
+
+
+it to make it from scratch in elixir but
+
+
+of course in the Ruby world there are a
+
+
+lot of gems for that so I was thinking
+
+
+if it's possible to connect those two
+
+
+languages then the answer is sir
+
+
+yes they can cooperate very well
+
+
+actually now I'll try to quickly show
+
+
+you how the thing is that there is a
+
+
+port this is an airline library which is
+
+
+used to run different programming
+
+
+languages into the airlock virtual
+
+
+machine and currently it supports Ruby
+
+
+and Python but actually I am an elixir
+
+
+developer so I don't want to write air
+
+
+lung because it's not that developer
+
+
+friendly as elixir so fortunately I
+
+
+found wrapper for the elixir to to
+
+
+Airlink port
+
+
+and I was able to relatively easily run
+
+
+Ruby code inside Alex here so this is
+
+
+how it's done we are just using this
+
+
+library this wrapper around a DeLong
+
+
+port and we just starting a regular
+
+
+addictive process with this line
+
+
+suggesting where is actually our Ruby
+
+
+code in our project then this this
+
+
+function will return process identifier
+
+
+which is used later on to call actually
+
+
+a ruby code in this case this is a
+
+
+police function with a string argument
+
+
+and it is and then it's returned the
+
+
+result but this is a very simple result
+
+
+the real world example is a little bit
+
+
+more difficult it's I don't know it's
+
+
+visible right now so so let's consider
+
+
+that this is an elixir code and here we
+
+
+are starting a ruby process to call some
+
+
+Ruby functions and here is the correct
+
+
+valid ruby code and this is just code to
+
+
+just authenticate with JIRA API we are
+
+
+calling here this function which is
+
+
+actually here with the arguments passed
+
+
+past here and we have them here it looks
+
+
+nice but there are some caveats some
+
+
+problems with that for instance the one
+
+
+problem is with data structure mapping
+
+
+because they are different they're kind
+
+
+of similar but they're different for
+
+
+instance this is a how air long data
+
+
+type types Maps
+
+
+Ruby types if we are operating on the
+
+
+simple data type like integers floats
+
+
+strings it's okay but if we are doing
+
+
+something with maps keyword lists maps
+
+
+are kind of hashes in the Ruby world and
+
+
+then we have a kind of problem but
+
+
+that's solved with the library for
+
+
+instance if we want to return a tuple in
+
+
+Ruby we can do just like that
+
+
+so this problem was solved but I've
+
+
+faced a different problem because ruby
+
+
+is an object-oriented language so if we
+
+
+create an object here to connect the ER
+
+
+client then return something and then we
+
+
+we are closing here the process in
+
+
+Erlang that was run a ruby code we just
+
+
+lost this this object so in order to not
+
+
+authenticate with the same credentials
+
+
+each time when I want to make a call to
+
+
+a external API I just solve this problem
+
+
+probably it's not the best but it works
+
+
+- just - just serialize those objects
+
+
+and then I can receive it here in the
+
+
+and the elixir environment turned into
+
+
+some sort of beauty JWT token and return
+
+
+yeah and actually that's all it works
+
+
+really good and I recommend trying it
+
+
+thanks okay we can start so I don't know
+
+
+what this talk about I just wanted to
+
+
+check how many things about different
+
+
+topics I can stick into five minutes so
+
+
+I should start already probably so I
+
+
+have five things to say
+
+
+one will be about people hides him
+
+
+because he can save 60 euros prayer
+
+
+second one will be why Ruby is not that
+
+
+field one will be thank you for one will
+
+
+be please help and 5/5 one will be well
+
+
+we will see if I have some time so
+
+
+people hides him he found why 260 euros
+
+
+per year just by having fun so I will
+
+
+just read it will be faster six years
+
+
+ago with three friends we went to drug
+
+
+camp where we meet Andrey who told me
+
+
+that we should come to the rostra but I
+
+
+said I won't be able to buy tickets
+
+
+probably because of how fast they are
+
+
+salt so he told me to help them organize
+
+
+conference which sounded like his worst
+
+
+most insane idea and because I'm from
+
+
+the waist up which is like 700
+
+
+kilometers from here but after a few
+
+
+days and few talks with Andrey about
+
+
+some board games I realized that
+
+
+organizing conference is sending few
+
+
+emails or making few calls so I didn't
+
+
+don't need to be there so I started to
+
+
+organize t-shirts after parties and so
+
+
+on since then I'm always in charge of
+
+
+before after funeral parties in pubs or
+
+
+clubs that I never been before and I
+
+
+never have to buy a ticket so there is
+
+
+60 euros per year while Ruby is not dead
+
+
+ok I have no time guys the this question
+
+
+is not about Ruby language at all
+
+
+it's always about our community if
+
+
+client is asking you if Ruby is dead he
+
+
+is wondering if he can mike develop get
+
+
+developers when you live so he's really
+
+
+caring about community not about
+
+
+language at least I feel like that so
+
+
+it's about how good are we into
+
+
+convincing more developers to use our
+
+
+language that have no issues at all and
+
+
+so far after it was rough I feel like
+
+
+super enthusiastic about what is the
+
+
+shape of our community I don't mention
+
+
+the language at all okay thank you I
+
+
+wanted to say thank you for all you
+
+
+people that are involved in this
+
+
+community not only speakers organizers
+
+
+supporters but mostly for people that
+
+
+are enjoying all the climate with me the
+
+
+people I can speak with in the after
+
+
+parties and the people who are there to
+
+
+be part of it and I am talking to all of
+
+
+you guys and in particularly of course
+
+
+our organization is ators all the
+
+
+sponsors that we have on our web page
+
+
+sorry I can try maybe
+
+
+[Music]
+
+
+not there okay yeah yeah you have them
+
+
+there okay
+
+
+and also guys who are with us here by
+
+
+year and always be like a part of
+
+
+community nico that is always playing
+
+
+for us normal that is trying to convince
+
+
+us to closure so we feel like we are
+
+
+important because he came here to
+
+
+convince us for something I don't know
+
+
+why both drums are brothers I don't know
+
+
+if I pronounced it correctly but they
+
+
+are always giving car lightning talks
+
+
+and one of them never can win book I
+
+
+give fingers crossed for you today but
+
+
+don't have big hopes again
+
+
+yeah and I lost okay I mean okay okay
+
+
+okay
+
+
+so yeah you you or feel like I would say
+
+
+thank you to all of you yeah okay good
+
+
+we can go further okay
+
+
+please help us I mean help us organize
+
+
+next also Furby it's really joyful you
+
+
+can save 60 euros I don't know what else
+
+
+I could add and I have I don't know how
+
+
+much time but it's me how which I met at
+
+
+the do come there no maybe it's better
+
+
+so how not to meet new people on the
+
+
+drug camp me how I still my good friend
+
+
+so I hope it won't be angry that I spoke
+
+
+about that but I consider it really
+
+
+funny so since I still have time I just
+
+
+wanted to tell you a story about the
+
+
+strangest way to get new friends in
+
+
+greetings mijo and also how I made whole
+
+
+the drug crew so when we arrived to the
+
+
+duck comfit was already 2 a.m. but some
+
+
+of the folks who still up because they
+
+
+are nice community and we're waiting for
+
+
+us even though we were already 4 hours
+
+
+later it's because my driver had to
+
+
+deploy a few hot fixes during the trip
+
+
+so you had to make stops on random
+
+
+parkings where we are he was like
+
+
+looking for Altair
+
+
+typing on the other hand so that took
+
+
+sus some time so one of the guys who
+
+
+were waiting for us in the drug camp
+
+
+told us where we were supposed to sleep
+
+
+but only two of us had our own beds and
+
+
+four of us of course that would be me
+
+
+because of the rest guys agreed that I
+
+
+deserved that
+
+
+greetings Audion it's gonna be different
+
+
+and then yesterday a little bit I
+
+
+wouldn't want to do lightning talk twice
+
+
+but somebody asked me to play like
+
+
+ending soundtrack or something of the
+
+
+conference but I'd like to involve you a
+
+
+little bit if you're okay with that
+
+
+do you like singing yes yes no okay so
+
+
+if you don't like singing you can like
+
+
+maybe keep a rhythm or do something but
+
+
+if everybody can make some kind of noise
+
+
+that would be nice so I'll start with a
+
+
+little melody that maybe everybody knows
+
+
+and you can sing that or anything else
+
+
+with any words you want and if you can
+
+
+sing loud it's better but as you wish
+
+
+okay we'll try there yeah you're in this
+
+
+yes I can see I'm also a bit tired so
+
+
+that's why I'd like to have some help
+
+
+thank you
+
+
+I'm not gonna code the whole song just
+
+
+the four first nerds okay so you can
+
+
+start now or whenever you feel like it I
+
+
+can't hear you
+
+
+[Music]
+
+
+[Music]
+
+
+[Music]
+
+
+you can't really sing anything you like
+
+
+[Music]
+
+
+come on come on come on
+
+
+[Music]
+
+
+[Applause]
+
+
+[Music]
+
+
+[Music]
+
+
+[Music]
+
+
+[Music]
+
+
+[Music]
+
+
+you
+
+
+[Music]
+
+
+[Applause]

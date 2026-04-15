@@ -1,0 +1,1351 @@
+maybe let's start with serious question
+
+
+jQuery or prototype okay
+
+
+none of it because you don't have to
+
+
+anymore
+
+
+so why okay some toolsets
+
+
+still uses under the hood but due to the
+
+
+changes in the browsers you have for
+
+
+example query selectors or other rapid
+
+
+changes we can get rid of this redundant
+
+
+I would save thirty five kilobytes of
+
+
+code from our build size so if you can
+
+
+have lower build size why you should
+
+
+bother with it as for the question
+
+
+whether we should use jQuery or
+
+
+prototype I think we should use funny
+
+
+address it's the best yeah that's my
+
+
+opinion
+
+
+that's rather let's go with that which
+
+
+fads idea stood the test of time in
+
+
+JavaScript which current fats are likely
+
+
+to stay as well if statement maybe I
+
+
+have one the one thing I think is
+
+
+getting traction in terms of the modern
+
+
+J's is the CSS in J's
+
+
+up until now I often seen it described
+
+
+as a bad pattern but recently almost all
+
+
+the modern libraries use it and it
+
+
+resolves a lot of problems we always had
+
+
+with the CSS for example it is a lot
+
+
+more maintainable if you have a
+
+
+component based architecture because you
+
+
+if you get got rid of some component or
+
+
+some leaf with certain class you would
+
+
+have from now on a search for the
+
+
+references in the CSS for for this class
+
+
+um all of your CSS files which was
+
+
+always a problem and so it improves in
+
+
+maintainability and the second thing is
+
+
+it also reduces the your bundle size
+
+
+which you are which are having on your
+
+
+website so I think that's one way one
+
+
+thing that that it's good to have Noah
+
+
+days can say as always the things that
+
+
+started a few years ago and are still
+
+
+here
+
+
+I mean tools are the best option in our
+
+
+case so probably you know what I am
+
+
+referring to
+
+
+no no angular amber yeah to build your
+
+
+SP a up so there are many tools that
+
+
+lose attraction during those days
+
+
+especially in joyous environment where
+
+
+actually the changes are pretty rapid
+
+
+lately if you are looking for some LTS
+
+
+solution then you should look for tools
+
+
+that doesn't change us often I would say
+
+
+it's easier to maintain also this is
+
+
+Ruby conference right so I would pick
+
+
+the solution that much to the our
+
+
+mindset already and in that case there
+
+
+are frame there frameworks that took the
+
+
+whole ideas from the rails community
+
+
+because at the beginning Kokoda start
+
+
+the amber yeah maybe another thing would
+
+
+be a reactive programming which
+
+
+from what I heard of is common for both
+
+
+react with mobiles and the amber I think
+
+
+that thinking in a way that your virtual
+
+
+dome is the is based on your state and
+
+
+you just write the state right it's
+
+
+actions and it is observable and the
+
+
+virtual Dom and all what user sees is
+
+
+reflecting this state and it update us
+
+
+you don't have to think when and how to
+
+
+update certain components it is just
+
+
+made based on your best based on your
+
+
+state because I think that if we know
+
+
+that the state is reflecting that your
+
+
+veto atom is reflective in your state
+
+
+then we can derive how it should look
+
+
+right in the exact moment right from the
+
+
+state we don't have to think about it it
+
+
+should just happen and I think the both
+
+
+mobiles and amber just to dust that and
+
+
+that's a great thing especially that all
+
+
+of us probably or some of us doesn't
+
+
+like Jess probably at the first I know
+
+
+when you see it for the first time so
+
+
+it's quite common but the best code that
+
+
+you have is no code because you don't
+
+
+have to maintain that you don't have to
+
+
+test that part of the code and if you
+
+
+have some convention that those two
+
+
+tools offer for instance then in case of
+
+
+any API changes probably you will have
+
+
+few place to just do some minor updates
+
+
+as far as I know
+
+
+radix has quite opposite approach so you
+
+
+have to produce a lot of code to parse
+
+
+the data usually it's end ups with
+
+
+but design on the backhand side as well
+
+
+because people have tendency to do a lot
+
+
+of custom code there which they
+
+
+shouldn't because they're already well
+
+
+no standards so why you should bother
+
+
+with some custom and why you should
+
+
+design stuff that works for big players
+
+
+already yeah so convention works the
+
+
+best and yeah exactly and this is the
+
+
+main principle that if you follow then
+
+
+you don't have to code much and it just
+
+
+works and you can focus on business
+
+
+domain or improvement you know in other
+
+
+areas so your customers are pretty happy
+
+
+of that so win-win situation yeah okay
+
+
+so maybe mmm we all be exclusively
+
+
+JavaScript developers in two years what
+
+
+are your opinions on that okay so maybe
+
+
+I'll start I think there's a difference
+
+
+here I think in them if we think about
+
+
+the backend the node.js isn't I think it
+
+
+is not the primary option in many
+
+
+companies and I think some of the some
+
+
+of the things is well most of the things
+
+
+is better in another languages for
+
+
+example in the our race framework it is
+
+
+a lot better for prototyping for quickly
+
+
+double quick development for example if
+
+
+you want to go for the if you have if
+
+
+you want to do some heavy lifting and
+
+
+you need something very very fast then
+
+
+you will go for a week zero because why
+
+
+not and I think nodejs in as as a
+
+
+back-end solution is having too many
+
+
+competition - - for that statement but
+
+
+given that we have
+
+
+the front end which is still dependent
+
+
+on the JavaScript that it will be
+
+
+dependent on javascript for the next two
+
+
+years and more the I think in that
+
+
+manner yes I think there is a huge
+
+
+chance in webassembly but I'm not sure
+
+
+if this is gonna happen next year but
+
+
+whenever the garbage collect and support
+
+
+and the ability to host objects between
+
+
+from different languages directly in the
+
+
+JavaScript browser engine runtime then
+
+
+it could be actually much more easier to
+
+
+make isomorphic application in different
+
+
+languages so where you could just write
+
+
+either Ruby or rust or C++ or Python
+
+
+code and run the output directly in the
+
+
+browser but actually going with all the
+
+
+all the libraries written somewhere else
+
+
+I would say it is also a question about
+
+
+what we want to do because we are here
+
+
+because which is Ruby and it's not the
+
+
+most common choice I would say but still
+
+
+even if there are some some says that
+
+
+Ruby is dead or other expressions that
+
+
+we are still here because we can
+
+
+convince our customers to pick that
+
+
+solution or pick us and we can provide
+
+
+the solution for our business partners
+
+
+and I think that if we will find the
+
+
+right argument or reasons to convince
+
+
+our customers to use
+
+
+I don't know Ruby elixir whatever Jas
+
+
+then we will just work in that and as
+
+
+all knows the job situation right now is
+
+
+pretty optimistic for us so nobody will
+
+
+be forced to do so I think in next few
+
+
+years so do what you want to do do what
+
+
+you like coding what you like also you
+
+
+have transpilers so you don't have to
+
+
+worry about JavaScript as much I would
+
+
+say because someone asked about opal hi
+
+
+solder there are many other solutions
+
+
+like that so I don't see any chance that
+
+
+it will break other language markets I
+
+
+would say is so rapidly okay so you
+
+
+think that opal can be treated as a real
+
+
+production technology mmm
+
+
+I haven't played with opal flora for
+
+
+like two years so maybe I won't say
+
+
+about the current version maybe it is a
+
+
+production ready or not but I will say
+
+
+something say about some other things
+
+
+about opal I think it missed its
+
+
+opportunity when the race has gone the
+
+
+web Parker ACMA script way and opal
+
+
+could gain a traction if it would be the
+
+
+primary way of writing the front-end
+
+
+code in the rise application - that
+
+
+would make Appa very famous and yeah it
+
+
+would boost it efficiently but given
+
+
+that the race went the other way
+
+
+given that the Appa weren't picked as
+
+
+the as the primary frontal rod for the
+
+
+rise I think it will it's proper
+
+
+popularity will decrease in time but
+
+
+we'll see okay so javascript finally
+
+
+died as development platform becoming a
+
+
+compilation target for a better language
+
+
+is like Allen pure script closure script
+
+
+maybe even typescript at least from what
+
+
+I know it's possible from years by now
+
+
+so you can write your code in typescript
+
+
+get all the fancy stuff from there and
+
+
+have as an output plane jet plane guess
+
+
+so
+
+
+it's it's more about your opinion right
+
+
+on the topic do you think that it will
+
+
+replace JavaScript I think that there
+
+
+will be like transition where library
+
+
+creators will mainly use the vanilla J's
+
+
+and normal people will just use all
+
+
+those tools to boost their performance
+
+
+as a developers basically so eventually
+
+
+yes maybe I would say that JavaScript
+
+
+will not die but it will became over the
+
+
+time only as a compilation result as it
+
+
+would said was that in this question
+
+
+well I also think that there is a huge
+
+
+chance that it will be much less
+
+
+important in in the next few years but
+
+
+it's really so much tied to the document
+
+
+object model and the whole way how we
+
+
+are actually interacting with the with
+
+
+the webpage that it may actually stay
+
+
+forever what will be J's developer's
+
+
+dream in one year from now what
+
+
+frameworks concepts will be a oh so cool
+
+
+let's do it
+
+
+for me on the features that comes to
+
+
+tc39 aspects that are there I saw for
+
+
+instance pipeline operator class
+
+
+modifiers stuff like that and they have
+
+
+some stages right now they try to
+
+
+implement that they also the guy from
+
+
+Babel try to support us as much as
+
+
+possible as fast as possible and
+
+
+encourage people to contribute to that
+
+
+project so those features will be
+
+
+available sooner from color perspective
+
+
+I would say not from native support yet
+
+
+they will be
+
+
+emulated but yeah I lost my point sir
+
+
+I would say that I would also support
+
+
+that that the reactive programming will
+
+
+be the gaining traction in next year's
+
+
+but apart from that I see a huge shift
+
+
+towards the progressive web applications
+
+
+you've given the little steps like like
+
+
+being able to read manifest.json in
+
+
+safari and things like more and more
+
+
+applications appearing as as a native
+
+
+app native applications using the
+
+
+electron or things like that I think
+
+
+will shift towards the offline
+
+
+applications using the using our tools
+
+
+and it will give us a ton of more
+
+
+opportunities but also ton of more
+
+
+problems to solve and that's neat I
+
+
+think also Microsoft invests a lot of
+
+
+money right now and they already claim
+
+
+that there will be much more PWA support
+
+
+in the next release ism of Windows so
+
+
+theoretically they want to kill
+
+
+partially the.net environment in favor
+
+
+of probably typescript and PWA yeah I
+
+
+think that they they're promoting
+
+
+typescript so maybe think between Rails
+
+
+and JavaScript what do you think about
+
+
+standardized API is format like JSON
+
+
+appear or graph QL they have what are
+
+
+your experiences in providing data for
+
+
+the apps and you recommend
+
+
+maybe I will say something about the
+
+
+JSON API behalf because I had a lot of
+
+
+experience with that and to be honest I
+
+
+hate it
+
+
+yes in in in the basics of the JSON IP
+
+
+is very humble and and there are tons of
+
+
+things to like but things like no
+
+
+standard for the file uploads or the
+
+
+problem with the libraries which are not
+
+
+especially the right way I'm talking
+
+
+especially about JSON API rest resources
+
+
+which is I think the commonly used the
+
+
+gem for using their JSON API in the race
+
+
+applications but I used it and I didn't
+
+
+like it at that much and I think the
+
+
+JSON API can be a decent choice but
+
+
+sticking with it religiously it's a bad
+
+
+idea I think having using the JSON API
+
+
+with your own exceptions which you are
+
+
+which you establish in your own company
+
+
+I think that's a good choice and that's
+
+
+how we approach the problem in our
+
+
+company lightly the creator of Jason APA
+
+
+resources also the guy who is really
+
+
+active as a contributor to JSON API spec
+
+
+presents like five days ago on ember
+
+
+conf or at present the operations which
+
+
+will basically solve a lot of issues
+
+
+like uploaders like bunch operations
+
+
+and other stuff that at the moment we
+
+
+usually use some custom solutions or
+
+
+custom end points which we shouldn't use
+
+
+so there is a hope and they have a
+
+
+different approach right now because at
+
+
+the beginning they want to establish the
+
+
+API so much that they basically stopped
+
+
+in in some moments and now they will
+
+
+work as a plugins sort of way
+
+
+so those features will be optional it
+
+
+will be in the spec but it's up to you
+
+
+to use it or not and just an API already
+
+
+one of the pull requests that we made
+
+
+custom actions on written API resources
+
+
+there was a struggle with creators
+
+
+because they know that they will they
+
+
+want to introduce operations already so
+
+
+unfortunately we spend a lot of time on
+
+
+that they didn't merge it and probably
+
+
+they want but there is a hope they will
+
+
+do it better so I'm waiting for that
+
+
+we'll see
+
+
+and back to your question should you
+
+
+ever consider not following the API or
+
+
+API standards or which one you should
+
+
+follow I think it's also a matter of use
+
+
+case so for instance graph QL has some
+
+
+much better use cases where Jason API
+
+
+basically sucks
+
+
+so you should always be open-minded when
+
+
+you choose the solution not stick to the
+
+
+one solution the the right one because
+
+
+there are none but definitely if you
+
+
+want to grow your team and you don't
+
+
+want to provide too much documentation
+
+
+because there is specification so it's
+
+
+sort of a documentation already then
+
+
+when you follow the standards your team
+
+
+will instantly go on go to the project
+
+
+and know what it does
+
+
+so why you should bother with some
+
+
+custom stuff okay thanks
+
+
+what about stimulus have you heard of it
+
+
+an experienced one heard of it someone
+
+
+asks probably is it that the that
+
+
+library that dh8 promoted for like 3 s
+
+
+with HTML generated from rails yeah
+
+
+that's all I know about it so no what
+
+
+about type scripts and or flow would you
+
+
+recommend using it or not to be honest I
+
+
+didn't he used dice type scripts yest
+
+
+yet but I think I'll give it a chance in
+
+
+the next project because I was looking
+
+
+at that and I liked most of the ideas
+
+
+that are there well I I definitely
+
+
+recommend both types typescript and flow
+
+
+because they are a huge forward step in
+
+
+the in actually making the the project's
+
+
+maintain able and handling them on the
+
+
+bigger scale in refactoring and and
+
+
+finding the bugs
+
+
+directly during the process of building
+
+
+the software also you get some output
+
+
+some feedback from your code even before
+
+
+the runtime so still you save some time
+
+
+there are extra checks because of those
+
+
+types yeah for me great option I highly
+
+
+recommend and I try to enforce as many
+
+
+people as I can during our local amber
+
+
+meetups to use typescript
+
+
+there is a really huge effort from
+
+
+Microsoft to actually make that
+
+
+technology tied to the current
+
+
+JavaScript ecosystem out of box weather
+
+
+biggest advantages of their web assembly
+
+
+I think the ability to actually run the
+
+
+code after first bytes of being it
+
+
+loaded I mean being able to interpret
+
+
+the codes after loading the first byte
+
+
+of the module of the function that
+
+
+you're you're implementing so if you
+
+
+have a ability to shake down your coat
+
+
+and your modules and load only the parts
+
+
+that you really need on the webpage it
+
+
+doesn't have to be like seconds before
+
+
+you start actually parsing the code and
+
+
+enter interpreting it so it's a huge
+
+
+performance boost for for the for the
+
+
+runtime
+
+
+I can also add something about that
+
+
+because again at the latest
+
+
+amber come via Hooda came up to the
+
+
+stage and he said that Microsoft asked
+
+
+him to do something with LinkedIn
+
+
+because right now the linking was
+
+
+rewritten to Amber and and as we now
+
+
+LinkedIn belongs to Microsoft and he
+
+
+sits in his garage for a few months now
+
+
+that's what he said more or less because
+
+
+he didn't want to show anything anyone
+
+
+results of his work and because he's so
+
+
+hyped with rust lately when he heard
+
+
+that he can compile rust to webassembly
+
+
+basically he rewrite the core part of
+
+
+the amber which is glimmer render engine
+
+
+to rust and compile to web assembly and
+
+
+they did a little experiment for now
+
+
+it's an experiment because it's not
+
+
+released not fully stable yet
+
+
+were basically what they want to achieve
+
+
+the they want to decrease the load size
+
+
+of the LinkedIn page for the first time
+
+
+because it's pretty heavy and they
+
+
+rewrite the whole main page with all the
+
+
+compliments all the data processing to
+
+
+pre-act because from their test that
+
+
+time it was the fastest solution for the
+
+
+first time when we run the up and also
+
+
+they built it in amber of course amber
+
+
+lost the first battle but then when he
+
+
+basically did the whole experiment with
+
+
+webassembly it ends up with 0.3 or 0.5
+
+
+better loading time initial loading time
+
+
+of the app so he I just referenced
+
+
+rewards basically it works and yeah that
+
+
+will be another way to go so sooner or
+
+
+later our tools will allow us to use
+
+
+more and more web assembly as an output
+
+
+I'm wondering whether the Microsoft will
+
+
+be came from the bad guy from the web
+
+
+developer perspective will become a good
+
+
+guy hearing that they promote typescript
+
+
+they are rebuilding the LinkedIn using
+
+
+the amber and they are using Mobile's
+
+
+for the day their new outlook so that
+
+
+I'm wondering who whether it will become
+
+
+like that in the next years I think that
+
+
+this India guy changed a lot
+
+
+they're basically Ballmer did it work
+
+
+okay
+
+
+are there any other questions or
+
+
+comments
+
+
+really
+
+
+last chance okay so thank you

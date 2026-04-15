@@ -1,0 +1,3196 @@
+okay so maybe let's start our panel
+
+
+about enterprise rails please meet the
+
+
+expert Nitin hello from event eat Andre
+
+
+from race event store and Nick from
+
+
+trailblazer so there are a few questions
+
+
+you can still add more questions to the
+
+
+gist
+
+
+so I will try to ask them the first
+
+
+question is what are the worst things
+
+
+that can happen in enterprise rails kind
+
+
+of projects and how to protect from them
+
+
+I mean you're the expert right you
+
+
+running a company so the worst thing
+
+
+that's gonna happen is that you no
+
+
+longer earn money and that's a result of
+
+
+not being able to maintain the system or
+
+
+keep it stable or keep it running and I
+
+
+think that by definition enterprise
+
+
+rails means something like when the
+
+
+application starts making money as as
+
+
+opposed to the startups for example and
+
+
+when you have complicated business
+
+
+processes and you need to like maintain
+
+
+them in the longer run usually you have
+
+
+more programmers in those systems I
+
+
+think when you when you lose control
+
+
+over the codebase question but what is
+
+
+enterprise whereas I wonder like what's
+
+
+the definition of an enterprise rails
+
+
+application and those words go
+
+
+hand-in-hand
+
+
+I'm sure there's precise definition but
+
+
+I would say like once your company has
+
+
+you know departments and stuff like that
+
+
+and your application is heavily use it
+
+
+doesn't mean that you have to need that
+
+
+you need to have many users it's just
+
+
+now people are using it and it's like
+
+
+various your organization becomes more
+
+
+structured or
+
+
+so like might be successful applications
+
+
+well I think like whenever I started at
+
+
+the beginning and there was this big
+
+
+thing in the community that we are anti
+
+
+enterprise that was like what djh was
+
+
+always saying there was basically like
+
+
+trying to be Punk but he chose the wrong
+
+
+word because enterprise software I
+
+
+looked it up on Wikipedia actually to
+
+
+prepare for this panel if he appears
+
+
+like a webpage on the internet like I
+
+
+don't know if you know it and enterprise
+
+
+software means it's a software for more
+
+
+than one person that's literally what it
+
+
+says on Wikipedia in the intro you know
+
+
+anybody can edit Wikipedia right but
+
+
+it's democracy hello yeah you're from
+
+
+America you probably it's : why do you
+
+
+think it got out and came here I'll say
+
+
+the worst thing that can happen if
+
+
+you're doing rails and and and also
+
+
+enterprise software is active record
+
+
+that's a good point what's active record
+
+
+Oh what isn't active record I think it's
+
+
+a better question yeah so the I think
+
+
+the the the general question we are
+
+
+addressing is enterprise rails means
+
+
+you're using rails in a professional
+
+
+environment you want to have software
+
+
+that is maintainable running that is fun
+
+
+to work with I mean I'm enjoying my job
+
+
+I'm sorry and the problem is that
+
+
+certain frameworks I'm not saying any
+
+
+names here right now uh-huh
+
+
+kind of hard to deal with after a
+
+
+certain amount of complexities edit and
+
+
+active record for example is it good is
+
+
+it good is a good word because it's not
+
+
+making it simple to to add features
+
+
+without breaking other stuff yeah
+
+
+specifically I think when you don't
+
+
+partition your system and you arrive at
+
+
+the kind of complexity that is always
+
+
+there in enterprise systems and if you
+
+
+haven't partitioned and everything's in
+
+
+one giant place and one
+
+
+giant universe then everything slows
+
+
+down it becomes hard to make changes
+
+
+becomes hard to understand what's going
+
+
+on to read the code when you want to
+
+
+make a change in one place you have to
+
+
+go make corresponding changes everywhere
+
+
+you have to do data migrations and data
+
+
+cleanup which is actually not what I
+
+
+mean enterprise in my understanding is
+
+
+besides the Wikipedia definition it's
+
+
+like am i make a build a system that is
+
+
+maintainable yeah and so so I'm
+
+
+struggling with rails like a railway
+
+
+system and maintainability in the same
+
+
+context because it's really hard to
+
+
+maintain a rail system no offense once
+
+
+he's good
+
+
+what is it gets big once it gets complex
+
+
+but that's I mean enterprise means you
+
+
+are successful that means you have more
+
+
+than one page showing a coffee shop in
+
+
+you have more than 100 active records
+
+
+and you have 100 that's nothing man I'd
+
+
+seen 700 yes what I was I mean I think
+
+
+the panel is about there is enterprise
+
+
+rails applications I mean there's lots
+
+
+of applications that make a lot of money
+
+
+and they have lots of users the point is
+
+
+where are we or I'm asking that do the
+
+
+experts from Poland in America I'm
+
+
+asking where are we in there in the
+
+
+rails community like because I mean
+
+
+let's ignore that we were rejecting
+
+
+enterprise and all this stuff I mean we
+
+
+are all writing enterprise software hey
+
+
+everyone he's writing enterprise
+
+
+software right because you were at
+
+
+software for more than one lecture
+
+
+developers here oh yeah I think it's a
+
+
+good start of the discussion like where
+
+
+are we right now is community and I
+
+
+think the idea behind this panel was
+
+
+also to bring together people who who
+
+
+are responsible for some of the tooling
+
+
+around this as well because I think
+
+
+Trailblazer is already here in the
+
+
+community for quite a while I think it's
+
+
+popular because you are popular I'm kind
+
+
+of responsible for race events tour
+
+
+five years ago he said I smell because
+
+
+those three beers ago and Nathan is
+
+
+responsible for Eventide yes Houston is
+
+
+a project by the way oh really
+
+
+yeah you didn't know you never told me
+
+
+because you never got me he forgot he he
+
+
+even came to my hometown and didn't even
+
+
+call me or hit me up on Twitter yeah
+
+
+that's that's the Ruby community you
+
+
+know like you you meet people you forget
+
+
+about that it's not how I work Lee and I
+
+
+have feelings I think we got to the
+
+
+point where we have to link I think that
+
+
+was my point
+
+
+I think the tooling is it's getting more
+
+
+and more stable so it's not only that
+
+
+rails is stable and mature and so on but
+
+
+also the tooling for I don't know a
+
+
+higher level architectures or some
+
+
+additional stuff however we want to call
+
+
+what we do and for example with rails
+
+
+even story it was a long time we were
+
+
+discussing whether we should do
+
+
+something about race even store whether
+
+
+such tools should exist then we decided
+
+
+it's a good idea and you know it things
+
+
+started to happen around this we have
+
+
+now some github repository some gems
+
+
+around it trade weather is very active
+
+
+event right is also super interesting in
+
+
+terms of you know event-driven
+
+
+approaches so I think we got to the
+
+
+point where now people experiment with
+
+
+those tools right how many of you
+
+
+experimented with at least one of the
+
+
+tools here so that's good to hear and
+
+
+probably probably there's still some
+
+
+things that don't work and can be fixed
+
+
+especially with straight laser but but
+
+
+it would be nice it would be nice to get
+
+
+some idea what some questions around it
+
+
+like when would you like to introduce
+
+
+such to link in your code base because
+
+
+the alternative is also now go without
+
+
+such tooling maybe you won't prefer to
+
+
+build your own or you know build some
+
+
+other structure I think I don't know if
+
+
+it's a problem at that what we have
+
+
+right now is like there's some companies
+
+
+using you know the pure rails way
+
+
+let's don't discuss this then there are
+
+
+lots of companies who building their own
+
+
+like tooling and then there is companies
+
+
+using tools that we have like event res
+
+
+event store event ID tribes' all this
+
+
+kind of stuff dry Abby and I think
+
+
+Enterprise means that you use tools that
+
+
+are available you know I mean I'm just
+
+
+looking at Java or something and like
+
+
+they have tools for everything and they
+
+
+are kind of standout and I think
+
+
+enterprise means that's my understanding
+
+
+you use existing tools instead of
+
+
+rebuilding everything all the time so
+
+
+yeah I mean your question aims at that
+
+
+but this is my interpretation of how we
+
+
+get Ruby to the next level is to use or
+
+
+reuse tools that are there instead of
+
+
+like because the the the most companies
+
+
+just rebuilt stuff you know like
+
+
+half-assed pardon my french
+
+
+and they they rebuild stuff we have and
+
+
+so we kind of lose the idea of what is a
+
+
+pattern and what is a good abstraction
+
+
+what is an interface for this and that
+
+
+pattern because we always build yeah I
+
+
+got a service object yeah I got view
+
+
+objects yeah I got form objects but they
+
+
+all have different API so I think
+
+
+enterprise would mean we use a
+
+
+standardized form object for example so
+
+
+um and and that the the problem is that
+
+
+Ruby is saying it's a problem it's not a
+
+
+problem to put the the thing is that
+
+
+Ruby allows you to do things in a
+
+
+hundred different ways and we do it so
+
+
+there's no standards basically so which
+
+
+is why you have to ask who is using
+
+
+event ID for example yeah I think
+
+
+there's another point here too which is
+
+
+these enterprise systems if you think
+
+
+about a bank or a healthcare company
+
+
+what you find is that it's very very
+
+
+irregular or abnormal for one of these
+
+
+large-scale systems to be doing
+
+
+everything in a web request response
+
+
+context but when we build when we when
+
+
+we start a company and we build a web
+
+
+app with rails we're kind of putting
+
+
+everything in this route web request
+
+
+response cycle and I think that there's
+
+
+a transition that happens when you stop
+
+
+looking at your work as web development
+
+
+and you start looking at as software
+
+
+development with some web sometimes for
+
+
+the front end and I think that if we
+
+
+want to have
+
+
+we won't have to have Ruby be a vibrant
+
+
+community for all kinds of software
+
+
+development then I think that we have to
+
+
+sort of wean ourselves off of this
+
+
+fixation on the web and start and start
+
+
+focusing on software in a more general
+
+
+fashion very cute guys so there's one
+
+
+question I think which is close to this
+
+
+discussion
+
+
+right now like right by default comes
+
+
+with MVC right is it enough for
+
+
+successful enterprise app or not enough
+
+
+I would say it's not enough and it was
+
+
+always alive about the MVC pattern it it
+
+
+was never true MVC pattern on the back
+
+
+end and I like I would agree with what
+
+
+you said is one of the definition of
+
+
+enterprise I would say it's like it's
+
+
+not only a web application anymore and
+
+
+can you decouple the rails layer from
+
+
+your application can you use your
+
+
+application like outside of the web
+
+
+environment everything like for example
+
+
+with rails even store that's kind of to
+
+
+help you separate your application from
+
+
+rails rails because it's
+
+
+serving customer needs a more complex
+
+
+way then you stopping getting funding
+
+
+you are independent then you are an
+
+
+enterprise a matter of fact not like if
+
+
+you have my point or not about when your
+
+
+company start stop to be like so the but
+
+
+you're not saying that I mean using
+
+
+different languages or something for the
+
+
+different components and the environment
+
+
+is doesn't say anything about the okay
+
+
+no I mean from a generic point of view
+
+
+the more you split your I mean I'm not
+
+
+saying hey let's have 500 micro services
+
+
+because it sucks but I think the more
+
+
+you split your application to different
+
+
+parts the more Enterprise you are
+
+
+because it means you are thinking about
+
+
+architecture interfaces what is going
+
+
+where who shouldn't be knowing about
+
+
+responsibilities can I be the first
+
+
+person to say bounded context DDD yeah
+
+
+considering enterprise projects are big
+
+
+does it requires application to be
+
+
+distributed or does majestic monolith is
+
+
+still reasonable according to the edge
+
+
+edge sorry it's very hard it's very
+
+
+difficult at the two to grow a complex
+
+
+software system in a single process
+
+
+boundary and the minute that you
+
+
+introduce process boundaries whether
+
+
+it's threads or UNIX tile operating
+
+
+system processes or independent docker
+
+
+containers or micro services whatever
+
+
+your your physical topology is you're
+
+
+going to you're going to encounter
+
+
+distributed systems problems and you're
+
+
+gonna need to be ready for them so
+
+
+there's no way around it I would love to
+
+
+not have to worry about things like
+
+
+idempotence and concurrency but they
+
+
+have to be understood and the best that
+
+
+we can do is provide tooling that gives
+
+
+people the right controls to be able to
+
+
+implement safe and robust distributed
+
+
+systems that always work and work just
+
+
+as well as a simple fizzbuzz program in
+
+
+once Christian I'm afraid to say I'm not
+
+
+talking about elixir and in fact that
+
+
+would challenge you to say if you need
+
+
+something like a lick sir
+
+
+to achieve disturb us distributed
+
+
+systems then you're not actually
+
+
+understanding how distributed systems
+
+
+work you're following patterns for an
+
+
+ecosystem that was designed for
+
+
+distributed systems and one of the
+
+
+things that we want for event ID is we
+
+
+never want to turn event ID into the
+
+
+rails for distributed messaging or
+
+
+distributed systems because then people
+
+
+won't understand how the fundamental
+
+
+physics underneath works and it will
+
+
+always bite them so I think in in fact
+
+
+we can't look to tools to solve
+
+
+distributed systems problems for us we
+
+
+can we can look to them to help inside
+
+
+makes it makes distributed systems
+
+
+easier basically right by design it it
+
+
+doesn't allow somebody who's incapable
+
+
+of building distributed systems that are
+
+
+robust able to do so it is it is the
+
+
+tooling that someone who is already in
+
+
+possession of that knowledge it will
+
+
+help them and save them some time from
+
+
+having their themselves so it's kind of
+
+
+a built-in idiot-proof mechanism it is
+
+
+it is actually it is actually not I can
+
+
+I can think of a thousand in one ways to
+
+
+use a vent ID to build a terrible system
+
+
+that doesn't mean that comes
+
+
+automatically with any tool basically of
+
+
+course yeah as rails in a great way but
+
+
+the software development world's
+
+
+proclivity towards solutions that try to
+
+
+take the hard problems away from them is
+
+
+something that I think we have to push
+
+
+back against all the time because we all
+
+
+have a tendency to succumb to magic
+
+
+silver bullets and and I I I just don't
+
+
+think that I want to be responsible for
+
+
+releasing a project that leads people to
+
+
+think that they've got a silver bullet
+
+
+that they can use to shoot themselves in
+
+
+the foot but but I mean even event tight
+
+
+encouraged people to build small stable
+
+
+software I guess like that's that's your
+
+
+goal well the authors of event I do yeah
+
+
+otherwise you wouldn't be building it
+
+
+right like you want to make people
+
+
+empower people do yes have the tools to
+
+
+build more stable momentum a software
+
+
+but we don't but but when we do so we
+
+
+don't teach people event I'd we use it
+
+
+as a teaching tool in workshops and
+
+
+whatnot but we teach people how to
+
+
+deliver a message from point A to point
+
+
+B
+
+
+such that it is processed once for
+
+
+instance and yes event ID is tooling
+
+
+that helps you do that but the important
+
+
+thing is the knowledge that goes into
+
+
+how to analyze your system and translate
+
+
+it into bounded context and how to
+
+
+communicate across those contexts safely
+
+
+I think like I think it's worth having a
+
+
+look at Eventide if you haven't it I
+
+
+think it's relatively I'm not that
+
+
+popular overall but it's very
+
+
+interesting even though we may have
+
+
+different opinions like when - Mogo
+
+
+micro-services and when when not to go
+
+
+there I think the overall trend will
+
+
+sooner or later force us to go
+
+
+distribute it and then you will have
+
+
+problems like how to deliver one message
+
+
+from one place to another place and
+
+
+deliver it once or execute process it
+
+
+once there there's many interesting
+
+
+things and the nice thing about Eventide
+
+
+as I understand it is that it's a it's a
+
+
+good foundation for a first start for
+
+
+for starting doing this problem the
+
+
+delivering messages or is it engineering
+
+
+it's the infrastructure I would say no I
+
+
+mean I mean there are languages you know
+
+
+I don't know like Koba is not a language
+
+
+but they think the mechanism was
+
+
+invented like 30 years ago
+
+
+maybe not 30 years but like messaging
+
+
+for example like Koba you know you call
+
+
+a method on a different object there
+
+
+might be a different language in a
+
+
+different ecosystem and so we those
+
+
+mechanisms exist you know like I'm just
+
+
+wondering is well is that a ruby problem
+
+
+that we have maybe there no we use Ruby
+
+
+because we love Ruby and we haven't
+
+
+switched to a new language because we
+
+
+still another applause but I but I think
+
+
+you know just just like distributed
+
+
+messaging is a problem that's decades
+
+
+old so is part I mean we used to it not
+
+
+we I wasn't involved in software was
+
+
+call this but what we call micro
+
+
+services now what used to be
+
+
+service-oriented architecture used to
+
+
+just be called partitioning and
+
+
+partitioning has been around for decades
+
+
+as well and these ideas aren't new and I
+
+
+would actually suggest that be it's the
+
+
+constant changing of these technology
+
+
+fads that leads us to never really delve
+
+
+deep into these concepts and we
+
+
+constantly reinvent them and give them
+
+
+new names to make them popular but it's
+
+
+like as a it's as if the software
+
+
+development world doesn't make progress
+
+
+because we change things at the
+
+
+surface like switching Ruby for a lick
+
+
+sir for instance and that's that you
+
+
+know I think sir comes with a built-in
+
+
+yeah it comes in messaging basically it
+
+
+comes in it comes it ships Erlang ships
+
+
+with an actor/model that solves certain
+
+
+kinds of problems also with like you
+
+
+know processes like you can detach a
+
+
+process which is basically like a threat
+
+
+or a guilt in Ruby 2 point 3 point
+
+
+something or whatever 5.0 and you you
+
+
+know you have this messaging built-in
+
+
+basically in the language so sometimes
+
+
+I'm wondering maybe is Ruby like
+
+
+blocking us from from using distributed
+
+
+models because I me me as you say like
+
+
+you know it will end up software has to
+
+
+be distributed so it has to be
+
+
+partitioned beautiful word I've never
+
+
+used it before and software has to be
+
+
+like in small components that's that's
+
+
+that's like there's no way around this
+
+
+you don't want to have one big
+
+
+application you change one thing and you
+
+
+break five other things but I'm
+
+
+wondering is Ruby sometimes I wonder is
+
+
+Ruby the problem like is it maybe other
+
+
+languages do they make it better I I'm
+
+
+not liking the experience
+
+
+process-oriented
+
+
+you need to optimize whole construction
+
+
+of the system to be process oriented
+
+
+it's not universal language this is the
+
+
+problem of Alexi as well right even if
+
+
+you're looking for more general-purpose
+
+
+language which giving you more options
+
+
+if you look look at for example
+
+
+enclosure you can choose transactional
+
+
+memory processes or threads it's up to
+
+
+you so it's not about the language again
+
+
+for my own in my opinion see Alixe it is
+
+
+good only in the process oriented stuff
+
+
+in messaging but other stuff will be
+
+
+block you like many use cases would be
+
+
+more difficult to make it in elixir
+
+
+because of such architecture okay that's
+
+
+good because I'm literally lacking
+
+
+experience with other languages I've
+
+
+been doing Ruby for like hundred years
+
+
+because ruby was like invented 100 years
+
+
+ago I will say you know if you work in
+
+
+multi-threaded software real-time
+
+
+systems where you have semaphores in
+
+
+mutexes
+
+
+concurrent or parallel programming or
+
+
+parallel computing is always very
+
+
+difficult and in fact the vast majority
+
+
+of programmers never reach a stage where
+
+
+it's they're comfortable
+
+
+operating in highly multi parallel
+
+
+environments with lots of different
+
+
+asynchronous processes communicating and
+
+
+I think one of the things we did with
+
+
+event ID is is and actually it's not
+
+
+it's something we invented with event
+
+
+type following the patterns of event
+
+
+sourcing we found a means by which we
+
+
+can build these do these independent
+
+
+autonomous services using patterns that
+
+
+we can teach to everyday programmers and
+
+
+I think that that's probably the most
+
+
+important thing blocking the software
+
+
+development world from as you say taking
+
+
+on distributed computing more and I
+
+
+think even sourcing is a key point in
+
+
+this in this transition because it
+
+
+encourages encapsulation right I mean
+
+
+you have different systems talking via
+
+
+events not via like even sourcing
+
+
+precisely means building the states out
+
+
+of events so that's how I like different
+
+
+ways of dealing with persistence mmm-hmm
+
+
+once you have even sourcing everything
+
+
+else like comes for free like you can
+
+
+decouple the bounded context or whatever
+
+
+way you want to call them you can go
+
+
+distribute it because now you are like
+
+
+fully even driven and I think this is
+
+
+this is like one of the steps in the
+
+
+bigger like longer-term transition that
+
+
+you can start with a model it and then
+
+
+decouple your modules and communicate
+
+
+between those modules using events and
+
+
+once you have the events you can then
+
+
+even source everything in this
+
+
+application language yes you know
+
+
+instead of what we are doing with active
+
+
+record is we're always keeping the data
+
+
+in the last state we don't keep them the
+
+
+history we don't we can't rebuild it
+
+
+from them from the beginning and in some
+
+
+applications that would be usually was
+
+
+okay
+
+
+that's how rails is doing the stuff this
+
+
+is how crowds are working but for bigger
+
+
+systems you know going events seems to
+
+
+be like more and more accepted and yeah
+
+
+probably required and if you need to go
+
+
+distributed at some point it's also hard
+
+
+to imagine any other protocol than
+
+
+messages
+
+
+so if you have it built-in in the
+
+
+Molalla to you it probably would be
+
+
+easier for you to go into distributed
+
+
+way and I think we are also like look at
+
+
+how languages didn't change that much
+
+
+over the last 10 years
+
+
+for example and but also look how the
+
+
+way we deploy our race applications did
+
+
+change over those last 10 years so how
+
+
+we struggle 10 years ago we were
+
+
+starting the race application because it
+
+
+was leaking and we are all dealing with
+
+
+the with our servers and so on and that
+
+
+the tooling kept changing it was like
+
+
+passenger Puma and now now probably many
+
+
+people here you are using some kind of
+
+
+Heroku or some other clouds the big
+
+
+companies like Amazon there is investing
+
+
+huge money in their platforms will
+
+
+probably all end up in their ecosystems
+
+
+they are investing huge money in
+
+
+serverless that's like important
+
+
+keywords to follow for the next 10 years
+
+
+probably and serverless is based on
+
+
+events you should have your own chair
+
+
+and we gave you a separate service as
+
+
+well because like when you take a look
+
+
+on the survey less you have events this
+
+
+is true but mostly low level about
+
+
+resources in the server less
+
+
+architecture you know that some file was
+
+
+uploaded some states ask in general is
+
+
+sorry if I interrupt your statement but
+
+
+so event tight and rails events so is
+
+
+both event what we call the seek no
+
+
+naughty correct so rails even stories
+
+
+DDD even sourcing and secure us support
+
+
+ID is also even sourcing right now what
+
+
+I was wondering and I wanted to ask you
+
+
+guys that actually like I actually
+
+
+wanted to ask you that is so event
+
+
+sourcing is not so lots of people think
+
+
+of event sourcing as like a historical
+
+
+database like you can restore something
+
+
+but I think is that that's not the key
+
+
+of event sourcing right the key is like
+
+
+like you say like designing events
+
+
+that that defined the system behavior
+
+
+basically right or am I wrong definition
+
+
+even the driven architectures is when
+
+
+you react to those events even sourcing
+
+
+means on the other building from then is
+
+
+only a side effect of the design around
+
+
+events right that's our natural
+
+
+consequence because many people say oh
+
+
+we need a historical database let's use
+
+
+event sourcing and that's not my
+
+
+understanding of events hosting events
+
+
+awesome for me means I don't think in
+
+
+active record calls I think in like
+
+
+business domain concerns and what might
+
+
+happen when and how they communicate
+
+
+which is kind of like what I think you
+
+
+were talking about the same like when
+
+
+you said it's low-level events you meant
+
+
+like we have to talk more about like
+
+
+business events exactly like one thing
+
+
+which you mentioned again about bounded
+
+
+context is one important fact when you
+
+
+like there was a few comparisons about
+
+
+like when you're using bounded context
+
+
+properly in your domain driving
+
+
+application it's much easier to slice it
+
+
+later on by the borders of the of the
+
+
+bounded context to be like microservice
+
+
+and then the messaging liar is let you
+
+
+like connect them together like in a
+
+
+synchronic way but this again you cannot
+
+
+I mean youth article you can like send
+
+
+events and and and publish them over the
+
+
+all bonded context but I would say oh
+
+
+this is also the best way because then
+
+
+information about current implementation
+
+
+of event it's also leaking out so I
+
+
+would also easily late somehow by under
+
+
+collection layers between different
+
+
+services and so on but like I said
+
+
+bounded contact is a perfect candidate
+
+
+to think about micro service of course
+
+
+only if you keeping on state inside I
+
+
+agree and that this is where they just
+
+
+connect like being even sourced even
+
+
+driven doesn't mean you have to go ddd
+
+
+but it's a really nice combination of
+
+
+things
+
+
+yep yeah i think and i think we've
+
+
+missed to to huge benefits of event
+
+
+sourcing the first ones around when we
+
+
+talk about distributed systems one of
+
+
+the one of the most important things to
+
+
+understand when you when you especially
+
+
+if you come from rails so in rails you
+
+
+have this notion of these these models
+
+
+that are your nouns and and they're your
+
+
+state database tables basically yeah and
+
+
+you've also got background jobs when you
+
+
+need to move some some code outside of
+
+
+your request response cycle you put it
+
+
+in background job well let's talk about
+
+
+background jobs for a second
+
+
+if the if the if our active record
+
+
+models a bank account and our background
+
+
+job is transferring funds from one
+
+
+account to another we can if we move to
+
+
+event sourcing or an event sourcing
+
+
+paradigm we can actually model both of
+
+
+these as event sourced entities we can
+
+
+have long-running business objects like
+
+
+a bank account or in order or we can
+
+
+have these short-term temporal processes
+
+
+like moving money from A to B and those
+
+
+short-term processes can actually
+
+
+coordinate activity with other systems
+
+
+and that's how we can build we can build
+
+
+distributed systems out of event
+
+
+sourcing that work really well and the
+
+
+other the other benefit that I think
+
+
+we've missed is as an information
+
+
+architecture you can think of events as
+
+
+being like a stem cell in the sense that
+
+
+they're undifferentiated they're unup
+
+
+enya nated about what they mean they
+
+
+just reflect what occurred and when you
+
+
+think about all of the events from a
+
+
+data perspective when you think about
+
+
+all the events that have been written
+
+
+you can now transform them into any
+
+
+other kind of representation this is why
+
+
+when people get excited by eventually
+
+
+saying they get excited about being able
+
+
+to produce new reports that include
+
+
+historical data that's an application of
+
+
+the fundamental truth which is that
+
+
+events are them the ross most usable
+
+
+form of data that you can store and if
+
+
+you look at your data and your
+
+
+information as an asset then event
+
+
+sourcing maximizes the value of that
+
+
+asset but the historical pod is only a
+
+
+side effect of event sourcing right
+
+
+right like you don't see well I think
+
+
+really want to take that back it's it's
+
+
+it's a great side effect but it's it's
+
+
+like because people always whether or
+
+
+not you disposition as a side effect
+
+
+probably depends on what your priorities
+
+
+are but but the event sourcing wasn't
+
+
+invented to make to replay something
+
+
+events and I have no idea what I'm
+
+
+talking about like event sourcing in my
+
+
+understanding this is really fun then if
+
+
+you're an expert you you don't have a
+
+
+chair you just sit somewhere in the
+
+
+audience and get your own microphone so
+
+
+event sourcing was
+
+
+events lousing was build around like
+
+
+designing a system with bounded contacts
+
+
+and communicating by events right and
+
+
+then they the the historical database
+
+
+thing is only they think that's
+
+
+something that comes automatically
+
+
+basically right yeah which is because
+
+
+that's that's this another thing I
+
+
+always like wonder about is like we have
+
+
+event sourcing then we have event event
+
+
+driven design or something like that
+
+
+then DDD which uses events but not event
+
+
+sourcing right so maybe I'm hurts my
+
+
+CQRS where's your microphone so someone
+
+
+asks whether it's possible to combine in
+
+
+try blazer with even sourcing and
+
+
+secures but and you don't have to answer
+
+
+that in my talk I mean can we clarify
+
+
+that because I'm really genuinely
+
+
+interested in events or saying I love
+
+
+the idea of their you know communicating
+
+
+components and this kind of stuff like
+
+
+historical events not like let's change
+
+
+state and just change it like the way
+
+
+actually fracker does it but I never
+
+
+understood what's so it does Trailblazer
+
+
+use events somehow yeah so in 12 is a
+
+
+2.1 you're gonna see it in my talk
+
+
+unless you go to the pop or something in
+
+
+ten minutes we kind of apply BPMN
+
+
+conventions to to to like the way we
+
+
+model processes and ppm n has events and
+
+
+events are the same events that you have
+
+
+an event sourcing I don't know what's
+
+
+the appropriate word that's my problem
+
+
+yeah that's more that's more enterprise
+
+
+than I'm willing to go wait which is why
+
+
+I'm wearing a suit I know but that's you
+
+
+know I mean for me it would be helpful
+
+
+if I know like event ID let's take event
+
+
+ID what patterns
+
+
+does it bring and what's the
+
+
+architectural idea behind it well do we
+
+
+have about an hour or two hours or we
+
+
+will have a talk by night and listen I
+
+
+mean there there there there are over 30
+
+
+libraries that make up event ID so I I
+
+
+think if for the general idea is the
+
+
+general idea is it's it's a collection
+
+
+of libraries that are useful to anybody
+
+
+who wants to implement systems with
+
+
+event sourcing and or sourcing
+
+
+so even sourcing plus micro services
+
+
+optional part relevant store is like
+
+
+even sourcing DeeDee and Sakura res but
+
+
+without the micro services part and now
+
+
+he's blaming me for not knowing all
+
+
+those abbreviations and patterns and so
+
+
+much time like you know maintain 39 gems
+
+
+like I have totally time to read books I
+
+
+actually read books but they are novels
+
+
+do you think that enterprise libraries
+
+
+like yours should be paid libraries or
+
+
+free would you would you like to be paid
+
+
+for Trailblazer I am but directly like
+
+
+if someone wants to use three browser
+
+
+and you give you gifting some more
+
+
+features well we have paid gems coming
+
+
+up very soon so we kind of I mean it's
+
+
+still open source but it's paid because
+
+
+it makes sense and lots of companies
+
+
+want to throw money at us to say hey
+
+
+let's here you go which is where I can
+
+
+afford very expensive apparel
+
+
+I don't know I kind of think walled
+
+
+gardens usually die I think it's very
+
+
+hard to build an enthusiastic community
+
+
+around proprietary products and of
+
+
+course I would love to make a fortune
+
+
+off of the work that I've done but at
+
+
+the same time I you know my colleague
+
+
+and I we started with a vent I'd not
+
+
+cotton we didn't have a name we were
+
+
+solving problems that we had and there
+
+
+was tooling that was not available and
+
+
+our mission is really centered around
+
+
+making sure when other people fine
+
+
+you know when other people are in those
+
+
+in the in that same position that they
+
+
+have tooling available to them and I
+
+
+think that's more important than
+
+
+personal profit thank you
+
+
+so we Fred even store the most
+
+
+inspiration comes from our clients
+
+
+projects and ready Steven stories mostly
+
+
+you know funded and supported by our
+
+
+concei so it is like similarly as in
+
+
+base campus is more than one project so
+
+
+usually heard enough five projects at
+
+
+one time and we try to introduce receive
+
+
+and store and use some even driven
+
+
+approaches and we see what is important
+
+
+what's helpful and that's how we
+
+
+introduce like some patterns support one
+
+
+by one like at the beginning we've had
+
+
+aggregates recently we've got a really
+
+
+nice addition of process managers
+
+
+because now we support the idea of
+
+
+having events within many streams and it
+
+
+was always needed in our project so
+
+
+immediately when once we help support
+
+
+for participant enters we it was
+
+
+immediately much easier in our clients
+
+
+projects to use process managers and
+
+
+this is like one of really beautiful
+
+
+patterns in the domain driven design
+
+
+community but also in
+
+
+[Music]
+
+
+[Music]
+
+
+[Music]
+
+
+[Music]
+
+
+[Music]
+
+
+Thanks sometimes open-source developers
+
+
+compliments sometimes and sometimes
+
+
+sometimes open-source developers need
+
+
+constructive criticism as well but do
+
+
+you get that automatically come on like
+
+
+I don't want to know how many fights you
+
+
+had over event ID versus Raceway and
+
+
+this kind of stuff
+
+
+come on you're always welcome if you
+
+
+ever want to air it out on game
+
+
+ask one question do you imagine someone
+
+
+using parts of your ecosystems in one
+
+
+project like what would you say it would
+
+
+be the part of eventide you would like
+
+
+to use in project with even store or the
+
+
+other way around so can you imagine ways
+
+
+to incorporate parts of these systems in
+
+
+one application I was wondering the same
+
+
+but I didn't ask because it would tell
+
+
+them that I don't know
+
+
+I would like like we are inspired a tree
+
+
+a Troye Sivan store we are inspired by
+
+
+Eventide like with the way they when
+
+
+distributed from the beginning we are
+
+
+ready Steve and store is for monolithic
+
+
+race applications right now we are
+
+
+working on the dist support for
+
+
+distributed systems and you know send
+
+
+messages reliably over the network still
+
+
+in progress and we are under big
+
+
+influence here so event ID is more low
+
+
+level in a way or what's it where is the
+
+
+overlap actually well I think I think in
+
+
+terms so I think I would wager that
+
+
+probably the things that you can do in
+
+
+rails event store overlap very strongly
+
+
+with the things that you can do an event
+
+
+type Trailblazer on the other hand I
+
+
+look at Trailblazer as and and you can
+
+
+correct me because I'm in ignorance
+
+
+because I haven't personally use it on
+
+
+one of my projects but it looks like a
+
+
+front-end framework for building the
+
+
+website or the user interface side you
+
+
+know with cells and and some of the
+
+
+other features so I can imagine I
+
+
+actually can imagine employing
+
+
+Trailblazer
+
+
+more likely than then rails event story
+
+
+simply because of the strong overlap
+
+
+with what these two projects do so both
+
+
+gems or projects implement event event
+
+
+sourcing is it the right word I think we
+
+
+we probably went more into this DDD re
+
+
+area word event I didn't go like so so
+
+
+even but event ID I understand as a like
+
+
+a low-level framework for event sourcing
+
+
+like the pattern basically right and you
+
+
+can message send events to other
+
+
+participants and
+
+
+they this will run the process
+
+
+automatically defined by event ID right
+
+
+this is kind of how worse I mean I
+
+
+looked at it on github which is like
+
+
+pretty cool like that read me scoop then
+
+
+um also you website man that's not me
+
+
+that's Scott he's got it it's it's
+
+
+widely published I think you can hit him
+
+
+up on Twitter but he doesn't actually I
+
+
+think I think if if I if I if I met the
+
+
+risk of divulging too much I believe it
+
+
+might be Squarespace which is a
+
+
+apparently pretty nice tool for building
+
+
+websites so I I don't wanna I want to
+
+
+avoid the term low-level because I think
+
+
+that it connotes sort of operating
+
+
+system or complex machinery I think it's
+
+
+it's event ID is web agnostic which is
+
+
+what I mean with like low level in terms
+
+
+of not connected to any framework you
+
+
+know like Travis is also not connected
+
+
+to any favor so it's kind of low level
+
+
+but it's defining a high level
+
+
+architecture I don't really make sense
+
+
+but you know what I mean
+
+
+like it rails event store by name is
+
+
+bound to rails and implements certain
+
+
+parents and behavior and events and
+
+
+naming yeah and I think they overlap
+
+
+with the idea invented obviously but but
+
+
+I'm just one I've seen event ID in other
+
+
+projects not in rails for example yeah
+
+
+so how hard would it be to use rails
+
+
+events to it so rarely see Fenster is
+
+
+just a thin layer on top of Ruby even
+
+
+store okay Ruby even store is a
+
+
+collection of libraries also and you can
+
+
+use it in hanami or wherever you want so
+
+
+there is like no coupling to rails and
+
+
+rails the race layer above this is only
+
+
+to make it more like convenient
+
+
+convenient for what we're developers
+
+
+would expect so there is like some kind
+
+
+of nicer API some nicer conventions at
+
+
+the rails even store level Ruby even
+
+
+store is more generic and you can use it
+
+
+totally without rails
+
+
+generic was the word not low-level sorry
+
+
+yeah Mary is much better thanks yeah I I
+
+
+think the event I'd experienced there's
+
+
+no web in it anywhere which means when
+
+
+you're using it in the context
+
+
+of a web server web framework yet it
+
+
+doesn't interfere because how could a
+
+
+web framework interfere with generic
+
+
+actually that's it's actually proven
+
+
+rails is proven time and again that it
+
+
+can and will interfere with code about
+
+
+this vision around threads even stir
+
+
+also we started with the idea that it
+
+
+should be easy to bring credit even
+
+
+story into an existing rails project
+
+
+gradually you know make it more even
+
+
+driven now we go to the point where this
+
+
+is already done this is like where we
+
+
+can introduce race even story and race
+
+
+products and everything just works and
+
+
+now we want to focus more on the idea of
+
+
+starting new projects right also release
+
+
+products but doesn't have to be race and
+
+
+from the beginning rely on release even
+
+
+store sort of being even driven from the
+
+
+beginning being even source from the
+
+
+beginning I think here we are on the
+
+
+same page I really I really want to
+
+
+support the idea of even sourcing almost
+
+
+fully and that's where we want to go
+
+
+with phrase even store it in the next
+
+
+steps so basically when you use an event
+
+
+sourcing gem may be relevant store event
+
+
+ID so basically the controller actions
+
+
+I'm speaking in novice speak now the
+
+
+controller acts has changed from doing
+
+
+something specific to like throwing an
+
+
+event or how is the workflow basically
+
+
+typically when I when I'm a control
+
+
+action was a metaphor for like a user
+
+
+action yeah it's it's um it's a little
+
+
+bit subtle to explain but yeah when
+
+
+you're thinking about like a web
+
+
+controller that's handling your requests
+
+
+in in the systems that we build with
+
+
+event ID even if we were to use event ID
+
+
+without micro services we would probably
+
+
+be getting out of that request response
+
+
+cycle very quickly
+
+
+for instance we would issue a command
+
+
+message and some consumer might pick up
+
+
+that command message and carry out the
+
+
+instruction so I don't know if that
+
+
+answers your question
+
+
+but does it answer your question hey
+
+
+that's a medic
+
+
+that's so nerdy because like one of my
+
+
+clients my clients he they are using
+
+
+event ID with Trailblazer which is like
+
+
+absolutely not overlapping so basically
+
+
+what they do is the controller so user
+
+
+action triggers events and those get
+
+
+transported by event ID and then the
+
+
+actual business logic happening after
+
+
+that is that she gets familiar to me
+
+
+because I think they hired you like a
+
+
+couple of weeks ago they told me yeah
+
+
+yeah dental stuff don't tell anyone
+
+
+yeah and saying sorry I yeah we're
+
+
+consultants and that that this kind of
+
+
+discussion happens why Pat it yeah and
+
+
+by it now you can save up to write and
+
+
+that particular that particular
+
+
+organization I I do look forward to
+
+
+hearing reports from them about what the
+
+
+experience was like with trailblazer and
+
+
+event I what they uh I can tell you
+
+
+their response
+
+
+I mean they are moving towards like they
+
+
+have a really complex system and they
+
+
+are moving towards event sourcing yeah
+
+
+and they chose event ID I think they
+
+
+didn't know about rails event stall
+
+
+because they started to talk about event
+
+
+ID from their day one and then so that's
+
+
+kind of their go-to architecture they
+
+
+use event ID domain speak they model
+
+
+their everything is around domains and
+
+
+events I think that's called DDD or
+
+
+something and then it's the underlying
+
+
+low-level business logic framework they
+
+
+use trade base because they like work
+
+
+there's no overlap you know link we have
+
+
+event I'm not okay with advertising even
+
+
+tight even though there is like some
+
+
+overlap because I am not here to sell
+
+
+you release even store but I I'm here to
+
+
+sell you the idea of being even driven
+
+
+and even sourced and I don't care if you
+
+
+use rails even store or even tight for
+
+
+that I'm finding that I'm also very
+
+
+comfortable with y'all promoting event
+
+
+tonight
+
+
+actually I've heard this pretty not
+
+
+a good salesman okay so I think that I
+
+
+agree with that sentiment sorry to
+
+
+interrupt I do agree with that sentiment
+
+
+I think getting people to explore and
+
+
+then invest in new architectural styles
+
+
+that go beyond rails is something that
+
+
+benefits everybody and that's why and
+
+
+this is basically also the finishing
+
+
+line the closing remark for this I mean
+
+
+for this panel because in the end of the
+
+
+day you want to build stable mature
+
+
+software that's maintainable enterprise
+
+
+and I think those kind of concepts we
+
+
+discussed is where we should be heading
+
+
+those ideas are already in other
+
+
+communities so it's not like we're
+
+
+inventing something new here Ruby is
+
+
+always 50 years B java.net even PHP is
+
+
+very very far also so it's just catching
+
+
+up I think okay thank you very much
+
+
+[Applause]

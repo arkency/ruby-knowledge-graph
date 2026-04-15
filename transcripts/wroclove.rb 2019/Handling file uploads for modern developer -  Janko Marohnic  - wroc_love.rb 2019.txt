@@ -1,0 +1,2038 @@
+hello everyone I want ask before I start
+
+
+who who of you has ever worked on a web
+
+
+application that needed to handle file
+
+
+uploads okay most of you so I think it
+
+
+this is a really common requirement in
+
+
+web applications but I feel like that
+
+
+it's not talked about enough and today I
+
+
+want to share with you some of the best
+
+
+practices that I learned over the past
+
+
+few years of being in this field so a
+
+
+bit about me my name is Hank American
+
+
+Ajay from Croatia I'm a ruby of Rails
+
+
+developer and creator of the shrine file
+
+
+attachment library so most of you have
+
+
+probably used one of these one of these
+
+
+libraries on the screen and I think that
+
+
+the Ruby echo system is really nice that
+
+
+it has so many options which have so
+
+
+many features which I haven't really
+
+
+been able to find that much in other
+
+
+languages when I researched it and I
+
+
+personally started my journey with
+
+
+paperclip and then soon I I got a bit
+
+
+frustrated with having to keep
+
+
+everything all of the file uploading
+
+
+logic in my active record models so I
+
+
+switched to carrier wave which let me
+
+
+move it to external classes then I after
+
+
+some time of using it I realized that
+
+
+some of the essential features of
+
+
+carrier wave are not really built into
+
+
+the gem such as direct uploads and
+
+
+background processing and both of these
+
+
+features are provided by external gems
+
+
+but they don't work well and they don't
+
+
+work well with each other so that also
+
+
+frustrated me and then around the time
+
+
+the original author of carrier wave
+
+
+released a file which really drew my
+
+
+attention because of its simplicity and
+
+
+I really liked I really liked how it
+
+
+solved some of the some of the
+
+
+complexity that Carraway
+
+
+had so I switched to that and I soon I
+
+
+was accepted as a corps maintainer of
+
+
+Rafael and for a while it was good but I
+
+
+I felt like it was too opinionated and I
+
+
+think it even says in the readme that
+
+
+it's opinionated that it doesn't work
+
+
+for everyone and I don't want that I
+
+
+want something that works for everyone
+
+
+I didn't see the reason why we needed to
+
+
+sacrifice certain things so because I
+
+
+did wasn't really able to find a good
+
+
+way to extend it I effectively forked
+
+
+off of Rafael and created shrine about
+
+
+almost three years after shrine was
+
+
+released rails 5.0 was released which
+
+
+featured active storage so some of the
+
+
+philosophies that I had one building
+
+
+shine was that it
+
+
+I wanted it to for for it to work for
+
+
+any Ruby application this is because I
+
+
+really I really enjoy working with other
+
+
+Ruby web frameworks and I have been
+
+
+doing so for the past few years and I
+
+
+want to focus my energy around tools
+
+
+that everybody can use not only rails
+
+
+developers the way to achieve that one
+
+
+first component of achieving that is to
+
+
+build for rack instead instead of
+
+
+Pharrell's because that way the rack is
+
+
+the basis of all Ruby web frameworks so
+
+
+if you build something for rack it's
+
+
+usable everywhere and another important
+
+
+thing is that I didn't want to couple
+
+
+the implementation to any specific URL I
+
+
+think that also leads to better design
+
+
+and because I don't think that file
+
+
+uploads are I think file uploads should
+
+
+have a thin integration between the
+
+
+persistence layer but I think it should
+
+
+be usable with anything else I also
+
+
+wanted like a modular solution so that
+
+
+they can pick and choose the features
+
+
+that they want and modify the behavior
+
+
+I wanted to have multiple levels of
+
+
+abstraction meaning that if I don't like
+
+
+how something works I want to be able to
+
+
+draw a level lower and use some lower
+
+
+level api's still provided by the
+
+
+library to build the flow that works for
+
+
+me and I wanted everything to be
+
+
+configurable because the nature of I'll
+
+
+upload is that if so if a user cannot
+
+
+adjust something to work exactly the way
+
+
+that they want for example to reduce the
+
+
+amount of kokingo files then the
+
+
+performance can really suffer because it
+
+
+often involves HTTP requests and whatnot
+
+
+and I also didn't want any media cells I
+
+
+wanted like just simple Ruby
+
+
+configuration I want to start off by
+
+
+talking about metadata invalidation so
+
+
+you should validate both on the client
+
+
+side as well but definitely on the
+
+
+server side the files uploaded by the
+
+
+user this is an example of how you can
+
+
+validate with with trying this
+
+
+particular example validates that the
+
+
+file is not larger than 10 megabytes and
+
+
+that it's a J JPEG or PNG image and the
+
+
+delivery that you use should support
+
+
+validations there is a specific caveat
+
+
+about mime type when we upload the file
+
+
+through to our else Ruby app the
+
+
+content-type header that's received
+
+
+doesn't have to necessarily match the
+
+
+mime type of the file this is because
+
+
+the browser determines this value solely
+
+
+based on the file extension so a person
+
+
+who wants to upload the malicious file
+
+
+can just put an extension that that our
+
+
+application considers valid what we want
+
+
+is to validate to determine the mime
+
+
+type from file content and this is
+
+
+possible because each of the file type
+
+
+has something called magic bytes which
+
+
+is a certain specific advice sequence of
+
+
+bytes
+
+
+at the beginning of the file that
+
+
+uniquely determines the type the most
+
+
+popular tool in UNIX for doing that is
+
+
+the file command but we also have some
+
+
+ruby gems that that can do the same
+
+
+thing in shine you can enable
+
+
+determining mime type from the file
+
+
+content by loading the plug-in and
+
+
+choosing the analyzer that you want
+
+
+another caveat is related to the file
+
+
+size it's not enough only to validate
+
+
+that because as people especially people
+
+
+from evil Martians who introduced me to
+
+
+that idea they they let us know that
+
+
+it's possible to generate a la image
+
+
+that is small in file size but large in
+
+
+dimensions and that can crash our image
+
+
+processing tool so yeah so for example
+
+
+this is an example of like there is a
+
+
+website where it was the person
+
+
+attempted to generate the most extreme
+
+
+example and this is something that's
+
+
+called image bomb and yeah so we should
+
+
+validate all in addition to file size
+
+
+results of all the dimensions and here
+
+
+we can see that the validate block is
+
+
+not a DSL because we can use regular
+
+
+conditionals and like in this case it
+
+
+makes sense to validate dimensions only
+
+
+if the time type of the file is an image
+
+
+otherwise there is probably no
+
+
+dimensions to extract it we try and it's
+
+
+also possible to validate to extract and
+
+
+validate any custom metadata without the
+
+
+need for any external showing extension
+
+
+that that needs to hook up to its
+
+
+internals this is an example of of
+
+
+extracting the duration of a video and
+
+
+then in this block we just write our own
+
+
+custom custom validation every metadata
+
+
+that we extract we should ideally be
+
+
+persisted in the database so that we can
+
+
+later extract it from the views
+
+
+so to recap what we just talked about we
+
+
+should validate the file
+
+
+did you have or it can be a common
+
+
+extensions a common metadata or any
+
+
+custom metadata specific to the type of
+
+
+the file and you should ideally persist
+
+
+the extracted metadata now that we've
+
+
+successfully validated the file we
+
+
+usually want to process them to
+
+
+normalize it into some formats that our
+
+
+application understands the for image
+
+
+processing most file attachment
+
+
+libraries come with their own macros
+
+
+because using imagemagick is not usually
+
+
+it's not as convenient because you
+
+
+usually want to have some kind of
+
+
+markers which are specific to which have
+
+
+some common web resizing logic so we try
+
+
+and I didn't want to implement another
+
+
+homegrown solution into shine so I
+
+
+created a separate gem which has a
+
+
+functional approach so you give it a
+
+
+source image in the input and it returns
+
+
+the processed file on the output and
+
+
+when we see the command that it
+
+
+generates we can see that in addition to
+
+
+resizing it also has some few specific
+
+
+extras like our outer rotating the image
+
+
+if it's if it's rotated and also many of
+
+
+you might not know that after we resize
+
+
+an image that it gets a bit blurry so it
+
+
+also applies some additional sharpening
+
+
+and it's nice to you be able to use a
+
+
+tool that takes care of these details
+
+
+for you there is an alternative to image
+
+
+magic which is called lip dips and or
+
+
+veep's for shirt and it's it's really
+
+
+cool because it's often much much faster
+
+
+than image magic and it's also
+
+
+full-featured so the image processing
+
+
+gem provides the integration for lip
+
+
+lips as an alternative back-end out a
+
+
+mini magic so it tries to share as much
+
+
+of the same interface as possible and
+
+
+the example when I benchmark
+
+
+generating a 500 times 500 thumbnail I
+
+
+like the performance different was
+
+
+astounding the it was three times to
+
+
+finally blips was three times to five
+
+
+times faster depending on the size of
+
+
+the source image this is this is a huge
+
+
+performance difference and I think this
+
+
+is largely due to the fact that live
+
+
+support supports a much narrower range
+
+
+of formats compared to image magic so I
+
+
+think it also gives it more focus and I
+
+
+would also encourage anyone interested
+
+
+more to like to go and read about the
+
+
+documentation Oblivion's which explains
+
+
+some of its internals now the way to
+
+
+actually hook up the processing is to
+
+
+the most the easiest way is to process
+
+
+the images or the like other types of
+
+
+files on the fly this means that when
+
+
+the file is uploaded uploaded and we
+
+
+generate a URL for it when that URL is
+
+
+requested then the file actually gets
+
+
+processed and typically cached into some
+
+
+CDN the way that active storage and some
+
+
+other gem solve it is to encode the
+
+
+processing steps into the URL which is
+
+
+convenient because then you don't need
+
+
+to define anything else
+
+
+however I don't like this approach
+
+
+because then your URL grows with the
+
+
+processing logic and also it's not so
+
+
+flexible because you cannot always
+
+
+represent processing as a ruby hash
+
+
+sometimes if you're compositing you need
+
+
+blocks or something which cannot be
+
+
+civilized into the URL the approach that
+
+
+shrine takes is to you define a custom
+
+
+alias and some custom arguments that you
+
+
+want to pass from the view and then when
+
+
+the URL is hit the you the shrine finds
+
+
+the corresponding processing block that
+
+
+you defined which is just a simple to be
+
+
+block you can define processing there in
+
+
+any way that you want
+
+
+and it's nice that when you look at the
+
+
+URLs that it communicates to you what
+
+
+the URL does other so in contrast to
+
+
+having like base64 encoded data only you
+
+
+you have like some kind of communication
+
+
+what do you what do you are really
+
+
+supposed to do what kind of type file
+
+
+type is supposed to return an
+
+
+alternative to on-the-fly processing
+
+
+which is often common for larger files
+
+
+such as videos which can which cannot
+
+
+feasibly be processed on the fly is to
+
+
+process an upload which enshrine it
+
+
+looks this a similar way to on-the-fly
+
+
+processing we also define a ruby block
+
+
+and then you add the result of the block
+
+
+is the collection of protest files that
+
+
+you want and unlike some solutions like
+
+
+carry waiver paper clip these files that
+
+
+are uploaded directionally serialized
+
+
+and stored each individual into the
+
+
+database so that when you later retrieve
+
+
+it it's all like it's all done and ready
+
+
+so that when you change you decide you
+
+
+won't change how you generate the upload
+
+
+location that it doesn't invalidate all
+
+
+of the existing urls because the upload
+
+
+location is encoded into the database
+
+
+because this is a generic block we can
+
+
+perform inside any other type of
+
+
+processing and again without needing to
+
+
+define any without needing to use any
+
+
+external certain extensions which have
+
+
+to know about internals so this is an
+
+
+example of transcoding a video
+
+
+so to recap processing you can do it
+
+
+either on upload or on the fly on on
+
+
+upload means that it's it's triggered
+
+
+when the file is attached on the fly
+
+
+when the your URL is requested for image
+
+
+processing it's it's it's good idea to
+
+
+use the image processing gem and this is
+
+
+some
+
+
+that active storage now uses as of rails
+
+
+6.0 which has a mini magic wrapper and
+
+
+ellipse wrapper which is oftentimes much
+
+
+faster now that we've successfully
+
+
+validated and protester files let's go
+
+
+back and improve the user experience of
+
+
+uploading the file itself so what I mean
+
+
+is that we want to go from like a
+
+
+synchronous upload where where the user
+
+
+doesn't know like how long something
+
+
+will something will how long did it will
+
+
+take for the image to upload or any
+
+
+other type of file is we want some kind
+
+
+of like more a synchronous experience
+
+
+where for example user can edit other
+
+
+fields and whatnot
+
+
+some file attachment libraries such as
+
+
+active storage and a file they they
+
+
+solve this problem by providing their
+
+
+own JavaScript file which automatically
+
+
+hooks everything up but I did I didn't
+
+
+like this approach in in shrine because
+
+
+I think it needs to be customized a lot
+
+
+and people will come up with new
+
+
+features and then need to worry about
+
+
+browser compatibility and everything and
+
+
+I just didn't want to maintain that and
+
+
+so I discarded it but luckily the the
+
+
+JavaScript ecosystem have solved file
+
+
+uploads so we can use one of the one of
+
+
+the JavaScript packages for that at the
+
+
+time when i was when i created shrine
+
+
+these were the most popular available
+
+
+option but but i found each one to be
+
+
+really difficult to use and configure to
+
+
+to work with with a simple flow that
+
+
+that i wanted for shrine so so these
+
+
+solutions I wouldn't recommend I
+
+
+[Music]
+
+
+so the the solution I would recommend is
+
+
+called a P which is a relatively new and
+
+
+modern JavaScript solution for file
+
+
+uploads and I was really happy when I
+
+
+researched it that it already hooks
+
+
+really nicely into the existing shine
+
+
+components so I and I also it knew it
+
+
+knew about a lot of stuff that the other
+
+
+JavaScript libraries didn't so what's
+
+
+cool one cool thing about this that it
+
+
+comes with a built-in UI components such
+
+
+you can just start from a simple file
+
+
+input and a progress bar in which which
+
+
+looks like this and by the way the
+
+
+previous program our progress bar that I
+
+
+generated was I had to implement it
+
+
+using bootstrap but this one is provided
+
+
+along with CSS and everything biopic so
+
+
+the next level could be a drag-and-drop
+
+
+field and a status bar which shows like
+
+
+more information and you can even also
+
+
+have like a full-blown dashboard that
+
+
+combines a lot of these UI components
+
+
+and provides a really nice user
+
+
+experience and this is all provided
+
+
+out-of-the-box from from Rp and as you
+
+
+might have seen from the code the ARP is
+
+
+also modular so you can or you don't
+
+
+have to choose these UI components if
+
+
+you don't want to so this was only
+
+
+presenting how how the RP will present
+
+
+the file upload itself but I want to
+
+
+talk about how how to actually we need
+
+
+to tell it where to upload the files the
+
+
+most simple solution is to just give it
+
+
+some custom end point where it cannot
+
+
+upload the file and then that end point
+
+
+can then forward that file on to the
+
+
+storage on on your app and just return
+
+
+some JSON data representing that file
+
+
+and then when we submit the form
+
+
+we only submit the JSON data so the
+
+
+submit is instantaneous
+
+
+we utilize that by loading the
+
+
+corresponding RP plugin and just point
+
+
+it to the URL that we want and then on
+
+
+the backhand side a shrine provides an a
+
+
+complete end point which will do the
+
+
+uploading and returning the response for
+
+
+you so you can also mount it wherever
+
+
+you want in your router and by the way
+
+
+this is not real specific because that
+
+
+component is built the track so it can
+
+
+be used in any web framework now this
+
+
+dissolution is the simplest but it it it
+
+
+is the your your server your application
+
+
+still needs to handle the actual upload
+
+
+itself which is using some resources and
+
+
+ideal thing would be to upload directly
+
+
+to a cloud service like s3 and the flow
+
+
+looks a bit like this that you that the
+
+
+client first needs to fetch upload
+
+
+parameters from the server because these
+
+
+upload parameters need to be generated
+
+
+from the AWS Keys which only live in the
+
+
+server and then the browser can use that
+
+
+data to make the actual upload and then
+
+
+again just when the form is submitted
+
+
+only the only the JSON data is sent via
+
+
+the form the the the flow looks a
+
+
+similar we just load the different IP
+
+
+plug-in and what's nice is that RP
+
+
+already knows about this flow it already
+
+
+knows about fetching parameters from the
+
+
+application and then uploading it you
+
+
+don't so it will do the Ajax calls for
+
+
+you you just you just need to tell it
+
+
+where to look and then just define route
+
+
+for that which will generate the actual
+
+
+upload parameters which run again
+
+
+provides for you so to
+
+
+direct uploads mmm
+
+
+use you can do it the simplest way to do
+
+
+it is just an endpoint on your app but
+
+
+you can also do it directly on anise
+
+
+tree or like another cloud storage
+
+
+service this usually provides better UX
+
+
+and performance mmm
+
+
+you I recommend that you use IP
+
+
+regardless of whether you're using
+
+
+shrine or something else it's really
+
+
+nice because it has it has built-in UI
+
+
+components and has really easy direct
+
+
+uploads to history which I haven't found
+
+
+in other solutions and it has like
+
+
+numerous more features which I encourage
+
+
+you to check out now we can if we're
+
+
+uploading large files we can extend upon
+
+
+our direct upload flow and improve the
+
+
+user experience even further by making
+
+
+the uploads resumable so the problem
+
+
+with simple with simple uploads is that
+
+
+it's just a single HTTP request so if
+
+
+and this HTTP request the request body
+
+
+is the file content so if that request
+
+
+gets interrupted at some point for
+
+
+example due to a flaky connection then
+
+
+the uploads needs to be restarted from
+
+
+the very beginning and this might range
+
+
+from like a simple annoyance from the
+
+
+user but also to also the some people
+
+
+might not even have access to a good
+
+
+internet so if they're uploading
+
+
+sufficiently large files their internet
+
+
+connection might not last long enough
+
+
+for the whole file to get uploaded the
+
+
+way to solve this is to split the upload
+
+
+into chunks so that then each of these
+
+
+chunks is uploaded individually so if
+
+
+one of them fails
+
+
+that chunk can be retried and also in
+
+
+some cases multiple chunks can be
+
+
+uploaded in parallel which can improve
+
+
+the overall upload speed depending on
+
+
+the internet connection the simplest way
+
+
+to to achieve resumable uploads is
+
+
+similar to the simple to direct uploads
+
+
+to s3 that we already talked about it's
+
+
+just that instead of using that it the
+
+
+browser is using the multi-part upload
+
+
+feature from history and it also needs
+
+
+to communicate to to some it also needs
+
+
+some end points in your application but
+
+
+the upload goes directly to the cloud
+
+
+service and IP provides a plug-in that
+
+
+does that and I also created the gem
+
+
+which which knows how to which is
+
+
+compatible with with which implements
+
+
+the endpoints that these are people are
+
+
+in needs now this dissolution is is kind
+
+
+of coupled to the storage so if you are
+
+
+using for example Google Cloud Storage
+
+
+it's it might be more difficult to make
+
+
+it work and also if you are if you are
+
+
+uploading if you want to make it more
+
+
+language agnostic it's kind of like you
+
+
+need to have JavaScript on the client
+
+
+side so iOS and Android
+
+
+not really and also there is a limited
+
+
+language support for for the the backend
+
+
+part that needs to be done there is
+
+
+there is the same company that created
+
+
+RP also created a dynamic HTTP protocol
+
+
+for resumable uploads
+
+
+that's called toss io and the word HTTP
+
+
+protocol sounds a bit scary but it just
+
+
+is just a collection of HTTP headers and
+
+
+a URL that both the client and the
+
+
+server needs to to know
+
+
+need to buy the pie so that together
+
+
+they can achieve the resumable upload
+
+
+because this protocol is generic there
+
+
+are numerous implementations for it and
+
+
+so you have much much more options and
+
+
+the way that it works is instead of the
+
+
+application just providing some some end
+
+
+points for information the uploads this
+
+
+time they go directly through your app
+
+
+or like through the TAS server and then
+
+
+the TAS server then translates these
+
+
+uploads to the specific storage service
+
+
+API so the tower server is the one
+
+
+that's configured with the storage and
+
+
+the TAS client doesn't know where the
+
+
+files will be stored it only knows how
+
+
+to communicate with the with the TAS
+
+
+server surprisingly there is also an RP
+
+
+plugin and a gem that that make these
+
+
+two things work together so it's like
+
+
+regardless of which option you choose
+
+
+it's kind of like it's always a similar
+
+
+way to implement and it's really
+
+
+streamlined and easy let's now see this
+
+
+in action
+
+
+so the resumable upload it looks similar
+
+
+to regular upload but we can see that
+
+
+that up he knew that the upload was
+
+
+resumable so it added the pause button
+
+
+and then when we click it the HTTP
+
+
+request is terminated but the server
+
+
+saved some data already on the server so
+
+
+when we click it the the upload can
+
+
+automatically resume with a new upload
+
+
+request and it can even happen like if
+
+
+our whole upload terminates which i will
+
+
+simulate here with by clicking on the X
+
+
+button the browser in local storage is
+
+
+stores the the status of the file so the
+
+
+upload can resume after that and
+
+
+everything is completed
+
+
+so to recap the
+
+
+resumable uploads it's really it really
+
+
+helps it can really improve the user
+
+
+experience when the user is uploading
+
+
+your user is uploading large files one
+
+
+way to implement is to use s3 multipolar
+
+
+to upload API which is the simplest and
+
+
+it's nice that upload goes directly to a
+
+
+cloud storage service and alternative
+
+
+ways to use a more generic test protocol
+
+
+which has which has numerous
+
+
+implementations in numerous languages
+
+
+here are some useful links for what I
+
+
+just talked about and that's it for me
+
+
+[Applause]
+
+
+if anyone has questions yes happy to
+
+
+answer hello thank you for the
+
+
+presentation
+
+
+I'd like to ask you about the processing
+
+
+on the fly part because it seems very
+
+
+nice because it doesn't low load the
+
+
+server upfront but it seems to be prone
+
+
+to DDoS attacks because the attacker can
+
+
+ask for several versions of the same
+
+
+uploaded file and clock your server
+
+
+effectively how do how to defend from
+
+
+this situation great question so the
+
+
+design feature or like and many other
+
+
+on-the-fly processing features in other
+
+
+file jams they sign the URL with a
+
+
+secret that's only known by the server
+
+
+so only the server can generate a valid
+
+
+URL so so and the urls that the server
+
+
+generates will likely then be cached
+
+
+into your CDN and then the attacker
+
+
+isn't able to generate any other URL
+
+
+because then the signatures won't match
+
+
+thank you that's great so I think
+
+
+there's one problem with a synchronous
+
+
+approach for file uploads you can have a
+
+
+user that submits a huge file and then
+
+
+just doesn't continue with my metadata
+
+
+you can't make a synchronous file upload
+
+
+transactional how do you deal with it so
+
+
+there is a mechanism provided by history
+
+
+that when you are requesting the upload
+
+
+parameters at the same time you can pass
+
+
+like a limit to the file size so that
+
+
+when the user like and then on this on
+
+
+the endpoint that generates the upload
+
+
+parameters you can say like okay you you
+
+
+cannot you cannot generate a larger file
+
+
+so that and there is also a mechanism of
+
+
+validating of constraining the content
+
+
+type so that that provides some kind of
+
+
+mechanisms which although are not
+
+
+generic it differs from service to
+
+
+service but the yes the it's it's more
+
+
+challenging than expected to prevent
+
+
+users from uploading large files to your
+
+
+to your cloud service yes I I don't have
+
+
+a good answer for that yeah I I will try
+
+
+to find more about that and if you have
+
+
+any more questions feel free thanks but
+
+
+I actually referring to a bit different
+
+
+thing yeah when file is first submitted
+
+
+but then you don't continue with the
+
+
+metadata you submit the image but don't
+
+
+type with the title they everything else
+
+
+making the image actually useless yes so
+
+
+is there a way for example to have the
+
+
+image expire after a few minutes yes yes
+
+
+okay now I understand
+
+
+so yes the shrine actually has a
+
+
+mechanism where it requires you to use a
+
+
+temporary and the permanent storage when
+
+
+we were generating these end points
+
+
+there was this cash symbol which meant
+
+
+like upload to temporary storage and
+
+
+then on the s3 that can be a separate
+
+
+directory which you can configure for
+
+
+example s3 to automatically expire old
+
+
+files and then that like that directory
+
+
+is separated from your main files that
+
+
+are actually attached to records so this
+
+
+is this is these files that are not
+
+
+attached anywhere are called orphan
+
+
+files and shrine tries very hard like
+
+
+not to allow that to happen
+
+
+thank you so much okay here how would
+
+
+you suggest testing this I mean in the
+
+
+test mode we would like to have instead
+
+
+of s3 storage maybe a local storage is
+
+
+it easy to implement in frame yes yes
+
+
+there is a great open source tool called
+
+
+Mineo and which responds to the s3 api
+
+
+so if you are using s3 you can just
+
+
+point the sdk to your mini server and
+
+
+then your mini server would store the
+
+
+files locally and that way during your
+
+
+tests everything will still think it's
+
+
+communicating with the s3 api but
+
+
+actually the files are just storing
+
+
+locally the only thing you need to do is
+
+
+is to run that mini server as a separate
+
+
+service and would it be easy to use like
+
+
+the private VPS instead of s3 as well I
+
+
+haven't researched that I it's probably
+
+
+possible because there are
+
+
+there are many I think there might be
+
+
+told that knows how to proxy the ds3 API
+
+
+into something that you want but I don't
+
+
+know I can specific tool that what that
+
+
+would do what to ask okay thanks here
+
+
+imagemagick
+
+
+has known security vulnerabilities in
+
+
+the past lip vapes is also know is
+
+
+better but it is it was not built with
+
+
+security in mind security first
+
+
+perspective there is image flow project
+
+
+have you considered adding this to image
+
+
+processing game I would love to add it
+
+
+like when it's at the moment the only
+
+
+problem is that there aren't Ruby
+
+
+binding Authority and I I would like if
+
+
+someone else would create the trophy
+
+
+bindings hopefully the outer I think
+
+
+that it was in the plan but I was
+
+
+following and have backed the image flow
+
+
+project before and I found it really
+
+
+exciting and I would like as soon as
+
+
+someone creates Ruby bindings I would
+
+
+love to add support to the image
+
+
+processing Jam
+
+
+Thanks okay I think that's all
+
+
+[Applause]

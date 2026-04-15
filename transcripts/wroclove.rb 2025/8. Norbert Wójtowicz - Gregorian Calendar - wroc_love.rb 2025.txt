@@ -1,0 +1,4786 @@
+Practice what you preach is a very
+
+
+famous saying and of course it can be
+
+
+done in a different context and Norbert
+
+
+will talk about date and times and he's
+
+
+expert in date and times in a context of
+
+
+programming although he will he said to
+
+
+me before presentation that he will not
+
+
+re respect the time constraints so I
+
+
+have to warn you Um all
+
+
+right testing one two one two one two
+
+
+three okay so um this is just a test of
+
+
+the system um actually I just want to
+
+
+take a quick moment and I give a shout
+
+
+out to this conference because um every
+
+
+time I get invited to talk here and they
+
+
+sort of know what's coming this is how I
+
+
+envision the organizer of this
+
+
+conference look like right so like just
+
+
+kudos Um, this is the actual talk. Like
+
+
+cameraman, you can actually just start
+
+
+here. Okay, so
+
+
+time the Gregorian calendar. So this is
+
+
+me and this is all the time I have for
+
+
+an intro. You can find me online or even
+
+
+better just talk to me at the
+
+
+afterparty. Today we are going to be
+
+
+talking about the Gregorian calendar and
+
+
+we are going to be showing code in C++.
+
+
+Why would we do this? Well, here's the
+
+
+pitch. I'm going to show you a bunch of
+
+
+history and you will learn why decisions
+
+
+made thousands and thousands of years
+
+
+ago impact the way you work day-to-day.
+
+
+And we will take this opportunity and
+
+
+sort of use this as a jumping off point
+
+
+to help you build new intuitions on how
+
+
+to answer these complicated questions.
+
+
+How do I make computers go fast? How do
+
+
+I deploy breaking changes? And when
+
+
+should I do a rewrite? And I would pause
+
+
+it that these are all questions that you
+
+
+are all burning have a burning desires
+
+
+to actually learn. Right? So a very
+
+
+short history of the world. In the
+
+
+beginning there was the big bang and
+
+
+then many many many years later we have
+
+
+the modern solar system. The earth
+
+
+orbits around the sun and the moon
+
+
+orbits on the earth. This gives us a
+
+
+solar day, a tropical period or also
+
+
+known as solar year and a lunar month.
+
+
+These are very useful things for people
+
+
+because it turns out we don't have good
+
+
+night vision. So you would like to know
+
+
+when it is daylight. You would like to
+
+
+know when to plant the crops and when
+
+
+it's time to actually start, you know,
+
+
+storing food for the winter. And you
+
+
+would like to know when it's for example
+
+
+low tide or high tide, which is
+
+
+something you need to look at the sort
+
+
+of the lunar phases to understand. So it
+
+
+turns out that as long as people have
+
+
+been around, people have been trying to
+
+
+predict these things and it has been
+
+
+done with more or less success. So, it
+
+
+turns out that the day is kind of easy.
+
+
+It's exactly 24 hours or 86,400 seconds.
+
+
+To this very day, there is such a thing
+
+
+as a mean solar day and it is defined
+
+
+exactly like this. So, if you want to
+
+
+talk about like leap seconds and stuff,
+
+
+talk to me afterwards. But that it's
+
+
+actually correct. The solar year,
+
+
+unfortunately, it's like
+
+
+365.242199 days. And I see that I tested
+
+
+this on a different pro projector. And
+
+
+so, probably some of the fonts are going
+
+
+to be off already. I can already I can
+
+
+already see this testing in production,
+
+
+but sorry that's a tangent. Um, lunar
+
+
+months. Well, it turns out that if you
+
+
+just have a lunar calendar, you after 12
+
+
+lunar months, you're going to have a
+
+
+year of 354 days, which is a problem
+
+
+because it means that every year you're
+
+
+drifting by 11 days, right? So, as you
+
+
+can imagine, most civilizations sooner
+
+
+or later realize that these calendars
+
+
+aren't perfect. They end up having lunar
+
+
+calendar, solar calendars, or most often
+
+
+a combination lunar solar calendar
+
+
+because they sort of want to be able to
+
+
+predict both of the things. And by the
+
+
+way, a small
+
+
+trivia, the lunar month is usually
+
+
+referred to as 29 days, but actually it
+
+
+takes 27 days for the moon to orbit
+
+
+around the earth. Exactly. But what
+
+
+happens is that the way we observe the
+
+
+moon is by looking up at the sky in
+
+
+comparison to the sun. So in 29 days
+
+
+what happens is those two bodies are
+
+
+orbiting around the sun as well. So you
+
+
+have this weird parallax effect and we
+
+
+think it takes 29 days but actually
+
+
+takes 27. So that's why you have
+
+
+something called the side real period
+
+
+and the synotic
+
+
+period. And one more bit of trivia there
+
+
+is this fun ratio of 235 synotic months
+
+
+is exactly 19 tropical years. This is
+
+
+completely useless information except if
+
+
+you ever are digging into some code
+
+
+that's doing calendar math and you see a
+
+
+magic number 235 or magic number 19, you
+
+
+will now know that what is happening
+
+
+there is a conversion between lunar and
+
+
+solar
+
+
+calendars. This is Stonehenge. We think
+
+
+of it as a very old thing, right? Like
+
+
+this is before the aliens came. And I
+
+
+sort of want to give you some context
+
+
+about how old this really is. So
+
+
+calendars a brief
+
+
+history in 11,000 B.CE in Australia we
+
+
+have a structure that is able to
+
+
+correctly predict solar movements and
+
+
+can predict when the equinoxes the the
+
+
+solstesses and so forth appear in 800 in
+
+
+Scotland. We have a perfectly working
+
+
+rock formation like rock structure that
+
+
+is able to predict both the lunar and
+
+
+the solar calendar. The Samrians only
+
+
+show up in 5500. They give us a lot of
+
+
+interesting new math. They give us a
+
+
+base 60 math, which is why to this day
+
+
+all the stuff you do with time and
+
+
+calendars is either based uh is
+
+
+divisible by 60 or divisible by 12. It's
+
+
+because of them. The Egyptians, they've
+
+
+been around a little longer than this.
+
+
+But by 2700, it is 100% known that their
+
+
+civil calendar understood that a solar
+
+
+year is 365 days and they have the
+
+
+concept of a leap
+
+
+year. Then we get to Stonehenge, right?
+
+
+Only then. So, it's like relatively new
+
+
+and uh we can argue if Stonehenge is
+
+
+used for observ you know calendars of
+
+
+observing some kind of astronomical
+
+
+things or just uh human sacrifices or
+
+
+maybe it's just the aliens. 1890
+
+
+Babylonians show up. Uh they have a lot
+
+
+more new interesting math for us mostly
+
+
+based on approximations and derivatives
+
+
+and things of this nature. And they also
+
+
+give us the compass directions. So,
+
+
+northwest southeast. The Chinese the
+
+
+Chinese actually go through many
+
+
+calendars but the one in 1600 also
+
+
+guaranteed to be 365 days plus a leap
+
+
+year and only then do we get the Greeks
+
+
+in 1200 right and they give us math
+
+
+based on geometry they give us logic
+
+
+they give us philosophy why am I talking
+
+
+about all this what I'm trying to give
+
+
+you is some context that humans have
+
+
+known many of these important things for
+
+
+a very long time but then the Romans
+
+
+show up and we forget everything right
+
+
+the Romans are essentially the Silicon
+
+
+Valley tech bros of the ancient world.
+
+
+They have a serious case of not invented
+
+
+here syndrome and they refuse to use any
+
+
+of this previous knowledge. So you will
+
+
+see in the upcoming slides what their
+
+
+calendar actually looks like. But I want
+
+
+to sort of give you some context about
+
+
+why the world exists today as it does
+
+
+because the Romans they cared their PK
+
+
+like they c their KPIs and their OKRs
+
+
+were military expansion. So law,
+
+
+medicine, agriculture, building roads,
+
+
+building aqueducts, like grade A,
+
+
+they're really good at it. But anything
+
+
+that wasn't for military expansion, they
+
+
+don't care about like philosophy and all
+
+
+this stuff. So what happens is they get
+
+
+they lose all this knowledge that we've
+
+
+gained. You know, like the library of
+
+
+Alexandria burns down like halfway in 48
+
+
+B.CE because of Julius Caesar. But
+
+
+actually what people don't know often is
+
+
+that it didn't get burned down
+
+
+completely. It got reconstructed. What
+
+
+actually happened was the Romans took
+
+
+over later in history. They took over
+
+
+Alexandria and they actually let this
+
+
+like the libraries go into disrepair.
+
+
+They kicked all the scholars out and
+
+
+like the stuff got destroyed due to
+
+
+neglect, not by accident because they
+
+
+simply didn't care about this. So
+
+
+thankfully for us, there's like a weird
+
+
+multiverse cosmic book like DC situation
+
+
+going on. And the Arabian Peninsula,
+
+
+they're actually keeping all this
+
+
+knowledge like around and they're
+
+
+advancing it in many ways, right? We've
+
+
+got like the uh treatise of algebra in
+
+
+1830 CE by the way CE already. And this
+
+
+is important for Europeans because in
+
+
+1200 there's something called the
+
+
+medieval rena renaissance when basically
+
+
+the Roman Empire is like you know it's
+
+
+like falling apart and we're getting
+
+
+like a trickle of all the all the stuff
+
+
+from the Arabs, right? Obviously there's
+
+
+lots of wars, conquest and stuff like
+
+
+this. But the nice thing is we're also
+
+
+getting all that knowledge coming in.
+
+
+Europeans learned about ancient Greek
+
+
+philosophers like Uklid and Aristotle by
+
+
+reading Arabic translations of the
+
+
+original works because it was lost
+
+
+during this time because of the Romans.
+
+
+Right? So let us look with that context
+
+
+in mind. Let us actually look at what
+
+
+the Romans
+
+
+did. Okay? So 753 BC this is the
+
+
+beginning of Rome.
+
+
+The Romans have a 10-month calendar. The
+
+
+first four months are named after the
+
+
+gods, the most important ones. And then
+
+
+they ran out of creative juice or they
+
+
+ran out of GPT tokens and they just
+
+
+numbered the months. All the months in
+
+
+orange are literally the name of the
+
+
+month of the year, right? So October,
+
+
+Octa 8, decimal, December 10, right? All
+
+
+those months literally just mean the
+
+
+name like the number of the month. Okay?
+
+
+And each of the months was still like 29
+
+
+30 days base because they were still
+
+
+kind of on the lunar calendar. So as
+
+
+long as the um the year was like
+
+
+basically 300 days and but obviously the
+
+
+the year is not 300 days. So what they
+
+
+did is they called the rest of the time
+
+
+winter. They didn't actually just they
+
+
+didn't count it. It's like they just
+
+
+went into their you know went into their
+
+
+into their home and basically came out
+
+
+two months later when someone like
+
+
+raised their hand and went today's the 1
+
+
+of
+
+
+March. And on top of this, the Rowans,
+
+
+they didn't have the concept of uh
+
+
+months of days of the month. You didn't
+
+
+say something like it's the 8th of
+
+
+March. What you had is you had the
+
+
+calendars, the nonsens, and the ides.
+
+
+Now, historically, they are actually
+
+
+based on lunar phases, but in practice,
+
+
+they had nothing to do with them at this
+
+
+point. You can think of it like the
+
+
+calendars was the 1st of March, known
+
+
+was the let's say 5th to 7th, and the
+
+
+ids was around the 14th. And then all of
+
+
+the other days of the month were just
+
+
+relative numbers. So you would say I'll
+
+
+I'll talk to you four days prior to the
+
+
+eyides of March. Like that's the way you
+
+
+would talk, right? And by the way, it's
+
+
+funny because counts, known, and ides
+
+
+actually means uh phases of the moon.
+
+
+But in fact, this is the equivalent of
+
+
+us using a floppy disc icon to save
+
+
+things to the cloud, right? Like they
+
+
+have nothing to do with each other
+
+
+anymore. And it's relevant for the
+
+
+future because they didn't like the zero
+
+
+concept. Their calendars are one- based.
+
+
+Okay, so after 50 years they get tired
+
+
+of this idea that they had this unknown
+
+
+winter period and they add two new
+
+
+months. January goes in the beginning of
+
+
+the year because rough translation it's
+
+
+looking forward to the year ahead and
+
+
+February goes to the end of the year
+
+
+because rough translation it is looking
+
+
+back. It is a retrospective on the year
+
+
+that has passed. This is why February
+
+
+has the least number of days and this is
+
+
+why the leap year calculation is in
+
+
+February because it happened at the end
+
+
+of the year, right? You basically ran
+
+
+out of days because you wanted to start
+
+
+a new year. Makes sense,
+
+
+right? It's a little weird because they
+
+
+still still don't have the concept of
+
+
+365 days and now octa means nine and
+
+
+desi means 11, which I'm sure didn't
+
+
+confuse anyone that was living during
+
+
+that time period.
+
+
+But that's not bad enough because in 450
+
+
+the Dutch and very which you can think
+
+
+of like roughly the Senate they were
+
+
+going to get voted out of power. So what
+
+
+did they do by national decree? They
+
+
+voted that February is the second month
+
+
+of the year and they're still in power
+
+
+for another 10 months.
+
+
+these guys wanted to stay in power for
+
+
+10 months longer and you know 2,000
+
+
+3,000 years later we're going to deal
+
+
+we're still dealing with the
+
+
+consequences of this change
+
+
+right this is this is where we're
+
+
+getting the calendar from by the way
+
+
+so okay 45 BC Julius Caesar shows up on
+
+
+the scene so Julius Caesar has been
+
+
+spending a lot of time with Cleopatra
+
+
+for obvious reasons and the Egyptians
+
+
+have a calendar that as I mentioned
+
+
+before like 2700 BC they already knew
+
+
+this they had a calendar that was 365
+
+
+days and the way they did it was they
+
+
+said every month is exactly 30 days and
+
+
+then we're just going to have a 5day New
+
+
+Year's Eve party and when it's a leap
+
+
+year we have a 6-day New Year's Eve
+
+
+party imagine all the times you've been
+
+
+dealing with some calendar issues
+
+
+imagine like this was the rule every
+
+
+month is exactly 30 days there is
+
+
+nothing more to compute right so Julius
+
+
+came back to Rome with these ideas. But
+
+
+of course, it's like, you know, take
+
+
+think take take theory and put into
+
+
+practice. People didn't want to get rid
+
+
+of their old things. They had certain
+
+
+holidays that happened on certain days.
+
+
+You couldn't just mess with that. So,
+
+
+what he ended up doing was he needed the
+
+
+365 days. So, he put an arbitrary number
+
+
+of days into each month to not to piss
+
+
+off the least amount of people. And
+
+
+that's why certain months have more days
+
+
+than other months, right?
+
+
+and he defined the idea that you know
+
+
+there's four four every fourth year is a
+
+
+leap year because of because of the you
+
+
+know the drift unfortunately literally a
+
+
+year later he
+
+
+died on the eyides of March now you know
+
+
+that the eyides of March just literally
+
+
+means a specific day in the month it's
+
+
+nothing more important so he died and
+
+
+the Romans because they count from one
+
+
+not zero looked at that rule and said hm
+
+
+so every 3 years I should add a day
+
+
+right and that's what they did. So after
+
+
+40 years, the calendar has drifted
+
+
+again. And the next Agusta Caesar goes,
+
+
+"No, no, enough is enough. We're going
+
+
+to fix the fix." So they made another
+
+
+calendar reform. They fixed the actual
+
+
+problem, which is they said, "No, every
+
+
+four." No, like literally, no, every
+
+
+every four years. Yes. Yes. Yes. Every
+
+
+four years. Exactly. Now you get it. Now
+
+
+you get it. Okay. So he did that, but
+
+
+since he was already doing some calendar
+
+
+reforms and he had kind of an ego trip,
+
+
+he named one of the months after
+
+
+himself. That's where you get August.
+
+
+But also to not look like a complete
+
+
+douchebag, he renamed the previous month
+
+
+after Julius Caesar,
+
+
+right? And that's where you get July and
+
+
+August from. And this is what is now
+
+
+known as the Julian calendar. It was
+
+
+actually Augustus that proposed it. And
+
+
+that's ABC. And apparently the way we
+
+
+learn about it in school is that's
+
+
+that's the most important date. Like
+
+
+that's the only date. And then somewhere
+
+
+in 1600, specifically 1582, Pope Gregory
+
+
+shows up and he does the Gregorian
+
+
+calendar reform, whatever that means. Oh
+
+
+yeah, that's um it's divisible by four
+
+
+except it's divisible by 100 or 400. Um
+
+
+what does this all mean? Okay, so after
+
+
+he added all these rules, we'll talk
+
+
+about those rules later. Um we get the
+
+
+more modern version, which is the
+
+
+365.2425 days average, which by the way
+
+
+is still a drift, right? there there's
+
+
+still some drift
+
+
+involved,
+
+
+but we'll come back to this later. So, I
+
+
+I realize there's actually a lot more
+
+
+interesting history, but I wanted to
+
+
+sort of highlight how we learn about
+
+
+this in school, which is that there's a
+
+
+Julian calendar, then there was a
+
+
+Gregorian calendar reform, and then
+
+
+there's the modern day, and apparently
+
+
+nothing happened in between, right?
+
+
+Obviously, like what else could possibly
+
+
+happen? We will come back to the
+
+
+interesting parts of the history, but I
+
+
+do want to give your brains a little
+
+
+break, and I want to talk about
+
+
+computers for a minute. So, how do we
+
+
+make computers go fast? Imagine you're
+
+
+straight out of the university and
+
+
+you're at your first hiring job
+
+
+interview and you get this question
+
+
+implement a leap year function right so
+
+
+a function that returns whether a year
+
+
+is a leap year or not I'm not even
+
+
+asking you to write the code like the
+
+
+code is right there what I am going to
+
+
+ask you though is is this the fastest
+
+
+way you can write this function like it
+
+
+seems pretty fast because the first
+
+
+thing you do is you immediately check
+
+
+for four which happens 75% of the time
+
+
+and immediately return next you check
+
+
+for 100 and immediately return next you
+
+
+check for for the 400 module right so it
+
+
+seems like as fast as possible you're
+
+
+returning from this function now
+
+
+obviously if this was this obvious it
+
+
+wouldn't be on a slide so I will
+
+
+actually tell you that this code on the
+
+
+right is faster than the code on the
+
+
+left but the code on the right does more
+
+
+operations more frequently than the code
+
+
+on the left so why is doing more work on
+
+
+the CPU faster than doing less work on
+
+
+the CPU
+
+
+Any
+
+
+thoughts? You have 10 seconds because
+
+
+we've got a lot of slides.
+
+
+So the problem I heard many many things
+
+
+at once. The problem is the if is a is
+
+
+entropy and entropy hurts the branch
+
+
+prediction algorithms that modern CPUs
+
+
+have. And it turns out that a modern CPU
+
+
+there's only so fast you can make the
+
+
+chip go, right? Like we're hitting the
+
+
+limits of physics. So until we switch
+
+
+architectures yet again into something
+
+
+different, we're hitting the limits of
+
+
+physics. So you can't make CPUs much
+
+
+faster. What you can do is you can make
+
+
+more of them like more cores, more dies
+
+
+and so forth. And you can paralyze
+
+
+things, right, with different kinds of
+
+
+pipeline strategies. But branch
+
+
+prediction breaks all this because it
+
+
+means that all those things that were
+
+
+almost going to run to completion,
+
+
+there's a go-to statement in there. It
+
+
+has to jump to some other part of that
+
+
+code and it has to ignore everything it
+
+
+just processed. So it turns out that in
+
+
+some ways on a modern CPU today for some
+
+
+simple kinds of microbenchmarks like
+
+
+this, it is actually faster to do more
+
+
+work than it is to do less work. These,
+
+
+by the way, are just two ways to write
+
+
+this code. They're equivalent
+
+
+performance-wise, but they're three
+
+
+times faster than the code on the left.
+
+
+Right? This, by the way, obviously I
+
+
+understand is not a C++ conference. I do
+
+
+not expect you to learn about C++
+
+
+profiling and benchmarking. I am not the
+
+
+person to teach you. What I want you to
+
+
+get out of this talk is two things.
+
+
+First of all, your intuition on what is
+
+
+fast and slow on a CPU is wrong by
+
+
+definition. Because even if what you
+
+
+have is right, it's not true five or 10
+
+
+years later because the architectures
+
+
+change. So the only way to do
+
+
+performance monitoring and benchmarking
+
+
+correctly is to actually benchmark. Have
+
+
+a hypothesis, test before and test
+
+
+after. And don't be afraid to try crazy
+
+
+things like doing more work instead of
+
+
+less work.
+
+
+Right? Quiz number two. Here's a
+
+
+function and it says give me the number
+
+
+of days in a
+
+
+month. If we are in the Egyptian
+
+
+calendar, this would be a constant that
+
+
+return 30 and you can inline it. But
+
+
+we're not on the Egyptian calendar
+
+
+because of the Romans. We are instead on
+
+
+the Roman calendar. And the Roman
+
+
+calendar, every month has a different
+
+
+number of days and then you still got to
+
+
+deal with that leap year thing. Can we
+
+
+make this code go faster? Because if you
+
+
+look at it, what we have is we've
+
+
+premputed the values. It's a lookup
+
+
+table in a vector. Can you get faster
+
+
+than a premputed
+
+
+value? It turns out you can. The way you
+
+
+do it faster is you do more
+
+
+work. It turns out doing more work is
+
+
+faster than doing less work.
+
+
+Again, ideas
+
+
+why memory
+
+
+access this is slow. Again, the more
+
+
+cores we have, the more CPUs we have, we
+
+
+are our memory is getting slower and
+
+
+slower compared to our CPU. On cases
+
+
+like this where we're just letting the
+
+
+computer do what it does really, really
+
+
+well, it's actually faster because even
+
+
+if you could even if you didn't have a
+
+
+cache miss, this means that your CPU is
+
+
+using up critical L1 cache to store
+
+
+things that it could have been using for
+
+
+other things as well. And again, it's
+
+
+not intuitive. Five, 10 years ago, the
+
+
+code on the left might have been faster,
+
+
+right? The point is that you have to
+
+
+rethink any assumptions you have about
+
+
+performance every couple of years
+
+
+because everything is changing around
+
+
+us. Okay, quiz number three. What is an
+
+
+epic? It's not a trick question. What is
+
+
+an epic? It's this weird number, right?
+
+
+I give you a weird long number and I
+
+
+tell you this is an epic. Then the first
+
+
+thing you do is you go this is the
+
+
+number of seconds since January 1st
+
+
+1970. Wrong. If someone gives you an
+
+
+epic which is this big integer the first
+
+
+two questions you need to ask is what is
+
+
+the granularity? Are we talking seconds
+
+
+milliseconds nanconds? And the second
+
+
+question you must always ask is what is
+
+
+the start date? Because depending on the
+
+
+API it may be 1970 it may not be 1970 it
+
+
+may be January 1st it may not be January
+
+
+1st. These are bad assumptions.
+
+
+Different APIs have different
+
+
+understanding of epics. But if I tell
+
+
+you that this is an epic, January 1st,
+
+
+1970, then it's fun because you can use
+
+
+very basic math to pull out lots of
+
+
+interesting data out of this thing,
+
+
+right? You can find out exactly which
+
+
+hour, minute, and second this integer
+
+
+represents. And you can even get the
+
+
+weekday because it's a module of seven
+
+
+and it happens that January 1st, 1970
+
+
+was a Thursday. Right? Simple enough. So
+
+
+here's my question. What do you divide
+
+
+by to get the fact that it's April 12th,
+
+
+2025? You know the answer at this
+
+
+point? The answer
+
+
+is you can't because of the Romans. If
+
+
+we had a simple system like the Egyptian
+
+
+one, we could simply do a bunch of
+
+
+division and we we'd get the answers.
+
+
+But we
+
+
+can't. This is the best we could do. A
+
+
+lot of smart Microsoft people sat down
+
+
+.NET 6. This is a pretty recent version
+
+
+of .NET, right? .NET 6. This is the best
+
+
+that Microsoft researchers who are paid
+
+
+lots of money came up
+
+
+with. It's got memory lookups. They
+
+
+actually independently computed the leap
+
+
+year version and the non-leier version.
+
+
+It's got a bunch of ifs and it's got a
+
+
+while loop. This is the best they could
+
+
+do,
+
+
+right? So the question is, how can we do
+
+
+better? And here's the intuition I want
+
+
+you to build. When you are working with
+
+
+a performance problem or any other kind
+
+
+of problem, you're working on a domain
+
+
+problem and it looks complicated. I want
+
+
+you to learn to rephrase problems. This
+
+
+is just like in school when you learned
+
+
+how to switch between the polar and
+
+
+coordinate and the cartisian system.
+
+
+Some problems are simply easier to solve
+
+
+in one or the other. Let me give you
+
+
+some
+
+
+examples. Convenient data structures.
+
+
+Christian Zeller 1882 came up with what
+
+
+is known as a computational calendar.
+
+
+Here's the idea. This is your calendar,
+
+
+right?
+
+
+2025 January to December and February is
+
+
+screwing us because of the Romans,
+
+
+right? So what what did seller do? Well,
+
+
+he said, "No, screw that. I'm going to
+
+
+literally just move this start time to
+
+
+March and the year ends in February of
+
+
+next year. I'm going to do all of my
+
+
+calculations, all the math I'm
+
+
+interested in from a calendar
+
+
+perspective on this simpler model. The
+
+
+February thing is all the way at the
+
+
+end. I honestly don't have to care about
+
+
+it. Almost never, right? And once I'm
+
+
+done with this logic, I just move the
+
+
+goalpost back and get the answer I
+
+
+wanted. It's such a simple idea, yet
+
+
+nobody thought of it until
+
+
+1882. Here's another one. Convenient
+
+
+numbers. Very quickly, without thinking,
+
+
+what is 42 over 5?
+
+
+It's not an easy answer, but here's
+
+
+another question. What's 42 *
+
+
+2? What's 84 over 10?
+
+
+Why is that so much easier? Because we
+
+
+are used to working with the decimal
+
+
+system and we're used to doubling
+
+
+things. It turns out that for humans n
+
+
+over 5 is a 2 * n / 10. It's easier. By
+
+
+the way, thank you for your
+
+
+participation. Computers are like this
+
+
+too, except they have a slightly
+
+
+different logic for them. Bit shifting
+
+
+and uh and big numbers are useful. So
+
+
+this is actually the fastest way to
+
+
+write n over five on a on a modern CPU.
+
+
+It's it's approximate because it's it's
+
+
+mathematically not correct but because
+
+
+of how uh underflow and overflow works
+
+
+it actually gives you the right answers
+
+
+always. Okay. So this is basically what
+
+
+this is the equivalent of Shimon's
+
+
+example but for the
+
+
+CPU. There's a third thing we need for
+
+
+this specific task but this is like
+
+
+Uklid functions. This is outside of this
+
+
+talk but if you're curious about it go
+
+
+Google it. I'm going to give you the
+
+
+10-second elevator pitch. You know how
+
+
+sometimes low-level assembly programmers
+
+
+have like these fun tricks they do with
+
+
+bit shifting and and operations to like
+
+
+trick the bounded boxes of CPU to do get
+
+
+answers that they normally wouldn't get.
+
+
+Uklid a a functions are that equivalent
+
+
+for mathematicians. It's a way they
+
+
+rephrase problems to to use bounding
+
+
+boxes boxes to like make some kind of
+
+
+calculations easier. It's not part of
+
+
+this talk but if you're interested I
+
+
+highly recommend it.
+
+
+But the result is using just those three
+
+
+changes. This is the .NET 7
+
+
+code. This code has no ifs, no while
+
+
+loops, and no memory
+
+
+lookups. It's all just pre It's all just
+
+
+computations, just raw CPU because of
+
+
+those tricks I just showed you that
+
+
+weren't that obvious. How much faster do
+
+
+you think this code is? Take a wild
+
+
+guess.
+
+
+100 times. Oh, that'd be really good.
+
+
+No, it's um 4x the Ner Schneider
+
+
+algorithm that's .NET 7 and then .NET 6
+
+
+is the 19.3. The Ner Schneider algorithm
+
+
+is in the most recent versions of GCC,
+
+
+Linux and .NET 7. Why do I say most
+
+
+recent? This was a white paper that was
+
+
+published two years ago. This is this is
+
+
+like bleeding edge computer science
+
+
+about how to make epic-to-date
+
+
+computations faster because of the
+
+
+Romans.
+
+
+Think about that for a
+
+
+second. You don't think this is
+
+
+important? Think about the server that's
+
+
+making hundred thousands of requests a
+
+
+second. And due to our previous
+
+
+presentations, you're doing multiple
+
+
+logs per request. And every log, what is
+
+
+the first thing it does? It does this
+
+
+calculation to print out the date and
+
+
+time, right? 4x that adds up
+
+
+quickly.
+
+
+TLDDR branch predictions, memory latency
+
+
+are just examples of how modern CPUs are
+
+
+slightly faster and non-intuitively work
+
+
+different than let's say CPUs from 10
+
+
+years ago. But I think the more
+
+
+important lesson for you guys is always
+
+
+measure, never assume. And learn to
+
+
+rephrase problems such that they are
+
+
+convenient for your purposes. Whether
+
+
+this is a performance thing or it's a
+
+
+domain modeling thing, there are
+
+
+multiple ways. This is very practical
+
+
+stuff. How are we how are we feeling?
+
+
+Are we still here? We still good? Okay,
+
+
+just checking in.
+
+
+That's a that's a you know party
+
+
+question.
+
+
+Okay, deploying breaking changes. So,
+
+
+let's come back to the history lesson.
+
+
+You're a very early Christian. When is
+
+
+Easter? The specification is Jesus rose
+
+
+on Sunday after the first night of
+
+
+Passover. That is the official just
+
+
+that's that's that's the specification
+
+
+you get for a product manager to
+
+
+implement. So it turns out the first
+
+
+thing that the early Christians have to
+
+
+do is they have to have a rabbi in their
+
+
+village because otherwise they don't
+
+
+even know when Passover is, right? So
+
+
+obviously this was this was not ideal.
+
+
+So very quickly
+
+
+3:25 they come up with a better
+
+
+definition. They say it's the first
+
+
+Sunday after the first full moon on or
+
+
+after the vernal equinox. This way you
+
+
+no longer at least have to deal with the
+
+
+the
+
+
+rabbis. This is called comput. This is
+
+
+where computers and computing comes
+
+
+from. Computous literally means the
+
+
+algorithm to calculate Easter. Your
+
+
+entire
+
+
+industry comes from this word to
+
+
+calculate Easter. This is the original
+
+
+big data problem.
+
+
+I want that to sink
+
+
+in. Okay, two things. First, a bit of
+
+
+trivia. If you ever have are dealing
+
+
+with like scheduling problems and you
+
+
+have someone that defines a task as
+
+
+first Sunday after, you will now always
+
+
+remember. Nor said don't do that. Why?
+
+
+Because you're immediately going to hit
+
+
+edge cases, which is what happens if the
+
+
+thing I'm looking at happens exactly on
+
+
+Sunday. Do I count it or not? So, here's
+
+
+the trick. Whenever you see something
+
+
+like this, you immediately rename it
+
+
+like this. And I apologize, but my fonts
+
+
+aren't working. The Sunday after the
+
+
+first Saturday on or
+
+
+after it's a really simple trick, but
+
+
+this version doesn't have those edge
+
+
+cases you have to worry about,
+
+
+right? The second thing is early
+
+
+Christians not not great fans of
+
+
+science. So they didn't want to actually
+
+
+deal with the whole solar, you know, the
+
+
+whole predicting when the sun will be.
+
+
+So they actually just hardcoded it to
+
+
+March
+
+
+21st. What could possibly go
+
+
+wrong? BD725. He was both a develop
+
+
+priest and a scientist and he actually
+
+
+developed a bunch of things. By the way,
+
+
+like you don't learn about this in
+
+
+school, right? Because Julian calendar,
+
+
+Gregorian calendar be actually came up
+
+
+he he told everyone about the Julian
+
+
+drift like guys we're drifting this is
+
+
+not a good like this is not a good
+
+
+strategy we need to do something 725
+
+
+remember 18 like 1600 was they actually
+
+
+fixed
+
+
+this matonic cycle he actually figured
+
+
+out this ratio that I mentioned and
+
+
+among other things he used all this
+
+
+knowledge to basically hand compute the
+
+
+next 532 years of eers Right? There was
+
+
+no computer. So he was the computer
+
+
+doing the computations for the
+
+
+comput.
+
+
+Right? Finally in 1582 Pope Gregory
+
+
+shows up and they actually do the
+
+
+Gregorian re calendar reforms. This is
+
+
+the BD algorithm converted to C++ and it
+
+
+has all these interesting things about
+
+
+like you see that 19 and you see all
+
+
+this other stuff that's sort of in the
+
+
+comments. We don't need to go through
+
+
+all the details, but basically every
+
+
+piece of that code is basically someone
+
+
+at some point doing something weird to
+
+
+the calendar. Now you have to deal with
+
+
+this,
+
+
+right? Even even that March 21st
+
+
+weekday, right? Like if if this was a
+
+
+vernal equinox, actually it would be
+
+
+easier to calculate, but it isn't. So
+
+
+they have to like hardcode and work
+
+
+around the fact that it's
+
+
+hard-coded. So yeah, great. Um, and it's
+
+
+not a solved problem. So these are some
+
+
+examples of mathematicians that like
+
+
+famous ones that actually have published
+
+
+newer better versions of how to compute
+
+
+Easter. Right? This is like the never-
+
+
+ending struggle. Like the most recent
+
+
+paper 1961, we're still dealing with
+
+
+this problem. We're still trying to find
+
+
+out a better way to actually calculate
+
+
+Easter. Um yeah, but let's come back to
+
+
+let's come back to Pope Gregory.
+
+
+So, I know you all have this situation.
+
+
+You've you're introducing V2. How do you
+
+
+get everyone to switch over? You've had
+
+
+this, right? Like, how do you get people
+
+
+to switch over? How long is it going to
+
+
+take? What are you going to do? Imagine
+
+
+it's your customer is not around for a
+
+
+year. Your customer has been around for
+
+
+1600 years. How do you get someone to
+
+
+switch off of 1600 years of using
+
+
+V1? I think we have an opportunity to
+
+
+learn from the masters.
+
+
+First thing is simple and clear patch
+
+
+instructions. This is why you have that
+
+
+weird rule about divisible by four also
+
+
+divisible by 100 and 400 because
+
+
+basically instead of making up a new
+
+
+rule that people would then argue about
+
+
+he took the old rule which was divisible
+
+
+by four and he added additional patches
+
+
+to it because when you think about it
+
+
+Gregary had to explain this as an
+
+
+instruction as a letter had to send it
+
+
+out thousands and thousands of you know
+
+
+miles kilometers away and hope that
+
+
+someone who is reading that is educated
+
+
+enough to understand and properly apply
+
+
+this because otherwise souls would not
+
+
+be saved, right? Like this is a big
+
+
+deal. So simple and clear and patch
+
+
+instructions instead of rewriting and
+
+
+redoing the thing from
+
+
+scratch. If you're already doing a
+
+
+breaking change, take the opportunity to
+
+
+fix things you kind of wanted to fix for
+
+
+a long time, but you couldn't. So the
+
+
+March 21st equinox by now has drifted
+
+
+over 10 days, which means the pope is on
+
+
+a weird place where he's saying that God
+
+
+is infallible, but the people are
+
+
+looking up at the sky and the sun is 10
+
+
+days from where it should be, right? So
+
+
+something's off. So he fixed it by
+
+
+basically just removing those days. He
+
+
+could have actually fixed it by
+
+
+switching over to like the actual solar
+
+
+observation, but you know, it is what it
+
+
+is.
+
+
+Another thing is imagine you have
+
+
+daylight savings time right now. Well,
+
+
+most of us don't experience it because
+
+
+your iPhone updates it automatically,
+
+
+but you know, like imagine your parents
+
+
+having to actually wind the clock and
+
+
+remember to wind the clock, right? Or if
+
+
+you're on a Polish train, uh the trains
+
+
+literally like stop in the field for an
+
+
+hour, right? Because they need to get to
+
+
+the train at a train station at a
+
+
+specific point in time. So imagine that,
+
+
+but it's not an hour. The person is
+
+
+going to go to sleep and wake up 10 days
+
+
+later.
+
+
+Right. So, so they came up with this
+
+
+thing is they picked October 4th because
+
+
+it was a Thursday. So, at least you
+
+
+would go to sleep on a Thursday and wake
+
+
+up on a Friday. Right? You would lose 10
+
+
+days, but at least maybe you could get
+
+
+sort of your work cycle figured out and
+
+
+then spend the weekend drinking and
+
+
+wondering what happened to your last 10
+
+
+days and slow adoption. So, he realized
+
+
+that this wouldn't be like a one day
+
+
+switchover. So the rules were
+
+
+implemented in such a way to guarantee
+
+
+that people had over 120 years to
+
+
+implement this correctly for 120 years.
+
+
+The Julian calendar and the Gregorian
+
+
+calendar would be in sync if you ask
+
+
+what year is a leap year because I mean
+
+
+it's 120 years. That's got to be enough
+
+
+time. So you know where this is
+
+
+going. There's a wonderful Wikipedia
+
+
+page called the list of adoption dates
+
+
+of the Gregorian calendar by country. Um
+
+
+I'm just going to show you some
+
+
+highlights. Which countries do you think
+
+
+were like the early early
+
+
+adopters? Germany, Italy, Poland,
+
+
+Portugal, and Spain. These are the only
+
+
+countries that did it first day
+
+
+immediately like switched over bleeding
+
+
+edge. What do you think? How how late do
+
+
+you think was the latest change?
+
+
+remember
+
+
+1582 120
+
+
+years
+
+
+2016 but okay that's a little unfair
+
+
+because it's Saudi Arabia they switch
+
+
+from the Islamic calendar right and
+
+
+similar like some of these are Soviet
+
+
+Yugoslavian so they like switching from
+
+
+the from the orthodox but um you don't
+
+
+have to scroll very far to for example
+
+
+find you know Chinese switch from like
+
+
+the Chinese calendar but you don't have
+
+
+to scroll that very far to find France
+
+
+1805 1805 five. But actually, that's not
+
+
+that's not the funnest thing about
+
+
+these. Um, if we sort by countries, I'm
+
+
+going to first scroll and just observe
+
+
+yellow. Do you know what yellow
+
+
+means? Yellow means that someone
+
+
+switched from the Julian calendar to the
+
+
+Gregorian calendar and then switch back
+
+
+to the Julian calendar and then switch
+
+
+back to the Gregorian calendar over and
+
+
+over
+
+
+again. And if you take something like uh
+
+
+let's take I don't know maybe France or
+
+
+Germany. Uh I think maybe like Germany
+
+
+is a good example.
+
+
+Uh some places were in 1700 and some
+
+
+places were let's say what's like the
+
+
+earliest 1582 depending on which city
+
+
+you live
+
+
+in. Depending on which city you live in
+
+
+it could be one of like Yeah. Amazing,
+
+
+right?
+
+
+I I I'd love to go more into this, but
+
+
+like just just just check out the like
+
+
+uh let's look at Switzerland for
+
+
+example. I think Switzerland is a good
+
+
+one also. Um Switzerland also is like
+
+
+some cities 1798, some places in
+
+
+Switzerland as early as 1583. So it's
+
+
+like imagine you're you know it's like
+
+
+imagine you're just writing a a letter
+
+
+to someone in a different city in the
+
+
+same country. Imagine imagine the people
+
+
+actually dealing with taxes.
+
+
+What does that even mean? So yeah, um
+
+
+fun. I I would say I would call this
+
+
+fun. Was it worth it? Well, as you can
+
+
+imagine, historians are not happy. Um if
+
+
+you have a if you have a some kind of
+
+
+document and it says March 3rd, 16002,
+
+
+similarly to how you have a local time,
+
+
+the first thing you have to ask as a
+
+
+historian is, well, what city was this
+
+
+written in? Because depending on the
+
+
+city, not even the country, the city, it
+
+
+might be in a different calendar system.
+
+
+And because of that, there are missing
+
+
+historical dates. There are dates that
+
+
+simply don't exist. But there are also
+
+
+duplicate dates, as in multiple
+
+
+independent days that all map to the
+
+
+same date,
+
+
+right? Must be fun being a historian.
+
+
+Astronomers don't use this because when
+
+
+when you're talking about hundreds of
+
+
+years in order to like actually use, you
+
+
+know, like track comets and things like
+
+
+this, they all use a Julian calendar for
+
+
+obvious reasons because then they don't
+
+
+have to deal with all this. And if you
+
+
+ever see this word prolleptic, whether
+
+
+it's whenever you see prolleptic
+
+
+calendar, I want I want to explain what
+
+
+this means. This is how your calendar
+
+
+app works in your computer, when you
+
+
+open it up and you scroll back to March
+
+
+3rd, 12:05 and it says that that's a
+
+
+Monday or whatever it says, that doesn't
+
+
+mean anything because what they do is a
+
+
+proactive calendar means the modern rule
+
+
+set for a calendar apply it backwards.
+
+
+So it's not useful for historians,
+
+
+right? It's not useful for anyone. It
+
+
+doesn't mean anything, right? But it's
+
+
+an easy way because then you don't have
+
+
+to deal with this. Like imagine if you
+
+
+had a properly accurate working
+
+
+calendar. When you scroll back, the
+
+
+first question the computer would tell
+
+
+you is, well, what city are we talking
+
+
+about,
+
+
+right? Or or it actually would tell you
+
+
+like that day doesn't exist. Like what
+
+
+are you going to do? Okay, but that's
+
+
+then what about now? I want to give you
+
+
+a word of caution because I know as
+
+
+engineers we see the new shiny thing and
+
+
+we want to switch over. An example of
+
+
+this is daylight savings. You keep
+
+
+hearing arguments about the fact that
+
+
+daylight savings is stupid and we should
+
+
+get rid of it. And I agree it is a
+
+
+stupid thing and from like an
+
+
+engineering perspective it doesn't make
+
+
+sense why it must exist. But I want you
+
+
+to think about the consequences of if
+
+
+tomorrow the United Nations voted that
+
+
+daylight savings is out. It would mean
+
+
+for the next 400 years you would have a
+
+
+bunch of code that is trying to figure
+
+
+out in which year which city of a
+
+
+country decided to apply those rules or
+
+
+not.
+
+
+Right? Think about that. I I want I want
+
+
+to like like bear into it that doing the
+
+
+engineering work is one thing but
+
+
+convincing the entire world to do
+
+
+something is a completely different
+
+
+other story. Right? Same thing with your
+
+
+API v2. We've all had this. You have a
+
+
+v2 you're already on v3. There's that
+
+
+one customer that refuses to get off
+
+
+V1. Was it worth it? That's a question
+
+
+only you can answer. Hyram's law, right?
+
+
+Anything the way the system works is the
+
+
+documentation is the specification.
+
+
+Doesn't matter what you think,
+
+
+right? I think it's important to think
+
+
+about this before you release
+
+
+V1. Whether you are happy living with
+
+
+this V1 for the foreseeable
+
+
+future, how are we
+
+
+feeling? Are we still good? I think
+
+
+we're doing good on time. Okay, that
+
+
+means that means I'll have time to show
+
+
+you some C++ because that was that was a
+
+
+request from the
+
+
+audience. To rewrite or not to rewrite,
+
+
+that is the
+
+
+question. I'm not going to give you one
+
+
+of those [ __ ] it depends answers.
+
+
+I'm going to actually tell you there is
+
+
+an actual rule. This is Norbert's golden
+
+
+rule of
+
+
+rewriting. Rewrite if and only if you
+
+
+want to build on different principles.
+
+
+That's it. We can all go
+
+
+home. Are we
+
+
+convinced? What does that
+
+
+mean? The question is what are
+
+
+principles? Principles I want you to
+
+
+think about as
+
+
+well-defined things like think of it
+
+
+like axims versus platitudes, right?
+
+
+axioms are this can only be this is a
+
+
+you know a single write database single
+
+
+writer transactor database CQRS splits
+
+
+commands and requests such that a you
+
+
+know uh a read can never mutate state
+
+
+and a command is always fire and forget
+
+
+it doesn't matter what the axioms are
+
+
+they're you decide but they have to be
+
+
+things that give you some kind of
+
+
+ability to scale up as in once these
+
+
+constraints because that's the thing
+
+
+about creativity the more you constrain
+
+
+your system the more you can actually
+
+
+use it to your advantage. And the whole
+
+
+thing about building on principles is
+
+
+you define a bunch of axioms that you
+
+
+say these are things that will always be
+
+
+true. I can always depend on 100% and
+
+
+because of that I can use that
+
+
+information to make other kind of
+
+
+interesting architectural decisions.
+
+
+Platitudes on the other hand are things
+
+
+like we will reiterate it using clean
+
+
+code or we will TDD the hell out of this
+
+
+application this time. Right? Those are
+
+
+nice things to have. I'm not saying
+
+
+don't do it, but don't call that a
+
+
+rewrite, right? It's you're not you're
+
+
+not giving yourself some kind of
+
+
+superpower to do things any differently
+
+
+this time,
+
+
+right? You do not simply like TDD or
+
+
+yellow principles. These are things you
+
+
+have to think about very hard because
+
+
+what happens in the real world is this
+
+
+rewrite, it's going to take a year,
+
+
+maybe two years to actually get it like
+
+
+into production, actually phase out the
+
+
+old thing. You're going to hit a hurdle
+
+
+where it's like it's no longer fun.
+
+
+there's a new shiny thing in there
+
+
+somewhere out there. You're going to hit
+
+
+the hurdle that your stakeholders are
+
+
+why are we spending so much money on
+
+
+this? And at that point, you have to be
+
+
+able to point at those axioms or those
+
+
+principles you've defined in your system
+
+
+and said this is why we're doing this.
+
+
+As soon as we finish this, we will be
+
+
+able to do x y and zed. We will be able
+
+
+to guarant guarantee things about this
+
+
+system that we couldn't before and we
+
+
+will abuse that to our competitive
+
+
+advantage.
+
+
+Right? Anything else? I would argue we
+
+
+let's just not call it rewrites. They're
+
+
+refactors or sometimes they're just
+
+
+retries. Retries can happen two ways.
+
+
+You can be like, "This team learned a
+
+
+lot about what happened and they're just
+
+
+going to like do a clean slate
+
+
+implementation." If they don't have that
+
+
+discussion about these are the
+
+
+principles we're building on, it's a
+
+
+retry. It's just throwing things at a
+
+
+wall, maybe it'll stick. If you decide
+
+
+to hire a brand new team without all
+
+
+that domain knowledge to do it again,
+
+
+again, a retry. If you do two years
+
+
+worth of refactoring and fixing the test
+
+
+and doing everything, that's really
+
+
+excellent work, but it's not a rewrite.
+
+
+It's just a very good refactor of your
+
+
+code, which I applaud. But if we stopped
+
+
+calling them rewrites, maybe we wouldn't
+
+
+have these stupid discussions on the
+
+
+internet. I want to give you a thought
+
+
+experiment. This is the code. This is
+
+
+all you see. How long are we sleeping
+
+
+for?
+
+
+We don't know. 10 seconds, 10 days, 10
+
+
+hours.
+
+
+What? What's the
+
+
+type? I mean, it's not a trick question.
+
+
+It's an integer, right? The type is an
+
+
+integer. So, here's my question.
+
+
+You've got a million line
+
+
+codebase, 100% test
+
+
+coverage, and you've got a bunch of
+
+
+places doing very complicated math that
+
+
+ends up being put into that sleep
+
+
+function. How confident do you feel in
+
+
+your system that you need to convert
+
+
+everywhere to go from seconds to
+
+
+milliseconds? From an integer to an
+
+
+integer that means something
+
+
+else. And let me up the stakes. you
+
+
+think you don't feel like you don't feel
+
+
+particularly confident but you have got
+
+
+an ego trip so like yeah I can do this
+
+
+and then I tell you this software is
+
+
+going up into a Boeing airplane you're
+
+
+flying the next day do you still feel
+
+
+that confident that you that you found
+
+
+all the places where it you assumed
+
+
+seconds and it should have been
+
+
+milliseconds
+
+
+yeah you're in the plane that's that's
+
+
+that's actually I think also a nice
+
+
+principle is engineers should by
+
+
+definition be flying the things they
+
+
+build that's that's what they mean when
+
+
+they said test in
+
+
+production.
+
+
+So reality check, we suck. We shouldn't
+
+
+be calling ourselves engineers, right?
+
+
+This is terrible, but this is what we do
+
+
+every
+
+
+day. Chrono is a C++ library written by
+
+
+Howard
+
+
+Hinn. He tried to solve this problem and
+
+
+I'm giving it to you as two for two
+
+
+reasons. first as an example of pre like
+
+
+practicing what you preach of using a
+
+
+small set of principles to do an a
+
+
+fundamental rewrite of a system. And the
+
+
+second thing is even though this library
+
+
+is in C++ the ideas behind this library
+
+
+I think are things that we should adopt
+
+
+in every single programming language
+
+
+because they just fundamentally do time
+
+
+better than anything than anything else
+
+
+I've seen. And Howard Henant has
+
+
+believed in these principles so much he
+
+
+has gone through four C++ committees to
+
+
+get more and more of this of his library
+
+
+into the C++ standard. And if you're not
+
+
+aware if some on some arbitrary
+
+
+spectrum deploying leftpad to npm is
+
+
+here getting something approved by the
+
+
+C++ committee is here. It's as far you
+
+
+can get the other way. As far as the
+
+
+amount of just crap you have to do to
+
+
+convince a bunch of people to put
+
+
+something into a standard that's not
+
+
+even a single implementation that's
+
+
+multiple implementations of the C++
+
+
+compiler, right? By a very conservative
+
+
+number of people who don't want to
+
+
+change anything ever. And he did this
+
+
+four times. So what was it? Like what
+
+
+was the problem statement? And the
+
+
+problem with statement was he wants this
+
+
+safety that I just talked about but he
+
+
+can't in any way impact performance
+
+
+because any change to performance means
+
+
+that no C++ developer will will use it.
+
+
+So we won't go into the standard. He
+
+
+came up with a specific solution which
+
+
+is type check units compile time ratios
+
+
+generics and standard algorithms. But
+
+
+that's just one solution. He could have
+
+
+come up with a different solution.
+
+
+Right? The point is that he unders he he
+
+
+understood very clearly these are my
+
+
+goals. This is the sort of Lego blocks
+
+
+I'm choosing to solve them with and I'm
+
+
+going full steam ahead right and I won't
+
+
+stop until it's in the
+
+
+standard. So what is chrono in practice?
+
+
+Well the first thing is one of the thing
+
+
+things it defines is it defines a
+
+
+duration. So a duration is time elapse
+
+
+and as you can imagine it is not an
+
+
+integer. Instead, it's a representation
+
+
+of some value and a ratio compared to
+
+
+seconds. The representation can be
+
+
+anything. It could be in float,
+
+
+whatever, because it's specific to the
+
+
+code you're writing. But the ratio is
+
+
+always two seconds. Seconds, as it turns
+
+
+out, are is a really good system to use
+
+
+as a baseline because, as I talked about
+
+
+previously on the very first slide, that
+
+
+feels like three hours ago, every day
+
+
+has exactly 86,400
+
+
+seconds, right?
+
+
+What does this mean in practice? You can
+
+
+define things like milliseconds, micros,
+
+
+nanos. They're just different ratios
+
+
+compared to a second. But you can define
+
+
+arbitrary things like 60 fps. You can
+
+
+define it as a new type that you just
+
+
+use in your in your code or NTSC frames,
+
+
+right? These are all just ratios that
+
+
+all they're saying is I have a very
+
+
+specific relationship to what a second
+
+
+of for what a 1 second means in time.
+
+
+And the and the way the library works
+
+
+this is like you know this is sort of
+
+
+like idiomatic because it's C++ we
+
+
+wouldn't do the same thing in Ruby but
+
+
+my point is in C++ what he ended up
+
+
+doing was if the function assumes that
+
+
+you need a duration of float in millies
+
+
+in milliseconds and you pass in five
+
+
+frames of 60 fps and 45 milliseconds.
+
+
+Everything that's happening on the
+
+
+bottom there the compiler is doing at
+
+
+compile time. It's checking all of the
+
+
+semantics that all of these numbers that
+
+
+you're trying to add together are
+
+
+something that you can do without any
+
+
+kind of implicit conversion that would
+
+
+break the semantics. Here the conversion
+
+
+is allowed because we're we're using a
+
+
+float at the end. So we're already
+
+
+losing technically data, but this is a
+
+
+loss that the programmer understands
+
+
+because he wrote the function. But
+
+
+what's really interesting is that this
+
+
+all happens in compile time. all this
+
+
+kind of semantic checking, type checking
+
+
+at runtime. This is just for like the
+
+
+these are just basically a couple
+
+
+numbers that are getting multiplied and
+
+
+added which is the exact same code that
+
+
+the C uh which is like the exact same
+
+
+code the programmer would have written
+
+
+handcoded to get the most performant
+
+
+version. So you get the exact same
+
+
+performance or better than what the
+
+
+human would have written, but you get
+
+
+all of the compile time semantic
+
+
+checking,
+
+
+right? And the next thing is he said,
+
+
+well, time point is not a duration
+
+
+because it's a moment in
+
+
+time. You can't say something like some
+
+
+number of seconds and it can't mean a
+
+
+specific point in time because it's
+
+
+relative to some starting point, right?
+
+
+This is just like that problem with the
+
+
+epic. So he just defines a time point
+
+
+which is the duration we just talked
+
+
+about with a clock and the clock
+
+
+explains what is the starting point and
+
+
+like what are the ticks right like what
+
+
+does it mean to be plus one of a clock
+
+
+and then you can define lots of clocks
+
+
+like by default the library it gives you
+
+
+like all the constant kind of clocks
+
+
+like system clock study clock atomic
+
+
+clocks but the thing is that the
+
+
+interface is so simple you can define
+
+
+your own clocks that only make sense in
+
+
+your specific application domain and as
+
+
+long as you can explain it in terms of
+
+
+relation to seconds. You get all of the
+
+
+infrastructure for free to do it with
+
+
+everything else,
+
+
+right? And of course, ratios work both
+
+
+ways. You can get less of a second, but
+
+
+you can get more of a second. So, you
+
+
+can get minutes, hours, and days. And
+
+
+then the natural question is how many
+
+
+seconds are in a
+
+
+month? You don't know, right? Because
+
+
+because of the Romans, you're getting
+
+
+it. Square peg round hole problem.
+
+
+Right? Most calendar libraries get this
+
+
+wrong. That thing on the top, right? The
+
+
+31st of January plus one month. If you
+
+
+check any of your favorite calendar
+
+
+libraries, it will do one of several
+
+
+things. It will either return the 28th
+
+
+of February or if it's a leap year,
+
+
+maybe it'll return the 29th, or it'll
+
+
+return the 1st of March, or maybe it'll
+
+
+it'll just assume a month is 31 or 30
+
+
+days. So, it'll come back with like
+
+
+March 3rd or it'll throw an error
+
+
+because what does it mean? You can't add
+
+
+one month. Like, what does that even
+
+
+mean? Or maybe it'll just like do, oh,
+
+
+it's actually February
+
+
+31st. All of those are legitimate cases.
+
+
+I've seen in some like choose an
+
+
+arbitrary calendar library. It does one
+
+
+of those
+
+
+things. The point is that all of those
+
+
+answers are correct depending on
+
+
+context. The problem is that if the
+
+
+library implements it as the logic, it
+
+
+means that the programmer who
+
+
+understands the specific domain they're
+
+
+in can't choose the algorithm correctly.
+
+
+If you are working on tax software, your
+
+
+definition of plus one month is very
+
+
+different than you're working on Google
+
+
+calendar or you know like scheduling
+
+
+emails or whatever. Right? The point is
+
+
+that there is no one answer. The only
+
+
+way to win is to not play the game,
+
+
+right? Don't do auto conversions. have
+
+
+the programmer tell you what they mean.
+
+
+And also this comes back every time you
+
+
+need to do a complicated logic like you
+
+
+want to schedule something for every
+
+
+last Wednesday unless it's the fifth
+
+
+Wednesday of a month and then don't do
+
+
+anything. Right? If your calendar
+
+
+library assumes that uh months are just
+
+
+31 days, this kind of logic is really
+
+
+really hard to implement. And the only
+
+
+way to like solve this problem is the
+
+
+way Krono does it, which is they say
+
+
+you've got time elapse, which is
+
+
+duration and time points. And then
+
+
+you've got calendars. And calendars have
+
+
+absolutely nothing to do with durations.
+
+
+They are some kind of class like some
+
+
+kind of logic that defines what it means
+
+
+to have valid dates in Julian calendar
+
+
+or the Chinese calendar or iso week or
+
+
+whatever. Right? These are completely
+
+
+this is a separate abstraction, right?
+
+
+You've got calendars and you've got
+
+
+durations and time elapse. They're just
+
+
+different parts of the library. And then
+
+
+for convenience, you've got strrus, but
+
+
+you could have just implemented this
+
+
+yourself. You've got some convenience
+
+
+strrus because it turns out that very
+
+
+often in a specific domain, you work
+
+
+with a specific kind of structure. Like
+
+
+you think about things as just weekdays
+
+
+or maybe you just count the number of
+
+
+weeks in a year or things like this. And
+
+
+then if your structure is I I actually
+
+
+only care about what year it is and what
+
+
+week of the year it is, then it's a
+
+
+struck with two values and it's really
+
+
+easy to do like a plus one operation on
+
+
+that because you find the week, you
+
+
+know, property and you add plus one to
+
+
+it and you don't have to think about the
+
+
+fact like what does that mean in time
+
+
+spent because you're working on the
+
+
+arbitrary semantics of your structure.
+
+
+You're not actually thinking about
+
+
+duration of time. And then the only
+
+
+thing that really needs to be done is at
+
+
+some point you need to do that
+
+
+conversion. So I want to just jump to
+
+
+like this last point there on the bottom
+
+
+which
+
+
+is if you make your library allow for
+
+
+explicitly switching abstractions. This
+
+
+is the same thing with that Christian
+
+
+Zeller calendar where he converted the
+
+
+calendar to make it easy to work with
+
+
+the kinds of things he wants to work
+
+
+with and then he converts it back.
+
+
+Similar in chrono you can you can start
+
+
+with like a civil calendar you can
+
+
+convert it to duration days. you can
+
+
+then do a bunch of stuff you were trying
+
+
+to compute and then maybe you end up
+
+
+switching it to an ISO standard, right?
+
+
+The point is that these steps need to be
+
+
+explicit because they're specific to
+
+
+your domain. Don't try to hide this
+
+
+stuff in the library. So I kind of
+
+
+jumped to the end of that slide, but in
+
+
+general the retrospective for krono is
+
+
+notice how there was a very minimum
+
+
+number of principal abstractions here. I
+
+
+would love to talk about more about the
+
+
+fact that kernel actually the part
+
+
+related to time and not to calendars is
+
+
+is also really nice and interesting but
+
+
+this is something you guys have to go
+
+
+check out for yourself. It actually also
+
+
+covers things like daylight savings time
+
+
+and all this stuff but it implements it
+
+
+by adding it as a layer on top of this
+
+
+logic. So it's like you've got time and
+
+
+duration as a concept. On top of that
+
+
+you've got calendars which is
+
+
+independent but there's some functions
+
+
+that help you switch between these
+
+
+things. On top of that, you've got a
+
+
+layer that talks about things like
+
+
+daylight savings time because that has
+
+
+nothing to do with calendars and
+
+
+duration. That's something about how,
+
+
+you know, specific laws were passed in
+
+
+specific countries. You can build these
+
+
+kinds of abstractions as long as you
+
+
+start thinking about this as independent
+
+
+abstractions. And it's al also helps us
+
+
+to teach us about doing things like
+
+
+avoiding exceptions. So months are not a
+
+
+special number of days. Calendars are
+
+
+not duration days. And what's really
+
+
+interesting is in Chrono there's no such
+
+
+thing as like a special leap year. They
+
+
+just explained that just the same way
+
+
+you have a leap year every four years,
+
+
+there's something called a leap century
+
+
+which happens every 400 years. And it
+
+
+turns out that you don't need a bunch of
+
+
+ifs because when you call it a leap
+
+
+century, you don't need that weirdness
+
+
+between 400 and 100, right? You know
+
+
+exactly when it happens.
+
+
+So the really nice thing about Chrono is
+
+
+that and the thing I sort of didn't
+
+
+hammer maybe home so much is that once
+
+
+you have these constraints and it limits
+
+
+you on the way you can convert between
+
+
+things, you can let the computer do a
+
+
+lot of interesting algebra and a bunch
+
+
+of semantic checking that you otherwise
+
+
+wouldn't allow. So if you just had
+
+
+integers, all of this would fall out the
+
+
+window. But once you have these
+
+
+concepts, you can do things such as if
+
+
+you take a time point and you subtract
+
+
+another time point, you will get a
+
+
+duration, right? Because it's two
+
+
+moments of time and how much time has
+
+
+passed between these things. If you take
+
+
+a moment in time, a time point, and you
+
+
+add a duration, you get a new time
+
+
+point. But if you take a time point and
+
+
+a time point and you add them together,
+
+
+what do you get? An error. Because
+
+
+semantically it doesn't make any sense.
+
+
+And while it was an integer, it could
+
+
+have been easily a bug. And the thing
+
+
+is, not only do you get these
+
+
+guarantees, but because of the fact that
+
+
+the computer understands all this stuff,
+
+
+it lets you do automatically do a bunch
+
+
+of conversions that right now you're
+
+
+hand rolling, right? We talked about the
+
+
+fact that the best way to avoid bugs is
+
+
+to write less code. This actually lets
+
+
+you write a lot less code because you
+
+
+let the computer do all the hard work of
+
+
+understanding those relationships. And
+
+
+anything that you can do without sort of
+
+
+losing information, it will do by
+
+
+default.
+
+
+This is the end of my talk. You have
+
+
+been a wonderful audience. Um, if you
+
+
+want to learn more about time and
+
+
+calendars, I suggest you go and re like
+
+
+watch some YouTube or read some white
+
+
+papers from these people. Um, if you
+
+
+care about time and I think we should
+
+
+all care about it, I think you should
+
+
+really study the kernel library. It has
+
+
+a lot more stuff than I talked about
+
+
+here. Um, but yeah, I mean time limit
+
+
+and all programming. Avoid overexited
+
+
+hype.
+
+
+But also avoid, you know, grumpy
+
+
+naysayers like me, right? Like I'm also
+
+
+not right. More I'm more often wrong
+
+
+than I'm right. But I do encourage you
+
+
+to study the past. It is amazing how
+
+
+often new research comes out in the
+
+
+sense of, oh, we just read this paper
+
+
+from the 1970s and we implemented it
+
+
+because back then we didn't have the
+
+
+compute power, but it turns out that now
+
+
+we do, right?
+
+
+And it's amazing how often you learn
+
+
+about weird things you do every day
+
+
+because of some decision that happened,
+
+
+you know, 2,000 years
+
+
+ago. If you care about
+
+
+performance, don't assume. Always
+
+
+measure. And remember that computers are
+
+
+changing. In five years, all these
+
+
+slides are out of date because we're all
+
+
+on some GPU computes and in 10 years we
+
+
+got quantum computing, right?
+
+
+when you're building stuff. This is this
+
+
+is sort of like my thing is I like this
+
+
+is why we're talking about C++ at a Ruby
+
+
+conference. I think the point is that
+
+
+you should learn to embrace this idea of
+
+
+going to other programming communities
+
+
+taking their root essence like taking
+
+
+ideas that they're that they have and
+
+
+stealing them and just implementing in a
+
+
+way that makes sense in your community.
+
+
+Right? So like I encourage someone to
+
+
+study Krono and implement a Ruby
+
+
+idiomatic version of this library.
+
+
+Example, if you go down the road of
+
+
+rewriting, do think about like axoms and
+
+
+principles. And I can't believe I have
+
+
+to say this. It's
+
+
+2025, but don't vibe code critical
+
+
+thinking, right? Your LLM would not be
+
+
+able to solve any of the problems we
+
+
+talked about
+
+
+today. That's all I've got. Thank you
+
+
+for your time.
+
+
+[Applause]
+
+
+Thank you, Norbert. Any
+
+
+questions? Anyone wants to roast some
+
+
+Romans? All right, they will come after
+
+
+in the afterparty. Um, thank you for
+
+
+talk once again, Norvich.
+
+
+[Applause]

@@ -1,0 +1,1909 @@
+so let's welcome Rafael with his talk
+
+
+about device
+
+
+[Applause]
+
+
+um so let me start with something maybe
+
+
+a bit more controversial as popular and
+
+
+often is device is it has some pitfalls
+
+
+edge cases and maybe even security
+
+
+issues
+
+
+I'm rafortenberger I'm a bit of security
+
+
+freak maybe and a software developer hit
+
+
+us here at Montreal and
+
+
+maybe let's start with who he never
+
+
+heard or used device
+
+
+all right that's good who is using in
+
+
+any project right now
+
+
+all right that's let's actually die at
+
+
+vote so it's probably more of a
+
+
+formality but what is the device
+
+
+device is a library for authentication
+
+
+and user management it provides us easy
+
+
+way to handle password resets sessions
+
+
+registration all those boring things
+
+
+that almost every application needs
+
+
+and why to use it I would say the
+
+
+biggest argument here is that it's
+
+
+popular
+
+
+uh it dwarves another
+
+
+solution in popularity and in features
+
+
+and security as well
+
+
+and
+
+
+I know that there's the saying about
+
+
+polarity that flights can be can't be
+
+
+wrong but that gives you an eyes it's
+
+
+often used a lot of people are looking
+
+
+at it so it should be secure
+
+
+but then what's the goal of this
+
+
+presentation
+
+
+well first of all I want to talk about
+
+
+uh backward limitations background is a
+
+
+harsh library that they have as uses and
+
+
+how device is misusing it
+
+
+um
+
+
+talk about about how to do token based
+
+
+authentication for apis uh because
+
+
+device is mostly for view based
+
+
+applications and
+
+
+how because of how mobiles are present
+
+
+in every everyday life we need more and
+
+
+more apis
+
+
+how to do refresh tokens and why to put
+
+
+them in cookies
+
+
+let's talk about it about enumeration
+
+
+attacks and why they're important to
+
+
+prevent them
+
+
+and what are generation attacks in
+
+
+timing based scenarios
+
+
+so what's wrong with break Crypt
+
+
+um but before that let's talk about salt
+
+
+and pepper because I got the feedback
+
+
+that it might be good to give a bit of a
+
+
+background
+
+
+so History part uh in 70s and 80s we
+
+
+were terrible at storing passwords we
+
+
+were just hushing them and saving them
+
+
+to database
+
+
+the problem with that was that the same
+
+
+password would result with the same hash
+
+
+so now when there is a leak I can just
+
+
+take the most popular passwords and
+
+
+breaking them will be probably easy
+
+
+because if it's popular it's weak
+
+
+and it gives me the most the most value
+
+
+and well the second problem is when I
+
+
+processed one leak I have a table with
+
+
+known hashes and passwords so in the
+
+
+next one I can use it I don't have to do
+
+
+the whole work again
+
+
+so we started using salt which is our
+
+
+random part random string or bytes that
+
+
+were added at the end of the password
+
+
+and as you can see
+
+
+now to uh users with the same password
+
+
+we have different hashes
+
+
+it solves both of the previous previous
+
+
+issues
+
+
+and in model uh well more modern uh
+
+
+hashing algorithms
+
+
+we don't even append it by ourselves we
+
+
+provide it as a second argument
+
+
+because for example bankrupt under the
+
+
+hood is doing much more magic with that
+
+
+salt than just adding it at the end
+
+
+but that wasn't a good thing good enough
+
+
+for us because still if somebody has
+
+
+very weak password
+
+
+you can just brute force it use
+
+
+dictionary attack strings like that so
+
+
+how to secure those users
+
+
+the well we have assault so now let's
+
+
+use pepper
+
+
+and that's how another random element
+
+
+that was update at the end of the
+
+
+password
+
+
+and this time it's not stored in
+
+
+database it should be stored somewhere
+
+
+else is a secret it should never be
+
+
+known to Luna anybody
+
+
+and now even if the password is password
+
+
+one two three
+
+
+without the paper you cannot check if
+
+
+that's the hash of the password
+
+
+and again more modern algorithms like
+
+
+argon they to treat that as argument and
+
+
+add instead of just adding it at the end
+
+
+which is important
+
+
+so let's go back to Bare Crypt
+
+
+uh record has design
+
+
+decision that limits the length of the
+
+
+password in most implementations to 72
+
+
+bytes
+
+
+that means as you can see
+
+
+uh the password that is 72as
+
+
+and the password that is 70 to A's and
+
+
+something else at the End Produce
+
+
+exactly the same hush with the same salt
+
+
+and what is pretty bad on uh backward
+
+
+developers decision is the site is the
+
+
+decision that they will just cut it
+
+
+there is no error there is no nothing it
+
+
+just works
+
+
+and that has consequences
+
+
+and the consequences are that device now
+
+
+comes with password limit length by
+
+
+default of 128 characters
+
+
+even though 72 bytes is the maximum
+
+
+value that will be used
+
+
+and the worst thing is that device
+
+
+wanted to add Peppers at some point
+
+
+so they are adding pepper at the end of
+
+
+the password
+
+
+and if with that limit
+
+
+it means buffer first not whole pepper
+
+
+is taken into account
+
+
+and second you can lick it
+
+
+uh because I can create an account
+
+
+put my password as 72 71 Ace
+
+
+and now only the first character of
+
+
+pepper will be added to the house
+
+
+so now I just iterate A B C D at the end
+
+
+of my password and finally I'm logged in
+
+
+and there isn't much I know what is the
+
+
+first character of the piper
+
+
+I do the same thing for the second one
+
+
+third one and so on and now I licked all
+
+
+the paper from the
+
+
+um application with simple login form so
+
+
+is here somebody who uses peppering
+
+
+device
+
+
+all right so nothing to do for you
+
+
+that's good uh I would argue that it
+
+
+will be good to use it properly because
+
+
+hey it's not circuit that way but yeah
+
+
+in
+
+
+device it's not a great idea
+
+
+um and this comes from uh the small
+
+
+misunderstanding because backgrip is not
+
+
+a hashing function
+
+
+it's password hatching function
+
+
+and the biggest difference here is that
+
+
+housing functions are supposed to take
+
+
+arbitrary length input and transform it
+
+
+to fixed size output
+
+
+um if you use average 256 to do a
+
+
+checksum of files you know that you can
+
+
+put their few gigabytes there and you
+
+
+will get 32 bytes of output
+
+
+uh back ripped takes fixed sized input
+
+
+and produced fixed size output
+
+
+uh and yes I set fixed size because even
+
+
+though you can provide a shorter
+
+
+password
+
+
+levels will actually make sure sorry not
+
+
+device backward make sure that it's 72
+
+
+bytes always
+
+
+uh if you ever written in C you know
+
+
+that each string uh ends with null byte
+
+
+so that will be update by default
+
+
+and then when backwards will find that
+
+
+null byte it will repeat the everything
+
+
+and again and again
+
+
+till it reaches 72 characters uh bytes
+
+
+bytes sorry
+
+
+as you can see those are the same hashes
+
+
+and the bad part is even if there is
+
+
+something else after that signal byte it
+
+
+will be ignored because that's the end
+
+
+of the string Force implementation
+
+
+fortunately
+
+
+the most common backroad library that is
+
+
+used in this example
+
+
+doesn't allow you to put uh null bytes I
+
+
+needed to change the bindings to see to
+
+
+create that slide
+
+
+um
+
+
+but why is it important we will see a
+
+
+bit later
+
+
+so how to fix that
+
+
+a simple solution that I recommend is
+
+
+just use argument to ID if you need
+
+
+paper or you want to have orbital and
+
+
+passwords
+
+
+uh it's hashing password competition in
+
+
+2015 winner
+
+
+uh it has a limit of the length of about
+
+
+four gigabytes
+
+
+so be sure to limit it because you gotta
+
+
+have uh those attacks based on that
+
+
+level on passwords
+
+
+uh it was built with salt and pepper
+
+
+supported as you can as you were able to
+
+
+see in other screen
+
+
+uh it's
+
+
+easy solution for new applications you
+
+
+just swap one thing and it works
+
+
+and it's recommended by oasp which I
+
+
+highly recommend you to take a look into
+
+
+they have great series about
+
+
+everything related to web applications
+
+
+all apps thanks for open web application
+
+
+security project
+
+
+other solution will be just to limit the
+
+
+length of the password
+
+
+I mean 72 bytes it's pretty secure if
+
+
+you have dominated pepper who cares it
+
+
+works
+
+
+but if for some reason you need paper or
+
+
+you believe as I that it's just needed
+
+
+in current world
+
+
+and you need to stick with back grip
+
+
+because argon had some issues
+
+
+mostly with performance
+
+
+you can always do something with that
+
+
+password before putting it by crypto you
+
+
+cannot hush it unfortunately
+
+
+because then you are open for passwords
+
+
+sorry house sucking and that basically
+
+
+means that
+
+
+if you put the whole password in shot
+
+
+256 and then to back script I can
+
+
+probably find a few
+
+
+million of passports or child benefit
+
+
+hashes that were never broken and I can
+
+
+now just check if putting them to back
+
+
+route doesn't result over in one of your
+
+
+hashes and now I just need to break that
+
+
+shot 256 instead of back Crypt which is
+
+
+much much easier
+
+
+um so hmac hmac is basically shot 256 in
+
+
+that example but with uh Pepper or key
+
+
+in normal use password will use a pepper
+
+
+um there are
+
+
+two most important things
+
+
+first is that base 64 digits
+
+
+hmac Retros normally bites so it can
+
+
+return little byte
+
+
+which as I show you is a no-go for back
+
+
+Crypt
+
+
+and the second thing
+
+
+you cannot use too long hashes because
+
+
+again 72 bytes password limit and you
+
+
+need to basically read 64 in code that
+
+
+um and well you need to use pepper in
+
+
+that scenario other things that you can
+
+
+use maybe use eyes to create uh if you
+
+
+need paper but you don't care about
+
+
+passing that you can use eyes to encrypt
+
+
+the password it has that benefit that
+
+
+now you can rotate your uh pepper
+
+
+so it's even more secure uh Dropbox is
+
+
+doing something like that if you want to
+
+
+read about a bit more
+
+
+but I promise you that we'll talk a bit
+
+
+about uh talking based application for
+
+
+apis and
+
+
+I have a role in my projects
+
+
+don't do security if you don't need that
+
+
+indeed
+
+
+so use Adobe stocking out if you need to
+
+
+do tokens for your application
+
+
+uh it's simple opaque token Solutions uh
+
+
+no jvts here you don't need more crypto
+
+
+if you don't need it
+
+
+works great with playing device because
+
+
+you still need maybe need to have admin
+
+
+panel in views or whatever
+
+
+uh it has great configuration it's
+
+
+pretty secure by default and you can
+
+
+always make it more secure
+
+
+and it is popular uh it is more popular
+
+
+than many concurrent to device solution
+
+
+for all authentication so
+
+
+I highly recommend it and they finally
+
+
+have normal simple authorization either
+
+
+instead of for independent header that
+
+
+needed to to keep track on the front end
+
+
+till last week I believe because it was
+
+
+released on 10th of September so
+
+
+thank you
+
+
+reference tokens and why to keep them
+
+
+into his cookies
+
+
+so why cookies uh it is actually very
+
+
+simple to implement Rice have support
+
+
+for them for I don't know how long
+
+
+probability zero is one
+
+
+and
+
+
+every other framework has support for
+
+
+them
+
+
+they were about to test it for over 25
+
+
+years they are first party citizen on
+
+
+your browsers and what's even better
+
+
+you control them not from them
+
+
+which means it's harder to do something
+
+
+stupid than
+
+
+uh
+
+
+they can prevent leaks because if you
+
+
+store long-term tokens in session
+
+
+storage in local storage things like
+
+
+that
+
+
+all JavaScript has access to that
+
+
+in cookie you said one flag JavaScript
+
+
+cannot even get access to that
+
+
+and if you set them to secure
+
+
+you cannot send them over http the
+
+
+browser will make sure that only in HTTP
+
+
+requests those are present which is
+
+
+important especially in a bit older
+
+
+browsers that seal down support H SDS
+
+
+and forcing https
+
+
+so tokens
+
+
+uh that part is pretty easy but this
+
+
+slide is here mostly because I wanted to
+
+
+talk about what tokens are
+
+
+tokens are passwords
+
+
+nothing else nothing more if you know it
+
+
+you can do something the same thing with
+
+
+password
+
+
+and that's why you should treat it as
+
+
+password
+
+
+you shouldn't ever store tokens in plain
+
+
+text
+
+
+because if you have refresh tokens that
+
+
+are meant to be long-term tokens
+
+
+if you have database leak or maybe when
+
+
+you have database leak
+
+
+now Whoever has that leak can use those
+
+
+tokens to log into your application and
+
+
+instead of having just read access from
+
+
+the leak they have right access to user
+
+
+accounts
+
+
+uh yeah you should probably have some
+
+
+the expired date for them
+
+
+and you probably should make sure that
+
+
+you don't keep too many of them in the
+
+
+app
+
+
+as
+
+
+these are easy
+
+
+that's all you need to set a cookie in
+
+
+the in the rails basically the uh the
+
+
+name the value
+
+
+when it expires and then some flux I
+
+
+recommend secure so it doesn't go over
+
+
+http
+
+
+HTTP only so it is not accessible to
+
+
+from Js
+
+
+same site strict so it's only sent to
+
+
+API never anything where else
+
+
+and well we set the domain which set the
+
+
+cookie
+
+
+how do you do refreshing them
+
+
+you just take again
+
+
+Cookie by name person because I decided
+
+
+on Jason there
+
+
+and find it
+
+
+check if it's valid if it is set the
+
+
+tokens render success everyone is happy
+
+
+um
+
+
+I if you work with mobile somebody might
+
+
+tell you that there are issues with
+
+
+cookies in Mobile
+
+
+just tell them to Google things because
+
+
+it works I have currently free mobile
+
+
+applications that work flawlessly with
+
+
+cookies and that's the best we could
+
+
+done for security and simplicity in our
+
+
+configs
+
+
+of course if you have cookies you
+
+
+probably need a course especially if
+
+
+your API is in different domain down
+
+
+front end
+
+
+if you are using ionic or something like
+
+
+that
+
+
+ionic is stupid because in turn it's a
+
+
+mobile app and card is for browsers not
+
+
+for mobile apps but it forms for
+
+
+whatever reasons follows the rules
+
+
+it means that you either have to yell at
+
+
+your back front mobile developers that
+
+
+they need to change client from Fetch or
+
+
+something like that to Native ionic
+
+
+or you need to add localhost free
+
+
+3000 here so they can work with that
+
+
+I would say yell at them but decision is
+
+
+up to you
+
+
+um important things here
+
+
+you need to say credentials too without
+
+
+that the browser will not let
+
+
+the app well it will not include cookies
+
+
+and that means the load won't work but
+
+
+it's actually great because you can now
+
+
+say work that cookies should be only on
+
+
+those two endpoints
+
+
+uh so only for refresh and for login
+
+
+and maybe for log out if you want to
+
+
+delay them
+
+
+but I was talking a bit about
+
+
+enumeration attacks and I wanted to ask
+
+
+if you know what those are
+
+
+so if somebody knows then ends up
+
+
+all right we have some people
+
+
+that's awesome
+
+
+um
+
+
+quick example of a narration attacks on
+
+
+registering forms that's Discord
+
+
+and now I know that this email is is in
+
+
+database because it's already taken
+
+
+so I can just go like this through all
+
+
+possible uh images that I have on my
+
+
+list because I need to check something
+
+
+and I will know
+
+
+uh who has accounts and who doesn't
+
+
+when these things can happen of course
+
+
+registration forms but every form that
+
+
+requires email probably as well password
+
+
+reset confirmation reset forms I mean
+
+
+you often see that sorry you don't have
+
+
+an account please go here and create
+
+
+them don't do that
+
+
+uh login First are much rare but it
+
+
+still happens I don't know why somebody
+
+
+bothers to have different message for
+
+
+wrong credentials and wrong email but
+
+
+they do
+
+
+and why should you care
+
+
+well I would say that just privacy of
+
+
+your user is good enough reason to care
+
+
+but if you don't believe in that then
+
+
+well maybe you shouldn't but what if you
+
+
+have up that for example helps people
+
+
+with addictions
+
+
+I wouldn't want to know that that app
+
+
+can be enumerated and uh now everybody
+
+
+will know that I struggle with alcohol
+
+
+addiction or things like that
+
+
+there may be requirements from client or
+
+
+we had uh information that there may be
+
+
+required requirements from government I
+
+
+don't know if that wouldn't break some
+
+
+hipa rules
+
+
+so how to prevent them
+
+
+well just change the messages
+
+
+okay we send you an email check your
+
+
+inbox
+
+
+do we send you confirmation link go
+
+
+there and if somebody already had an
+
+
+account instead of confirmation link
+
+
+just let them know hey you already have
+
+
+an account if you forgot your password
+
+
+Here is the result page
+
+
+um it works on every form and it's easy
+
+
+but is it enough
+
+
+and the answer unfortunately is no
+
+
+uh because uh snorbacks is taught us
+
+
+yesterday uh Galileo decided to create
+
+
+the concept of unit of time
+
+
+and now we can measure it
+
+
+which means that I can take my email
+
+
+that I know doesn't have an account in
+
+
+given page
+
+
+the Thousand requests on password reset
+
+
+form
+
+
+and have some graph that shows me how
+
+
+long more or less it takes
+
+
+then I can create an account
+
+
+repeat the whole scenario and now I can
+
+
+see that oh
+
+
+that's a bit longer
+
+
+so let's try with other email
+
+
+that is pretty close to the case when
+
+
+account doesn't exist so probably
+
+
+doesn't
+
+
+but if it was closer to the second chart
+
+
+then this means that I can't pretty much
+
+
+for sure exist
+
+
+and that's again a leak
+
+
+is much more complicated
+
+
+but it is so where this time difference
+
+
+comes from
+
+
+the
+
+
+well of course if you do this if you
+
+
+send emails synchronously request that's
+
+
+very long time
+
+
+but object is a civilization takes time
+
+
+you can have callbacks there that take
+
+
+time
+
+
+uh you are probably doing some even
+
+
+waiting for a radius to get a connection
+
+
+from the polo especially when I'm
+
+
+hitting in with thousands and thousands
+
+
+of requests because I'm measuring time
+
+
+can take time
+
+
+so how to prevent that
+
+
+one solution is to and it works for
+
+
+registration forms for passwords and
+
+
+forms is
+
+
+you don't check if the account exists on
+
+
+request
+
+
+you just
+
+
+schedule a job on the sidekick we had a
+
+
+great presentation about safety
+
+
+yesterday
+
+
+and you do that in the job and if the
+
+
+account exists you just send them
+
+
+instructions hey you have an account if
+
+
+you forget the password you can reset it
+
+
+here
+
+
+and if it doesn't you create them create
+
+
+send confirmation email and it works
+
+
+but this doesn't unfortunately work for
+
+
+um login forms because you cannot really
+
+
+do that asynchronously it would be
+
+
+awesome but hey well uh you can but not
+
+
+easy
+
+
+um the simple way is to request limit
+
+
+the login form because if I cannot
+
+
+create those charts because I cannot do
+
+
+enough requests
+
+
+nothing I can do about that
+
+
+um
+
+
+this part it's limits by email and it's
+
+
+awesome for those situations but if
+
+
+somebody will
+
+
+find out that you are doing it like that
+
+
+they may want to
+
+
+use it to dose your application because
+
+
+now I can
+
+
+go with emails and block users from
+
+
+login
+
+
+that's why I highly recommend having an
+
+
+easy way to skip this email version but
+
+
+of course
+
+
+our IP always works
+
+
+so quick summary
+
+
+uh if you want to use pepper in device
+
+
+just use argon and if you don't
+
+
+maybe we'll remember that password won't
+
+
+limit because
+
+
+it will be strange that some you can
+
+
+create longer password that is even
+
+
+taken into account
+
+
+if you want to create a APA token
+
+
+application
+
+
+device talking out is your friend and I
+
+
+highly recommend to refresh tokens and
+
+
+cookies
+
+
+and for enumeration attacks
+
+
+there is solution with doing that async
+
+
+for most of the forms and yeah I hope
+
+
+you have a great conference and
+
+
+thank you very much any questions
+
+
+[Applause]
+
+
+um thanks a lot uh what do you think
+
+
+about using uh other services for
+
+
+example all zero uh to handle the users
+
+
+and the authentication instead of device
+
+
+for example that's awesome because if
+
+
+you don't have to Store password then
+
+
+store it it solves a lot of issues but
+
+
+uh to be honest uh at the end of the day
+
+
+part of authentication is always there
+
+
+because you need tokens alongside
+
+
+optimize the IP authenticate API and
+
+
+things like that so the second part of
+
+
+the presentation is too valid
+
+
+uh but yeah you know how it is in real
+
+
+world clients might say you but this is
+
+
+too expensive to use and go with can
+
+
+build solution but yeah other providers
+
+
+are awesome I mean less passwords is
+
+
+always better
+
+
+um if these things are broken in the
+
+
+package have you tried like opening an
+
+
+issue on the repo and talking to the
+
+
+guys there to fix it for everybody maybe
+
+
+I tried to write I mean email because I
+
+
+didn't really want to talk about leaking
+
+
+pepper uh publicly at first but because
+
+
+they didn't reply for three months
+
+
+already
+
+
+I feel Justified to talk to you about
+
+
+that and yeah I will probably try to
+
+
+find time and do something about that
+
+
+but to be honest it's not that easy uh
+
+
+because
+
+
+the the solutions that I showed you are
+
+
+great for single project
+
+
+but device needs to think about what
+
+
+about those people who can only update a
+
+
+package
+
+
+creating API breaking changes in
+
+
+security Liberator libraries is terrible
+
+
+idea that's why opensl still supports 25
+
+
+years old apis
+
+
+because a lot of people need them and
+
+
+it's responsible to do it that way
+
+
+I gotcha well I think it's better to
+
+
+like break some apis or for somebody to
+
+
+update it than to have like bad security
+
+
+but yeah that for
+
+
+for using that yeah that's because yeah
+
+
+but there are some things that are not
+
+
+that simple and like uh understand why
+
+
+they will take some time to figure out
+
+
+less painful migration path gotcha thank
+
+
+you very nice talk
+
+
+thanks
+
+
+all right so thank you very much
+
+
+[Applause]

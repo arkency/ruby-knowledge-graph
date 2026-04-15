@@ -1,0 +1,2611 @@
+thank you for having me i'm thrilled to
+
+
+be here let me just get a picture of all
+
+
+of us
+
+
+to post on twitter
+
+
+perfect
+
+
+so i just want to say you're amazing
+
+
+people and you're freaking smart i mean
+
+
+uh pavel's presentation yesterday and
+
+
+nyx
+
+
+and the yaroslav that was amazing that
+
+
+that you you caught like the the essence
+
+
+of uh view components and um
+
+
+and hot wire and thank you for making
+
+
+the difference
+
+
+of of hot wire and react because it's
+
+
+important to know that there are many
+
+
+tools in our toolkit and we should use
+
+
+the proper one so we should not hate
+
+
+technologies uh maybe closure but
+
+
+no we shouldn't hate no it's all good
+
+
+elixir elixir yeah
+
+
+perfect
+
+
+so i'm going to talk to you about today
+
+
+about how to package a rails engine from
+
+
+generation to automation it's a real
+
+
+trivial subject from your nice talks so
+
+
+i'm adrian i'm the author of avo avo is
+
+
+an um application building f framework
+
+
+built on top of vr rails so it helps
+
+
+developers build uh tools ten times
+
+
+faster i've been in a freelancer in
+
+
+digital agencies in corporations in a
+
+
+silicon valley startup i've been
+
+
+everywhere but now i'm trying to be an
+
+
+entrepreneur
+
+
+you can find me adrian the dev
+
+
+everywhere agentdev.com and if you want
+
+
+to check out avo go to avo.com
+
+
+so
+
+
+what is a rails engine so a rails engine
+
+
+is basically a miniature
+
+
+application
+
+
+sorry a miniature rails application
+
+
+inside your host application
+
+
+so a mini me
+
+
+it holds its own routes its own models
+
+
+its own
+
+
+controllers views and so on so when
+
+
+would we use an engine
+
+
+so let's take for example we're building
+
+
+like a marketplace app uh we'll always
+
+
+have like buyers and we'll always have
+
+
+sellers and they'll probably have like
+
+
+different admin panels different back
+
+
+offices and different functionalities so
+
+
+how would we go and and build that if we
+
+
+weren't using engine so we can go to
+
+
+controllers and create a new directory
+
+
+buyers and add all our controllers and
+
+
+another sellers and so on we then would
+
+
+go to models and add our directory there
+
+
+or we can generate new um new engines
+
+
+buyers and sellers and those engines
+
+
+would be like separate apps in which to
+
+
+keep all your
+
+
+logic
+
+
+perfect
+
+
+so this is perfect when you are building
+
+
+an engine for yourself for your company
+
+
+for your own app but maybe you're
+
+
+building something that you want to
+
+
+share with the world
+
+
+something like maybe an admin panel
+
+
+framework i know
+
+
+cool so let's start work so we'll
+
+
+generate an engine
+
+
+so
+
+
+i will just write like plug rails plug
+
+
+in new admin and you want to add the
+
+
+mountable option so you get all of those
+
+
+goodies like the controllers the models
+
+
+the directories everything autoloaded
+
+
+for you
+
+
+you'll also get a dummy app inside your
+
+
+test directory so this dummy app is
+
+
+another
+
+
+rails application
+
+
+on which you can test your code you can
+
+
+test like automatic code or you can do
+
+
+manual tests and run
+
+
+your engine inside that app
+
+
+so what are we going to build so we're
+
+
+going to build this admin panel
+
+
+framework which is actually
+
+
+it will go and
+
+
+uh
+
+
+find all our models it will display them
+
+
+on the sidebar with a link to an index
+
+
+page where we'll see all of our records
+
+
+so all the users posts and comments and
+
+
+so on
+
+
+um
+
+
+test your engine
+
+
+test all your code that's very good
+
+
+advice so this is a small test where
+
+
+that just loads a page and makes sure
+
+
+everything passes
+
+
+um cool so how are we distributing this
+
+
+this thing how are we distributing this
+
+
+engine uh
+
+
+the easiest way is through rubygems
+
+
+and how do we do that we do that using
+
+
+uh the gem utility and uh we can um the
+
+
+gem utility is using this thing called a
+
+
+gem spec file so every uh engine that
+
+
+you generate and
+
+
+any gem that you generate you will have
+
+
+this this information
+
+
+i'll i'll just go through it really
+
+
+quick so think about the gen the gem
+
+
+spec as the package json to your package
+
+
+like what jpeg as json is to npm the gem
+
+
+spec is to your engine to your package
+
+
+so in the first section you have like
+
+
+the uh some uh information about about
+
+
+the package like the name the author the
+
+
+version the description and so on next
+
+
+there's some metadata that you can uh
+
+
+add to your gem spec
+
+
+uh these are some links from avo uh
+
+
+these links are used by rubygems and
+
+
+other websites that are scraping this
+
+
+gem to
+
+
+show the page nicely and it will show
+
+
+like what's the homepage and the bug
+
+
+tracker the issue and everything else uh
+
+
+the files option this is very important
+
+
+because when you package it up and we'll
+
+
+talk about this you don't want to add
+
+
+everything maybe you have like dot files
+
+
+inside your repo you have no js mod node
+
+
+modules directory and you definitely
+
+
+don't want to pack that so here this is
+
+
+the place where you specify
+
+
+what files you want added to your gem
+
+
+last but not least the dependencies so
+
+
+uh let's say you're running like pundit
+
+
+you're you're using pundit in your
+
+
+runtime so you can go about it in two
+
+
+ways you can build your gem and not add
+
+
+a dependency and then you can write it
+
+
+in your documentation like hey you must
+
+
+install pundit for this to work and
+
+
+nobody reads it nobody does it it'll be
+
+
+broken and you'll get like bad reviews
+
+
+online or you can do this you can you
+
+
+can specify you can say spec add
+
+
+dependency pundit and that will um when
+
+
+when the user runs bundle install inside
+
+
+their host app the parent app
+
+
+bundler will go
+
+
+read this configuration and take that
+
+
+into account so it will add pundit at
+
+
+the runtime
+
+
+of course yeah that's another thing you
+
+
+can do you can add dev dependencies or
+
+
+uh you'll also get a gem spec inside
+
+
+your engine so you can use that gem spec
+
+
+it's a regular gem file sorry it's a
+
+
+regular gem file where you can add
+
+
+things for that dummy app for your
+
+
+development dependency so you can do
+
+
+that or you can do this
+
+
+thank you
+
+
+cool so let's build a thing
+
+
+um bundle exec rails build and it will
+
+
+take all of those files it will take
+
+
+that option that i told you about and
+
+
+put everything together inside one gem
+
+
+file
+
+
+what i like to do is build an isolation
+
+
+so as i said you might have like dot
+
+
+files you might have different
+
+
+environment variables on your local
+
+
+machine so you'll have like rails
+
+
+environment and node environments set to
+
+
+development instead of production so
+
+
+maybe assets won't be compiled properly
+
+
+or maybe when you run the build command
+
+
+you have a different version of your
+
+
+assets so what i like to do is build an
+
+
+isolation so i'm using docker for this
+
+
+i'm just going to go very fast through
+
+
+it so i'm i'm starting from a from a
+
+
+ruby
+
+
+ruby image i'm installing something for
+
+
+linux i'm caching nokogiri because it
+
+
+takes a long time and this layer will be
+
+
+cached by docker so it won't it will
+
+
+only run the first time
+
+
+i'm installing bundler i'm setting those
+
+
+environment variables so everything
+
+
+compiles down properly
+
+
+i'm setting the work there copying
+
+
+everything over
+
+
+running the bundle install so installing
+
+
+everything on docker and then just
+
+
+running the build command that i just
+
+
+showed you
+
+
+now your docker image has that
+
+
+gem file that you generated in isolation
+
+
+so all the all the assets should be like
+
+
+like they are like the environment
+
+
+variables and so on
+
+
+perfect
+
+
+um of course that gem file uh sits
+
+
+inside your inside the docker image so
+
+
+we're going to use a helper script to
+
+
+pick that up so we're taking the version
+
+
+of the gem
+
+
+uh we're building the the image
+
+
+uh we're taking that image id what i
+
+
+like to do is to delete the latest
+
+
+package because uh usually when i when i
+
+
+use that building and isolation
+
+
+technique i usually use it to send up
+
+
+like bug fixes or try out features
+
+
+before i release to to to main and i i
+
+
+release a stable release and sometimes i
+
+
+do that and i build multiple packages so
+
+
+if something happens to the docker image
+
+
+i know uh it and it doesn't put out
+
+
+output the
+
+
+the good package the good gem
+
+
+uh then i might send the wrong gem over
+
+
+so i make sure i delete this one so i
+
+
+have the brand new one so another
+
+
+command like docker copy and i'll take
+
+
+things from from docker and
+
+
+to my machine cool so what's left so
+
+
+publish the thing so to publish we're
+
+
+going to use the gem utility and we are
+
+
+going to use the gem push command
+
+
+perfect
+
+
+so there it is you published your work
+
+
+everybody can see it so
+
+
+you've done a good job you you're
+
+
+helping a lot of people
+
+
+but
+
+
+what happens when you publish it and
+
+
+somebody writes to you on github you
+
+
+have a bug or maybe you want to add a
+
+
+new feature so we we want to release
+
+
+again and we are using versioning for
+
+
+that so whenever we generate a new
+
+
+engine or a new package we get this
+
+
+version rb file right and it will start
+
+
+at 0.1.0 and you can go in
+
+
+increment that zero to zero run bundle
+
+
+install so that is
+
+
+added to your gem file lock file
+
+
+and then uh you you you republish it or
+
+
+you can use the bump gem
+
+
+so this will
+
+
+increment the version you can specify
+
+
+like okay bump it like a pre-release a
+
+
+minor a major
+
+
+or a patch version and it will play with
+
+
+the digits and add whatever version you
+
+
+told it to
+
+
+this will commit the code
+
+
+it if it will even
+
+
+cut out a tag for you and push it to
+
+
+github
+
+
+cool
+
+
+uh and now like whenever you have like
+
+
+you have this package you have this
+
+
+thing that helps everybody you gotta you
+
+
+gotta make sure whenever you publish
+
+
+something new that you tell them what
+
+
+you did because there's nothing wrong
+
+
+like when you update a package and
+
+
+something breaks and you never know what
+
+
+happened and you have to like check the
+
+
+code to check the source code and
+
+
+everything so you have to publish like
+
+
+release notes there are a few ways of
+
+
+doing that
+
+
+you can use like a changelog markdown
+
+
+file inside your repo and every time you
+
+
+push
+
+
+an update you just write it there like i
+
+
+fixed this i added this and you commit
+
+
+that to your repo you can use confluence
+
+
+if you're in that's like that
+
+
+type of thing
+
+
+you can use like your own documentation
+
+
+pages or we use github releases
+
+
+github has this notion of a release
+
+
+which is attached to a git tag whenever
+
+
+you push a git tag and you can add like
+
+
+titles and bodies and other things on it
+
+
+so what is our update workflow so we
+
+
+push the initial version of the of the
+
+
+gem and now you want to add like a bug
+
+
+fix or a feature
+
+
+so first you check out the new branch
+
+
+you add your changes and commit you push
+
+
+the github and open a pr you merge the
+
+
+pr you pull the main branch back on
+
+
+local
+
+
+you bump the version number
+
+
+then you build the gym publish the
+
+
+rubygems and make sure the changelog is
+
+
+is
+
+
+properly updated so yeah it it could be
+
+
+tiresome
+
+
+um cool but we can automate a few things
+
+
+so that's what i want to talk to you
+
+
+about today
+
+
+so
+
+
+we're going to use github actions for
+
+
+that so github actions like most ci
+
+
+systems
+
+
+you tell it
+
+
+to run certain tasks uh those tasks can
+
+
+be like bash commands like some pre-made
+
+
+actions you give it some configuration
+
+
+from environment variables and secrets
+
+
+and you tell it when to run it on events
+
+
+maybe when you merge a pr when you open
+
+
+a pr you can set up a cron job at a
+
+
+certain time or you can
+
+
+click a button and give it some
+
+
+arguments and those arguments will be
+
+
+available for you inside that ci system
+
+
+the nice thing about github auctions is
+
+
+that it has a marketplace and that
+
+
+marketplace has a lot of pre-made
+
+
+actions that will definitely help help
+
+
+you out these actions can do things like
+
+
+check out the code it can label prs it
+
+
+can it can
+
+
+they can
+
+
+set up like layering uh caching layers
+
+
+and trigger other automations and so on
+
+
+um cool so let's automate the testing
+
+
+we give it a name
+
+
+then we i hope everybody can see it
+
+
+we tell it when to run
+
+
+so it will run every time we we open a
+
+
+pull request
+
+
+toward towards main or wherever whenever
+
+
+we are pushing to main so we want to
+
+
+test our code every time
+
+
+uh then we we have some jobs and we are
+
+
+going to test it with the matrix
+
+
+strategy that matrix strategy is that
+
+
+that time when you lean on your back to
+
+
+dodge bullets no i'm kidding
+
+
+it's uh testing against multiple ruby
+
+
+and rails versions so now we're testing
+
+
+against rails six and seven making sure
+
+
+everything works and ruby30
+
+
+next up
+
+
+we have the environment variable so the
+
+
+environment variables can be
+
+
+actually no
+
+
+yeah perfect the environment variables
+
+
+can be
+
+
+simple things like rails environment you
+
+
+can even set up
+
+
+where is it you can even
+
+
+define like variables inside those
+
+
+environment variables so this will set
+
+
+true like the coverage will be set to
+
+
+true only if the rails version is seven
+
+
+and the ruby version is three so you can
+
+
+even play around with that
+
+
+so it runs on ubuntu
+
+
+uh next i'm setting up postgres you can
+
+
+set up postgres redis and some more
+
+
+services
+
+
+uh next i'm checking out the code so
+
+
+this is a one of those pre-made actions
+
+
+so i don't have to do git checkout and
+
+
+give it like the commit
+
+
+or the pr it will just know
+
+
+next i am what am i doing
+
+
+oh this is the checkout sorry
+
+
+next i am setting up ruby and now you'll
+
+
+see that oh perfect thank you so now
+
+
+you'll see that the ruby version that i
+
+
+want to use this is another pre-made
+
+
+action so the ruby version is actually
+
+
+read by that matrix so one time it will
+
+
+have like four jobs and two of them will
+
+
+have ruby
+
+
+3.03 and one will be 3.1 whatever we
+
+
+defined in that matrix
+
+
+uh then
+
+
+oh yeah
+
+
+and then uh we installed posgress client
+
+
+we do a bundle install and
+
+
+create the database and migrate it then
+
+
+we run our tests
+
+
+and like if the tests fail like our spec
+
+
+is going to generate
+
+
+uh these images of the failed of the
+
+
+failed tests and also so the html so if
+
+
+the tests pass on your machine and they
+
+
+don't pass on the ci you can and you can
+
+
+figure out from the logs what's
+
+
+happening you can
+
+
+create um rspec will create these files
+
+
+for you but this action called uh
+
+
+what is upload artifact
+
+
+this will take those files which i
+
+
+defined here like this directory spec
+
+
+dummy temporary screenshots and create
+
+
+an archive for me so that archive will
+
+
+be available on this job so i can
+
+
+download those files and inspect what
+
+
+happened on my ci system
+
+
+uh next
+
+
+oh
+
+
+yeah and this this step will run only if
+
+
+the outcome of the testing uh testing
+
+
+job is failure so only if it fail if it
+
+
+doesn't fail this will be skipped
+
+
+uh cool and then you can generate
+
+
+coverage there's another code carve
+
+
+action uh just give it the token and it
+
+
+will generate the coverage and we'll
+
+
+send it to the codecov
+
+
+cool
+
+
+next automating linting and code
+
+
+analysis so
+
+
+um we're going to use reviewdog
+
+
+and we are going to do this on each pull
+
+
+request so whenever uh somebody creates
+
+
+a pr uh this task will run and this has
+
+
+like two jobs one of them is standard rb
+
+
+so again
+
+
+another premade action and one is eslint
+
+
+but the nice thing about this like
+
+
+github github and these actions is that
+
+
+not only they'll fail
+
+
+but they will highlight on your pr what
+
+
+happened so you'll see at the exact line
+
+
+you'll see a comment with the exact like
+
+
+warning with what happened and even more
+
+
+there are actions that can offer
+
+
+suggestions so this is what you have to
+
+
+do to fix it so just click commit
+
+
+suggestion and that's all you don't have
+
+
+to like pull do it on your machine and
+
+
+push and so on so that's very nice
+
+
+cool um so what
+
+
+what happens is like even you have like
+
+
+a small repo or a big revo
+
+
+you might have like um
+
+
+it can get very gnarly very soon so
+
+
+labeling the prs that that could help a
+
+
+lot so we are using a popular uh
+
+
+popular strategy using like features
+
+
+chores fixes and refactors you can add
+
+
+style test docs and and others but these
+
+
+are like maybe the most popular for us
+
+
+and what happens is
+
+
+this will run every time somebody opens
+
+
+a pull request
+
+
+and using this action pr labeler and
+
+
+this will read the name of the branch so
+
+
+we
+
+
+create the branches as feature forward
+
+
+slash in the name of the feature or fix
+
+
+forward slash what we fixed and this
+
+
+action will read that and automatically
+
+
+label them you can use multiple
+
+
+strategies
+
+
+read from the body of the pr or from the
+
+
+first commit message or something else
+
+
+so you can use multiple strategies
+
+
+automating the release notes so this is
+
+
+cool
+
+
+again we are going to run this every
+
+
+time we merge something to main
+
+
+and we are going to use again an action
+
+
+so release drafter is an excellent
+
+
+action so what this does is
+
+
+get the commit
+
+
+hash from your last your latest release
+
+
+and do a diff to whatever you merge now
+
+
+and pick up all of those pr's and it's
+
+
+going to create the release notes
+
+
+automatically
+
+
+so you'll get them
+
+
+properly nicely uh categorized like
+
+
+features bug fixes maintenance you can
+
+
+customize these and they'll have like
+
+
+the name of the commit uh the author and
+
+
+the pr
+
+
+which uh github makes a link so that's
+
+
+that's very nice now you'll also get
+
+
+somewhere in the footer you'll get all
+
+
+of those contributors that help you out
+
+
+cool so we're getting close to the grand
+
+
+finale
+
+
+uh automating uh uh and uh cutting the
+
+
+release
+
+
+so
+
+
+i told you that we're using the bump gym
+
+
+and it will cut a tag for us and push it
+
+
+to github so this action runs whenever a
+
+
+tag with v dot star dot star gets
+
+
+uploaded
+
+
+uh and it's starting
+
+
+to to run the tasks that i have told you
+
+
+uh
+
+
+until now so it will check out the code
+
+
+it will set up ruby
+
+
+it will do a bundle install
+
+
+it will build the gem
+
+
+next uh i'm getting i'm fetching the uh
+
+
+the gem version so i'm fetching that off
+
+
+of the name
+
+
+i can see it now now off of the name of
+
+
+the
+
+
+uh where is it the tag of the name of
+
+
+the tag and then i'm getting the re i'm
+
+
+fetching the release notes so the
+
+
+release notes that we previously
+
+
+built using automation
+
+
+i'm using a javascript file here so this
+
+
+could be a good place to set up a
+
+
+pre-made action
+
+
+cool
+
+
+um
+
+
+next we are creating a release so i told
+
+
+you about the notion of a release that
+
+
+is attached to a tag inside github
+
+
+so
+
+
+you we have to give it
+
+
+we have to give it a tag name to which
+
+
+to attach it to
+
+
+we have we have to give it the release
+
+
+name
+
+
+and the body so all of those release
+
+
+notes that we automatic automatically
+
+
+generated and fetched in the previous
+
+
+step now they are going to be added to
+
+
+this new release
+
+
+and next we are uploading the release
+
+
+assets so the gem file that we just
+
+
+built we want to upload it to this
+
+
+release so everybody can have it if they
+
+
+want to just download it and don't want
+
+
+to use it of ruby gems and now we are
+
+
+publishing we are pushing to rubygems so
+
+
+we are adding credentials and just doing
+
+
+like a gem push this could be like a
+
+
+github action as well
+
+
+uh cool so how can others use it
+
+
+so all they have to do is do is run
+
+
+bundle add admin the name of the gem
+
+
+or add it to their gem file and run
+
+
+bundle install and next they have to
+
+
+mount
+
+
+the engine so you built the engine and
+
+
+they mount it so they will mount it
+
+
+under the the path that they want so
+
+
+whenever in the parent type you go to
+
+
+slash admin you'll actually use the
+
+
+whole engine so the routes will take
+
+
+over the views will take over the
+
+
+controllers and so on
+
+
+and they can see the end result
+
+
+cool there's one more thing i haven't
+
+
+talked about and it's
+
+
+quite important
+
+
+it's the asset pipeline
+
+
+so there are multiple ways of doing this
+
+
+but there are like maybe two big ways
+
+
+hook into the asset pipeline so whenever
+
+
+the you can add your your assets and
+
+
+adds a command so whenever the the
+
+
+parent app gets deployed and runs assets
+
+
+pre-compile
+
+
+command
+
+
+that will compile your assets as well
+
+
+but that's not maybe what we want
+
+
+because maybe we are using uh
+
+
+es build or something and that requires
+
+
+node.js on the deploy server and maybe
+
+
+the the host app doesn't have that so
+
+
+we can use something else we can
+
+
+pre-compile assets on build time so that
+
+
+abstracts away the whole asset pipeline
+
+
+for the customer for for your user
+
+
+and you can be like a superhero
+
+
+perfect
+
+
+so let's see how that looks like so
+
+
+inside package.json i'm going to add a
+
+
+few scripts so i have this
+
+
+build.js which actually runs es build so
+
+
+it's running
+
+
+it's running uh what's it called js js
+
+
+bundling with es build four rails so
+
+
+it's going to run es build and take
+
+
+everything inside your app javascript
+
+
+directory of the engine
+
+
+and we'll output everything to a public
+
+
+slash admin assets right you can
+
+
+customize this path
+
+
+and similarly we're going to run for for
+
+
+css we're going to use tailwind and it
+
+
+will take one admin css file and publish
+
+
+it to admin assets admin css everything
+
+
+is compiled down
+
+
+so
+
+
+and you have like one big uh script that
+
+
+does both of them
+
+
+and next up this is how like the typical
+
+
+directory structure looks like
+
+
+and
+
+
+what happens is you have this entry file
+
+
+so this is your source admin tailwind
+
+
+css and then you have your source
+
+
+javascript file right so this is basic
+
+
+rails and what happens in um
+
+
+in development it creates this
+
+
+you have this builds
+
+
+directory so everything that we create
+
+
+we had here we actually built it inside
+
+
+build so this is for production and but
+
+
+for development you would actually build
+
+
+it inside builds and then the asset
+
+
+pipeline would just pick it up and and
+
+
+show it to the to the user
+
+
+uh but now what we did using the
+
+
+production uh the production scripts we
+
+
+actually built them inside public admin
+
+
+assets so those are the compiled assets
+
+
+those are everything like the css put
+
+
+together javascript and so on
+
+
+uh and how how is how is the uh host app
+
+
+going to find those files because they
+
+
+are not like readily available they are
+
+
+not mounted on a server
+
+
+so we are going to use a middleware
+
+
+and we are going to update
+
+
+the engine files again when you generate
+
+
+an engine you get this engine uh file
+
+
+which is think of it like your
+
+
+application rb
+
+
+uh whenever you have a configuration or
+
+
+you wanna add maybe a quick initializer
+
+
+you do it in application rp or in your
+
+
+environment file like production and
+
+
+development so this is what engine is
+
+
+it's like the entry point the ruby entry
+
+
+point to your engine and we are going to
+
+
+add a new middleware rack static and we
+
+
+tell it like whenever somebody goes to
+
+
+admin assets
+
+
+actually redirect them to admin engine
+
+
+root and join public so it's going to
+
+
+get get us to that
+
+
+public path that we discussed
+
+
+so this is how the browser has access to
+
+
+those compiled assets that you
+
+
+pre-packaged
+
+
+and now you'll have to do something in
+
+
+your application html for your rails
+
+
+engine and do something like if your
+
+
+engine is packed so you have to figure
+
+
+that out uh if that is packed use the
+
+
+avo assets path so the the ones that we
+
+
+just uh we just added here if it's not
+
+
+packed just add the simple like
+
+
+javascript include tag and add avo and
+
+
+oh sorry admin and um you'll be done the
+
+
+asset pipeline would find them because
+
+
+they will be available inside
+
+
+the builds directory
+
+
+cool
+
+
+so to recap
+
+
+we talked about what is a rails engine
+
+
+generating uh generating it sharing it
+
+
+in on rubygems
+
+
+uh push uh push updates and versioning
+
+
+we talked about the updates workflow we
+
+
+talked about how to automate all of
+
+
+those things on github actions and how
+
+
+to to be an asset hero right to help
+
+
+not involve the the the user the
+
+
+customer in like having an asset
+
+
+pipeline
+
+
+um
+
+
+i have a quick community shout out so
+
+
+first of all if there are any romanian
+
+
+ruby developers watching this go to ruby
+
+
+romania
+
+
+we're trying to set up a new community
+
+
+so go check that out
+
+
+and short ruby newsletter so my friend
+
+
+lucian is doing a
+
+
+roundup of what's happening on twitter
+
+
+about ruby so if you don't have time to
+
+
+watch out uh watch like me
+
+
+argue with people about dsls or
+
+
+want to see what joel drapper is doing
+
+
+with
+
+
+flex or xavier noria talking about
+
+
+autoloading awesomeness go check out and
+
+
+sign up
+
+
+so there's one more thing i would like
+
+
+you to be awesome
+
+
+so
+
+
+go and build useful things
+
+
+uh share it with others and most
+
+
+importantly be kind
+
+
+okay
+
+
+i'm adrian the dev everywhere check out
+
+
+avo short ruby ruby romania
+
+
+jin queer
+
+
+[Applause]
+
+
+so if you have questions please as many
+
+
+as possible because andre is coming
+
+
+after me and he has a few slides that he
+
+
+would like to trash like engines and
+
+
+maybe he'll take them out so as many
+
+
+questions as possible to cut his time
+
+
+short
+
+
+hi uh thank you for your talk
+
+
+um
+
+
+i have a question about other usages of
+
+
+engine apart from gems
+
+
+did you consider use it as a
+
+
+i will give you a practice uh example in
+
+
+our application it was a monolith and we
+
+
+were thinking about
+
+
+building another application inside it
+
+
+yeah and
+
+
+discussing should be it enjoying because
+
+
+it can grow in future and we can
+
+
+separate it easily we should be just
+
+
+name spaced
+
+
+inside this rails
+
+
+and what do you think which approach has
+
+
+its pros and cons and what would you
+
+
+choose in this case if both applications
+
+
+not so big yet
+
+
+so
+
+
+um yeah it depends of course
+
+
+so what i would say my general advice is
+
+
+like build everything build anything to
+
+
+be able to scale it okay okay scale is a
+
+
+is a very pumpish word it's a big word
+
+
+but to be able to extend it or extract
+
+
+it if you if needed so if you build
+
+
+anything like that or if you build
+
+
+everything like that then you'll be able
+
+
+to extract it easily and and manage it
+
+
+more easily so it all depends on what
+
+
+kind of functionality so if we're
+
+
+talking like that marketplace that i
+
+
+told you about then it makes perfect
+
+
+sense to have like different engines
+
+
+because the the buyers and the sellers
+
+
+are like first uh class citizens so
+
+
+they're very important so it's clear
+
+
+that the the
+
+
+um
+
+
+the functionality is going to differ so
+
+
+we needed a part if it's something else
+
+
+like uh we i built sometimes like a
+
+
+a while back i built an e-commerce
+
+
+gateway and we had this
+
+
+app and we had like we should we we were
+
+
+talking to shopify to aw to amazon to uh
+
+
+different marketplaces
+
+
+we started uh adding like namespaces but
+
+
+then it grew too much too too big and
+
+
+too tough to handle then we extracted
+
+
+those things into separate engines so we
+
+
+had like separate channels separate
+
+
+engines for each um
+
+
+each year marketplace of shopify amazon
+
+
+and so on so it all depends
+
+
+you just have to talk with the you with
+
+
+your team
+
+
+just like you talk with to when you're
+
+
+trying to build any type of feature what
+
+
+are we going to do we use this or to use
+
+
+that and so on
+
+
+and also the second question did you
+
+
+have experience that
+
+
+in both
+
+
+main application engine you have
+
+
+webpacker
+
+
+yeah yeah so we started we started over
+
+
+with webpacker uh there wasn't too much
+
+
+documentation but if you check the code
+
+
+so if anybody has like uh
+
+
+real interest into this i can i can show
+
+
+them the code so you can package an
+
+
+engine and have a webpacker asset
+
+
+pipeline inside your engine we used to
+
+
+do that and you can do the same thing
+
+
+you can uh use a
+
+
+hook into the asset pipeline so if you
+
+
+have like your app you would like to
+
+
+compile all the assets when you deploy
+
+
+your app but if you want to package the
+
+
+engine and send it to everybody else you
+
+
+can use the second
+
+
+strategy and compile them in in
+
+
+production and
+
+
+in
+
+
+build time so you can definitely do that
+
+
+it you can add some middleware so you
+
+
+hook into webpacker it's not easy but
+
+
+you can do it
+
+
+okay thank you you're welcome
+
+
+if you're curious about like es build or
+
+
+tailwind you can ask me that as well
+
+
+those questions
+
+
+so on your example you have uh two
+
+
+engines buyer and sellers so how to
+
+
+avoid duplication of models
+
+
+well
+
+
+that's
+
+
+i was talking to andre you know there
+
+
+are developers that like to build things
+
+
+and there are developers that like to
+
+
+ship things that's a job for the
+
+
+developers that like to build things so
+
+
+you can extract things into modules and
+
+
+then include them inside your own models
+
+
+or you can figure out like different
+
+
+like architectures whatever works for
+
+
+your app but if it's something like just
+
+
+buyers and sellers you can have like
+
+
+maybe concerns somewhere and just add
+
+
+them here and there and so on um
+
+
+okay but in your case you duplicate
+
+
+models or you work in different way in
+
+
+my case as with avo
+
+
+uh no so actually i don't think i have
+
+
+any models in avo avo hooks into your
+
+
+app and figures out what models you have
+
+
+uh you have available and then um we
+
+
+just picked them up from
+
+
+i don't know where right now from the
+
+
+object space whatever uh from i think
+
+
+we're eager loading the whole app and
+
+
+then we're figuring out what inherits
+
+
+from application record and then we we
+
+
+take those and do things with it okay
+
+
+thank you yeah you're welcome
+
+
+cleo
+
+
+hey i'm available uh after the talk i
+
+
+will be available tonight um and i'll be
+
+
+available on discord and go check out
+
+
+the repo
+
+
+and uh we're really friendly we like
+
+
+people playing with our with our code so
+
+
+thank you so much for everything
+
+
+you

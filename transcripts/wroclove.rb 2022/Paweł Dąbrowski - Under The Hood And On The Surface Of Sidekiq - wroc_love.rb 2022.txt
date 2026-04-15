@@ -1,0 +1,2503 @@
+hello everyone I hope you are doing well
+
+
+it's great to be here today it's also
+
+
+difficult to be a speaker after you know
+
+
+Andre and Mario's as they always set the
+
+
+bar very high and today I'm going to
+
+
+talk about the sidekick
+
+
+the sidekick on the surface which means
+
+
+the design patterns that we can follow
+
+
+at the good practices that we should
+
+
+apply and the Hub is that we should
+
+
+develop in order to build
+
+
+well-functioning background job
+
+
+processing and sidekick under the hood
+
+
+which is a more advanced stuff like
+
+
+sidekick internals uh the way the
+
+
+sidekick communicates with redis and for
+
+
+example how the middleware is working
+
+
+before I start just let me briefly
+
+
+introduce myself so my name is Pavel
+
+
+Dombrowski I'm a definitely a ruby guy
+
+
+and I work with Ruby for the last 12
+
+
+years I'm also proud to be the part of
+
+
+the iron intense since the beginning of
+
+
+the company and by day I work as a CTO
+
+
+and by night I write a lot of Articles
+
+
+you can find them on my personal website
+
+
+as well as the ironing blog I sometimes
+
+
+also post guest articles on the app
+
+
+signal block as well if you prefer
+
+
+listening to reading make sure you check
+
+
+the Ruby rocks and my Ruby story podcast
+
+
+when I had a pleasure to be invited few
+
+
+times in the past and of course you can
+
+
+find me on the social media on Twitter
+
+
+and GitHub where I share the stuff
+
+
+mostly about Ruby but enough about me
+
+
+let's talk about the sidekick I'm sure
+
+
+that most of you know what Sidekick is
+
+
+you probably is using uh this sidekick
+
+
+on a daily basis but just in case you
+
+
+don't know Sidekick is a library for a
+
+
+background job processing it's open
+
+
+source so of course you can use it for
+
+
+free but it also provides some part
+
+
+versions like Pro and Enterprise those
+
+
+versions comes with some useful features
+
+
+like Enterprise rate limiting or patches
+
+
+there are quite expensive if you are a
+
+
+solo developer on a site project or you
+
+
+work in a small startup team but the
+
+
+good news is that you can easily replace
+
+
+them with some open source stuff as well
+
+
+Sidekick is simple which means that you
+
+
+can easily get started and build the
+
+
+workers and it's very efficient you can
+
+
+easily scale from few jobs to millions
+
+
+of jobs it all depends on the way you
+
+
+are designing your process and the good
+
+
+news is that it work outside the rails
+
+
+so that's the good news probably for
+
+
+many of you
+
+
+and I split this uh presentation into
+
+
+two parts as I mentioned before so let
+
+
+me start with the first one sidekick on
+
+
+the surface
+
+
+first of all why should you care about
+
+
+their good practices well first of all
+
+
+you don't want to annoy your customers
+
+
+imagine that you send by accident
+
+
+thousands of duplicated emails to them
+
+
+this is something that we should like
+
+
+you know to avoid second you don't want
+
+
+to waste your money imagine that you
+
+
+have a process and you expect some
+
+
+errors that you're going to retry and in
+
+
+most cases you don't want to lock those
+
+
+errors into monitoring service you only
+
+
+want to lock error once if the job would
+
+
+not succeed
+
+
+and I also will be talking about that
+
+
+how we can avoid you know spending uh
+
+
+money on the monitoring service for
+
+
+errors that we should not lock and the
+
+
+last thing which we don't want to waste
+
+
+time we want to debug efficiently and we
+
+
+don't want to search you know for
+
+
+parents that we should pass to their job
+
+
+if we are queuing it manually
+
+
+so first of all let's talk about the
+
+
+naming things properly as the developers
+
+
+we know that is very hard and in the
+
+
+past probably most of us was using the
+
+
+workers term but about a year ago the
+
+
+mic creator of the sidekick decided to
+
+
+move forward and change the naming to
+
+
+job of course right now we can use both
+
+
+sidekick worker and both side job but as
+
+
+a sidekick 7 we will only have job on
+
+
+our disposals so make sure that you
+
+
+remember about it the next time you will
+
+
+upgrade your sidekick
+
+
+the second thing is that we should
+
+
+always use the proper naming for our
+
+
+classes in most cases it makes sense to
+
+
+name the class after its responsibility
+
+
+but I saw many word cases in the past
+
+
+when one of the developers named the
+
+
+class as mechanisms
+
+
+I think the developer does not know what
+
+
+is doing after a few weeks
+
+
+so I prepare here two examples the first
+
+
+one is delete users
+
+
+in my opinion is too generic we don't
+
+
+even know that is a background job so
+
+
+it's a good idea to give it more
+
+
+meaningful name like remove outdated
+
+
+users job and thanks to this we know
+
+
+first this this is a background job and
+
+
+the second thing it removes outdated
+
+
+users which in most cases means users
+
+
+that are no longer active and the second
+
+
+example is also very generic is resume
+
+
+processor so we can as well give it a
+
+
+better name and I highly encourage you
+
+
+to take a look at your code base to see
+
+
+if you are using meaningful names maybe
+
+
+there is a space for the refactoring it
+
+
+won't take too long
+
+
+and of course if your jobs are related
+
+
+somehow it's always good to you know
+
+
+create additional namespace put it in a
+
+
+separated directory so you have a better
+
+
+clue about the context in my example the
+
+
+stripe is the you know thing that
+
+
+connects all the jobs so I decided to
+
+
+give it a additional namespace
+
+
+the next thing is about keeping
+
+
+parameters simple this one is very
+
+
+important I think it's fundamental for
+
+
+the background jobs
+
+
+and the basic idea behind the
+
+
+simple parameters is not only to save
+
+
+the memory of course you can you know
+
+
+pass some hashes use many arguments even
+
+
+pass objects
+
+
+with the active jobs you get the
+
+
+serializers and these serializers with
+
+
+the sidekick you probably have to you
+
+
+know implement the serializers uh by
+
+
+yourself but yes you can but it doesn't
+
+
+mean that you should
+
+
+the idea of simple params is that it's
+
+
+easier to queue them either manually or
+
+
+automatically it's easier to find them
+
+
+if you are looking at the sidekick
+
+
+dashboard and logs it provides better
+
+
+isolation which means also easy testing
+
+
+and the last thing is that you make the
+
+
+radius happier because redis is in
+
+
+memory data storage and if you are
+
+
+providing simple params in costumes less
+
+
+memory as well
+
+
+and I prepared here a simple example
+
+
+as you can see
+
+
+the first one contains four arguments we
+
+
+are passing only values
+
+
+and we can easily refactor it but
+
+
+passing just the reference so inside the
+
+
+job we can pull you know the actual data
+
+
+and we are sure that we won't end up
+
+
+with the data that is not up to date
+
+
+anymore
+
+
+the reason for that is not only we are
+
+
+using fewer parameters but also we
+
+
+should never take the data for granted
+
+
+imagine that your queue a job with some
+
+
+values and those values change in the
+
+
+meantime and you finish executing the
+
+
+job with the data that is no longer
+
+
+valid
+
+
+here is the very simple example of that
+
+
+we are passing the email what can go
+
+
+wrong but imagine that you are queuing a
+
+
+millions of jobs and some of the emails
+
+
+will change in the meantime and you will
+
+
+most likely end up with sending emails
+
+
+to the wrong recipients
+
+
+and to easily fix this just pass the
+
+
+reference that way you are always sure
+
+
+that you are pulling the actual data
+
+
+it's very simple but it's very useful
+
+
+the next thing is that you should be
+
+
+aware that it is not good idea to queue
+
+
+the jobs inside the transaction first of
+
+
+all we can queue the job and then the
+
+
+transaction will be rollbacked and the
+
+
+second thing even if we would put the Q
+
+
+process in the end
+
+
+we are not sure that the transaction
+
+
+will be committed before we will execute
+
+
+the job and this is the problem that
+
+
+Sidekick is dealing from the beginning
+
+
+and of the sidekick 7 this problem is
+
+
+finally solved so uh the big things are
+
+
+coming in terms of sidekick
+
+
+and of course we should keep the logic
+
+
+simple it applies to all classes I
+
+
+believe but if we have a you know simple
+
+
+logic inside our jobs
+
+
+we automatically use smaller jobs and
+
+
+smaller jobs are very important in terms
+
+
+of sidekick
+
+
+here we have a simple example we pull
+
+
+all the website from our database and
+
+
+for each website we scrub the title and
+
+
+save it back to the database what can go
+
+
+wrong imagine that the scrapping process
+
+
+break in the middle so it's not possible
+
+
+to retry it from the moment where it
+
+
+failed of course you can Implement some
+
+
+begin rescue and handle that but there
+
+
+is a easier way for do this
+
+
+we can easily split the whole process
+
+
+into smaller jobs as you can see here
+
+
+for each job we simply queue separated
+
+
+job so it's very easy to retry the job
+
+
+we won't affect the whole process and
+
+
+you can even easily queue it manually
+
+
+from the console if you would like to
+
+
+and the idea behind the smaller job is
+
+
+that you can faster process them you
+
+
+know faster with using concurrency so
+
+
+you can execute them
+
+
+concurrently it's possible to queue them
+
+
+manually as you have to remember only
+
+
+one parameter is super easy and super
+
+
+quick it's easy to retry job as you are
+
+
+retrying only small piece and you can
+
+
+easily Implement progress tracking if
+
+
+you are using sidekick Pro or Enterprise
+
+
+you have batches for that with the
+
+
+useful calbacks but if you you are using
+
+
+the free version you can easily
+
+
+implement it by yourself
+
+
+the next thing is about the connection
+
+
+to retis of course if you have a
+
+
+separated instance for your Sidekick and
+
+
+application that everything is okay but
+
+
+imagine that you have a one instance
+
+
+which is a very common case and your
+
+
+application is not aware of the sidekick
+
+
+they don't know each other so they are
+
+
+not aware of the connection that you are
+
+
+using and you can easily run into
+
+
+problem when the you know connections
+
+
+are gone there are no more connection
+
+
+and you will end up with the error
+
+
+so the very simple solution for that is
+
+
+to use connection pool for both your
+
+
+application and sidekick
+
+
+and also is very easy because sidekick
+
+
+provides some interface for that you can
+
+
+easily use this block
+
+
+and call your redis and you are sure
+
+
+that you want to run out
+
+
+of the available available connections
+
+
+the next thing is that in most cases you
+
+
+should don't use inheritance when it
+
+
+comes to background jobs because there
+
+
+is one big problem with inheritance
+
+
+you can only have one parent
+
+
+and imagine the case that you have a few
+
+
+jobs they are quite similar but they are
+
+
+not the same they are sharing some
+
+
+common responsibilities for example job
+
+
+a has the handling for error a and error
+
+
+B job B has a handling for error a and
+
+
+error C and we also have job C which
+
+
+shares the handling for error C and
+
+
+error B now imagine handling this with
+
+
+the inheritance we'll probably end up
+
+
+with the parent class that is very big
+
+
+there is non-testable and maintainable
+
+
+is a nightmare
+
+
+but luckily we can use modules and prep
+
+
+and for that and while most developers
+
+
+know what is include an accent prep and
+
+
+work very similar to include it only
+
+
+takes the module and put it at the
+
+
+beginning of at the store chain while
+
+
+the include will put it after the class
+
+
+and with the prep and we can easily
+
+
+create the module as you can see here we
+
+
+are rescuing from an error
+
+
+we are calling super which will call the
+
+
+perform method from a job
+
+
+and that way we can
+
+
+easily put the logic into module and
+
+
+prevent it in a job class that way you
+
+
+can share those responsibilities between
+
+
+the class you don't need one big parent
+
+
+you can add as many handlers as you want
+
+
+and it's super cool because in the
+
+
+perform method there is no rescue
+
+
+everything works behind the scene
+
+
+and when it comes to errors we should
+
+
+remember about retrying day properly and
+
+
+in order to retry them properly first of
+
+
+all we have to make sure that we are
+
+
+able to roll back to the initial state
+
+
+that's why we need a smaller job
+
+
+because if you are going to retry the
+
+
+job you don't want to duplicate anything
+
+
+you don't want to make to any necessary
+
+
+API calls as this can you know harm your
+
+
+performance or or do other nasty stuff
+
+
+and if we are talking about the retrying
+
+
+which I mentioned before
+
+
+sometimes we don't want to lock errors
+
+
+in our monitoring service here is the
+
+
+example from the app signal but you can
+
+
+also do this for providersack roll bar
+
+
+or any other
+
+
+and the idea is that we should not lock
+
+
+the error unless it's a final error
+
+
+because the job might succeed and this
+
+
+error is not needed in most cases in the
+
+
+monitoring service and to solve that we
+
+
+can use very simple pattern the first
+
+
+step is just to create the error wrapper
+
+
+it simply inherits from the standard
+
+
+error it saves the reference to the
+
+
+original error and the next step is to
+
+
+raise it as you can see here we are
+
+
+simply rescuing for our our original
+
+
+error and then we write the job wrapper
+
+
+with the original error inside it
+
+
+then we ignore our wrapper of course we
+
+
+are retrying so we don't want yet to log
+
+
+it into Monitoring Service as this is
+
+
+not a final error
+
+
+and the last step is that we can
+
+
+Implement sidekick retrace exhausted
+
+
+this is the hook that is called when all
+
+
+retries are used so we can report the
+
+
+final error and we don't waste our API
+
+
+calls we don't waste simply money
+
+
+and when it comes to logging in most
+
+
+cases we don't need them but if we need
+
+
+them we want to make sure that we log
+
+
+only meaningful information that will
+
+
+point us to the problem
+
+
+and so in terms of sidekick first of all
+
+
+you should ensure that the logs are
+
+
+saved then you should think about the
+
+
+logging job execution and in the end you
+
+
+should care about the logging inside the
+
+
+job
+
+
+and as of sidekick 6 you have to take
+
+
+care of the lock redirection by yourself
+
+
+it's no longer possible to config the
+
+
+local Direction on the sidekick level so
+
+
+make sure that you are saving the logs
+
+
+in a file so you can use them later
+
+
+and here is the default
+
+
+job execution output as you can see we
+
+
+have some useful data like class name or
+
+
+the unique identifier for a job but if
+
+
+you would like to have the arguments
+
+
+automatically save them you can easily
+
+
+do this by using middleware here is the
+
+
+example of working middleware you can
+
+
+use it straight into your project and
+
+
+with this middleware we get the
+
+
+arguments included in the logs
+
+
+automatically is very useful if you are
+
+
+doing debugging or you are looking for a
+
+
+jobs by the parents that were passed
+
+
+and when it comes uh to logging inside
+
+
+the job of course you may have separated
+
+
+loggers separated files but if you want
+
+
+to put the information into default log
+
+
+you can use built-in logger from
+
+
+sidekick and then your message will get
+
+
+this useful prefix so you can see that
+
+
+they are grouped by the unique job
+
+
+identifier and knowing the job
+
+
+identifier you can find all the
+
+
+occurrences of this job
+
+
+and that's it about the good uh
+
+
+practices let's talk about the sidekick
+
+
+internals first of all why should we
+
+
+care about the psychic internals
+
+
+we know it very well we know how to use
+
+
+it so why should we care how it's
+
+
+working under the hood so first of all
+
+
+uh I think it's useful to know it to
+
+
+learn how to extend sidekick
+
+
+it helps us to debug more efficiently as
+
+
+we know how things are running under the
+
+
+hood and the last thing it helps us to
+
+
+become a better developer because I
+
+
+believe that by reading other people
+
+
+code we are getting better and better
+
+
+and here is my Philosophy for learning I
+
+
+wasn't looking under the hood all the
+
+
+time at some point it changed for me so
+
+
+each time I have a new tool to to learn
+
+
+I learn how to use it enough to build
+
+
+something working then I improve it to
+
+
+be able to run in production then I take
+
+
+a look at the good practices to refactor
+
+
+the code and in the end I look under the
+
+
+hood to understand it more so I can
+
+
+either extend it or even uh
+
+
+learn how to use it better even more but
+
+
+actually there is a one step that I
+
+
+missed that we sometimes forget about
+
+
+it's about the documentation we should
+
+
+always look into documentation at every
+
+
+step or our Learning Journey and I think
+
+
+it applies to all people at all level of
+
+
+seniority
+
+
+and as I mentioned before sidekick
+
+
+heavily depends on the radius it saves
+
+
+the data in the radius
+
+
+and redis is a in-memory data store in
+
+
+op it's open source is based on the key
+
+
+value Pairs and it provides some data
+
+
+types sets sorted says lists and hashes
+
+
+for example
+
+
+and when it comes to the process of
+
+
+using credits by sidekick we can
+
+
+separate this into two steps the first
+
+
+one is adding job to the queue and the
+
+
+second one is picking job from a queue
+
+
+so let me tell you more about adding job
+
+
+to the queue here is the typical flow
+
+
+that the sidekick is using so first of
+
+
+all we are passing params then the
+
+
+sidekick is validating this data under
+
+
+the hood then the assignment of the
+
+
+default params begin then the middleware
+
+
+executed this is the last chance to
+
+
+reject the job from being safe in radius
+
+
+then the Json is verified
+
+
+I mentioned before that it's good to
+
+
+pass simple params because with the
+
+
+complex objects you may not pass this
+
+
+verification of Json and in the current
+
+
+version of sidekick you will only get
+
+
+the warning but with sidekick 7 you will
+
+
+get the error and your job will be gone
+
+
+to the dead queue and it won't be retry
+
+
+automatically
+
+
+and when the Json is verified we are
+
+
+finally pushing our Q2 radius and we are
+
+
+pushing then the payload
+
+
+so let me go over every step in a detail
+
+
+as you can see here our call is simply
+
+
+translated to the hash of course if you
+
+
+are planning to execute your job at some
+
+
+point in the future another arguments
+
+
+will be added this is the ad
+
+
+and it will represent the time converted
+
+
+to float
+
+
+then sidekick simply validates our job
+
+
+it makes sure that the job is a hash if
+
+
+arguments and tags are in Array if job
+
+
+class either string or a class and if
+
+
+the add param is provided it verifies
+
+
+that is a numeric value
+
+
+then the assignment of the default
+
+
+params begins
+
+
+as you can see here it will Mark your
+
+
+job as free tried True by the default so
+
+
+make sure you will disable it explicitly
+
+
+if you don't want to retry your job if
+
+
+you won't pass the queue it will assign
+
+
+the default queue and of course it will
+
+
+Define some unique identifier and the
+
+
+creation date which is the time object
+
+
+create a translated to float
+
+
+and then the client middleware is
+
+
+invoked as I mentioned before this is
+
+
+the last step where we can reject a job
+
+
+from being safe into readies and that's
+
+
+how the skeleton is looking
+
+
+you can have some params at your
+
+
+disposal you can even use the redis pool
+
+
+to perform some action or even checks
+
+
+then the Json is verified as you can see
+
+
+here the verification is quite simple
+
+
+and if you are passing very complex
+
+
+object you most likely won't pass the
+
+
+verification
+
+
+so I always advise to
+
+
+avoid that
+
+
+and when it comes to saving data into
+
+
+redis we can either decide that we want
+
+
+to perform job later at some point in
+
+
+the time for example in the next day or
+
+
+we can use the perform uh you know async
+
+
+to
+
+
+executed as soon as possible and in
+
+
+terms if we want to execute the job
+
+
+later then the sidekick will use that
+
+
+add command in redis it's simply add
+
+
+member with score to the sorted set and
+
+
+when it comes to score it simply means
+
+
+the time of the job execution translated
+
+
+to float thanks to that we can easily
+
+
+end up with a sorted set of numbers that
+
+
+we can you know select the right job to
+
+
+the execution
+
+
+and if we are if we want to execute the
+
+
+job as soon as possible then first of
+
+
+all psychic will call the S add command
+
+
+from redis it's simply add member to set
+
+
+ignore if exist so thanks to that we are
+
+
+having a set of cues that are unique and
+
+
+it perform L push comment for the
+
+
+payload it's simply add item to the head
+
+
+of the list so we have a simple list
+
+
+with the payloads
+
+
+and when it comes to picking job from a
+
+
+queue we have a two mechanism the first
+
+
+one is a puller the second is manager
+
+
+and the puller is generally responsible
+
+
+for taking the job from Radice when it's
+
+
+their time to execute then it passed the
+
+
+payload to the manager and manager is
+
+
+responsible from translating the params
+
+
+into the instance of a job and calling
+
+
+the perform method with the right
+
+
+arguments on it
+
+
+and the puller is using the Z range by
+
+
+score command in redis it takes the
+
+
+elements in a sorted set with a score
+
+
+between Min and Max and as I mentioned
+
+
+before the score is a time of execution
+
+
+converted to float mean is usually minus
+
+
+infinity and Max is the current time
+
+
+converted to float so it's very easy to
+
+
+take all jobs that should be executed by
+
+
+now
+
+
+then the job is passed to the manager
+
+
+manager is using the radius BR pop
+
+
+comment it's a simply blocking list
+
+
+primitive it takes the queues as the
+
+
+argument then it pulls the job from
+
+
+those skills and execute them if there
+
+
+are no jobs in the given queue it blocks
+
+
+the connection and it won't eat and it
+
+
+waits something to appear and then it
+
+
+executed
+
+
+and this is the manager flow in the
+
+
+detail so it first decodes the payload
+
+
+if everything is okay it will proceed
+
+
+otherwise it will push the job to the
+
+
+that queue then the middleware is
+
+
+invoked so there is the last chance to
+
+
+reject the job from being executed and
+
+
+then the manager simply execute the job
+
+
+by creating the instance of a class and
+
+
+calling the perform method on it
+
+
+and of course we also have the sidekick
+
+
+dashboard that is very useful and under
+
+
+the hood is just a simple rack
+
+
+application that has a views in our B
+
+
+format and I also mentioned about the
+
+
+pro and Enterprise versions
+
+
+those various are also gems you can get
+
+
+them by buying the license then you get
+
+
+the credentials you add them to your gem
+
+
+file then you pull pull them from a
+
+
+private rubygem server and the code is
+
+
+saved to your machine if you are paying
+
+
+for the license uh with every year then
+
+
+you get all the updates on your machines
+
+
+as well
+
+
+and that's it from my site when it comes
+
+
+to sidekick
+
+
+uh if there are any questions then go
+
+
+ahead
+
+
+thank you
+
+
+I have a question you had the slide
+
+
+where uh job was scheduled inside the
+
+
+transaction and you mentioned there was
+
+
+a race condition there
+
+
+uh and you also mentioned if I
+
+
+understood correctly that the new
+
+
+version of sidekick fixes this race
+
+
+condition
+
+
+okay just let me find it
+
+
+okay
+
+
+yes yes this one and I'm very curious
+
+
+how does it do it
+
+
+you mean how does the sidekick 7 will
+
+
+deal with that problem yes
+
+
+to be honest I don't know the pull
+
+
+request is still opened they don't have
+
+
+the date for the you know for the
+
+
+release so I'm not sure now
+
+
+uh I just go you know briefly through
+
+
+the pull request and read that this is
+
+
+one of the most important things
+
+
+uh so yeah have no idea how they will
+
+
+solve that but this is something they
+
+
+was you know experiencing from the
+
+
+beginning so it's the big one so just to
+
+
+make sure that I I understood correctly
+
+
+you're saying that uh it will somehow
+
+
+prevent the job from being executed
+
+
+before the transaction is committed is
+
+
+that correct yes yes the job will wait
+
+
+until the transaction is committed to
+
+
+the database and then jump will be
+
+
+executed if the job is you know uh Queue
+
+
+at the very end of the transaction
+
+
+okay thanks it sounds impossible but
+
+
+very curious
+
+
+no thank you very much for your
+
+
+presentation now it was very insightful
+
+
+and I just wanted to comment on that
+
+
+last question because
+
+
+I actually had this exact use case in
+
+
+the other project and I had to somehow
+
+
+solve this use case so
+
+
+um what I can share here is that
+
+
+well that's a pretty common problem when
+
+
+you have to
+
+
+um
+
+
+to systems to to commit something to so
+
+
+this is pretty Universal and if you
+
+
+don't just commit things to your
+
+
+database then you will always face this
+
+
+problem
+
+
+and there are various algorithms how to
+
+
+do it they have each have its own
+
+
+caveats but
+
+
+the simplest thing in my opinion you can
+
+
+do if uh if if you have to like solve it
+
+
+now and probably guys from sidekick will
+
+
+solve it pretty well is
+
+
+well
+
+
+saving something to the database that
+
+
+will identify your intent to
+
+
+um
+
+
+to to execute this particular job and
+
+
+then in that job read that from the
+
+
+database and if it's there well you know
+
+
+it's committed if it's not there that
+
+
+the
+
+
+transaction didn't execute
+
+
+and you have to retry a couple of times
+
+
+because the transaction might be stall
+
+
+and after just a bit of time you can if
+
+
+if it's still not there you can discard
+
+
+it so that's
+
+
+um
+
+
+pretty easy solution that scales really
+
+
+well from my experience that that one
+
+
+can use so it is possible
+
+
+um but it's it's not simple there's
+
+
+there's no simple solution to this
+
+
+problem yeah I agree definitely
+
+
+the question I have you mentioned one of
+
+
+the advices is to keep the job simple
+
+
+and I have seen multiple recommendations
+
+
+how to achieve that conflicting
+
+
+recommendations one is to always have
+
+
+job only as a wrapper for your service
+
+
+object call and another is actually to
+
+
+treat the job as Ruby object and do the
+
+
+logic in there not to complicate things
+
+
+do you have any preference on this and
+
+
+if so why
+
+
+uh well it all depends like like always
+
+
+right but what I prefer is to use some
+
+
+basic checking right and then calling
+
+
+some service object or calling API you
+
+
+know just to make sure that if you would
+
+
+uh execute the job multiple times you
+
+
+always get the same result we don't want
+
+
+to any duplication
+
+
+so uh yeah that's my way of doing it but
+
+
+it also depends on the case I saw a many
+
+
+examples of Simply calling you know the
+
+
+service from that
+
+
+so that's the one I think that sidekick
+
+
+also provides delayed extension which
+
+
+can turn any classical into the you know
+
+
+background job by passing the delay you
+
+
+know and then name of the method but it
+
+
+will be removed as of sidekick 7 but I
+
+
+think it will exist as a separated gem
+
+
+so that's another way of doing it
+
+
+thank you for your advices for using a
+
+
+sidekick the one question I have is
+
+
+about a keep Simple Arguments for your
+
+
+jobs uh I see few times in different
+
+
+projects that sometimes developers just
+
+
+put a whole list of IDs which might have
+
+
+a few hundreds of object of IDs there is
+
+
+it a good idea to this or for example to
+
+
+just Shadow a few a few few hundred of
+
+
+jobs in the same time same time to have
+
+
+single just ID for just one job or you
+
+
+have an other solution for
+
+
+such a list of IDs you need to perform
+
+
+asynchronously okay so I usually use the
+
+
+batches feature which takes the mini
+
+
+jobs you can use it thousands of
+
+
+millions of them and when they are all
+
+
+finished you get the you know the
+
+
+Callback which is usually another
+
+
+background job so I would go for that if
+
+
+you can you know execute those jobs
+
+
+independently
+
+
+okay I never used batches so I need to
+
+
+read about this and probably this is the
+
+
+feature of the sitekey pro and
+
+
+Enterprise but there are some
+
+
+Replacements that are free so they
+
+
+should work as well thanks
+
+
+thank you for your presentation
+
+
+um let's consider a scenario
+
+
+where
+
+
+um jobs are consuming messages from a
+
+
+message queue
+
+
+and a lot of messages can
+
+
+concern on the same record
+
+
+do should you somehow
+
+
+decide if any of the jobs following
+
+
+first initial
+
+
+um event
+
+
+that was consumed and generated the job
+
+
+um when the jobs are executing one by
+
+
+one
+
+
+and or if any jobs are present already
+
+
+should we schedule new ones
+
+
+um
+
+
+you know just to avoid
+
+
+too much of the of the of of of jobs
+
+
+being scheduled for basically non-chain
+
+
+none of the changes that are important
+
+
+for the record
+
+
+well I think it's a very specific case
+
+
+but if it's possible I will execute them
+
+
+one by one
+
+
+or you can execute a few of them
+
+
+concurrently but then I believe you have
+
+
+to make sure that you are not all
+
+
+writing your data so probably any you
+
+
+know negative logging or something like
+
+
+that should be applied
+
+
+uh but I think you know it depends on
+
+
+your case if you can do that then go for
+
+
+that you have some special requirements
+
+
+then I think it needs a bit of
+
+
+Investigation to find the right solution
+
+
+uh thank you for talk I'm here
+
+
+um I I have a question
+
+
+um are you interested in why sidekick
+
+
+don't work with uh write this cluster
+
+
+maybe you investigate it no I haven't
+
+
+had a chance to look at it
+
+
+[Music]
+
+
+yeah
+
+
+I I wasn't aware even of that that it's
+
+
+not working there so
+
+
+sorry
+
+
+hi um I have a question about scaling
+
+
+um in cloud computing AWS Lambda for
+
+
+example uh when there are no jobs to
+
+
+process it kills all the containers so
+
+
+you don't have to pay for them you don't
+
+
+waste any resources if there is a spike
+
+
+uh it spins up several containers so you
+
+
+know it can handle all the jobs uh in a
+
+
+timely manner and so the question is how
+
+
+do you scale a sidekick do you have any
+
+
+smart techniques
+
+
+uh well we always used many instance of
+
+
+a sidekick when we have you know a need
+
+
+for a bigger power to be honest I never
+
+
+use any Lambda or any of that to replace
+
+
+the sidekick or make it more useful so
+
+
+uh you know it's hard to tell I think it
+
+
+all depends on the nature of your data
+
+
+right because if you have a unique data
+
+
+then you have to be very careful but if
+
+
+you are uh you know dealing with a case
+
+
+where you have a data that can be easily
+
+
+inserted in a database and you want
+
+
+expert experience any conflicts then I
+
+
+would simply go for the multiple radius
+
+
+instance
+
+
+uh yeah to achieve that but if you have
+
+
+some special case then uh I think uh
+
+
+some more Advanced Techniques may be
+
+
+needed as well
+
+
+but it's hard to know to give you the
+
+
+the right solution the bullet one that
+
+
+will work in every case
+
+
+all right thanks
+
+
+so I have a question
+
+
+um here uh do you have some particular
+
+
+advice how to do back pressure at the
+
+
+application Level when you're not is is
+
+
+the application in some way aware of how
+
+
+uh swamped the sidekick is and so the
+
+
+application can in some way do back
+
+
+pressures and not generate lots of
+
+
+events that you know you can't handle
+
+
+uh
+
+
+I never did with that case but I think
+
+
+it's possible right because uh in redis
+
+
+you can access to all the information
+
+
+regard the number of events and the data
+
+
+that is used
+
+
+so I think uh
+
+
+it's not that difficult but you can but
+
+
+you should have to plan it wisely
+
+
+and check it frequently you know to to
+
+
+never miss a place where uh there is
+
+
+enough you know power or the the space
+
+
+and it will become very hard to know
+
+
+to continue the process because there
+
+
+are no resources or something like that
+
+
+okay let's thank Pavel and we need to
+
+
+carry on with the next session so thank
+
+
+you very much
+
+
+[Applause]

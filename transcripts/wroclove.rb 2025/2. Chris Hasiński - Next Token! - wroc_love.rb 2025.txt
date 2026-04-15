@@ -1,0 +1,1789 @@
+All right. So, our next speaker tonight
+
+
+is the regular speaker at
+
+
+FRSB. He's a software engineer that is
+
+
+passionate about performance and making
+
+
+slow things work fast. Ladies and
+
+
+gentlemen, please welcome Chris
+
+
+Kashinski.
+
+
+[Applause]
+
+
+Hello. Does it work? Yeah, seems like
+
+
+it. All right. Um, so apparently I was
+
+
+banned at doing three or four talks in
+
+
+the row at Ros of RB, but I am unbanned
+
+
+this year. So I'm doing one. Uh, and you
+
+
+might notice that there is a wrong date
+
+
+because I actually made this
+
+
+presentation at several other
+
+
+conferences, but in AI world, you can't
+
+
+really do the same presentation twice
+
+
+because it's out of date. So here is an
+
+
+update.
+
+
+Yeah. Um, I'll still have the same intro
+
+
+though because I would like to talk to
+
+
+you about um falsehoods, things that we
+
+
+believe that are right but aren't. And
+
+
+there was this article about falsehoods
+
+
+about time. Yeah. And uh it was very
+
+
+popular. There was a list of
+
+
+misconceptions that programmers carry
+
+
+around time. Things like uh the month
+
+
+always has 30 or 31 days, which is
+
+
+obviously not true. Some of them are
+
+
+like highlighted because people were
+
+
+actually arguing about those like does
+
+
+month always begins and ends in the same
+
+
+year. Turns out in Ethiopia they start
+
+
+year of September 11. So no it does not
+
+
+always start on the same
+
+
+year. Yeah. Uh there is even better
+
+
+repository with different kind of
+
+
+falsehoods like not only the ones that
+
+
+are about time but also for example
+
+
+about emails. Did you know that you can
+
+
+have multiple ads sign in email?
+
+
+Apparently, you can, but I would like to
+
+
+start another one. The falsehood that we
+
+
+believe about LMS. And the first one is
+
+
+the most controversial that they can
+
+
+chat. Turns out LMS can't really do
+
+
+chat. They also can't think and uh they
+
+
+can't really interact with anything
+
+
+because most of what they do is
+
+
+something like this. This is a Fibonacci
+
+
+sequence. It's basically uh you add a
+
+
+new item at the end that is based on
+
+
+some formula from the previous
+
+
+items. I call those things uh tokens in
+
+
+LMS. Um and they look like
+
+
+this. They are actually really numbers
+
+
+underneath. But if you go to the
+
+
+tokenizer on OpenAI, this is a tool that
+
+
+they use to uh calculate how many tokens
+
+
+will you burn. uh you will see that uh
+
+
+different words give the different
+
+
+tokens sometimes is a part of the word
+
+
+sometimes entire word in English is
+
+
+actually pretty simple because English
+
+
+is a popular language it was over
+
+
+represented in the training set so they
+
+
+get nice tokens even tokens like tokens
+
+
+that you can actually read on their own
+
+
+they make sense they often start with a
+
+
+space because spaces are also popular in
+
+
+English language if you have Polish
+
+
+though yeah we earn a lot of tokens in
+
+
+that. Uh some languages are kind of
+
+
+cheating like this is Japanese. This is
+
+
+says
+
+
+uh
+
+
+yeah which means good Japanese and this
+
+
+is the thing that you hear if you don't
+
+
+speak good Japanese. Yeah. They say and
+
+
+you're like still bad still bad I need
+
+
+to learn more. And the word nihon which
+
+
+is Japan is a separate token because
+
+
+it's a popular word in Japanese. Uh go
+
+
+is a language so it's also a popular
+
+
+word so it gets its own token. Uh Joo is
+
+
+actually one word but these are two
+
+
+tokens and this is like a grammar thing
+
+
+that will get its own token because it's
+
+
+super popular. So you don't really burn
+
+
+a lot of tokens and you get like a very
+
+
+dense text.
+
+
+If we go back to this, we will have
+
+
+another
+
+
+number. But LLMs don't really work that
+
+
+way that they have like a fixed formula
+
+
+based on some math. They are trained on
+
+
+data. They are trained on something. So
+
+
+this is also a good answer if this is in
+
+
+the training
+
+
+set. Yeah. And by the way, these are two
+
+
+tokens. We don't have to always get a
+
+
+new one, just one
+
+
+token. So um not all tokens are created
+
+
+equal. uh a lot of them include space
+
+
+and uh the more exotic this the language
+
+
+and the character set the shorter the
+
+
+token and LLMs are basically a big token
+
+
+factory. What they do is they are really
+
+
+really good at predicting next matching
+
+
+token. What wait the next token that the
+
+
+trainer actually liked because we have
+
+
+an extra step. The extra step is
+
+
+reinforcement learning. So they are not
+
+
+really representing the original source
+
+
+set but they represent something that
+
+
+someone actually preferred them to to to
+
+
+output. Imagine the following prompt.
+
+
+Here is the
+
+
+prompt kind of empty. Um this was the
+
+
+original way of breaking chart GPT
+
+
+because if you don't give it any signal
+
+
+or you give it something that uh like aa
+
+
+they will start generating random stuff
+
+
+and the reason is that there is nothing
+
+
+they can base the next token
+
+
+on. Of course if you type this into chat
+
+
+GPT nowadays you don't get the random
+
+
+answer they they programmed around it.
+
+
+they have something that uh processes
+
+
+the prompt, sees that it doesn't make
+
+
+sense and give you a can't answer. There
+
+
+is a lot of prompt processing going
+
+
+on. So it kind of looks like this and
+
+
+the LM is just one of those tiny
+
+
+robots and there is no chat. Chat is
+
+
+also something that is fictional. It's a
+
+
+processing trick. It's uh the only thing
+
+
+that actually exists are stop tokens.
+
+
+And what are stop tokens? Well, imagine
+
+
+the following prompt. You are like this
+
+
+is a system prompt for some imaginary
+
+
+very simple LM. So you are an assistant.
+
+
+Uh you will respond with uh well you pre
+
+
+prefix your answers with something like
+
+
+assistant. The user will prefix it with
+
+
+user. And uh here's an example. End of
+
+
+example. Now the user has its query. And
+
+
+then we give the prompt to user. We
+
+
+don't run the LLM at this point. The
+
+
+user appends something, right? And then
+
+
+we take all of this text and we put it
+
+
+as a context for the LLM and the LLM
+
+
+answers with 42. Then it answers with
+
+
+user because it wants to create more of
+
+
+the conversation. But that's is actually
+
+
+stop token. This is the token that we
+
+
+defined that at this point if you
+
+
+generate user it means that you're not
+
+
+supposed to generate anymore stop the
+
+
+user is doing stuff. So there is a
+
+
+program that is running LLM and it
+
+
+specifically looks that the LLM is
+
+
+trying to write the response for the
+
+
+user and it stops.
+
+
+Um, if the LLM generates something that
+
+
+is not really matching the stop token,
+
+
+the LLM will actually carry on and
+
+
+answer itself. Ask itself another
+
+
+question, which is uh really creepy. If
+
+
+you're using voice model, this is from
+
+
+the OpenAI um model uh page for the uh
+
+
+thing. It turns out if you miss a stop
+
+
+token on a voice model, uh the model
+
+
+will clone your voice and ask itself
+
+
+another question with your
+
+
+voice. This is real. If you use chat GPT
+
+
+enough, you can see that sometimes it's
+
+
+ask itself a question. They have like a
+
+
+sensor model now. So it immediately
+
+
+disappears, but you can still sometimes
+
+
+kind of find it.
+
+
+Sometimes there's like an opposite
+
+
+situation in which the stop token is
+
+
+triggered too fast and you get like a
+
+
+broken
+
+
+response. User are a terrible stop token
+
+
+and I say plural because these are
+
+
+actually two tokens in this case. There
+
+
+are some like better ones. This one is
+
+
+really popular end of text. A lot of the
+
+
+models have this pre-trained h they used
+
+
+to use nn in some older models but this
+
+
+is a terrible because it's it appears in
+
+
+a lot of text and whatever you think
+
+
+that won't come naturally in the text
+
+
+might be a good stop
+
+
+token. Uh if you run llama uh cpp
+
+
+through for example llama file which is
+
+
+a really cool project I highly recommend
+
+
+checking out llama file. This is a
+
+
+binary that works on Mac OS, Windows and
+
+
+Linux without any modification. same
+
+
+file just download it and you have a
+
+
+model. They actually have uh some of
+
+
+this configuration available in the
+
+
+server that runs. They used to have stop
+
+
+tokens here as well but I think they
+
+
+moved it into some configuration file
+
+
+but you still have this uh template for
+
+
+a chat and you can modify it and
+
+
+sometimes the model misfires you can get
+
+
+um I think this is the case. Yeah, you
+
+
+can see some of the stop token. It it
+
+
+missed one. It prevent it outputs
+
+
+something different, but llama CPP has
+
+
+some protection against it and it will
+
+
+still interrupt the flow. But this is an
+
+
+example of a tiny model that is
+
+
+misbehaving because it's missing a stop
+
+
+token. Um, we can also disprove that the
+
+
+model can actually think. Uh, there is
+
+
+no thinking.
+
+
+uh if you run the reasoning model like
+
+
+01 or 03 you will see this thinking
+
+
+magical box sometimes you will get a
+
+
+summary which isn't actually what's
+
+
+what's happening this is another model
+
+
+doing summary of what's actually
+
+
+happening but at deepse you can actually
+
+
+see the reasoning for example and the
+
+
+model is just generating tokens so it
+
+
+turns out sorry I um
+
+
+uh yeah this is the right
+
+
+Uh so basically what what what is
+
+
+happening under here is that there is
+
+
+like a separate um separate role in that
+
+
+chat that says reason and this is just
+
+
+the tokens that we don't really show to
+
+
+the user but this still just generating
+
+
+tokens. There is nothing special about
+
+
+it. There isn't anything uh going on
+
+
+other than model outputting the text
+
+
+that you can't really
+
+
+see. There is also the thing about
+
+
+tooling. weird uh in the this year that
+
+
+u the agents are the most popular thing
+
+
+that you can have with AI but none of
+
+
+this actually is real in the agent
+
+
+itself like there is no tooling models
+
+
+can't really use tools on their own you
+
+
+have to add something extra so what they
+
+
+do is they abuse stop tokens abuse
+
+
+embeddings and abuse output formatting
+
+
+to make them agents
+
+
+uh abusing stop tokens is uh easy you
+
+
+add another role like with reasoning
+
+
+that's called tool and then you look for
+
+
+a specific invocation and then you look
+
+
+for a specific top stop token. So in
+
+
+this particular fictional prompt you are
+
+
+an assistant that has open weather
+
+
+magical API that you can use using this
+
+
+specific syntax which starts with a tool
+
+
+and then there is JSON with parameters
+
+
+and then there is commit and these are
+
+
+basically two stop tokens. There is
+
+
+commit and there is user. This isn't
+
+
+real. This is like a very simplified
+
+
+version of a system prompt. But what is
+
+
+happening here is um the user types in
+
+
+something. Uh the LLM outputs tool and
+
+
+invocation. We stop generating at this
+
+
+point. We call the tool. We take the
+
+
+output. We glue it back together into
+
+
+context. And then LLM carries on. So
+
+
+there is no action here. The program
+
+
+that runs the LLM actually calls
+
+
+something. The LM doesn't really do
+
+
+anything. It just generates tokens as
+
+
+usual. So there is user prompt tool
+
+
+function call stop generating tool
+
+
+response and then LM
+
+
+resumes. Uh of course we don't really
+
+
+show it to the user. We we hide it. We
+
+
+we don't want the to ruin the magical
+
+
+thing. We want to hide the the pro the
+
+
+processing the extra tooling that we use
+
+
+to to make the LM do magic. So we do um
+
+
+looking up weather with a nice box and
+
+
+and that's
+
+
+it. This is a part of uh lang chain. Um
+
+
+they already switched to the JSON
+
+
+format. So there is some processing here
+
+
+as well like um this isn't responding
+
+
+directly to tokens. It's responding to a
+
+
+hash but they are looking actively for
+
+
+something that looks like a function
+
+
+call and then call this
+
+
+function. Yeah. So fast forward six
+
+
+months because this is outdated and now
+
+
+we have nicer things like Ruby LLM which
+
+
+actually wraps in the readable code not
+
+
+some magical thing that that looks for
+
+
+double underscore because the interfaces
+
+
+are now unified and everybody else is
+
+
+using OpenAI format that that's really
+
+
+simple to use. You have just a list of
+
+
+fun of tools to
+
+
+call. Of course, tools are old. Now we
+
+
+have MCP servers because everything is
+
+
+outdated on every presentations on AI.
+
+
+But MCP servers is basically a meta
+
+
+tool. So you have a tool that allows you
+
+
+to list the tools and then LM only gets
+
+
+the ones that is interested in. So you
+
+
+save a little bit of context, but they
+
+
+didn't do any kind of security checks on
+
+
+those. So any MCP server can break your
+
+
+model. Please be aware that uh if you're
+
+
+using MCP server, you basically allow
+
+
+someone to control your
+
+
+LLM. You can also abuse embeddings. Uh
+
+
+we talk embeddings during the workshops
+
+
+and embeddings are basically um version
+
+
+of a concept that is uh magically
+
+
+infused into set of numbers. It's great
+
+
+for indexing unstructured data and uh
+
+
+you can search uh for them which means
+
+
+that you can basically find uh the data
+
+
+that is relevant to your model. So what
+
+
+you do is uh if you have phrase like two
+
+
+black cats with blue eyes you can
+
+
+decompose it into a high level of
+
+
+catnness uh a little bit level of um I
+
+
+don't know blackness tuness and maybe
+
+
+high blue-eyedness and this is basically
+
+
+an embedding that has those parameters
+
+
+high. So if you compare it to something
+
+
+that has like a low catness, it will not
+
+
+match. It's of course simplified because
+
+
+LLMs extract this data on their own and
+
+
+they don't really decide on con concrete
+
+
+concepts like catness. They will find
+
+
+something more abstract. But if we go
+
+
+like example, there is like a nice
+
+
+midjourney uh image which is also
+
+
+outdated. We have much better image
+
+
+generators right now. Um so we have like
+
+
+a king which is high royalness, queen
+
+
+which is high royalness and car which
+
+
+has low royalness. Then we have king who
+
+
+is uh very manly, queen who isn't very
+
+
+manly and the car is also not very manly
+
+
+because it's an
+
+
+item. Yeah, there are distances between
+
+
+those items but I think it's better to
+
+
+show them on a graph which is not
+
+
+upscale XY but still you can see that
+
+
+you can represent this on this very very
+
+
+basic twodimension embedding and you can
+
+
+find the distances between those. Of
+
+
+course, real embeddings have like a
+
+
+hundreds or thousands of dimensions and
+
+
+they're all very abstract, but this
+
+
+allows you to
+
+
+search. And if you plug this into a rag
+
+
+system, either using predefined lookup
+
+
+before the query or tool lookup during
+
+
+the elements response, you can actually
+
+
+put some relevant data for the user.
+
+
+Sometimes you'll need to pre-process the
+
+
+data, chunk it. Sometimes you need to
+
+
+convert the format for it to be able to
+
+
+see something like an image or video or
+
+
+audio and um sometimes you don't because
+
+
+you have like a multimodel uh embedding
+
+
+models which we used also during the
+
+
+workshop uh all the new one which is the
+
+
+sigip from Google also very
+
+
+nice search supports of course um
+
+
+embeddings because as well everything
+
+
+everything in machine learning in in
+
+
+Ruby is done by Andrew Kane
+
+
+And of course, neighbor, which is also
+
+
+done by Andrew Kane. If we lose Andrew,
+
+
+we don't have a Ruby ecosystem anymore.
+
+
+Please don't lose this
+
+
+guy. Uh this is really nice because it
+
+
+allows us to to use something very
+
+
+simple like SQLite or PG um posgress to
+
+
+to do basically a full vector searching
+
+
+stuff. Um there are also some other
+
+
+tools. Um but the most important part if
+
+
+you have unstructured data that you
+
+
+would like to include for your LM this
+
+
+is a good tool and uh the only thing
+
+
+that I would add probably for 225 is
+
+
+that also consider graph databases
+
+
+especially generating graph databases
+
+
+with an LLM. This is also very cool. I
+
+
+think I have this over here. Yes,
+
+
+because there also going to be an update
+
+
+for for those slides.
+
+
+Um a lot of people also use mixed
+
+
+approach which is using classic search
+
+
+like uh basically word lookup using
+
+
+vector search and perhaps use whatever
+
+
+else works because right now there is no
+
+
+good solution for all the LLMs and
+
+
+everything is in flux everything changes
+
+
+all the time and I need to update this
+
+
+presentation every 15 minutes for it to
+
+
+be up to date. Very
+
+
+frustrating. Yeah. So you can also abuse
+
+
+output formatting because if you have
+
+
+all this data that you put into LLM,
+
+
+right? You still get a stream of tokens.
+
+
+Even if you use tools, even if you use
+
+
+everything else, you're still just
+
+
+getting text. Luckily, even though text
+
+
+doesn't really plays nicely with
+
+
+functional programming or
+
+
+object-oriented programming, text also
+
+
+include JSON. So what we used to do
+
+
+because this is outdated once again is
+
+
+we use ask model nicely please generate
+
+
+me data that matches this JSON schema.
+
+
+Then we um validate the output against
+
+
+the schema and if it doesn't work we ask
+
+
+it again. This is exactly the same
+
+
+algorithm that we did with junior
+
+
+developers. Yeah. We ask them to do
+
+
+something. We validate it. Then we yell
+
+
+at them until they do what we want.
+
+
+Yeah. Fix it.
+
+
+Um this is a pseudo code. Please don't
+
+
+copy. I I I have to put this notice
+
+
+because someone did. Uh this is
+
+
+basically how we ask models to do uh
+
+
+JSON response. And this is real. This is
+
+
+from taken u like the code itself isn't
+
+
+real because this is the real code. This
+
+
+is from uh lang chain. They have a
+
+
+prompt that basically say that yeah
+
+
+please format it according to those
+
+
+specs. Here are the specs in JSON
+
+
+schema. And if it doesn't
+
+
+work they have another one. this one in
+
+
+YAML because lang chain people they
+
+
+can't really decide if they want to have
+
+
+templates or if they want to inline
+
+
+stuff. There are some ERB, there are
+
+
+some YAML, then there are some inline
+
+
+functions but they all basically have
+
+
+prompts and this prompt says okay that
+
+
+didn't work. Here is the context, here
+
+
+is the error message, please do it again
+
+
+and that's how they do output
+
+
+formatting.
+
+
+Luckily we have uh better tools now and
+
+
+the language u um LLM servers that we
+
+
+have will do this internally and you
+
+
+will get nice JSON response. You don't
+
+
+really need to do this. You will get
+
+
+also the messages listed in a JSON
+
+
+format. So you know you have like a
+
+
+array of messages with some metadata
+
+
+with some full tool goals. It it's it's
+
+
+much better than it used to be. It used
+
+
+to be just
+
+
+text. Um, so longchain, I talk about
+
+
+several times about lchain that uh we
+
+
+don't need it
+
+
+anymore. It used to be like an OM for
+
+
+your LLM because we needed some common
+
+
+abstraction. We needed some some some
+
+
+extra things that we couldn't get from
+
+
+just a stream of
+
+
+tokens. But um we moved all of this to
+
+
+LM server and now Langshine is basically
+
+
+dead. Uh we have better stuff.
+
+
+Uh Ruby LM is really popular. Uh it's
+
+
+growing very fast, but it might be
+
+
+growing a little bit too fast because uh
+
+
+the guy who is doing it uh uh has like a
+
+
+bazillion pull requests to go through
+
+
+including mine.
+
+
+Um there are some nice tooling for the
+
+
+um lookups and like neighbor from Anana
+
+
+and Baron. I don't know who's the author
+
+
+of Baron. It sounds very polished,
+
+
+right? Yeah. But it's a something to
+
+
+chunk content into more meaningful um
+
+
+meaningful parts so we can embed them a
+
+
+little bit better. MCP servers are
+
+
+getting popular. We have several
+
+
+different implementations in Ruby. So
+
+
+you can have an MCP server that exposes
+
+
+data of your real application which is
+
+
+really
+
+
+nice. Um and of course we have the APIs
+
+
+from different vendors. They
+
+
+standardized a little bit o open AAI
+
+
+format but there are some minor tiny
+
+
+differences. So you might want to look
+
+
+into the docs if you're using any of
+
+
+them. And if you're using something like
+
+
+a meta provider like bedrock or uh open
+
+
+router they're also slightly different
+
+
+and they expose some subset of
+
+
+functionality for each
+
+
+model. It is still wild west out there.
+
+
+uh I gave this presentation and it was
+
+
+saying it was wild west before. It is
+
+
+still wild west. We don't have any good
+
+
+standards. Everything is in flux.
+
+
+Everything that you write today will be
+
+
+outdated tomorrow. But one thing that is
+
+
+to remember is that basically we have a
+
+
+new tool, the magical token
+
+
+generator and we have a lot of software
+
+
+to write around it. A lot of it. So if
+
+
+you're worried about your job, you'll be
+
+
+doing a lot of this
+
+
+software. I would like to take some
+
+
+questions. Oh, sorry. I missed the stop
+
+
+token. Are there any?
+
+
+Hi. Um, thanks for your presentation. It
+
+
+was great. Um I have one question which
+
+
+is um when an LLM is uh generating
+
+
+whether it's JSON or any other language
+
+
+actually
+
+
+I my understanding is that it is
+
+
+generating one token at a time and it's
+
+
+looking at the entire context every
+
+
+single time. Yes. So could you make it
+
+
+work with a fault tolerant passer so
+
+
+that um the moment that it was one
+
+
+tolerant one token out of step with the
+
+
+fault tolerant passer it could tell you
+
+
+and like retry just that one token. So
+
+
+in the same way that if I'm writing in
+
+
+TypeScript it can like tell me the next
+
+
+three valid words that you could type
+
+
+are these three words it could also put
+
+
+that in the context live like token by
+
+
+token. Is that something that people are
+
+
+doing or is it something I I think that
+
+
+uh llama CPP already has something
+
+
+similar. I don't know if it's exactly
+
+
+this algorithm but what they how they do
+
+
+the structured output. I'm quite sure
+
+
+that some of the uh proprietary u
+
+
+providers do it this way and also you
+
+
+can do this if you run low-level API on
+
+
+a model like you're basically having a
+
+
+neural net so you have a input which is
+
+
+array of numbers and the output which is
+
+
+one number then you can basically if you
+
+
+run it in a loop how you generate tokens
+
+
+you could do this quite easily if you
+
+
+want it would have to be local right
+
+
+because the latency would be like if I
+
+
+wanted to hook it up to Ruby LSP so that
+
+
+it knew what Ruby was predicting Ruby LP
+
+
+was predicting it would be so slow to go
+
+
+back and forth to like a remote one. But
+
+
+I guess with like a dev server that had
+
+
+the LLM local and my code, it would be
+
+
+able to do one of the reasons why they
+
+
+moved this feature from being client
+
+
+side to being server side because they
+
+
+could check it quickly and and interrupt
+
+
+the LM if something is going wrong. They
+
+
+have new parameters for those by the
+
+
+way. They have a uh minimum number of
+
+
+tokens so they can ensure that you
+
+
+generate something. they have a like a
+
+
+token callback which you can like remove
+
+
+one token and go back one token so you
+
+
+so you uh start generating again with a
+
+
+different parameters. There is a lot of
+
+
+stuff to play in llama cpb. So I highly
+
+
+recommend if you're interested in it I
+
+
+highly recommend downloading it and just
+
+
+playing out the parameters. It's it's
+
+
+mind-blowing sometimes. Thank
+
+
+you.
+
+
+Any other
+
+
+question? All right. So, uh, thank you
+
+
+very much, guys.
+
+
+[Applause]
+
+
+And and I promise not to patch this
+
+
+presentation again. I will make a new
+
+
+one.

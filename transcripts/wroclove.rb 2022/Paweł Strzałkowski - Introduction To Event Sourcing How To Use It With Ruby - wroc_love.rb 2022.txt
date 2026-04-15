@@ -1,0 +1,4486 @@
+hi everyone i'm pavel
+
+
+uh
+
+
+on a daily basis can you hear me well
+
+
+all right awesome
+
+
+so i work as a software developer as a
+
+
+consultant in a software house called
+
+
+visuality in orso
+
+
+and i'm extremely interested in topics
+
+
+around domain-driven design
+
+
+around even sourcing
+
+
+event-driven
+
+
+architecture and so on and so forth
+
+
+even storming as well so everything
+
+
+event related but enough about me today
+
+
+i'm going to tell you about
+
+
+even sourcing and what can you do with
+
+
+it in ruby
+
+
+we are going to talk about what it is
+
+
+then i'll go over
+
+
+basic concepts that you cannot really go
+
+
+without when talking about even sourcing
+
+
+and then i'll give you a short
+
+
+introduction
+
+
+into
+
+
+a toolkit that you can use in ruby
+
+
+so let's start
+
+
+meet mary
+
+
+she's a client of our e-commerce and
+
+
+she's been with us for years
+
+
+she's made only one purchase
+
+
+and we also know that she's into chess
+
+
+and she's also interested in crime
+
+
+novels
+
+
+let's see how we know that
+
+
+of course our e-commerce uses a very
+
+
+classic relational database so we have a
+
+
+user's table
+
+
+inside we have an entry for mary
+
+
+her name mary jane her last name
+
+
+parker and her email
+
+
+married.watson well it doesn't really
+
+
+match but whatever
+
+
+and we also have the creation day so we
+
+
+know when she has created her account
+
+
+let's go forward
+
+
+i've said that she's only made one one
+
+
+purchase so we have of course order
+
+
+table order stable and some order items
+
+
+well as traditional as classic as it
+
+
+gets
+
+
+as for her interests we have
+
+
+yet another table
+
+
+that joins interests and users so we
+
+
+know that she has
+
+
+expressed interest into subjects
+
+
+to sum it up
+
+
+we have data stored in a relational
+
+
+database
+
+
+that database that information stored in
+
+
+database is persistent and it's our
+
+
+source of truth
+
+
+there were some events
+
+
+while she was using our application
+
+
+she's made some changes but those
+
+
+changes were
+
+
+transient we didn't really care about
+
+
+them we just
+
+
+heard about the final state which is
+
+
+saved in our database
+
+
+so we know who
+
+
+well mary
+
+
+what she has done well in what state she
+
+
+has left our system
+
+
+let's meet mary one more time but now
+
+
+through every change that she has
+
+
+introduced to our system
+
+
+so once again
+
+
+she's a client and has been with us for
+
+
+years so at some point she has made a
+
+
+change she has made a change
+
+
+in our system she has created an account
+
+
+she has created it with a first name
+
+
+mary last name watson
+
+
+well now the email matches right he's
+
+
+married.watson.com
+
+
+then she has changed she has said her
+
+
+last name first name over the years
+
+
+so she has made an update
+
+
+later on she's
+
+
+she's
+
+
+done one purchase so she has added
+
+
+something something to her order then
+
+
+another thing then she's adjusted the
+
+
+quantity well she's added to too much at
+
+
+first
+
+
+we all know that already
+
+
+but if we go further we see that she has
+
+
+added one more thing
+
+
+then she was thinking about it for
+
+
+if you look at the time for a day or so
+
+
+then she removed it and finalized the
+
+
+order
+
+
+as for her interests we already know
+
+
+that there are two right so she's added
+
+
+to interest
+
+
+but then she removed those and replaced
+
+
+with something else
+
+
+if we summon up we still know that she's
+
+
+our customer
+
+
+and she's been with us for years but we
+
+
+also know that she has adjusted her
+
+
+first name and her last name
+
+
+it's possible that she has been married
+
+
+or divorced
+
+
+we know
+
+
+that she's made only one purchase but
+
+
+now we also know that she was interested
+
+
+in a survival survival kit
+
+
+on top of that we know she's into chess
+
+
+and crime novels but she used to be into
+
+
+hiking and sailing
+
+
+now the data is stored as events
+
+
+and those events are persistent and they
+
+
+are our source of truth
+
+
+we can sum up all the events and figure
+
+
+out what's the current state but that
+
+
+state is transient
+
+
+we can always remove well forget about
+
+
+the final state
+
+
+and rethink the events one more time to
+
+
+figure out what it is
+
+
+so we can now analyze the entire history
+
+
+we know who get married in what state is
+
+
+right now but we also know why
+
+
+because if we can analyze all the steps
+
+
+we can come up with a history what has
+
+
+really happened
+
+
+and that's called even sourcing
+
+
+even sourcing is a pattern for storing
+
+
+data
+
+
+as events in an append only log
+
+
+so we store events and we append them at
+
+
+the end of our log we never modify
+
+
+events from the past
+
+
+just like in real life
+
+
+we all would like to do that but we
+
+
+can't
+
+
+we can only add new events at the end of
+
+
+our log and it's very important from the
+
+
+event sourcing point of view
+
+
+that those events are stored in the
+
+
+order that they really happened
+
+
+let's see where it could be useful to
+
+
+have all the events from the past
+
+
+let's imagine that you have a
+
+
+application
+
+
+where
+
+
+your team members create documents they
+
+
+have to create it they have to say they
+
+
+are done and someone has to approve it
+
+
+so
+
+
+this would be a normal path
+
+
+right someone has created the document
+
+
+said i'm done and then someone approved
+
+
+it
+
+
+but this is an alternative
+
+
+they could have finished their document
+
+
+then someone from the team could have
+
+
+rejected that
+
+
+they would have to
+
+
+fix the document or change then then
+
+
+finalize and then approve
+
+
+maybe in your team there is someone who
+
+
+always gets rejected
+
+
+or maybe there is someone who always
+
+
+rejects others if you only have a field
+
+
+in your documents
+
+
+table in your relational database let's
+
+
+say
+
+
+and you can only see that it's approved
+
+
+you don't see in the entire history
+
+
+let's take a look at a very classical
+
+
+example of a shopping cart we have two
+
+
+shopping carts one on the left has two
+
+
+items
+
+
+someone has finalized the
+
+
+the order afterwards and on the right
+
+
+someone has added two things two things
+
+
+then added the third one removed them
+
+
+that the third item and finalize the the
+
+
+order
+
+
+let's think for a second if they are the
+
+
+same or different
+
+
+quite the same right
+
+
+we've sold just as much stuff on the
+
+
+left and on the right
+
+
+however the information that comes with
+
+
+it the information that comes from the
+
+
+from the left card and from the right
+
+
+kite card or order in general
+
+
+is much different
+
+
+maybe the guy who was ordering the order
+
+
+on the right
+
+
+maybe his paycheck was like late
+
+
+maybe his wife was looking over his
+
+
+shoulder and maybe that's what that
+
+
+watch was a bit too expensive
+
+
+maybe we should advertise it to him
+
+
+in a day or two
+
+
+the
+
+
+marketing value is quite obvious
+
+
+but in general the information about the
+
+
+client is priceless
+
+
+a third one for
+
+
+let's say for dda enthusiasts
+
+
+cargo location let's ship some cargo
+
+
+over overseas
+
+
+let's imagine we have a big boat that
+
+
+goes overseas to miami or whatever
+
+
+and we have we want to track its
+
+
+location so we always want to want to
+
+
+see where it's at
+
+
+so again we have this dialog that says
+
+
+current location
+
+
+so we have a first oh sorry not this way
+
+
+so we have a first measurement
+
+
+and we update the current location field
+
+
+again
+
+
+obvious
+
+
+again
+
+
+there was some miscommunication there
+
+
+there is no signal we don't have a new
+
+
+measurement but the last one seems quite
+
+
+all right
+
+
+it happened again but fortunately
+
+
+in a in a few moments we have a new
+
+
+location so we just update our current
+
+
+location and we live with it
+
+
+we reach the final destination
+
+
+and when it happens once
+
+
+we really shouldn't occur maybe
+
+
+but
+
+
+if we don't have all the events
+
+
+if we don't store all the measurement
+
+
+events
+
+
+then we miss something
+
+
+maybe we miss that on that path
+
+
+all our ships go through bermuda
+
+
+triangle
+
+
+so the thing is don't lose data
+
+
+if you don't have to
+
+
+if you have a point in your application
+
+
+that people can or a system can reach
+
+
+using two different paths
+
+
+and you don't know which path was taken
+
+
+you've just lost data
+
+
+you
+
+
+kind of cannot put a price on that
+
+
+you
+
+
+you might have a
+
+
+vague idea how much it might be worth
+
+
+but how about in a year or two or three
+
+
+you cannot put a future price on the
+
+
+data data that you've lost
+
+
+because
+
+
+more often than that you even didn't
+
+
+know you should have stored it
+
+
+all right so that's even sourcing it's a
+
+
+pattern for storing data in an append
+
+
+only log
+
+
+and that's pretty much it
+
+
+but
+
+
+if you want to talk about even sourcing
+
+
+there is
+
+
+the learning curve is quite steep
+
+
+because you have to understand a few
+
+
+concepts
+
+
+to start really talking about it
+
+
+we'll go over these concepts so well
+
+
+you'll know them already
+
+
+but we'll be talking about those
+
+
+concepts in a context because there are
+
+
+many technologies many ways to start
+
+
+with even sourcing even in ruby there is
+
+
+more than one
+
+
+so
+
+
+in some of those technologies the
+
+
+concepts are named a bit different or
+
+
+they mean something a bit different
+
+
+so i'm gonna tell you this in a context
+
+
+in a ruby toolkit called eventide
+
+
+projects
+
+
+it's a toolkit for creating even source
+
+
+autonomous services
+
+
+at least by the book
+
+
+however you can use it for any type of
+
+
+project
+
+
+it comes with an even store because we
+
+
+have to store our events it's called
+
+
+messagedb and it comes with a very nice
+
+
+test framework it's called testbench and
+
+
+you can use it for any ruby project
+
+
+including rails
+
+
+all you have to do to start with it you
+
+
+have to forget anything that you've ever
+
+
+learned about rspec and you're good to
+
+
+go
+
+
+so even sourcing we have to have an
+
+
+event concept
+
+
+you can describe an event in different
+
+
+ways in real life let's say but in here
+
+
+it's a message
+
+
+if you have a component that
+
+
+has done something
+
+
+it publishes an event it publishes a
+
+
+message
+
+
+to broadcast that it has done something
+
+
+there was a change
+
+
+so an event
+
+
+is a message
+
+
+with a specific purpose
+
+
+what what could have happened someone
+
+
+could have deposited money into a bank
+
+
+account or someone could have added line
+
+
+item or user might have been registered
+
+
+so those are names of events
+
+
+so if something happened it had to have
+
+
+a cause
+
+
+that cause could be a command
+
+
+command is a also a message saying you
+
+
+do something so it's a request
+
+
+so command is a request to do something
+
+
+an event is an effect of that
+
+
+of that
+
+
+of processing for example processor
+
+
+command but both are messages
+
+
+and i said that i'm going to show it in
+
+
+the context of event code toolkit so
+
+
+this is how we would
+
+
+define those messages in code
+
+
+those are very simple ruby classes with
+
+
+just a bit of syntax so you can define
+
+
+attributes of such a message
+
+
+all right
+
+
+so we have command and event both are
+
+
+messages
+
+
+let's take an entity order entity and
+
+
+let's give it id
+
+
+seven
+
+
+what can we request from that entity
+
+
+we can say
+
+
+addline item as we've said or add
+
+
+shipping address right
+
+
+so if you take every command that we've
+
+
+requested from that entity
+
+
+they are
+
+
+organized in something called a command
+
+
+stream
+
+
+streams are
+
+
+fundamental unit of message
+
+
+organizations but you don't create
+
+
+streams
+
+
+you just
+
+
+create a message and say okay you
+
+
+message are in this or that stream
+
+
+in this in this context uh uh where's
+
+
+this button
+
+
+this is how command stream for an order
+
+
+seven would look like that's the name
+
+
+and if we want to see the commands for
+
+
+this again commands for this entity we
+
+
+would look into this command stream
+
+
+and one once we process those
+
+
+those commands
+
+
+well there might or might not be events
+
+
+that were produced like
+
+
+similarly to the command stream this
+
+
+would be an event stream
+
+
+this is a like most important stream in
+
+
+fact because this stream
+
+
+contains all the events that has
+
+
+happened
+
+
+so every change that has happened so in
+
+
+fact this stream
+
+
+contains all the information about this
+
+
+entity
+
+
+all right so we have commands we have
+
+
+events
+
+
+we have messages
+
+
+we have to store them
+
+
+so we have a handy thing called
+
+
+messagedb for storing messages
+
+
+it's
+
+
+the beauty of it
+
+
+is that it's implemented on top of
+
+
+postgres so all you have to do all you
+
+
+have to have and know to start with even
+
+
+sourcing in ruby is postgres
+
+
+you can install messagedb over it
+
+
+and
+
+
+well it's
+
+
+a single table implementation so it's
+
+
+not complicated of course there is a lot
+
+
+of other database
+
+
+stuff inside i won't get too into that
+
+
+but there is only one table
+
+
+and contains all the messages
+
+
+let's quickly go over
+
+
+what's inside so you have a general idea
+
+
+global position is a sequence
+
+
+so it's a sequence number of the message
+
+
+we start from zero and go to gazillion
+
+
+position is a when again a sequence
+
+
+but within a single stream
+
+
+time when it happened
+
+
+stream name well we've gone over that
+
+
+type that would be class of a message so
+
+
+for example add line item or line item
+
+
+edit
+
+
+data well that's kind of important this
+
+
+json
+
+
+containing all the attributes and their
+
+
+values
+
+
+all the attributes of the message
+
+
+metadata
+
+
+another json but this one contains
+
+
+information how the message came to be
+
+
+so for example why or was correlated to
+
+
+some other stream curriculum for example
+
+
+an id of course we need a message id we
+
+
+this we have to identify each message
+
+
+but in this world we use uids for those
+
+
+all right
+
+
+i've said i've said that we have
+
+
+commands
+
+
+something processes them
+
+
+and we have events
+
+
+what's that something
+
+
+it's called a consumer
+
+
+so consumer is a process
+
+
+let's
+
+
+give you a reference it's like if you
+
+
+started a sidekick
+
+
+unit a sidekick process for example it
+
+
+just runs and it processes
+
+
+it reads and consumer who reads
+
+
+constantly reads messages from a single
+
+
+category it produces them
+
+
+applies business logic based on those
+
+
+messages
+
+
+and produces events
+
+
+let's go inside so inside of consumers
+
+
+we have something called handlers
+
+
+handlers are
+
+
+business logic blocks so each handler is
+
+
+responsible for handling a specific type
+
+
+of message so for example we would have
+
+
+a one handler for
+
+
+deposit messages
+
+
+another for example for withdrawal what
+
+
+can you do from a bank account
+
+
+or like close account for example
+
+
+so one handler for one type of a message
+
+
+and if we want to look at the code it
+
+
+looks like this
+
+
+just a bit of the cell of course
+
+
+but we have something like handle block
+
+
+i cannot really see the screen but it's
+
+
+somewhere here
+
+
+and such a handler block
+
+
+handles a specified type of message and
+
+
+at the very end for example it can it
+
+
+can publish a message like here
+
+
+deposited
+
+
+i'll show you a bit more a bit more of
+
+
+that later on
+
+
+so going back to our consumer we know it
+
+
+reads
+
+
+we know it processes and we know it
+
+
+right
+
+
+and this is where stuff gets interesting
+
+
+a consumer doesn't have to read commands
+
+
+it can also be triggered by events
+
+
+probably you can imagine that you can
+
+
+model any type of logic like this
+
+
+so you have a message something reacts
+
+
+to it for example
+
+
+finalize an order that's a command right
+
+
+someone something processes and
+
+
+publishes an event called order
+
+
+finalized
+
+
+so once the order is ready what can we
+
+
+do maybe some component will start to
+
+
+generate invoices
+
+
+other components would start thinking
+
+
+about
+
+
+notifying some other services maybe we
+
+
+have some
+
+
+packing of our shipment to do or
+
+
+whatever
+
+
+so any consumer can publish
+
+
+events
+
+
+or can issue commands
+
+
+it reads
+
+
+processes and writes
+
+
+and such a creation as you see on this
+
+
+let's say diagram is called pops up
+
+
+pops up is a messaging pattern
+
+
+in here we have publishers that publish
+
+
+messages
+
+
+but they don't really occur to whom
+
+
+they publish messages into a specific
+
+
+category
+
+
+and that's it
+
+
+publisher publishes message to a
+
+
+category in here streams
+
+
+we also have subscribers
+
+
+that subscribe to those categories and
+
+
+read messages from them
+
+
+but publishers do not think about
+
+
+subscribers
+
+
+nor subscribers think about publishers
+
+
+they are independent from each other
+
+
+they just communicate over a category of
+
+
+messages
+
+
+all right
+
+
+this one's for me
+
+
+all right so we have just two things
+
+
+to go over
+
+
+all right so
+
+
+how the handler
+
+
+after receiving
+
+
+addline item command how would it know
+
+
+whether it can add this command or this
+
+
+add this line item or not
+
+
+let's say our order has an invariant
+
+
+saying
+
+
+hey you can only have two line items how
+
+
+would it know
+
+
+whether it can add another one or not
+
+
+line items could have been added and
+
+
+removed in the past
+
+
+so it have to
+
+
+go through all the events from the very
+
+
+beginning till the very end
+
+
+and see how many light items we have
+
+
+if it's 0 or 1 we can add another line
+
+
+item
+
+
+as you can see on the screen if you if
+
+
+we go over every event we can figure out
+
+
+a current state
+
+
+and that's called projection
+
+
+so if we take the event stream
+
+
+and go over all the events and sum up
+
+
+all the information that we have there
+
+
+and
+
+
+create a
+
+
+static state out of this this is called
+
+
+projection
+
+
+why we do that for example as i've
+
+
+mentioned to make a decision
+
+
+so a handler
+
+
+would
+
+
+would do that to make a decision
+
+
+however
+
+
+by far it's not the only the not the
+
+
+only
+
+
+reason we do that
+
+
+we can also let's imagine you have like
+
+
+a thousand orders and we you want to
+
+
+find an order that has a total value of
+
+
+total amount of more than something
+
+
+you wouldn't query the streams right
+
+
+it's
+
+
+they are really not for that
+
+
+what you query is normally a relational
+
+
+database because it's meant
+
+
+to serve you in this purpose
+
+
+so you can take all your orders
+
+
+project
+
+
+everyone
+
+
+and put in a relational database let's
+
+
+say
+
+
+therefore you create something called
+
+
+the read model
+
+
+so it's a model of data that you just
+
+
+read from
+
+
+for example you can present it to on
+
+
+your website as a list of orders
+
+
+or a single order
+
+
+and the very important thing is that if
+
+
+you have this final static static state
+
+
+of your entity you can put it into any
+
+
+data model it doesn't have to be a
+
+
+relational database
+
+
+it can be a graph database because maybe
+
+
+it it's much easier to process
+
+
+your data your relations in a graph as a
+
+
+graph or document database or
+
+
+whatever database that suits you
+
+
+all right so that's projection let's
+
+
+take a very quick look how this
+
+
+relational database projection will look
+
+
+like
+
+
+on the left we have an account again a
+
+
+bank account we can deposit we can
+
+
+withdraw money
+
+
+on the right we have a depos
+
+
+a relational database
+
+
+and a table called accounts someone has
+
+
+deposited on the left we have an event
+
+
+deposit amount of three and on the right
+
+
+we create a data model of account that
+
+
+has an id and a balance not amount but
+
+
+balance it that model
+
+
+someone has deposited more so the
+
+
+balance has increased
+
+
+if we we draw something of course it
+
+
+lowers but
+
+
+something has happened another event has
+
+
+came
+
+
+was published
+
+
+withdrawal was rejected because someone
+
+
+asked for too much
+
+
+that doesn't update our relational
+
+
+database this the
+
+
+projected state is the same
+
+
+and if another deposit comes for another
+
+
+account well
+
+
+we have a second row
+
+
+all right
+
+
+and this is the last thing i wanted to
+
+
+say about
+
+
+let's combine our consumers pops up and
+
+
+projections
+
+
+so
+
+
+we have a this let's stick with this
+
+
+order idea
+
+
+so we have orders and events
+
+
+let's have a consumer
+
+
+that
+
+
+reacts on every event related to an
+
+
+order
+
+
+it continually
+
+
+continuously reads all the events
+
+
+processes them and creates
+
+
+projection in a related related
+
+
+relational database sorry
+
+
+so we have our source of truth in events
+
+
+but it's constantly projected into a
+
+
+relational database where we can read
+
+
+from for example for our ui
+
+
+in this way
+
+
+we've just
+
+
+separated reads
+
+
+writes from reads
+
+
+we write
+
+
+to our
+
+
+system using commands
+
+
+but we read from a
+
+
+relational database and
+
+
+this split of reading and writing
+
+
+gives you an enormous freedom that you
+
+
+start to appreciate once you use it
+
+
+of course the data in the
+
+
+relational database
+
+
+is
+
+
+not consistent
+
+
+not all the time consistent with what
+
+
+you have in events it's it's called
+
+
+eventual consistency
+
+
+the data in a relational data database
+
+
+is eventually consistent but
+
+
+you can deal with that and that's not
+
+
+always
+
+
+a drawback
+
+
+all right so we've talked about what
+
+
+even sourcing is
+
+
+and the core concepts
+
+
+let me show you how it works
+
+
+kept you in the realm of event project
+
+
+so
+
+
+the
+
+
+examples will be from there as well
+
+
+you can find
+
+
+available projects
+
+
+example project that event team uses in
+
+
+their workshop
+
+
+but you can download them they are not
+
+
+really that well documented or not
+
+
+documented at all
+
+
+because they are for kind of their
+
+
+internal usage but
+
+
+you can go over all the commits they are
+
+
+very well maintained from like from the
+
+
+first time to the last glass one and
+
+
+learn a lot
+
+
+how you do that you just clone the repo
+
+
+of course and well bundle up
+
+
+then what we need is the mentioned
+
+
+messagedb and fortunately it's just a
+
+
+gem
+
+
+let's assume that you have your
+
+
+portgress already installed you
+
+
+install the jam
+
+
+and
+
+
+with it with the gem you get a whole set
+
+
+of cli commands one would be
+
+
+create db
+
+
+and here you already have your message
+
+
+db installed with some default values
+
+
+so
+
+
+we have a ready component
+
+
+what can we do we can go into this
+
+
+and launch something called uh
+
+
+interactive test
+
+
+you might imagine
+
+
+that when you build
+
+
+autonomous services they don't really
+
+
+have ui
+
+
+those consumers they are not meant to
+
+
+have
+
+
+any ui at all in fact
+
+
+so if you want to change something in
+
+
+your system you have to do it from the
+
+
+from cli
+
+
+those interactive tests are meant to
+
+
+give you that freedom to say okay
+
+
+deposit some money for example or write
+
+
+command to write for like this one write
+
+
+me a command for deposit
+
+
+i've adjusted a bit what's inside of
+
+
+this file just to have you to give you a
+
+
+broad idea
+
+
+but
+
+
+without going to some of the details
+
+
+but it does more
+
+
+more or less this
+
+
+it defines what what account id
+
+
+we want to use
+
+
+or we initiate an object this is a
+
+
+command object we put data in it we
+
+
+define what's the stream
+
+
+it's like should be pretty readable and
+
+
+in fact we could just write it by
+
+
+well we just we could have just given
+
+
+string in here because we know what it
+
+
+should be it should be account command 7
+
+
+one two three
+
+
+and we write stuff in our database
+
+
+well i've said that it's no no ui really
+
+
+but fortunately we have a viewer
+
+
+this is the viewer
+
+
+so we can
+
+
+launch viewer and open it in a web
+
+
+browser
+
+
+it will show you all the streams
+
+
+commands and event streams you can
+
+
+browse and you have all the events
+
+
+within
+
+
+once uh right now we just have one event
+
+
+well sorry one command stream
+
+
+and there is the the
+
+
+the command that we've written deposit
+
+
+command
+
+
+when we click on this
+
+
+on this rectangle we get all the details
+
+
+of that
+
+
+of that message
+
+
+all right
+
+
+so we've written a message and nothing
+
+
+happened
+
+
+awesome
+
+
+let's start up a consumer that would
+
+
+consume that message
+
+
+and hopefully produce a event
+
+
+it's well it's a it's a ready part of
+
+
+this of this component that we've cloned
+
+
+so we just have to
+
+
+start it up
+
+
+as a result we get another stream this
+
+
+one now an event stream
+
+
+deposit command deposit event
+
+
+let's do something more fun let's write
+
+
+a bunch of commands
+
+
+so we deposit
+
+
+and we draw three times each time we
+
+
+deposit we put into amount of 11
+
+
+each time we withdraw we get the amount
+
+
+of 10.
+
+
+so this is the result
+
+
+we've already seen that with our
+
+
+projection example
+
+
+at the very end the last command to
+
+
+withdraw was rejected
+
+
+because there was not enough money
+
+
+since we are looking into ruby code
+
+
+let's see how it looks there
+
+
+so we have a stream of events called
+
+
+account so we have an account entity
+
+
+so it's an account class as simple as
+
+
+that
+
+
+it has some uh some module loaded
+
+
+included just for the sake of being able
+
+
+to
+
+
+define the attributes of this class of
+
+
+this entity
+
+
+but it's as simple as it gets the entire
+
+
+event project is extremely object
+
+
+oriented well in a good way
+
+
+so we have
+
+
+we have properties and we have behavior
+
+
+the next thing that we have defined is
+
+
+a class
+
+
+that would describe
+
+
+how an event changes this entity
+
+
+when
+
+
+when we start projection we start from
+
+
+the very first event
+
+
+but
+
+
+it looks it works like this we take an
+
+
+empty account entity and we apply all
+
+
+the events one by one
+
+
+so we have to know how to apply those
+
+
+events
+
+
+it's not like in the handler that had
+
+
+some logic for each type of message no
+
+
+we already have those events we just
+
+
+have to apply information to project it
+
+
+in some way into an
+
+
+entity and this is a class again just a
+
+
+bit of dsl
+
+
+and we saw we have apply blocks so apply
+
+
+this kind of event this way
+
+
+the last thing that we need
+
+
+and
+
+
+don't read too much into it it's
+
+
+an idea of the store it's just a
+
+
+mechanism to bind this this entity with
+
+
+this projection
+
+
+because in fact you can project an
+
+
+entity in different ways using the same
+
+
+events
+
+
+but that's maybe for another story
+
+
+okay so we want to project so we take
+
+
+our store we just configure it with this
+
+
+build
+
+
+and we say which
+
+
+which entity so which id we want to get
+
+
+and we say store hey fetch
+
+
+and this is what we get
+
+
+so of course if someone wanted to
+
+
+withdraw 11
+
+
+well it was just a bit too much
+
+
+all right so let's go quickly
+
+
+over
+
+
+one more example this one is a bit more
+
+
+complicated
+
+
+and i'll kind of just swoop over it
+
+
+just
+
+
+to show you what is the complexity of
+
+
+such a of such an example
+
+
+and if you'd like to
+
+
+maybe see it in action
+
+
+or talk a bit more about it
+
+
+let me know afterwards
+
+
+so now we are going to make funds
+
+
+transfer we have two accounts
+
+
+we have money on the first account and
+
+
+we want to transfer it to the second
+
+
+account
+
+
+so what do we have
+
+
+what so what do we need to do
+
+
+we have a fund transfer component just
+
+
+as we have an account component but
+
+
+first we have to pre-deposit some money
+
+
+to the first account
+
+
+right
+
+
+so this is nothing new
+
+
+we have account
+
+
+we issue a command called deposit it has
+
+
+deposited
+
+
+awesome
+
+
+then we issue a command to our fund
+
+
+transfer saying hey
+
+
+transfer me some money
+
+
+i didn't put the command in here for the
+
+
+sake of clarity but we initiate this
+
+
+transfer and the first event that comes
+
+
+out of it is not funds transferred it's
+
+
+not
+
+
+as
+
+
+this symbol of an image
+
+
+but our process initiate is initiated so
+
+
+the first event in the
+
+
+funds transverse
+
+
+stream is called initiated
+
+
+this while
+
+
+creating this event
+
+
+we issue a command to the account stream
+
+
+today well the account
+
+
+saying
+
+
+we draw some
+
+
+money
+
+
+once it's withdrawn
+
+
+our fund transfer component is
+
+
+subscribed to this stream
+
+
+this category so it realizes well pops
+
+
+up as you might remember it realizes
+
+
+okay something has been withdrawn
+
+
+i can react on that
+
+
+react to that
+
+
+so once it has been redrawn we write our
+
+
+own internal withdrawal event those are
+
+
+completely different just the name is is
+
+
+the same because the meaning is itself
+
+
+is the same
+
+
+so we write withdraw event and once we
+
+
+know that money
+
+
+has been withdrawn we can issue a
+
+
+deposit command to the second account
+
+
+once it's deposited
+
+
+we are subscribed to this event as well
+
+
+so we write our own deposited event
+
+
+when we know money has been withdrawn
+
+
+then deposited our job is done
+
+
+and we
+
+
+register that by create by issuing well
+
+
+brought publishing sorry transferred
+
+
+event
+
+
+so this means our job is done
+
+
+in fact
+
+
+there is a bit of
+
+
+[Music]
+
+
+gimmicks related to item potence which i
+
+
+didn't really want to go into this
+
+
+uh
+
+
+tonight
+
+
+but if you understand all this
+
+
+including that item item potential stuff
+
+
+unfortunately but if you understand all
+
+
+this
+
+
+you are ready to start your production
+
+
+level even sourcing
+
+
+there is quite a lot of things within
+
+
+but if you
+
+
+spend some time
+
+
+and understand all of this
+
+
+you're good to go
+
+
+awesome
+
+
+so you know what even sourcing is
+
+
+you know the core concepts you know at
+
+
+least one library
+
+
+to start with it
+
+
+all right
+
+
+but
+
+
+right
+
+
+it's all it has been all ruby
+
+
+awesome language awesome technology but
+
+
+to connect it into rails it's not that
+
+
+easy
+
+
+let's just
+
+
+show me show you like two examples and
+
+
+that's that's it i won't bore you with
+
+
+more
+
+
+so
+
+
+first one i've already shown
+
+
+this is a command
+
+
+if you create your own component
+
+
+or take the account component
+
+
+and put it in your gem file
+
+
+because it's a gem
+
+
+you can write this
+
+
+and you have your commands so your race
+
+
+application can issue commands
+
+
+they are
+
+
+they then start to live in the events
+
+
+source world but you've just connected
+
+
+the worlds
+
+
+and you can apply all your new knowledge
+
+
+in
+
+
+uh in your new component and another
+
+
+example maybe not of even sourcing but
+
+
+to apply even driven architecture
+
+
+so no projections but you can react on
+
+
+events you all know this
+
+
+have a service
+
+
+it does this and that you know
+
+
+and when it finishes you want to
+
+
+schedule the next step
+
+
+so you use a scheduler so you take for
+
+
+example sidekick
+
+
+you say okay after at the end of my
+
+
+service
+
+
+run
+
+
+next thing in a while asynchronously
+
+
+but you can but you can flip the
+
+
+control flow
+
+
+and do this
+
+
+so you have your service and at the very
+
+
+end of your service
+
+
+you
+
+
+publish an event
+
+
+then
+
+
+you have your consumer
+
+
+i've talked about
+
+
+which reacts on that event
+
+
+and
+
+
+performs that asynchronous operation
+
+
+using pops up
+
+
+and just like that your service doesn't
+
+
+have to know what's the next step
+
+
+you've just decoupled this
+
+
+from this
+
+
+and you don't have to have one
+
+
+subscriber you have more you can have
+
+
+more so we've just achieved
+
+
+an event-driven
+
+
+architecture
+
+
+in our race application
+
+
+i want to leave you with just
+
+
+a few resources
+
+
+so first of all well i've used eventide
+
+
+so well linked for
+
+
+to them
+
+
+and event slack they are extremely
+
+
+helpful
+
+
+so just
+
+
+write something and you'll get an answer
+
+
+for sure
+
+
+and two presentations in fact if you
+
+
+were to take anything from this
+
+
+presentation
+
+
+you have it in those two links
+
+
+like forget about what i've said
+
+
+go watch this
+
+
+you can actually
+
+
+well not everyone agrees
+
+
+with everything scott says but he's a
+
+
+beautiful mind and he really
+
+
+tells a lot of things that can actually
+
+
+change the way you think about
+
+
+different stuff about how to write how
+
+
+to use ruby how to write microservices
+
+
+how to use service how to write
+
+
+autonomous service in general please go
+
+
+watch it's like 40 minutes and we cannot
+
+
+have a discussion about events without
+
+
+mentioning neil young greg young sorry
+
+
+greg young
+
+
+go watch this this is the presentation
+
+
+that got me started
+
+
+and if
+
+
+if you want to
+
+
+learn a lot about even sourcing just go
+
+
+on the internet and find everything greg
+
+
+young has ever done watch it and you'll
+
+
+learn that at home
+
+
+so please go there and just have a watch
+
+
+thank you that's all do you have any
+
+
+questions
+
+
+thank you very much that was very
+
+
+interesting
+
+
+um on one of the slides
+
+
+somewhere
+
+
+in the middle where you showed us how to
+
+
+write
+
+
+projections is if i remember correctly
+
+
+there was
+
+
+something about assigning a sequence
+
+
+could you please explain what's the
+
+
+meaning of it
+
+
+uh
+
+
+let's just make sure that we're on the
+
+
+same well page sure is it here or uh
+
+
+that was that was a code sample
+
+
+code
+
+
+oh okay i get it
+
+
+i hope it's not too detailed yeah i was
+
+
+really thinking to get rid of this one
+
+
+this line
+
+
+because
+
+
+uh it's it's actually a
+
+
+real life code from this component
+
+
+so
+
+
+um
+
+
+okay so
+
+
+it's actually a sequence so it's number
+
+
+of other event within this stream
+
+
+so
+
+
+you just have the idea
+
+
+in which let's say version this account
+
+
+is in here so it's actually just a
+
+
+number so it's just a sequence of the
+
+
+of the event even in the event stream so
+
+
+it's not
+
+
+more than a version of of this
+
+
+projection you're in because actually
+
+
+you can
+
+
+you don't have to project into the final
+
+
+state you can check how the event
+
+
+looked a year ago or two years ago
+
+
+and you can check how would your code
+
+
+react for example uh on the next event
+
+
+or the next command
+
+
+so again just a sequence to give you the
+
+
+idea where you're at
+
+
+thanks
+
+
+i also have a question about projection
+
+
+i assume that this is reasonable to
+
+
+if i have a
+
+
+an event and then there is uh for
+
+
+example user for example we have some
+
+
+projection based on order streams
+
+
+and
+
+
+a user did something that affects
+
+
+affects all of these projections so for
+
+
+example user had
+
+
+10 orders so there is 10 different
+
+
+projections for these separate orders
+
+
+doing something whatever and user did
+
+
+something that affects all of these
+
+
+order or all of these 10 order
+
+
+projections
+
+
+uh
+
+
+how would that be executed like in
+
+
+parallel
+
+
+like one by one projection is a creation
+
+
+in a realm of single stream
+
+
+like if we have two streams they have
+
+
+nothing in common
+
+
+like
+
+
+you can model as uh your system
+
+
+to
+
+
+let's say join to to events to two
+
+
+streams to produce something but again
+
+
+that's not written on trivial but but
+
+
+doable
+
+
+but i think i don't know if that answer
+
+
+is a question so there's basically a
+
+
+rule one projection is based always on
+
+
+one stream and
+
+
+that's it ah
+
+
+i try to imagine how other
+
+
+how would we
+
+
+i think at this point yeah
+
+
+i'm really having a
+
+
+worse time wrapping my head around your
+
+
+question but i think it's the
+
+
+well yeah you project a stream that's
+
+
+like the
+
+
+that's what what's what you do
+
+
+yeah yeah that's that's pretty much it
+
+
+so you mentioned that we never lose data
+
+
+but sometimes we need to lose data for
+
+
+example to comply with gdpr or other
+
+
+regulations what then
+
+
+uh it depends
+
+
+as always but
+
+
+let's say you have used user stream
+
+
+and
+
+
+you you might have another stream like
+
+
+user profile or user
+
+
+gdpr protected data
+
+
+let's say that user wants to be
+
+
+forgotten
+
+
+you can remove that stream
+
+
+without really
+
+
+already affecting your stream as long as
+
+
+you definitely you
+
+
+model it like this so if you keep all
+
+
+the gdpr related data in one stream
+
+
+and this is like a side stream like a
+
+
+user profile you can't still have the
+
+
+idea that user word that was there so
+
+
+you have the user id and it relates all
+
+
+the things that they've done
+
+
+you can drop their personal information
+
+
+if you want to do more
+
+
+there are a few tricks but you have
+
+
+actually you have to think about it
+
+
+before you start you have to design your
+
+
+system in a way if you have some
+
+
+let's say
+
+
+encrypted data
+
+
+you can lost you can lose your
+
+
+encryption key so is it still there but
+
+
+you have no access to it so you cannot
+
+
+identify personal information of that
+
+
+user
+
+
+it's not that you cannot lose data you
+
+
+don't lose data if you
+
+
+well you you think about every piece of
+
+
+data you can still delete it
+
+
+but
+
+
+carefully
+
+
+but you think about every piece of data
+
+
+and don't you don't lose it
+
+
+unintentionally
+
+
+like
+
+
+with this for example cart idea when
+
+
+someone was adding and removed removing
+
+
+stuff we just i
+
+
+i've worked with like 50 plus e-commerce
+
+
+sites and we we were always analyzing
+
+
+abandoned cars someone someone who has
+
+
+added some things into card but never
+
+
+finalized their order
+
+
+but we really never
+
+
+maybe it was our fault but we were never
+
+
+thinking about things that people have
+
+
+removed from their cards before they
+
+
+finalized an order order so we basically
+
+
+just kept losing data so it's just
+
+
+thinking about the data you can drop it
+
+
+if you really really want to
+
+
+so one more thing about uh like
+
+
+you said that you can't allow the data
+
+
+to be lost in the in the system and i
+
+
+think that
+
+
+in reality we actually do the opposite
+
+
+so we basically consciously decide like
+
+
+what to store and what to
+
+
+like what to lose in the system because
+
+
+uh like some of the data okay in the in
+
+
+the comment solution that you've showed
+
+
+is like okay it's pretty obvious you can
+
+
+probably
+
+
+make some like generate some new some
+
+
+some revenue from the data that's been
+
+
+stored but in most of cases i think it's
+
+
+like the data would be
+
+
+maybe useful for debugging but it won't
+
+
+generate you any like
+
+
+additional revenue or uh it would be
+
+
+just the cost an additional cost to
+
+
+store it and maybe it would be even
+
+
+illegal to store it right so i think
+
+
+it's like most of cases it's
+
+
+quite the opposite way i would dare to
+
+
+ask how do you know that
+
+
+how do you know if
+
+
+let's say the amount of interest your
+
+
+latest collection
+
+
+[Music]
+
+
+were well let's say you have one
+
+
+collection and we you you are thinking
+
+
+next year hey should i
+
+
+create a
+
+
+collection that's similar let's see
+
+
+how much movement it has created are you
+
+
+talking about like in
+
+
+in case of the converse solution that
+
+
+you've shown it's it might be like i
+
+
+guess it's like lots of data user
+
+
+generates might be useful for like
+
+
+you know i know if you can you can
+
+
+always go into that world that realm
+
+
+using your marketing tool so google
+
+
+analytics your segment another thing is
+
+
+like you know storing like typing
+
+
+patterns or like i don't know mouse
+
+
+movements or whatever is it you just
+
+
+you have a level that you just say stop
+
+
+you know it's not
+
+
+worth to store anymore maybe uh two
+
+
+things first of all the e-commerce
+
+
+or three things sorry
+
+
+first of all e-commerce can be done
+
+
+using even storage even uh even sourcing
+
+
+and they are there are very
+
+
+smart people in this room that will tell
+
+
+you so
+
+
+second uh thing is that
+
+
+now
+
+
+that i've
+
+
+worked with even sourcing i agree that
+
+
+that i consciously
+
+
+think about what data is lost and what
+
+
+data is stored but if you don't start
+
+
+thinking about it at some point
+
+
+you lose data you actually lose data
+
+
+and third thing was
+
+
+ah
+
+
+two things should be enough but
+
+
+let's look afterwards
+
+
+oh i know
+
+
+even this
+
+
+order idea it's so useful as a
+
+
+learning technique as a as an example
+
+
+that everyone understands
+
+
+but even
+
+
+i
+
+
+i personally prefer events in those
+
+
+services that are autonomous
+
+
+so you model your logic using events
+
+
+you don't have to model your entire
+
+
+application using events and that's
+
+
+again a
+
+
+conscious ide
+
+
+decision
+
+
+but this order idea is just very nice to
+
+
+present those ideas on
+
+
+how useful is it in real life again it
+
+
+might be done like this
+
+
+and there are examples of that examples
+
+
+of that
+
+
+but how useful that is let's talk
+
+
+afterwards
+
+
+thank you very much was quite helpful
+
+
+and
+
+
+you showed one example with postgres
+
+
+and you showed the way how would we
+
+
+store an event some base
+
+
+attributes key attributes right
+
+
+let's assume that we built
+
+
+probably some
+
+
+payment domain
+
+
+even based project
+
+
+or architecture we design architecture
+
+
+and we have lots of events
+
+
+and we build it from scratch
+
+
+and probably we will have some
+
+
+events versioning right because
+
+
+potentially our events could be updated
+
+
+in the future
+
+
+some new attributes will appear there
+
+
+and
+
+
+what do you think um
+
+
+would be better to use
+
+
+no skill database for example
+
+
+a mongodb or aws dynamodb then postgres
+
+
+um
+
+
+what con and procs do you see
+
+
+could you share
+
+
+uh if you could keep the mic for a
+
+
+second because i have to have to ask you
+
+
+something what what would you like to
+
+
+use this nosql db for in fact like
+
+
+what's the purpose of
+
+
+that database for you yeah the purpose
+
+
+uh that
+
+
+um
+
+
+as a result we should store uh our
+
+
+events right
+
+
+uh or we should store some entities that
+
+
+will be a result of projection as you
+
+
+showed us and since
+
+
+the events
+
+
+they
+
+
+could be updated new attributes could
+
+
+appear for example we had some events
+
+
+version 1 and version 2 has been
+
+
+implemented and designed
+
+
+probably then we should have more
+
+
+flexibility right
+
+
+and
+
+
+maybe in some cases we should also
+
+
+update or edit our tables
+
+
+and maybe here we would
+
+
+be more flexible if we use a no-skill
+
+
+databases
+
+
+we will need to use
+
+
+so uh
+
+
+we
+
+
+wouldn't need to use some migrations
+
+
+right
+
+
+sorry let me let me stop you sorry
+
+
+because we are getting very very
+
+
+specific uh you're talking about uh
+
+
+event versioning and that's like broad
+
+
+broad topic
+
+
+and
+
+
+i still don't
+
+
+know where you're getting at with this
+
+
+nosql database i would love to answer
+
+
+but uh let's put it like this two beers
+
+
+and we can talk
+
+
+okay cool awesome yeah i'll accept it
+
+
+uh i have just one more question about
+
+
+these projections
+
+
+uh so uh because you told that at some
+
+
+point we can make the projection to
+
+
+create this rich data model
+
+
+uh so we can read from it and um
+
+
+[Music]
+
+
+uh is there any policy around how often
+
+
+should it be done or every
+
+
+event every message should uh end with
+
+
+some projection or can we just do it on
+
+
+our own
+
+
+um
+
+
+like uh is it that much
+
+
+uh connected to
+
+
+how uh
+
+
+how fresh data we need on the yeah
+
+
+exactly you've just answered i think uh
+
+
+let's say
+
+
+you issue a command it gets processed
+
+
+it an event is published
+
+
+something reacts on that event and
+
+
+create creates a projection
+
+
+let's say it takes like a second
+
+
+more or less
+
+
+it doesn't have to take that long but
+
+
+let's say
+
+
+so all you have to do is go to your
+
+
+client and ask well okay is three
+
+
+seconds okay
+
+
+and if you ask what kind like should we
+
+
+react on every event
+
+
+again it's a is a business question
+
+
+should we have how how fresh this data
+
+
+should be because in fact
+
+
+what
+
+
+people don't really realize that they
+
+
+never see fresh data
+
+
+if you open like an index page with
+
+
+orders or
+
+
+well order is a bit different but let's
+
+
+say product list
+
+
+or a product page it's already
+
+
+expired
+
+
+because if something has happened
+
+
+half a second later you don't see it so
+
+
+you just move timing by three seconds
+
+
+let's say
+
+
+and you just have to realize to the
+
+
+business because they usually answer
+
+
+no it has to be
+
+
+an immediate thing you have to learn
+
+
+them that it doesn't because most often
+
+
+than that it doesn't and
+
+
+well
+
+
+let's say okay so we you start from that
+
+
+second so none instant and you belong
+
+
+build on top of that but usually you can
+
+
+just do it more or less instant
+
+
+uh and one technical question arises
+
+
+from dies so how do we know that the
+
+
+projection uh
+
+
+is the most fresh or not is it like the
+
+
+sequence where is it where the sequence
+
+
+come in so we just compared the
+
+
+sequences
+
+
+uh number of uh all messages and so on
+
+
+because i believe that at some point of
+
+
+uh of our project it would be pretty
+
+
+hard to build every projection from the
+
+
+scratch or to compare
+
+
+our projection our
+
+
+read model
+
+
+with all the events that happened from
+
+
+the beginning of the project
+
+
+first of all you have to learn to build
+
+
+short streams by short time
+
+
+saying tens of events not thousands of
+
+
+events
+
+
+so the projection is not that long
+
+
+second of all you know
+
+
+so we have read models and you have that
+
+
+event streams so you never never perform
+
+
+business decisions i mean the the
+
+
+application business level decisions
+
+
+based on read models you always so read
+
+
+model is something for reading someone
+
+
+can make a human decision based on a
+
+
+read model but
+
+
+so how fresh
+
+
+well it should be up to date because why
+
+
+not there is really no technical
+
+
+obstacle to make it up to date
+
+
+but the business decisions they are
+
+
+never they are always based on an
+
+
+up-to-date decision because this
+
+
+projection for a business decision will
+
+
+be always done
+
+
+the moment that this business decision
+
+
+is processed it's not always started
+
+
+from the very beginning they are
+
+
+snapshots of your streams so you don't
+
+
+always have to start from the very
+
+
+beginning so it's quite fast
+
+
+but
+
+
+i've just lost track so i think but i
+
+
+think i answered more or less yeah uh i
+
+
+believe this snapshot is the when it
+
+
+comes so so is it the part also on the
+
+
+event project or is it somehow built in
+
+
+yes
+
+
+you can you can just as you like i think
+
+
+it's like 100 events
+
+
+per default so a snapshot would be made
+
+
+but i can be wrong
+
+
+okay thanks very much thanks
+
+
+you

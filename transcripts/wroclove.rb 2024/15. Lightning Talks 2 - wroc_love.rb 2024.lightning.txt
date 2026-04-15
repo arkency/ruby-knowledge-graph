@@ -1,0 +1,370 @@
+so uh this is a Libra office default
+
+
+template this this cool effect and um
+
+
+I'm Michael from liik and I thought
+
+
+before yeah before letting the lightning
+
+
+TS die I talk or talk briefly about Zite
+
+
+which is a um open source race
+
+
+application uh which we've been um yeah
+
+
+like working on for quite a while as a
+
+
+side project
+
+
+um so I copied this from our website uh
+
+
+basically Zite is kind of U something in
+
+
+between tro and like a big Enterprise
+
+
+solution from
+
+
+Salesforce uh think like task and
+
+
+Process Management and flexibility and
+
+
+inputting data and getting structured
+
+
+data out and so on
+
+
+um
+
+
+but it's only available in German uh for
+
+
+now and uh so would I would I advise you
+
+
+to to to use it um probably not because
+
+
+also it's not meant for you as you can
+
+
+read it's uh I mean like people like you
+
+
+and me we have other means to set up our
+
+
+like don't know task tracking and I mean
+
+
+who who who invented issue management
+
+
+yeah um so kind of uh it's not not
+
+
+really that that useful for us but uh
+
+
+for for like our C or not customers but
+
+
+our users it's it is pretty pretty
+
+
+useful so um and it's open source uh and
+
+
+we're really happy if you have like if
+
+
+you if you ever get the idea we we need
+
+
+something in between like this ex
+
+
+existing Solutions and should be open
+
+
+source and maybe gdpr stuff and so
+
+
+counts uh then just like contact us um
+
+
+we also very happy to uh implement it
+
+
+into like research projects it's what
+
+
+what we're actually using it uh uh most
+
+
+for um but why I'm am I here uh so
+
+
+recently or also the last two days we
+
+
+heard a lot of like projects with which
+
+
+which have a big Outreach and yeah kind
+
+
+of like stars on GitHub and G lab they
+
+
+count quite a much quite quite a lot so
+
+
+and we we really had a had a major surge
+
+
+in popularity recently um
+
+
+50% uh turns out yeah our our users are
+
+
+not really on good good lab yeah um and
+
+
+every time I I tell somebody here on a
+
+
+conference and tell them hey and why not
+
+
+give us a star he's like oh yeah I will
+
+
+do so but then there's two Factor
+
+
+authentification and it's just too much
+
+
+too much work so I would be really
+
+
+grateful if we could like up the num for
+
+
+like maybe reach 100% growth today or
+
+
+tomorrow um that would be
+
+
+cool um
+
+
+yeah and then I thought
+
+
+like
+
+
+sorry oh
+
+
+great I have to make new slides now yeah
+
+
+um and then I thought about maybe like
+
+
+some something completely um unrelated
+
+
+which I could maybe talk about also uh
+
+
+we recently or like a while ago had a
+
+
+had a new research prototype which we uh
+
+
+should like had a like a contract would
+
+
+implement it no designer and no no real
+
+
+UI requirements everybody saying UI
+
+
+doesn't really is not so important it's
+
+
+the first prototype and then we'll see
+
+
+uh so and then I mean you can spend days
+
+
+just like researching which option to
+
+
+bundle your CSS and JavaScript and the
+
+
+world is changing and do you want to
+
+
+take tnd and da UI or bootstrap or
+
+
+whatever so we really um sat together
+
+
+and made a made a decision um to choose
+
+
+nothing uh
+
+
+so and it's it's kind of it was it's was
+
+
+interesting yeah because it takes you
+
+
+quite a for quite a reaches quite a
+
+
+while yeah it's a uh so pure HTML it's
+
+
+kind of nice it's mobile friendly yeah
+
+
+more more than mobile friendly maybe and
+
+
+um but of course at some point like the
+
+
+users uh they were like okay yeah it's
+
+
+everything is nice I mean you can have
+
+
+like this multi select uh Fields like
+
+
+like this is example I mean you have to
+
+
+know how to select multiple items in it
+
+
+but it's works out yeah um and then they
+
+
+came up with yeah but really I this are
+
+
+we have this big data sets of documents
+
+
+and we really we need to get a get a
+
+
+idea of of the distribution of the data
+
+
+like how many documents per year maybe a
+
+
+histogram or something similar and I was
+
+
+ah okay this means I don't know like
+
+
+some kind of spark line inline image
+
+
+live I don't know yeah
+
+
+but yeah then I really I I really didn't
+
+
+want to include any more like big UI
+
+
+libraries for this phase of the project
+
+
+um and I don't know if anybody else here
+
+
+has an idea what how we solved this uh
+
+
+the solution was actually I think was
+
+
+kind of a nice uh getting the job done
+
+
+um because we simply uh used Unicode
+
+
+spark lines which is kind of a thing as
+
+
+soon as you
+
+
+know how to Google it it's there like a
+
+
+huge page of how to implement unic code
+
+
+spark lines on on some Viki um yeah and
+
+
+it just worked out perfectly and they
+
+
+were happy we could really nicely uh
+
+
+give them a feeling for the data um for
+
+
+not only selecting the data sets but
+
+
+also uh for results and um yeah that's
+
+
+all I go back to the uh
+
+
+thanks

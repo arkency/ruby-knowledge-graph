@@ -1,0 +1,2794 @@
+yeah and so let's welcome Anita who is a
+
+
+programmer and a psychologist so nice
+
+
+combination
+
+
+yeah that's exactly why I'm here
+
+
+hello everyone
+
+
+so let me start
+
+
+perhaps you all heard about five stages
+
+
+of grief it's a pretty handy model it's
+
+
+commonly known and it goes pretty much
+
+
+like this at first there is a denial
+
+
+then it's followed by anger then usually
+
+
+there is a phase of bargaining
+
+
+uh it goes smoothly to the depression
+
+
+phase or just sadness and ends with
+
+
+acceptance of the new situation
+
+
+and why I even talk about this because
+
+
+we all go through losses basically every
+
+
+single day
+
+
+and if you're surprised with this
+
+
+information now let's think about
+
+
+something that might happen to any of us
+
+
+on any given week let's say imagine you
+
+
+wake up on a Saturday morning very late
+
+
+morning around noon
+
+
+and you realize that in two hours we
+
+
+need to be at the family lunch
+
+
+and this family lunch is actually your
+
+
+mom's birthday party and you forgot to
+
+
+buy her a gift
+
+
+so you have two hours to actually make
+
+
+it work so you rush you rush from home
+
+
+you get into your car you go to the
+
+
+nearest shopping center
+
+
+and it's a Saturday early afternoon so
+
+
+obviously it's super packed you cannot
+
+
+find any parking spot you go around and
+
+
+you pretty much at first your reaction
+
+
+probably would be like no no no no no no
+
+
+it cannot be happening to me I really
+
+
+need to do it denial then you very
+
+
+quickly probably would get super angry
+
+
+why these stupid people need to be here
+
+
+now like I really need to go there
+
+
+then you start bargaining maybe if I go
+
+
+around a couple of times someone would
+
+
+leave and I can find my parking spot
+
+
+usually it never happens so you just
+
+
+enter the sadness and depression mode
+
+
+with some catastrophic thoughts I'm
+
+
+going to be late my mom is going to hate
+
+
+me I'm such a disaster in life but
+
+
+a few moments pass and you just accept
+
+
+the situation perhaps you leave the
+
+
+parking place
+
+
+go outside and it's like okay I will
+
+
+just walk this extra 200 meters and I
+
+
+will be 10 minutes late no biggie
+
+
+um because you see a loss doesn't have
+
+
+to be physical a loss is actually
+
+
+anything it can be a loss of something
+
+
+pleasant that you planned it can be
+
+
+anything that you anticipated it can be
+
+
+a loss of opportunity it can be a loss
+
+
+of comfort
+
+
+and every single time we go through any
+
+
+sort of loss we go through all of the
+
+
+Cycles they can last just a second but
+
+
+sometimes they last much longer
+
+
+so think about something that you
+
+
+probably all do daily or at least weekly
+
+
+code reviews
+
+
+and the code review that you are
+
+
+requested to do looks like this
+
+
+what are your thoughts what's your
+
+
+thinking process when you see something
+
+
+like that
+
+
+that's one of the answers but before you
+
+
+do that wouldn't you go through all the
+
+
+stages of like no no I really don't want
+
+
+to do that why people even do that to me
+
+
+and then you accept it and at the end it
+
+
+can be a LG TV yeah happens
+
+
+um
+
+
+and during the process let's say you
+
+
+want to do it right you perhaps even go
+
+
+for the cycle of denial aggression
+
+
+sadness over and over again until you
+
+
+get it done
+
+
+and it's an emotional roller coaster and
+
+
+it always happens
+
+
+and how about when you're requested to
+
+
+build a new feature you see a feature
+
+
+requirement
+
+
+and you pretty much are in a panic mode
+
+
+and for the product person it's like how
+
+
+hard can it be it's just a button
+
+
+and again you pretty much would go for
+
+
+similar faces because this is a loss of
+
+
+comfort
+
+
+and comfort is very important for us we
+
+
+build these boxes of comfort
+
+
+and this is very good for us because
+
+
+once we build it we can automate certain
+
+
+behaviors certain processes uh pretty
+
+
+much everything is known to us it means
+
+
+comfort
+
+
+and getting out of this comfort zone
+
+
+well it's uncomfortable
+
+
+but because of this comfort and
+
+
+automation of the other things you can
+
+
+focus on what actually matters what's
+
+
+important and for
+
+
+99 maybe even 100 programmers the most
+
+
+important thing is writing clean code
+
+
+code is the most important thing right
+
+
+but our work is not about code
+
+
+so do you have any ideas what our work
+
+
+could actually be about
+
+
+you're close any other ideas
+
+
+speak up
+
+
+yes you're very very close as well
+
+
+our work is actually about bringing
+
+
+business value
+
+
+and business value
+
+
+almost hundred percent of the time
+
+
+equals bringing money and as depressing
+
+
+as it might sound to some of you nobody
+
+
+cares about code or Tech in business
+
+
+absolutely nobody they want to solve
+
+
+problems
+
+
+and we live in a dynamic world and for
+
+
+companies it means that they need to
+
+
+adapt to things very very quickly they
+
+
+need to ship features to maintain
+
+
+current users they need to improve the
+
+
+user the features to actually attract
+
+
+new ones for example business needs to
+
+
+adapt constantly
+
+
+sometimes not only based on features but
+
+
+for example there needs to be like a
+
+
+pivot in the business model sometimes it
+
+
+means that entire application or set of
+
+
+applications needs to be completely
+
+
+scraped removed we start something new
+
+
+and
+
+
+sometimes because of that we are asked
+
+
+to deliver things just like fast and
+
+
+dirty and then iterate over that adding
+
+
+this complexity of features and then
+
+
+again scrape everything and perhaps
+
+
+start from scratch that's just life
+
+
+everything happens in Cycles
+
+
+and it can be super demotivating because
+
+
+it every single time this happens it
+
+
+breaks our comfort box
+
+
+but let's get back to the code
+
+
+we usually don't feel
+
+
+this much emotional roller coaster or
+
+
+such resistance when it comes to
+
+
+refactoring code
+
+
+this is pretty regular task for us
+
+
+um we iterate over things we refactor we
+
+
+apply any patterns beautiful things
+
+
+people get excited like programmers get
+
+
+excited about this kind of things and we
+
+
+even refactor our own code over time
+
+
+seeing that how things could be done
+
+
+better now because we got more knowledge
+
+
+we got more experience we just know
+
+
+better now and usually we say that's an
+
+
+opportunity to grow we are not denying
+
+
+that needs to happen
+
+
+and then why business changes are so
+
+
+scary to ask if you are so used to
+
+
+getting and working in Cycles
+
+
+uh I think there are a few reasons the
+
+
+first one is uh that there is difference
+
+
+of scale and time invested over this
+
+
+so when you think about finding a
+
+
+parking spot you are investing this for
+
+
+like a minute or two so you also forgot
+
+
+relatively quickly about this roller
+
+
+coaster every single stage just lasted
+
+
+for a few seconds maybe minutes stops
+
+
+um when we iterate over code then again
+
+
+the cycle maybe it's not that uh it's
+
+
+not that long
+
+
+uh but if you're invested in a project
+
+
+that you were just like building over
+
+
+and over and over as a whole for a year
+
+
+or two or maybe more this is a very
+
+
+different attachment that you got to it
+
+
+this is your comfort box you know
+
+
+everything ins and outs of this project
+
+
+um then there's our personal differences
+
+
+because we all are different as humans
+
+
+and it's based on our temperament and
+
+
+character some of us might adapt to
+
+
+changes super quickly nothing really
+
+
+matters I'm easy I will just go with
+
+
+whatever happens some might get more
+
+
+difficulties getting used to that
+
+
+and bad news is as I mentioned this is
+
+
+our temperament character so it means
+
+
+it's mainly biological
+
+
+there is not really that much we can do
+
+
+about it we need to deal with it however
+
+
+a big chunk of this which is comes with
+
+
+our character is a behavioral which
+
+
+means it can be exercised if we go over
+
+
+and over similar situations we get used
+
+
+to them way quicker
+
+
+uh yeah
+
+
+so let's get back to this griefing model
+
+
+again
+
+
+why do I even talk about this this model
+
+
+was created in 1969 by Dr Elizabeth
+
+
+cobbler Ross and it was created based on
+
+
+working with patients dealing with
+
+
+terminal terminal illnesses later on it
+
+
+was reviewed and some more elements were
+
+
+added
+
+
+it was a base to create then a change
+
+
+curve it's a model that's used to it's a
+
+
+model to use to explain a typical
+
+
+response of people to a change in an
+
+
+organization
+
+
+because absolutely each change even the
+
+
+best one means losing something
+
+
+and because each loss
+
+
+means that we need to adapt to the new
+
+
+situation
+
+
+this is how this model looks like At
+
+
+first there is shock followed by a
+
+
+denial this looks around the same then
+
+
+there is anger phase usually as a
+
+
+frustration followed by its uncertainty
+
+
+and confusion
+
+
+the main difference is what happens
+
+
+after
+
+
+people start dealing with their
+
+
+situation and perhaps start to
+
+
+experiment they need to see what this
+
+
+act what this change actually means to
+
+
+them if the experiment goes relatively
+
+
+well they say okay I decide to go with
+
+
+it and then they usually integrate this
+
+
+new situation and carry on
+
+
+please note an important detail here how
+
+
+it affects motivation over time
+
+
+this is time and this is motivation
+
+
+it drops
+
+
+but then it rises again
+
+
+and node number two the lines start
+
+
+before the graph
+
+
+and I did something funny
+
+
+okay we are back
+
+
+so the line starts over here and ends
+
+
+outside of the slide what does it
+
+
+actually mean
+
+
+it means that it's a never-ending
+
+
+process we finish at one stage and then
+
+
+we start again
+
+
+it might be years it may be days but we
+
+
+will go and we'll start with certain
+
+
+level of motivation over time
+
+
+and because all of this happens over and
+
+
+over again in Cycles there's there's an
+
+
+alternative title to my talk
+
+
+eat sleep cows repeat everything happens
+
+
+like that sometimes less or more more
+
+
+chaotic but it happens in Cycles
+
+
+and perhaps now is a good time to give
+
+
+you a bit more context while I talk to
+
+
+you about these things
+
+
+as it was already mentioned uh I started
+
+
+in it like 10 years ago for like around
+
+
+eight years I used it as a backend I
+
+
+used to work as a backender then two
+
+
+years ago I joined a company called job
+
+
+and talent and after a year I decided to
+
+
+go into the managerial path so now I'm
+
+
+an engineering manager and I currently
+
+
+manage two teams I also started a
+
+
+master's degree in Psychology like three
+
+
+years ago and I'm about to finish it
+
+
+this semester so please keep your
+
+
+fingers crossed from Master Texas
+
+
+and
+
+
+what I'm about to show you more here is
+
+
+pretty much based on my experience
+
+
+guiding my team
+
+
+and to give you some context about what
+
+
+we are dealing with as I mentioned I
+
+
+used to I used I started as a programmer
+
+
+and then I actually was a team lead and
+
+
+then engineering manager of two teams it
+
+
+means that over the two years the
+
+
+company went through a lot of changes
+
+
+and a lot of crucial projects to give
+
+
+you context the revenue of a company is
+
+
+like two and a half billion euros a year
+
+
+it's a massive scale and there is a lot
+
+
+of business everywhere affecting
+
+
+everything we do
+
+
+um
+
+
+and let me state it this way Tech is
+
+
+Easy Tech is predictable and Tech is
+
+
+very rational this is really the easy
+
+
+part but Tech is built by people and
+
+
+people are not easy at all people are
+
+
+very often not predictable and people
+
+
+are definitely not rational
+
+
+we all are different perhaps as
+
+
+different as all the Sesame Street
+
+
+characters but we all go through the
+
+
+same things like in the grief model but
+
+
+we just react to the things differently
+
+
+we are driven by biology and you can
+
+
+spark cows a lot of cows
+
+
+but getting back to this change curve
+
+
+this is the original one
+
+
+please know that if we start from a high
+
+
+note regarding our motivation even at
+
+
+the lowest point when the change happens
+
+
+we still have room to continue and be
+
+
+relatively enthusiastic about what we do
+
+
+about work company project you name it
+
+
+no issues here whatsoever
+
+
+but this typically and this typically
+
+
+happens when we start a new organization
+
+
+as a new job and it's very much like
+
+
+starting a new relationship romantic
+
+
+relationship we are hyped everything is
+
+
+amazing our new partner is amazing life
+
+
+is wonderful world is beautiful no
+
+
+doubts here
+
+
+but when we already are a bit stagnated
+
+
+our lowest point can lead to nothing for
+
+
+a moment because our motivation can be
+
+
+almost at zero for a moment and until we
+
+
+get over this yellow Tipping Point of
+
+
+confusion uncertainty and get into this
+
+
+integration raising our motivation again
+
+
+we are in this
+
+
+state of nothingness that's quite
+
+
+unpleasant
+
+
+but what if it doesn't happen what if we
+
+
+are sort of stuck in the yellow bubble
+
+
+or if we don't have enough time to have
+
+
+our motivation go up again
+
+
+because uh again if we make it happen we
+
+
+have our motivation up there we start
+
+
+building our comfort box we can put like
+
+
+our furniture there and like make it a
+
+
+home but what happens when another
+
+
+change another big change that affects
+
+
+us happens again before we do that
+
+
+we pretty much start our very low point
+
+
+and our motivation at the lowest can be
+
+
+negative so we are distractors we are
+
+
+not motivated at all
+
+
+we are not productive
+
+
+and we don't know what's happening to us
+
+
+everyone around us and we don't like it
+
+
+and it feels really shitty that's not
+
+
+sugar coated this is a very bad and very
+
+
+unpleasant emotional state
+
+
+and on top of that we are not productive
+
+
+so we don't have this constant kicks of
+
+
+dopamine in our brains when we actually
+
+
+achieve something even small
+
+
+and dopamine is a very very nice hormone
+
+
+that makes us uh makes us feel like
+
+
+kings and queens of the world it's this
+
+
+amazing feeling that when you actually
+
+
+find this annoying bug that was bugging
+
+
+you all day long you fix it and then
+
+
+you're like I did it I'm amazing
+
+
+everything is great again for a minute
+
+
+or five maybe an hour but it's important
+
+
+for our brains to get it regularly
+
+
+and in the scenario there's none of that
+
+
+and unfortunately I was there
+
+
+my internal motivation was basically
+
+
+non-existent I felt really confused and
+
+
+Powerless I also saw that people in my
+
+
+team were affected by the changes around
+
+
+I felt very responsible for them so I
+
+
+decided to do what any psychology nerd
+
+
+would do which is research
+
+
+I started looking into a lot of papers
+
+
+and like books regarding motivation
+
+
+themes changes anything that really
+
+
+could help me understand what we are
+
+
+going through and how perhaps to make it
+
+
+better
+
+
+a big part of it was the strange curve
+
+
+that I already showed you and
+
+
+acknowledging the fact that this curve
+
+
+is normal we feel these emotions and
+
+
+this is absolutely normal everyone goes
+
+
+through that you it can be sometimes
+
+
+longer or shorter people go at it in a
+
+
+different pace but everyone goes through
+
+
+the stages
+
+
+and I know that to a rational brain it
+
+
+might sound like a new age nonsense to
+
+
+you but acknowledging an emotion like
+
+
+really agreeing with it and just
+
+
+noticing like I see you you're here
+
+
+welcome really makes it disappear way
+
+
+faster way way faster
+
+
+okay so we know what we feel
+
+
+uh that is on a curve and that this is
+
+
+normal we might even start feeling
+
+
+better because of acknowledging that
+
+
+what's next
+
+
+and then there's lipid Noster model for
+
+
+managing complex change to the rescue
+
+
+according to this model there are five
+
+
+elements needed to all go seamlessly for
+
+
+a complex change at organization meaning
+
+
+this change curve can be flatter much
+
+
+flatter
+
+
+meaning less unpleasant
+
+
+so there is vision
+
+
+their skills there is motivation
+
+
+resources and an action plan
+
+
+done right
+
+
+we successfully delivered a really bad
+
+
+big project in a very changing
+
+
+environment obviously the model doesn't
+
+
+help by itself but its authors actually
+
+
+made a really good thing with this they
+
+
+created a matrix of emotions that
+
+
+correspond to each missing element in
+
+
+this model
+
+
+so when there is no vision people
+
+
+usually feel confused when there is no
+
+
+skills or not enough skills there's
+
+
+anxiety
+
+
+when there's no motivation there's a lot
+
+
+of resistance
+
+
+when there is not enough resources we
+
+
+feel frustrated
+
+
+and if there is no action plan it leads
+
+
+to a false start not really an emotion
+
+
+but I will get to that
+
+
+and the original Matrix looks like this
+
+
+and please note that this can be read as
+
+
+a mathematical equation and the missing
+
+
+element can be an X that means that we
+
+
+can base on the emotion we experience we
+
+
+can get the missing element and name it
+
+
+because of that we can understand what's
+
+
+missing and fix it
+
+
+so you can be a very big help to
+
+
+yourself and to your colleagues and
+
+
+pretty much everyone around involved in
+
+
+a project by naming what you feel name
+
+
+it seriously don't be afraid of it
+
+
+once yet because once you identify it
+
+
+you can fix it
+
+
+so let's say you're confused it means
+
+
+that you either don't understand the
+
+
+vision or you don't know the vision at
+
+
+this stage it's crucial to ask questions
+
+
+uh you probably are not the one who can
+
+
+answer them but there should be people
+
+
+around you who can any sort of manager
+
+
+at this situation should be your person
+
+
+to go
+
+
+uh it could be your direct manager it
+
+
+can be a product manager uh just start
+
+
+asking around this is very important for
+
+
+everyone to understand why we are doing
+
+
+things
+
+
+because as a deaf you're not only
+
+
+entitled to ask questions to business
+
+
+you're encouraged to
+
+
+because answering these questions is
+
+
+also an excellent way to show others
+
+
+where are the issues maybe show Blind
+
+
+Spot maybe show like something is
+
+
+missing really
+
+
+and by asking questions you can also
+
+
+support your colleagues because all of
+
+
+us probably were in a situation that
+
+
+there's like something new being
+
+
+presented and there's like are there any
+
+
+questions
+
+
+violence silence nobody speaks up and
+
+
+then one person asks a question or
+
+
+shares something and then
+
+
+a full conversation starts this is what
+
+
+happens when people start speaking up
+
+
+what just one person is needed to start
+
+
+this
+
+
+and to start this domino effect that can
+
+
+actually bring a positive change to
+
+
+everyone around in your team
+
+
+when you feel anxious you probably don't
+
+
+have enough skills or you don't feel
+
+
+like you have enough skills
+
+
+and please mind that an imposter
+
+
+syndrome is a real thing it might be not
+
+
+about your skills it might be about your
+
+
+confidence
+
+
+statistically more women experience that
+
+
+but I also saw men in that position
+
+
+so be mindful of that
+
+
+perhaps it's best to ask for feedback
+
+
+from your colleagues usually there is no
+
+
+issues there
+
+
+so either way the best thing to do again
+
+
+is communicate your things because on
+
+
+top of
+
+
+let's say you really don't know
+
+
+something you miss a very specific
+
+
+important skill
+
+
+um it's ugly comforting for everyone
+
+
+around in a difficult situation for
+
+
+someone to speak up and say I don't know
+
+
+I don't know how to do it
+
+
+and if you're a junior developer this is
+
+
+sort of expected nobody would even blink
+
+
+an eye but if you're a senior you might
+
+
+think this actually going to ruin your
+
+
+reputation actually usually the opposite
+
+
+happens
+
+
+uh the more senior you are
+
+
+the more respect and kind of like street
+
+
+cred you can get by saying this
+
+
+because there is no single person in
+
+
+this world that knows everything and we
+
+
+Instinct instinctively know that but we
+
+
+rarely get reminders of it it's a matter
+
+
+of an ego saying something saying I
+
+
+don't know the more senior you are the
+
+
+more comfort you can actually bring to
+
+
+the team
+
+
+and remember Dan is better than perfect
+
+
+even if you don't have like a hundred
+
+
+percent of a skill but you know how to
+
+
+sort of deliver it that's usually good
+
+
+enough
+
+
+don't overthink it
+
+
+and regarding motivation and the
+
+
+resistance that comes with lack of it
+
+
+it's an interesting one
+
+
+because
+
+
+according to this curve of change let's
+
+
+say you're already at a very low
+
+
+motivation point
+
+
+but there are two types of motivation
+
+
+one is internal and the other one is
+
+
+external internal one is this great
+
+
+sweet spot for us to be we just do
+
+
+things because they feel amazing and we
+
+
+really want to do them
+
+
+no questions asked we just do it for
+
+
+ourselves
+
+
+but the external one needs some
+
+
+incentives like for example money
+
+
+Prestige cookies and nice coffee I don't
+
+
+know whatever works for you
+
+
+and direct
+
+
+external incentives are pretty rare in
+
+
+our work because we don't get a bonus
+
+
+when a project gets finished on time
+
+
+that's usually how it goes
+
+
+and we sort of need that we can hack our
+
+
+brains actually we can create our
+
+
+external incentives for ourselves and
+
+
+get reminded of them every single day
+
+
+because of that we can spark our
+
+
+dopamine kicks in our brain and actually
+
+
+start feeling more motivated internally
+
+
+because of that but you need to create
+
+
+that incentives list for yourself
+
+
+and set a list of incentives it's best
+
+
+to write it on using pen and paper
+
+
+uh there are a lot of studies uh showing
+
+
+that handwriting versus typing actually
+
+
+uses very different parts of our brain
+
+
+handwriting is great for sparking
+
+
+creativity problem solving and it
+
+
+actually increases our memory
+
+
+so it's best to use pen and paper maybe
+
+
+on a sticky note post it put it on your
+
+
+screen and look at it every single day
+
+
+and your incentives might be very big
+
+
+like for example
+
+
+if we finish this project there will be
+
+
+less support requests so I will spend
+
+
+time uh answering questions to these
+
+
+annoying people who just keep asking the
+
+
+same thing or I don't know don't know
+
+
+how to use anything
+
+
+or it can be if I learn this new
+
+
+technology then perhaps I can be
+
+
+promoted to an architect position and
+
+
+when I get at architect position I will
+
+
+get a salary raise amazing right but it
+
+
+also can be super small
+
+
+uh for example if I finish this task I
+
+
+will order pizza and play my favorite
+
+
+video game that also works this also
+
+
+like this rewarding ourselves
+
+
+remembering why we do it why is it worth
+
+
+to stick to things
+
+
+can hack our brain into getting a bit of
+
+
+dopamine at this point
+
+
+and the resource resources and the
+
+
+frustration that causes them
+
+
+this is one that's actually pretty easy
+
+
+to communicate and actually pretty easy
+
+
+to solve because resources can be
+
+
+anything that you lack to do your work
+
+
+and it can be a piece of software to
+
+
+make your life easier it can be a
+
+
+comfortable chair
+
+
+but very often it's time time is also
+
+
+resource and the time can be literally
+
+
+time but also for example you need more
+
+
+people in your team to deliver a project
+
+
+and that's why estimating tasks is super
+
+
+important and can be used as a
+
+
+communication tool in that matter
+
+
+and on top of that the estimation is
+
+
+pretty much the only communication form
+
+
+I could think of that doesn't include
+
+
+forming full sentences and speaking
+
+
+about emotion so if you're not
+
+
+comfortable with that use this instead
+
+
+uh
+
+
+and estimates are great because they're
+
+
+understood by business very very well
+
+
+and they can take actions on them
+
+
+if for example you estimate something to
+
+
+take x amount of time the business can
+
+
+decide that okay it's a bit long we need
+
+
+to change the scope of this project it's
+
+
+not feasible this way
+
+
+or maybe we need to change our hiring
+
+
+plan and actually get more developers on
+
+
+board because we want to do big things
+
+
+and we need more hands
+
+
+or maybe there will even rethink the
+
+
+entire project because on a certain
+
+
+timeline doesn't make sense
+
+
+and speaking about timelines this
+
+
+happens very very very often for
+
+
+business estimates are very often
+
+
+deadlines because business operates on
+
+
+timelines dates dates datelines uh
+
+
+deadlines whatever that is a very
+
+
+accurate point of time when they can put
+
+
+a money number on top this happens we
+
+
+can we have to deal with that
+
+
+and in order to understand why is it
+
+
+important you can think about a very
+
+
+different situation when you're for
+
+
+example at the end on the other end of
+
+
+such a similar situation because any IT
+
+
+project is not different from a non-it
+
+
+project for example building a house of
+
+
+flats a block of floods well I don't
+
+
+know what I say
+
+
+uh so yeah you got an apartment for
+
+
+yourself and you usually do that such an
+
+
+operation like a year ahead or like a
+
+
+few months ahead perhaps you need to
+
+
+sell your old place perhaps you need to
+
+
+hire a construction crew maybe an
+
+
+architect designer whatever you name it
+
+
+uh before this morning time and that
+
+
+moving in date you need to plan an
+
+
+entire timeline of things people
+
+
+projects that need to happen and
+
+
+obviously they also need to be planned
+
+
+in advance
+
+
+so when your apartment is not ready at
+
+
+the time
+
+
+multiple projects multiple plans and
+
+
+multiple people are involved and the
+
+
+plans fall apart for all of them this is
+
+
+the impact of not delivering on time
+
+
+obviously
+
+
+uh life is life and things almost never
+
+
+happen on time
+
+
+but it's way better even for you
+
+
+buying that apartment it would be way
+
+
+more convenient to know that instead of
+
+
+four months from now you would get your
+
+
+apartment seven months from now but you
+
+
+would get it seven months from now
+
+
+that's why when you estimate things add
+
+
+a lot of padding
+
+
+estimate something double it maybe
+
+
+triple it if needed
+
+
+uh makes a number that's comfortable
+
+
+with you for you for your team for your
+
+
+skill set for anything it's way better
+
+
+to deliver things
+
+
+on time even six months from now then
+
+
+over and over prolonging the data making
+
+
+a lot of people in a lot of projects and
+
+
+with more complexity there's like more
+
+
+people and more products involved that
+
+
+depend perhaps on that
+
+
+so yeah the last one uh fall start is
+
+
+not an emotion but it's a situation that
+
+
+once you're in it you probably know it
+
+
+and you'll know it because you don't
+
+
+know pretty much we don't know how to
+
+
+start
+
+
+and perhaps I will not surprise you
+
+
+again if I say again speak up ask
+
+
+questions and talk with your teammates
+
+
+uh I would encourage you not to hate all
+
+
+of the meetings
+
+
+for meeting is absolutely necessary for
+
+
+building an action plan really sit down
+
+
+get a focused time of like an hour or
+
+
+two of work and build an action plan
+
+
+and a good action plan defines your goal
+
+
+lists all the necessary tasks or at
+
+
+least an outline of tasks identifies
+
+
+critical ones and then there is like
+
+
+assignment of tasks and then
+
+
+iterating over that plan
+
+
+this is pretty much what happens or
+
+
+should happen during Sprint planning and
+
+
+then daily is like an iteration of this
+
+
+action plan
+
+
+but you don't necessarily have to stick
+
+
+to just your team action plan you can
+
+
+build an action plan for yourself and
+
+
+then it's also super super handy
+
+
+uh again I encourage you to uh do it
+
+
+with pen and paper because it works way
+
+
+better for our brains
+
+
+but especially if you have a larger
+
+
+feature to develop and perhaps you're by
+
+
+yourself or maybe just like with another
+
+
+person pairing up do the action plan for
+
+
+this particular big thing that sounds a
+
+
+little scary perhaps at the moment it
+
+
+might really help you
+
+
+and I will make a small digression here
+
+
+uh when I mean communication when I say
+
+
+communication when I say questions I
+
+
+obviously don't mean anything like what
+
+
+Elmo says here
+
+
+uh this is technically communication but
+
+
+obviously not a very good one
+
+
+and communication is a really really
+
+
+large topic
+
+
+um there could be a separate talk about
+
+
+this and again it will be only on the
+
+
+surface there are books lectures courses
+
+
+you name it it's a really really vast
+
+
+area
+
+
+but uh there are three tips that you can
+
+
+remember and start using in case you
+
+
+really don't know how to start and you
+
+
+would like to start speak up
+
+
+first one is the I statements so saying
+
+
+something like they usually start with
+
+
+an i because it's about me I don't feel
+
+
+comfortable with this estimation
+
+
+period that's a very good form of
+
+
+communication
+
+
+then questions unless they're passive
+
+
+aggressive you really can't go with
+
+
+questions
+
+
+they're seriously it's really hard to
+
+
+ruin a conversation with a question
+
+
+so use that tool ask questions and let
+
+
+if you don't understand something ask
+
+
+questions always always and always
+
+
+and then the third one is quite big it
+
+
+might need some more practice but when
+
+
+you communicate especially with business
+
+
+but it works for everyone focus on risks
+
+
+and perhaps even propose a solution so
+
+
+it could go something like that
+
+
+if we don't Implement X now there is a
+
+
+risk of losing data in the future
+
+
+person a is an expert in this matter and
+
+
+he would need around a week to have it
+
+
+implemented
+
+
+done
+
+
+business might have like some follow-up
+
+
+questions but
+
+
+if you work with decent people nobody
+
+
+would say like a hard note to you to
+
+
+that conversation
+
+
+and the good thing is is that it's not
+
+
+only about business and what about what
+
+
+we do this uh things about communication
+
+
+can be also used in our personal lives
+
+
+imagine such a situation
+
+
+your girlfriend wants you to go to a
+
+
+shopping mall again uh doing shopping
+
+
+look for clothes like I don't know any
+
+
+single man who likes doing that so this
+
+
+is a very good example
+
+
+instead of just like being defensive and
+
+
+saying you suck and everything is
+
+
+terrible like Elmo don't be Elmo
+
+
+uh you can say something like I am very
+
+
+tired I feel very tired why do you need
+
+
+me there what's my value there maybe you
+
+
+can go along and I will meet you there
+
+
+later at the movies and we can go back
+
+
+home together
+
+
+probably any rational person wouldn't
+
+
+start a fight right after
+
+
+hearing such a thing perhaps I don't I
+
+
+don't put any guarantees on that
+
+
+so a tldr version of all this
+
+
+emotional roller coaster when facing any
+
+
+type of changes absolutely normal
+
+
+business is business we have to deal
+
+
+with it
+
+
+by acknowledging and naming your
+
+
+emotional state you can identify what's
+
+
+wrong and then fix it
+
+
+and communicate communicate communicate
+
+
+always there is not enough Communication
+
+
+in this world
+
+
+and in case everything falls apart you
+
+
+really don't know what to do everything
+
+
+is terrible
+
+
+Keep Calm at carry on because it's just
+
+
+a job
+
+
+[Applause]
+
+
+on one of the last slides there was this
+
+
+about focus on risks and solutions and I
+
+
+just like realized that often that I
+
+
+give the review I'm using like I am
+
+
+afraid that something will happen which
+
+
+is basically the same but I assume that
+
+
+saying there is a risk that something
+
+
+will happen is at least more
+
+
+professional but maybe there are some
+
+
+other like I don't know phrases like
+
+
+avoid these five phrases when you are
+
+
+doing your code review or something like
+
+
+that so
+
+
+often way there is something
+
+
+um it's one of the most common
+
+
+psychological mistakes we do when
+
+
+something happens to us we attribute
+
+
+things to external circum circumstances
+
+
+so I didn't deliver this thing because
+
+
+my cat was sick my I don't know whatever
+
+
+I didn't have this this and that it's
+
+
+not my fault it's because of something
+
+
+else but when something else happens to
+
+
+your colleague and this person for
+
+
+example doesn't deliver on time and you
+
+
+depend on it you probably would think
+
+
+things about that person instead of the
+
+
+situation that that person was in this
+
+
+probably would be my first uh my first
+
+
+note
+
+
+I cannot think of like five things from
+
+
+the top of my head uh but this would be
+
+
+the I think this one this one really
+
+
+helps in life and if you
+
+
+if you talk about your emotion use the I
+
+
+statement and then talk about risk in a
+
+
+separate part of a conversation because
+
+
+sometimes talking about emotion is
+
+
+important but as you mentioned it's not
+
+
+necessarily professional at least not in
+
+
+all of the uh aspects of business
+
+
+thanks uh first of all thank you for
+
+
+your talk really nice talk
+
+
+um I have a question because I really
+
+
+like this Matrix equation and I find it
+
+
+pretty useful
+
+
+however I haven't won I have one concern
+
+
+because it's sometimes really hard to
+
+
+identify the feelings actually how to
+
+
+distinguish for example anxiety from
+
+
+frustration and so on I used to be an em
+
+
+and I had this problem because those
+
+
+emotions are pretty elusive so you you
+
+
+cannot actually actually
+
+
+identify it well on one-on-ones with
+
+
+your team so maybe you have some hints
+
+
+how to do this and how to properly
+
+
+identify and distinguish those emotions
+
+
+this is again a really really big
+
+
+question uh but I can give you some
+
+
+hints emotions are not necessarily what
+
+
+we think and what's in our head but very
+
+
+very often we feel them in our bodies so
+
+
+for example anxiety is kind of like this
+
+
+nervousness over here anger is very
+
+
+often in our hands
+
+
+uh frustration is more like a belly area
+
+
+for example uh it's obviously like a
+
+
+different person to person but this can
+
+
+be like a first biological cue to kind
+
+
+of like
+
+
+when you think about this project what
+
+
+does it hurt like where where does it
+
+
+hurt is your belly is it like you want
+
+
+to smash something or you like feel like
+
+
+your heart is about to like I don't know
+
+
+explode or kind of like here this might
+
+
+be helpful okay thank you
+
+
+I'm not really a question but a thank
+
+
+you for you because I feel like you
+
+
+exactly decide
+
+
+um
+
+
+what is frustration
+
+
+I was thinking that for me for example
+
+
+this model that you presented would be
+
+
+helpful because it's a resource and I
+
+
+can use when I feel this way or that way
+
+
+so thank you for reducing my future
+
+
+frustrations you're welcome I'm glad I
+
+
+could help
+
+
+okay thank you all very very much
+
+
+thank you

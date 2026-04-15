@@ -1,0 +1,2737 @@
+[Applause]
+
+
+hello and thank you I was trying to make
+
+
+this slide uh as dramatic as possible so
+
+
+and let's start so I I'm Ian I'm uh
+
+
+originally from Russia I live for 10
+
+
+years already in
+
+
+Serbia um these are two startups I was
+
+
+helping in the last
+
+
+years um I I'm on rail since 2006 I'm a
+
+
+small Ruby on Rails agency owner and uh
+
+
+I used to work for gitlab as a fun fact
+
+
+and those are two small projects uh not
+
+
+completely finished but you still might
+
+
+find them useful so and why I'm here so
+
+
+I'm here to play the role of this guy so
+
+
+I know that service is like a widely
+
+
+accepted pattern in the community yet
+
+
+uh um yet we're going to uh question
+
+
+this so the plan the plan is the
+
+
+following first of all I'm going to
+
+
+share uh one method which I kind of
+
+
+invented few years ago uh I call it o in
+
+
+pictures and we're going to use it later
+
+
+in the talk and then we will see how
+
+
+developers what the what developers talk
+
+
+about service objects in their articles
+
+
+and
+
+
+uh uh what are the benefits what they uh
+
+
+they think uh service objects given them
+
+
+and then we're going to talk about roots
+
+
+of the concepts we will analyze what
+
+
+guys like Martin Fowler uh Eric Evans
+
+
+and uh Robert Martin said about service
+
+
+objects and try to get an idea from that
+
+
+and we'll see
+
+
+how service objects look in serious big
+
+
+projects I will show you some examples
+
+
+from gitlab
+
+
+repository and in the end I will show
+
+
+how I do it and how I think about it and
+
+
+the last part I think the most is the
+
+
+most
+
+
+important
+
+
+so service object this is like I'm going
+
+
+to be really bold now service object is
+
+
+a very strange controversial and harmful
+
+
+abstraction that doesn't make any
+
+
+sense and which contradicts with main
+
+
+architectural principes
+
+
+and and it doesn't give you any
+
+
+benefits and I would say in long term
+
+
+because at the first place it might look
+
+
+that it actually gives you benefits but
+
+
+we will see that it actually doesn't
+
+
+so o p pictures if you're
+
+
+interested there's a whole uh
+
+
+presentation on it like from my uh talk
+
+
+in railson uh there's a QR code and it
+
+
+will be uh shown later if you will be
+
+
+interested as well so the fun
+
+
+part this is the method I invented when
+
+
+I was teaching my students and I was
+
+
+explaining objectoriented programming to
+
+
+them and I really like throwing those
+
+
+little dudes so I decided why wouldn't I
+
+
+draw like classes as those little
+
+
+dudes and then uh I was I decided Well
+
+
+and actually can draw hands and the way
+
+
+you can interact with a class with an
+
+
+object actually you just uh Shake one of
+
+
+their their hands so and then I started
+
+
+developing this idea so how the rest of
+
+
+the ontology would look like and I
+
+
+figured out that those hands they can be
+
+
+actually like Robo arms with fingers and
+
+
+through those fingers uh uh those
+
+
+methods can accept arguments and
+
+
+obviously number of fingers represents
+
+
+number of arguments and those arguments
+
+
+they go into their brains and uh those
+
+
+are instance variables and later they
+
+
+can be reused in other
+
+
+methods and to get a result of a
+
+
+function or a method you open this hatch
+
+
+and you get the
+
+
+result and private methods is a funny
+
+
+concept because those are still arms but
+
+
+they are kind of internal ones so no one
+
+
+can shake them from outside but the guy
+
+
+still can use
+
+
+them uh exception looks like this it's
+
+
+kind of you still get the result but
+
+
+from the different
+
+
+place uh and maybe not the nice one
+
+
+and with this you
+
+
+can you can start seeing antipatterns
+
+
+visually so for example like too many
+
+
+arguments too many
+
+
+methods uh to Long
+
+
+methods uh too many instance variables
+
+
+too much conditional logic in the
+
+
+method or too much of everything
+
+
+so and another and we were talking about
+
+
+objects for now but what about classes
+
+
+and I was not sure how to express it
+
+
+visually and then I came up with the
+
+
+idea of kind of spawning platform that
+
+
+has a cartridge and on this cartridge we
+
+
+have an instructions on what object to
+
+
+object to spawn
+
+
+and we have this lever we pull it and
+
+
+the magic happens and we get an
+
+
+object and the fun part is that actually
+
+
+these two things they have the same
+
+
+ontology and essentially this lever is
+
+
+the same as hand and uh it also can have
+
+
+fingers apparently and this is also just
+
+
+a method so that's the story and I used
+
+
+this method to analyze the talk of
+
+
+Sunday Mets and uh to represent how the
+
+
+diff the the complexity of a class was
+
+
+changed over time and I find it really
+
+
+useful so you don't have to analyze the
+
+
+code you just see how much complexity
+
+
+have been added so we're going to use
+
+
+this this method as well
+
+
+today okay what is service
+
+
+object and let's see what what
+
+
+developers say I analyzed like I don't
+
+
+know a dozen of Articles and collected
+
+
+uh opinions of various developers so it
+
+
+they are crucial for enhancing like code
+
+
+efficiency and maintainability they help
+
+
+you structure uh improve structure
+
+
+organization and testability they
+
+
+encapsulate business logic they make
+
+
+your code more modular easier to
+
+
+maintain easier to
+
+
+test uh avoid code blood and uh CL ing
+
+
+of the code keep your code clean and
+
+
+organized encapsulate business logic
+
+
+simplify development process make
+
+
+testing easier etc etc single they are
+
+
+single
+
+
+responsibility and sometimes you also
+
+
+get a a bit of criticism like service
+
+
+objects are crappy and better Solutions
+
+
+exist but unfortunately author doesn't
+
+
+say what are those
+
+
+Alternatives uh okay
+
+
+and yeah this is a short summary of what
+
+
+the they said what developers
+
+
+saying and what do they do let's see the
+
+
+quote from those
+
+
+articles and first of all we get this
+
+
+guy what it does it uh it simply creates
+
+
+a book uh with some parameters pass to
+
+
+it and we have a lot of boiler plate
+
+
+code which essentially yeah uh
+
+
+just which is essential there just to
+
+
+get the shape of a service object but
+
+
+the useful code is very short here so
+
+
+another one validate discount code
+
+
+so I I'm not sure like maybe it could be
+
+
+a validation maybe it could be just a
+
+
+method in a in a model but yeah for some
+
+
+reason it's also a service object uh
+
+
+this one here we also have a mutation
+
+
+and uh message uh we send email uh to
+
+
+our user so it looks like some kind of a
+
+
+business operation here uh another one
+
+
+my favorite one so
+
+
+uh and this one here another business
+
+
+operation which consists of mutation we
+
+
+update our trip with parameters but also
+
+
+we go to external service to Google Maps
+
+
+and fetch uh distance and duration of
+
+
+the trip and update uh a trip with it
+
+
+with it as
+
+
+well uh this one is a little bit longer
+
+
+and there are few more methods below
+
+
+so it is authentication Service you
+
+
+don't have to read in detail what it
+
+
+does we will uh explore it later in
+
+
+details and the final one is a class
+
+
+called tweet Creator which basically a
+
+
+wrapper uh um around Twitter API to
+
+
+create a
+
+
+tweet and what do we see what does this
+
+
+code do we see some kind of validation
+
+
+we see a calculation we see a creation
+
+
+of an entity we see mutation business
+
+
+scenarios of two kinds mutation plus
+
+
+notification external service call plus
+
+
+mutation and we see rer for external
+
+
+service and uh to me it is a little bit
+
+
+strange why uh this code is doing so
+
+
+many different things and it is called
+
+
+the same but let's continue and and if
+
+
+we try to come up with a definition at
+
+
+this point uh the definition will be
+
+
+this they just do some
+
+
+stuff and I wanted to find some kind of
+
+
+more deep philosophical uh idea behind
+
+
+it like is there one and I decided to
+
+
+analyze uh what our fathers said about
+
+
+it so first of all what is s Service
+
+
+about service objects and to understand
+
+
+that I decided
+
+
+to uh go through those famous books of
+
+
+these guys and in uh his book patterns
+
+
+of Enterprise
+
+
+architecture uh Martin Fowler is saying
+
+
+that basically he doesn't mention the
+
+
+idea of service object and the closest
+
+
+concept uh I found there is service
+
+
+layer and they're going to be a visual
+
+
+representation of what uh I think they
+
+
+meant in order to kind of
+
+
+uh have the whole picture like visually
+
+
+so first of all there's an application
+
+
+and there's a domain logic and
+
+
+application logic and service layer
+
+
+defines application
+
+
+boundary also it sets available
+
+
+operation so they are inside the service
+
+
+layer uh and it would be fair to say
+
+
+that inside those
+
+
+operations uh coordination of domain
+
+
+objects happen and also service layer
+
+
+controls trans transactions and I think
+
+
+it's happening in the same place and
+
+
+also um yeah uh the same operations they
+
+
+encapsulate the application business
+
+
+logic and the final bit is that service
+
+
+layer services in service layer by
+
+
+Martin Fowler they coordinate uh
+
+
+responses but the trick here is that
+
+
+fower suggest that Services can be
+
+
+called either remotely or locally so if
+
+
+we can if we
+
+
+uh if our application is just a regular
+
+
+monolith and it's not kind of a
+
+
+microservice architecture I would say we
+
+
+can ditch it we don't need it
+
+
+so uh yeah and Erica
+
+
+in
+
+
+dddd the closest concept to service
+
+
+object in his book is domain services
+
+
+and the first thing he mentions is that
+
+
+they are stateless so they just take
+
+
+some arguments they do their stuff and
+
+
+that's it uh they are named for an
+
+
+activity rather than an
+
+
+entity and they represent significant
+
+
+business domain processes and operations
+
+
+SL
+
+
+operations and they are distinct from
+
+
+Technical Services this is interesting
+
+
+so it he doesn't say what are those
+
+
+Technical Services he's just saying that
+
+
+they are different
+
+
+so and those business operations they
+
+
+have they may have side effects and I
+
+
+treated is that uh they actually should
+
+
+have side
+
+
+effects uh it could be that there will
+
+
+be no side effects if some condition uh
+
+
+they do not are not met but uh in princi
+
+
+principle they there there should be
+
+
+some and Robert Martin in his book clean
+
+
+code he's saying that service should
+
+
+have well defined interface honestly I
+
+
+don't know what what what he meant but I
+
+
+drew it so
+
+
+anyway um it can be a single component
+
+
+or it can be composed of a several
+
+
+component I drew it as well and those
+
+
+components separated by architectural
+
+
+boundaries
+
+
+and unfortunately the context in which
+
+
+he mentions this is that yeah again
+
+
+microservices and service oriented
+
+
+architecture so those are kind of it's
+
+
+not really relevant to our like very
+
+
+lowkey uh monolithic
+
+
+World unfortunately but he also mentions
+
+
+the importance of single responsibility
+
+
+principle and I think it actually can be
+
+
+applied to us so let's keep it there
+
+
+okay so this is the message being sent
+
+
+to us by the fathers of complexity
+
+
+management and kind of lots of rules
+
+
+let's let's try to kind of squeeze it
+
+
+and I kind of squeezed it a bit and then
+
+
+a bit more and this is and now we have
+
+
+crafted our service ruler and with this
+
+
+ruler we're going to be measuring like
+
+
+uh the services we met uh uh so domain
+
+
+Services they should be stateless well
+
+
+actually we will see it uh a few more
+
+
+times so don't need to read
+
+
+it all right let's try to
+
+
+analyze
+
+
+and yeah this one it is not stateless
+
+
+there is a Constructor uh there's some
+
+
+State being stored in the object so it's
+
+
+named for an activity not entity uh no
+
+
+we failed for the rest I would say yes
+
+
+we we have passed it represents some
+
+
+business operation it coordinates the
+
+
+main objects it uh controls trans
+
+
+transaction uh it complies with single
+
+
+responsibility principle and it should
+
+
+have side effects and there's no
+
+
+application logic all right another one
+
+
+and it this one fails miserably so um
+
+
+yeah definitely not a domain
+
+
+service this one again looks like
+
+
+another business operation we've got
+
+
+here but but doesn't really comp not
+
+
+sure if it complies with SRP because
+
+
+actually it does two things it it does a
+
+
+mutation it also calls uh some external
+
+
+service so we need to think um depends
+
+
+on how we look at
+
+
+it another one uh again fails miserably
+
+
+um doesn't coordinate any domain object
+
+
+uh doesn't represent business operation
+
+
+uh but it is state
+
+
+another business operation we've got
+
+
+here again doesn't comply with SRP
+
+
+because it does two things it works with
+
+
+external service and uh does a
+
+
+mutation and this
+
+
+one another business operation we've got
+
+
+here but we've got a plenty of code here
+
+
+so and apparently it does a lot of
+
+
+things and
+
+
+most of the developers that I ask they
+
+
+think about s such code that actually it
+
+
+is uh this thing is single
+
+
+responsibility like the whole thing is
+
+
+about user authentication therefore
+
+
+there's a single responsibility of
+
+
+authenticating
+
+
+users and nope unfortunately no but this
+
+
+is not what Martin follower meant he
+
+
+meant that there should be only single
+
+
+reason to change a unit of code and
+
+
+here we have plenty of
+
+
+reasons all right uh the final one not a
+
+
+domain Service as well um works with
+
+
+external Ser uh with ex external system
+
+
+it complies with SRP it has side effects
+
+
+but for the rest no it's not uh domain
+
+
+service according to the
+
+
+fathers so what do we
+
+
+see this code which everyone calls uh
+
+
+service object they just just do
+
+
+different kind of
+
+
+stuff um some of them are definitely not
+
+
+domain Services none of them mat all
+
+
+requirements yet developers name them
+
+
+name them the same they put them in the
+
+
+same bucket and this is a bit
+
+
+strange did we achieve what we wanted
+
+
+maintainability avoid Cod blood I'm kind
+
+
+of not sure like it's not yet clear
+
+
+single
+
+
+responsibility uh uh sometimes we've got
+
+
+it sometimes not like and we see that
+
+
+the bigger our uh service object gets
+
+
+like the less singular responsibility we
+
+
+have more modular H not sure again
+
+
+encapsulates business logic yes for sure
+
+
+we like I think the whole thing is for
+
+
+the sake of an encapsulation but we
+
+
+could
+
+
+encapsulate uh logic in methods as well
+
+
+so not sure what's the benefit here
+
+
+and easier to test um again with small
+
+
+pieces of code yes easier like when it
+
+
+gets bigger I'm not so sure and about
+
+
+structure and organization I would say
+
+
+the same so let's continue what is so
+
+
+object about service
+
+
+objects and in other words is there a
+
+
+reason why they are shaped like
+
+
+objects so
+
+
+three pillars of objectoriented
+
+
+programming encapsulation inheritance
+
+
+polymorphism encapsulation we see a lot
+
+
+inheritance I would say it's a really
+
+
+bad idea to start using inheritance here
+
+
+and polymorphism I couldn't come up with
+
+
+a with a reason to use it here so not so
+
+
+many reasons to use o here like concepts
+
+
+of oop and three more ideas is there
+
+
+reason like uh is there a state which
+
+
+needs to be managed uh in this story is
+
+
+there a life cycle of an object we are
+
+
+about to
+
+
+create can we imagine a situation where
+
+
+we need multiple instances of a class at
+
+
+the same place and the answer is
+
+
+no so uh pretty much nothing tells us
+
+
+that uh so that we should be using o
+
+
+here and what is service object let's
+
+
+try to answer this question again it
+
+
+looks like it's just a technical
+
+
+trick uh with no huge idea behind it in
+
+
+the sake of and I was really trying hard
+
+
+to like uh find uh this this this reason
+
+
+and the only one I found the two I found
+
+
+like moving code from controller
+
+
+and remember the whole thing started
+
+
+like we are we're having fed models fed
+
+
+controllers let's solve this problem
+
+
+with services and now we have what fed
+
+
+Services perfect and testing it
+
+
+separately from controller yes I would
+
+
+say it's a good
+
+
+reason uh but later we will see that
+
+
+actually Services they take more and
+
+
+more like in in many cases they take a
+
+
+lot of responsibilities from controllers
+
+
+so you are kind of testing it separately
+
+
+from from controllers but still you have
+
+
+stolen most of the functionality from
+
+
+controllers so it's not a huge win
+
+
+actually okay let's see how serious guys
+
+
+are doing it like they must have like uh
+
+
+invest it in in it better and they
+
+
+um they should really understood uh
+
+
+should have been understand something
+
+
+and the good thing is that yes the code
+
+
+is uh open source
+
+
+and we can see in the Dynamics how the
+
+
+things have changed over time and I will
+
+
+be showing just I don't know random
+
+
+service objects I found there and some
+
+
+of them they are not too big again there
+
+
+is a state and those are three hairs
+
+
+those are uh they are representing uh
+
+
+utter readers
+
+
+um so only two arms one public one in uh
+
+
+One internal and the Constructor doesn't
+
+
+look scary I see it does something with
+
+
+caching I would say caching is a
+
+
+application Level logic but okay fine
+
+
+whatever another one two internal uh uh
+
+
+methods one public kind of
+
+
+okay uh this one already is a bit bigger
+
+
+five uh private methods and what we see
+
+
+here we we see that one service calls
+
+
+another service and also it is inherited
+
+
+from a thing called Base Service and in
+
+
+the base service there's a small include
+
+
+which includes this thing so it looks
+
+
+the
+
+
+that like this thing is quite complex
+
+
+and it looks like this thing is like
+
+
+they have to invent the whole framework
+
+
+to manage this kind of complexity and
+
+
+still it looks complex so let's
+
+
+continue this guy I had to record the
+
+
+gift just to show you like the the whole
+
+
+thing so it has uh about 200 lines of
+
+
+code and uh but what is
+
+
+interesting is at the
+
+
+beginning it was also a very small and
+
+
+Co and Compact and nice uh service
+
+
+object with only two private methods but
+
+
+over time it it grew and grew and it
+
+
+turned into this
+
+
+monster so what we see that uh with this
+
+
+idea of service objects the complexity
+
+
+grows
+
+
+Inward
+
+
+and that's a bad
+
+
+sign what we see we see that uh service
+
+
+object they proactively stealing
+
+
+controllers responsibilities they kind
+
+
+of prepareing responses they work with
+
+
+sessions etc etc uh we see that um we
+
+
+see a mix of application logic with
+
+
+domain logic inside those service
+
+
+objects and the
+
+
+code and this is a really important part
+
+
+the code is doing different types of
+
+
+work
+
+
+and um but
+
+
+I would say those service objects they
+
+
+are doing different uh types of work but
+
+
+we still put them in the same bucket and
+
+
+call them the same and inside we see
+
+
+lots of low-level code uh also doing
+
+
+different types of work and if we
+
+
+represent it visually it will look
+
+
+something like
+
+
+this so if those colors represent
+
+
+different types of work for example red
+
+
+is interaction with external system
+
+
+uh green is
+
+
+mutation uh yellow is I know business
+
+
+rules so the picture looks like this and
+
+
+we put this into the same
+
+
+bucket so and these are different kinds
+
+
+of work these guys are doing
+
+
+so and
+
+
+uh yeah I let that sink for a while
+
+
+so what we see few more observations for
+
+
+from what we've
+
+
+seen uh we've seen once that there's a
+
+
+cold chain of services and if we called
+
+
+if if we allow one service to call
+
+
+another it basically means that this
+
+
+service that we've called it can also
+
+
+call another service and this can call
+
+
+another and another and another and we
+
+
+even can get a circular dependency and
+
+
+I've seen it in the wild and that it
+
+
+doesn't look nice so we see inheritance
+
+
+we don't like it as well uh we see that
+
+
+over time complexity grows inward
+
+
+doesn't look nice we see the service
+
+
+layer becomes responsible for
+
+
+everything and effectively we have
+
+
+killed ideas of layed architecture ideas
+
+
+of modularity and ideas of single
+
+
+responsibility
+
+
+principle uh doesn't look
+
+
+nice so the definition of the
+
+
+curse uh there's no reason for services
+
+
+to be shaped as
+
+
+objects they doesn't much with what
+
+
+father said developers do not actually
+
+
+achieve what they wanted to achieve
+
+
+and uh practice actually opposes the
+
+
+idea
+
+
+layered architecture modularity and
+
+
+SRP again this
+
+
+picture
+
+
+and what if what if instead of uh
+
+
+putting different code uh
+
+
+into uh building blocks of the same
+
+
+shape we would start finding the right
+
+
+places and the right shapes for
+
+
+different kinds of code in our
+
+
+application
+
+
+and what if we could uh find a shelf
+
+
+find its own shelf for different types
+
+
+of work in our application what if there
+
+
+would be a shelf for business operation
+
+
+there will be a shelf for business rules
+
+
+there will be a shelf for complex
+
+
+mutations a shelf for interaction with
+
+
+external
+
+
+systems and like the place to work for
+
+
+with data preparation validations Etc ET
+
+
+Etc
+
+
+and I really like this quote that
+
+
+throughout uh throughout our history it
+
+
+has always been standardization of
+
+
+components that has enabled creations of
+
+
+Greater
+
+
+complexity and I think this
+
+
+standardization is actually achievable
+
+
+and I will show you how I achieve it so
+
+
+how do I do it and how do I think about
+
+
+it let's take this guy I promised we
+
+
+will
+
+
+uh work with him a little bit more
+
+
+so first uh first thing I'm doing when
+
+
+I'm seeing uh such code is that I'm
+
+
+trying to see uh what kind of what types
+
+
+of work this code is doing and uh short
+
+
+uh not note that I'm completely fine
+
+
+with long methods as long they are doing
+
+
+like the same type of work and it is of
+
+
+the same level of of abstraction
+
+
+uh uh I think that most of the code we
+
+
+write on the daily basis those are just
+
+
+procedures and if we have a long
+
+
+business operation it's fine uh for it
+
+
+to look as a loan method so okay those
+
+
+are kinds of work this code is doing so
+
+
+we see some controller level logic of uh
+
+
+working with session and preparing
+
+
+responses we see some rendering we see
+
+
+uh mutations we see business
+
+
+rules um and we see one
+
+
+call one interaction with external
+
+
+service
+
+
+so yeah let's find that own shelf for
+
+
+every type of for and some shelves we do
+
+
+have already and the first first first
+
+
+shelf would
+
+
+be um a
+
+
+model and we can extract those business
+
+
+rules where we ask a user if account
+
+
+loged or if it's a first login for from
+
+
+new IP so yeah we can just put it in the
+
+
+model it looks like there's already a
+
+
+place for
+
+
+it and
+
+
+for lowlevel details of complex
+
+
+mutation we will put it into its own
+
+
+mutator layer layer and mutators they
+
+
+adjust procedures
+
+
+again and essentially this uh this is a
+
+
+method to uh avoid callbacks
+
+
+completely uh it will be just a
+
+
+procedure of uh
+
+
+your model creation and in complex cases
+
+
+creating one
+
+
+entity uh during creation of one entity
+
+
+you actually need to create and fill in
+
+
+some special way a lot a plenty of
+
+
+associations so and I just I would just
+
+
+put this in
+
+
+this
+
+
+um in in a procedure and this will
+
+
+guarantee you that uh in your codebase
+
+
+there will no longer be half baked
+
+
+entities like we we already started
+
+
+create creating some object but some
+
+
+associ associations are not yet created
+
+
+this method actually uh helps you avoid
+
+
+this problem so so yeah I would just
+
+
+create a folder mutators I would create
+
+
+a module or a class doesn't matter uh
+
+
+because it is just a container for
+
+
+functions and I would just put those two
+
+
+functions there they will just do their
+
+
+job and I will just call them from a
+
+
+service
+
+
+so and the main Services they are just
+
+
+business operations they do represent
+
+
+business operations and it means like we
+
+
+have a business operation we have one
+
+
+service and it is also just a procedure
+
+
+but the code there should be of a high
+
+
+level of obstruction and this is how it
+
+
+looks like
+
+
+so remember we have moved uh mutation
+
+
+details on a mutator
+
+
+level uh we have moved business rules to
+
+
+the model so now our code looks actually
+
+
+um much more High levish so to say uh I
+
+
+put interaction with the mailer like
+
+
+this I don't think it it makes sense to
+
+
+wrap it into something because it it is
+
+
+obvious what it what's it doing if it
+
+
+would be a more complex interation it
+
+
+would go to separate uh bucket as
+
+
+well so and of course we want to keep
+
+
+application logic outside of services
+
+
+for example permissions check and data
+
+
+preparation I would also do outside of
+
+
+services and only call this service with
+
+
+valid
+
+
+params um I know that nobody actually
+
+
+does it but yeah you will see that
+
+
+actually it does it does a lot of sense
+
+
+makes a lot of
+
+
+sense um yeah and this is how controller
+
+
+would like would look like so it like we
+
+
+find this user and we don't uh execute
+
+
+service until we sure everything is
+
+
+fine and we prepare responses here on a
+
+
+controller level we work with session as
+
+
+well here so we let controller to take
+
+
+care about application
+
+
+logic
+
+
+and here's what we've got so on the
+
+
+bottom we have a our
+
+
+model then we have a mutator then we
+
+
+have a user service and then we have a
+
+
+controller and this is what we had in
+
+
+the begin
+
+
+beginning and this is what we've got so
+
+
+instead of uh having single class which
+
+
+over time will become bigger and bigger
+
+
+we have found uh places to put this uh
+
+
+functionality uh to and we have built
+
+
+much smaller building blocks and over
+
+
+time we just get more of those simple
+
+
+building blocks instead of having like a
+
+
+bigger uh complex one
+
+
+yeah this is what we've
+
+
+got and
+
+
+uh surprisingly this thing is stateless
+
+
+it is just a function it is named for an
+
+
+activity not entity so it's called
+
+
+authenticate it represents business
+
+
+operation it coordinates the main
+
+
+objects it controls transactions via
+
+
+calling mutators it complies with single
+
+
+responsibility principle because it
+
+
+represents all the business logic on a
+
+
+high level of
+
+
+obstruction uh it has side effects
+
+
+obviously uh yeah and the code is of
+
+
+same level of obstruction um what we've
+
+
+got here is
+
+
+modularity what we've got here is
+
+
+layered architecture what we've got here
+
+
+is single responsibility principle
+
+
+because every piece of this code has
+
+
+only one reason to
+
+
+change uh yeah and yeah this thing is
+
+
+much more more easier to test I would
+
+
+still not test it I would still test
+
+
+only
+
+
+controller but that's the separate
+
+
+story
+
+
+and if I would like this picture I drew
+
+
+just to
+
+
+highlight
+
+
+uh the idea that on those different
+
+
+layers we have code of a different uh
+
+
+obstruction and uh
+
+
+these guys are doing different kinds of
+
+
+work because a lot of developers they
+
+
+just do all right I have a bit of too
+
+
+much code here I just copy it there I
+
+
+just copy it there I just copy it there
+
+
+instead I I insist that you should think
+
+
+where this code belongs find this place
+
+
+in the rails uh in the in in the tooling
+
+
+of rails or invent invent your own layer
+
+
+and put it there there that would work
+
+
+just fine so we did a little like very
+
+
+little tweaking to what rails gives us
+
+
+here and uh we we've returned it to to
+
+
+ideas of layered
+
+
+architecture and let's quickly uh
+
+
+refactor all those uh service objects
+
+
+from from the beginning of the talk so
+
+
+this guy it is just a m mutator right so
+
+
+if the creat logic gets more complex the
+
+
+M mutator will grow but the service we
+
+
+we will don't have to
+
+
+change this guy I would put it into a
+
+
+model into the model uh it would be just
+
+
+a method
+
+
+legitimate and the finder
+
+
+method this guy yeah this is a service
+
+
+this is valid business operation it can
+
+
+be a service it can be put into
+
+
+service there's no reason for for it to
+
+
+be stateful so it's just a
+
+
+function this guy just a method in in
+
+
+the model
+
+
+obviously this one uh this is
+
+
+interesting because we I think that
+
+
+we've got more code here than
+
+
+originally but uh what we've got is that
+
+
+we separated this manager which uh does
+
+
+interaction with external service and
+
+
+our service
+
+
+yes it has more code but the code is
+
+
+just simple it's just simple procedure
+
+
+that like line by line you clearly
+
+
+understand what what's happening and uh
+
+
+yeah you are not mixing two things in
+
+
+one um all right and this guy it will be
+
+
+a just
+
+
+uh I I I call them managers the like the
+
+
+building blocks that are interacting
+
+
+with external systems and and you can
+
+
+see
+
+
+that uh I kind of reverted it because
+
+
+originally in like the author construct
+
+
+passed message into Constructor and
+
+
+instantiated uh rest client in the
+
+
+method call but actually it should be
+
+
+the opposite
+
+
+so so that's it actually and do you
+
+
+still think that service object was a
+
+
+good idea I would really love to get
+
+
+argumented uh kind of ideas and if you
+
+
+still think that I'm wrong I would love
+
+
+to discuss that and I hope that you will
+
+
+get enough of things to discuss during
+
+
+the lunch so if we have any time for
+
+
+questions I would love to answer them
+
+
+[Applause]
+
+
+Bo oh boom roasted that's what I wanted
+
+
+to
+
+
+say uh thank you very much for your talk
+
+
+I love the examples where you simplify
+
+
+the service subjects but I wanted to ask
+
+
+about the inverse uh which is what about
+
+
+over engineering because gitlab is a
+
+
+quite a
+
+
+sophisticated application uh and it has
+
+
+a very complex even login logic because
+
+
+of security con concerns I guess um and
+
+
+most people will probably never work on
+
+
+an app even close to that big so don't
+
+
+you think there is a risk that they will
+
+
+just invent layers for the sake of
+
+
+inventing layers and add classes for
+
+
+sake of adding classes where a simpler
+
+
+approach might be just
+
+
+enough I insist that this approach is
+
+
+simpler because we haven't changed much
+
+
+to the uh to what rails gives us we just
+
+
+like service layer we do already have
+
+
+the only thing that we have introduced
+
+
+so far is mutator level and also in
+
+
+practice you don't have to add like uh
+
+
+if there would be a simple user Creation
+
+
+with one line of code I wouldn't drop it
+
+
+into mutator and drop it into service
+
+
+and call this all like the the whole
+
+
+hamburger I would just keep it huh
+
+
+just it it it was already a bit long so
+
+
+but it could be yes it could be so it's
+
+
+not like those examples like if I would
+
+
+be refactoring them tomorrow the code
+
+
+would look a little bit different so
+
+
+but yeah it's it's it's not the real
+
+
+problem actually so it could go into
+
+
+controller and with time you extract it
+
+
+to mutator that's how I do it basically
+
+
+uh
+
+
+so one of your arguments against uh
+
+
+service object is that service objects
+
+
+are not not objects and they are not
+
+
+objectoriented programming however in
+
+
+your approach you go totally in
+
+
+Direction opposite of
+
+
+objectoriented it's and my question is
+
+
+like when would you use object oriented
+
+
+Paradigm uh as uh as opposed to
+
+
+procedural programming which is I assume
+
+
+what you advocate
+
+
+well I guess well when you develop some
+
+
+code some when you extend your framework
+
+
+when you develop in some kind of
+
+
+libraries you will need uh
+
+
+objectoriented you might need
+
+
+objectoriented approach but yes most of
+
+
+the code which we are writing on the
+
+
+daily basis is it should be just
+
+
+procedures it should be as simple as
+
+
+possible and when we come up with the
+
+
+concepts like monets etc etc dependency
+
+
+injection we're not doing
+
+
+good this kind of it's good like
+
+
+for internals for libraries for gems but
+
+
+in the reg regular code it shouldn't be
+
+
+there thank you for your talk um you
+
+
+said that you should use different tools
+
+
+for different approaches and I curious
+
+
+did you use interactors and if yes for
+
+
+which cases did you use it interact
+
+
+rectors they just add even more boiler
+
+
+plate and even more to the idea
+
+
+of service objects so I don't recommend
+
+
+to use it at all if you you can
+
+
+simply uh convert it into functions and
+
+
+it will work just
+
+
+fine like basically you will decrease
+
+
+amount of code like significantly if you
+
+
+just put it into functions into regular
+
+
+functions he uh thank you for the talk
+
+
+um do you have any large race
+
+
+application where this pattern has been
+
+
+applied
+
+
+um I've seen
+
+
+some uh and the two projects I've been
+
+
+working on I've shown I was uh
+
+
+practicing
+
+
+this and I would say in reality it
+
+
+doesn't always look that nice they
+
+
+always going to be some amount of dirty
+
+
+Solutions and sometimes it's justifi F
+
+
+because sometimes it's just faster and
+
+
+more pragmatic to do it in a kind
+
+
+of in that kind of way the only thing
+
+
+you have to take care about is that uh
+
+
+this piece of code ideally shouldn't be
+
+
+replicated so it should be isolated then
+
+
+it's fine so I can actually yes I will
+
+
+probably share on Twitter like the
+
+
+repository where you can see this
+
+
+approach in practice uh I should have
+
+
+been added it here so um yeah I will
+
+
+show it I will I will share it great
+
+
+thank you uh and one more question do
+
+
+you find this to be an extension to what
+
+
+to the patterns you wrote in your
+
+
+painless Race book like the shapes for
+
+
+example uh the shapes the shape I don't
+
+
+think it was a good it was a nice name
+
+
+essentially it's just a form and this is
+
+
+kind of thing this is the evolution of
+
+
+what I was what I wrote in my book and I
+
+
+need to basically rewrite it and uh yeah
+
+
+but forms is a very like unfortunately I
+
+
+wasn't able to add it to my talk because
+
+
+working with forms is very interesting
+
+
+concept as well I will probably do
+
+
+another talk about it yeah thank
+
+
+you all right uh thanks Ivan for curing
+
+
+this disease ladies and gentlemen Ivan
+
+
+nenko
+
+
+[Applause]

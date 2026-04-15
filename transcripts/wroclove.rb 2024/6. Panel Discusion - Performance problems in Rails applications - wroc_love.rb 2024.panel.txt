@@ -1,0 +1,3847 @@
+all right but now we're start with the
+
+
+performance questions uh so the speakers
+
+
+are the panelists are unprepared and so
+
+
+so am I uh luckily they are experts in
+
+
+that field so uh let's start with the
+
+
+first question uh what are the typical
+
+
+performance problems in Rayos
+
+
+application applications and how do you
+
+
+solve them uh we can start with uh
+
+
+Stephen
+
+
+from your
+
+
+experience
+
+
+so I feel like most
+
+
+people would probably their their minds
+
+
+would go to database bottlenecks how can
+
+
+I make my queries faster um and one of
+
+
+the interesting things I found like
+
+
+doing preparing a talk like this and
+
+
+doing a lot of benchmarks um I was
+
+
+reminded of a fact that I learned years
+
+
+ago and it always slips out of my mind
+
+
+and I want to remind all of you action
+
+
+view is incredibly fast if you're just
+
+
+rendering a view and as soon as you call
+
+
+out to a partial it gets way slower and
+
+
+most of the applications that I have
+
+
+worked in average like maybe three to
+
+
+six layers of partial calls and the Erb
+
+
+engine itself quite fast but the rails
+
+
+Erb to actually go and find those files
+
+
+and like compile them quite slow and I
+
+
+distinctly remember I was running some
+
+
+benchmarks and I was like expecting that
+
+
+all of my right benchmarking apis were
+
+
+going to be slower than my reads because
+
+
+of the linear rights and all this stuff
+
+
+and they were all consistently faster
+
+
+and I looked like what is going on and
+
+
+um sqlite was way faster than action
+
+
+view um and even just introducing I did
+
+
+an experiment I introduced just one
+
+
+partial so I had a index view with I was
+
+
+building a table I pulled out the table
+
+
+Row for each post into one partial and
+
+
+it was
+
+
+40% slower um
+
+
+so sure if you've got really slow
+
+
+queries yeah go and fix them but don't
+
+
+lose sight of your depth of partial
+
+
+layers right like got the view and it's
+
+
+called I've got the header partial and
+
+
+the header partial I've got the left
+
+
+partial and the right partial and the
+
+
+left partial I'm calling the button
+
+
+partial that is killing your
+
+
+application's
+
+
+performance um okay uh stepen focus on
+
+
+views so let's imagine that now that you
+
+
+don't have any views let's talk only
+
+
+about apis and and keeping aside queries
+
+
+that sometimes of course you can improve
+
+
+of index and everything um I think it's
+
+
+pretty easy for you to forget what's
+
+
+actually happening on those black boxes
+
+
+and this something that's need to should
+
+
+be very careful when using um activ
+
+
+records and Frameworks in general so
+
+
+this why this kind of talks like the one
+
+
+Stephen did like going to the Deep
+
+
+details of what's going on is important
+
+
+because it's super common for you to
+
+
+Simply load a big collection in memory
+
+
+and it's super common SC uh when I do
+
+
+code reviews with my team it's pretty
+
+
+common oh please replace this each with
+
+
+a find each know you're changing five
+
+
+letters but instead of you loading 1,000
+
+
+items in memory and it iterates on them
+
+
+you're doing it on a pated z and you're
+
+
+not going to explode so I think that
+
+
+this uh critical minds of really
+
+
+understanding of what high level
+
+
+languages are doing because they're
+
+
+super easy to write and they almost read
+
+
+like P code but it's important to
+
+
+remember that they're actually doing
+
+
+stuff and it's important to understand
+
+
+what they are doing sometimes it's very
+
+
+tiny changes on the way that things are
+
+
+written that make a big difference on
+
+
+what's actually being what's actually
+
+
+being run and there's a second thing
+
+
+that add which is also um okay this
+
+
+things take a long time let's run
+
+
+everything as background jobs and then
+
+
+you start serializing a big object and
+
+
+putting it to run in backgrounds and
+
+
+then suddenly you have your background
+
+
+queue running slower than if it was
+
+
+running foregrounds because you're
+
+
+spending most of your time serializing
+
+
+objects so um so this is just have this
+
+
+critical minds of like know exactly what
+
+
+you are using and to use the two the
+
+
+best way running a background job pass
+
+
+just you know numbers IDs reload your
+
+
+objects from from insides and know know
+
+
+that sometimes un serializing a big
+
+
+object in memory is going to be slower
+
+
+than actually just running a database
+
+
+query to load it so those are two other
+
+
+cases that I remember that I've been
+
+
+through that I would add to what stepen
+
+
+said all right ma let me repeat the
+
+
+question for you what are typical
+
+
+performance problems in race
+
+
+applications how do you solve them
+
+
+that's it works that's a right question
+
+
+I think that my colleagues answered most
+
+
+most of them um what I
+
+
+saw uh up to date is mostly related to
+
+
+fetching too much data or doing to many
+
+
+queries uh to the uh to the database
+
+
+what could I could add it's a very
+
+
+specific uh case but sometimes you need
+
+
+to fetch data from two
+
+
+sources and when you do this you need to
+
+
+basically you need to re reimplement
+
+
+some database algorithms on your
+
+
+application Level because for instance
+
+
+you need to join the data from the two
+
+
+from two sources because I don't know
+
+
+you have
+
+
+uh uh transactions from one source and
+
+
+users from another source and you want
+
+
+to match them and if you do a nested
+
+
+loop it's rather slow and if you employe
+
+
+hash you basically start uh implementing
+
+
+database uh that's one thing that could
+
+
+happen another thing is that if you
+
+
+fetch uh a lot of data let's say from
+
+
+elastic and you keep it keep it in
+
+
+hashes um and you want to add just a few
+
+
+fields to those deeply nested hashes
+
+
+this operation is uh rather costly
+
+
+that's our experience uh I spend once uh
+
+
+half a day trying to optimize such an
+
+
+update fortunately we were able to make
+
+
+a bypass by talking to the product and
+
+
+and showing less data instead of of
+
+
+trying to optimize it yeah that's that's
+
+
+actually one of the common problems that
+
+
+I also uh noticed in the industry uh and
+
+
+uh maybe I'll just uh pop up one more
+
+
+question of uh based on what you said so
+
+
+what do you think about the models that
+
+
+we have that are often driven by the
+
+
+framework that we use that most of us us
+
+
+love and U how do you see the this
+
+
+correlation of the growing models for
+
+
+example a user class that has
+
+
+57 columns in the database does it
+
+
+affect performance from your perspective
+
+
+I'm uh asking all of you by the way um
+
+
+and uh what goes on top of that is that
+
+
+we also have to do many joints sometimes
+
+
+to S uh show some more sophisticated
+
+
+page uh some report and so on how does
+
+
+that um how what do you think about that
+
+
+problem in general H if I may start if I
+
+
+really need to show very specific data
+
+
+for or use very specific data let's say
+
+
+I have a background job that shows data
+
+
+to an external
+
+
+service I'm very okay of not using
+
+
+models or hacking the models uh fetching
+
+
+the data that I need wrapping it in a
+
+
+structure or anything simple and then
+
+
+sending it way because I don't use I
+
+
+don't need all
+
+
+the nine cities that active record
+
+
+provides um when I have like a regular
+
+
+business logic when I need to actually
+
+
+use them method uh methods defined on
+
+
+models it's a different case um then I I
+
+
+would probably think but actually I I'm
+
+
+not very sure that the fact that there
+
+
+are
+
+
+fields or 60 Fields is a that big of a
+
+
+problem yeah I think to add to
+
+
+that
+
+
+I this is advice that I'm giving my past
+
+
+self 8 years ago which just like to
+
+
+really really focus on pragmatics and to
+
+
+deep deeply think about like what
+
+
+situation am I in like what is the uh
+
+
+the context of this problem
+
+
+and to not fall into the Trap of trying
+
+
+to find a one siiz fits-all solution um
+
+
+so are there situations where like the
+
+
+difference between 100 microsc and 1
+
+
+millisecond is actually important to the
+
+
+business yes there are are there many of
+
+
+them no there aren't um and adding a
+
+
+whole bunch of
+
+
+complexity uh into a situation that
+
+
+doesn't actually need need it is going
+
+
+to cause you more pain than not um so I
+
+
+think like on
+
+
+average most problems no I don't think
+
+
+that models are affecting performance um
+
+
+but it requires really knowing the
+
+
+problem that you're working in like what
+
+
+your performance budget is why it is
+
+
+that way um doing enough benchmarking to
+
+
+see like you know what is the cost of
+
+
+having like um this extra column um
+
+
+should I for example one one decision
+
+
+I've made in some apps is like should I
+
+
+pull out a Json payload column into a
+
+
+separate table so that I only retrieve
+
+
+it when I actually need it and it's like
+
+
+a a polymorphic table to anything or do
+
+
+I just leave it on those tables um and I
+
+
+did it once because I thought that's
+
+
+smart you know why load extra data and
+
+
+it was a massive pain in the ass uh and
+
+
+saved me a millisecond like it it in
+
+
+that app it wasn't actually useful and I
+
+
+was annoyed at my past self within 3
+
+
+months yeah i' i' show that that first
+
+
+maybe take a step back because in many
+
+
+situations to actually question and do
+
+
+some neot negotiation even with front
+
+
+end and API clients or whatever in many
+
+
+cases you don't necessarily need to load
+
+
+everything at own so I don't think that
+
+
+the data structure necessarily if it's
+
+
+growing too much is the problem but it's
+
+
+more how you use it so you know there
+
+
+are Str is on the API client side to
+
+
+build build and load things on demand
+
+
+and not everything at on and you should
+
+
+probably have room to discuss those
+
+
+approaches because this is after all
+
+
+it's user experience as well so uh
+
+
+loading things um um on demand is super
+
+
+important and sometimes I bring those
+
+
+things up because I've worked a long
+
+
+time on the front and side as well with
+
+
+react um but when you do need to load uh
+
+
+all those things there in some cases
+
+
+adding a new column is going to be f
+
+
+because it can be a counter cach column
+
+
+for example that's going to save you um
+
+
+a lot of time doing some calculation but
+
+
+again not even counter cach should be
+
+
+treated as some kinds of super BS that
+
+
+always work um sometimes it'll be faster
+
+
+to just do that calculation as you need
+
+
+so measuring and really understanding
+
+
+the problem at hand and you may find the
+
+
+right solution um I usually I say my
+
+
+answer to almost all those things is
+
+
+depends and understanding the context
+
+
+which includes budget um and and and
+
+
+other things is super important as well
+
+
+but imagine that at some point the
+
+
+database grows too much in terms of
+
+
+number of records and you do a bunch of
+
+
+queries there that really gets really
+
+
+really huge which may be a good problem
+
+
+to have you know if it's this means that
+
+
+your business is growing or because
+
+
+you're restoring more than what you
+
+
+should um I'm just mentioned that in the
+
+
+past working on a very big application I
+
+
+had to choose partitioning so just to
+
+
+mention here and one solution in many
+
+
+cas partition is not even needed you
+
+
+know in the way that databases are
+
+
+implemented if you have a good like
+
+
+index that you can isolate your data it
+
+
+can already work totally fine um but uh
+
+
+but there is a solution if things get
+
+
+really really really big but I think
+
+
+there are many other steps that you can
+
+
+take before I get into that
+
+
+point all right uh thank you do we have
+
+
+any question from the
+
+
+audience okay not uh all right let's go
+
+
+to the second question uh the second
+
+
+question is how to triage performance
+
+
+problems which are the best to be solved
+
+
+first uh we can start with Mach this
+
+
+time I think that that I'll just repeat
+
+
+I I just second what KY said it's
+
+
+um to trash it I I guess that we need to
+
+
+talk to the business uh what's their
+
+
+pain and if they feel a pain that
+
+
+something is working to too slow that's
+
+
+the first thing to do um but there is a
+
+
+caveat at least in my experience it's
+
+
+very easy to Tech talk them and they
+
+
+complain after a months of complaining
+
+
+oh the site is too slow and listening
+
+
+well the site is slow because we show a
+
+
+lot of data right because we we have a
+
+
+complex
+
+
+application um they stop complaining and
+
+
+sometimes it's uh it's our call uh to
+
+
+realize that something is wrong um H my
+
+
+my euristic is that if I work on
+
+
+something on a part of
+
+
+application at there is a request that's
+
+
+slower than a second at least I take a
+
+
+look because maybe it's an easy
+
+
+win uh so that's my first answer uh
+
+
+leave the place uh in a better shape
+
+
+that you uh uh that you show it that you
+
+
+that you seen
+
+
+it there was one interesting thing in
+
+
+what you said so you mentioned that um
+
+
+that that the page may be complex and
+
+
+that you need to fetch a lot of data
+
+
+what's the biggest issue in that problem
+
+
+is that the amount of data we're
+
+
+fetching the way we structure our SQL
+
+
+query is that the rendering part from
+
+
+your perspective uh from my perspective
+
+
+um I do work on application that shows a
+
+
+lot of data because we we have complex
+
+
+analytics
+
+
+so that could be slow
+
+
+um the biggest issue is that we uh that
+
+
+I've seen so far or the most common is
+
+
+that we load too much data we load data
+
+
+that's not required because uh it's
+
+
+cheaper not to implement pagination for
+
+
+instance because I don't love it's not
+
+
+just about showing page and the number
+
+
+of pages but if you implement it you
+
+
+need to add a search or you need to do
+
+
+the proper sorting on the database so
+
+
+it's more expensive so it's an easy cost
+
+
+cost to
+
+
+cut uh and then your application starts
+
+
+to be very slow because somebody decided
+
+
+that they they would deliver deliver
+
+
+their ticket uh without pation and it's
+
+
+it will be okay so yeah I think that the
+
+
+most common thing I've seen so far is is
+
+
+about showing sending too much data at
+
+
+once okay thank you uh Stephen what's
+
+
+your perspective the first question on
+
+
+the the latter
+
+
+one yeah so for triaging performance
+
+
+issues
+
+
+I strongly
+
+
+recommend
+
+
+um I'm going to use business language
+
+
+I'm already annoyed um time boxing
+
+
+exploration right so like a problem
+
+
+comes in and the goal is to find the
+
+
+highest leverage opportunities right
+
+
+where can I put in an hour of work and
+
+
+like get a big performance boost and
+
+
+it's really especially with performance
+
+
+like it's it's often quite unintuitive
+
+
+and our guesses are often
+
+
+wrong but if we just try to do the full
+
+
+fix like the optimization it you know
+
+
+sometimes it can take hours it's really
+
+
+useful and you can get
+
+
+quite good at it um and to get to a
+
+
+place where like you can take 10 to 30
+
+
+minutes to just pop in and get a sense
+
+
+of like okay could I spend two hours and
+
+
+save a second here or is it going to
+
+
+take me 5 days to save 100
+
+
+milliseconds and if you
+
+
+take the time to get decently fast at
+
+
+like that kind of exploration to triage
+
+
+like okay where let me actually
+
+
+concretely find high leverage
+
+
+opportunities and then you go and
+
+
+optimize three High leverage places like
+
+
+that is an incredibly valuable use of
+
+
+time um so those like quick Explorations
+
+
+right like just take a bunch of them and
+
+
+and and check them out uh on the second
+
+
+question I'll just say I really don't
+
+
+know and I'm not trying to be uh a shill
+
+
+but I've never had performance
+
+
+bottlenecks at the database layer guys
+
+
+it's so fast these things are operating
+
+
+in micros seconds it's like what a gift
+
+
+uh so for me it's always the view layer
+
+
+but you know for everyone else you're
+
+
+sending queries over the network like
+
+
+animals um so maybe that's your problem
+
+
+I don't know for me it's never been mine
+
+
+uh that's because we have more than a
+
+
+megabyte of
+
+
+[Laughter]
+
+
+data uh okay but uh you mentioned uh for
+
+
+in the second question I mean uh in the
+
+
+first in the other one that uh you not
+
+
+will not optimize for 1 second or 100
+
+
+milliseconds but uh let's change the
+
+
+perspective a little bit what if we have
+
+
+a page that is timing out for
+
+
+certain for certain customers that are
+
+
+annoyed by by that and are willing to
+
+
+quit for
+
+
+example and let's say that those are
+
+
+very expensive Enterprise customers that
+
+
+we cannot afford to
+
+
+lose fix
+
+
+that how
+
+
+like how do you how do you triage it I
+
+
+mean that that's as much an art as it is
+
+
+a science but
+
+
+um I remember there's another question
+
+
+about tools but like there's there's a
+
+
+few different General classes of tools
+
+
+so the low testing tool that I was using
+
+
+OHA um pretty simplistic um it's like
+
+
+fancy curl um but it's going to give you
+
+
+a sense of from the response side like
+
+
+your
+
+
+general um response times uh and
+
+
+then the on the other side like having
+
+
+some kind of monitoring um you know Kyo
+
+
+gave a lot of great examples that aren't
+
+
+just specific to graphql like you can
+
+
+plug those tools into any rails
+
+
+application um and then it takes a
+
+
+little bit of practice to just find like
+
+
+you know hop in hop into a rails console
+
+
+and try a few things out get a sense of
+
+
+what kinds of variables make sense to to
+
+
+tweak see what kind of responses you're
+
+
+getting you can just use the Ruby like
+
+
+Benchmark block to to start to get a
+
+
+little bit of a sense of where things
+
+
+are and then you just dive deeper as you
+
+
+find
+
+
+signal okay thank you
+
+
+K hello sorry um yeah uh to add to that
+
+
+first understanding the business is
+
+
+super important because depending on
+
+
+your public and what you're trying to
+
+
+achieve Where You Are operating who are
+
+
+your users 100 MCS is fine depending on
+
+
+the other user case one MC may be not um
+
+
+so understand that is super important
+
+
+understand the differ layers also as
+
+
+well because when it gets to the backend
+
+
+sides maybe it's already too late there
+
+
+is there are opportunities for you to
+
+
+optimize that on a layer above on the
+
+
+front end on requesting less data for
+
+
+for for example so I remember one time
+
+
+that we were running a project in Togo
+
+
+and our web application with you know a
+
+
+few kilobytes of bundled JavaScript it
+
+
+would take a long time to load in a
+
+
+place where the network is very poor so
+
+
+why mind about you know those queries
+
+
+are taking that time if not even the
+
+
+first bundle that loads your application
+
+
+is able to be rendered in the browser so
+
+
+understanding on all the steps and how
+
+
+to optimize each of them before maybe
+
+
+optimizing the wrong place I think it's
+
+
+super important this is why all those
+
+
+different tools um that operate at
+
+
+different layers are important there
+
+
+will be no single tool that you able to
+
+
+measure everything from you know from
+
+
+the um most user faing interface to the
+
+
+to the lowest level and to be sure that
+
+
+you are optimizing on the right place um
+
+
+if um performance optimization and
+
+
+monitoring is not something that's
+
+
+happening on a ongo basis during your
+
+
+development process probably the easiest
+
+
+way to start is as step was saying try
+
+
+to find the low hanging
+
+
+and um uh you know like why optimize a
+
+
+query that's taking 3 seconds but it's
+
+
+doesn't represent much of your request
+
+
+it's not impacting those many users so
+
+
+find that so try to find exactly those
+
+
+easy wins where you can have biggest
+
+
+impacts on users with lower efforts this
+
+
+way you can you know have some thing to
+
+
+be shipped faster and having some
+
+
+impacts before um and uh yeah missioning
+
+
+tools because this was the the original
+
+
+question right I think performance K go
+
+
+um alone it needs to always be connected
+
+
+to metric so you need really and what
+
+
+are the most used features because maybe
+
+
+the solution of performance problem will
+
+
+be deprecated this feature you know it's
+
+
+it just exploded and no one is really
+
+
+caring about it so why why you need to
+
+
+to to maintain that so we have a mantra
+
+
+in our team that the best codes is no
+
+
+code so and like focus on deleting codes
+
+
+not on writing codes especially when
+
+
+you're are maintaining in old uh
+
+
+database so maybe sometimes the the the
+
+
+fix to the performance probably will be
+
+
+on redo this thing or get rid of it do
+
+
+it in a different way and not
+
+
+necessarily try to fix it um so the
+
+
+tools I showed some of them they operate
+
+
+at a different levels we've been pretty
+
+
+successful with honeycomb most of our
+
+
+stuff runs on AWS so we rely a lot on a
+
+
+tools as well um Integrations with
+
+
+cloudwatch for alerting and monitoring
+
+
+and up time that can um also track
+
+
+performance from different regions you
+
+
+know so you don't have this problem
+
+
+where a user somewhere in the world is
+
+
+reporting oh this thing is not loading
+
+
+for me and you have the worst answer
+
+
+that is that is oh it's loading fine
+
+
+here so where is the problem uh so
+
+
+having tools that are able to measure
+
+
+performance from different parts of the
+
+
+of the world is also important to help
+
+
+you debug those those issues um more
+
+
+easily so you have more more context to
+
+
+work on them all right thanks uh this a
+
+
+little bit forward to the next question
+
+
+uh so which tools do you use to monitor
+
+
+triage and fix performance problems uh
+
+
+let's start with the tools for the
+
+
+database uh maybe anything else that you
+
+
+haven't mentioned yet in your
+
+
+presentation or uh in your previous
+
+
+answer yeah so continue I saying um so
+
+
+hyab um time cloud. CHS in general um
+
+
+for the database we use PG analyzer to
+
+
+generate some insights on database
+
+
+performance it can you know just uh send
+
+
+some insights on some easy wins like
+
+
+sometimes it's really um it um sometimes
+
+
+we tend I think to overlook the simplest
+
+
+thing and we try to think about the most
+
+
+complex and complicated reasons for
+
+
+things and sometimes really you may
+
+
+forget to add in in extra column it
+
+
+happens so uh so those tools um help
+
+
+with that as well um PG analyzer for
+
+
+that um specifically for graphql um as I
+
+
+mentioned on Apollo is is uh is useful
+
+
+to generate some data
+
+
+grafana um yeah just to mention a few
+
+
+but I'll let my colleagues add to that
+
+
+okay thank you Ma same question
+
+
+um right now we are using open Telemetry
+
+
+it means that we write uh statistics
+
+
+performance statistics to the logs and
+
+
+then there is a um a server for metrix
+
+
+consuming them there are several uh
+
+
+servers that can use it the good thing
+
+
+is that you don't have to change
+
+
+anything your code if you don't like
+
+
+your uh metrix platform you switch the
+
+
+platform in the past of course I use
+
+
+data do and new
+
+
+but you know there are very lengthy blog
+
+
+posts about the pricing of those tools
+
+
+so uh you need to know if you you can
+
+
+afford
+
+
+them one thing that wasn't mentioned uh
+
+
+by K is that when we were optimizing a
+
+
+crucial uh craft ql uh based API we
+
+
+added our custom Telemetry uh uh custom
+
+
+instrumentation and for every request
+
+
+that was sent there weren't that many so
+
+
+we can we we were able to afford this we
+
+
+were logging uh some stats including the
+
+
+uh the request time and because of this
+
+
+it we were logging it on on the client
+
+
+side and because of this uh we were able
+
+
+to pinpoint the slow requests we were
+
+
+able to check them in p uh measure them
+
+
+properly aggregate them and uh and
+
+
+triage um by saying okay our next slow
+
+
+request is this one and because we were
+
+
+logging everything including the pams uh
+
+
+we were able to reproduce the exact slow
+
+
+request locally because we were using
+
+
+the same prams and we were optimizing
+
+
+them locally uh it was great because the
+
+
+feedback loop loop was very tight uh we
+
+
+weren't guessing because after adding
+
+
+some optimizations we were able to do
+
+
+the um acceptance test
+
+
+locally all right yeah I think that
+
+
+these are really great answers for like
+
+
+I don't know big meaningful apps I'll
+
+
+take the perspective of uh smaller less
+
+
+meaningful apps um because there's lots
+
+
+of them too and they're important and
+
+
+you can't uh you you certainly can't pay
+
+
+for data dog um so
+
+
+uh
+
+
+I have been using something uh
+
+
+personally and I'm still in the process
+
+
+of trying to package it up as a gem
+
+
+but um rails is pretty well instrumented
+
+
+um a lot of there's a lot of active
+
+
+support notifications that are woven
+
+
+throughout all of rails um so in the
+
+
+biggest small app that we have at work
+
+
+um
+
+
+I am just subscribing to active support
+
+
+notifications and piping those into a
+
+
+sqlite database and then I have a route
+
+
+uh that just basically shows me that
+
+
+sqlite database and uh as I go I'm like
+
+
+I kind of want to do a simplistic graph
+
+
+of this part of it um but I I think
+
+
+that especially as you're getting
+
+
+started
+
+
+um leaning into like how far can I get
+
+
+with what the framework already gives me
+
+
+and like as I just started reading about
+
+
+it I'm like wow there's there's a lot of
+
+
+instrumentation in rails that it
+
+
+actually gives you a lot of information
+
+
+um if you just grab it and put it
+
+
+somewhere and even if you need to or
+
+
+want to use postgress as your main
+
+
+database like that's probably a
+
+
+reasonable use for sqlite to just sort
+
+
+of like have a little pocket of
+
+
+analytics that you uh map to a route um
+
+
+I think that there are those kinds of
+
+
+minimalist options for when you're just
+
+
+starting out or if you have smaller
+
+
+projects or sort of internal back office
+
+
+projects um but
+
+
+for business I I would just say their
+
+
+answers yeah I would not do this because
+
+
+you said about this publishing this
+
+
+endpoint with uh with stats it's is
+
+
+basically what you do when you have
+
+
+promes because you you publish your
+
+
+stats in prus read them you probably
+
+
+have prome because your infra guys set
+
+
+them up for them so ask them nicely to
+
+
+reuse it and publish metric there and
+
+
+use all the nities related to Prometheus
+
+
+grafana and and stuff it's it's very
+
+
+useful when you use it last point for um
+
+
+those tools that come for free that you
+
+
+can get started and get useful sites um
+
+
+for background processing particular
+
+
+sidekick itself has a pretty good
+
+
+Insight interface that comes with it so
+
+
+you can see the cues latency and that
+
+
+kind of stuff and for regular rails
+
+
+background jobs active support
+
+
+notifications are surprisingly useful on
+
+
+giving insights on where are the botton
+
+
+X so you can definitely start with
+
+
+those uh okay uh do you have any other
+
+
+tools recommendations when it comes to
+
+
+solving performance issues uh with CPU
+
+
+memory IO uh Network latency or uh sorry
+
+
+not Network lat see just a network or
+
+
+front end generation specifically if we
+
+
+have too large uh
+
+
+Dom start with
+
+
+Stephen I don't think
+
+
+so I haven't done a lot of that
+
+
+optimization work I don't have like uh
+
+
+particularly clever or smart answers so
+
+
+I'm not going to make up an attempt at a
+
+
+clever or smart answer I bet that they
+
+
+do
+
+
+though um the next layer the we can talk
+
+
+about are the profilers um after some
+
+
+break I got back to profilers that we
+
+
+have in Ruby community and FKS they are
+
+
+great and just check Speedos scope and
+
+
+just check arpr you can get very nice
+
+
+graphs very nice stats uh with a very
+
+
+little effort and you're able
+
+
+to uh when you decide which endpoint you
+
+
+want to or which spec you want to
+
+
+optimize
+
+
+you can get very detailed stats of which
+
+
+methods takes the most of time and focus
+
+
+there uh just to avoid
+
+
+guessing um yeah same I I haven't been
+
+
+doing a lot of like front end profile
+
+
+for example
+
+
+but hello it's back think um some that
+
+
+we care about Reus bundle size as as I
+
+
+mentioned and on the the front end word
+
+
+it's so easy to do an npm install and
+
+
+add a dependency for which you need one
+
+
+function and then you're adding 100
+
+
+kilobytes to your turbon so doing some
+
+
+kinds of tree shaking and um tools to
+
+
+audit the dependence the dependencies
+
+
+that you're adding to the code
+
+
+because
+
+
+um um and it's the only thing that would
+
+
+add to that but in general for uh for
+
+
+performance um not tools that we use but
+
+
+I think that in many cases where I se in
+
+
+practice that it's hard to reproduce
+
+
+some of the scenarios um so that you can
+
+
+really know if you're really solving the
+
+
+problem so um trying to like how are so
+
+
+this is why like logging the parameter
+
+
+values is important for you to be able
+
+
+to reproduce and we use Sentry a lot for
+
+
+her catching in all our layers from the
+
+
+front end to the to the back end and
+
+
+it's useful to includes information not
+
+
+only for debugging but also
+
+
+for uh profiling performance issues so
+
+
+um try to be sure that you can improve
+
+
+your two kits in order to be able to
+
+
+reproduce the problems and not only to
+
+
+fix them otherwise you never know how if
+
+
+you really fix them you needed to push a
+
+
+fix and cross your fingers that's all
+
+
+and just to say the name um I haven't
+
+
+used it to like actually solve a
+
+
+production uh performance issue but
+
+
+there's a new profiler from John
+
+
+Hawthorne from the rails Corps called
+
+
+verer um v r n i e r um which I think
+
+
+he'll talk about in his keynote at rails
+
+
+comp um but he's been doing a lot of
+
+
+work on that and and trying to make that
+
+
+a uh particularly useful tool um so in
+
+
+addition to those profilers which are
+
+
+very much battle tested um I've I've
+
+
+watched a couple of his live streams on
+
+
+it but I wanted to at least if you
+
+
+haven't heard of it you should hear of
+
+
+it um and I think it's definitely worth
+
+
+checking out if you need a
+
+
+profiler and remember you heard about
+
+
+that here uh all right next question
+
+
+what would be your her istics um when to
+
+
+finish performance optimizations right
+
+
+because um cost is also important and as
+
+
+you already mentioned few times uh we
+
+
+cannot we we need to make a decision
+
+
+right if we want to make uh say 50% of
+
+
+optimization and then just stop and say
+
+
+okay it's good enough versus just going
+
+
+bananas and spending weeks to get this
+
+
+perfect solution that doesn't exist what
+
+
+are your characteristics uh we can start
+
+
+with Stephen yeah so this goes back to
+
+
+what I was saying before like you you
+
+
+have to Define uh performance budgets um
+
+
+there's there's maybe not even a lot of
+
+
+value and trying to do a lot of
+
+
+performance optimizations before you
+
+
+have done that in like hand
+
+
+conversations with the rest of your team
+
+
+had conversations with um people from
+
+
+product had conversations with people on
+
+
+the business side
+
+
+um to get some general agreement right
+
+
+like do we
+
+
+want you might say if we have a regular
+
+
+web application might say we want every
+
+
+single page to be below 300 milliseconds
+
+
+or maybe for your application you say
+
+
+these Pages need to be below 100
+
+
+milliseconds but those pages can be up
+
+
+to a second um or like it it really can
+
+
+vary a lot um but if you start off with
+
+
+those conversations and you actually
+
+
+have um some defined and agreed upon
+
+
+budgets it makes this question actually
+
+
+now much easier you say like okay are we
+
+
+um under budget or are we not and if
+
+
+we're not we've made an agreement that
+
+
+will be under it so we have to do the
+
+
+work to get under it um and if you're
+
+
+really really struggling like to to get
+
+
+under that budget then you can start
+
+
+having pragmatic conversations say hey
+
+
+remember when we had that conversation
+
+
+and we agreed every single page would be
+
+
+below 100 milliseconds I think I was
+
+
+stupid to agree to that and let me tell
+
+
+you why and I would like to
+
+
+renegotiate um and that's perfectly
+
+
+that's a very reasonable thing to do
+
+
+context change you get more information
+
+
+but um performance budgets are really
+
+
+valuable it's a valuable concept to to
+
+
+bring into this kind of
+
+
+conversation yep that sounds very good
+
+
+um I think that's one of the biggest
+
+
+waste of ources can be trying to start
+
+
+doing performance optimization before
+
+
+even defining any slas with your team so
+
+
+if you don't have service level
+
+
+agreements what can like anything is
+
+
+fine right or um or you don't know
+
+
+exactly where you need to put most of
+
+
+the energy so I would focus more first
+
+
+and starting on defining those slas with
+
+
+the teams product business see what's
+
+
+actually feasible technically and what's
+
+
+actually fits the budgets that you have
+
+
+and then you go into into into the
+
+
+tooling otherwise you may be putting
+
+
+energy on things that are not even
+
+
+needed and not even perceivable
+
+
+depending on the context that you are
+
+
+working hey imagine that there is
+
+
+something that happens in the background
+
+
+of your application you got it blazing
+
+
+fast but the user doesn't even notice
+
+
+because you know it's happening it's
+
+
+just updating one simple component of a
+
+
+page is is synchronously so um um
+
+
+understanding those have those
+
+
+agreements defined across all the teams
+
+
+and then get into work on them um I
+
+
+think is the most this is the only thing
+
+
+that I think is a Comm it's common to
+
+
+almost all the cases you need to have
+
+
+those slas defined defined budget
+
+
+defines and then depending on any
+
+
+combinations of those there are
+
+
+different approaches to
+
+
+them let me sorry let me ask you about
+
+
+uh one more thing so imagine that I'm a
+
+
+business and I have no clue about what
+
+
+is
+
+
+SLA or other stuff you mentioned and I
+
+
+have this very important page it's slow
+
+
+I want it fast and I want it
+
+
+now how do we talk you want it now I
+
+
+want it fast and I want it now
+
+
+yesterday cash the whole
+
+
+page updated on every updates but it's
+
+
+everything cash on cloud FL and no I
+
+
+already heard about cash and I know it
+
+
+introduced other
+
+
+problems um no just uh okay how would
+
+
+you um how would you negotiate with uh
+
+
+such a person because it's uh not always
+
+
+our business is educated right we
+
+
+sometimes we just talk with people that
+
+
+have no idea what's SLA why we need some
+
+
+budget they just want it to work they
+
+
+just want it to work good right yeah the
+
+
+I mean there is no easy answer to that I
+
+
+think there is a lot that goes into
+
+
+culture and education of a team and
+
+
+sometimes it's going to take a while to
+
+
+get to a points where those
+
+
+conversations can really happen at a
+
+
+level that people really trust each
+
+
+other and what is is going on there um
+
+
+but uh but it's better to have those
+
+
+conversations on the beginning and set
+
+
+expectations early in the process even
+
+
+if it's going to create some internal
+
+
+stress at that time then just agree to
+
+
+whatever comes and then have everything
+
+
+down and clients clients complaining
+
+
+it'll be even worse so setting
+
+
+expectations on the beginning even if it
+
+
+takes some work
+
+
+negotiation education and building a
+
+
+more mat cuture in a team it's bur to
+
+
+invest time there while everything is
+
+
+internal when after everything explodes
+
+
+in the face of
+
+
+users all right thanks M um I agree to
+
+
+with the principle of of uh performance
+
+
+budgets um still I haven't seen them in
+
+
+the wild so if you could show me them
+
+
+I've seen them in the zoo right in blog
+
+
+posts I haven't seen them in the wild so
+
+
+if you can show me them I'll be happy to
+
+
+to see them uh I believe that many of us
+
+
+are in the organization that don't have
+
+
+the the uh defined performance budget um
+
+
+and it's a great thing to to push
+
+
+towards them but what to do before we
+
+
+get there and our application is slow
+
+
+you
+
+
+know if we take the this craftsmanship
+
+
+approach that you click on a page and
+
+
+you think think oh my cow this is so
+
+
+slow I just can't leave and saying I'm
+
+
+working on this
+
+
+application um then uh this ad hoc
+
+
+approach while getting to the
+
+
+budgeting uh is just this the the fact
+
+
+of life and what I do then is that I
+
+
+declare I call my shots I declare
+
+
+publicly I need to optimize this page
+
+
+and I will spend half a day or a day on
+
+
+optimizing this and uh if I in the new
+
+
+team I say them
+
+
+when I uh get to the end of the time box
+
+
+yell at me that I have to finish because
+
+
+otherwise I
+
+
+won't uh or I'm I say to myself that's
+
+
+my time box I will finish it by then or
+
+
+I'll just drop it because yeah it's it's
+
+
+an endless work so the answer to the
+
+
+original question is where to finish
+
+
+current optimization task uh when you
+
+
+run out of time and this time should be
+
+
+defend defined ahead because uh
+
+
+performance optimization could be an
+
+
+endless effort so you can safely do it
+
+
+in an iterative manner this week I'll
+
+
+test this hypothesis next week I'll test
+
+
+another hypothesis and without stopping
+
+
+the world I'm making the app a bit
+
+
+better every week or every
+
+
+Sprint yeah and just to add to that
+
+
+because that is a very good point um we
+
+
+certainly do not have like a knowledge
+
+
+based page with a table that has page
+
+
+and then like agreed upon SLA um very
+
+
+true it's it's much fuzzier and it's
+
+
+it's worth um making that very explicit
+
+
+that it's often much fuzzier and it's
+
+
+much more about having conversations and
+
+
+having this kind of language and and
+
+
+having General agreement like so like
+
+
+our main application we have um a portal
+
+
+which is for customers from from the
+
+
+companies we have a portal for testers
+
+
+and we have a portal for internal
+
+
+workers um
+
+
+and we have a lot of more than one
+
+
+second load pages in the internal
+
+
+employee portal uh and for the tester
+
+
+portal and for the customer portal we're
+
+
+like much more uh attentive and the
+
+
+customer portal we're more more
+
+
+attentive to right um and
+
+
+so there are fuzzy and rough performance
+
+
+budgets of like um and this goes back to
+
+
+education and culture and like having
+
+
+some of these conversations to say like
+
+
+you
+
+
+know human eye can't even tell the
+
+
+difference between one millisecond and
+
+
+100 milliseconds like we're if we're
+
+
+below 100 milliseconds on the customer
+
+
+portal we're doing really good um if
+
+
+we're above a second we're doing really
+
+
+bad uh so call us out if it's above a
+
+
+second um and the the craftsmanship
+
+
+approach is also um an important part of
+
+
+culture and just like especially if you
+
+
+are u in some degree of leadership in
+
+
+the team uh demonstrating that like
+
+
+leading by example to say like I care
+
+
+about things and also showing like the
+
+
+right things to care about to say like I
+
+
+don't care about I mean there are
+
+
+certain situations where you should like
+
+
+I want to shave off 10 milliseconds on
+
+
+this query but so like this was really
+
+
+annoying as for me as a user to like
+
+
+watch the page load for over a second
+
+
+and um I want to have this empathetic
+
+
+user Centric mindset and I want to
+
+
+demonstrate like I care enough about it
+
+
+to set aside the work and also to
+
+
+demonstrate here's how you communicate
+
+
+with your team and with the business to
+
+
+say I'm going to make a tradeoff right
+
+
+now to stop doing this work to do this
+
+
+work I'm going to do it responsibly
+
+
+within a Time budget like I'm not just
+
+
+going to spend the next two weeks like
+
+
+I'm going to explore see if I can do it
+
+
+in three hours if I can find a high
+
+
+leverage solution here like these are
+
+
+the kinds of things it's it's much
+
+
+fuzzier and yeah you're never going to
+
+
+have like this perfect table but you can
+
+
+start to bring that into your culture
+
+
+and as that spreads like it really is
+
+
+quite remarkable how well you can end up
+
+
+as a a team and as a product if you just
+
+
+sort of um build the habits of talking
+
+
+about these things caring about these
+
+
+things caring about them from the right
+
+
+perspective of like what's actually
+
+
+happening and experienced by the users
+
+
+who are your users where are they at
+
+
+like those are the those are the really
+
+
+valuable
+
+
+parts thank you um so another question
+
+
+whoever is first can start answering
+
+
+what's your most complex performance
+
+
+problem that you have ever
+
+
+solved I killed production
+
+
+once
+
+
+how
+
+
+completely
+
+
+so
+
+
+uh we were optimizing API right I told
+
+
+you it was a wonderful project and I
+
+
+applied performance optimization but we
+
+
+were switching from rest to graphql I
+
+
+I'm telling the story on some kind of
+
+
+presentation so bear with me
+
+
+um and I noticed that there is there is
+
+
+a security issue with our API and we
+
+
+don't sanitize parameters properly so I
+
+
+sanitize it parameters in both
+
+
+branches and I deployed to production
+
+
+and I we had a very good fish
+
+
+flux uh so I enabled graphql for 10 I
+
+
+don't know for 10% of the traffic to see
+
+
+the impact and something was getting off
+
+
+but I was I believed that it's not me so
+
+
+I didn't care until it
+
+
+exploded uh yeah infra guys solved me uh
+
+
+they reverted my deploy um but what was
+
+
+the point why
+
+
+was um it wasn't complex but was serious
+
+
+I sanitized too much and I removed all
+
+
+the pars from the from the filter and we
+
+
+were fetching data from an external
+
+
+service with sanitized pams we were
+
+
+basically doing select
+
+
+star from the table um joined with some
+
+
+other tables
+
+
+semicolon without the we part so we were
+
+
+loading the classic the whole database
+
+
+to memory then izing it to hashes then
+
+
+serializing it to no I think we didn't
+
+
+get to the point to serialize it to to
+
+
+the
+
+
+network did you did you have to debug
+
+
+that or that was easy to
+
+
+spot um I actually can't really remember
+
+
+anything I did more than two years ago
+
+
+if if six months ago but um genuinely
+
+
+probably the whole thing I I stepped
+
+
+through in my talk I I uh have been
+
+
+trying to figure out like where are
+
+
+the hotspots and the pain points in
+
+
+rails applications specifically with
+
+
+sqlite and um I believe it or not I cut
+
+
+a lot out of that talk um around view
+
+
+layer optimization and using different
+
+
+sqlite drivers so I spent um a few weeks
+
+
+really sort of digging into the weeds uh
+
+
+and tried to take as much of the highest
+
+
+leverage um steps and like what I
+
+
+actually was seeing in thinking and like
+
+
+moving my way through in that talk um
+
+
+and if I've done anything more
+
+
+complicated more than two years ago I I
+
+
+genuinely have no
+
+
+idea um yeah I have this problem with
+
+
+memory as well but so maybe there is not
+
+
+the most complex performance problem
+
+
+that I had to deal with but there's this
+
+
+one I remember that was pretty
+
+
+interesting because made the team learn
+
+
+so um we had this big elections project
+
+
+in Brazil
+
+
+2022 and uh our API was connected to a
+
+
+big WhatsApp
+
+
+Channel um so it was receiving a lot of
+
+
+messages at at at the same time there
+
+
+was one end point for text similarity
+
+
+that's called an external machine
+
+
+learning service running as a AWS Lambda
+
+
+function and uh we cared a lot about
+
+
+scaling the Roy's API to handle lots of
+
+
+requests that were coming that was fine
+
+
+but then not this other service which
+
+
+was a python service service um running
+
+
+on LDA which at our general usage it
+
+
+would handle all request is just fine so
+
+
+the raise API would receive a a request
+
+
+make another request to the python
+
+
+service those requests were happening
+
+
+synchronously which is we didn't notice
+
+
+before because it was just you know it
+
+
+was just too fast that you didn't even
+
+
+care but at scale it starts to be to be
+
+
+a problem because and we saw contention
+
+
+in the database connected to the ra
+
+
+service but we didn't saw activity
+
+
+happening on the database so that there
+
+
+are too many connections but no activity
+
+
+on the database this was because the ITP
+
+
+request to the ra service was opening a
+
+
+transaction starting a transaction
+
+
+opening a database connection that
+
+
+connection was opened while the request
+
+
+was made to the other servers which was
+
+
+the one having a scalability problem and
+
+
+that and that connection remains open to
+
+
+the database doing nothing so we saw so
+
+
+other requests were not able to open a
+
+
+connection to the database because the
+
+
+pool was full uh and while the external
+
+
+service was processing so there was a
+
+
+simple solution there of like make the
+
+
+requested external service but close the
+
+
+database connection because this a
+
+
+request is not doing anything in the
+
+
+database we don't even need it but it's
+
+
+going to happen by default um so this
+
+
+was an interesting um performance
+
+
+debugging session when like there were
+
+
+two Services involved database full full
+
+
+with no database activity happening so
+
+
+that was pretty
+
+
+interesting all right thanks uh so it's
+
+
+time for the last question um and there
+
+
+ask questions from the audience so how
+
+
+to deal with the big data sets on the
+
+
+index endpoint that contains many
+
+
+filters for example 20 plus filters that
+
+
+could be mixed in any
+
+
+combination silver bullets
+
+
+only um well it depends
+
+
+we got a consultant yeah uh more
+
+
+seriously it depends how much data you
+
+
+have in many cases it's just enough to
+
+
+use pogress and in other cases use SQ
+
+
+light um with proper
+
+
+index you almost convinced
+
+
+me with proper
+
+
+indexing and to load tested properly on
+
+
+local and on staging and production and
+
+
+to measure of everything and if you out
+
+
+grow it use some kind of secondary index
+
+
+my solution of choice is elastic search
+
+
+but you can use something else and
+
+
+filter there the issue is that sometimes
+
+
+you you would have to maybe join data
+
+
+between elastic and post Cris in app as
+
+
+I said before and it might be a
+
+
+performance
+
+
+bottleneck and yeah I will leave the
+
+
+obvious answer that you should cash
+
+
+everything because yeah I would just
+
+
+index everything properly and you should
+
+
+be okay yeah and just to add a little
+
+
+bit to
+
+
+that I would imagine that um when he
+
+
+says like big data it's worth like we're
+
+
+talking probably hundreds of gigabytes
+
+
+right like
+
+
+postgress oh 30 gigabytes it's that's
+
+
+not a problem that's a small amount of
+
+
+data that's tiny data that's not big
+
+
+data um so don't prematurely optimize
+
+
+like oh my God I see a GB like how I
+
+
+must need elastic search like um these
+
+
+databases are really powerful pieces of
+
+
+Technology um the other thing is it's
+
+
+very um often that we presume a high
+
+
+degree of complexity and a high degree
+
+
+of Randomness we like okay I've got 20
+
+
+filters and they can come in any
+
+
+combination like H there's no way I
+
+
+could all the combinations I i' need
+
+
+like a thousand you know indices and
+
+
+that's way too many it's going to be a
+
+
+massive problem in reality you have a
+
+
+very high chance of having really hot
+
+
+clusters of combinations of filters put
+
+
+it in production have monitoring find
+
+
+the hot clusters like this combination
+
+
+of three filters is you know the parto
+
+
+principle is like actually quite real in
+
+
+a lot of places and you could probably
+
+
+find three to six indices that would
+
+
+make 80% of your queries run really
+
+
+really really fast and then the rest of
+
+
+them you have them run relatively slow
+
+
+um try to keep everything in one table
+
+
+like if you can minimize joints that's
+
+
+going to help but um just to add those
+
+
+two caveats like big data is whatever
+
+
+number is in your head for Big Data like
+
+
+probably double it um and by the time
+
+
+you actually have to deal with this
+
+
+problem in 2 years probably you need to
+
+
+double that number again because
+
+
+Hardware is increasing at a at a solid
+
+
+rate and um just because technically
+
+
+there's a lot of combinations doesn't
+
+
+mean that actually you have to like put
+
+
+an index on all of them I just see what
+
+
+actual usage patterns are and I bet you
+
+
+you will see a parto distribution and
+
+
+you can apply a small number of
+
+
+indices sorry because I heard the heresy
+
+
+um you don't need an single table if you
+
+
+have proper database engine because
+
+
+postris handles pretty well up to 20
+
+
+joints I guess so yeah don't be afraid
+
+
+so you are against data the
+
+
+normalization I'm all for data uh sorry
+
+
+uh what you just said I lost a word uh
+
+
+the
+
+
+normalization uh but that's not required
+
+
+in many cases joints are really really
+
+
+okay yeah in most case I think you can
+
+
+probably do totally fine with a welld
+
+
+designed database Bas with the proper
+
+
+indexes in place and the joints and they
+
+
+are just going to work fine um there is
+
+
+this maybe a everyone is using L search
+
+
+we should probably put l search on top
+
+
+of that in most case this going to be
+
+
+true um you know there are many case
+
+
+that of course elastic search is going
+
+
+to be the right answer especially if for
+
+
+doing proper search full text search and
+
+
+you know things that elastic search can
+
+
+really um help with um but uh depending
+
+
+the volume and the operations that
+
+
+you're doing you can have almost the
+
+
+same performance with a well designs and
+
+
+architected database um and to the
+
+
+points again you can always take a step
+
+
+back and you you have an interface where
+
+
+user can apply 20 filters at on is
+
+
+reasonable so it's uh um I one point we
+
+
+had something like that we knew that was
+
+
+not common but it could happen because
+
+
+the interface allowed for that but no
+
+
+one was really using it based on user
+
+
+Matrix and then the interface for just
+
+
+changed to like after 10 I don't
+
+
+remember the name of this is like uh you
+
+
+extended the limits please make
+
+
+something that is more um and and then
+
+
+you just control that on what the user
+
+
+and what the API can actually handle so
+
+
+this is the kinds of limitation that you
+
+
+needed to put uh in some cases we think
+
+
+about rate limiting only when we we are
+
+
+implementing apis for an external
+
+
+consumption um but uh even for you know
+
+
+and interfaces and other clients to an a
+
+
+that's more internal having those those
+
+
+gr Royals is also going to save a lot of
+
+
+headache and then you don't need to
+
+
+improve your situation that's going to
+
+
+happen 1% of the
+
+
+time all right thank you and we have run
+
+
+out of time so uh please give a applaud
+
+
+to our
+
+
+panelists thank you very much guys that
+
+
+was really interesting

@@ -1,0 +1,3820 @@
+hello everyone how's everyone doing
+
+
+today good
+
+
+awesome so I mean I'm here to talk to
+
+
+you about everything that you're doing
+
+
+wrong with event sourcing which is one
+
+
+of life's greatest pleasures
+
+
+I'm Nathan Ladd you can find me at real
+
+
+ntl on Twitter and as mentioned I am a
+
+
+co principal of the event ID project
+
+
+it's a toolkit for building event
+
+
+sourcing projects using event sourcing
+
+
+as well as autonomous services so before
+
+
+I begin I noticed on the schedule I am
+
+
+the first speaker presenting about event
+
+
+sourcing so hopefully I can give us a
+
+
+brief review of what event sourcing is
+
+
+and save the the remainder of the talks
+
+
+a little bit of time if I do a bad job
+
+
+with my review they'll have to of course
+
+
+explain it again and then explain why I
+
+
+was wrong so hopefully I help them out
+
+
+so before I talk about event sourcing I
+
+
+want to just go back to basic web
+
+
+application stuff and that's web forms
+
+
+and I want to call web forms by a more
+
+
+general generic name which is commands
+
+
+or command messages so this is a typical
+
+
+web form and it's your browser submits
+
+
+it to your app server your web server
+
+
+and and your your web server handles
+
+
+that form command so I'm gonna call it a
+
+
+command message because when we're in
+
+
+the context of microservices and when
+
+
+we're in the context of a rails app for
+
+
+instance we're all just talking about
+
+
+handling commands and command messages
+
+
+and when you have a web controller like
+
+
+an MVC controller and your web app you
+
+
+you can also think of that as being a
+
+
+command Handler and the important thing
+
+
+there is that our handlers are the entry
+
+
+point of our code so around around that
+
+
+handler you have framework and machinery
+
+
+and plumbing but but the handlers are
+
+
+where your code is first executed so I
+
+
+want to talk about to do to explain a
+
+
+eventsource thing I want to talk about
+
+
+how your typical MVC plus ORM web
+
+
+framework handles form submission so we
+
+
+have in a deposit funds into an account
+
+
+command message and I want to show kind
+
+
+of how its it's handled by your web MVC
+
+
+framework so first thing that happens is
+
+
+usually in your controller you retrieve
+
+
+your model and then you
+
+
+figure out what changes to make to the
+
+
+models for instance increase the account
+
+
+balance might be a change and then you
+
+
+apply those changes to models usually by
+
+
+some attributes API like an active
+
+
+record and then you validate the new
+
+
+model State and based on that you save
+
+
+the model state if the the new state is
+
+
+valid and then callbacks get triggered
+
+
+and of course callbacks when they're
+
+
+triggered they can cause other models to
+
+
+update and you might have callbacks in
+
+
+and cue background jobs which sends you
+
+
+right back to where you start and this
+
+
+is the architecture a lot of people tell
+
+
+me is so much simpler than event
+
+
+sourcing but I don't know if I can
+
+
+believe that because here is the same
+
+
+approach in event sourcing you handle
+
+
+your command by projecting your entity
+
+
+and I'll explain what a projection is in
+
+
+a minute you accept to reject the
+
+
+command just like you did before you
+
+
+write an event or you you build a
+
+
+deposit event I should say and then you
+
+
+write it to the database your event
+
+
+store and that's it and that projection
+
+
+that I talked about is really where we
+
+
+gather all the events that pertain to a
+
+
+single entity or model if you're in in
+
+
+rails land you gather them together and
+
+
+you you reduce them down or distill them
+
+
+down using a projection into a single
+
+
+entity or perspective of of what that
+
+
+entity is derived from the events and so
+
+
+when we've when we've written events to
+
+
+a stream and we want to project it we
+
+
+can kind of visualize that we're reading
+
+
+a stream sequentially because that's the
+
+
+way we read streams and when you're
+
+
+projecting entities you always start
+
+
+with a blank or empty data structure for
+
+
+your entity and you sequentially
+
+
+traverse each event one by one and so in
+
+
+this case we start with an opened event
+
+
+and we copy some attributes over and
+
+
+next we read a deposited event because
+
+
+that's the next event of the stream and
+
+
+we increase the balance by 11 dollars so
+
+
+it goes from 0 to 11 and then we handle
+
+
+in withdrawal for 10 dollars so it goes
+
+
+the balance goes from $10 to $1 and so
+
+
+on and so forth so that is the talk I
+
+
+think if anybody has any questions
+
+
+you're welcome to ask
+
+
+I'm a little bit early on time no no I'm
+
+
+I'm here to talk about all the things
+
+
+that can go wrong once you decide on
+
+
+this architectural style in fact there's
+
+
+a lot of common anti-patterns that and
+
+
+mistakes that I've seen teams make and
+
+
+it's Costin time and money and usually
+
+
+they all stem from the same source which
+
+
+is continuing to perceive our software
+
+
+or the way we develop software from the
+
+
+lens of the ORM and and really I what I
+
+
+want to say about this is I'm gonna go
+
+
+into the anti patterns there's four I'm
+
+
+gonna bring up and the important thing
+
+
+to note here is mistakes are a lot more
+
+
+costly in an event source system because
+
+
+your database is immutable and what that
+
+
+means is if you make a mistake in your
+
+
+software when you're using a relational
+
+
+database you can you can go and change
+
+
+all the data to correct it and
+
+
+compensate for that mistake but if your
+
+
+database is immutable you really you
+
+
+really don't have that option there are
+
+
+approaches and techniques to remediating
+
+
+bad data in an event source system but
+
+
+they all much more much more expensive
+
+
+in terms of time and cost so if you
+
+
+follow these if you follow if you avoid
+
+
+these anti patterns and pitfalls it
+
+
+doesn't guarantee success but I think
+
+
+you'll be better off if you heed them
+
+
+so the first dating pattern I want to
+
+
+talk to you about is entities that are
+
+
+aware of the messaging around them and
+
+
+typically in events or systems we we
+
+
+handle a command message or a candle
+
+
+command and we publish an event and
+
+
+usually there's a correspondence between
+
+
+the command and the event we issue
+
+
+deposit and we write deposited and all
+
+
+of that is messaging and the reason I'm
+
+
+bringing that up is because I first want
+
+
+to show you what an entity is like when
+
+
+that entity is unaware or hasn't been
+
+
+coupled to the surrounding messaging and
+
+
+it's really nice you can you can
+
+
+understand and read this code at a
+
+
+glance in fact it doesn't even need
+
+
+syntax highlighting and incidentally
+
+
+Google slides software it doesn't
+
+
+support syntax highlighting so I really
+
+
+love it when the universe just makes
+
+
+things work out but you can understand
+
+
+and
+
+
+and and it makes sense and if you've
+
+
+been using ORM s for a long time you
+
+
+might even approach this entity with a
+
+
+little bit of skepticism how can it be
+
+
+this simple to have an entity of course
+
+
+when you're done after some time you're
+
+
+going to have a lot more baggage around
+
+
+it and that's actually not true there's
+
+
+a really good point made yesterday which
+
+
+is your entities or core business logic
+
+
+that's what belongs in your entities and
+
+
+yes you can work on and implement
+
+
+systems where the entities are as simple
+
+
+as this and they are a lot more reliable
+
+
+and they're a lot easier to work with
+
+
+and you can think of messaging as
+
+
+periphery that integrates your entities
+
+
+with your user interface in front-end
+
+
+other entities you know your underlying
+
+
+operating system other databases other
+
+
+you know other other concerns and once
+
+
+we introduce the the concern or the
+
+
+responsibility of messaging into our
+
+
+entity we see very very immediately that
+
+
+that the the the entities cohesion has
+
+
+been has been reduced substantially
+
+
+we've got these unrelated issues so this
+
+
+method deposit now takes a command
+
+
+message as a parameter and it actually
+
+
+it actually decodes or interprets what
+
+
+the meanings of the attributes on that
+
+
+message are and that the interpretation
+
+
+of what a message means is a messaging
+
+
+concern it belongs in a message handler
+
+
+and this entity also returns an event
+
+
+and when you when you build an entity
+
+
+that is coupled to event sourcing then
+
+
+you've really then you really put
+
+
+yourself in a situation where this
+
+
+entity can only be used as long as
+
+
+you're doing event sourcing and you must
+
+
+always be aware of a net sourcing when
+
+
+you're in understanding and interpreting
+
+
+what this class does and in reality the
+
+
+entities that I build that don't look
+
+
+like this I could switch from event ID
+
+
+over to ROM and keep the same entities
+
+
+and everything around that is how we
+
+
+integrate the entity with the rest of
+
+
+the system and your entities are your
+
+
+most core business logic and they're the
+
+
+they're the biggest strongest asset that
+
+
+you have it an entity in fact if I look
+
+
+at the previous one this almost you can
+
+
+read it and read it as a specification
+
+
+for what an account does as it pertains
+
+
+to deposits and withdrawals
+
+
+so don't give that don't give that up
+
+
+easily so the next anti pattern that I
+
+
+want to talk about is view bias to vent
+
+
+schemas and this one is I'll just
+
+
+explain what I mean when I say view it
+
+
+is very simple anytime we're displaying
+
+
+information for our end-users whether
+
+
+it's auditory or visual we're presenting
+
+
+them a view of information and
+
+
+oftentimes those views contain data that
+
+
+that actually in its authoritative place
+
+
+lives in multiple different event
+
+
+streams or some of the data might be in
+
+
+an event source system and other data
+
+
+might be in a relational database so how
+
+
+so so building views typically with
+
+
+event stores doesn't work out too well
+
+
+because our event stores that we use for
+
+
+storing events are log structured and
+
+
+they can only be queried given an
+
+
+entities ID so we can't say give me all
+
+
+the accounts that have it have had
+
+
+activity in the last 90 days relational
+
+
+databases are really good at that
+
+
+they're also really good at tying
+
+
+information from different parts of your
+
+
+domain together to and joining them to
+
+
+present a single view so when we build
+
+
+events or systems we typically when we
+
+
+write events we typically handle those
+
+
+events and update and build materialized
+
+
+views out of them and if you're familiar
+
+
+with DDD you probably or you might be
+
+
+referring to these as these databases on
+
+
+the right side as read models which is
+
+
+another term form but I just call them
+
+
+materialized views because that's what
+
+
+they've been called for the last few
+
+
+decades so if if this slide resembles
+
+
+the original side I used to demonstrate
+
+
+projection it sits on purpose projecting
+
+
+events into a view database or a
+
+
+materialized view is really not a whole
+
+
+lot different than projecting them into
+
+
+a data structure an entity in memory so
+
+
+here's kind that's the background for
+
+
+this anti-pattern but but I'm going to
+
+
+give you a specific example here we have
+
+
+an account transactions table and a
+
+
+transaction categories table and this is
+
+
+this is the view that we want to display
+
+
+for our end users we have individual
+
+
+transactions but they each have a
+
+
+category ID and that category ID
+
+
+and be used to join to the the
+
+
+categories table and give you the name
+
+
+of the category so we can figure out the
+
+
+first transaction was an $11 and 11 cent
+
+
+purchase of office supplies for instance
+
+
+so the problem that we we typically run
+
+
+into when we start building events or
+
+
+systems is for the first time as we
+
+
+realize I'm trying to project this
+
+
+withdrawn event for instance and the
+
+
+view I'm trying to write to has this
+
+
+column for a category ID and I haven't
+
+
+got a category ID on the event that I'm
+
+
+that I'm dealing with and that's that's
+
+
+an immediate problem you don't know how
+
+
+to get it there and the the tendency or
+
+
+the temptation is let's just change the
+
+
+event scheme and attack on the category
+
+
+ID so that it's there that when we need
+
+
+to assemble the materialized view and
+
+
+the problem with this is the the problem
+
+
+with this is the dependency direction is
+
+
+going the wrong way right we're
+
+
+designing our events our core which are
+
+
+part of our core domain we're designing
+
+
+them to serve our UI and the data that
+
+
+we need to display and when I said
+
+
+earlier that changes to your events in
+
+
+your event schemas is like with the most
+
+
+expensive thing that happens in these
+
+
+systems this is this is really
+
+
+interesting because I've added a new
+
+
+reason for this schema to change if your
+
+
+categories are being applied for
+
+
+instance based on some heuristics that
+
+
+are determining oh you bought this you
+
+
+bought you made this purchase at a
+
+
+grocery store it must be food you bought
+
+
+this purchase at an office supply store
+
+
+it must be office supplies if that
+
+
+heuristic algorithm changes these values
+
+
+might change and so that might
+
+
+invalidate the data that you've written
+
+
+in your existing events if you were to
+
+
+add category ID to the event so you
+
+
+really want your events to represent
+
+
+what occurred and nothing else that's
+
+
+it's very important there are raw truth
+
+
+of what happened there not a vehicle or
+
+
+a conduit for you to shove in other data
+
+
+so that you can get the whole end-to-end
+
+
+experience working that's usually the
+
+
+number one thing that people coming to
+
+
+coming to event in systems deal with is
+
+
+they want to figure out how to build the
+
+
+whole UI all at once and that whole
+
+
+getting that whole picture to work
+
+
+immediate immediate
+
+
+there's a lot of obstacles like this in
+
+
+their way and I want to kind of I want
+
+
+to kind of talk about this word tie
+
+
+because I think it's it's slang that we
+
+
+use very often to talk about how
+
+
+different entities relate to each other
+
+
+and that relationship is really a
+
+
+relational database way of thinking and
+
+
+and this is an example the tendency and
+
+
+the temptation for us to do this is
+
+
+usually a carryover from our mentality
+
+
+of building systems on top of relational
+
+
+databases and and and or eum's so the
+
+
+alternative here that that works a lot
+
+
+better is to compose the whole view
+
+
+database from different events and
+
+
+isolate where where events are coming
+
+
+from so that they don't have to all be
+
+
+in the same event or the same stream and
+
+
+there's there are also additional
+
+
+techniques to aggregate your events so
+
+
+that you could produce any kind of
+
+
+schema you want including a view
+
+
+database that combines a category ID
+
+
+sorry I misspelled it there category ID
+
+
+with your transactions but I'm not going
+
+
+to go into that because we don't really
+
+
+have the time there's a variant on this
+
+
+this anti-pattern where people come from
+
+
+rails and they're used to the error the
+
+
+errors object and they're used to using
+
+
+the errors object to show validation
+
+
+errors in web forms and they want that
+
+
+because that's that's how they're used
+
+
+to making their UI work and the problem
+
+
+with this is your error is a really it's
+
+
+a disposition it's a negative
+
+
+disposition as Nick was saying it's the
+
+
+left-hand path and that's a that's a UI
+
+
+concept when when funds you know when a
+
+
+withdrawal caused somebody's account to
+
+
+go into the negative because they didn't
+
+
+have enough balance that's not an error
+
+
+from the perspective of the bank that
+
+
+collects $20 every time or 20 euros or
+
+
+whatever every time somebody goes
+
+
+negative so we don't disposition events
+
+
+as being positive or negative that's a
+
+
+UI concern and we have to build to build
+
+
+systems this way we really have to start
+
+
+distinguishing our user interface from
+
+
+our back-end systems or
+
+
+our core logic or domain the next
+
+
+anti-pattern is opaque dependencies and
+
+
+by opaque I mean you can't see the the
+
+
+traditional meaning is you can't see
+
+
+through it but what what it really what
+
+
+it really connotes is that you can't
+
+
+control something or that it's implicit
+
+
+or it's out of your hands and opaque
+
+
+dependencies can cause real problems and
+
+
+just about well in really any kind of
+
+
+software system but an event sourcing
+
+
+they crop up in a couple ways the first
+
+
+one is making your projections opaque in
+
+
+other words hiding the projection so if
+
+
+you if your command handler accepts as
+
+
+input the already projected event then
+
+
+you hat you cannot control the
+
+
+projection and there's a couple problems
+
+
+with this first of all this is
+
+
+terrifying for beginners because they've
+
+
+just learned about event sourcing and
+
+
+then they go into the code to understand
+
+
+how it works and to see how it happens
+
+
+and they can't find the event sourcing
+
+
+anywhere it's actually in the bowels of
+
+
+some framework that is that is external
+
+
+the other problem is that you can't
+
+
+control the projection directly so if
+
+
+you want to introduce in 2d caching or
+
+
+you want to change the caching strategy
+
+
+you have no means of doing so without
+
+
+the framework also affording indirect
+
+
+control through settings configuration
+
+
+class macros or gasp global State we all
+
+
+know a global state is a bad idea right
+
+
+yeah ok so the other thing the other
+
+
+reason this is a bad ideas there's
+
+
+actually plenty of situations where
+
+
+entities are not even necessary when we
+
+
+typically when we are for instance
+
+
+ensuring that an email address is unique
+
+
+and using events tour databases we write
+
+
+a reservation event it's good we call it
+
+
+reservation pattern but this particular
+
+
+approach for validating uniqueness is it
+
+
+doesn't depend it doesn't need an entity
+
+
+and so you'd have to construct one if
+
+
+your framework forces you to have one in
+
+
+your command handler and incidentally
+
+
+this approach to uniqueness is a lot
+
+
+like the rails one but it doesn't have a
+
+
+race condition in it what that validates
+
+
+uniqueness of does
+
+
+the the the the other situation that I
+
+
+want talking about is when we're
+
+
+updating those materialized views when
+
+
+we were materializing those views the
+
+
+entity is a view entity and it's
+
+
+actually data living for instance in a
+
+
+relational database if you're using a
+
+
+relational database for your for your
+
+
+read model and in those cases you have
+
+
+no entity and and and the final one
+
+
+sometimes we have just telemetry
+
+
+handlers that for instance every time
+
+
+your your company receives money from a
+
+
+payment you might want to record a
+
+
+metric or record a signal sorry
+
+
+telemetry is if you think about an
+
+
+airplane and every time an airplane
+
+
+crashes which is thankfully pretty rare
+
+
+there's that black box that they recover
+
+
+from from the plane and that black box
+
+
+contains the telemetry or all of the
+
+
+information logs of what happens and it
+
+
+can be studied for root cause analysis
+
+
+of why the plane crashed yes yes and and
+
+
+I kind of I kind of used the every time
+
+
+a purchase is made you want a signal as
+
+
+an example but in reality telemetry is
+
+
+more of a lower-level concept where we
+
+
+want to see how long our message is
+
+
+taking to get handled and what's going
+
+
+on in the system so the next kind of
+
+
+opaque dependency is an opaque writer
+
+
+and in this case we we we just watched
+
+
+NYX talk and we got really excited about
+
+
+functional programming and we said you
+
+
+know I don't really want my handler to
+
+
+write events at all
+
+
+I wanted to receive as input a command
+
+
+and return as output events and
+
+
+unfortunately there are a couple of
+
+
+problems with this approach you know I
+
+
+want to say first of all when when if
+
+
+the handlers job is to accomplish
+
+
+writing an event the handler isn't done
+
+
+until the events been written so so the
+
+
+handler is in this state is incomplete
+
+
+because it's returned
+
+
+it's a returning event but the event
+
+
+hasn't been written and and databases
+
+
+are unfortunately running on computers
+
+
+with electrons and writing to the
+
+
+database can fail
+
+
+so when your handler hands off the
+
+
+responsibility of writing the event to
+
+
+some external actor then that external
+
+
+generalized actor has to end up figuring
+
+
+out what to do if there's a failure
+
+
+which is very unfortunate and again
+
+
+another sign that that this handler
+
+
+hasn't done its job hasn't completed it
+
+
+the other thing I want to say is there's
+
+
+a lot of variations to how we write
+
+
+event an event sourcing it's not as
+
+
+simple as returning events one of the
+
+
+first one of the first parameters that
+
+
+tends to come into play when we exercise
+
+
+writers is something called expected
+
+
+version and this is a little bit more
+
+
+technical but it's it's a means of
+
+
+concurrency protection so if you have to
+
+
+if you have the same if you have two
+
+
+passenger threads let's just say
+
+
+accepting form submissions or commands
+
+
+that pertain to the same entity at the
+
+
+same time there's a race condition which
+
+
+one is going to be first and the
+
+
+behavior of the whole system might be
+
+
+different depending on which one of
+
+
+those threads wins and so expected
+
+
+version is an important countermeasure
+
+
+for being able to deal with concurrency
+
+
+but it's also very important that it is
+
+
+not used in every case because if your
+
+
+Handler on the other hand issues for
+
+
+instance an API call to stripe charging
+
+
+somebody's credit card then you don't
+
+
+want to introduce any reason why that
+
+
+right would fail because if you charge
+
+
+somebody's credit card and then you
+
+
+don't record any event that says you
+
+
+charged it then you're prone to charging
+
+
+them again because you've forgotten that
+
+
+you already charged them
+
+
+and all of this to say is sometimes you
+
+
+need to set expected version and
+
+
+sometimes you don't which means
+
+
+returning events from a handler is is
+
+
+improper it's it's it doesn't allow you
+
+
+to control it and there's other
+
+
+variations to writing that I won't go
+
+
+into but suffice it to say your handler
+
+
+must be able to control the writing of
+
+
+the message because it's not
+
+
+generalizable the situation's the
+
+
+different situations call for different
+
+
+means or different techniques when you
+
+
+write events and the common theme here
+
+
+is we need to be able to control our
+
+
+dependencies
+
+
+and and I think that's one of the most
+
+
+fundamental aspects of software that is
+
+
+is oftentimes overlooked by teams
+
+
+because they've never done it before
+
+
+we've we learned how to install gems
+
+
+like VCR that can step out Network calls
+
+
+for us so we don't have to control our
+
+
+network interactions we mock the
+
+
+database using global mocks so that so
+
+
+that we don't have to control whether
+
+
+our object interacts with the database
+
+
+or not and as you build more and more
+
+
+complex as your systems grow in
+
+
+complexity your need to be able to
+
+
+revisit earlier classes that you wrote
+
+
+six months ago and test them and
+
+
+exercise them in all the different ways
+
+
+that you might want to that that ability
+
+
+is severely severely diminished if you
+
+
+can't control the dependencies and in
+
+
+fact in our systems when we test our
+
+
+handlers let's see well this is not a
+
+
+great example when we test our handlers
+
+
+we never hit the database because we
+
+
+don't need to because we have a
+
+
+substitute writer that we can that we
+
+
+can control we can control the handler
+
+
+and change its writer to that of a
+
+
+substitute alright this is where I pick
+
+
+a friendly fight and I'm gonna I'm gonna
+
+
+call out the aggregate root class
+
+
+pattern and it is if it is a friendly
+
+
+fight I promise but I have I have seen
+
+
+this pattern used by multiple clients
+
+
+and I it has had it had very unfortunate
+
+
+consequences in in every case and to
+
+
+explain explain what I'm really talking
+
+
+about I'm talking about classes that
+
+
+that mix the responsibilities of an
+
+
+entity and the responsibilities of a
+
+
+message handler and the responsibilities
+
+
+of a projection into one and this is
+
+
+ostensibly done for convenience but it
+
+
+it causes us as I said earlier when our
+
+
+entity starts to become concerns with
+
+
+all these other things like messaging it
+
+
+stops - it stops being an entity
+
+
+altogether it stops being something that
+
+
+you can look at and recognize as an
+
+
+implementation of your domain model and
+
+
+one of the major benefits that we get
+
+
+with event sourcing is lost when you do
+
+
+this
+
+
+because when you can build and test your
+
+
+entity in isolation without needing to
+
+
+instantiate events and when you can test
+
+
+your projection by simply giving your
+
+
+test an entity and some prior state and
+
+
+an event and testing the next state and
+
+
+when you can test your handlers by
+
+
+simply controlling the current entity
+
+
+and asserting on on what was written
+
+
+when you can't do that you're missing a
+
+
+big opportunity because when you can
+
+
+these systems become very easy to reason
+
+
+about and understand and I want to kind
+
+
+of bring up another question that is a
+
+
+little bit uncomfortable it's why are
+
+
+aggregates so popular why do I see these
+
+
+everywhere everywhere I go where people
+
+
+have already started using event
+
+
+sourcing and I think I think that
+
+
+they're even outside the rails community
+
+
+I think the vast majority of web web
+
+
+developers have very little comfort with
+
+
+object-oriented programming I think
+
+
+they're used to procedural and
+
+
+declarative interfaces where you you
+
+
+subclass a framework artifact like a
+
+
+controller and you insert your code
+
+
+there and you don't really think about
+
+
+what is the structural design in my
+
+
+system
+
+
+you don't move concerns into namespaces
+
+
+very very often and so by moving all the
+
+
+responsibilities into one class one
+
+
+aggregate class you're increasing the
+
+
+comfort level locally or in the short
+
+
+term and I think that's the
+
+
+justification but I don't think it bears
+
+
+out to be to be that beneficial in the
+
+
+long term and and at a variant of this
+
+
+I've seen is a lot of a lot of teams
+
+
+even even more experienced people will
+
+
+justify this and say well in the
+
+
+beginning you don't know what your
+
+
+boundaries are and because you don't
+
+
+know what your boundaries are we just
+
+
+want to hack some code together we want
+
+
+to we want to iterate and then we want
+
+
+to refactor later when we know those
+
+
+boundaries and the problem with this
+
+
+thinking is that it's backwards it's a
+
+
+lot like if you went through your house
+
+
+and grabbed cleaning supplies under the
+
+
+sink and then you bought some test tubes
+
+
+and beakers from Amazon and then you
+
+
+poured all your cleaning supplies and
+
+
+test tubes and beakers hoping that you'd
+
+
+get a scientific discovery coding is not
+
+
+a practice that leads to an
+
+
+understanding of anything it's a
+
+
+practice it's what happens after we do
+
+
+the engineering and decide what it needs
+
+
+to be and what it needs to do so there's
+
+
+a there's a organizational maturity or
+
+
+industrial or professional maturity that
+
+
+comes when we understand how to
+
+
+distinguish banging on keyboards to
+
+
+produce an implementation from closing
+
+
+our laptop lids and maybe getting in a
+
+
+whiteboard and figuring out what the
+
+
+system is supposed to be with our team
+
+
+and the other reason I think these
+
+
+approaches and really the aggregate
+
+
+class has has involved all the other or
+
+
+most of the other ending patterns as
+
+
+well a lot of times it's community that
+
+
+really leads to the proliferation of
+
+
+these patterns and community is
+
+
+unfortunately a word that only seems to
+
+
+have positive connotations and I think
+
+
+that that's I think that some of that
+
+
+positivity is fair because communities
+
+
+can be wonderful this is it's supposed
+
+
+to be animated but it's not animating
+
+
+this is these this is a group of Amish
+
+
+in Pennsylvania United States that are
+
+
+building a barn in less than 24 hours
+
+
+and actually there was recently a
+
+
+hurricane in Texas where I'm from that
+
+
+not where I live but in Houston there
+
+
+was there were just tons of houses right
+
+
+on the oceanfront and I think I'm close
+
+
+to time but I'm gonna keep going anyway
+
+
+there was many many houses that were
+
+
+just blown away and and these Amish
+
+
+people actually left their homes and
+
+
+families and and spent a few weeks down
+
+
+in Texas helping to to clear out these
+
+
+old destroyed homes and replace them
+
+
+with with well built the Amish are very
+
+
+good builders and that's wonderful and
+
+
+inspiring and it should be inspiring but
+
+
+communities can also be incredibly
+
+
+harmful they can lead they can cause
+
+
+psychological triggers that really
+
+
+subvert our critical and rational
+
+
+thinking processes and they can lead us
+
+
+to not question things and most
+
+
+importantly when we when we have
+
+
+communities we usually have community
+
+
+leaders and when we have community
+
+
+leaders we trust them and that means
+
+
+that when they espouse ideas we we hold
+
+
+those ideas under less scrutiny and then
+
+
+they can they can become popular and I
+
+
+don't think this does a service to
+
+
+thought leaders and I think
+
+
+you know if I I could probably give you
+
+
+a list of a hundred really terrible
+
+
+ideas I've had in the last two years or
+
+
+ten years that my colleague Scott has
+
+
+helped to disabuse me of and this is
+
+
+what we want we want we want to feel
+
+
+comfortable having bad ideas be called
+
+
+out by people in a friendly way and when
+
+
+you don't have that people follow the
+
+
+rails way for instance even though it
+
+
+leads them to ruin and it's interesting
+
+
+you know I what I've seen in these
+
+
+events sourcing implementations that use
+
+
+aggregate classes is they can't stand
+
+
+rails in fact they're a little bit above
+
+
+rails they're a little bit better than
+
+
+rails because they've learned why rails
+
+
+sucks and and they say real sucks we
+
+
+have all these god classes and nothing's
+
+
+nothing's well-designed or modular and
+
+
+then and then we look at the
+
+
+implementation and we see God classes
+
+
+using event sourcing and you got to
+
+
+wonder if if you're thinking about the
+
+
+tooling being the problem
+
+
+remember the tooling never forced you to
+
+
+build a big monolithic application that
+
+
+you can't change that was you and if you
+
+
+don't correct the thing the mistakes
+
+
+that you made you're gonna make them
+
+
+again and if you think you're going to
+
+
+move to a lick sir for instance and
+
+
+you're going to correct all those
+
+
+problems because elixir doesn't have
+
+
+them then then you haven't really found
+
+
+the root cause so I think it's important
+
+
+to always scrutinize popular techniques
+
+
+and methodologies I look forward to when
+
+
+I'm done checking checking the hash tag
+
+
+for everybody telling me why I was wrong
+
+
+I I really do look forward to that and
+
+
+and be aware of of how difficult this
+
+
+stuff is and also be aware of your
+
+
+understanding of complexity because I
+
+
+think what happens what happens and
+
+
+causes people to stick with monoliths
+
+
+and make them happy with their monolith
+
+
+is because they feel like when I start
+
+
+to partition my system or I start to
+
+
+approach new styles I see more
+
+
+complexity I see projections and and
+
+
+entity cashing an expected version and I
+
+
+never used to see those things with
+
+
+rails and active record and the problem
+
+
+is is yes there is there is an increase
+
+
+of complexity as we add these patterns
+
+
+but it's not complexity that you always
+
+
+have to remain
+
+
+Arif its contextualized complexity your
+
+
+operating system is incredibly
+
+
+complicated
+
+
+Ruby's virtual machine is incredibly
+
+
+complicated web browsers have tens of
+
+
+millions of lines of code but you you
+
+
+really only deal with a subset of their
+
+
+a small subset of their complexity so
+
+
+when we're building these systems and
+
+
+composing them of these these modules
+
+
+and we're using event sourcing for
+
+
+instance for not only persistence but
+
+
+but communication between these services
+
+
+you are adding complexity but you're
+
+
+also you're also allowing yourself to to
+
+
+safely disregard most of it at any given
+
+
+point in time and the kind of the last
+
+
+message I have is I really I really
+
+
+believe in this after this phrase which
+
+
+is measure twice cut once there there
+
+
+was a time when when when we criticized
+
+
+waterfall and we jumped into agile and I
+
+
+think that that was very positive but
+
+
+that was at a time when it was when it
+
+
+was typical to spend six to eighteen
+
+
+months in upfront design and now we're
+
+
+at a place where the community is
+
+
+usually uncomfortable with more than 6
+
+
+or 18 minutes of design and I see it
+
+
+over and over again with clients if you
+
+
+spend a week a week designing just one
+
+
+service and then you maybe spend one
+
+
+week or two weeks including that one
+
+
+week will be hell for people that are
+
+
+not used to designing things and they'll
+
+
+call it waterfall but it's not waterfall
+
+
+it's not six months it's not 18 months
+
+
+it's a week of closing your laptop and
+
+
+figuring out what's going on and that's
+
+
+what you that's the fundamental
+
+
+philosophy that you need to adopt to be
+
+
+able to succeed and that's all I got
+
+
+again I'm a trillion TL on on Twitter
+
+
+event ID is the project I'm a co
+
+
+principle co-founder and please check it
+
+
+out i welcome you to we're we're working
+
+
+on documentation and it's in progress
+
+
+and we're not really interested in
+
+
+releasing a1o until until we have
+
+
+release documentation so that
+
+
+everybody's comfortable you know so that
+
+
+we feel comfortable asking for adoption
+
+
+so it's coming soon we have used it in
+
+
+production quite a bit though so anyway
+
+
+that's it
+
+
+q thank you all I appreciate it
+
+
+questions
+
+
+she won't explain even something to you
+
+
+again but you can start what is an
+
+
+entity is an entity like an object that
+
+
+has attributes oh is that a process
+
+
+I usually when I'm talking about an
+
+
+entity and I'm talking about the code
+
+
+perspective I'm usually talking about a
+
+
+data structure with with methods around
+
+
+it that that for instance is it when I
+
+
+showed the deposit method that that
+
+
+increase the balance that's an entity
+
+
+it's a data structure with Metin with
+
+
+domain specific methods there's also
+
+
+other perspective entity like a logical
+
+
+one
+
+
+so an account micro-service might might
+
+
+actually be thought of as an account
+
+
+entity if you zoom out enough which is a
+
+
+subtle point but usually I'm talking
+
+
+about the code pattern so could you
+
+
+actually show this slide with this
+
+
+entity and how you handle the event well
+
+
+handle the comment wait this is the
+
+
+wrong one right the one where we had a
+
+
+handler yeah I think it's this one this
+
+
+is the yeah this one is okay so usually
+
+
+in many cases you would have more than
+
+
+one such if statement so the reason for
+
+
+withdrawing the command or rejecting the
+
+
+comment might be more such reasons so
+
+
+don't you think this will end up with
+
+
+the feature env smell that you asked the
+
+
+object things and things before you
+
+
+actually tell the object to change
+
+
+something yeah actually this is
+
+
+something it's come up before which is
+
+
+if you if you if you want are aware of
+
+
+the principle and object-oriented design
+
+
+tell don't ask you're identifying a
+
+
+query where we ask the account if there
+
+
+are sufficient funds and and it is
+
+
+possible to tell the account to make a
+
+
+decision based on whether there's enough
+
+
+but the problem is is the outcome so
+
+
+this is an if-else and and the outcome
+
+
+of this else is deciding which message
+
+
+to write and that's a messaging concern
+
+
+and I think it's it's a little bit
+
+
+taking encapsulation too far the idea of
+
+
+encapsulation too far to say that you
+
+
+can't ever have a query method this is a
+
+
+method that returns true or false which
+
+
+is necessary for an application to
+
+
+decide what to do because we can't
+
+
+generalize what action to take they
+
+
+whether an based on whether there are
+
+
+not sufficient funds I think like this
+
+
+is exactly the place where I agree with
+
+
+the way you describe the aggregate root
+
+
+problem because in I agree that it does
+
+
+couple the entity logic with the
+
+
+messaging layer however I think this is
+
+
+the decision that we want to make
+
+
+whether we want to expose many query
+
+
+methods and go with the query approach
+
+
+overall or go with the you know telling
+
+
+the objects what to do and then you need
+
+
+to couple because that was like the
+
+
+aggregate root for example as in receive
+
+
+and store this was a design choice to
+
+
+eliminate such code so that's the reason
+
+
+we have the messaging couples to with
+
+
+entities yeah I don't have so that so
+
+
+the best answer I can give you is that
+
+
+there is an if-else that belongs in this
+
+
+handler because the handler has to
+
+
+decide to write withdraw withdraw
+
+
+declined or withdrawn and so so that if
+
+
+else or that conditional belongs in the
+
+
+handler and so so the best that the
+
+
+entity can do is give us a yes or no if
+
+
+there's sufficient funds now in the case
+
+
+of withdrawing funds there's only two
+
+
+outcomes you either had enough money or
+
+
+you didn't and in other context there
+
+
+might be many more outcomes and the the
+
+
+the answer that event ID has for that is
+
+
+is that event ID has no answer it's it's
+
+
+up to the programmer to determine how to
+
+
+manage that complexity so I think that I
+
+
+can't prescribe a one-size-fits-all
+
+
+solution there yeah just in my
+
+
+experience like I wanted to avoid such
+
+
+code because what if it's just one
+
+
+if-else that's okay but usually we you
+
+
+have like a more more nested if
+
+
+later on and then then this this code
+
+
+doesn't look released at school anymore
+
+
+well I so so um I'll say that when I'm
+
+
+in now
+
+
+so before this code gets written there's
+
+
+an analysis there's an analysis of what
+
+
+does what happens when we handle a
+
+
+withdrawal and we already know where
+
+
+we're going to get to because we're only
+
+
+analyzing accounts we're not analyzing
+
+
+the whole system and so we put an
+
+
+account accounting system that's very
+
+
+similar to this into production and yet
+
+
+we didn't have to make one code change
+
+
+to it aside from one minor fix not it
+
+
+wasn't even a fix it had to do with
+
+
+something minor I can't remember now but
+
+
+by and large we didn't we didn't we we
+
+
+designed our accounting service and we
+
+
+deployed it and we didn't have to add a
+
+
+single conditional for years afterwards
+
+
+and that's because we understood what is
+
+
+innate about account withdrawals
+
+
+so we epitomized the essence that we
+
+
+append mais or captured the essence of
+
+
+what withdrawals were and that's that's
+
+
+why we arrived at this F else it's this
+
+
+is not a pattern of this else if else
+
+
+that always goes in can in handlers its
+
+
+frequented handlers to have left or
+
+
+right as Nick was saying earlier but
+
+
+it's not it's not the only way or it's
+
+
+not the only pattern that emerges so I
+
+
+guess my my opinion there is as long as
+
+
+your handler is in control of everything
+
+
+that it needs to be in control of you
+
+
+can tackle that complexity however is
+
+
+appropriate for that entity which is not
+
+
+a really good answer but the answer
+
+
+usually isn't isn't that great or it
+
+
+requires you to figure out what's best
+
+
+for you so what is currently your
+
+
+biggest problem and you're dealing with
+
+
+now the biggest challenge with this
+
+
+approach oh man now we got to get real
+
+
+huh
+
+
+everything's perfect
+
+
+so here's here's here's an important
+
+
+there's a couple of realities number one
+
+
+you will never build you'll never be
+
+
+able to prototype with these systems as
+
+
+quickly as you can prototype with rails
+
+
+that is it is impossible so when you
+
+
+need when you when you need to sketch
+
+
+when you want to sketch out a small web
+
+
+app or or whatever it's it's it's now I
+
+
+will say I will say I you know you can
+
+
+you can still implement these pretty
+
+
+quickly and in some it in many cases it
+
+
+is just as just as it happens to be just
+
+
+as fast but we don't aim to be the
+
+
+shortest path to implementation I'm
+
+
+trying to understand the transactional
+
+
+property of that flow because when when
+
+
+you record the event like we've drawn
+
+
+you or we've drawn declined it it has to
+
+
+be cobbled together with the actual
+
+
+withdrawal that happens in a external
+
+
+system or something but you still risk
+
+
+that the other the actual operation will
+
+
+fail so I'm just I'm just curious how
+
+
+how do you guarantee that that's the the
+
+
+action of recording an event like we're
+
+
+all is actually connected with the real
+
+
+operation may be yeah this happening
+
+
+manually right they could the wire the
+
+
+transform my phone whatever right yeah
+
+
+well I think there's two considerations
+
+
+here number one this system might be
+
+
+authoritative over account balances in
+
+
+which case there is no external call a
+
+
+number two this is sketch code which is
+
+
+which is really incomplete from an
+
+
+implementation perspective because it
+
+
+doesn't consider idempotence what
+
+
+happens if we handle withdraw more than
+
+
+once and unfortunately there just isn't
+
+
+enough time to go into patterns and
+
+
+techniques for idempotence but they're
+
+
+there there is a little bit more to
+
+
+building these systems but not much more
+
+
+if right right so if a withdrawal can
+
+
+only be achieved by sending and
+
+
+submitting an API requests for instance
+
+
+to a third-party service then that has
+
+
+to happen here and also that decision
+
+
+about sufficient funds does not happen
+
+
+here because because we because wherever
+
+
+the data is authoritative
+
+
+that's where decisions could be made
+
+
+around the data so you can't make
+
+
+decisions locally around somebody else's
+
+
+data and that somebody else could be
+
+
+another organization and it could be
+
+
+another service but we are you know data
+
+
+that changes together stays together
+
+
+and also decisions based computational
+
+
+decisions based on data belong where the
+
+
+data is authoritative official fellow
+
+
+thanks for the talk I'm wondering about
+
+
+this line when you do an event time and
+
+
+set in current time to this property so
+
+
+that it means that there is a ordering
+
+
+of events which relies on the time no
+
+
+okay so what do you need is well and and
+
+
+well I will say is is what we typically
+
+
+when we typically sign an attribute
+
+
+called time we're talking about a
+
+
+timestamp when the event occurred but
+
+
+there is no necessary reason to assume
+
+
+that the order of the events in the
+
+
+database is the same order as the times
+
+
+of all the events
+
+
+it just is just a meta information okay
+
+
+I guess that is it so then the next
+
+
+question so you get a distributed system
+
+
+so how do you order the events happen
+
+
+different system and the answer to that
+
+
+is to use a very technical term that is
+
+
+you don't need to understand this
+
+
+because there's better ways to learn it
+
+
+but the technical term is vector clock
+
+
+okay I guess yeah but expected this and
+
+
+you get something you yes but I actually
+
+
+when we teach when we teach when we do
+
+
+we put on workshops and we haven't done
+
+
+one in Europe yet someday I would like
+
+
+to but when we teach this stuff we don't
+
+
+teach people vector clocks we teach them
+
+
+how to have the underlying problems and
+
+
+then and then
+
+
+to solve them with the tools so yes it
+
+
+has a vector clock but do not be do not
+
+
+be scared off by that turn sounds great
+
+
+actually hands banks yep
+
+
+I'm just wondering when people from
+
+
+rails start to use event ID do they I
+
+
+mean it's probably an anti-pattern in do
+
+
+they happen to write those handlers
+
+
+instead of controller actions because it
+
+
+looks like you know they will add all
+
+
+the code to the handlers basically and
+
+
+then treat requests basically like an
+
+
+event is that something that happens or
+
+
+well the first decision that they that
+
+
+that people are trying to adopt event ID
+
+
+within the context of rails will the the
+
+
+first decision that they'll one of the
+
+
+first decisions they'll face is whether
+
+
+or not to have their controller actions
+
+
+write a command message to a stream or
+
+
+to handle the command in the request
+
+
+response cycle and I will say that if
+
+
+you're planning a transition to micro
+
+
+services you're better served by writing
+
+
+the command message because then your
+
+
+implementation is fully portable you can
+
+
+take it out of that the context of your
+
+
+rails app or your hanami up and it'll
+
+
+just work if you set it up right does
+
+
+that answer your question yeah there was
+
+
+a hand raised up there at the top not do
+
+
+you I got you in the back man
+
+
+[Music]
+
+
+how do deal with event versioning I mean
+
+
+what if the scheme of the event changes
+
+
+yeah that's a really good question so
+
+
+when you do when you do realize that you
+
+
+wrote some events with with a schema
+
+
+that you don't want to live with and you
+
+
+want to change the event schema that's a
+
+
+difficult situation and there are
+
+
+countermeasures when you're built when
+
+
+you're doing event sourcing in the
+
+
+context of a monolithic application a
+
+
+versioning is really usually the only
+
+
+option you have so you have to so you
+
+
+have to publish new versions of your
+
+
+events and then you have to every time
+
+
+you handle events you have to figure out
+
+
+is this version a or B and then you
+
+
+to perhaps take different take a
+
+
+different action there one of the big
+
+
+reasons why we use invent sourcing in
+
+
+conjunction with micro services is micro
+
+
+services are generally small enough that
+
+
+they can be reimplemented very quickly
+
+
+so if you if you identify that micro
+
+
+service wrote events that were wrong
+
+
+enough that you need to change them that
+
+
+you can build a new micro service and
+
+
+then you can take the events of the old
+
+
+and then transform them into commands
+
+
+that you feed into the new which is
+
+
+still a lot of work and it's still very
+
+
+difficult so my first answer your
+
+
+question is don't make a mistake and and
+
+
+it's it's it's hard to hear that as
+
+
+software developers but every day
+
+
+millions of Jets fly you know fly around
+
+
+and take people from point A to B and
+
+
+they usually don't crash you know well
+
+
+yeah and and the industry of airline has
+
+
+learned from their mistakes one of the
+
+
+biggest and you're getting me started
+
+
+now one of the biggest problems with
+
+
+software is we don't learn from our
+
+
+mistakes instead we switch programming
+
+
+languages we switch tools we switch jobs
+
+
+we do everything we possibly can to
+
+
+avoid facing up to the fact that we
+
+
+screwed up do you typically use
+
+
+centralised even store or a different
+
+
+approach that's a that's a bit of a
+
+
+loaded question because I think in the
+
+
+microservices world there's a there's a
+
+
+concept that each micro service should
+
+
+get its own database and there is a lot
+
+
+of Merit to that in the context of
+
+
+relational databases because those
+
+
+associations that that connect one table
+
+
+to the other those associations will
+
+
+prevent you from drawing service
+
+
+boundaries because you'll have to have
+
+
+that data to be in the same database in
+
+
+the case of event stores they don't
+
+
+offer associations and they're naturally
+
+
+isolated at the stream boundary
+
+
+therefore there's really no harm in a
+
+
+services architecture of running all of
+
+
+your services against the same physical
+
+
+event store that said it's up to your
+
+
+operations people to decide you know
+
+
+what our account service is experiencing
+
+
+a high volume of transactions and we
+
+
+need to scale and one of the first
+
+
+easiest things you can do to scale is
+
+
+move that database out so that all of
+
+
+your other event traffic is not
+
+
+interfering or slowing down your your
+
+
+your account traffic for instance oh
+
+
+goodness
+
+
+keeps going love it I love it hi I have
+
+
+a question if you keep your data as a
+
+
+series of events do these events contain
+
+
+the latest state or each of them somehow
+
+
+contains the change of a state and if
+
+
+you want to get the current state do you
+
+
+need to somehow calculate it from the
+
+
+couple of events or do you have some
+
+
+single source of truth current one and
+
+
+if not how does this potential
+
+
+calculation effects performance if you
+
+
+need to
+
+
+you cannot just read it you always have
+
+
+to calculate it here yeah I think I
+
+
+don't get it so that's a good question
+
+
+to get to go back to the beginning of
+
+
+the talk we do store and persist as
+
+
+authoritative data the the events that
+
+
+rep they don't represent the current
+
+
+state they represent just what happened
+
+
+and in order to arrive at an entity in
+
+
+memory that represents the current state
+
+
+we have to read each and every one of
+
+
+them sequentially and this does present
+
+
+a number of performance considerations
+
+
+but fortunately there are very readily
+
+
+generalizable countermeasures for
+
+
+instance if you'll notice each one of
+
+
+these events has a position that's
+
+
+exactly one greater than the previous
+
+
+one and that means if I project this
+
+
+entity up to the withdraw an event at
+
+
+position two I can store a cash record
+
+
+that also includes hey this is version
+
+
+two of the entity and so the next time I
+
+
+read that entity I can pull a version
+
+
+two out of the cash and then I can start
+
+
+reading from three onwards so we can use
+
+
+cat we can use caching transparently
+
+
+to solve that problem and then there's
+
+
+another performance issue of well if you
+
+
+accumulate one event for every time
+
+
+something happens then you're you're
+
+
+using a lot of disk space it's relative
+
+
+to if you only stored the current state
+
+
+and there's countermeasures for that too
+
+
+but I am going to so one more question
+
+
+do you have some kind of caching
+
+
+solution baked into your gem or deserves
+
+
+to somehow do it from scratch phew yeah
+
+
+no event ID is a collection of libraries
+
+
+and there's a gem called entity store
+
+
+and this is this is a little bit of a
+
+
+bastardized example of it normally we
+
+
+build it and and use it as a dependency
+
+
+and you're seeing it references a class
+
+
+here but the entity store library
+
+
+already comes with a cache and in fact
+
+
+that cache has a means of introducing
+
+
+snapshotting as well and what
+
+
+snapshotting is is if you have us if you
+
+
+have a stream with a million events in
+
+
+it when you restart your server you
+
+
+don't want your server to have to
+
+
+project a million events the first time
+
+
+it's accessed so we can periodically
+
+
+snapshot and that means write a
+
+
+representation of the current state of
+
+
+the entity every hundred or every
+
+
+thousand events so that's another
+
+
+countermeasure for the performance
+
+
+issues thanks so how do you deal with
+
+
+the gdpr like the data protection like
+
+
+requirements that are like in your
+
+
+theanine now yeah okay but we can use
+
+
+the Evenstar syncing new Europe also so
+
+
+yeah sorry in America we can kind of do
+
+
+whatever we want
+
+
+like and regulatory requirements are
+
+
+part of your business domain they're not
+
+
+part of a framework so when you and I've
+
+
+actually I I joke but I've worked in
+
+
+healthcare industries and we do have
+
+
+some regulations most of them were
+
+
+designed to prevent people from
+
+
+competing with the big corporations that
+
+
+run everything but there are regulations
+
+
+and and you have to model them in your
+
+
+domain but I I haven't encountered a
+
+
+situation before where we're following
+
+
+regulations was a difficult thing to do
+
+
+with with our libraries or with event
+
+
+sourcing thank you
+
+
+[Applause]

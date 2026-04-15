@@ -1,0 +1,1672 @@
+All
+
+
+right. Um, so our next speaker, I must
+
+
+say that I met him last night for the
+
+
+first time and um, I'm really glad he's
+
+
+here. I mean, thanks guy. Thanks, man.
+
+
+This itself requires applause.
+
+
+[Applause]
+
+
+But jokes aside, we are serious people
+
+
+here. Um, so Set is going to tell us how
+
+
+to build beautiful UIs in Ruby on Rails
+
+
+Native.
+
+
+No, no, it's it's okay, right? Okay. No
+
+
+stress, right? Okay. Beautiful UIs in
+
+
+Rails native approach.
+
+
+Hello. Oh, there we go. Wow. So, um,
+
+
+yeah. Uh, I'm going to be showing you
+
+
+how to build beautiful UIs for a little
+
+
+bit of this talk, but there was a crazy
+
+
+story that happened on Friday
+
+
+night. So, uh, I hadn't met Joel before.
+
+
+I've hung out with Stephen a couple
+
+
+times and, uh, we got a lot closer on
+
+
+Friday. Um what happened was we went out
+
+
+um met a Polish friend uh went for
+
+
+drinks and we got him hammered. Um
+
+
+so
+
+
+uh we went out had a great time and uh
+
+
+every time we went through the streets
+
+
+you get really good recommendations from
+
+
+locals to go to certain places and uh
+
+
+bars, restaurants, you know, whatnot.
+
+
+and uh they just kept on recommending to
+
+
+go to these places. So uh after three
+
+
+[Laughter]
+
+
+recommendations, we went to the titty
+
+
+bar and uh got locked out of our hotel
+
+
+and uh I'll finish the story later.
+
+
+So So uh building beautiful UIs with
+
+
+Flex and Ruby. I'm Seth Horesley. I work
+
+
+at Statesert and uh we needed to figure
+
+
+out a way to um move from
+
+
+the MER stack to Rails. So, six years
+
+
+ago, we started with uh MongoDB,
+
+
+uh Express, React, and Node.js.
+
+
+[Laughter]
+
+
+Unfortunately, it was whack. Um, so then
+
+
+I uh learned about Ruby on Rails, Ruby,
+
+
+and uh since I'm the owner, I decided
+
+
+it's migration time.
+
+
+Um there were some nasty migrations. So
+
+
+about four years ago we started
+
+
+migrating from Rails um well from
+
+
+MongoDB to Postgress and that was nasty.
+
+
+Um syncing [ __ ] and Postgress is a
+
+
+cluster [ __ ] Um it's horrible. So uh
+
+
+after figuring out those parts we wanted
+
+
+to see how we can figure out the front
+
+
+end side of things. So how do we from
+
+
+react rails fy the front end? So, uh,
+
+
+looking at how the architecture needed
+
+
+to look, we needed to migrate in a
+
+
+decent way. So, we looked at a couple
+
+
+different, uh, options, we needed to
+
+
+keep in mind that we had some more
+
+
+complex interfaces and, uh, some data
+
+
+dashboards and some internal tools that
+
+
+used React quite heavily. So, some of
+
+
+the options we went through were uh,
+
+
+default Rails views, so ERB, action
+
+
+view. Um, we could also build a custom
+
+
+component system. Um there's view
+
+
+components and there's flex. So
+
+
+uh going through just the default ERB
+
+
+view action view setup.
+
+
+Um ERB is not very modular. Uh temp
+
+
+template logic is very it's very coupled
+
+
+with the presentation. Um hard to use
+
+
+small
+
+
+components. You can't really uh make a
+
+
+button partial and just sprinkle that
+
+
+everywhere. It's really nasty. And uh
+
+
+and then testing of individual parts was
+
+
+a lot more challenging from some of the
+
+
+other options that we went through.
+
+
+There's no enforcement
+
+
+of it's weird. I'm these slides are not
+
+
+I'm not used to doing it in presenter
+
+
+mode here. Um so yeah uh there's no
+
+
+enforcement of component boundaries and
+
+
+it's not a very pragmatic approach. So
+
+
+uh what do we need? We need something
+
+
+extensible, fast and as simple as
+
+
+possible. So that was a no for erb and
+
+
+action view went through a custom
+
+
+components. So there's this idea of
+
+
+slots that's used quite a bit with
+
+
+custom component systems view components
+
+
+and uh it's kind of interesting. Um we'd
+
+
+have to reimplement the ren the render
+
+
+function. There's a couple other things
+
+
+that we'd have to sprinkle in to be able
+
+
+to get it kind of up to par with
+
+
+something like view components and a lot
+
+
+more decisions and a truckload of work.
+
+
+So that was a hell no. Um the other
+
+
+option was view components faster than
+
+
+ERB. That's a plus. Used in quite a few
+
+
+big apps. It's working right now. Um
+
+
+uses slots. Kind of interesting. But you
+
+
+have this logic splitting where uh you
+
+
+have your view component RB and then
+
+
+your component
+
+
+HTML. Um wasn't a really fan of that. So
+
+
+um two paths of logic obviously is not
+
+
+as simple or maintainable as one. And
+
+
+the worst part is the creators have been
+
+
+moving away from it. So that kind of
+
+
+scared us a little bit.
+
+
+Um,
+
+
+so what the hell? There we go. So that
+
+
+was a no. And
+
+
+uh, we found
+
+
+flex. Um, it's a it's a Ruby library for
+
+
+building object-oriented HTML views.
+
+
+Um it was
+
+
+uh it was a really really interesting
+
+
+journey. We we found out about flex. We
+
+
+looked at different libraries to to use
+
+
+flex with for building the UI and uh
+
+
+obviously it's nothing like ERB and HTML
+
+
+and uh we really liked that it's very
+
+
+it's a it's a Ruby way to write your
+
+
+views. So it's one one file rules them
+
+
+all. Um handles view and logic and
+
+
+obviously you have native Ruby syntax.
+
+
+So that was really nice and it can be
+
+
+made type safe. Um and I should have put
+
+
+in there too that
+
+
+uh testing was way easier with this.
+
+
+Um so about composability
+
+
+um here's here's a little example.
+
+
+Yesterday, these two guys decided to
+
+
+compose something together and
+
+
+[Laughter]
+
+
+uh they've been they've been cooking
+
+
+with some amazing HTML CSS stuff.
+
+
+They're the best CSS programmers I've
+
+
+met. Um so, um here's a basic example of
+
+
+how Flex works if you all don't know. So
+
+
+just takes a a block, you pass it into
+
+
+the tag that you want and it renders it
+
+
+really fast. So Ruby UI, it's a it's a
+
+
+shad CN component library for flex. And
+
+
+uh this is kind of what some of the
+
+
+primitive looks like. So here's a
+
+
+button. You can pass it variants,
+
+
+primary, secondary, and this is the
+
+
+beauty that comes from that. Look at
+
+
+that. Um so components obviously they're
+
+
+reusable building blocks. Each component
+
+
+they're completely self-contained. You
+
+
+can pass things, you can override things
+
+
+with the library. Um, thanks to flex,
+
+
+components um can be composed together
+
+
+and everything is a component. So,
+
+
+here's an example component. Uh, select
+
+
+dropdown, go to the
+
+
+website, copy the generator thing, slap
+
+
+it in your terminal, and it generates it
+
+
+extracts it ejects the component from
+
+
+the gem, installs it locally so you can
+
+
+maintain it. And uh there copies all the
+
+
+components for the oh you can't see my
+
+
+cursor but yeah it copies all the
+
+
+components for the select dropdown
+
+
+installs any dependencies that
+
+
+JavaScript has and we take the uh we
+
+
+take the uh the snippet of code from
+
+
+there and then you put it in your editor
+
+
+and then you come up with something like
+
+
+this if it will play. There we go. So
+
+
+animations and everything. So, it really
+
+
+worked out really well. Um, we have a
+
+
+bunch of
+
+
+components and uh we would love some
+
+
+more help building some more if you all
+
+
+need some. It has uh there's a few
+
+
+companies using in production now and uh
+
+
+it's decently full but there's still
+
+
+more to do obviously. So, here is a more
+
+
+in-depth snippet of some really cool
+
+
+components you can make. Um Joel is
+
+
+gonna come up here and help me. So, give
+
+
+a round of applause for Joel.
+
+
+[Applause]
+
+
+I can't remember what the slides are.
+
+
+Um, oh yeah. So, so Seth wanted me to
+
+
+basically explain um how flex kind
+
+
+of it it implements this philosophy of
+
+
+the accordion of complexity where you
+
+
+can kind of expand and
+
+
+contract the the accordion. And this is
+
+
+just a an example. Which one is showing?
+
+
+The left one.
+
+
+um of a table component that you could
+
+
+implement in a bunch of different ways.
+
+
+And we're actually just going to look at
+
+
+the interface rather than the the
+
+
+implementation, but um this is like the
+
+
+most basic thing uh the most basic idea
+
+
+of a table
+
+
+component. Um where you're essentially
+
+
+just you're calling the table method,
+
+
+which is how you render the component.
+
+
+um and you're passing in the data and
+
+
+the component is just going to look at
+
+
+that data and iterate um over the rows
+
+
+and the
+
+
+uh the columns. Actually, this one we
+
+
+did write an implementation for. This is
+
+
+kind of what that would look like. So,
+
+
+you're going to grab the headers uh grab
+
+
+the rows and then within your view
+
+
+template, you can just use Ruby um
+
+
+iteration um and interpolation and stuff
+
+
+like that.
+
+
+This is um another approach to a table
+
+
+component where you could break down
+
+
+each part of the
+
+
+table and you could say um you know my
+
+
+my table component is just going to wrap
+
+
+this one piece of HTML. So it's just
+
+
+wrapping the table tag, but it's going
+
+
+to compose it's going to kind of compose
+
+
+it together. It's going to add maybe
+
+
+some additional markup that you might
+
+
+need. um tailwind classes, that kind of
+
+
+thing. Um so this is another way that
+
+
+you could do it. You could just have a
+
+
+very granular set of components and you
+
+
+just use a lot of them. Um and this is
+
+
+actually how I think pretty much how it
+
+
+works in Ruby UI, right? Um but then you
+
+
+can kind of go further and you can
+
+
+compose it into something that's more
+
+
+like this.
+
+
+Um, and this component I I can show you
+
+
+how this would be implemented, but
+
+
+basically the the interface that you can
+
+
+make from from the component system
+
+
+would be something like this where you
+
+
+can say my table component just takes an
+
+
+innumerable list like users and then I'm
+
+
+going to use um this DSL to to define
+
+
+the columns and then it's going to
+
+
+iterate over that list of users and it's
+
+
+going to execute the proc on the user.
+
+
+Um, and the the advantage of being able
+
+
+to build something like this is that you
+
+
+can think about your tables just in
+
+
+terms of columns. You don't have to
+
+
+think uh you don't have to keep your
+
+
+like your headers separate from your
+
+
+your body and try to keep those two
+
+
+things in sync. They're they're sync by
+
+
+default. Um, I think that's that's all
+
+
+you want me
+
+
+to
+
+
+Oh, so Oh god. Um there's been so much
+
+
+controversy over how fast flex is with
+
+
+um there was there was a benchmark that
+
+
+was run um that had quite small um
+
+
+templates and turns out flex like
+
+
+absolutely destroyed action view in that
+
+
+benchmark. It is not 100% true that flex
+
+
+is uh faster than erb 100% of the time
+
+
+flex does have to do a lot more work
+
+
+when it's rendering the HTML than ERB
+
+
+does. Um, but if you have very small
+
+
+components, it does significantly less
+
+
+work when you're rendering each
+
+
+component. So if you have like a
+
+
+thousand partials, um, that's very
+
+
+expensive to do in action view, it's
+
+
+very cheap to do in flex. So depending
+
+
+on how big you're going to make these
+
+
+things and honestly like it's the way I
+
+
+build views, it's not unrealistic to
+
+
+have a couple of thousand partials or
+
+
+like components on a page. Um, so we're
+
+
+not gonna like I think the Ruby UI
+
+
+website is still claiming 12 times
+
+
+faster. I think silly. Um,
+
+
+um, but I did benchmark it yesterday on
+
+
+my new M4. Um, and this is how fast it
+
+
+was producing HTML. Uh, I think that's
+
+
+fast enough. Uh, that's on a single
+
+
+core. Um, and hopefully that kind of
+
+
+puts that myth to bed.
+
+
+Um, catch me later if you have any
+
+
+questions about that. Um, but it will
+
+
+probably saturate your network
+
+
+connection before before it saturates
+
+
+your
+
+
+CPU. Is that it?
+
+
+I'm I'm
+
+
+worried.
+
+
+Um, because I can see the next slide.
+
+
+[Laughter]
+
+
+Oh, so uh yeah, thank you Joel by the
+
+
+way. Um, so, um, Stephen came to the
+
+
+Litty party and, uh, he told us that the
+
+
+hotel was locked. So, uh, we they were
+
+
+freaking out. They didn't want to sleep
+
+
+in the in the street. So, uh, we went,
+
+
+validated that. We all went tried to
+
+
+open some of the windows, try to try to
+
+
+somehow get in the hotel. No, nothing.
+
+
+So, uh, we all ended up having a
+
+
+sleepover. Um, and I didn't have a
+
+
+picture of that, but, uh, that's a story
+
+
+that I composed. And uh it's all true.
+
+
+So composable components are very
+
+
+essential for
+
+
+everything. That was us this morning. We
+
+
+survived last night. And uh there's a QR
+
+
+of Ruby UI. So go check it
+
+
+[Applause]
+
+
+out. One, two. Wow, that was a plot
+
+
+twist. I didn't expect that. Where did
+
+
+you lose your bow tie?
+
+
+Oh, yeah.
+
+
+I I went to the I I've been traveling
+
+
+quite a bit and uh my clothes were
+
+
+running out so I had to get my uh my
+
+
+clothes washed and dried and my shirt
+
+
+shrank a lot or I got fat so it was like
+
+
+just squeezing me so I couldn't stand
+
+
+it. That's what happened. Okay, that's
+
+
+just a compliment for Roto and good
+
+
+food. Uh okay, any questions?
+
+
+Hi, thanks for your talk. Uh, I have a
+
+
+question about flex, maybe more
+
+
+specific. Uh, how does it play out with
+
+
+Turbo and, uh, basically this new
+
+
+system? So, so we have a flex expert
+
+
+right here.
+
+
+Uh, yeah. So,
+
+
+um, in in Rails,
+
+
+uh, they actually have already I think
+
+
+Vue component did a lot of this work.
+
+
+the team behind view component there's
+
+
+already this abstraction called a
+
+
+renderable
+
+
+uh and almost everything well not
+
+
+everything but almost everything in
+
+
+Rails actually works around this concept
+
+
+of a renderable um or at least accepts
+
+
+this concept of a renderable which is
+
+
+just an object you can call render in on
+
+
+that object you pass it a view context
+
+
+you pass it a block um and so all of the
+
+
+Turbo helpers um everything to do with
+
+
+Turbo actually just work with with Flex
+
+
+because it implements interface. Also,
+
+
+um, Flex has a feature. We haven't made
+
+
+a very big deal about it so far because
+
+
+it's quite early in experimental and
+
+
+we're still figuring out everything
+
+
+about it, but
+
+
+um, it lets you do selective rendering.
+
+
+So, um, so you could configure it that,
+
+
+uh, when you do a turbo frame, it will
+
+
+actually only render the frame that you
+
+
+were looking for. Um, so that's
+
+
+something uh where I think Flex is going
+
+
+to be able to maybe integrate even
+
+
+better with Turbo than anything else.
+
+
+Um so it looks like the Ruby UI project
+
+
+likes this approach of um a large number
+
+
+of atomic components and um and not the
+
+
+sort of common slots approach that you
+
+
+see in view components. I'm just
+
+
+interested in hearing more about why
+
+
+um we don't like slots re so if you're
+
+
+coming from JavaScript slots really
+
+
+aren't a big thing and
+
+
+uh I have the idea that slots kind of
+
+
+limit the functionality like they're
+
+
+very very tied with that component. You
+
+
+can't if if if it's a very micro
+
+
+component that you could use other
+
+
+places you can't do that with slots. So,
+
+
+that's that's the reason.
+
+
+Um, just just one followup. Uh, my name
+
+
+is spelled S T E P H E N. Oh, where did
+
+
+I mess that up? Um, on every single
+
+
+slide.
+
+
+I'm sorry. Okay. Just for the I'll get
+
+
+you drinks later.
+
+
+It's good that guys that you're close.
+
+
+Uh, hello. Thank you for the talk. uh
+
+
+and uh have you ever had a situation in
+
+
+your organization where some uh when
+
+
+some purely uh kind of front end people
+
+
+uh like HTML, CSS, JavaScript people uh
+
+
+face this uh user interface written in
+
+
+Ruby and try to modify anything. So what
+
+
+was their reaction?
+
+
+Ruby is so
+
+
+easy. it just worked and like especially
+
+
+with with uh flex uh if if they mess up
+
+
+HTML, they forget to end something, it
+
+
+shows a very good clear error. So yeah,
+
+
+we we we didn't have much trouble having
+
+
+the team move over to using Flex.
+
+
+Okay, thank you. Can I can I um actually
+
+
+very soon flex is going to have a
+
+
+validator that will mean if you mess up
+
+
+an attribute on an an element like for
+
+
+example you format the date wrong in a
+
+
+time element or you use true when you
+
+
+should have used yes or you use um close
+
+
+when you should have used false. Um,
+
+
+it's going to actually tell you uh
+
+
+because we're writing literal schemas
+
+
+for all of the HTML attributes
+
+
+basically. Um, and so it will actually
+
+
+tell you and it will tell you um, you
+
+
+know, here's how you messed it up.
+
+
+Here's how you can fix it. Here's the
+
+
+documentation on MDN for that attribute
+
+
+on that element. So hopefully that will
+
+
+make it even even easier.
+
+
+All right, any other questions?
+
+
+Let's take a picture in front of the
+
+
+crowd. So, this was the first talk I
+
+
+ever gave at a conference and I want to
+
+
+take a picture to prove that I did
+
+
+it. Can we all put our hands in the
+
+
+air? There we
+
+
+go. Okay, that's good enough. Can you
+
+
+elaborate a little bit more uh how does
+
+
+Ruby UI integrate with CSS and
+
+
+JavaScript? like what's possible, what's
+
+
+not possible there like does it depend
+
+
+on rails pipeline or is it okay if you
+
+
+use something like separate for front
+
+
+end would that work with that as well?
+
+
+So we are right now tied with stimulus
+
+
+um that might change but we made it very
+
+
+very firm efforts to not depend on
+
+
+active support. You can use it I have a
+
+
+Sinatra app working with it. You can use
+
+
+it obviously with Rails. Um, as far as
+
+
+the asset pipeline, as long as either
+
+
+you compile it, point it to the right
+
+
+JavaScript file, you
+
+
+can [ __ ] works. Does it come with its
+
+
+own styles and JavaScript or does it
+
+
+rely on something already existing in
+
+
+the JavaScript community?
+
+
+Uh, we're we're using uh stimulus
+
+
+controllers for for the components. Each
+
+
+component you implemented on your own
+
+
+like the date peakers all of that you
+
+
+implement your own versions of it. Yes.
+
+
+Yeah. Yeah. We're we're not we're not
+
+
+using uh we are using floating UI uh for
+
+
+a couple things. Um and we might
+
+
+introduce a couple other packages for
+
+
+handling accessibility. Accessibility is
+
+
+very difficult and uh I yeah we we might
+
+
+have to reach out for other packages for
+
+
+that.
+
+
+Right now most most of the stuff is
+
+
+pretty slim down like we're not using
+
+
+many other packages.
+
+
+Got it. You're still using Tailwind,
+
+
+right? Oh yeah. Yeah. Sorry. Tailwind.
+
+
+It's um Shad CN is very heavily based
+
+
+off of Tailwind. There's a configuration
+
+
+for it. You can um we copy over the
+
+
+application CSS file with all the
+
+
+Tailwind configurations for that style
+
+
+and uh you can take it and run it run
+
+
+from there, you know.
+
+
+Thanks.
+
+
+Thank you for pointing that out. Okay, I
+
+
+see no. Ah, there's one more.
+
+
+Uh, thanks for the speech. Um, I do have
+
+
+a question about like testing. uh when
+
+
+you render the code and let's say you
+
+
+would like to test like a feature spec
+
+
+like the actual rendered code and how it
+
+
+works. Do you have any like shortcuts to
+
+
+uh to know which element to test from
+
+
+let's say
+
+
+um
+
+
+inspect um to like
+
+
+um make assumptions from the code that
+
+
+uh generated the the component and to
+
+
+test it how it works and if it really
+
+
+like was rendered.
+
+
+So, so right now we're we're taking the
+
+
+string that's being rendered from flex
+
+
+and we're just comparing that. There's
+
+
+other ways with uh with flex 2 now. Um
+
+
+actually you uh yeah so I I don't know
+
+
+if the question is about testing as in
+
+
+automated testing or it sounds almost
+
+
+more like you're asking if you're
+
+
+manually testing can you easily see
+
+
+which component created the the HTML?
+
+
+Actually uh I'm asking about like
+
+
+automated testing in let's say in nspec.
+
+
+So uh currently uh if I would like to
+
+
+test the actual site the actual like
+
+
+view uh I would go through HTML do
+
+
+elements to find the right one. Is there
+
+
+any shortcut to like not have to write
+
+
+all the DOM tree to find the element
+
+
+that I'm looking for? and if it was
+
+
+rendered. Yeah. Um so what what you can
+
+
+do right now is um there's a guide in in
+
+
+the documentation for flex on how to set
+
+
+up a testing helper and you can choose
+
+
+um to to use nooki capibara um or
+
+
+anything that you want to do to pass the
+
+
+HTML it generates and then use that to
+
+
+query it. So you would use a CSS
+
+
+selector. Um hopefully in the future
+
+
+we'll make a version of flex. Stephen
+
+
+mentioned this yesterday. Um, this idea
+
+
+that Flex could actually compile instead
+
+
+of to HTML in a test environment, it
+
+
+could compile to an A that you could
+
+
+then query. I think that we can do one
+
+
+better than that.
+
+
+Um, which is I think that we can make it
+
+
+even faster because in theory, you know,
+
+
+you could just say these are my
+
+
+assertions I want to make about this
+
+
+component. can you pseudo render it in a
+
+
+way that means you can come back and
+
+
+tell me if those assertions would have
+
+
+been met had you been rendering it
+
+
+properly. Um and so you can you can have
+
+
+much faster test assertions. Um and I
+
+
+don't know if we're going to be able to
+
+
+do this or how much work it's going to
+
+
+be, but um there's definitely ways that
+
+
+it can get better. Oh, great. Thanks.
+
+
+Yeah.
+
+
+Um thank you set. Thank you Joel for
+
+
+supporting. Uh big applause. Thank you.
+
+
+Thank you. Thank you.
+
+
+[Applause]

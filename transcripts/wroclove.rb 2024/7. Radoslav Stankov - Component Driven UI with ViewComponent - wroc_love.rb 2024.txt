@@ -1,0 +1,2494 @@
+[Applause]
+
+
+everybody is this on okay great so yeah
+
+
+hello uh I'm radoslav stano for for
+
+
+short R I come from
+
+
+Bulgaria uh I have a newsletter called
+
+
+tips at arank of.com where I roll
+
+
+basically what everything uh all my
+
+
+slides are uploaded in speaker de
+
+
+already because I tend to have a lot of
+
+
+cot in my slides and I noticed that I
+
+
+present some fast and people try to take
+
+
+pH to and I switch the slides so don't
+
+
+worry about it all the slides are over
+
+
+here so if you again don't need to rush
+
+
+to make all the photos for the slides
+
+
+they will be online uh so I used to be
+
+
+the CTO of produ hun where we had this
+
+
+architecture which actually I really
+
+
+liked um I was really happy with this
+
+
+architecture we had like a rails backend
+
+
+we had a graph C layer uh which was
+
+
+connecting Apollo next GS and it was
+
+
+great it fit our needs quite well and
+
+
+when I was at produ hun I started this
+
+
+side project uh called angry building
+
+
+and I was joking that the goal of the
+
+
+company is to rename the building to
+
+
+happy building because everybody who
+
+
+uses it should be happy after that so
+
+
+this is basically an RP system for
+
+
+facility
+
+
+management and it started as a side
+
+
+project it's something I was doing in my
+
+
+weekends in my spare time so when I was
+
+
+starting the system I put a lot of
+
+
+thought into architecturing it like what
+
+
+are the pieces which I wanted to use so
+
+
+obviously I want to use Ruby on Rails
+
+
+because I'm really good with that uh I
+
+
+like JavaScript but I didn't want to
+
+
+write a lot of JavaScript because it's
+
+
+harder to test I didn't try to write a
+
+
+lot of CSS even though again I'm very
+
+
+big I like CSS but I wanted to try
+
+
+Tailwind I wanted to have extensive
+
+
+endtoend tests with basically because
+
+
+it's like a business software it's very
+
+
+important to know work end to endend
+
+
+that was also the reason why I removed
+
+
+JavaScript from it and the big focus of
+
+
+the call Project should be domain I
+
+
+didn't need to think a lot around like
+
+
+Reinventing the wheels and building
+
+
+Technologies so I laugh rub
+
+
+a life a love rails but there is always
+
+
+one butt in the story so uh the first
+
+
+thing is in the rails folder when we
+
+
+open a standard rails project there is
+
+
+two folders that always so there is this
+
+
+folder called helpers which most of you
+
+
+most probably are familiar with there is
+
+
+this folder named views and when you
+
+
+think about those folders this is the
+
+
+thing which gets to my mind this is how
+
+
+I feel about those it's like you start p
+
+
+pulling a partial you go to a helper
+
+
+from the helper another partial another
+
+
+one another one and this is how it feels
+
+
+and it gets messy very quickly and for
+
+
+eight years ago before I was doing a lot
+
+
+of react and I started thinking a lot in
+
+
+terms of component when I built my uis
+
+
+so I was fortunate that GitHub released
+
+
+this gem Co view components which was a
+
+
+system to build
+
+
+components in the view layer very
+
+
+smartly named it very obvious so this is
+
+
+the website this is how the view
+
+
+components work uh they are if you think
+
+
+here is an example if you have let's say
+
+
+this field set where you have to enter a
+
+
+bank account if you think about it you
+
+
+have a component which is called field
+
+
+set the field set component have a title
+
+
+and content and in your rubby code what
+
+
+you do is you say oh I'm going to render
+
+
+a new instance of my field set component
+
+
+and it's going to have the form and the
+
+
+form going to have the inputs so this is
+
+
+how the view component is going to look
+
+
+like you just inherit from view
+
+
+component base it accepts a title you
+
+
+add it as an instance variable and then
+
+
+you have this really nice earb template
+
+
+which is your field set where you can
+
+
+basically make the field set
+
+
+and where does this content come from
+
+
+like the F set had two things it has
+
+
+component uh it has a text and title and
+
+
+this content is basically what's the
+
+
+block passed to your view component so
+
+
+in this way you have something simple uh
+
+
+one and that's it that's the view
+
+
+component because we are in the Ruby and
+
+
+rail world we are really great with
+
+
+having awesome tools and view component
+
+
+have this thing called previews and
+
+
+previews basically allows you to render
+
+
+your component in a safe space where you
+
+
+can see how it looks uh it's very
+
+
+similar to how when you do mailers you
+
+
+you create your mail template and you
+
+
+can see how your mail looks like and if
+
+
+you add a gem called lookbook This is
+
+
+how you get for free basically you can
+
+
+boast all your components with their
+
+
+previews you can check them
+
+
+and yeah and stuff works and you have
+
+
+the achievement you basically are
+
+
+experts in view components that's it my
+
+
+job here is done and I have half an hour
+
+
+more so I mean you're an expert but
+
+
+let's go to the next level let's see
+
+
+more because that's all to it like view
+
+
+components that's the way you use it but
+
+
+the thing about it is the devil is
+
+
+always in the details and now you have
+
+
+couple of questions
+
+
+what goes to the helpers what goes to My
+
+
+Views what go what's a partial what's a
+
+
+view component and I have
+
+
+this antipattern in a raos app like I
+
+
+really hate when I open a view and I
+
+
+notice this just a wall of partials
+
+
+which as we learned in the previous
+
+
+panel it's very slow and if somebody
+
+
+sees that and say oh now we're going to
+
+
+use view components I'm going to do
+
+
+stuff like that it's the same yeah it's
+
+
+a bit faster but still it's it doesn't
+
+
+help us it doesn't help us so I have
+
+
+this mental checklist of when I'm going
+
+
+to use a view component and where I'm
+
+
+not because every tool has its place and
+
+
+we as Engineers need to know when to use
+
+
+one
+
+
+so the way I use view components is
+
+
+first if I noticed group of code that's
+
+
+used between two
+
+
+controllers I create I move it into a
+
+
+component if it's something
+
+
+reusable if uh I'm having a view helper
+
+
+that was generating
+
+
+HTML more than like two three lines I'm
+
+
+also moving it to a view component if I
+
+
+have have complicated if else logic like
+
+
+something really deep where the
+
+
+conventional logic is extract a
+
+
+presenter decorator or whatever I move
+
+
+this to a view compos component because
+
+
+the view components are a nice place for
+
+
+you to put logic in that you can
+
+
+actually
+
+
+test also if I have to copy paste a lot
+
+
+of code like I noticed I'm pasting this
+
+
+pattern changing couple of lines here
+
+
+I'm making my copy pasting
+
+
+easier also I'm using view components if
+
+
+I have JavaScript in the mix like as
+
+
+well as as we live we have to do
+
+
+JavaScript at some point so if I have a
+
+
+component that's connecting to a
+
+
+JavaScript usually it's something that's
+
+
+reusable as well so I wrapped it in a
+
+
+view component so I can for example
+
+
+connected to a stimulus or I mean I
+
+
+don't use jQuery but you can imagine
+
+
+jQuery where I don't use view components
+
+
+which I think it's important like the
+
+
+first place is I still use
+
+
+partials in one place and that's
+
+
+underscore form like I can imagine you
+
+
+all created this partial code SC form
+
+
+and it's like okay there is this form
+
+
+that's basically the same as ADD and
+
+
+create it's fine like basically this is
+
+
+the only partial I use it works it's not
+
+
+like a performance bottleneck and it's
+
+
+fine it's not like a cardinal or
+
+
+anything where I use view helpers I
+
+
+still have like I think 20 view helpers
+
+
+and they're basically helpers like I
+
+
+have a function called format money
+
+
+which doesn't make sense to be a
+
+
+component it's basically a function that
+
+
+gets a big decimal and formats it into a
+
+
+money also I don't extract view
+
+
+components form messy HTML I'm fine of
+
+
+having like a very messy HTML in one
+
+
+page because it's in one page and if I
+
+
+try to make it clean it's harder to fix
+
+
+it later like I have this philosophy of
+
+
+like if I have a messy code but it works
+
+
+I just isolate it I keep the messiness
+
+
+closed so the next time I see the
+
+
+messiness and I have a better idea how
+
+
+to do it I do it so it's isolated and
+
+
+this is basically my checklist for view
+
+
+components the way I think about them is
+
+
+think about like that you have helpers
+
+
+those helpers are used inside of the
+
+
+view components and view components
+
+
+make domain components like the UA
+
+
+component and the domain component so
+
+
+those this is another concept which I'm
+
+
+stealing from my react World where you
+
+
+think about like this I have a helper
+
+
+called format money and format money
+
+
+formats money I also might have a money
+
+
+component where for example if it's
+
+
+positive it's it's green if it's
+
+
+negative it's red if it's zero it's blue
+
+
+it might have some UI then I have a
+
+
+product price component where I give it
+
+
+it an instance of product and it says oh
+
+
+this is the product price and also it
+
+
+might have like a discount code or
+
+
+something else but that's how you I
+
+
+layer the component logic team
+
+
+myself what's not here is the header
+
+
+component because it's not reusable it's
+
+
+for one
+
+
+page and this is how I structure the
+
+
+components but I promise you a lot of
+
+
+code and again talk chip I can talk you
+
+
+all that theories and theories are
+
+
+really great it's very nice to talk
+
+
+about them but let's see something real
+
+
+and uh let's see how we can show you
+
+
+some real code so the first thing is I
+
+
+really don't like to do render fi set
+
+
+component title it's very long so I
+
+
+created this helper called component
+
+
+where you just give it a symbol you pass
+
+
+whatever it's basically doing this very
+
+
+simple interpolation yeah it do
+
+
+performance overhead it's not very slow
+
+
+though but it works it haven't sold my
+
+
+application and it's a nice and you
+
+
+would see to my code I'm just going to
+
+
+use this component helper just makes the
+
+
+reading kit easier so this is a real
+
+
+page for my application it's basically
+
+
+half of my application look like that
+
+
+because it's an Earp system so it's
+
+
+basically rendering Excel with fancy
+
+
+fonts so let's break this down so if you
+
+
+think about it the app has couple of
+
+
+components
+
+
+here it has the navigation the page
+
+
+header the filter form the stats and the
+
+
+table areas and those things are
+
+
+components navigation component page
+
+
+header component filter form component
+
+
+stats component and table component and
+
+
+those are the reusable components so
+
+
+this is how the page looks like if you
+
+
+see it fits on one slide it's very
+
+
+readable you totally see what I mean
+
+
+so again it fits on one slide
+
+
+technically and we on a technical
+
+
+conference but yeah let's Zoom a bit
+
+
+because uh let's focus on this part
+
+
+first so this is one component which
+
+
+basically presents some statistics about
+
+
+the table I called it the stats
+
+
+component I'm very good with literal
+
+
+names so the stats component code this
+
+
+is the code from the page looks like
+
+
+that and let me Zoom a bit just because
+
+
+to make it a bit more visible to you all
+
+
+and let's focus on the page on the code
+
+
+this is the start component the stats
+
+
+component uh again it uses my component
+
+
+helper here there is this renders here
+
+
+it looks like a fancy DSL but there is
+
+
+nothing fancy here it's very simple so
+
+
+if
+
+
+we think about uh our UI there is this
+
+
+concept of slots like a lot of the more
+
+
+reusable things like if you make a UI
+
+
+component often they have those slots
+
+
+like holes you can put stuff in and view
+
+
+components have this concept of slots as
+
+
+well so if you think about the stats
+
+
+component it's not it's list of smaller
+
+
+stats it shows you a list of stats and
+
+
+every stat is its own status stats
+
+
+number
+
+
+and in the future I might have something
+
+
+else I can St have stats string or
+
+
+whatever so far I just have stats
+
+
+numbers and this is the definition of
+
+
+the stats component stats component just
+
+
+have this render many numbers which is
+
+
+stats number
+
+
+component and that's the whole code of
+
+
+the whole component this is the
+
+
+production variant I haven't removed any
+
+
+sensitive data from here it's like that
+
+
+and
+
+
+um one thing I do here I have this Alias
+
+
+number with number
+
+
+is view components have this thing where
+
+
+you say render manyu and render manyu
+
+
+would give you this method code with
+
+
+number which would create a new instance
+
+
+of this component so it makes this DSL
+
+
+and I don't like with number it doesn't
+
+
+sound good so I just as it to number so
+
+
+I can say number arguments and this
+
+
+would create the new instance also again
+
+
+I have the application component because
+
+
+I put some stuff there uh what we'll see
+
+
+later
+
+
+the earb file of this component is very
+
+
+simple it renders uh DL so it's actually
+
+
+even semantically right and it basically
+
+
+Loops to the numbers and that's it
+
+
+renders them and works the stats number
+
+
+component are a bit more complex they
+
+
+have
+
+
+um so they have this attributes which is
+
+
+the title the amount from color link
+
+
+because you make them clickable and the
+
+
+component itself just gets those data
+
+
+and this is most of the components you
+
+
+do are just like that just
+
+
+initializers and uh oops wrong button so
+
+
+this is one of the functions in my
+
+
+account application component which is
+
+
+one of the hacks I have is I have this
+
+
+Fetch with fullback where I passed a
+
+
+color and if the color doesn't exist in
+
+
+the list in it's going to capture an
+
+
+exception in my error reporting in
+
+
+development and test this is blowing up
+
+
+in production it's being clocked but it
+
+
+renders default things to the user so I
+
+
+use this hack in a lot of places in my
+
+
+application where when I build the app
+
+
+you as developer get all the crap from
+
+
+the app but the users get the the hidden
+
+
+behavior and you Tres the notification
+
+
+so it's a nice strategy if sometimes you
+
+
+need to throw an error to to be like a
+
+
+presentative but you don't want the
+
+
+users to know about that so this is the
+
+
+component not nothing special another
+
+
+component on top of that is this filter
+
+
+form so also from the panel discussion
+
+
+there was the question about the 20
+
+
+filters I also have 20 filters even more
+
+
+in some places so much that I needed to
+
+
+build a custom UI for those and let's
+
+
+see how these components look like so
+
+
+let's scroll down and uh let's focus
+
+
+here I'm doing something which I call
+
+
+the Builder pattern and what the Builder
+
+
+pattern does is I'm making this form
+
+
+component it's yelling a form object
+
+
+which is very similar to the form object
+
+
+that we have and laugh and hate in the
+
+
+same time with the form helpers in rails
+
+
+where I have custom builder methods
+
+
+where to present what I'm the filter
+
+
+form for so what I have here is I search
+
+
+by query I search I se I have a select I
+
+
+have date range it's basically a simple
+
+
+form and in my UI I just Define that and
+
+
+how does this work so this component is
+
+
+a bit more
+
+
+complicated actually I have implemented
+
+
+this component before I knew slots
+
+
+existed in review components because who
+
+
+reads docs noway so I implemented it
+
+
+before slots and it works and it works
+
+
+well and I'm I mean I'm not scared I'm
+
+
+to touch it I'm lazy to touch it so the
+
+
+way I implemented this is I have two
+
+
+attributes exposed one is what's the
+
+
+action which is like the
+
+
+URL which by default is no that means
+
+
+it's the same page and inputs which is
+
+
+just an array
+
+
+and I have this Mo hack before render
+
+
+content uh so in view
+
+
+components the moment you call content
+
+
+like the block this uh let me come back
+
+
+so this block here is only executed when
+
+
+you request the content valuable uh if
+
+
+you have slots they are always executed
+
+
+so this is like one of my hacks to
+
+
+basically render Uh custom builder
+
+
+pattern if I had slots here I wouldn't
+
+
+need that so let's go to all the methods
+
+
+so my search is
+
+
+basically my inputs is basically a two
+
+
+dimensional array a label plus
+
+
+uh something and something is something
+
+
+being rendered as HTML here I'm
+
+
+rendering uh another search input
+
+
+components and I'm basically giving the
+
+
+name plus params and y
+
+
+y the select I'm B I'm just using the
+
+
+normal HTML select from rails like the
+
+
+select helper it's select tag collection
+
+
+from select it has a class if I need the
+
+
+class and I just entered it it's just a
+
+
+normal select I don't need anything more
+
+
+in the future when I'm less lazy or my
+
+
+business requires me this select would
+
+
+become some fancy JavaScript select or
+
+
+something like that now this
+
+
+works uh and yeah again why don't I
+
+
+don't use slots because I'm I
+
+
+implemented this before slots and I'm
+
+
+too lazy to change that texts text again
+
+
+just input text nothing special nothing
+
+
+fancy it
+
+
+works uh another trick I have because my
+
+
+application is multilanguage so it's
+
+
+basically have to work in many languages
+
+
+uh I have I found this hack and I have a
+
+
+this helper called T label and tlel what
+
+
+it does is it check if the value is
+
+
+blank it returns a blank string it has
+
+
+cases where I need that if it's a string
+
+
+it renders it if it's a symbol it
+
+
+basically tries to find it in the
+
+
+translation table and in this way I can
+
+
+just say give me a text and a symbol
+
+
+name and it's going to translate this
+
+
+name into the valous languages so this
+
+
+is like an interation
+
+
+trick date
+
+
+range I here actually use two inputs I'm
+
+
+a bit cheating and if I want to have
+
+
+more like a fancy calendar or something
+
+
+I can replace that at some point right
+
+
+now I don't so I just have this and the
+
+
+way I render this component it's very
+
+
+simple just look through the elements
+
+
+show the label and show the input
+
+
+nothing more nothing less and this is
+
+
+how this component looks like and the
+
+
+nice thing about this is I have like 10
+
+
+other methods here rendering 10 other
+
+
+inputs types and if I need to change
+
+
+them if I need to change like the fancy
+
+
+select the fancy calendar I have like a
+
+
+very ugly looking um amount and
+
+
+searching for money input if I want to
+
+
+change that to my whole application make
+
+
+it a bit more ux friendly I can do it in
+
+
+one place I don't need to change
+
+
+anything else in my system my system
+
+
+just is changing in one place and this
+
+
+is like the level of abstraction where
+
+
+where I like to
+
+
+be so let's go to another place um this
+
+
+thing the header like I told you doesn't
+
+
+make make sense to create like a header
+
+
+partial in this case there is logic here
+
+
+so it makes sense for me to make this a
+
+
+component so how does this look like um
+
+
+so I have a component called page
+
+
+header I know there's gems for that and
+
+
+I hate using them for breadcrumb so I
+
+
+just got my own breadcrumbs which is
+
+
+basically an array so I have this header
+
+
+and the header had breadcrumbs
+
+
+and the breadcrumbs accepts various
+
+
+things like for example if it accepts
+
+
+like a domain object which is my case
+
+
+building it knows that it uses the name
+
+
+of the building proper links and yada y
+
+
+y yada I have Herer action and header
+
+
+actions is those buttons over here so my
+
+
+whole page header component has three
+
+
+things in it it has the breadcrumb the
+
+
+page title and it has these um
+
+
+actions so uh how is this
+
+
+implemented uh I have couple of slots
+
+
+here so here I have the slots from
+
+
+breadcrumbs they're called breadcrumb
+
+
+items because I have a helper called
+
+
+breadcrumbs uh I have action slot which
+
+
+is an action slot uh if you notice here
+
+
+I'm like aliasing with action slots
+
+
+because it doesn't look very very well
+
+
+to just
+
+
+actions which reads better for
+
+
+me uh here the title I'm using another
+
+
+of my t- magic helpers it's called the
+
+
+display this is like the heart of my
+
+
+internalization system uh this is the
+
+
+whole the the whole way this thing works
+
+
+so it basically gets an object and tries
+
+
+to interrogate it into how can I
+
+
+actually display actually with switch
+
+
+this can actually be changed switch now
+
+
+when I look about it with the new
+
+
+pattern matching stuff but again too
+
+
+lazy to change that uh and it's bad
+
+
+thing to think about it on the stage but
+
+
+yeah so the the thing this thing gets an
+
+
+object and it tries to interrogate it if
+
+
+you are a symbol you will be translated
+
+
+if you are string you're going to be
+
+
+displayed then if you have this I call
+
+
+it display name this is how the world
+
+
+sees you how you are going to be
+
+
+displayed and the other one is when I
+
+
+didn't have the display name inter I Ed
+
+
+name or title uh and again they have
+
+
+different semantic meanings so if you
+
+
+have a name I show you the name if you
+
+
+have a title I show you the title
+
+
+otherwise I convert you to
+
+
+string uh maybe I should lock an error
+
+
+here but sometimes there is nulls so uh
+
+
+yeah another cool trick here
+
+
+is you can access rail helpers via every
+
+
+view component so every view component
+
+
+has rails helpers and rails helpers have
+
+
+this content for which you can use to
+
+
+set the page HTML title it's a nasty
+
+
+hack not proud of that but it works
+
+
+really well to sync your header title
+
+
+with the page title you have it in
+
+
+single
+
+
+way here
+
+
+oops here another thing I do here is
+
+
+before
+
+
+render I'm calling this function I call
+
+
+it iner title because I started using
+
+
+like oh I'll pass a title I'll p pass a
+
+
+title here I'll pass title here I'll
+
+
+pass title here and this get really
+
+
+boring and I got very TI tired of that
+
+
+and I had and I found a formula which is
+
+
+basically the controllers have names and
+
+
+resources have names and I have
+
+
+internalization system so what I do is
+
+
+if you don't give me an explicit title
+
+
+for the page I'm going to infer it and
+
+
+I'm going to check if you are an index
+
+
+you have the name of your index in the
+
+
+translation table and it's always Pages
+
+
+underscore title whatever whatever
+
+
+otherwise I'm getting the the
+
+
+name the nor the
+
+
+modularized and because this is already
+
+
+being translated in some for some other
+
+
+reason I get translated that so I don't
+
+
+need to deal much with the
+
+
+translations and this is how the page
+
+
+HTML looks like and this is very clean
+
+
+HTML it's nothing more logic and the
+
+
+whole component removes a lot of area of
+
+
+for my app and all my pages are very
+
+
+consistent I have everything I want and
+
+
+how much time more we have oh great so
+
+
+we get to the big boy uh the table
+
+
+component so uh the table component is a
+
+
+component where it has a weird
+
+
+history uh I before few components like
+
+
+10 years ago I needed to make an admin
+
+
+panels and I needed tables and I created
+
+
+a helper we generated tables and I
+
+
+basically copy pasted this thing for
+
+
+years and just wrap it around like a
+
+
+view component and right now it's a view
+
+
+component but it started like basically
+
+
+a view helper so this is how the table
+
+
+component looks like you just say
+
+
+component table you give it a
+
+
+collection and you can say and you need
+
+
+to use the builda pattern
+
+
+for showing like what column it is like
+
+
+what are the columns
+
+
+and a column can be a
+
+
+record which can be a name and it uses
+
+
+the property itself of the record Being
+
+
+displayed the record can be an apartment
+
+
+that means this is like the apartment of
+
+
+this building
+
+
+object I can get like a block where I
+
+
+buil like a custom logic in this case
+
+
+I'm showing some
+
+
+documents um I can have dates I have
+
+
+money I mean my application have money
+
+
+I'm not sure how much money I have but
+
+
+the application has money so I have the
+
+
+money component here uh and yeah this is
+
+
+a very nice way to define table so far
+
+
+and over the time I have added various
+
+
+columns so let's see how this is
+
+
+implemented also one thing to notice
+
+
+here is I'm using components inside of
+
+
+components so for example I have a
+
+
+component named a batch component and
+
+
+this is a component that R like a batch
+
+
+which is basically half a circle with
+
+
+like different colors and I have this
+
+
+component with a very unique name called
+
+
+uh let me read it because it's very it's
+
+
+transaction kind batch component which
+
+
+you know it's very Gable if you need to
+
+
+replace it which gets a transaction and
+
+
+knows what kind of batch it can render
+
+
+to this transaction imagine in other
+
+
+application that transaction can be
+
+
+pending transaction can be failed
+
+
+positive negative you can add a lot
+
+
+business logic and hide that business
+
+
+logic to how to display in single
+
+
+place uh one thing where I used helpers
+
+
+is I like nice nice the code to look
+
+
+nice so I for buttons I have my button
+
+
+component and I actually extracted this
+
+
+very recently before for buttons I just
+
+
+had like a button act button helpers but
+
+
+I just have those helper methods because
+
+
+it
+
+
+it was kind of un natural to write
+
+
+component button whatever whatever and
+
+
+to do like
+
+
+component compared to like just say Okay
+
+
+butt an action also one advice to
+
+
+everybody if you're making a new system
+
+
+don't and it's very tempting when you
+
+
+make a UI system to start to extract
+
+
+components from component name button
+
+
+leave the button component last like
+
+
+button components are one of the most
+
+
+used components in your apps a lot of
+
+
+opinions about the buttons and there is
+
+
+a lot of variance of the buttons so
+
+
+don't overe extract button components
+
+
+like the worst component you can start
+
+
+your design system from is a button
+
+
+because there are too many of them and
+
+
+there will be too many of them
+
+
+so most of the time you need to extract
+
+
+a button not Implement a button and then
+
+
+use it just friendly advice you'll thank
+
+
+me later
+
+
+uh so uh the table
+
+
+component table component just have two
+
+
+Fields records and
+
+
+columns and here I have two things one
+
+
+is for formatting money and formatting
+
+
+dates uh and the initializer just
+
+
+receives a list of records and it
+
+
+creates an empty columns array I have my
+
+
+for render
+
+
+hack um and this is how the columns look
+
+
+like so every column is just a plain
+
+
+Ruby object called table column it's
+
+
+that accepts name classes format which
+
+
+is something that that can you can call
+
+
+call on so basically a
+
+
+function uh helpers which are the rails
+
+
+helpers for rendering whatever and if
+
+
+it's a block I'm just bypassing the
+
+
+block so this is every column so with
+
+
+this method you can Implement everything
+
+
+in this table so all my helpers are just
+
+
+using this thing I can say column name
+
+
+number class number why do I need class
+
+
+for number because you want all the
+
+
+numbers to be on the on one side and be
+
+
+always sorted uh why I want it for time
+
+
+because there was something for time and
+
+
+for I want to say okay I format the time
+
+
+record is a bit more
+
+
+complicated uh with record what I do is
+
+
+I'm getting the record and I'm saying
+
+
+okay um this attribute name the second
+
+
+argument here is the attribute name and
+
+
+I'm getting one of the properties of the
+
+
+record and I'm trying to find the link
+
+
+for it I'm using my friend T display
+
+
+here I have this helper called routes uh
+
+
+record path which basically for every in
+
+
+my domain system can render a route and
+
+
+here is where the itself hack works so
+
+
+in Ruby every object has a property
+
+
+called itself which returns itself so I
+
+
+don't know if it's meant for uses like
+
+
+mine to to be able to say oh my
+
+
+attribute is itself so it renders the
+
+
+class but it works so yeah the record is
+
+
+a bit more complicated and the table
+
+
+column it's actually quite short and
+
+
+that's the whole code I haven't I think
+
+
+I removed two comments here because I
+
+
+forgot what they were uh for what the
+
+
+code was so again I'm just getting a lot
+
+
+of properties and I have two methods
+
+
+render header which renders me the
+
+
+header of the table and I have a render
+
+
+cell which is the whole logic where you
+
+
+basically render all the cells so render
+
+
+sales does some voodoo magic to get the
+
+
+block content it uses the display to do
+
+
+a lot of stuff but again it's something
+
+
+that you do once and the table itself
+
+
+it's a lot simpler you just Loop through
+
+
+the columns and for each column you use
+
+
+the column thingy to
+
+
+render either the header either the cell
+
+
+and if it has pagination you show the
+
+
+pagination if it doesn't have pagination
+
+
+you don't do it so notice this works
+
+
+with active record associations it works
+
+
+with paginated things it works with
+
+
+arrays
+
+
+so it's like a very simple grid table
+
+
+nothing fancy and over the time again I
+
+
+changed its
+
+
+implementation so yeah that's uh the
+
+
+whole uh system and how it works I
+
+
+wanted to show you some real Cult of
+
+
+view components because they're very
+
+
+simple like when you you become expert
+
+
+for like five minutes and this could
+
+
+have been the whole presentation but I
+
+
+think there is value of like showing
+
+
+stuff in real life like the the dirty
+
+
+stuff like yeah so yeah thank
+
+
+you yeah the slides are here thank you R
+
+
+do we have any
+
+
+questions thanks uh do you have
+
+
+experience with react and what is your
+
+
+attitude to it oh yeah I mean I have
+
+
+plenty of experience with to react uh I
+
+
+used to organiz can you compare this
+
+
+solution with direct and your feelings
+
+
+about uh so they're very different like
+
+
+they have different uh value
+
+
+propositions in my opinion like uh I
+
+
+have for this company I have a mobile
+
+
+app which is react native which is a
+
+
+very like the same way view components
+
+
+was a great solution for the back end
+
+
+react native was a great solution for
+
+
+the mobile experience so they are in my
+
+
+opinion you need to think about what
+
+
+interactiv ability your application
+
+
+needs and what is the tradeoffs like for
+
+
+example if when I was the in prod hunt
+
+
+we use next GS with react if I use view
+
+
+components with the rails way there I
+
+
+would hate myself if I use SGS
+
+
+with uh react for my for angry buildings
+
+
+back end I would have hate myself like
+
+
+there is this balance of is your
+
+
+application needing this Technologies
+
+
+can your applications take the
+
+
+constraints and the disadvantages of
+
+
+these Technologies because every
+
+
+Everything is a trade-off and you have
+
+
+to think about each technology comes
+
+
+with its benefits hopefully it has
+
+
+benefits and it has its drawbacks and
+
+
+you need to kind of balance that in my
+
+
+in in in these cases like my previous
+
+
+company and this company they were
+
+
+totally different products the
+
+
+interaction ability model were very
+
+
+different and and the teams the
+
+
+constraints were very different and
+
+
+again I can talk for hours why one is
+
+
+better but talk come to me afterwards I
+
+
+give
+
+
+more okay any other
+
+
+okay so one of the um advantages often
+
+
+presented for view components is
+
+
+testability I'm interested in your
+
+
+experience um do you tend to heavily
+
+
+unit test view components not um and
+
+
+what your thoughts are yeah so uh it's
+
+
+Advantage for testing what I I don't do
+
+
+unit tests I do smoke tests so uh let me
+
+
+show you this
+
+
+uh so uh as I mentioned view components
+
+
+have this awesome featured called
+
+
+previews which oh my God this was too
+
+
+long guys how did you so lookbook uh
+
+
+like you you make those previews so for
+
+
+most of my components I have those those
+
+
+previews that work like M's previews
+
+
+lookbook uh like view components renders
+
+
+those in a page so what I do is capara
+
+
+test that goes to each of those pages
+
+
+opens it and makees sure it doesn't blow
+
+
+up and this is well enough for me
+
+
+because uh I have end to end test for
+
+
+all the business logic and all the
+
+
+business functionality so I know stuff
+
+
+function it works I have most of the
+
+
+logic in my components if it's something
+
+
+more complex it's moved to like a
+
+
+business service object or whatever and
+
+
+I make sure I have smoke test for those
+
+
+things don't blow up usually what's more
+
+
+useful is having this lookbook where I
+
+
+can check oh how does this look with
+
+
+this variant of UI with this variant of
+
+
+UI with this variant if I was making
+
+
+like a real Library I would have this
+
+
+would be a nice way to do like visual
+
+
+tests where I render make a screenshot
+
+
+and apply but I don't need
+
+
+that okay any other
+
+
+questions all right let's take a break
+
+
+but first let's uh give a appla to R
+
+
+thank you very much thank you great
+
+
+presentation

@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "planet-knowledge-graph": {
+      "command": "./bin/mcp_server"
+    }
+  }
+}

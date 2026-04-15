@@ -1,0 +1,3739 @@
+thank you so much for this warm welcome
+
+
+i'm actually really surprised uh by i'm
+
+
+not not surprised like positively uh
+
+
+emotional about this turn up i wasn't
+
+
+sure
+
+
+if i'm gonna speak in front of five or
+
+
+ten people but apparently there's lots
+
+
+of people who
+
+
+came to this conference on a friday
+
+
+night which is great i almost didn't
+
+
+make it because
+
+
+my train got cancelled and then i had to
+
+
+take another train and another train and
+
+
+another train and the fourth one to get
+
+
+here and so i literally just arrived
+
+
+five minutes
+
+
+ago or something like that but hey
+
+
+everything is cool the projector is
+
+
+working my laptop is working
+
+
+you're all here this is great
+
+
+who's staying till monday
+
+
+the same eight people who don't know me
+
+
+okay so i don't know if you have noticed
+
+
+but this room is uh heads like 45
+
+
+degrees i will start sweating it's not
+
+
+because i'm nervous it's because it's
+
+
+just
+
+
+very warm in here
+
+
+um but yeah keep you keep your keep your
+
+
+beanies on like this this one guy with a
+
+
+red beanie sitting there and
+
+
+not sweating i don't know what's going
+
+
+on but i'm impressed
+
+
+yeah so in order to um in order to uh to
+
+
+to make this talk something new i
+
+
+actually had to do some a little bit
+
+
+unpleasant experience
+
+
+i had to go through my own talks
+
+
+and it's kind of
+
+
+um
+
+
+the content was okay but the the way
+
+
+they are presented is always a mixed
+
+
+experience so i had to watch the talk i
+
+
+was giving in roslove i think it was
+
+
+2018. it was called
+
+
+super ain't super and then blah blah
+
+
+blah functional programming blah blah
+
+
+blah ruby or something like that yeah so
+
+
+so i i just wanted to make sure that i'm
+
+
+not talking about the same stuff again
+
+
+and i also had to watch this other talk
+
+
+it was called reform what went wrong it
+
+
+wasn't an
+
+
+ode to uh mistakes i've made when i was
+
+
+designing the the reform gem i actually
+
+
+this was the talk
+
+
+i gave in
+
+
+in in odessa in 2000 i think 17 or 18
+
+
+back then you could
+
+
+there was already a small war going on
+
+
+the russians only claimed crimea back
+
+
+then but at least there were no bombs
+
+
+flying it was a bit
+
+
+um it was a
+
+
+yeah it was not so cool and
+
+
+i mean this is a bit off topic but i
+
+
+just remembered that the conference
+
+
+organizers they had like two problems
+
+
+the first problem was uh uh okay there's
+
+
+some small war going on in our country
+
+
+should we do a conference or not and the
+
+
+second
+
+
+problem they had was initiated by a
+
+
+handful of
+
+
+self-acclaimed social justice warriors
+
+
+that were claiming that this is a white
+
+
+male-only conference and how
+
+
+unheard of it is to have a conference
+
+
+happening with only white speakers who
+
+
+are males and it was i don't know it was
+
+
+kind of bizarre because i think
+
+
+it was really hard for the conference
+
+
+organizers and uh yeah it's even more
+
+
+bizarre to think of them right now
+
+
+because they are all like fighting
+
+
+actually they send me photos i'm in
+
+
+touch with them or they are escaping
+
+
+from
+
+
+um
+
+
+from the country and this kind of stuff
+
+
+so yeah whatever i mean let's not get
+
+
+too political we are here to talk about
+
+
+beautiful stuff like code and um i don't
+
+
+know what else software concepts
+
+
+drinking and all this
+
+
+um so in case you haven't noticed i'm
+
+
+talking about the reform gem
+
+
+not about politics the reform gem is um
+
+
+some ruby library that brings you form
+
+
+objects so it basically gives you a dsl
+
+
+to or not a dsl a declarative api
+
+
+let's be uh precise here we are at the
+
+
+computer science university
+
+
+uh so it gives you an api to define
+
+
+forms and it gives you an api to to to
+
+
+render those forms and you can validate
+
+
+incoming data through that form and you
+
+
+can also
+
+
+persist data
+
+
+through the form into a database or
+
+
+something and the beautiful thing about
+
+
+reform is that it works with apis and
+
+
+with html views so it's not limited to
+
+
+any use case
+
+
+and
+
+
+so this is the old rails logo i i didn't
+
+
+want to take the new ruby on rails logo
+
+
+because i can't pay the licensing fees
+
+
+to david heinemer hanson and i think
+
+
+he's rich enough already
+
+
+so the reason we came up with the reform
+
+
+was um that i was working at a company
+
+
+back then back in the days in australia
+
+
+in a publishing company and we were
+
+
+using
+
+
+accepts nested attributes for in it's a
+
+
+rails feature of active record you all
+
+
+know it you love it i can see it like i
+
+
+see hard hearts in your eyes and
+
+
+people start kissing
+
+
+so um if you in case you have not in
+
+
+case you have not used accepts nested
+
+
+attributes for i will show you real
+
+
+quickly how it works
+
+
+the beautiful feature in rails so let's
+
+
+say you have a form and the form is
+
+
+supposed to create a product and the
+
+
+product has a name and the product made
+
+
+might also have a linked model called
+
+
+variant and variant has a size it's just
+
+
+an example i made up i'm not sure all
+
+
+the examples are complete [ __ ] but
+
+
+you're smart enough to abstract it to
+
+
+something meaningful so yeah you have
+
+
+this you have this product um
+
+
+model and you want to have something
+
+
+like a variant being created
+
+
+automatically when you submit a form
+
+
+like this
+
+
+so basically when you submit this form
+
+
+what you get is this hash and the hash
+
+
+has like product name and then it has
+
+
+like variant attributes it's like super
+
+
+magical and then in variant attributes
+
+
+you actually have the attributes for
+
+
+your variants that one you want to
+
+
+create
+
+
+i mean that's how rails does it out of
+
+
+the box and all the form helpers work
+
+
+with it automatically and it's kind of
+
+
+cool because um
+
+
+you run that hash through product create
+
+
+i'm not sure if it's pro it's if it's
+
+
+create or if it's update attributes or
+
+
+something but you rails basically does
+
+
+it automatically for you so you get an
+
+
+article with the real name with the name
+
+
+beer
+
+
+which is make making my mouth watering
+
+
+already
+
+
+and then rails also creates variants for
+
+
+you automatically and as you can see
+
+
+they have the correct sizes and they are
+
+
+assigned to that product automatically
+
+
+so that's very beautiful
+
+
+and then the problem starts to arise
+
+
+when you have
+
+
+something that is a bit more complex
+
+
+i mean it's actually not a problem
+
+
+because rail solves it you have this
+
+
+product the product has a name the
+
+
+product has a variant and the variant
+
+
+has a maybe a size object that has
+
+
+a field called color so you basically
+
+
+nest three models into each other so
+
+
+what you have to do is
+
+
+you have to
+
+
+define that
+
+
+the variant model is also accepting
+
+
+nested attributes and this and this time
+
+
+it's for the size
+
+
+model so
+
+
+this allows rails to
+
+
+process
+
+
+a three-way nested hash
+
+
+and create an article that has variants
+
+
+and the variants have size objects
+
+
+automatically
+
+
+so you have to touch
+
+
+two models like the model class and you
+
+
+have to define that on the class level
+
+
+and i mean
+
+
+this works great it's amazing but it
+
+
+only works for one particular case so
+
+
+basically you can have one form
+
+
+for every model you have in your app um
+
+
+that works with exception asset
+
+
+attributes and i mean you haven't
+
+
+normally there's every application has
+
+
+only one form per model right i mean you
+
+
+don't have like three different create
+
+
+forms or something like that no you
+
+
+don't have that i mean basecamp doesn't
+
+
+have it
+
+
+so you don't need that yeah so the
+
+
+problem is that um
+
+
+this is great in the beginning so we
+
+
+were crazily happy about this and uh
+
+
+people were i don't know throwing each
+
+
+other through the air and a few hours
+
+
+later you might start
+
+
+with something like okay i have this
+
+
+create product and variant form but i
+
+
+also want to create and maybe i want to
+
+
+update uh product variants
+
+
+and i don't want the same logic that i
+
+
+want in the create mode so how do i do
+
+
+that or maybe i have a form that creates
+
+
+a product and a variant as an admin and
+
+
+you want to have different fields
+
+
+processed than you processed with a
+
+
+normal user or something like that
+
+
+and so what happens is that you have to
+
+
+start adding ifs to all your
+
+
+models because you want to have accepts
+
+
+attributes for this case and for that
+
+
+case and for that case and for that case
+
+
+and the same for validations i mean for
+
+
+validations they at least came up with
+
+
+this validation context feature which is
+
+
+kind of okay but the problem is that you
+
+
+have to you have one place where you
+
+
+define different way basically try to
+
+
+define different forms using if and else
+
+
+and to me this was um something i
+
+
+couldn't go actually it also just didn't
+
+
+work for a lot of
+
+
+cases
+
+
+and it started to grow and the ifs and
+
+
+else and reject and everything were just
+
+
+it was impossible to maintain so
+
+
+um we
+
+
+sat down people got grumpy people
+
+
+started to
+
+
+talk debate there was noise in the
+
+
+streets
+
+
+people started gathering there was this
+
+
+turmoil like
+
+
+i wasn't sure if i should join or if i
+
+
+should stay safe at home and there were
+
+
+more people and they were yelling and
+
+
+they were yelling really loud
+
+
+reform
+
+
+so uh we started our own gem to handle
+
+
+forms in rails
+
+
+and uh it's it's a it's a part of the
+
+
+trailblazer framework now it used to be
+
+
+just a
+
+
+like a standalone gem it's still
+
+
+standalone
+
+
+it has uh it's quite it's not super
+
+
+popular but it's not like unknown so
+
+
+there's lots of people who contribute to
+
+
+it as you can see there's like this guy
+
+
+for example like i took this last commit
+
+
+because it's a different person than me
+
+
+so it looks like a lot of people are
+
+
+working on the project
+
+
+and yeah so it's it's on github you can
+
+
+check it out thank you very much it was
+
+
+a great
+
+
+audience okay um well let's let's let's
+
+
+check some more details of reform so
+
+
+first of all the um the way reform works
+
+
+is you have one class per form okay so
+
+
+we use like object orientation as it was
+
+
+object orientation is that a word i
+
+
+don't know um so uh we use we use oop
+
+
+the way it's supposed to be you have one
+
+
+context you have one use case so you
+
+
+have one class to cover that and that in
+
+
+our case is a form so here we have this
+
+
+product create form it's a horrible name
+
+
+i would never call a class like that but
+
+
+it's easier now i would use name spacing
+
+
+and all the features of ruby and magic
+
+
+constant lookups it's great okay so if
+
+
+there's one we have this one class and
+
+
+in that class you can define your fields
+
+
+of the form and you can say for example
+
+
+i say like property name and i say i
+
+
+have a i'm expecting a collection of
+
+
+variants and you can see we also have
+
+
+nesting so you can nest forms i mean
+
+
+don't worry about this code it's just to
+
+
+show you the structure and what is very
+
+
+interesting is you can also have
+
+
+validations in your form i mean you're
+
+
+supposed to have the validations sit in
+
+
+the form and not on the model you can
+
+
+have it both ways if you want but
+
+
+the key idea was let's get the code out
+
+
+of the model the the accepts
+
+
+accepts nested attributes for i'm not
+
+
+drunk so i can't talk
+
+
+and
+
+
+and the validations out of the form
+
+
+out of the model into separate form
+
+
+classes
+
+
+and
+
+
+for this
+
+
+remaining talk of
+
+
+20 minutes i have simplified the form a
+
+
+little bit so we have a product and a
+
+
+product has a name and a product has a
+
+
+nested object called size and the size
+
+
+has a field color it does not make sense
+
+
+at all but it was just what
+
+
+came to my mind when i was preparing
+
+
+this talk the last
+
+
+seven and a half months because
+
+
+um
+
+
+oh wait no it was only like two weeks
+
+
+because you didn't tell me the
+
+
+conference is happening and like
+
+
+probably everyone else you didn't know
+
+
+the conferences today
+
+
+yeah um but
+
+
+spontaneous people ruby community is
+
+
+great okay so keep in mind we have this
+
+
+product with a name and some nested size
+
+
+object whatever that is and the size has
+
+
+a color it it's so it's so senseless i i
+
+
+i just i i'm feeling it the cool thing
+
+
+in reform is that so we have this
+
+
+structural class where you define the
+
+
+form
+
+
+and that what the form looks like
+
+
+and you can use inheritance to
+
+
+to create subforms for example for an
+
+
+update form i don't need to rewrite
+
+
+everything i just can i can just inherit
+
+
+from the create form and that's a very
+
+
+beautiful way for things like when you
+
+
+have
+
+
+an admin creating a product they might
+
+
+need more or less fields or more or less
+
+
+validation so that's exactly where
+
+
+reform strikes because we have i think i
+
+
+have one example yeah so this is just a
+
+
+very simple example like i have i have
+
+
+this update form inheriting from from
+
+
+create so you basically copy over
+
+
+validations and the fields into the
+
+
+update form
+
+
+and then you can fine tune them you can
+
+
+delete validations you can add
+
+
+validations i'm adding a validation here
+
+
+and i'm adding a field into the size
+
+
+object like
+
+
+so the size will now have color and hex
+
+
+code again it does not make sense if you
+
+
+have better ideas for
+
+
+for talk
+
+
+for talk use cases please let me know
+
+
+after the conference
+
+
+uh so yeah so so we were um so the idea
+
+
+in reform was to ha to provide this this
+
+
+declarative api i will say dsl from now
+
+
+uh to to make it really simple to have
+
+
+forms and
+
+
+complex nested forms and to have it very
+
+
+simple to have validations and the
+
+
+structure in one place per use case okay
+
+
+so one form for create one form for
+
+
+update and so on
+
+
+and so the the dsl was not the problem
+
+
+the problem was the runtime api so
+
+
+when you use the form basically so you
+
+
+have this form whatever like forget
+
+
+about the structure so what you do first
+
+
+in reform in a typical update case is
+
+
+you
+
+
+retrieve the object you want to update
+
+
+like a product i find one may it could
+
+
+also be fine 99 or something it doesn't
+
+
+matter so i get the product model it's
+
+
+an active record thing it could also be
+
+
+any kind of database abstraction you
+
+
+want and then you pass that model into
+
+
+the form constructor so i'm having i
+
+
+have this product update form
+
+
+i give the model into the initializer
+
+
+and i get a form object
+
+
+and the form object
+
+
+look at it
+
+
+look at it and remember it it's four
+
+
+characters f-o-r-m because this is the
+
+
+the um
+
+
+the bad boy in this entire talk
+
+
+so what you can do now is you can take
+
+
+that form and throw it into your
+
+
+rendering yeah if you if you use uh i
+
+
+don't know simple form or something
+
+
+the form will respond to name because
+
+
+name is actually the name from the
+
+
+product number one because the product
+
+
+number one is wrapped by the form object
+
+
+and you can also access nested
+
+
+models like the size or something like
+
+
+that so you just i mean basically it's
+
+
+100 compatible with things like simple
+
+
+form or something so you throw the form
+
+
+instead of the model into the form
+
+
+helper and it renders a beautiful form
+
+
+and so that was beautiful and that
+
+
+that's where i should have stopped with
+
+
+reform but we went on so you can also
+
+
+um use the same form object that i was
+
+
+just
+
+
+throwing into my rendering layer and you
+
+
+can use that and you can call dot
+
+
+validate on it and you know if the
+
+
+params i throw into the form are maybe
+
+
+product and then name with a blank
+
+
+string
+
+
+after validating it
+
+
+i can ask the form for like errors like
+
+
+hey give me the errors you you generated
+
+
+or you you validate it and then there
+
+
+will be like name can be blank so it's
+
+
+again like completely um compatible with
+
+
+the way rails form helpers work
+
+
+and so and that's again like i call this
+
+
+on the instance that i just used for
+
+
+validation
+
+
+and i can also say form dot save after i
+
+
+validate it actually i can also call
+
+
+save before i validate it so let's
+
+
+complete [ __ ] and save will
+
+
+literally just push the empty string
+
+
+name to the product product find one you
+
+
+remember that
+
+
+the product that is wrapped by the form
+
+
+and it will also create something like
+
+
+um
+
+
+it will also magically create
+
+
+a size object for you because size was
+
+
+null and now there is a size object
+
+
+sitting there in in this in this product
+
+
+and um so that was something
+
+
+so that behavior was kind of built into
+
+
+reform completely non-magical but it was
+
+
+the battlefield
+
+
+of reform so that was the most
+
+
+um misunderstood feature of reform so i
+
+
+mean everyone got the idea okay you have
+
+
+this model you throw it in a form you
+
+
+get the form rendered okay i understand
+
+
+that you have the form you validate it i
+
+
+get that i get the form validated and i
+
+
+save it and it pushes the data back to
+
+
+the model i get that but how the hell do
+
+
+you get
+
+
+nested models created
+
+
+automatically
+
+
+and the key was this was called
+
+
+populators and i just
+
+
+mentioned it it was the the the best and
+
+
+the worst idea
+
+
+in one
+
+
+so the way populators work is
+
+
+i retrieve this product i mean this is
+
+
+happens outside of reform i retrieve a
+
+
+product with product.find whatever
+
+
+and the size the nested object size in
+
+
+the product is little so there's no
+
+
+nested size
+
+
+and then
+
+
+so i instantiate the form again
+
+
+and when i call validate
+
+
+and there is actually some
+
+
+hash coming in for the so so someone
+
+
+filled in this the size form
+
+
+there is a nested hash it's like product
+
+
+name beer size and then another color
+
+
+yellow so reform kind of realizes oh
+
+
+okay you want to create a nested object
+
+
+in the product
+
+
+and i know about the size concept i know
+
+
+the product has sizes so i will create
+
+
+it
+
+
+and the way that worked was with
+
+
+populators do you had do you had to say
+
+
+something like
+
+
+hey size
+
+
+you will if you see a fragment an
+
+
+incoming fragment
+
+
+you have to run a populator and the
+
+
+populator is called size populator and
+
+
+the size populator
+
+
+would be in the same would be written in
+
+
+the implemented in the same form
+
+
+and so it could check do we already have
+
+
+a size object on the product no we don't
+
+
+so i'm going to create a new size object
+
+
+so that's basically the magic behind
+
+
+popular so that was automatically built
+
+
+in and you could override it
+
+
+you could actually do um yeah so here's
+
+
+the the populator again you could
+
+
+actually do
+
+
+and you can actually do other stuff like
+
+
+you could say something like okay there
+
+
+is a size
+
+
+coming in for my product uh actually i
+
+
+don't want that size because it has
+
+
+faulty um parameters because you could
+
+
+also access the incoming fragment in the
+
+
+populator you could do lots of things
+
+
+you could skip it you could create a new
+
+
+size object you could find an existing
+
+
+size object object depending on what is
+
+
+in this incoming hash and so on so
+
+
+basically populators were
+
+
+well and
+
+
+i don't care whether or not anyone is
+
+
+confused now but popular is where kind
+
+
+of a concept for parsing yeah so
+
+
+deserialization or parsing like you you
+
+
+have this you have this huge hash of
+
+
+nested forms coming in
+
+
+and you go through it and you figure out
+
+
+which which
+
+
+property belongs to what
+
+
+form and where do i have to create a
+
+
+nested object and so on so and that's
+
+
+all like the magic happening behind the
+
+
+scenes in access nested attributes
+
+
+we kind of
+
+
+created names for that like populators
+
+
+were supposed to create nested models
+
+
+for example
+
+
+but it was misused it was
+
+
+um an absolute nightmare what i've seen
+
+
+in the last couple of years how people
+
+
+overused populators because i mean it's
+
+
+a parsing
+
+
+people are laughing um it's not funny so
+
+
+so it populaters are a way to to
+
+
+customize your parsing and pausing is
+
+
+something that no one cares about in the
+
+
+ruby world so we always have this like
+
+
+here's a hash the hash is actually
+
+
+coming from json but it's a hash and
+
+
+then throw this hash into the database
+
+
+and make models from it and
+
+
+i don't know it's it's a bit more
+
+
+difficult than just you know converting
+
+
+the hash into objects and storing it so
+
+
+so people started to like this populator
+
+
+feature but they overlapped it and
+
+
+abused it in a way
+
+
+it hurt my heart
+
+
+but anyway now you know how you can
+
+
+create nested objects using reform
+
+
+and
+
+
+i hope you don't have nightmares of
+
+
+populators they are really beautiful
+
+
+things if you use them right but
+
+
+let's come back to this form instance
+
+
+that i was talking about
+
+
+so
+
+
+you had this
+
+
+you had this form instance that you
+
+
+created and you could throw that form
+
+
+instance into your rendering and it it
+
+
+would respond to something like
+
+
+form.name and you could also say
+
+
+form.name equals something so you could
+
+
+set values on the form at runtime before
+
+
+or after you validate and then you could
+
+
+call form.validate and again and again
+
+
+so people sometimes called validate
+
+
+several times
+
+
+in one controller actually for example
+
+
+to to get the form to a certain state
+
+
+that they want the form to be and then
+
+
+and they sometimes the form would flip
+
+
+from
+
+
+true to false i mean am i valid yes no
+
+
+so because they were they they had the
+
+
+ability to call validate several times
+
+
+and that was just wrong and and they
+
+
+were complaining about this as well like
+
+
+hey i'm calling
+
+
+i'm doing this and that and and reform
+
+
+suddenly flips from true to false
+
+
+in in the valid validity and i said okay
+
+
+what are you doing like i'm calling
+
+
+validate and then do this and i call
+
+
+validate again and i do that it's like
+
+
+okay but that's not how it's supposed to
+
+
+be like you're not supposed to call
+
+
+validate twice
+
+
+and so um and then you know you also had
+
+
+like form arrow form save people were
+
+
+using save
+
+
+three times in a row and this kind of
+
+
+shizzle so um
+
+
+i started to realize okay maybe
+
+
+something in my api is wrong and what
+
+
+was really um interesting was that the
+
+
+internal architecture of reform
+
+
+was something i was not
+
+
+overly unhappy with so because you know
+
+
+the form was an object and then you had
+
+
+something called twins they were they
+
+
+were doing all the database work like
+
+
+extracting values from models or writing
+
+
+data to models so that was a separate
+
+
+object completely different gem and then
+
+
+you had a different object for parser
+
+
+for the parsing and you the validations
+
+
+were happening in a separate object so
+
+
+internally behind the scenes when you
+
+
+call validate lots of different objects
+
+
+were um triggered and used
+
+
+so the internal architecture was kind of
+
+
+okay the problem was that i was using a
+
+
+separate gem for every box you can see
+
+
+here so i mean validator we were using
+
+
+active active model validations and for
+
+
+parsing we were using representable
+
+
+which is a very complex gem
+
+
+and then for twins we wrote our own gem
+
+
+for the database abstraction and so it
+
+
+was it was hardcore and if you had an
+
+
+exception in reform in reform 2 so i'm
+
+
+talking about reform 2 here all the time
+
+
+actually i'm supposed to talk about
+
+
+reform 3 but
+
+
+it's not finished so the problem was
+
+
+that when you had exceptions for example
+
+
+in your parsing if you wrote your own
+
+
+populator and you were calling validate
+
+
+on the form and it would go through this
+
+
+massively nested hash you would get like
+
+
+a track stay
+
+
+track stay tr stack trace that's the
+
+
+word
+
+
+stack trace with like 500 lines and
+
+
+15 different gems you know
+
+
+being involved so here's like i don't
+
+
+know i think five different gems on on
+
+
+this screen so it was really hard to to
+
+
+understand what is going on when i
+
+
+validate this hash on this form like
+
+
+it's and when things bro
+
+
+when things break it was
+
+
+it was a nightmare to debug
+
+
+and also what was really interesting was
+
+
+that um people started to
+
+
+i mean lots of people
+
+
+still used reform they were not
+
+
+um i mean they were not drawn away by
+
+
+all those
+
+
+funny things like populators
+
+
+it was even worse they started to do
+
+
+things like
+
+
+they overwrote methods in reform for
+
+
+example name equals gets called
+
+
+automatically
+
+
+when you validate a form and there's the
+
+
+name field and then it reform calls it
+
+
+or maybe blah blah blah blah blah but um
+
+
+the thing is
+
+
+this setter is called in several
+
+
+different contexts and then you had to
+
+
+make sure i mean this is just [ __ ] i
+
+
+made up but they looked like this so you
+
+
+had like five different if and else
+
+
+because you only what you actually
+
+
+wanted was here you wanted to call value
+
+
+dot up case that was all you wanted to
+
+
+do but you had to protect that code from
+
+
+being called in the wrong in the wrong
+
+
+context and with a lot of if and else
+
+
+so when i saw this kind of stuff and i
+
+
+actually had to write this kind of code
+
+
+myself and then i felt like okay
+
+
+there is some problem and that also
+
+
+speaks for that we have i don't know
+
+
+more than 300 issues close but i don't
+
+
+think we fixed all of them because some
+
+
+of them were just not fixable because
+
+
+the
+
+
+the design was wrong and we still have
+
+
+35 open it's uh don't worry about it we
+
+
+have reform 3 coming
+
+
+so um so i i sat there i had lots of you
+
+
+know issues open and people asking hey
+
+
+can we fix this and that and can we i
+
+
+don't know improve
+
+
+the parsing of reform and can we improve
+
+
+the way validations work and lots of
+
+
+feature requests
+
+
+and it was kind of
+
+
+i don't know
+
+
+uh yes we can fix everything but we are
+
+
+fixing
+
+
+the wrong
+
+
+the wrong thing like i don't want i
+
+
+don't want to fix something that is
+
+
+broken by design
+
+
+so there was this um there was this um
+
+
+suspicion
+
+
+dawning on the horizon that maybe
+
+
+this
+
+
+one form instance that does everything
+
+
+is wrong
+
+
+and even though they do it in rails
+
+
+everywhere like you have active record
+
+
+has like i don't know 5 000 public
+
+
+methods
+
+
+and maybe that's wrong you know maybe
+
+
+it's not a good idea so
+
+
+what i really like i mean yeah so i saw
+
+
+it in in the issues i saw it in my own
+
+
+code i saw it in in code of people i was
+
+
+consulting so they were just using the
+
+
+public api
+
+
+like in the wild west and they did
+
+
+stupid things but the api allowed to do
+
+
+that so it's your fault as a software
+
+
+designer as the library designer
+
+
+and so what i what i what i finally
+
+
+concluded is okay i really like the dsl
+
+
+i really like the way you declare nested
+
+
+forms i mean you look at it and if you
+
+
+have never seen reform you kind of get
+
+
+the idea okay there's some nested setup
+
+
+and you have validations happening for
+
+
+size you have validations happening for
+
+
+for the product and and so on like the
+
+
+dsl was kind of um a success story as
+
+
+they say in apple um in apple speak
+
+
+so what what i what i did for reform
+
+
+three so i was actually working on
+
+
+reform three the last couple of months
+
+
+uh because i can
+
+
+and so what we have here is like we have
+
+
+we mostly have class methods so i say
+
+
+like reform.present and then i pass in
+
+
+the class the the form class and i get
+
+
+back an instance
+
+
+of an immutable object and that
+
+
+immutable object behaves like a form
+
+
+that i can throw into for example simple
+
+
+form but it's immutable i cannot change
+
+
+anything on that form and that's for and
+
+
+that's not an it's it's its own kind of
+
+
+class subclass it's not it's not some
+
+
+some reform form it's it's some like i
+
+
+don't i think it's called like
+
+
+presentable form or something like that
+
+
+so it's a completely separate object
+
+
+that you get for rendering
+
+
+and the same is with validation so you
+
+
+have this class method um validate
+
+
+and again i pass in the the
+
+
+form class and i get back a result
+
+
+object i don't get back true or false i
+
+
+get back an object and that object again
+
+
+is immutable it's not you can't change
+
+
+it and you cannot call if you call
+
+
+validate twice you will have two
+
+
+different result objects
+
+
+and the result object is something you
+
+
+can throw into simple form
+
+
+and it will render error messages and it
+
+
+will will enter
+
+
+it will render the error ring form but
+
+
+it's um
+
+
+it's something that is immutable so
+
+
+people cannot muck around with this
+
+
+again like if you want to call validate
+
+
+three times in a row you will have three
+
+
+different result objects and it's it's a
+
+
+functional concept it's amazing like an
+
+
+orbit is going to talk about it
+
+
+next tomorrow no on sunday right
+
+
+yeah functional programming like you
+
+
+just just make the api in a way that you
+
+
+cannot [ __ ] it up anymore and it's the
+
+
+same with persist so you cannot say
+
+
+form.save anymore you have to say like
+
+
+persist activerecord.sync or something
+
+
+like that i mean this part is not
+
+
+finished yet it's it's very simple
+
+
+actually but i had didn't have time so
+
+
+again like you get you get you don't
+
+
+have you don't get to call anything on
+
+
+the on the instance itself you have to
+
+
+use a class method and you will get back
+
+
+something like a mutations object or
+
+
+something like that
+
+
+okay so that was kind of the uh that was
+
+
+kind of the api change for the runtime
+
+
+api i was envisioning and i was talking
+
+
+about this
+
+
+back then in ukraine and uh and i'm kind
+
+
+of i just kind of realized on the way
+
+
+here that it's finished i mean i
+
+
+actually implemented this now so i i can
+
+
+finally talk about it with confidence
+
+
+i was working on this on the refactoring
+
+
+of reform 2 not refactoring redesign
+
+
+basically
+
+
+we kept the dsl the runtime api changed
+
+
+you don't have this instance anymore
+
+
+that one single instance you
+
+
+you have like different uh
+
+
+sections or components in the code that
+
+
+do different jobs like validation or
+
+
+like presentation or persisting of data
+
+
+and so but the main takeaway that i that
+
+
+i realized was that so a form is is all
+
+
+about transformations a form is not
+
+
+something like an object that you that
+
+
+changes and flips state a form is
+
+
+something like
+
+
+you throw in data like a hash of from
+
+
+from simple form like a nested hash and
+
+
+then you go through that hash and you
+
+
+deserialize and parse that hash into an
+
+
+object graph and that object graph you
+
+
+pass to to a validation library like
+
+
+like a drive validation or active record
+
+
+validation if you're lame
+
+
+and
+
+
+and then once this data is same you you
+
+
+get another data graph or a data data
+
+
+structure that you pass
+
+
+to something else for persistence so
+
+
+what i realized is yeah we are we're
+
+
+always talking about transformations and
+
+
+transformations are always a lot of
+
+
+steps and some step fails you do
+
+
+something else for example in the
+
+
+parsing you look into the hash is there
+
+
+a key called
+
+
+name yes there is so i'm going to pass
+
+
+that key into into like a
+
+
+into a data structure and then i'm going
+
+
+to run my own parsing logic and then i'm
+
+
+gonna set this name value on some on
+
+
+some internal data objects so so that's
+
+
+kind of and if if if the key name is not
+
+
+there i'm gonna do something else so i
+
+
+realized okay this is all uh it's all
+
+
+about like workflows basically
+
+
+and um and that's something i'm i'm
+
+
+really
+
+
+like familiar with uh workflows
+
+
+because uh what i was talking about uh i
+
+
+think it was like four years ago or
+
+
+something it was uh i was talking about
+
+
+trade-based operation and the way
+
+
+trade-based operations work is you
+
+
+basically have a dsl to define um to
+
+
+define your code flow
+
+
+and it basically helps you to avoid
+
+
+cluster f star cks like this so so
+
+
+basically the dsl takes away the control
+
+
+flow it takes it doesn't take away the
+
+
+control flow it takes over the control
+
+
+flow you only program what happens and
+
+
+the trellis operation will know when so
+
+
+graphically this is more or less like
+
+
+this and so yeah you find the model then
+
+
+you validate and then you save and the
+
+
+saving fails everything else is skipped
+
+
+so no more green boxes are executed so
+
+
+that's kind of um how trailblazer works
+
+
+in a nutshell and so this is very
+
+
+similar to what i wanted in reform
+
+
+because parsing say persisting data to
+
+
+the database it's always like flows and
+
+
+you know taking different routes if
+
+
+something fails and so on and so on
+
+
+don't look too long at this diagram i
+
+
+just made it up it's completely
+
+
+senseless but so yeah i i realized okay
+
+
+i can use all the mechanics if i rewrite
+
+
+reform three with trailblazer i can
+
+
+basically um reuse all the mechanics
+
+
+that we have
+
+
+someone is already face palming like oh
+
+
+no he did not really go down that road
+
+
+and rewrite reform three with treadmills
+
+
+yes we did and it was the best choice in
+
+
+the last two years
+
+
+um
+
+
+so for example um we have inter-episode
+
+
+2.1 a few years ago we
+
+
+we spent a lot of time on developer
+
+
+experience because people were
+
+
+complaining that trade wizard
+
+
+2.0 and 1.1 or something was really hard
+
+
+to debug a little bit like reform so for
+
+
+example when you run uh the parsing in
+
+
+in in reform or in trailblazer this is
+
+
+kind of what happens when you pass the
+
+
+name and the size hash
+
+
+you can
+
+
+trace that and you see what flow your
+
+
+form logic actually took and that is it
+
+
+will save you thousands of hours of
+
+
+debugging
+
+
+beautiful is as well that if you have an
+
+
+exception somewhere happening let's say
+
+
+you have a five level deep nested form
+
+
+and you have those populators sitting
+
+
+somewhere five levels deep and you have
+
+
+a buck there there will be an exception
+
+
+and the exception is visible in the
+
+
+trace so you can actually see what and
+
+
+where happened my exception and this is
+
+
+like five
+
+
+l five to ten years ahead of ruby
+
+
+because ruby stack traces are nice but
+
+
+those stacked races in trailblazer where
+
+
+you can see the flow and the nesting and
+
+
+the flow talk is just it's just
+
+
+breathtaking and
+
+
+actually when i was working on reform 3
+
+
+i was using the tracing all the time so
+
+
+it actually saved me a lot of time
+
+
+writing reform
+
+
+and it's even when you have like when
+
+
+you have collections you can see which
+
+
+item in the uh you know in the in the
+
+
+five list of five sizes or something
+
+
+like that and item number three caused
+
+
+an exception like you don't have that in
+
+
+ruby it's impossible like you have to do
+
+
+your own debugging and use pry here it's
+
+
+very simple so that is all coming out of
+
+
+the box with trailblazer
+
+
+and
+
+
+you remember this parsing code like all
+
+
+i want to do is when the form passes the
+
+
+incoming hash i want to uppercase the
+
+
+product name you don't need this kind of
+
+
+stuff anymore you can just
+
+
+basically insert a step into your
+
+
+parsing i mean
+
+
+don't try to understand all the steps
+
+
+here but you kind of get the idea like
+
+
+there's a lot of stuff happening for
+
+
+name then there's a lot of stuff
+
+
+happening for size and then
+
+
+the parsing knows okay size is a nested
+
+
+object again so i'm going there and
+
+
+check for the color and so on and you
+
+
+can basically plug
+
+
+your own logic into that flow very
+
+
+easily so in this case i just want to
+
+
+have something like give me the value
+
+
+you read for the name field
+
+
+and uppercase it and then save that and
+
+
+then from there on treat the uppercase
+
+
+value
+
+
+as um the value you read from the hash
+
+
+so basically this is all the code you
+
+
+need for for this big if and else i
+
+
+showed earlier and the way you use that
+
+
+in the form in reform three is again
+
+
+it's kind of
+
+
+cool i really like it so all you do is
+
+
+like for the property name i want to
+
+
+extend the path block this is the api
+
+
+currently it will be much nicer probably
+
+
+but you basically say i want one more
+
+
+step there and that's up
+
+
+case and up case is an instance method
+
+
+and that's the the method that really
+
+
+that i just showed that really just up
+
+
+cases the the value that you read for
+
+
+the name field
+
+
+and um so when i'm running reform dot d
+
+
+serialize or dot validate it's dc
+
+
+release happens in the validation
+
+
+you can actually see that in your trace
+
+
+there is now your up case
+
+
+parsing block
+
+
+automatically included
+
+
+in the parsing pipeline so you can
+
+
+extend that really easily because that
+
+
+was one of the biggest features that
+
+
+everyone wanted it's
+
+
+for you know to to i don't know to
+
+
+to pass credit card numbers or to
+
+
+change a date from i don't know uh
+
+
+slashes to dashes or to train to change
+
+
+a date into a date object so you can
+
+
+plug your own logic into every pass
+
+
+pipeline
+
+
+and then
+
+
+the uh when you ask the past form for
+
+
+for the name it's the upper case name so
+
+
+it's like special for example special is
+
+
+a really good beer from the
+
+
+northeast of poland we go there every
+
+
+year to sail nerds on lakes actually
+
+
+adam piotrovsky is organizing it you
+
+
+should all come next year
+
+
+and yeah speaking of
+
+
+speaking of beer
+
+
+we are probably it's time to wrap up so
+
+
+actually ten things you never wanted to
+
+
+know but reform three is that it
+
+
+actually makes strong parameters
+
+
+completely obsolete you don't need
+
+
+strong parameters with reform it doesn't
+
+
+matter if it's two or three because the
+
+
+form will only pass the parameters it
+
+
+knows so you don't need to define that
+
+
+on the params hash
+
+
+and you can use drive validation as well
+
+
+as active record validation if you're
+
+
+lame
+
+
+i prefer dry validation it's coming from
+
+
+poland so it has to be good
+
+
+um you have you can use both gems you
+
+
+can use reform and the new thread
+
+
+there's a form which is reform3 so you
+
+
+can use both in one app because uh i
+
+
+don't want people to change all their
+
+
+forms from two to three it's a no go and
+
+
+i was just showing like the dsl and a
+
+
+little bit of the runtime api but you
+
+
+can have lots of more features like
+
+
+coercion typing and this kind of stuff
+
+
+you can even use rom behind it so you
+
+
+don't have to use active record
+
+
+so when you
+
+
+for example when you
+
+
+pass all the validated data to the
+
+
+database it can go through a rom adapter
+
+
+and it will create a change set and
+
+
+that's a rom concept
+
+
+and so you're not bound to active record
+
+
+anymore
+
+
+and then there's also this thing like we
+
+
+will have a talk about avo and i think
+
+
+that something like reform would be the
+
+
+perfect um backing
+
+
+component for something like avo because
+
+
+alva is trying to mimic like forms it's
+
+
+a very simple way you can define forms
+
+
+but maybe reform would be a good
+
+
+replacement for ava's own form engine i
+
+
+will talk to um do the other team later
+
+
+when i'm drunk
+
+
+and then also um you will you will you
+
+
+might have had very bad experiences with
+
+
+reform too
+
+
+actually i i saw lots of tweets of
+
+
+people like oh my god i'm never going to
+
+
+use it again so please man this is like
+
+
+3.0 is rewritten we learn from a lot of
+
+
+mistakes and it's not the same as two
+
+
+points something we we learn from the
+
+
+mistakes so give it another go because
+
+
+it's a different implementation
+
+
+there's also beautiful docs on
+
+
+trailblazer.to in about two weeks to
+
+
+four months i will finish it
+
+
+and then it's spelled reform not reform
+
+
+that's 290s sorry i see that a lot it's
+
+
+it's no i don't know it doesn't work
+
+
+with me and it's open source so if you
+
+
+want to help you can learn so much from
+
+
+helping with reform because you will
+
+
+learn a lot about how trailblazer
+
+
+internals work and you will learn about
+
+
+and those trailblazer internals you can
+
+
+use for your business code in in any
+
+
+application so i don't know if you're
+
+
+interested come speak to me by the way
+
+
+um
+
+
+i have um shirts treadblazer shirts with
+
+
+me and lanyards and stickers so there's
+
+
+lots of merchandise and i don't want to
+
+
+take it home so
+
+
+maybe buy me a beer at the pub now
+
+
+because i'm really thirsty and we can i
+
+
+don't know debate your future open
+
+
+source career thank you very much it was
+
+
+a great audience
+
+
+[Applause]
+
+
+yeah yeah we got a question no we're not
+
+
+gonna rewrite it in lisp
+
+
+you know and i was gonna say something
+
+
+nice so
+
+
+no um
+
+
+so thank you for the talk because aside
+
+
+from your
+
+
+natural charm i really like talks where
+
+
+you have this introspection where you
+
+
+actually dig dig deep it's not just
+
+
+here's the here's the read me in in
+
+
+visual form now my question is because i
+
+
+noticed that you wrote core coercion as
+
+
+like step three or four
+
+
+now that you've separated parsing from
+
+
+validating have you started to notice
+
+
+that it's more of a cycle in the sense
+
+
+of what happens if inside of your
+
+
+parsing you want to do validations
+
+
+and then more parsing and more
+
+
+validations because that's essentially
+
+
+what coercion is
+
+
+that this is a brilliant point and so
+
+
+so the parsing and the validation was
+
+
+already separated in in reform too but
+
+
+it's exactly the problem i was
+
+
+discussing with uh sonic a few years ago
+
+
+actually because for me it's the same
+
+
+like you pass something and then you try
+
+
+to
+
+
+coerce a value like i don't know a date
+
+
+string into
+
+
+into a date object and that is already
+
+
+validation right and so so my idea was i
+
+
+don't know either make
+
+
+very small drive validation forms for
+
+
+you know like the parsing block i was
+
+
+just showing that was just um you know
+
+
+uppercasing a name that could also be a
+
+
+little tiny um rule or a set of rules by
+
+
+drive validation and if that fails you
+
+
+could already add arrows to the
+
+
+to the um to the arrows object because
+
+
+it's exactly the problem and i'm very
+
+
+happy that someone sees that from the
+
+
+outside because i was always wondering
+
+
+parsing is already validation yes or no
+
+
+because it it actually is right and
+
+
+that's kind of so the first idea would
+
+
+be to have like a little form
+
+
+dry validation form or whatever
+
+
+like a dry coercion running around in
+
+
+this parting step and
+
+
+and then let's see where we go from
+
+
+there but
+
+
+but yeah i'm really happy that you
+
+
+mentioned that because that was a big
+
+
+issue i had when i was designing the two
+
+
+cycles
+
+
+okay so as a follow-up let's let's just
+
+
+talk over viewers later for this but um
+
+
+also just as a slight troll looking at
+
+
+your stack trace do i see hints of maybe
+
+
+monet over there um
+
+
+we are actually uh
+
+
+we are actually basically
+
+
+our we have our own monad dialect in
+
+
+trailblazer it's much more readable it's
+
+
+easier to use we have tracing you don't
+
+
+have tracing in monads are you talking
+
+
+about driving so are you talking about
+
+
+monets in functional programming
+
+
+uh well that the success is just um i
+
+
+mean i
+
+
+can't show stuff anymore but you know
+
+
+the operations or activities as we call
+
+
+them in generic way they always have one
+
+
+end and dot success and they have they
+
+
+always have this end dot failure you
+
+
+know it's a railway pattern so i don't
+
+
+know i just took the names from
+
+
+functional programming so maybe it's a
+
+
+monad
+
+
+i i yeah cool i
+
+
+i what's the verb i moan at it or
+
+
+something like that
+
+
+yeah so i'm using monets by the way it's
+
+
+nice to meet you
+
+
+hi nick
+
+
+um if you build gym doppler mihawk
+
+
+if you build uh reform from scratch what
+
+
+would you do differently like what's the
+
+
+biggest design mistake if any
+
+
+you mean if i rebuilt reform 3 or refund
+
+
+2 because i was talking about
+
+
+the entire talk the newest version but
+
+
+you're a dad of two i know you have to
+
+
+sleep in my talk
+
+
+[Laughter]
+
+
+well maybe i wouldn't i don't know maybe
+
+
+ruby is not the right language or
+
+
+something it could be
+
+
+what are you working on recently alexi
+
+
+or something
+
+
+javascript well i have
+
+
+i i don't have a problem with javascript
+
+
+um yeah but i think
+
+
+there's a lot of things you can change
+
+
+but
+
+
+the the right decision was to use the
+
+
+trailblazer mechanics because the
+
+
+tracing and everything and the way you
+
+
+can plug and play your uh your
+
+
+nested forms and stuff is just uh it's
+
+
+such a time saver
+
+
+but uh yeah so if you want to know the
+
+
+actual answer just look at the check the
+
+
+video that was recorded
+
+
+and you will have 45 minutes of pure
+
+
+regrets and design mistakes i'm
+
+
+mentioning
+
+
+it's a
+
+
+perfect it's perfect in a sense that i
+
+
+don't see
+
+
+reasons to optimize
+
+
+i should be politician
+
+
+[Laughter]
+
+
+okay thank you very much again let's go
+
+
+to the pub because i'm really thirsty i
+
+
+haven't had food in like 10 hours
+
+
+because my train and so on i told you so
+
+
+thank you very much
+
+
+[Applause]
+
+
+you

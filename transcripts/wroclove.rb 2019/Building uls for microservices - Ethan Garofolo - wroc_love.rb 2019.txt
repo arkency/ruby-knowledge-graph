@@ -1,0 +1,2572 @@
+thanks everybody really excited to be
+
+
+here we're gonna talk about
+
+
+microservices who here has worked with
+
+
+micro-services almost everybody who has
+
+
+at least heard the word before okay that
+
+
+looks like that got everybody awesome
+
+
+first of all that's no moon
+
+
+that's a Venn diagram and micro-services
+
+
+is kind of a big universe and we're
+
+
+talking about just a little piece of it
+
+
+today the UI implementation I'm sorry
+
+
+their UI implement implications of
+
+
+micro-services and so it might feel kind
+
+
+of like a firehose in the beginning just
+
+
+too much stuff all at once or maybe
+
+
+there's some context that's missing my
+
+
+apologies we'll try to fix that Who am I
+
+
+like Adam said my name is Ethan I live
+
+
+in the western United States and in the
+
+
+spirit of dirty confessions I actually
+
+
+make my living programming in nodejs
+
+
+and not Ruby but I got started in web
+
+
+development using a popular Ruby
+
+
+framework for making web applications
+
+
+that I'm not going to name because this
+
+
+is a ruby conference so yeah that was
+
+
+good anyway I'm also writing a book for
+
+
+the pragmatic bookshelf about micro
+
+
+services and hey if you want to talk to
+
+
+me about that I'd love to talk about it
+
+
+so that's me
+
+
+so I just want to say this is not really
+
+
+an answers talk per se there's a French
+
+
+philosopher named Claude levi-strauss
+
+
+and he said that the scientist is not a
+
+
+person who gives the right answers the
+
+
+scientist is one who asks the right
+
+
+questions and so some talks you're gonna
+
+
+leave with all the knowledge you need to
+
+
+go sit down and start coding right away
+
+
+maybe it's teaching you a new library
+
+
+new framework or something unfortunately
+
+
+that's not what this talk is doing
+
+
+it's about questions and ideas and how
+
+
+you can reason about the systems that
+
+
+you're building because I think being
+
+
+able to ask the right questions is a lot
+
+
+more valuable than knowing what lines of
+
+
+code dis length
+
+
+so um what do I mean by microservices
+
+
+there are as many definitions of that
+
+
+word as there are cheese's in France I
+
+
+think and in the spirit of all being on
+
+
+the same page or having a ubiquitous
+
+
+ubiquitous language if domain-driven
+
+
+design is your thing what do I mean by
+
+
+them let's start with what a monolith is
+
+
+a monolith is not a deployment strategy
+
+
+it's not a way of putting all of your
+
+
+code into one repository a monolith is a
+
+
+data model what do I mean by that so I
+
+
+mentioned I started in web development
+
+
+with a ruby library for making web
+
+
+applications and it pointed me towards a
+
+
+certain architecture and a big part of
+
+
+that was the users table who here has
+
+
+ever worked on a project that involves
+
+
+users yeah a few hands to go up with
+
+
+that one right so this table is not
+
+
+unlike the ones that I saw in those days
+
+
+and it felt awesome at first it was
+
+
+amazing 15 minutes from zero to blog
+
+
+that's incredible but it became
+
+
+difficult over time there was this wall
+
+
+of productivity that I'd run into time
+
+
+and again and not just on projects that
+
+
+I started so it might have just been me
+
+
+but it was every project based on this
+
+
+framework that I worked on over time if
+
+
+you look at this graph here and you just
+
+
+you kind of squint at it enough and
+
+
+maybe tilt your head a little bit you
+
+
+start to see do these pieces of data
+
+
+really belong together are these pieces
+
+
+of data that are talking about the same
+
+
+thing really because when I look at this
+
+
+I see at least four different domains on
+
+
+there for example an email and a
+
+
+password hash those are really useful if
+
+
+what you're trying to do is identify a
+
+
+user right I mean that's how people log
+
+
+in often but what do the email and
+
+
+password hash have to do with tracking
+
+
+which features the user has used in a
+
+
+system those data are not at all related
+
+
+the only thing they have in common is
+
+
+that they share a user ID
+
+
+right that's the monolith right there
+
+
+when you try to cram all these very
+
+
+different domains into this one
+
+
+representation so if you take a
+
+
+monolithic data model and build an
+
+
+application on top of it you have a
+
+
+monolithic application here is an
+
+
+example of one I've called out a user's
+
+
+domain a products domain there is a
+
+
+database in the middle and the greenish
+
+
+box means this is all running in one
+
+
+program when two different things are
+
+
+running in the same program and they
+
+
+talked to each other what is that called
+
+
+what mechanism do you use to have one
+
+
+piece of code call another what was that
+
+
+are in the same process though it's the
+
+
+same program method calls yeah function
+
+
+calls exactly right and so when you hit
+
+
+that productivity wall where it's hard
+
+
+to keep doing stuff you go to the
+
+
+blogosphere for help we all love the
+
+
+blogosphere and it gives you great
+
+
+advice such as just extract micro
+
+
+services so now I've pulled out my users
+
+
+service and put it in a its own server
+
+
+its own process it has its own database
+
+
+even surely I have services right but
+
+
+hmm what are those lines now that
+
+
+they're all on different services I'm
+
+
+sorry different servers age TTP exactly
+
+
+but everything else looks exactly the
+
+
+same my access patterns were all the
+
+
+same all that's different now is it's on
+
+
+different servers and all else being
+
+
+equal who would rather deal with HTTP
+
+
+calls than function calls write bigger
+
+
+ops concerns a whole lot more that can
+
+
+go wrong so that leads to great
+
+
+statements like this one from Aaron
+
+
+Patterson smart guy done a lot for the
+
+
+Ruby community I think it's hilarious
+
+
+micro services are great for turning
+
+
+method calls into distributed computing
+
+
+problems yeah only that's not micro
+
+
+services
+
+
+so say it with me let's get audience
+
+
+participation here distributed +
+
+
+monolith equals drum roll distributed
+
+
+monolith if you've worked with
+
+
+microservices and this is what you
+
+
+worked with you probably had a really
+
+
+bad time with it a horrible time my
+
+
+first introduction to service
+
+
+architecture was one of these stinkers
+
+
+and I hated it and I actually did it up
+
+
+leaving that company because I had tried
+
+
+for months to just say let's just
+
+
+combine it all back together because it
+
+
+was so difficult to work on but it's not
+
+
+services so if you had a bad time with
+
+
+this you didn't have a bad time with
+
+
+services and that's really good news
+
+
+because there's a better way to do stuff
+
+
+so what if then do I mean by services
+
+
+there's a lot of things to go into what
+
+
+makes something a service but the
+
+
+biggest is autonomy what do I mean by
+
+
+autonomy well no one asks a service for
+
+
+anything services don't have get api's
+
+
+they don't represent things we have
+
+
+pieces in architecture that we get
+
+
+information from we call them databases
+
+
+and the process of asking them is called
+
+
+a query and if you take a database and
+
+
+put it behind HTTP you still just have a
+
+
+database in fact some databases ship
+
+
+with the ability to respond to HTTP
+
+
+right out of the box so they're still
+
+
+just databases second a service doesn't
+
+
+ask anyone for anything else for example
+
+
+if I have to ask you for something to do
+
+
+my job you're now a dependency of mine
+
+
+and I'm no longer autonomous because
+
+
+depending is the exact opposite of
+
+
+autonomy and a really nice
+
+
+characteristic that comes out of this is
+
+
+that a service is actually completely
+
+
+oblivious to the existence of anything
+
+
+else in the system and those other
+
+
+things are also oblivious to the
+
+
+existence of the service so a service
+
+
+can go down and no one else goes down
+
+
+sure your systems not gonna do as much
+
+
+as it used to but at least it won't be
+
+
+broken how do they communicate then
+
+
+that's through asynchronous messages to
+
+
+flavors events and commands
+
+
+events are you can just represent them
+
+
+as JSON objects but they'll have a type
+
+
+such as pen dropped this is an exciting
+
+
+service that drops pins and picks them
+
+
+back up but you as the system designer
+
+
+you come up with those types they're
+
+
+just strings there are data payloads for
+
+
+them
+
+
+that is in the past tense and that's an
+
+
+important point because events are
+
+
+things that have happened you can't
+
+
+argue with them they just are if you
+
+
+don't like the state of something in an
+
+
+event you can write a command so here's
+
+
+an example drop pen if I were holding a
+
+
+pen and you wanted that on the ground
+
+
+you would send a drop pen command and I
+
+
+may or may not accept it notice that's
+
+
+in the imperative mood it's a command I
+
+
+want you to do this and commands can be
+
+
+invalid they can be rejected they can
+
+
+also be accepted that's how they
+
+
+communicate and what's really fun about
+
+
+this if you're familiar with the concept
+
+
+of event sourcing is that those events
+
+
+literally become the state of the system
+
+
+so in the traditional MVC crud world you
+
+
+might just or something like that table
+
+
+so pen number one is currently in the
+
+
+picked up state but what actually
+
+
+happened was first it was dropped and
+
+
+then it was picked up so if you build a
+
+
+system like this what are the major
+
+
+components to that system well first of
+
+
+all you have services they are
+
+
+represented by lightning bolts because
+
+
+they are action-packed they do stuff if
+
+
+you've ever been hit by lightning you
+
+
+know what I'm talking about I really
+
+
+hope you haven't been though because
+
+
+that probably isn't very much fun there
+
+
+is what I call an application layer that
+
+
+doesn't mean that there is only one
+
+
+application but this is where your
+
+
+projects based on that Ruby web
+
+
+framework would live if you're in the
+
+
+nodejs world this is your Express server
+
+
+your happi server in the Python world
+
+
+this is your django server and the
+
+
+application receives requests from happy
+
+
+users because we are professionals and
+
+
+our users love us but the application
+
+
+will then write commands sometimes
+
+
+events to a transport mechanism called a
+
+
+message store
+
+
+and services will observe those commands
+
+
+write new ones write new events in
+
+
+response to them then you have what are
+
+
+called read models materialized views
+
+
+sometimes called or just data views and
+
+
+the reason you have that is because the
+
+
+lists of events in here aren't so useful
+
+
+for rendering a user interface unless
+
+
+you're rendering an interface for an
+
+
+auditor they would love that kind of a
+
+
+thing but most people aren't auditors so
+
+
+we want different shapes for the data
+
+
+and then there are what I call
+
+
+aggregators that take the events the
+
+
+linear list of events shape them into
+
+
+things that make more sense for what you
+
+
+want to show to a user and none of this
+
+
+implies that we're talking about a
+
+
+distributed system because services are
+
+
+not the same thing as a distributed
+
+
+system you can distribute there are
+
+
+reasons to do it but they really have
+
+
+nothing to do with each other so what's
+
+
+a message store well a message store is
+
+
+a database that's optimized for storing
+
+
+and retrieving events you might have
+
+
+heard of the event store project and
+
+
+probably can't read it though that's
+
+
+from Greg young he talks a lot about
+
+
+micro services and events so we're
+
+
+seeing there's the event type project
+
+
+they Nathan who spoke here last year is
+
+
+one of the co maintainer of that along
+
+
+with a guy named Scott Bell where they
+
+
+have a Postgres backed version of a
+
+
+message store and of course there is the
+
+
+rails event store that Andre and the
+
+
+folks at are concei maintained so those
+
+
+are just examples of message stores and
+
+
+that's the firehose introduction to the
+
+
+world that we're talking about so
+
+
+hopefully that made sense if not we'll
+
+
+be around for the next couple of days
+
+
+obviously let's talk because I love this
+
+
+stuff so what I didn't mention was that
+
+
+these messages that are getting
+
+
+published it's in a pub sub style so if
+
+
+I'm writing a message I don't know who's
+
+
+consuming it if I'm reacting to one I
+
+
+don't know who sent it and this all
+
+
+happens asynchronously so that creates
+
+
+some potentially weird situations what
+
+
+I'm trying to give a user interface user
+
+
+does something they want a response how
+
+
+do I give them one when the information
+
+
+is not yet available
+
+
+that's what we're gonna get into with
+
+
+the rest of this so first thing I want
+
+
+to say though who here has ever worked
+
+
+with 3d graphics or a game engine like
+
+
+unity or something few people who's ever
+
+
+played a video game okay more handsome
+
+
+so you see these objects in your 3d
+
+
+video game and the way that they get
+
+
+created is someone defines the geometry
+
+
+of that object in this case zebra and
+
+
+there's what's called a texture map made
+
+
+which links points on the zebra two
+
+
+points on a to do to do 2d texture that
+
+
+a poor unfort I mean an artist would
+
+
+generate I cannot wrap that around that
+
+
+in my mind but whatever the case may be
+
+
+there are people who can and then using
+
+
+the texture map and the texture images
+
+
+you end up with the textured zebra okay
+
+
+here is a really disturbing picture that
+
+
+is could be a texture map for a human
+
+
+head okay what would happen if you took
+
+
+the texture for the human head and tried
+
+
+to map it to the geometry for a zebra
+
+
+you would get a monstrosity that's what
+
+
+you'd get but the point of this so if
+
+
+you're in web development there's a
+
+
+really good chance you came to it from
+
+
+the MVC crud style of architecture think
+
+
+of that as the zebra smelly can't be
+
+
+tamed and then the texture those are the
+
+
+ideas of the MVC crud architecture that
+
+
+sorry the model here is your mental
+
+
+model and then you get introduced to
+
+
+some new ideas service architecture if
+
+
+you try to take those ideas from service
+
+
+architecture and map them to the same
+
+
+thinking of the MVC crud monolith you're
+
+
+gonna have a really bad time and it's
+
+
+not gonna make any sense you're gonna
+
+
+say this is stupid and you're gonna
+
+
+write articles like the majestic
+
+
+monolith so said another way if you've
+
+
+started building a microservices system
+
+
+and you got to this point where you just
+
+
+have an HTTP form over a row in a
+
+
+database
+
+
+and that's when you start thinking about
+
+
+what are the implications of the
+
+
+eventually consistent pub/sub model
+
+
+you're gonna have a bad time this is too
+
+
+far down the process to start thinking
+
+
+about it you need to step back and
+
+
+re-examine what you're doing and the way
+
+
+to do that is set aside all the
+
+
+technology all right we're good with
+
+
+technologies set it aside figure out
+
+
+what experience is it that you want to
+
+
+deliver to your users once you've got a
+
+
+firm idea of that and of course that's
+
+
+revealed by talking with your business
+
+
+team your UX experts then start figuring
+
+
+out the technology because the
+
+
+technology that's the easy part
+
+
+knowing what you're supposed to show
+
+
+your users that's the hard part so let's
+
+
+get into some specific use cases and
+
+
+things that might help and the first one
+
+
+is the sometimes nothing is enough like
+
+
+don't even care about the asynchronous
+
+
+nature of it there are cases where
+
+
+that's valid I'm thinking like analytic
+
+
+stuff or if you really hate your users
+
+
+you can also ignore it but don't hate
+
+
+your users they're nice to you but
+
+
+suppose that we have a website where
+
+
+you're tracking video views like a
+
+
+YouTube or yeah like a YouTube that's a
+
+
+good example and you want to know how
+
+
+many times a video has been viewed do
+
+
+your users really need that in real time
+
+
+like if you sit and watch a video on
+
+
+YouTube and you get to the end of it do
+
+
+you expect the view counter to go up by
+
+
+one right in that moment I don't in fact
+
+
+I saw this video once where they get to
+
+
+it's like it's a hundred and thirty
+
+
+seven or something and then it won't go
+
+
+up anymore because that's the point at
+
+
+which they start investigating are these
+
+
+actual legitimate video views anyway
+
+
+there is zero expectation of real time
+
+
+anything with tracking this kind of
+
+
+analytics data and it's okay if there's
+
+
+some lag so the flow of the data through
+
+
+here is the user watches the video and
+
+
+some requests get sent to the
+
+
+application the application writes an
+
+
+event to the message door saying hey the
+
+
+video was viewed and at that point the
+
+
+application renders a response to the
+
+
+user we can actually see this in action
+
+
+sort of
+
+
+here is an amazing website called video
+
+
+tutorials and this is the home page if
+
+
+you couldn't tell there is no actual
+
+
+video but I can click this button to
+
+
+simulate the end of watching one and
+
+
+you'll notice right now it says there
+
+
+has only been one video watch so I'll
+
+
+just refresh the page just to we can all
+
+
+be convinced about that and I'm gonna
+
+
+click this button and this is exciting
+
+
+it's going to send a request to the
+
+
+server saying a video is watched and
+
+
+then the server's gonna respond it did
+
+
+it but you'll notice the count still
+
+
+says one videos see it's even good with
+
+
+the plural words there so why does it
+
+
+still say one well because like I said
+
+
+the request goes to the server an event
+
+
+gets written it's an aggregators job to
+
+
+update the database it tells me how many
+
+
+videos have been seen but that didn't
+
+
+happen before I rendered a response to
+
+
+the user and that's okay cuz again like
+
+
+I don't need it in real time so if I
+
+
+just refresh the page here now look at
+
+
+that
+
+
+- incredible you saw it here first so
+
+
+sometimes it's okay to just not worry
+
+
+about it like Elsa said in the movie
+
+
+frozen
+
+
+let it flow let it flow cuz that's what
+
+
+she did she was a programmer and just
+
+
+let the data happen as you want it to
+
+
+next one I like to call this one
+
+
+stalling for time who here has ever
+
+
+registered for a website before nice
+
+
+when you registered for a website did
+
+
+you by chance get taken to a page that
+
+
+said hey thanks for registering we'll
+
+
+send you an email go click it to confirm
+
+
+your email address yeah that happens a
+
+
+lot I like to think that's them just
+
+
+stalling for time right I mean there's
+
+
+reasons to verify an email address but
+
+
+it provides perfect cover for hiding the
+
+
+fact that when you registered there
+
+
+isn't yet that formal record of it yet
+
+
+because it's flowing through the event
+
+
+system
+
+
+so this kind of a strategy could also be
+
+
+used like when you place an order on an
+
+
+e-commerce site right you go do a hey
+
+
+thanks we got your order page and you
+
+
+don't get any more information but you
+
+
+don't really expect it either right
+
+
+they'll tell you if there's a problem or
+
+
+whatnot or with bank transfers those
+
+
+certainly don't happen immediately so
+
+
+there's you don't have to show it in
+
+
+real time so what does that scenario
+
+
+look like oh here's a metaphor for it
+
+
+this is a swan very such grace very bird
+
+
+they look amazing on top of the water
+
+
+right there just poise and elegance but
+
+
+if you look under the water what are
+
+
+their feet doing it's like they lose
+
+
+some of that grace and elegance right
+
+
+this is exactly the stalling for time
+
+
+strategy so you're in a situation where
+
+
+you need time for background processing
+
+
+you want to show the user that something
+
+
+is happening and so for example with a
+
+
+user registration and a user will submit
+
+
+their registration and you want to send
+
+
+an email so just send them to a static
+
+
+screen and they're none the wiser
+
+
+because they weren't expecting anything
+
+
+real-time and what happens is they
+
+
+submit the registration the application
+
+
+renders the go check your email some
+
+
+registration service as part of its flow
+
+
+will write a command that an email
+
+
+service picks up to send the email that
+
+
+probably happens in less than a second
+
+
+more than you wanted in a request
+
+
+response cycle but small enough that
+
+
+unless they're like seriously like
+
+
+they've opened up your site and Gmail
+
+
+and as soon as they hit submit they're
+
+
+over here just spamming the refresh
+
+
+button they're not going to know the
+
+
+difference so you get to look like a
+
+
+swan and your users are happy so so the
+
+
+point to it is with both of these
+
+
+examples is when I come from the MVC
+
+
+crud world that is like the hyper
+
+
+optimization for immediate responses
+
+
+there are cases where I really do need
+
+
+an answer right now
+
+
+but I don't need that for every use case
+
+
+and so the MVC crud training tells me I
+
+
+have to every response I need an answer
+
+
+right now otherwise there's big problems
+
+
+and people will probably die but that
+
+
+just isn't the case in a lot of
+
+
+scenarios so ask the question what
+
+
+experience do I need to present to the
+
+
+users what do they expect and if they
+
+
+don't expect an immediate response you
+
+
+can not give them one and that's just
+
+
+fine so the last one is as we get closer
+
+
+to needing faster responses one thing
+
+
+you didn't talk about in the intro is
+
+
+when you're doing an event based system
+
+
+like this there's a lot of analysis that
+
+
+has to go up front with that and I don't
+
+
+mean like waterfall style nine months of
+
+
+it but a week or two figuring out what
+
+
+you're actually doing is still agile in
+
+
+my book right a week or twos not that
+
+
+long and if a week or two of planning
+
+
+can save you the kinds of problems that
+
+
+happen when you work with a well-known
+
+
+Ruby framework for building web
+
+
+applications that time is well spent so
+
+
+back to the video tutorials example
+
+
+suppose you are letting people upload
+
+
+videos because you need videos to show
+
+
+your users and there are rules around
+
+
+valid names right we don't want blank
+
+
+names we don't want names with bad words
+
+
+in them but those rules they live in a
+
+
+service and services process things
+
+
+asynchronously so when they submit a
+
+
+name to me I don't know if it was a good
+
+
+one or not now I could duplicate all of
+
+
+the rules that the service will enforce
+
+
+inside of an application but if those
+
+
+ever changed now I've got to change it
+
+
+in two places
+
+
+I think a good solution to this is just
+
+
+embrace the evented model and we don't
+
+
+want to display invalid names to viewers
+
+
+so like if I'm the content creator and
+
+
+you all are just coming to the site I
+
+
+don't want to show you the incorrect
+
+
+names or take the video down just
+
+
+because I tried to submit a name that
+
+
+shouldn't have been there but at the
+
+
+same time it would be good if I saw the
+
+
+bad name I tried to put in there so that
+
+
+I could fix it
+
+
+so let's let's tell a little story here
+
+
+this is mr. grumpy pants and he tries to
+
+
+make horrible experiences on websites
+
+
+for people and using our crude tools he
+
+
+tries to send some bad words to this
+
+
+video that already has a lovely name
+
+
+now if I'm still thinking an MVC crud
+
+
+here my alarm bells are going on like I
+
+
+have got to stop that no that's not what
+
+
+stop signs look like in Europe but I was
+
+
+so thrilled that Google slides had an
+
+
+eight-sided figure so yeah it's not even
+
+
+what a stop sign looks like in the
+
+
+States either so anyway the alarm bells
+
+
+are going off and I've got to stop this
+
+
+because this row in this database that
+
+
+is it that is the entirety of what it
+
+
+means to be a video in my system and if
+
+
+something bad happens there I don't even
+
+
+know how to recover from that because I
+
+
+don't have any history all I have is
+
+
+what it's currently named I would
+
+
+contend with the invented model it's not
+
+
+that big of a deal right why okay so
+
+
+here's the thing that I'm afraid of the
+
+
+bad name gets through there's evil
+
+
+laughter for mr. grumpy pants who's now
+
+
+happy and children are sad that one is
+
+
+intentional that's like when you know
+
+
+something's really serious is when you
+
+
+have a1 mixed in with your exclamation
+
+
+points but what if we were dealing with
+
+
+an e vented model right so the video has
+
+
+been uploaded mr. grumpy pants he sends
+
+
+his request that he wants to have his
+
+
+bad title and there's an application
+
+
+you're just saying okay fine you sent me
+
+
+a name and he thinks he's so happy
+
+
+because his name got through and in a
+
+
+sense it did we recorded it the fact
+
+
+that he submitted an invalid name that's
+
+
+totally a part of that video's history
+
+
+right
+
+
+it happened can't argue with that but we
+
+
+have events we have aggregators CQRS
+
+
+like andre was talking about I can take
+
+
+these events and shape them into one
+
+
+form for the kiddos right they get a
+
+
+nice screen with
+
+
+video and the lovely name that doesn't
+
+
+offend them and doesn't cause tears but
+
+
+then mr. grumpy pants for him for his
+
+
+view of the video we get to say hey
+
+
+bucko you've got to fix this thing
+
+
+so from the same data we get these
+
+
+different views these things that
+
+
+normally were database level validations
+
+
+I can elevate them into my core business
+
+
+model right why do I push that off this
+
+
+is I Andre you mentioned that you got
+
+
+active record quickly became a problem
+
+
+point for you it did for me as well and
+
+
+one of the things was these validations
+
+
+why are those baked into the database
+
+
+layer your validations what is validated
+
+
+in your system it's not a persistence
+
+
+concern that's part of your core domain
+
+
+model and so by pulling it out of there
+
+
+I can just have a service control that
+
+
+and that now is a first-class citizen in
+
+
+my system allowing me to handle this
+
+
+potentially disastrous situation by
+
+
+showing one thing to the kiddos and one
+
+
+thing to the uploader who sent the bad
+
+
+name so embrace the event model let the
+
+
+bad data through but you don't have to
+
+
+show it to the users you don't have to
+
+
+act on it all you're capturing is that
+
+
+oh yeah person submitted a bad event
+
+
+that's fine now what am I gonna do about
+
+
+it and the kind of temporal flow through
+
+
+that of course is person sends the name
+
+
+write the command to the message door
+
+
+immediately render the response then in
+
+
+the next step this is a fun diagram the
+
+
+publishing service picks up the command
+
+
+it processes it validates it writes back
+
+
+the success or not and the aggregator
+
+
+aggregates that into a materialized view
+
+
+and this is also a four because those
+
+
+happen at the same time from the moment
+
+
+that happened the UI can be pulling to
+
+
+see if the command has processed because
+
+
+when I write a command it's true that
+
+
+the whole operation hasn't completed but
+
+
+I do know the ID of the command that I
+
+
+wrote so I can tell if it's been
+
+
+processed or not so right even that can
+
+
+be handled properly if your mental model
+
+
+is first
+
+
+what do I need to provide my users vs.
+
+
+oh this just goes into controller and a
+
+
+model and stuff so that one doesn't
+
+
+matter anymore
+
+
+alright so concluding now again I just
+
+
+want to say I love the micro-services
+
+
+architecture not there's not wine right
+
+
+but the principles of it the separation
+
+
+of concerns the separation of right
+
+
+model from read model it's fantastic
+
+
+it's fun to work with and if you're in a
+
+
+distributed system it's really fun when
+
+
+you write an event and your little
+
+
+electronic minions go doing your will
+
+
+that's always exciting but if you bring
+
+
+the MVC crud way of thinking to a micro
+
+
+services architecture it won't make any
+
+
+sense and you'll get a zebra shape with
+
+
+a human face and that will disturb you
+
+
+so start thinking about what it is you
+
+
+want to give to your users before you
+
+
+start coding more that's good advice in
+
+
+any case but it's absolutely critical in
+
+
+an architecture like this use the event
+
+
+model it gives you options you didn't
+
+
+have before like accepting the bad input
+
+
+and dealing with it after the fact
+
+
+always be working with your business
+
+
+team and your UX people we've all seen
+
+
+what you eyes look like when developers
+
+
+build them I mean there are some
+
+
+outliers right but I don't think any of
+
+
+you would want to use any UI that I came
+
+
+up with so always ask yourself the right
+
+
+questions and honestly when you're
+
+
+asking the right questions the
+
+
+technological solutions will reveal
+
+
+themselves if you want some more info I
+
+
+recommend reading the event type project
+
+
+it's fantastic reading even if you don't
+
+
+use it in your day to day work it will
+
+
+inform a lot of things for you like I
+
+
+said I work in nodejs mostly day-to-day
+
+
+but it has really helped me understand
+
+
+micro services a lot better I have a
+
+
+mailing list if you're interested and
+
+
+the slides are not yet posted there but
+
+
+they will be for whatever reason using
+
+
+my phone Google slides was telling me
+
+
+sorry sharing is not available so I'll
+
+
+get that fixed and I do have code for
+
+
+the stuff that we talked about and I'll
+
+
+get that posted and share it on Twitter
+
+
+the national resources good people to
+
+
+follow in this space oh my gosh I left
+
+
+that last one in there pretend that
+
+
+isn't there because this is a ruby
+
+
+conference and happy coding
+
+
+any questions yeah when do you counter
+
+
+command as processed I would consider it
+
+
+when the service has produced the event
+
+
+because the service is the thing that's
+
+
+ultimately responsible for processing
+
+
+the command and so when it does that
+
+
+it's been processed there will be of
+
+
+course in an additional slight delay
+
+
+before aggregators pick that up to
+
+
+signal it to the rest of the world but
+
+
+that really is the moment that the
+
+
+command is processed thanks the next
+
+
+upon the journey is oh yeah sorry it's
+
+
+gonna say so if there are no more
+
+
+questions I get it
+
+
+I wonder if we we validate each piece of
+
+
+data in this way and we ask our data
+
+
+creator to change it somehow it looks to
+
+
+me that it increases the complexity of
+
+
+the system tremendously so we could have
+
+
+not only the label of the video which
+
+
+should be changed but the description
+
+
+etc so a lot of other fields and it
+
+
+looks to me a lot of new forms UI side
+
+
+should be added if we choose this path
+
+
+how would you handle this complexity
+
+
+yeah that's a great question so to be
+
+
+sure you don't have to go this way
+
+
+the sort of model that MVC cred chooses
+
+
+in every case is still an option in some
+
+
+cases so I'm not trying to say never do
+
+
+that but I am saying there are other
+
+
+options that said there are other
+
+
+aspects to building a UI for a system
+
+
+like this I didn't talk about and that's
+
+
+what a concept like task-driven user
+
+
+interfaces so most systems that I've
+
+
+been in when you go to do something they
+
+
+just present you a gigantic form that
+
+
+has almost every field that's in a
+
+
+database and you just go edit all those
+
+
+fields and hit submit so you have a
+
+
+whole lot of things on there and one of
+
+
+the drawbacks to that is the process
+
+
+that I'm trying to do is not encoded in
+
+
+the software right I have to know that
+
+
+and if I'm working in an office on this
+
+
+piece of software and I leave the
+
+
+company sure hope I trained someone else
+
+
+that they're know that they're supposed
+
+
+to go edit this thing to do part of the
+
+
+process and here to edit it so when you
+
+
+what we do this other aspect with a more
+
+
+task driven interface there's a really
+
+
+good chance that the forms are going to
+
+
+be smaller in the first place so when
+
+
+you you're not going to submit this
+
+
+massive four
+
+
+with three things that need to be fixed
+
+
+so I think that would help a lot with
+
+
+the complexity and it is true I would
+
+
+imagine that on average if you take that
+
+
+approach you will have more screens to
+
+
+do but complexity I know from my
+
+
+perspective now having worked with micro
+
+
+services for so long I don't find it
+
+
+more complex it's more typing for sure
+
+
+but typing is rarely my bottleneck when
+
+
+I'm trying to get stuff done and putting
+
+
+up a screen isn't that hard to do all
+
+
+right I can do that okay but the way
+
+
+that it all flows in execute so I still
+
+
+find that to be more straightforward
+
+
+have you ever had one of those piggy
+
+
+banks where you like you drop a coin in
+
+
+it and the coin rolls down and then hits
+
+
+the slot it's supposed to go in and just
+
+
+falls to be that's that's how an event
+
+
+sewer system works right the events are
+
+
+just flowing and they hit their spots
+
+
+and they do their thing whereas with
+
+
+credit I've got to do like all the weird
+
+
+validation stuff so probably more
+
+
+elements because they're smaller but I'd
+
+
+find that each one has less complexity
+
+
+than the larger ones would have in an
+
+
+MVC crud so more things of less
+
+
+complexity I find easier to work with
+
+
+and fewer things with a lot of
+
+
+complexity does that answer your
+
+
+question yeah okay yeah that's a great
+
+
+question and that might work that's the
+
+
+big one we're struggling with right now
+
+
+I work in at a commercial real estate
+
+
+company and let's just say that the
+
+
+systems that have powered that type of
+
+
+business for the past several decades
+
+
+aren't really well they've been around
+
+
+for a while let's just say and different
+
+
+design patterns went into them so the
+
+
+hard answer is to begin with like like
+
+
+you said the good domain data it's
+
+
+already gone it's like a compression
+
+
+algorithm that loses information how do
+
+
+you get it back
+
+
+well you can't it's gone and so what we
+
+
+do is say we have some big piece of data
+
+
+from this legacy system and really it's
+
+
+like that original users table it's a
+
+
+combination and aggregation of many
+
+
+different domains
+
+
+I usually just will take that I build
+
+
+the new model first what should it look
+
+
+like and get that working and then I
+
+
+need to map what exists to what's there
+
+
+and so I'll have different events so
+
+
+like legacy foo imported that will be
+
+
+the start of streams for the new data
+
+
+model and they're just not as good as it
+
+
+would have been if I had had the domain
+
+
+model from the get-go but it's the best
+
+
+I've got and with a separate event type
+
+
+around it I can distinguish what came
+
+
+from the old system from the new stuff
+
+
+and yeah just hope it works I mean it
+
+
+will work but it's just it's challenging
+
+
+because what you need to have good data
+
+
+is already gone so you're left with just
+
+
+what you have which I mean it is an
+
+
+event that this thing was put into this
+
+
+database it's not a good business event
+
+
+but it is an event and I can still get
+
+
+it advantages of the pub/sub
+
+
+architecture from it which is really
+
+
+what I'm after
+
+
+but yeah so that's what I usually do in
+
+
+that situation but
+
+
+thank you so much
+
+
+[Applause]

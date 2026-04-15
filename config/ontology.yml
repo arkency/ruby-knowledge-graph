@@ -1,0 +1,70 @@
+node_kinds:
+  - kind: person
+    description: "speaker, attendee, organizer, developer"
+  - kind: talk
+    description: "conference talk, workshop, panel, lightning talk"
+    attrs:
+      - name: type
+        values: [talk, workshop, panel, lightning-talk]
+  - kind: event
+    description: "conference, meetup, camp"
+    attrs:
+      - name: format
+        values: [in-person, remote, hybrid]
+      - name: date
+      - name: location
+  - kind: company
+    description: "company, organization"
+    attrs:
+      - name: industry
+  - kind: tool
+    description: "framework, library, language, platform"
+    attrs:
+      - name: category
+        values: [framework, library, service, platform]
+  - kind: concept
+    description: "technical concept, pattern, methodology"
+    attrs:
+      - name: category
+        values: [pattern, methodology, architecture, practice]
+  - kind: project
+    description: "software project, open-source product"
+    attrs:
+      - name: license
+        values: [open-source, closed-source]
+      - name: status
+        values: [active, completed]
+
+edge_relations:
+  - relation: authored
+    signature: "person --authored--> talk"
+  - relation: presented_at
+    signature: "talk --presented_at--> event"
+  - relation: attended
+    signature: "person --attended--> event"
+    attrs:
+      - name: role
+        values: [participant, speaker, organizer]
+  - relation: sponsors
+    signature: "company --sponsors--> event"
+  - relation: about
+    signature: "talk --about--> concept | tool | project"
+    hint: "what the talk covers"
+  - relation: works_at
+    signature: "person --works_at--> company"
+    attrs:
+      - name: role
+  - relation: works_on
+    signature: "person --works_on--> project | tool"
+    attrs:
+      - name: role
+  - relation: uses
+    signature: "person | project --uses--> tool"
+  - relation: has_skill
+    signature: "person --has_skill--> concept | tool"
+    attrs:
+      - name: level
+        values: [beginner, intermediate, expert]
+  - relation: related_to
+    signature: "* --related_to--> *"
+    hint: "last resort — use only when no specific relation fits"

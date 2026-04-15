@@ -1,0 +1,1840 @@
+[Applause]
+
+
+thanks thanks Lish for introdution me
+
+
+and thanks everyone for coming for this
+
+
+talk
+
+
+today uh this is my first English talk
+
+
+uh I hope uh it will be good and you
+
+
+like it thank
+
+
+you okay let's
+
+
+start uh I remember myself at school uh
+
+
+where we had 10 computers as class and
+
+
+only one of them was working we had also
+
+
+10 uh students in the class and we had
+
+
+to share uh this computer somehow right
+
+
+so it's definitely a problem and uh
+
+
+nowadays it's not a problem at all but
+
+
+there were times you know uh yeah it's
+
+
+it's a problem but we are not going to
+
+
+solve it today uh the sharing account uh
+
+
+I will talk about is about the um your
+
+
+credentials that you share with your
+
+
+friends and family members and everyone
+
+
+around when you buy application and
+
+
+share so that everyone uses uh the
+
+
+application it's one
+
+
+case uh another case is uh is when
+
+
+someone steals your credentials and you
+
+
+this your account so you paid it but
+
+
+someone else is using us except of you
+
+
+and uh it's a security problem right
+
+
+obviously but um companies don't think
+
+
+so and uh usually they think about
+
+
+Revenue right so they want uh to improve
+
+
+their revenue this the the goal number
+
+
+one of every commercial company and uh
+
+
+exact exactly this problem we had in our
+
+
+application so there was some members
+
+
+users that sharing their credentials and
+
+
+obviously looking at the revenue how
+
+
+it's dropping uh we uh Sol it there is a
+
+
+problem and we have to solve it
+
+
+somehow uh so I personally don't like uh
+
+
+very complicated Solutions and uh first
+
+
+of all when I face with the problem uh I
+
+
+try to analyze and see for the uh
+
+
+possible solutions and uh stick with the
+
+
+simplest one that would be just enough
+
+
+for
+
+
+us uh there are various solutions that
+
+
+uh cope with this problem that I
+
+
+specified
+
+
+um actually first first of all it's eort
+
+
+thought Party solution for example
+
+
+fingerprint there is such Service uh
+
+
+obviously you it's uh just ready
+
+
+solution you just rely on that solution
+
+
+they actually you own your data and that
+
+
+the problem number one that um uh you
+
+
+don't have all means to analyze the data
+
+
+so you don't own own the data and you
+
+
+cannot analyze it and also you
+
+
+Additionally you have to uh Implement
+
+
+some solution inside your application uh
+
+
+somehow integrate it and write custom
+
+
+code so basically it's not so easy as uh
+
+
+it sounds in the
+
+
+beginning uh there are
+
+
+also um Solutions like analyzing
+
+
+locks uh looking into IP addresses user
+
+
+agent and maybe some another additional
+
+
+information that is passed out of these
+
+
+things like location and so on forth um
+
+
+we actually tried to implement them but
+
+
+it turned out it's not easy first of all
+
+
+and secondly we could not find some um
+
+
+100% solution that would be um um
+
+
+precise enough for
+
+
+us uh
+
+
+so we just abandoned this solution and
+
+
+uh um tried to one article that we found
+
+
+on the internet said that multiactor
+
+
+notification can improve the
+
+
+situation uh yes obviously it's kind of
+
+
+sounds like uh good idea right so we
+
+
+just uh turn on multiactor reification
+
+
+for our users and uh we just prevent uh
+
+
+just complicate things during Lin that's
+
+
+it so that means that
+
+
+theoretically uh it this solution can
+
+
+improve the situation around uh the
+
+
+problem but um
+
+
+uh for how how much how much we gain if
+
+
+if we implement this solution uh it's uh
+
+
+a good question like if you turn this
+
+
+solution for everyone would it really
+
+
+improve the situation because it's a
+
+
+risky factor for users so that they
+
+
+would not like this solution it just
+
+
+start to leave the
+
+
+application uh this are the questions we
+
+
+faced with
+
+
+and uh tries to trying to implement
+
+
+multiactor
+
+
+identification one
+
+
+second uh so how to deal with this
+
+
+problem like how to understand if we
+
+
+enable multiactor identification for our
+
+
+application would it improve the
+
+
+situation or it will make it worse so
+
+
+this is the question we are going to
+
+
+solve how to solve it um if uh look at
+
+
+the construction business they have a
+
+
+scaffolding idea like before starting
+
+
+some project they build scaffolding and
+
+
+around it they build some some buildings
+
+
+right uh when we face with a similar
+
+
+problem to starting when starting uh a
+
+
+project uh IT project uh in IT project
+
+
+we have
+
+
+data and but inside our application we
+
+
+actually didn't have enough data to
+
+
+prove uh to see if uh the situation
+
+
+would be better after implementing
+
+
+multiactor nitification so we have to
+
+
+had to collect this data in the
+
+
+beginning
+
+
+uh and uh this um thinking this way we
+
+
+have come up with the following plan
+
+
+collecting data uh then um identifying
+
+
+some indicators that would tell us uh
+
+
+the situation is getting uh worse better
+
+
+um and then we had an idea to enable
+
+
+multiactor notification not for everyone
+
+
+but only for those users they definitely
+
+
+Share account so this is how we kind of
+
+
+um differentiate our risks when we
+
+
+implement this kind of
+
+
+potentially uh good
+
+
+solution uh this uh
+
+
+indicators that we have come up with
+
+
+it's the number of signups per day uh
+
+
+per period actually we wanted to see how
+
+
+the situation is going on uh during week
+
+
+month and so
+
+
+on uh next is user
+
+
+retention it just um it just would show
+
+
+how many active users users are still
+
+
+there inside the
+
+
+application and a number of Lin sessions
+
+
+per
+
+
+user uh by the way we in the beginning
+
+
+we did not have uh all this data inside
+
+
+our
+
+
+application I mean specifically like in
+
+
+sessions we didn't have this concept we
+
+
+could not just understand who is sharing
+
+
+the account at this
+
+
+moment and also of course we could see
+
+
+the revenue inside
+
+
+stripe we wanted to watch it obviously
+
+
+because we expected uh that the
+
+
+situation is there is not getting worse
+
+
+at least
+
+
+and obviously this is uh our
+
+
+expectations something should should go
+
+
+up something should uh go down
+
+
+specifically like in sessions prod users
+
+
+number of Ling sessions proder should be
+
+
+dropping uh and everything else should
+
+
+grow uh when it comes to collecting data
+
+
+uh uh first of all we we relied on a
+
+
+paper trail gem it's easy gem just uh
+
+
+you install uh for existing uh Ruben
+
+
+rails application another by the way
+
+
+another way uh to collect the the data
+
+
+would be to implement uh data sourcing
+
+
+no I know
+
+
+Ros RB is U uh promoting this idea of uh
+
+
+event souring and is
+
+
+actually uh a good use case where if we
+
+
+had this in the beginning of our
+
+
+application it would help us to collect
+
+
+the data but again we didn't have it so
+
+
+we just wanted to come up with some e
+
+
+easy solution and uh paper TR is good
+
+
+enough for
+
+
+this and next is uh Lin sessions table
+
+
+um Lin sessions table is uh just a model
+
+
+that would represent Lin session
+
+
+obviously um every time the idea is the
+
+
+following every time when um user Lins
+
+
+we just create a record inside our
+
+
+database and inject its ID inside uh
+
+
+cookus session and this is how we
+
+
+identify um the the active session the
+
+
+active current session uh for every user
+
+
+because it comes uh with every request
+
+
+that is coming after
+
+
+Lin this
+
+
+way uh next uh we had to analyze our
+
+
+data somehow and represent it um for us
+
+
+in easy way so that uh we understand how
+
+
+uh the situation
+
+
+is is it getting better or is it getting
+
+
+worse again and
+
+
+um uh we use metabase for this uh it
+
+
+allows to represent uh
+
+
+data um in an easy uh way with charts
+
+
+with numbers and
+
+
+um basically yeah chart sh and numbers
+
+
+there are different ways of representing
+
+
+the data and as a good Tool uh the good
+
+
+thing is that it's easy to set up it set
+
+
+up this uh thing because uh they have a
+
+
+Docker uh the installation takes about 5
+
+
+minutes just install it uh
+
+
+configure
+
+
+uh uh put in the um
+
+
+URL to your database to connect and
+
+
+that's it basically you ready to start
+
+
+using
+
+
+it okay and this are these are our
+
+
+results after implementing our solution
+
+
+and
+
+
+idea uh so you see that in the beginning
+
+
+the number of Lin sessions per user was
+
+
+growing uh looking by uh you you can see
+
+
+that by looking into the average of like
+
+
+inceptions per user uh after that we
+
+
+started to enable multiactor
+
+
+notification uh periodically every week
+
+
+uh for users that violate our rules and
+
+
+you see that uh
+
+
+somewhere in November
+
+
+right uh it started to drop
+
+
+meaning that
+
+
+uh like number of Lin SS perers was
+
+
+decreasing slowly but
+
+
+decreasing by the way in order to
+
+
+write um in order to prepare the data to
+
+
+represent it we had to write custom SQL
+
+
+yeah without SQL is it will be hard
+
+
+actually to deal with these charts
+
+
+yeah so Lear
+
+
+SQL um this is the situation for users
+
+
+without multiactor identification
+
+
+meaning that we just there is there will
+
+
+be always some users that uh don't share
+
+
+account so that we don't need to uh
+
+
+enable multifactor notification for them
+
+
+and uh this is the situation for them we
+
+
+also watched for the
+
+
+and this is just uh the situation for
+
+
+all users it also shows that everything
+
+
+is going
+
+
+better another chart shows uh Lin
+
+
+sessions
+
+
+um uh summary basically for all users
+
+
+but not per user but just total number
+
+
+and uh we also watched how it it's uh
+
+
+you see that it's increasing basically
+
+
+it means that uh users are using the
+
+
+application uh this chart shows uh
+
+
+retention of users
+
+
+basically yeah it would be hard to
+
+
+understand I will try my best to
+
+
+understand it um but the idea they
+
+
+Fallen you just um it just shows how
+
+
+many users of active users uh still
+
+
+remain on specific day because uh there
+
+
+is
+
+
+a uh when users sign up they obviously
+
+
+use the application but for how much
+
+
+time I mean uh some users uh drop after
+
+
+one day some need one week and some one
+
+
+need someone needs uh one year right and
+
+
+for that reason you see
+
+
+that the the right the right U part of
+
+
+this chart is uh going up exactly for
+
+
+this reason because uh users that sign
+
+
+up recently still remain in the
+
+
+system but uh we can see that that
+
+
+situation here is also
+
+
+positive uh this is the situation for
+
+
+signups so our expect was that uh the
+
+
+number of signups per day would be
+
+
+increasing and uh yeah so you see that
+
+
+it's not so obvious the situation is a
+
+
+bit uh wavy
+
+
+here uh especially in December yeah in
+
+
+the beginning uh we had uh we had no
+
+
+data we had not enough data that's why
+
+
+you see that uh uh it's close to zero
+
+
+but then
+
+
+um the situation was improving uh
+
+
+December was not good month in cells for
+
+
+at all uh but nevertheless there was
+
+
+some cells and basically if uh
+
+
+we draw um regression line we can detect
+
+
+that uh the situation ising and is
+
+
+proving significantly just 20
+
+
+27% uh gain after implementing this
+
+
+solution so yeah we can say that it's a
+
+
+success successful story right so
+
+
+multiactor unification indeed improves
+
+
+uh the situation around account
+
+
+sharing so and uh the impact is
+
+
+significant
+
+
+basically plus uh
+
+
+27% sign ups per day
+
+
+average
+
+
+but uh there are some other factors that
+
+
+could impact it for example organic
+
+
+search it was also increasing with the
+
+
+application uh meaning that we cannot
+
+
+say
+
+
+exactly uh how much uh the impact was
+
+
+but at least uh look into the charts uh
+
+
+specifically to the number of Lin
+
+
+sessions per users uh that was positive
+
+
+and uh the total Lin stions at all
+
+
+meaning that the application is being
+
+
+used we can claim that basically the
+
+
+situation um got improved and improved
+
+
+significantly
+
+
+uh next uh I will I will describe how uh
+
+
+we manage
+
+
+to basically some details technical
+
+
+details about uh how exactly we
+
+
+implemented
+
+
+this first of all multifactor
+
+
+notification was implemented using uh
+
+
+device to factor gem we had inside this
+
+
+application device already installed so
+
+
+we just had to install the this another
+
+
+Gem and just configure it uh by the way
+
+
+we didn't have uh phone number of users
+
+
+that's why we just use email to send the
+
+
+verification code for
+
+
+users uh for us it was just
+
+
+enough and yeah we just uh
+
+
+remember uh every time one user uh
+
+
+passes
+
+
+notification uh Cod uh we remember this
+
+
+for 30 days in cookies
+
+
+uh next
+
+
+uh we had to track somehow this you
+
+
+remember uh we had to create Lin session
+
+
+uh record every time when users log in
+
+
+and uh for fortunately device uh
+
+
+specifically won the that device uses
+
+
+provides hooks that we can use and
+
+
+leverage this opportunity in order to
+
+
+implement uh such things like after l in
+
+
+do this after log out do do this and
+
+
+here you see that after l in we just try
+
+
+to record U Lin
+
+
+session and um every time when someone
+
+
+calls inside the application current
+
+
+user um
+
+
+we uh the the the Run comes to this hook
+
+
+uh that price to L out meaning that um
+
+
+if like current Lin stion um is expired
+
+
+for example we can every time say that
+
+
+this Ling session is expired that's why
+
+
+um we can uh every time when uh someone
+
+
+tries to uh get current user we just
+
+
+additionally uh see uh if uh the related
+
+
+leing session is active and if it's
+
+
+active if we just pass so meaning that
+
+
+current US is there if um it's expired
+
+
+this uh this way we just log out and
+
+
+current user will give
+
+
+Neil uh and after every log out we just
+
+
+expire Ling session this is just needed
+
+
+again to see and collect the statistics
+
+
+uh this
+
+
+is this are details um some details
+
+
+about record Lin method uh
+
+
+deactivate uh maybe L out maybe L out
+
+
+MFA uh that uh you saw on the previous
+
+
+slides
+
+
+um when it comes to record l in and
+
+
+activate is pretty obious what they they
+
+
+do uh maybe L out as they roate which we
+
+
+just um see if uh uh the current
+
+
+conditions should just deactivate the
+
+
+current Uh current Ling session and it
+
+
+just do this uh maybe L out MFA means it
+
+
+tries to uh deactivate the session for
+
+
+users uh that have not pass multiactor
+
+
+notification but for some reason they
+
+
+got enabled
+
+
+it uh this is how we just force log out
+
+
+and try uh and ask them to pass login
+
+
+and um authentification
+
+
+through multiactor
+
+
+uh this uh details about how we create
+
+
+leing session how do record actually
+
+
+it uh by the way uh what is important
+
+
+here is that I also up token
+
+
+and um secure U
+
+
+uid uh line it actually means that we
+
+
+actually had
+
+
+um two applications like inside we had a
+
+
+mobile application that is IOS
+
+
+application that was implemented using
+
+
+um authentification token gem again it's
+
+
+just uh extension for
+
+
+device uh and the usual Lin session uh
+
+
+for
+
+
+browser that's why we
+
+
+just
+
+
+um uh use for iOS for iOS application we
+
+
+just used their token of this jam and
+
+
+for our um for lin session inside
+
+
+browser we
+
+
+just used uh our own concept that is uh
+
+
+uid uh what is up also uh interesting
+
+
+here is that we also
+
+
+record uh Cloud front cloudfront
+
+
+headers uh actually all request uh
+
+
+inside our application pass through
+
+
+cloudfront and cloudfront uh cloudfront
+
+
+AWS cloudfront it's a service uh that is
+
+
+kind of
+
+
+proxy and uh they have a cool feature
+
+
+that you can optionally enable they they
+
+
+just uh collect and collect all
+
+
+information about the request I mean IP
+
+
+they pass the IP and U detect
+
+
+location
+
+
+um and uh there there is a lot of
+
+
+information actually uh even latitude
+
+
+and longitude of this point but yeah it
+
+
+sounds great but actually in fact uh uh
+
+
+you know that that it's not uh easy
+
+
+thing to detect exactly where the user
+
+
+is and uh uh from practice it doesn't
+
+
+work exactly how we
+
+
+expected uh when it comes to the next
+
+
+plans uh we are going to
+
+
+implement uh the following step uh uh we
+
+
+we are going to limit the uh like
+
+
+session per user so that every user has
+
+
+exactly four maximum four Lin
+
+
+sessions allowed and if this number is
+
+
+uh exhausted every time when they l in
+
+
+they will see this model and they have
+
+
+to
+
+
+decide uh which laging session should be
+
+
+expired uh
+
+
+basically we expect that this this will
+
+
+be final solution and
+
+
+just uh
+
+
+again um in order to implement this
+
+
+solution we just are going to implement
+
+
+it based on
+
+
+the
+
+
+um on the pre preparation data that we
+
+
+used for multiactor notification is just
+
+
+kind of side effect uh that was possible
+
+
+for
+
+
+us and
+
+
+takeaways yeah first of
+
+
+all uh what I wanted to say is that
+
+
+every time uh when you face with the
+
+
+situation and you just uh see that you
+
+
+are trying to implement some feature uh
+
+
+that
+
+
+is very hard to predict how will impact
+
+
+to the application just stop and think
+
+
+try to uh Define some indicators that
+
+
+would show you how the sitation will go
+
+
+would it be better or
+
+
+worse analyze your
+
+
+data uh and in order to analyze the data
+
+
+you need to learn
+
+
+SQL uh and yeah yeah our success story
+
+
+is multiactor notification is definitely
+
+
+improving health of your application
+
+
+if you have some questions thank you I'm
+
+
+ready to answer
+
+
+[Applause]
+
+
+them thanks so uh I have one question
+
+
+why did you finally decideed to stop the
+
+
+limit on the number of four because like
+
+
+from my side from my perspective uh the
+
+
+number of four seems like uh enough
+
+
+number to share your account with your
+
+
+friends or with your family like and uh
+
+
+it's not very often case for users to
+
+
+use uh their own own account on four
+
+
+devices at the same time for example
+
+
+like I can use same application at my
+
+
+laptop and uh at my mobile phone at uh
+
+
+probably some third device but not for
+
+
+and usually it's one or two devices for
+
+
+one user why did you decided to do a
+
+
+limit of four thank you okay thanks um
+
+
+yeah so it's first of all it's specifics
+
+
+of the of our application first of all
+
+
+uh our users use uh the application from
+
+
+different devices like uh desktop
+
+
+browser mobile browser um iOS
+
+
+application and we are going to launch
+
+
+uh react native application that will be
+
+
+IOS and
+
+
+Android uh
+
+
+so
+
+
+basically this was one explanation right
+
+
+and another explanation is just business
+
+
+client wants this oh why uh I to be
+
+
+honest don't don't know why I have no
+
+
+exact answer to to to this question but
+
+
+um mainly is because users uh use the
+
+
+application from different devices and
+
+
+um it's okay for us and
+
+
+also you know that we also understand
+
+
+that we cannot solve this problem
+
+
+100% uh for sure uh for that reason we
+
+
+have to find some compromise you know
+
+
+for for number number four looks good
+
+
+for us because basically looking at to
+
+
+the history we just see that users users
+
+
+will use just four
+
+
+devices um if uh what they be able to
+
+
+share their account yes
+
+
+definitely but um again uh how many
+
+
+users will be there inside the system
+
+
+and what the impact will be on the
+
+
+revenue uh probably it will not be big
+
+
+you know that's why it's not a problem
+
+
+sorry if I missed it during the talk but
+
+
+uh how do you decide which user should
+
+
+have this MFA enabled is it manual or
+
+
+maybe you have some script with some
+
+
+rules and you do it
+
+
+automatically uh yeah uh so we have SQL
+
+
+query that
+
+
+actually um identifies how many like
+
+
+sections per users per users there so we
+
+
+just watch this number if meaning that
+
+
+if one user has four and more right
+
+
+legging sessions active current sessions
+
+
+we just decide to enable MFA for for
+
+
+them thank
+
+
+you uh so I have question regarding uh
+
+
+sharing of credentials but uh not in
+
+
+form of user uh username and password
+
+
+but in form of uh cookies so let's say
+
+
+uh some sophisticated user shared
+
+
+cookies with another user do you protect
+
+
+against that no
+
+
+thanks so you had a slide with the
+
+
+different options that were considered
+
+
+and maybe I just missed it but I would
+
+
+like to hear more more
+
+
+about why MFA with a second device or
+
+
+MFA with an authenticator application
+
+
+were deemed not uh I don't remember like
+
+
+not suitable for the company or for the
+
+
+business and what it was about MFA via
+
+
+email that made that option for MFA
+
+
+suitable yep thanks
+
+
+question um actually we first of all
+
+
+didn't want to dist ract our users uh
+
+
+the idea was that we don't need uh take
+
+
+any additional actions from users and
+
+
+collect some data from them
+
+
+specifically uh we didn't have the phone
+
+
+number that's why we could not cons
+
+
+consider the option with the sending uh
+
+
+Cod to to to the phone
+
+
+number
+
+
+um when it comes to aicat application uh
+
+
+it's additional step for for users uh
+
+
+meaning that it's a risk again
+
+
+so uh if you force them install this
+
+
+application um maybe we can lose
+
+
+them so that's um yeah we have to we had
+
+
+to come up with some simple solution uh
+
+
+that uh has a minimum distraction and
+
+
+effect to user experience that's why
+
+
+thank you Andre for great presentation I
+
+
+have a question because I see weak point
+
+
+uh have you observed like users that
+
+
+drop their accounts and create a new
+
+
+with new credentials just creating new
+
+
+email which is shared between friend and
+
+
+then they can just use the share the
+
+
+email and they can just log in so uh you
+
+
+get the point it's not a full solution
+
+
+but have you checked loged or something
+
+
+to see if this is this is happening
+
+
+actually uh yeah it's a great question
+
+
+first of all no uh we have not analyed
+
+
+this logs uh but I think that we should
+
+
+consider this solution and uh you see
+
+
+that it's more advanced solution but we
+
+
+have to start with something and this is
+
+
+just first step
+
+
+yeah so the main thing is revenue it
+
+
+stopped dropping
+
+
+and we are happy with
+
+
+this um we have time for one more
+
+
+question
+
+
+anyone what does this application
+
+
+do uh okay it's um education uh
+
+
+application for
+
+
+musicians uh it sells um courses for
+
+
+basically classes for
+
+
+musicians right uh thank you Andre for
+
+
+answering once again big Applause for
+
+
+the first speaker

@@ -1,0 +1,2194 @@
+so before we start let me repeat my let
+
+
+me repeat this thing that I gently ask
+
+
+you while I do in this boring
+
+
+introductory part I didn't ask you to
+
+
+follow this link open it and answer a
+
+
+couple of questions it will give us a
+
+
+lot of interesting data which I'll show
+
+
+you tomorrow before my second part of
+
+
+this talk and I think we'll learn a lot
+
+
+about how we use rails and how we manage
+
+
+complexity within rails so I think it's
+
+
+pretty important and it would be pretty
+
+
+interesting and let me start with my
+
+
+talk so we all love Rails and this is
+
+
+why we here but we know that sometimes
+
+
+they they make us suffer so they can
+
+
+hurt us and sometimes we switch to new
+
+
+projects and we hope that this time it
+
+
+will be different so this time and
+
+
+sometimes it's different but in a new
+
+
+way so it makes us feel pain in a
+
+
+different way so some of us they they
+
+
+develop new frameworks they develop new
+
+
+languages or just switch to another
+
+
+languages because they can't can no
+
+
+longer deal with it
+
+
+but what about the rest of us who are
+
+
+just trying to get our job done so what
+
+
+do we do we I think we've developed some
+
+
+kind of empiric set of rules set of
+
+
+habits on how to deal with rails so no
+
+
+callbacks if possible no concerns please
+
+
+fat model skinny controllers maybe so
+
+
+this is just an example right so every
+
+
+one has its own set of rules and we try
+
+
+to follow them but they are not explicit
+
+
+they're more like implicit ones and of
+
+
+course we try new techniques we
+
+
+visit conferences we hear like new stuff
+
+
+and we try to embed new techniques in
+
+
+the way we develop software and another
+
+
+thing I want to say is that Ruby is a
+
+
+powerful language right and it allows us
+
+
+to build a lot of cool Handy tools and
+
+
+sometimes we are in waste of the of the
+
+
+beautifulness of these cool tools but
+
+
+the trick is that power is dangerous and
+
+
+it can be harmful and although I like
+
+
+like the new style of of the conference
+
+
+website I want to point that the
+
+
+previous one actually reflected very
+
+
+good idea that we need to learn how to
+
+
+control the power and good teams they
+
+
+actually develop constraints that allow
+
+
+them to control that power all right to
+
+
+summarize to summarize I created this
+
+
+stupid name just to show that the the
+
+
+main idea we have and now to the intrud
+
+
+like who I am I started using rails in
+
+
+2006 pretty long time ago I part from
+
+
+programming I did a lot of different
+
+
+stuff like freelance in agencies
+
+
+conferences lean poker teaching and all
+
+
+this crazy part stuff and I spent a
+
+
+European get lob developer advocate but
+
+
+this role
+
+
+in this role I didn't touch their code
+
+
+base which is pretty stupid but anyway
+
+
+and yeah because of this I have stickers
+
+
+if you need them they are there and
+
+
+there's plenty of them that that's a
+
+
+good thing about being working in
+
+
+develop you have supply of stickers so
+
+
+and I was in the same spot three years
+
+
+ago and this is when I started like the
+
+
+whole thing started for me like
+
+
+I discovered finally the patterns the
+
+
+solid principles on all the stuff and I
+
+
+learned how how to apply them in my
+
+
+rails applications and I shared this
+
+
+stuff I created this website where I
+
+
+wrote down couple of things I learned
+
+
+and understood I even started writing a
+
+
+book and like you can still leave your
+
+
+email there and you will get a first
+
+
+chapter but but there is like no more
+
+
+chapters yet because I think the
+
+
+situation where I was like that I still
+
+
+had more answers than questions and now
+
+
+to the interesting part how I ended up
+
+
+in here like I have not been developing
+
+
+with rails for in the last three years
+
+
+and I'm still I'm on the stage so yeah
+
+
+the trick is that recently I decided to
+
+
+refresh my rails knowledge and I found
+
+
+another freelancing customer and I like
+
+
+remembered all the few things I knew and
+
+
+developed the project and of course I
+
+
+used all the techniques like services
+
+
+form objects all the stuff I learned but
+
+
+I wasn't quite satisfied with the result
+
+
+that's the trick and then I was lucky
+
+
+enough to attend one workshop it was
+
+
+held by another Russian guy
+
+
+it was two and a half day long and my
+
+
+mind was blown blown away by what I've
+
+
+heard and what I've tried and it was
+
+
+like he was telling me the contents of
+
+
+my book I was going to write so this is
+
+
+and yeah and what I decided like since I
+
+
+had no active project to apply all the
+
+
+stuff I learned but I really wanted to
+
+
+remember all the stuff not forgetting
+
+
+anything so I decided to apply to a
+
+
+conference to give a talk so I had a
+
+
+reason so I have a reason to summarize
+
+
+all the knowledge so I sent the proposal
+
+
+to the most thoughtful ruby conference
+
+
+and like the faith sofa is the most
+
+
+favorite my most favorite Ruby
+
+
+conference and the organizers they were
+
+
+so amazed by this proposal they even
+
+
+kicked out two speakers and gave me like
+
+
+the best time slots on both days so here
+
+
+I am yeah so let's finally start and
+
+
+let's start with a few statements and
+
+
+yes sorry I am for sure will be not the
+
+
+most well prepared speaker but I have a
+
+
+serious intention to be the most
+
+
+impactful one or at least to shake your
+
+
+beliefs so let's start with the let's
+
+
+use our imagination right and what would
+
+
+be an ideal system we want to build so
+
+
+an ideal system must oppose or resister
+
+
+bad code like react does so in react if
+
+
+even for junior developer developer it's
+
+
+pretty hard to write bad code so it it's
+
+
+it's structured in a way so it's the
+
+
+layers are thin end and they oppose you
+
+
+so I'm not saying it's impossible but
+
+
+but it resists you alright so the second
+
+
+thing is that this system we are
+
+
+building it shouldn't fight against the
+
+
+framework it means it it should use
+
+
+defaults if it's possible and the third
+
+
+thing is that there should be ideally
+
+
+there should be on
+
+
+one way to do a certain thing because
+
+
+programmer shouldn't be an artist who
+
+
+just had an inspiration and decided to
+
+
+do it in this way or inner this way so a
+
+
+programmer should be an engineer who
+
+
+analyzes different ways of doing this
+
+
+chooses the best way and standardizes
+
+
+and makes it a rule in his system so
+
+
+that's then that's an idea
+
+
+but also we have to deal with reality
+
+
+and in reality we're lazy sometimes we
+
+
+are not lazy we are just tired why you
+
+
+all have other things to think about
+
+
+like family stuff and we're don't have
+
+
+like enough mental power to think about
+
+
+decisions we are making so I think
+
+
+relying on discipline while building
+
+
+such system is a bad thing because
+
+
+discipline burns your mental and energy
+
+
+and mental energy is expensive when I
+
+
+think about the system that relies on
+
+
+discipline I can this picture it's quite
+
+
+good because it's a working system but
+
+
+it requires a lot of discipline and and
+
+
+coordination to work and this looks more
+
+
+like a job project to me so the next
+
+
+thing is that there is a theory there is
+
+
+a practice and there is a dream and in
+
+
+theory everything is beautiful in dream
+
+
+everything is even more beautiful and
+
+
+reality sucks we know it so in reality
+
+
+there will be always it solved a certain
+
+
+amount of dirt and we have to deal with
+
+
+it we can try to build beautiful
+
+
+abstractions but that's not at some
+
+
+level where they start to break but also
+
+
+a good thing that problem is dirt is not
+
+
+the problem itself the until expose your
+
+
+system it is okay and if it helps you to
+
+
+build a good system then it's more than
+
+
+a key all right we are finished with
+
+
+statements and now we can finally can
+
+
+start with beliefs
+
+
+and the first belief or habit we've
+
+
+developed is a flat model structure so
+
+
+we will do like the like this so we have
+
+
+models folder and we put our stuff there
+
+
+and it's kind of fine on the small
+
+
+projects but then the projects gets
+
+
+bigger and for example in Redmond we
+
+
+have 17 models and one folder get lop is
+
+
+better there are sixteen folders and
+
+
+there is probably some structure inside
+
+
+but still on the top level there are 130
+
+
+models and this course the file like the
+
+
+best Ruby on Rails forum solution 100's
+
+
+70 models and zero folders so imagine
+
+
+yourself come into this project and
+
+
+trying to understand the structure and
+
+
+the like what models are more important
+
+
+and what Manos are least important now
+
+
+you have a good challenge so instead of
+
+
+this the suggestion is to use here are
+
+
+key based on entities dependencies it's
+
+
+somewhat connected or related to an idea
+
+
+of aggregation route but if you don't
+
+
+know what is it what it is it's not
+
+
+important let's take a look so what we
+
+
+have for example if you have an article
+
+
+and there is a comment and the link
+
+
+which belong to this article then you
+
+
+simply create a folder and put your
+
+
+models there because without article
+
+
+they don't make make sense
+
+
+so you just group them into folders and
+
+
+of course this affects the way your
+
+
+tables in database are named but but it
+
+
+is also a good thing because you like in
+
+
+its name you define what it is like
+
+
+if a comment makes no sense without
+
+
+without article then it should be
+
+
+article comment good thing that it is
+
+
+fully supported by rails so you simply
+
+
+have these namespaces and the worst
+
+
+thing that could happen is that you have
+
+
+to define this class name in the first
+
+
+model because rails can't can deal with
+
+
+the deep hierarchy ok so it makes it
+
+
+easier to understand what is your
+
+
+application about the most important
+
+
+things there on top of your hierarchy
+
+
+and and you simply you can simply employ
+
+
+explore your system by going into the
+
+
+folders and see what the what it is all
+
+
+about it has zero internal cost so if if
+
+
+you start doing it actually I encourage
+
+
+you to start doing it from the day
+
+
+number one because if you try to
+
+
+refactor then you have to deal with all
+
+
+these names and it will be a little bit
+
+
+harder so rails fully support this
+
+
+sometimes we need to specify class name
+
+
+and like a good thing and a bad thing
+
+
+is that you have to think about
+
+
+dependencies like what models are depend
+
+
+on others and group them according the
+
+
+second thing is flat controller
+
+
+structure like almost the same we have a
+
+
+controllers folder we put everything
+
+
+there the structure is playing and then
+
+
+it gets bigger and we have like plenty
+
+
+of controllers and another thing that if
+
+
+we take a look inside those controllers
+
+
+we might find something like this there
+
+
+like a lot of a lot of conditional logic
+
+
+there are no if statements but there are
+
+
+all conditionals right they they just
+
+
+hidden at the end of the lines because
+
+
+we there are lots of except and only
+
+
+and like this and like this so I could
+
+
+make much more of these screenshots like
+
+
+how do we do this so why do we do this I
+
+
+think there are three reasons it's it's
+
+
+very easy for me to say like I think but
+
+
+two weeks ago I didn't know any of this
+
+
+okay so rest with understanding we use
+
+
+the respond to and we kind of think
+
+
+about the G but we know don't know how
+
+
+to apply it in our systems so let's
+
+
+start with the rest so what we get here
+
+
+any ideas a post yeah but what it is is
+
+
+it resource alright then what we get
+
+
+here the the same resource yeah that's
+
+
+kind of strange but yeah we get a
+
+
+representation of this resource and
+
+
+actually these are two different
+
+
+representations of the same resource and
+
+
+rest is all about representations and
+
+
+you never get the resource itself all
+
+
+you get is a different representation
+
+
+and there could be many representations
+
+
+and this is fine and they can be very
+
+
+different so developers who are limiting
+
+
+themselves with one with one controller
+
+
+per model they simply do not understand
+
+
+Rails we kind of get the general idea
+
+
+but when it comes to the two details we
+
+
+we suck then someone could say that we
+
+
+serve different different
+
+
+representations with respond to I have
+
+
+bad news because it it's it's not
+
+
+representations and let's talk about it
+
+
+so how do we use respond to the small
+
+
+scale
+
+
+looks innocent on a larger scale looks
+
+
+completely weird so we have five four
+
+
+months within the same action within one
+
+
+controller and probably we have more
+
+
+than one action and the trick here is
+
+
+that so the question is why it should be
+
+
+in the same controller so all these
+
+
+things they are used differently and
+
+
+yeah they will be used in a different
+
+
+way and they require different subsets
+
+
+of data and they been generated
+
+
+differently using different tools so it
+
+
+actually makes sense to create a
+
+
+separate rest representations not the
+
+
+single one with with different formats
+
+
+so the solution is to create top-level
+
+
+namespaces in your controllers folder
+
+
+and many teams already do this for
+
+
+example for API they realize that the
+
+
+structure of the API doesn't reflect the
+
+
+structure of their main application so
+
+
+they create a separate folder and move
+
+
+and create a separate set of controllers
+
+
+for for the API but we can do it for
+
+
+feeds for RSS feeds we can do the same
+
+
+for reports I I don't think you really
+
+
+have like the PDF for every action in
+
+
+every controller in your application so
+
+
+it would be much easier to do with PDF
+
+
+generation logic if it will be in the
+
+
+same place rather than it would be
+
+
+spread across all applications so it's
+
+
+again it's pretty easy thing but I don't
+
+
+know why we are not doing this all right
+
+
+and let's try to apply some digital kind
+
+
+of stuff to what we are doing and yeah
+
+
+we know that
+
+
+DDD is about the same language between
+
+
+business and programmers but we are
+
+
+interested in the idea of bounded con
+
+
+texts here so the idea is that right
+
+
+let me give me let me give you an
+
+
+example so we have an article and
+
+
+authors can create articles and articles
+
+
+have title and body and author but on
+
+
+the other hand there should be like a
+
+
+mod there are moderators and they should
+
+
+during the moderation process they must
+
+
+add a publication date and the category
+
+
+without them it is they are not allowed
+
+
+to save the this article so how do we do
+
+
+it usually so we create another action
+
+
+and we make a bunch of conditional
+
+
+validations and that's it but if you
+
+
+think about it as and applied EDD you
+
+
+see that there are two different bounded
+
+
+contexts like the first one is article
+
+
+editing and creation and the second one
+
+
+is moderation so there is no such thing
+
+
+as a universal article here so there is
+
+
+no like the first one is the true
+
+
+article and the second one is the kind
+
+
+of fake temporary article will be using
+
+
+for moderation no they are both correct
+
+
+and correct representations and they're
+
+
+both fine so yeah and the trick is that
+
+
+representation depends on context both
+
+
+in terms of behavior and data set so it
+
+
+is important we are not only showing
+
+
+different fields the actions can be
+
+
+different right so here's how it looks
+
+
+apply to a folder to our controller
+
+
+structure so you can see we well so we
+
+
+have this moderation so first of all it
+
+
+lies inside web folder and then we have
+
+
+this moderation and then there is this
+
+
+article controller which has its own
+
+
+actions
+
+
+for editing so the good part is that as
+
+
+you can imagine like we have another
+
+
+logic for authorization because we don't
+
+
+want moderator to be allowed no we don't
+
+
+want to simple authors to moderate
+
+
+articles then if it would be a simple
+
+
+single controller what would we do
+
+
+we had a conditional more conditional
+
+
+logic there if it's a separate thing
+
+
+then you you don't need conditionals for
+
+
+pure action you don't even need
+
+
+conditionals per per controller maybe
+
+
+you can create a separate application
+
+
+controller within moderation namespace
+
+
+and then just just use it as a parent so
+
+
+good news it is fully supported by rails
+
+
+and you could can't do it and should do
+
+
+it from the day one when you started
+
+
+working with rails so all you should do
+
+
+is learn how to define properly this
+
+
+stuff like scope and namespace and
+
+
+you're done so instead of complex and
+
+
+Universal controllers you get many
+
+
+simple controllers for specific
+
+
+representations and for specific bounded
+
+
+context all right
+
+
+it makes it much easier to understand
+
+
+what is your application about it has
+
+
+zero long-term cost rails supports this
+
+
+it reflects the URL structure you have
+
+
+that's pretty important one and it
+
+
+reduces number of if statements in
+
+
+controller or conditional logic let's
+
+
+say in your controllers you get longer
+
+
+controller names but this is your
+
+
+business logic this is your business
+
+
+domain so we have if you have nested
+
+
+things this is probably makes sense
+
+
+so no respond to separate namespaces per
+
+
+wave usage and introduce more namespaces
+
+
+per bounded context in
+
+
+site next thing violating my support and
+
+
+pattern like MVC is actually meant to be
+
+
+modular and the question is what what is
+
+
+modularity I think for most of us it's
+
+
+more like a buzzword even my previous
+
+
+talk was called a way to a modular
+
+
+development like from rails with
+
+
+something like so what makes a system
+
+
+modular like modules right so if two if
+
+
+two modules are interconnected then it's
+
+
+not modularity one depends on another
+
+
+and another one depends on the first one
+
+
+we can't call it a modularity so a
+
+
+modularity is the lack of circle
+
+
+dependencies or connections what does it
+
+
+mean in practice in practice it means
+
+
+that controllers can know about stuff in
+
+
+your models with models shouldn't know
+
+
+anything about controllers models
+
+
+services external services and all the
+
+
+stuff and yet models that send
+
+
+notifications like 90% of our of rails
+
+
+projects and part of this we do by
+
+
+ourselves part of this will bring with
+
+
+with stuff like device and and yeah
+
+
+there are more gems that violate in MVC
+
+
+and we love them because like we give us
+
+
+so much functionality for free like
+
+
+activate man or the or this this is an
+
+
+example of acts as API usage and what is
+
+
+wrong with it and it is well something
+
+
+specific
+
+
+yeah but the fact is that it's not the
+
+
+logic that we related it's it's it's
+
+
+actually view inside model it's not that
+
+
+the model it's not that view generates
+
+
+logic depending on the model on what it
+
+
+it had in model is the model that has
+
+
+instructions how to generate you so we
+
+
+have no layers here and again yeah and
+
+
+yeah the most favorite one so how to how
+
+
+to put current user into models and even
+
+
+DHH in he's getting real screencasts he
+
+
+shows us how to use this and and like
+
+
+advocates for Global's and for Global's
+
+
+inside mixings inside your know inside
+
+
+Global's inside mix-ins inside your
+
+
+models yeah and these Global's we should
+
+
+use for current user alright so how do
+
+
+we we violate ABC so all of these things
+
+
+they're like you could think of them as
+
+
+a ways how we make our life more
+
+
+complicated so we do playing models and
+
+
+it makes our life harder we do playing
+
+
+controllers track structure and it also
+
+
+does our life harder and we violate MVC
+
+
+and at some point it strikes back so we
+
+
+use rails features that violate and we
+
+
+see we ignore differences between
+
+
+application layers we use we use gems
+
+
+that violating we see and we are not
+
+
+distinguishing application logic from
+
+
+business logic and let's talk about it
+
+
+so what is application logic actually in
+
+
+the example here let's think of it the
+
+
+fact that we need to ask a user
+
+
+confirmation of a password is it
+
+
+with this logic is it a part of our
+
+
+domain what about this small check box
+
+
+this is part of our domain or is more
+
+
+like a technical detail this capture
+
+
+thing so the trick is that it's all
+
+
+application logic it's not a business
+
+
+logic but still it is in our models so
+
+
+rails gives us this power to bring
+
+
+application related logic into models
+
+
+her question it could be it could be a
+
+
+business logic right you're right it
+
+
+could be a business logic of course but
+
+
+sometimes it's not all right so rails
+
+
+gives us this stuff and it's well maybe
+
+
+not differently in some in some contexts
+
+
+in some scenarios it might be business
+
+
+logic but sometimes it's an application
+
+
+logic and it's still in our models all
+
+
+right
+
+
+but what models should be about like we
+
+
+have like are they about persistence we
+
+
+have database and like active record
+
+
+stuffing but we learned yesterday that
+
+
+not all of the models could be should be
+
+
+active record models we can't have some
+
+
+models without persistence layer at all
+
+
+and resistance X really is just a
+
+
+technical detail so it is hard to ignore
+
+
+this detail in rails but it is so and
+
+
+what if we try to use models like like
+
+
+if they were the main models is it even
+
+
+possible
+
+
+what is the main model the mall the main
+
+
+model is a system that imitates
+
+
+structure of functioning of explored
+
+
+domain and it should be adequate to to
+
+
+relate the domain so the main model we
+
+
+know that it doesn't depend on
+
+
+programming language
+
+
+what are you implementing your domain
+
+
+logic in PHP or Java it should remain
+
+
+the same you can probably even draw it
+
+
+on the board of course it shouldn't
+
+
+depend on the type of the application
+
+
+you develop whether it's web application
+
+
+or desktop application on mobile
+
+
+application your domain logic remains
+
+
+the same domain models and of course it
+
+
+shouldn't depend on framework but yet we
+
+
+all have this in our models so we just
+
+
+put everything there like almost
+
+
+everything and yeah because we have this
+
+
+fat model skinny controllers idea and I
+
+
+think it's still floating around so I'm
+
+
+not driving into this let's let's talk
+
+
+about next topic so how does the
+
+
+complexity creep in so at the beginning
+
+
+we have these simple controller actions
+
+
+so we have new employee if it's valid
+
+
+with it gets saved then we redirect user
+
+
+if it's if something goes wrong then we
+
+
+render the form but then a business guy
+
+
+comes and ask us to add these small
+
+
+checkbox so that when we create an
+
+
+employee we also want to promote in to
+
+
+administrator if the checkbox is set
+
+
+then it becomes a little bit more messy
+
+
+and what do we do here and this is
+
+
+probably not the whole thing we should
+
+
+think about wrapping this thing into the
+
+
+transaction add in some email
+
+
+notification
+
+
+but the question is how do we fight
+
+
+complexity and the first rule is to
+
+
+avoid it so seriously when we get a task
+
+
+lock like this and we see that it's kind
+
+
+of it's not obvious how to implement it
+
+
+in rails but like there is no
+
+
+straightforward way we see it as a
+
+
+challenge and as the programmers will
+
+
+love challenges so we are accepted this
+
+
+challenge and we do a research we find a
+
+
+some unconventional way way to to do it
+
+
+but then we find that it's not that
+
+
+straightforward we do more and more
+
+
+assertion you spend the day or do or
+
+
+three doing some stupid thing and then
+
+
+you come to a business gained and say
+
+
+him that well it took three days to at
+
+
+least small check box so you'll be
+
+
+surprised but if you if you tell this
+
+
+business guy that well it looks like
+
+
+things might be harder than you expect
+
+
+and is it really important can we tweak
+
+
+the business case a little bit so that I
+
+
+could do this change faster so it won't
+
+
+take three days so usually there are
+
+
+ways to change the workflow a bit for
+
+
+example ask ask if if users should be
+
+
+promoted to administrator on the next
+
+
+step after the first one or something
+
+
+different or it's not important on this
+
+
+use case at all so the second thing is
+
+
+to if it is important then we have to
+
+
+learn how to put stuff into proper
+
+
+places so that we don't mix the layers
+
+
+of responsibility hmm I mean abstraction
+
+
+layers
+
+
+No so I I'm always making fun of this
+
+
+slogan but the problem with this slogan
+
+
+is that it's it makes us think about non
+
+
+important thing things because there are
+
+
+really important things like what it is
+
+
+all about and we started to think about
+
+
+size and it looks like we simply can
+
+
+move different code from one place to
+
+
+another like because of the size it's
+
+
+it's it doesn't look right so and we all
+
+
+smart guys here is its broad Slav so we
+
+
+all know about services but let's repeat
+
+
+service encapsulates single process of
+
+
+our business it takes all the
+
+
+collaborators and performs a game
+
+
+process so we know how to create a
+
+
+service we create a class we simply move
+
+
+the logic there and we call this the
+
+
+service and in the controller in
+
+
+controller starts to look almost the
+
+
+same as it looked before and we have a
+
+
+place to put our business logic but
+
+
+let's talk about services and in DDD I
+
+
+once defined the service as an action
+
+
+not a thing and but yet this is another
+
+
+example I took it from our concei block
+
+
+it's from 2013 but still so you see what
+
+
+is this this is a state so we have a
+
+
+class and this is a state it is
+
+
+therefore for purpose
+
+
+well yeah you're right
+
+
+probably it's a bad it's a bad example
+
+
+but it's not that important let me show
+
+
+you a different thing with it so let's
+
+
+imagine it says it's a state yeah yeah
+
+
+yeah
+
+
+you're right thank you so but this thing
+
+
+solves this problem also so I'll explain
+
+
+by actually I'll explain it now so what
+
+
+is the difference if the service is a
+
+
+class or a method so we can we can do
+
+
+either but when it is a it is a class
+
+
+then we should rely on discipline so
+
+
+that someone's did not put in the state
+
+
+of their because someone who is not very
+
+
+experienced might see a class and decide
+
+
+to introduce the state so all right if
+
+
+we want to get rid of the need to pass
+
+
+payment adapters and stuff like this we
+
+
+can try to use dry container and it's
+
+
+pretty simple you don't even have to
+
+
+read the documentation it's all like the
+
+
+the whole scenario is here so you simply
+
+
+create a global inside initializer and
+
+
+you name it config container you create
+
+
+this object and then you register
+
+
+multiple containers for all your
+
+
+external dependencies for so for one
+
+
+environment for test environment you put
+
+
+a stop implementation there and for
+
+
+development and production you put the
+
+
+real thing there and then in the code
+
+
+all you need to do
+
+
+yeah it's long line but anyway so you
+
+
+resolve this container and you get real
+
+
+class and what it gives you then in your
+
+
+tests you don't have to care about
+
+
+swapping implementations anymore and you
+
+
+have a single place where you can keep
+
+
+all these how to say different
+
+
+implementations of of external things so
+
+
+that's definitely a good thing yeah what
+
+
+do you mean yeah this is global state
+
+
+yeah but as I said the the difference is
+
+
+subtle but is very important this is
+
+
+definitely a dirty trick we use in
+
+
+global but the purpose is important what
+
+
+we are achieving with this so what we
+
+
+achieving we don't have to deal with
+
+
+more complexity on on on other layers
+
+
+right so and we put all the all the
+
+
+stuff which is related which is about
+
+
+replacing real implementation with steps
+
+
+into one place so yeah of course but
+
+
+this is not a current user thing so
+
+
+these things are a little bit different
+
+
+yeah the method is the same but use case
+
+
+is different and yeah that's that's the
+
+
+theme okay this is another example and
+
+
+the restate here because I wrote it I
+
+
+know so I was a huge fan of the
+
+
+interactor gym because I thought that it
+
+
+kind of gives us a way or to structure
+
+
+our complex scenarios and if you don't
+
+
+know how to how to work so it gives you
+
+
+these ability to create small classes
+
+
+and if you have like a few steps in your
+
+
+use case then you create multiple
+
+
+classes and then with this additional
+
+
+class
+
+
+which includes thing called interactor
+
+
+organizer you defined an order how to
+
+
+launch these things and there is an idea
+
+
+for all bags or something like this
+
+
+inside interactor gym weather I never
+
+
+used it and I'm not sure if it even
+
+
+works and if it's useful so I've written
+
+
+code like this and then I decided to
+
+
+like to get rid of the unimportant stuff
+
+
+and then all I got is this simple method
+
+
+four lines long so why can't we simply
+
+
+do that so we take it we put it into a
+
+
+class we create a bunch of class methods
+
+
+and these are methods inside the class
+
+
+and we simply use them and as I said the
+
+
+difference is subtle but with this
+
+
+system
+
+
+nobody could introduce the state in
+
+
+introduced into this method of course he
+
+
+could he could use Global's but then
+
+
+probably we wouldn't live for long
+
+
+alright that's enough for me for today I
+
+
+don't know how about you and these are
+
+
+like my website email and yeah the
+
+
+Twitter the the Twitter thing is kind of
+
+
+tricky because like the I have two
+
+
+Twitter's one in Russian and I usually
+
+
+post something something something
+
+
+they're pretty often but another one is
+
+
+in English and I almost not using it so
+
+
+I decided to put put balls so it's it's
+
+
+your it's up to you to decide now and if
+
+
+you can't feel this this survey yet
+
+
+please do and we'll see the results
+
+
+tomorrow I think we'll start with the
+
+
+analyzing results ok thank you that's it
+
+
+for me if you have any questions welcome

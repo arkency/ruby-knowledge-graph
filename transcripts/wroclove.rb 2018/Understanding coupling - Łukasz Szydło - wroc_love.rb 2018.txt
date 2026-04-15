@@ -1,0 +1,418 @@
+okay so welcome everybody on my talk understanding coupling a couple of
+things about me I'm as Simon said before programmer architect trainer consultant
+whatever and my main line of work is
+helping other companies making software a little bit better so like my
+experiences most companies are making okay software and then we come people
+from my company and they are making it even better than they were doing it and
+then they were doing it before yeah so my my specialties are domain driven
+design architecture continues delivering things but continues delivery not from
+the infrastructure perspective that also continues delivery from architecture perspective in my private life I have a
+wife five kids three sons two daughters so yeah so so so we have to forgive me
+if I will not last until the end of the conference because I also have to spend
+some time with them on Sunday so hopefully it will be okay great
+so let's start let's meet Guido Guido
+instinctive this is Guido instinctive who is Guido instinctive he's a ruby
+sharp some let's say object-oriented language or even functional your into
+language programmer he was so I have a little thing called so also forgive me
+fold it for this he is he's just became a team lead at his at his company he is
+starting to to work his after a couple of years when he was just a programmer
+company trusted him and and he will become a team lead and his main priority
+is good design and he he knows that he now will be responsible for for this
+project this this team the software that will come and and this is this is his
+responsibility yeah so he will be spreading and the design knowledge to
+everybody and he will be telling people how to do stuff and how to do it better
+and he will be patient and all of this and he will make this in this project
+yet the design will be good all the people will understand this design and
+will not argue with each other why this why that and so on and this is his this
+is his new mission guido instinctive okay but when he starts this new project
+in this this new role he encounters a problem yeah what kind of problem he
+encounters how to evaluate the design so
+he goes to or sits with somebody on the code review somebody created some kind
+of software and he has to somehow describe this design and say is it good
+is it bad what is it and what he can say about the design it looks ok I think it
+looks ok or my gut feeling tells me yeah
+it's too complicated I think it should be simpler but what should be simpler
+it's it's like it's like let me know you're like too many classes or too little classes or something is wrong
+with it yeah or yeah I I think it should be more elegant yeah your code is not not
+elegant enough or you know like small
+method small classes you know this is this is a problem
+a lot of programmers have that especially Guido that it's hard to talk
+about it's hard to talk about abstract things design it's not something
+concrete it's some people say even something relative it's hard to have my
+rhetorical discussion about about design
+so yeah or test coverage would be better
+you know test coverage but what part of the software should recover yeah so how
+to evaluate design how do you tell if some part of your software some part of
+your code is good design and bad design how can you tell a difference it's
+really hard it's really hard so let's focus on it a little bit what is it it's
+not like some tricky question it's just yes it's a mug and now the tricky
+question is the good mark or is it the back bad mag yeah okay it's empty it's
+bad yeah but but what would well-paid consultants say yes very good he will
+say or she would say it depends depends on what Thanks
+yeah all of the answers that I heard probably there were more answers from from the back that I didn't are all
+right but all of them are different so yeah it's actually there are two
+things that are important in evaluation of design of anything is it a physical
+thing like a mug is it them building like like real building or real
+architects do or is it the software design first of all to evaluate anything we
+need to have a context in which this thing will be will be living attack will
+be used will something we'll do about it for example this mark it's pretty big
+mark for for my one and a half year old son this would be very bad Mac bad
+architecture bad design because wrong material he will like throw it on a
+floor and it will add smashed into pieces but for some I don't know adult
+man with all fingers who is right-handed and likes coffee and the color is okay
+for him and it's affordable and so on this will be a good neck so the same mag depending on the same cup depending on
+the on the on the context will be either good or bad and the same with our
+software so this is one thing at the context and the other thing is our
+precise description or precise discussion about attributes of this cup
+so I can define a context in which I will be using it and then I have to
+precisely define what kind of temperature range will it handle what
+kind of material it will be made of and world what are the qualities of the object of this material so we actually
+to be able to discuss the design to be able to evaluate our design we need to
+have to mean we have to define context and we need to define the precise
+attribute or modern we have to have a precise attribute description those
+things enable us to talk about design in more structured way not like you know we
+are really young profession like enterprise software development this may be 60 years
+maybe 70 depends on when you begin the start by comparing it with real building
+architecture or medicine or law or finances where they have
+thousands of year of years of their profession and we are really really
+really young so it's absolutely natural that we do not yet have this kind of
+body of knowledge and that if I would ask I don't know any of you please
+define me a module what is a module or what is a component or what is architecture I would probably have like
+everybody will give me a different answer all of them will be ok everyone each one of it would be different so
+it's natural that we don't have it it so I will share with you how I approach
+this stuff so how I define context and how I discuss the precise attribute
+description and we will do this precise attribute description based on coupling which is a pretty abstract thing it's
+hard to to talk about it and we will try to see how we can like do it more
+precise ok so in any kind of design or any kind of
+object design we can look at the context from free perspective there is a world
+there are things that are an architecture called like architecture drivers which define the context of our
+system this is a business context project context and drivers and and
+qualities or attributes attributes of the of the software so first yeah there
+is other there's this business context the goal the vision the requirements of
+the of the stakeholders the problems we are trying to solve yeah so sometimes we
+call it functional requirements and we have to know who will be using the the cup how he will be using it for what
+kind of beverage it will be used all of those requirements are needed the second part is the project part how much money
+do we have for it how much time we have
+or this particular project do we have to do in one week or do we have three weeks or or three months or two years as with
+some government projects or what kind of
+available materials do we have or do we have experience Ruby programmers or Java
+programmers what kind of I know frameworks can we use what kind of architectures do we know what kind of
+patterns what is our body of knowledge that we can actually use like like in real building like what what kind of
+materials do we have with what we can build it and available now how what is
+the knowledge of our of our people on this project everything is a context
+that we that we have and the third thing is our quality attributes what kind of
+quality attributes our project should expose availability security reliability
+extends to all those luyties something and liddy at the end and and there is a wiki page
+with 50 or 60 of them so we can go and check there it there is a lot of them
+but this is the first thing that we need yeah when you are building a house or you're building some other structure the
+first thing architects do they look at what is around them so they are looking
+at the space available what kind of buildings are on the on the
+now the landscape but how do we call this so on the necessary add-on surround on
+the surrounding gear the neighbors say what what kind of buildings your neighbors have or what are the some kind
+of rules from the the government about how high the building can be here and so
+on so so this is this is what what architect or designer starts with their
+start with theirs to put the context without the context we cannot evaluate we cannot say is it good or bad yeah
+because it everything depends on this context is everything depends on the surrounding this surrounding is our point of entrance for any evaluation of
+any design of anything okay great so we
+have context we have context which we define the context we define each of those those those three there are those
+three things that we have we now know what is the surrounding but now the second part and the second part was
+talking precisely about design yeah but the bit Guido Guido still has a problem
+how to talk precisely about abstract things it's really really difficult so
+is it really how do we do it at nature how do we do it in everyday life for
+example how do we talk about time time
+is a really abstract concept yeah nobody sees it yeah where is it yeah but
+everybody talks about time in a different manner for some people you know time is money I'm spending my time
+on something yeah or time as a container
+I have to do it within some time or I can treat time mass change time will
+heal your wounds we are using to talk
+about abstract things we you are using metaphors with some real tangible things
+that we have or that we interact with on our daily basis
+it's very hard to talk about that sex thing but we during thousands and thousands of years of our existence on
+earth we've we've learned how to do it we are using metaphors to build some kind of intuition these are not
+one-to-one mappings time is maybe not exactly money yeah but it makes it easy
+for us because we know how we handle money we know that money is precious and we know that we can spend it on this
+or this and dime has the same quality so we are trying to find similarities with
+with our design with our things in in the real in a real life so now the
+question is what kind of metaphor can we have for coupling as the example of one
+design quality or or abstract quality that we have in code what can it be
+and when you think about it even
+object-oriented programming or thinking about programs are as objects which
+communicates with messages it's another metaphor for abstract thing
+we know how objects work we know how to send messages to between them and this
+is something we can our minds can can work with our how our minds are handling the the code abstractness or the
+complexity of the problem that we are solving so let's go a little bit deeper
+with this metaphor I'm using because object is very general I'm think about
+objects as people at each object that I
+have is some kind of person which has a role and the whole software or the whole
+program it's like set of objects which communicate with each other like like in
+company there is a CTO and tells okay now we want to I want to have this
+project created and this message goes to some team lead team lead spread this message to some
+programmers programmers communicate with each other and at the end we have the
+product ready yeah objects communicating with each other using messages and the result is they're the same in military
+there is a general general gives order order gets propagated among the graph of
+objects which are soldiers and at the end we have result very natural thing of
+a very natural way of thinking of it so object not as a artificial like things
+like and now remote or sandwich or a cup but as a living person which is
+naturally sending messages when we are talking to each other we are sending messages we are building sentences there
+are only three kind of sentences people can build their K I can ask you a
+question I can give you an order or I can inform you about something
+in any language there is no other type of sentence in this particular context
+and there are only questioning sentences ordering sentences or informing
+sentences that is why in programming or in object-oriented programming we only
+have three kinds of messages we have comments queries and events each one
+representing the one particular way how we communicate with each other and then
+never will be more than never will be less on windows 3 because it's not a programming thing
+it's a linguistic thing it's a communication thing so this is the
+metaphor that that we will be using and using this metaphor we will try to build
+a little bit of intuition about how we can think about coupling and this will
+be the dangerous part because this will be the live coding part and you know how
+life cutting goes on conferences most cases doesn't really work okay so
+we will we will build we will build some we have the the I don't know the nice
+word for up so now everything it should
+be it should be should be okay okay so we will build a company this will be a
+small company one-person company so who is what is the role of the of the person
+with with one person when you have one person company what is the role of the only employee how do you call the only
+employee in the one person company salt operator okay but more commonly boss
+owner but in in most cases in Poland this this will be some kind of director
+yeah because there is there there has to be some kind of a steam with the role yeah so there has to be a director so
+let's have a director so we will have a
+director ugly language really ugly language oh no okay and the company also
+have to have to do something so most of the companies in Poland are some kind
+serving some kind of services so we will have a method that will be doing like
+how we will call it do your job
+do your job and the method do your job since it's there is only one employee
+director director do the job and yeah
+and this is really like modern IT company so what the director needs to to
+do his work modern IT company what is the one object that he that he needs to yes exactly he
+needs a computer so I will do it here
+computer create a field computer some
+kind of computer create class of course
+rename and we have a director and we
+have a computer and he will be doing his job great but computers are mechanical
+things and they have a tendency to break right they break so responsible
+programmer like the fencing coding will do if my computer is broken then what
+yeah no somebody we are not like in this throwaway culture yeah we are now in
+this I fix your stuff culture so so what the video computer is broken you do you
+what do you have to do nothing so you have to we have to fix it somehow
+if computer is broken we have to fix it yeah else else do something do something
+yeah this is not interesting part for us but things we have to fix it let's say
+we have to fix it and in the if we have one person company so owner who will
+have to fix it who will be the IT guy here
+in one in one person company who will be responsible exactly the director will
+have the method fix computer great and
+he will do something like this exactly and now this is the part that we want to
+start with there is a coupling here when the first thing is between what between
+what two things the coupling the coupling here is bit what would between what two functions between what two
+people there is a there is a coupling between a director that wants to do the
+work and between the IT guy that will be fixing the computer you in this case
+this is the strongest coupling that we can be when we have the relation is a
+because the director is IT guy so this
+is the strongest kind of coupling and now we will go here and how can we talk
+about this coupling in more precise way when you talk about when you think about
+other people objects as other people there are actually four basic qualities
+then we can that we can have describing the relation between them the relation
+in say space and behavior we can know
+how something can be done we can know where is this where is this person that
+will be doing it we have to know who is this person who will be doing it and what will be done only those four only
+those four coupling only those four qualities and the first level of coupling the highest coupling is
+something that we can call local method when I am a director I know everything
+about the other thing I know how to fix a computer I
+where the computer will be fixed because I will be fixing it I know who will be fixing it because I will be fixing it
+and I know what will be done because the computer will be fixed this is the what
+fix the computer the how implementation of the method the who they me there were
+in my instance the highest form of coupling of two objects when one object
+is another object and in practice it's just a private local method that doesn't
+have to be private yeah but it's two local method first kind of first level
+of coupling okay but now our company grew a little bit we have our computer
+is broken a lot or more often than we thought at the beginning and so what we
+have to do we will hire somebody we will hire John we will hire John John the IT
+guy John the IT guy John the IT guy
+ah IntelliJ great Chanti guy great and
+now we will decrease the coupling between the fixing of the computer and
+the director we will move the method to another instance to the instance Joe the
+IT guy plays fix please fix the computer
+what actually it would decrease the coupling how does it look on our diagram
+we now don't know how is it done we know
+where it will be done because we know the instance of John we are creating it
+so we know where he is if we are using new or we are creating the object by ourselves this is like relation in space
+we know where it is we know he is here it's like I will be come directly to John I know where he
+says he sits at this desk I will come I will give him a computer I will say fix it but the only thing I don't know is I
+don't know how it will be done because how it will be done now it's the knowledge of John not me so
+this is another level of coupling which is called local instance coupling and we
+can decrease it even more John he's
+retired of being at our office he wants to you know work remotely he would say
+mr. director we are really modern company and I don't really need to be here because I had like remotely log
+into your computer and fix fix it and remove you know all your browsing history and so on to do you know so I
+don't really have to be here maybe it is possible for
+maybe it is possible for four for me to work remotely and we say okay on this
+market is really high hard hard to find a new IT guy so we will let him work remotely yeah so how will this how this
+remote will work okay so we will make it so we will make it private final delete
+this and we will add a constructor great
+and we once again decreased coupling what what is how this decoupling
+decreased how does the counting decreased right now okay so let's look about a look at our our table now we
+have level that we can call external instance we don't know how we don't know
+where how on we'll do it we don't know where is John yeah it's like we can only
+call him so we have his number we have his reference the reference is like a phone number and John is somewhere there
+maybe on some Island yeah maybe at his home or whatever we
+don't know where he is and we have only his reference but we know who he is this is John and we don't have a number
+two some many particles we have number two the particular person John and what he will be doing he will fix the
+computer so coupling is a little bit less okay
+but our company right now is like very
+successful company the services that we are providing very high level and everybody is appreciating them and we
+have a lot of customers and we became really really big company and one IT guy is not enough we need to have something
+more we need to have IT service or IT department we need to have IT department
+so we will not now directly that will John John is not something we interact
+with anymore we will interact with IT departments the power
+IT department okay this will be here
+create now not the class will be not a class it will be an interface IT
+department we will add the constructor and here will be the IT department and
+IT department will have a method fix great and what we did now we decreased
+coupling a little more how does it look on our table we've actually an R on the
+level which is which I call configurable instance because everybody will say yeah
+yeah Lukasz you are just doing dependency injection and colleague and fancy-like
+configurable instance yeah but when you think about it what is dependency injection what doesn't really
+mean dependency injection if you will tell to somebody that is not technical maybe to your kid maybe to your wife or
+your spouse or whatever he would say what what were we doing today at work well you know I was like like injecting
+the dependencies and it was really really hard to figure out what I should inject and why should not inject and now
+what is in the head of this of this person yeah they are like having in some kind of needles maybe and and you know
+those how it's called a syringe yeah and the syringe that that they are injecting
+those thing inside I always wanted to know what is inside those computer and there are syringes there it's really
+really great yeah it's really sucky sucky metaphor but and what we actually
+achieving with dependency injection with interface because the previous one we could also call dependency injection
+with instance and now we can call it dependency injection of interface but this exactly what we have is just
+configurability I can configure the director with different kind of IT departments this is
+configurable instance it's like a bicycle bicycle is a perfect example of
+dependency injection only if we will call it configurable
+instances every part of the bicycle except the main how it how it's the
+frame yeah everything except the frame is configurable I have I can have different instances of steering wheels I
+can have different instances or different implementation of wheels because there is this kind of coupling
+between the frame and the handles and between the frame and the wheels that
+enable them to be configure this is a really complicated stuff it would be
+much easier if it would be just like fixed like the one part the the frame and the steering wheel would be only one
+thing it will be cheaper to do everything will be everything would be better but we need this kind of
+configurability so we pay a price for it and we make it a little bit complicated
+and because when we were fixing it by ourselves it was really really cool and but configurability is something that we
+really that we really like and how can we think about this about this configurability we can think of it as we
+are not calling the person directly so we are not calling john but we are calling some kind of con center we don't
+know exactly who will we call yeah we all just call some kind of dispatch
+object-oriented dispatch and there is a dispatch there and the dispatch will dispatch us to some particular
+implementation of the IT guy yeah because you know John can be sick he can
+be not at work we can have no John exception in the previous example and this is really bad exception no John
+exception we cannot fix this and this in particular way we are handling the no John exception is really really good eh
+right yeah just because we make it configurable and this is configurability
+and now we can ask the question do we need this kind of code to be configurable yeah and ask another
+question do we need this part of code to be dependency injectable doesn't
+really make sense yeah or maybe only for me because I'm not native English speaker because maybe
+for native English speaker it makes sense to make something dependency injectable yeah okay so this is the
+basic the the most common level of coupling between two people that we
+encounter in our software but we can make it even less we can make it even
+let's say not less but weaker weaker coupling instead of the because our
+company let's say our company is now really really big it we our corporation and in the corporation does the director
+really goes to IT department and say hey can you fix my computer now right what
+does the director in the big corporation do when this computer is broken who does he call yeah he is calling an
+assistant so instead of injecting here the IT department we will inject here
+assistants I will remove it here
+assistants hopefully I didn't make and
+this is also an interface and rename it a system up now yeah now it will be much
+better thank you IntelliJ for code completion and and fixing my end and now
+really nice things happen because we will not say what to do
+we will now say to the assistants no assistant fix my computer I don't know
+maybe it need fixing maybe it's needs replacement yeah maybe it may be just needs no charging or
+whatever yeah you know I'm just City our CEO and what can I know about computers
+I just know about money computers make money so I'm in computers right now
+so I will not tell them imperatively what to do yeah I will tell them
+declaratively what happened I will say my my computer is broken do something
+about it and I maybe I will mind not not me eh that's my my computer is broken or
+no no I will say to my assistant because this is generic assistant and an
+assistant can assistants can handle a lot of different messages so I will make
+a method handle and I will create a class that will be representing my
+action which will be called an event and
+now my assistant can handle that my computer is broken and let's look at our
+table it was the last level of coupling its notification I don't know how it
+will be done the fixing of my computer I'd know know where it'd be done I don't know who will do it and I will don't
+know what will be what will happen maybe it will be fixed Matt will be will be charged maybe it will be replaced I
+don't know and the question is yeah do I have to say what should be done so I had
+to be imperative man or should I be just saying this happened handle it because I
+don't want to be couple with you in in that manner that I will always tell you what to do I don't want to always tell
+you what to do sometimes I just want to like tell you this happen just do it and
+those are five basic five basic levels
+of coupling that we can now like recognize in our code we can talk about
+it and we can relate to them in this kind of metaphor it don't has to be that
+not have to be that everybody talks a bit about different and everybody has this intuition about coupling yeah or
+this instinct when it sits high its right it's it's it's loose and the one
+the the next thing the next thing is
+that you know coupling yeah coupling the the tight we know now how what are the
+levels of coupling and so what and which kind of level of coupling is better the high coupling or loose coupling which is
+which is better which is more preferred in the design very good we have a
+potential for new consultants yeah please come to me after the target exactly it depends a coupling is just
+like gravity it isn't like bad or good it's just some kind of force sometimes it's good
+sometimes it's bad sometimes we want to have high coupling when you are in DDD context within the aggregate yes and we
+want to have those invariants protected and and so on then we need high coupling but between services in micro service
+architecture yeah we want to those services to be told as much independent as they can be so there we will want to
+use the technique that makes coupling as loose as possible so it will always
+depend on the concrete place or concrete usage about it but what but what is the
+lesson at the end of this talk to have better design you have to first learn to
+describe the design precisely it's
+really hard to keep your team in sync it's really hard to communicate about
+the design because design or things are really really abstract so first you have
+to learn about it times you have to learn how to talk about it and it's not really only coupling these are coupling
+this is architecture these are all the other kinds or elements of design that
+are useful for us or different kinds of abstraction that we are using so first
+learn to talk about it and then the design will come so yeah
+don't do it instinctively like Guido
+it okay so thank you very much hopefully I didn't now I think I have a perfect
+time 45 minutes so there is of course no time for questions right now but maybe I don't know one or two I do if there are
+some some questions then I'm happy to answer if not I will be for some time
+here so we can catch me up and okay there is one question how to massively
+detect a coupling so if you have big project that you join and you want to know about best couplings how would you
+like start working on this I will start
+working on this let's say very context-specific questions and the one
+the theoretical answer will be metrics yeah there are metrics for coupling let's say but from my experience this is
+only theoretical answer because on the new project massive project with that
+has problems with with coupling those metrics orders so much of it and that
+this is not really those metrics don't really say nothing because all of the
+code is coupled in such a way that okay I I can like see that everything is coupled with with everything the number
+will not help me and this is more of the communication tool or an educational
+tool that will enable those people that did the this project and now want to do
+it better to start like talking about it in a precise manner so that they will
+not end up with the same bad code or bad design again and so I will say rather
+not it's not it's not something that you
+can apply after it's just something that you have to apply before because design needs to be first and design first and
+not design at the at the end but maybe there are some some tools that I'm not aware of them for me the educational
+part of it is the most important the communication okay thank
+you there is a one-person dairy so maybe let's say last last question and thank
+you for this possibility you certain the variant of the presentation don't do
+that into like into TV into it
+yeah instinctively intuitively so don't you think that for people is a large
+experience in not an intuition intuition like activity but just experience and
+sometimes like experience architect can even correct probably as a customer
+requirement some business and quality on whatever so if we have like a very
+beginner level customer we who don't know exactly what oh don't know o has
+some feeling believing that he can hit the market with that and that but the
+experience architect justice his or her intuition can correct even those design
+quality requirements is it work holes yes I'm I'm a maybe a big believer not
+but let's say yeah I'm a big believer in in something that that is called tacit knowledge so this is this kind of
+knowledge that cannot be expressed with words yeah so there is this psychological philosophical that's
+saying let's say that we cannot say everything we think within because there
+are some tacit knowledge that is that that cannot be expressed and the intuition is something in experienced
+person that is really good but the problem that we are solving here is the cooperation problem because I'm totally
+agree with you that experienced architect can do great design but what
+we are solving here is the communication of the design and then also mentoring of the other people
+so that we can like understand why the design is the way it is why I picked
+this kind of thing and not those kind of thing and and to be able to evaluate it
+together and so once again communication and not one person doing the right thing
+and then telling all the other people how they should do it without explaining it not because he not because it's a bad
+idea and he didn't want to but because he just doesn't have the vocabulary or metaphor to tell the younger people the
+younger programmers why exactly this is this way why exactly this is that way and also giving feedback to the to the
+people that he works with okay you created this design yeah and and can you this is this kind of level and then used
+it because here I need configurability and here I have a tight coupling because I need consistency and here I have like
+loose coupling because I need eventually consistent system and so on because there are like consequences to to the
+level of coupling in in the manner in the field of like architecture of the whole system and this is one of the
+basic I think that we need to think about and they were building on it some more so it's more precise communication
+precise description and it doesn't exclude the intuition of the experienced
+architect that can that has these gut feelings I also have those sometimes it I know it will bad idea but I cannot
+tell you why you just have to trust me there and this is absolutely for me okay and absolutely acceptable and this is
+this body of knowledge that we acquired during our lifetime okay so thank you
+very much thank you for your patience thank you for coming here this early on some day on this weather it's really
+really cold so thank you very much and hope you've learned something today
+you

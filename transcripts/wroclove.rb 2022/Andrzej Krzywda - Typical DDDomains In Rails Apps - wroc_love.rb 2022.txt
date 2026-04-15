@@ -1,0 +1,4087 @@
+it's always fun for me to invite myself
+
+
+for the conference so here we are let me
+
+
+introduce the next speaker andre shivda
+
+
+today i would like to talk about ddd
+
+
+obviously so domain driven design
+
+
+and i will talk from the perspective of
+
+
+the code that we all write the same
+
+
+so
+
+
+yes
+
+
+yes we all work on different project
+
+
+types so maybe some of you work on
+
+
+e-commerce uh
+
+
+it's popular nowadays to work on edutech
+
+
+so courses teaching learning and stuff
+
+
+um
+
+
+[Music]
+
+
+so probably your application is
+
+
+somewhere there or somewhere between
+
+
+those or maybe it's not that far from
+
+
+those
+
+
+um there are different types
+
+
+of projects but we solve still very
+
+
+similar problems if you talk to each
+
+
+other if you look at the code bases that
+
+
+we have together is very very similar
+
+
+concepts so we also have the same
+
+
+problems in the code
+
+
+so for example
+
+
+who here has a column or a concept of a
+
+
+price in your project
+
+
+i'm pretty sure many of you are lying if
+
+
+you don't have a price like what what
+
+
+exactly is your tool doing if you don't
+
+
+have a price
+
+
+so you have a
+
+
+domain of pricing in your business in
+
+
+your project similarly
+
+
+yes if you have a login you have
+
+
+authentication
+
+
+if you have an address you probably have
+
+
+shipping if you have a concept of
+
+
+available products or you're selling
+
+
+some
+
+
+ecommerce stuff you have a concept of
+
+
+inventory
+
+
+and if you have a concept of payment you
+
+
+have a domain of payments
+
+
+and if you're a concept of a tax rate
+
+
+maybe then you have a domain of taxes
+
+
+and if you have a concept of invoices uh
+
+
+invoicing
+
+
+if you have a concept of dates generic
+
+
+dates you have a domain of calendar
+
+
+so
+
+
+anyone here had at least one of those
+
+
+okay
+
+
+more than three of those like more or
+
+
+less
+
+
+okay
+
+
+so we have very similar concepts uh
+
+
+in our race applications
+
+
+and i just made a list of
+
+
+14 for some reason there is like i don't
+
+
+know 20 maybe of them
+
+
+and typically you have many of those or
+
+
+at least half of those
+
+
+and then you have
+
+
+sorry
+
+
+some oh yeah the pink ones were
+
+
+important
+
+
+so the pink ones are the ones where is
+
+
+your so-called core domain so the domain
+
+
+where actually your business is unique
+
+
+because probably your business is not
+
+
+unique in the terms of like how you deal
+
+
+with pricing or how you deal with
+
+
+shipment or maybe it is uh but usually
+
+
+we have some other ones which are not so
+
+
+typical so those are the ones where we
+
+
+should focus on and the ones which are
+
+
+above are boring and we shouldn't write
+
+
+them all the time
+
+
+yeah so we all solve the same problems
+
+
+in code
+
+
+but somehow we do it differently so
+
+
+again the diagrams we see the same
+
+
+everywhere but the code is very very
+
+
+different
+
+
+so why is our code different
+
+
+because our code basis is
+
+
+israel's so
+
+
+we have
+
+
+we hope it works we have models we have
+
+
+views
+
+
+and we have controllers
+
+
+the views recently changed into some
+
+
+kind of json view so maybe json
+
+
+serializes
+
+
+but hopefully with hotwire will be back
+
+
+with views
+
+
+and now the question is who has service
+
+
+objects
+
+
+who are service objects in the code yes
+
+
+that's quite a lot
+
+
+i like service objects but sometimes i
+
+
+don't like them but i have to defend
+
+
+them because 10 years ago i was the one
+
+
+of the people
+
+
+advocating service objects so i have to
+
+
+be honest with myself
+
+
+the service objects introduce
+
+
+interesting debates in projects i wonder
+
+
+if you have them or if you've had them
+
+
+first of all do you call them services
+
+
+commands operations actions interactors
+
+
+scenarios
+
+
+many different names for that but the
+
+
+same concept
+
+
+apotonique is here
+
+
+i can have fun from that trailblazer
+
+
+okay
+
+
+um so yeah how to name them the second
+
+
+way of naming is exactly what's the
+
+
+naming convention so do you have like a
+
+
+class called register user service
+
+
+or maybe just register user
+
+
+okay users are just okay
+
+
+some people like to uh
+
+
+uh also have debates about call versus
+
+
+execute
+
+
+what's the answer
+
+
+yeah
+
+
+how many debates were in your team about
+
+
+that
+
+
+it's quite a lot probably
+
+
+how to group them so some people like to
+
+
+group the services into like user
+
+
+service class and then you have register
+
+
+and delete user
+
+
+uh
+
+
+like like more like methods
+
+
+so another debate
+
+
+um
+
+
+what do they return that's that's the
+
+
+one that i was
+
+
+heated debates were here like what does
+
+
+a service object return
+
+
+a nothing
+
+
+b the last record that was changed
+
+
+see true or false because we like active
+
+
+record
+
+
+um
+
+
+what else
+
+
+monarchy success or failure
+
+
+um
+
+
+[Music]
+
+
+yeah so that's i don't i'm not giving
+
+
+answers here
+
+
+uh how to communicate failures
+
+
+what else
+
+
+return falls or use exceptions but the
+
+
+con exceptions are slow
+
+
+um can they can they call other services
+
+
+can a service object call another
+
+
+service object
+
+
+[Music]
+
+
+how to test them okay that's an easy one
+
+
+do you mock everything out or do you
+
+
+test many services at once another
+
+
+debate i'm not giving answers yet
+
+
+yet
+
+
+and do we use them in tests to set up
+
+
+the state of the application in
+
+
+integration tests or do we still rely on
+
+
+some kind of
+
+
+gems for creating active records
+
+
+directly
+
+
+no no answers okay
+
+
+um
+
+
+yeah and the one that i like so the
+
+
+params driven development usually the
+
+
+service object they takes a bunch of
+
+
+params and they just the parameters flow
+
+
+through the whole system and at the end
+
+
+they're saved somewhere right so that's
+
+
+the typical flow
+
+
+uh
+
+
+service objects are
+
+
+[Music]
+
+
+damn it
+
+
+are not enough
+
+
+that's my honest way of escaping this
+
+
+way that i i advocated them
+
+
+uh but in 10 years ago when i was
+
+
+experimenting with service objects and
+
+
+that was like my
+
+
+my entry into the domain driven design
+
+
+world
+
+
+i called them
+
+
+a gateway drug
+
+
+so
+
+
+that's our starting point and those
+
+
+questions are good to have because
+
+
+you see that the answers are not easy
+
+
+to find
+
+
+so let's go further
+
+
+i've seen many rails modularization
+
+
+attempts in the existing projects
+
+
+concerns
+
+
+dhh
+
+
+[Music]
+
+
+microservices who went with
+
+
+microservices
+
+
+i'm sorry for you guys um
+
+
+who went with engines
+
+
+okay
+
+
+adrian is so nice that they can't really
+
+
+engines actually suck
+
+
+trade blazer
+
+
+that's a very popular one actually so
+
+
+nick is not here so i can say tell you a
+
+
+secret i see many code bases where if
+
+
+you make some git archaeology you will
+
+
+see that someone introduced three blazer
+
+
+and then removed it
+
+
+so
+
+
+kafka
+
+
+yeah
+
+
+i know the company you work for
+
+
+um
+
+
+yeah so
+
+
+the problem with all those choices is
+
+
+that they can be good but they can be
+
+
+wrong and usually they are wrong because
+
+
+there is a one important assumption that
+
+
+many of us make and the assumption is
+
+
+that
+
+
+it's enough to have a one level of
+
+
+modularization in our whole application
+
+
+so we try to cut our application into
+
+
+for example engines right and the engine
+
+
+contain everything and there's this
+
+
+question about buyers and sellers today
+
+
+so do they contain the models together
+
+
+or
+
+
+or not and how to deal with this so the
+
+
+problem is that this is
+
+
+regardless of what how you choose the
+
+
+modularization attempt there is more
+
+
+than one
+
+
+modularization layer unfortunately
+
+
+you have at least two layers in your
+
+
+application and that's a big
+
+
+simplification
+
+
+a big simplification here but i think we
+
+
+can fit many of those into application
+
+
+layer or domain layer
+
+
+so let's see how it works you have app
+
+
+layer domain layer
+
+
+and the application layer has its own
+
+
+separation its own modularization
+
+
+and for example
+
+
+what would we put here this is a this is
+
+
+a mystery
+
+
+we would put here stuff like admin panel
+
+
+or the main application that we work on
+
+
+or we would add the mobile api because
+
+
+that's a different application
+
+
+or we would push the integration with
+
+
+shopify for example because many
+
+
+projects nowadays integrative shopify so
+
+
+you have to have some kind of a
+
+
+application layer for this or you have
+
+
+graphql who has graphql
+
+
+that sucks too
+
+
+it's possible to deal with graphql
+
+
+fortunately so
+
+
+basically at this layer we have
+
+
+controllers
+
+
+and we have
+
+
+service objects that's the main building
+
+
+blocks so service objects belong to the
+
+
+application layer we have one answer
+
+
+here today
+
+
+and then we have domains
+
+
+and we have those black boxes like
+
+
+pricing inventory all the boring ones
+
+
+that i mentioned plus the pink ones
+
+
+which are interesting for you
+
+
+and we have read models pavel introduced
+
+
+this concept yesterday during the even
+
+
+sourcing talk read models are the
+
+
+persisted views so the stuff that is
+
+
+displayed
+
+
+is usually eventually consistent so for
+
+
+example in admin panel we would this
+
+
+would like to display all products
+
+
+regardless if they're available or not
+
+
+in the public application we display all
+
+
+products but only the available
+
+
+available ones so that's a different
+
+
+read model so we will use a green color
+
+
+to say that there is like all products
+
+
+there is ledger
+
+
+there is
+
+
+all orders thanks and month reports so
+
+
+all the financial stuff maybe you have
+
+
+more applications for the sales people
+
+
+so this is stuff like this
+
+
+so read models also belong to the
+
+
+application layer
+
+
+then we have maybe some other stuff like
+
+
+for example for shopify integration
+
+
+maybe you use the web hooks uh
+
+
+and you will have those service objects
+
+
+in all those apps you will have service
+
+
+objects some people find it tempting to
+
+
+reuse service object
+
+
+objects between the applications i would
+
+
+say it's better not to create such
+
+
+coupling it's better not to have those
+
+
+service objects being reused it's better
+
+
+to have a focus okay which a part of the
+
+
+application you are changing and which
+
+
+service object is responsible for that
+
+
+so what are the domains
+
+
+here because that was the topic
+
+
+domains are functions hello norbert
+
+
+everybody will have a talk about
+
+
+functional programming tomorrow so
+
+
+domains are functions from commands to
+
+
+events so you will commence is an input
+
+
+and the events is an output so if you
+
+
+have a pricing domain
+
+
+you will have a
+
+
+input consisting of certain commands
+
+
+those commands are very granular if you
+
+
+look at them so it's like setting price
+
+
+um
+
+
+setting discount removing discount
+
+
+activate time promotion everything
+
+
+related to pricing
+
+
+is here
+
+
+and the output
+
+
+is very similar events as the commands
+
+
+so
+
+
+the number of them is very similar it's
+
+
+not complete pricing domain but this is
+
+
+the stuff that you would usually add to
+
+
+the pricing module the pricing domain
+
+
+the next thing
+
+
+your application layer belongs to the
+
+
+rails application
+
+
+service objects i think it's fine to put
+
+
+them in app services or if you use
+
+
+engines uh
+
+
+we generate those different directories
+
+
+at the top so they can you can group
+
+
+those stuff
+
+
+in engines
+
+
+by the way i added form objects as well
+
+
+so
+
+
+i
+
+
+forgot about nick
+
+
+so this is in the directory of erase
+
+
+application i think it's a good idea to
+
+
+keep it together
+
+
+however and this is
+
+
+shocking
+
+
+the domain layer does not belong to a
+
+
+rails application this is your business
+
+
+logic and has nothing to do with rails
+
+
+to the point that it even shouldn't be
+
+
+in
+
+
+part of your rails directory
+
+
+so how can this work
+
+
+on the left side you see a directory
+
+
+structure
+
+
+of a project where the ecommerce
+
+
+directory is a list of domains
+
+
+no dependency to rails and then you have
+
+
+hanami application and rails
+
+
+applications and let's forget about the
+
+
+infrastuff
+
+
+so the race application on the right
+
+
+side you see the structure more or less
+
+
+it's made up but mostly it's like i want
+
+
+to show you that there is this structure
+
+
+of apps in the in the race application
+
+
+you group stuff like forums with model
+
+
+services together
+
+
+and you will have separate stuff for
+
+
+each of them
+
+
+and then
+
+
+you have domains which are in the
+
+
+e-commerce directory in my case it was
+
+
+e-commerce directory and they have no
+
+
+rails dependency they don't use active
+
+
+support you can run tests without having
+
+
+rails and stuff so they they are
+
+
+almost uh
+
+
+almost without dependencies the only
+
+
+dependencies are you need some stuff
+
+
+about events and commands so in my case
+
+
+i'm using release event store
+
+
+but you can use whatever you like so we
+
+
+have some
+
+
+commands like set price which just takes
+
+
+product id and price we have order id
+
+
+and amount for set percentage discount
+
+
+so those are commands those are events
+
+
+very similar very small if you look at
+
+
+them
+
+
+and you need something to publish to
+
+
+publish those events from the domain
+
+
+usually you would have some concept of
+
+
+aggregates but not everyone likes them
+
+
+so you can have whatever code you like
+
+
+basically you need something that
+
+
+is
+
+
+responsible for taking a command
+
+
+and publish events if it's possible to
+
+
+handle this command so if someone tells
+
+
+me
+
+
+hey i would like to um let's go let's
+
+
+i'd like to set percentage discount
+
+
+we'd like to allow this uh only if there
+
+
+was no discount before so
+
+
+if there was a discount before we
+
+
+we would like to first remove the
+
+
+discount and only then add a new one so
+
+
+that's uh
+
+
+it can fail sometimes if it fails it
+
+
+raises an exception and this is an
+
+
+example code which is very very simple
+
+
+because there is no business logic
+
+
+really it's basically a product class
+
+
+which when you set a price it allows it
+
+
+because it's always possible to set a
+
+
+price and here is a bit bigger example
+
+
+where you have an order in the pricing
+
+
+module where it contains all the
+
+
+products it contains all the discount
+
+
+which is applied for this order and at
+
+
+the bottom you can see that
+
+
+you can't assign two discounts so it
+
+
+will raise an exception so this is a way
+
+
+of dealing with the business logic
+
+
+so that's how we will
+
+
+implement those domains the typical
+
+
+domains and also your domains that's how
+
+
+it can be solved and the building blocks
+
+
+are again
+
+
+commands events
+
+
+and the domains of the domain level
+
+
+the read models
+
+
+are very simple usually there are one
+
+
+table
+
+
+because they are displaying like a box
+
+
+of data
+
+
+and this is a dsl i came up recently
+
+
+with so you we are just
+
+
+declaring that this read model
+
+
+i promise not to go there
+
+
+the read model
+
+
+subscribes to those events you can see
+
+
+in the call method so product register
+
+
+product name stock level change you can
+
+
+see those events come from different
+
+
+namespaces from different modules from
+
+
+different domains so that's why read
+
+
+models live in the application layer
+
+
+because they don't belong to one
+
+
+specific domain
+
+
+and
+
+
+you just declare okay from which
+
+
+event
+
+
+attribute you map the data to which
+
+
+column in the database that's very easy
+
+
+okay so now is the fun part
+
+
+because maybe you will ask a question
+
+
+uh
+
+
+about how the domains communicate
+
+
+exactly
+
+
+because the domains
+
+
+they don't know about each
+
+
+other it's not necessarily a rule they
+
+
+can't know about each other but this
+
+
+coupling that you will introduce will
+
+
+make everything just ugly because it's
+
+
+no longer a
+
+
+map from from commands to events it's so
+
+
+additional
+
+
+coupling added and ideally you would
+
+
+like to use those domains without
+
+
+adding the next one required
+
+
+so what is the solution to the problem
+
+
+that the domains they don't know about
+
+
+each other but somehow they need to
+
+
+collaborate in order to
+
+
+to do anything what is the anything that
+
+
+we need to do the only thing is
+
+
+that business businesses have processes
+
+
+usually
+
+
+you would like to capture those
+
+
+processes when the business explained to
+
+
+us how things work we would like to have
+
+
+this in the code so that whenever they
+
+
+change the rules we know where to change
+
+
+it
+
+
+processes
+
+
+processes coordinate domains and
+
+
+processes map events onto commands so at
+
+
+the technical level at the abstract
+
+
+level there are business processes but
+
+
+at the technical level they react to
+
+
+certain events
+
+
+and they do something on as a result so
+
+
+if you look at how business people
+
+
+communicate stuff to you very often it's
+
+
+about checklists so
+
+
+whenever a and b and c happens we do x
+
+
+in our business
+
+
+very often it's very simple processes
+
+
+like whenever a happens we just do x in
+
+
+our business so that's a very simple
+
+
+thing
+
+
+for example
+
+
+whenever we rename products we let
+
+
+invoices departments know about it
+
+
+because on the invoices we should have
+
+
+the
+
+
+the right name for the product
+
+
+for some in some projects you will have
+
+
+a separate name for invoicing you don't
+
+
+copy it from the product catalog you
+
+
+just have a separate product name just
+
+
+for invoicing
+
+
+which means we have something like this
+
+
+in our code base we have a process
+
+
+whenever product is named
+
+
+we say to the invoicing we say hey set
+
+
+product name displayed on invoice for
+
+
+this product
+
+
+obviously we don't change the history we
+
+
+just change for the new ones
+
+
+another process is
+
+
+whenever people add items to basket
+
+
+this is a unusual requirement this is
+
+
+more for those businesses which i don't
+
+
+know i've heard about those fast food
+
+
+chains where
+
+
+they when you when you use the kiosk to
+
+
+choose the order they will
+
+
+it
+
+
+automatically appears on the kitchen on
+
+
+the the preparation site uh so that they
+
+
+can most likely prepare you the food
+
+
+even though you can still delete it but
+
+
+it's time effective for them to prepare
+
+
+it
+
+
+so whenever people add items to basket
+
+
+to order we prepare the shipment that's
+
+
+like very specific process
+
+
+and also shows like this is not very
+
+
+processes are not exactly at the domain
+
+
+level they are between the application
+
+
+level and the domain level because
+
+
+uh those are very specific to the
+
+
+project very specific to the business
+
+
+so this might make sense in mcdonald
+
+
+this will not make sense for e-commerce
+
+
+and this is the code responsible for it
+
+
+so whenever item is added to basket
+
+
+in the shipping they call it ship and
+
+
+shipment picking list so
+
+
+we will add we'll create a list of the
+
+
+shipment list it's not yet delivered
+
+
+it's just waiting but we'll add it and
+
+
+when item is removed we remove it so in
+
+
+many ways those processes they they kind
+
+
+of synchronize the data between domains
+
+
+so and there is some duplication i will
+
+
+agree that there is some duplication in
+
+
+terms of data
+
+
+but there is a nice separations in terms
+
+
+of business logic so you want to handle
+
+
+shipment separately from ordering
+
+
+there are many such processes
+
+
+this is from my project uh this is like
+
+
+a simulation of e-commerce
+
+
+so you can you may want to check
+
+
+availability when item is added to
+
+
+basket you want to determine the vat
+
+
+rate uh there's a shipment process
+
+
+yeah so a bunch of them
+
+
+even more of them
+
+
+so even for a quite simple
+
+
+e-commerce simulation project we already
+
+
+have like i don't know
+
+
+25 or 30
+
+
+processes and they solve the problem of
+
+
+communication between the domains and
+
+
+they kind of allow us that if we take
+
+
+those existing domains the typical
+
+
+domains
+
+
+uh
+
+
+usually what we would have to do is to
+
+
+configure the coordination between via
+
+
+processes
+
+
+so the domains could be reusable
+
+
+okay let's go back to the service
+
+
+objects because we didn't have all the
+
+
+answers yet
+
+
+um
+
+
+we have this form in our project it's a
+
+
+new product with name price and that
+
+
+rate
+
+
+three
+
+
+ui controls
+
+
+how many
+
+
+commands
+
+
+you think are from are coming from those
+
+
+three controls
+
+
+three would be the obvious answer but
+
+
+there's actually four
+
+
+the code on the that we see is actually
+
+
+from the controller
+
+
+because once the service objects are not
+
+
+really needed because they're just
+
+
+mappers from command from params to
+
+
+commands
+
+
+i i'm tempted often to just leave this
+
+
+code in the in the controller but it's
+
+
+fine if it would be part of the service
+
+
+object as well
+
+
+and you can see there are just some
+
+
+simple uh actually it's it's lacking the
+
+
+ui validation so the form object idea
+
+
+that was we were we've had the talk
+
+
+yesterday about form objects uh it's
+
+
+still a good idea form objects they
+
+
+could be
+
+
+used just before the service object but
+
+
+from object they shouldn't save data
+
+
+that's a mis
+
+
+that's a
+
+
+bug in thinking
+
+
+[Music]
+
+
+okay so what happens in this code later
+
+
+those methods are called and those
+
+
+methods are called so you can see the
+
+
+commands are
+
+
+called and the commands are basically
+
+
+uh
+
+
+just instantiations of the command
+
+
+objects so
+
+
+this is this this ui maps it could be
+
+
+mapped to a form object it could be
+
+
+mapped to a service object and the
+
+
+service object role is to find the
+
+
+commands that we want to run to the
+
+
+domains and that's all
+
+
+so that's all that's all that is left
+
+
+about the service object and this
+
+
+answers several questions here so what
+
+
+does a service object return
+
+
+nothing in java void
+
+
+we don't have this concept in ruby but
+
+
+you can understand that you don't rely
+
+
+on the return value
+
+
+how do you test it it's easy you just
+
+
+pass the params and you expect what kind
+
+
+of commands were
+
+
+created on the on the command bus
+
+
+what was the answer okay do you have
+
+
+call and execute or execute it doesn't
+
+
+matter
+
+
+so it's becoming it's becoming so simple
+
+
+that many answers are obvious
+
+
+okay
+
+
+some conclusions
+
+
+this is a heated debate it's not really
+
+
+my topic for today but so many people
+
+
+are wondering okay how can we have
+
+
+juniors in the rails applications and
+
+
+that's a usual claim against doing ddd
+
+
+in
+
+
+rails because for some reasons people
+
+
+think that if you have a big ball of mud
+
+
+it's easier for juniors but if you start
+
+
+modularization is more difficult for
+
+
+juniors so i would say it's probably the
+
+
+opposite and i think that juniors will
+
+
+find it much easier if they start with
+
+
+some very simple tickets to work on
+
+
+which just touch one remodel at the
+
+
+beginning and they will they will focus
+
+
+on one component at a time and then
+
+
+slowly they will work on more and more
+
+
+second thing i'm not a big fan of
+
+
+estimates but i know sometimes you can't
+
+
+expect them and with modular codebase
+
+
+like this one when you have some
+
+
+building blocks and this is just one
+
+
+idea how we can modularize it it's more
+
+
+estimation friendly because you can
+
+
+easily map requirements into building
+
+
+blocks so if you obviously
+
+
+probably
+
+
+it's difficult to get to this point of
+
+
+this modularity but maybe one for your
+
+
+next project you will start better
+
+
+i think it's worth learning how to
+
+
+detect typical domains
+
+
+so just to look for the typical concepts
+
+
+in your code base so that even though
+
+
+you don't have these reusable domains in
+
+
+your code maybe yet i don't have them
+
+
+too at least you will recognize them and
+
+
+you know that they're they might have
+
+
+their own place in your codebase as a
+
+
+module
+
+
+this is a bit futuristic thinking but
+
+
+because i'm not there yet as well but
+
+
+given that those domains they have all
+
+
+the features of uh something that could
+
+
+be reusable they could be reusable in
+
+
+the future so hopefully when we meet
+
+
+here in five years from now we will have
+
+
+gems open source gems for pricing for
+
+
+shipment for ordering i'm not saying i
+
+
+will create them but at least we will
+
+
+have them available because right now we
+
+
+don't have them and we create them all
+
+
+from scratch over and over again and
+
+
+that's why our code is different
+
+
+and yes we can configure them with
+
+
+processes
+
+
+we've had a great talk from euroslav
+
+
+today
+
+
+and
+
+
+it was about
+
+
+components view components and hot wire
+
+
+and read models are hot wire friendly so
+
+
+if because read models under the hood
+
+
+usually they use as you saw the example
+
+
+they use active record and you can just
+
+
+connect your active record with hot wire
+
+
+so you can use those callbacks from hot
+
+
+wire and it will be broadcasted for
+
+
+example to the view i'm not yet
+
+
+experienced with hotwire but but the way
+
+
+i understand it is that
+
+
+it's fitting perfectly well with the
+
+
+concept of read models so those small
+
+
+boxes on your pages where you display
+
+
+the data so that we don't have to use
+
+
+react
+
+
+also important thing ready models don't
+
+
+know about each other
+
+
+many projects i see
+
+
+go this way when you have dependencies
+
+
+between read models because it's so
+
+
+tempting to say here is a list of
+
+
+products i will just grab the list of
+
+
+products from this read model and then i
+
+
+will use them in some kind of report for
+
+
+example so it's better to have like
+
+
+denormalized
+
+
+and decoupled from each other with
+
+
+models
+
+
+and
+
+
+treat them as separate modules
+
+
+also for for example for juniors to have
+
+
+better understanding how it works
+
+
+separately
+
+
+uh service objects just as a repetition
+
+
+are mappers from params to commands
+
+
+commands are input to the domains
+
+
+domains can produce events
+
+
+events are the triggers for processes
+
+
+processes can trigger new commands
+
+
+events are also triggered for read
+
+
+models and that's the whole loop for the
+
+
+application so i know for many of you
+
+
+those building blocks may sound like a
+
+
+bit science fiction right now uh but
+
+
+this whole event driven approach
+
+
+actually is simple and most of the
+
+
+tickets that you work on
+
+
+uh can be easily mapped into those
+
+
+concepts and you know where to put code
+
+
+important thing form objects are not for
+
+
+saving but aponics isn't here so
+
+
+he still will not learn
+
+
+okay here
+
+
+maybe don't show it to dhh but uh
+
+
+params driven development is just not uh
+
+
+not the right way like i i whether you
+
+
+go with service service objects or not
+
+
+uh basically
+
+
+what i see in the code bases and i see
+
+
+many of your code bases too uh i uh i
+
+
+see that you just add a param at the top
+
+
+of your like control flow so somewhere
+
+
+at the controller or even better in the
+
+
+form or in the view template or it comes
+
+
+from javascript and somehow magically
+
+
+this param goes like everywhere like a
+
+
+bunch of params goes everywhere and this
+
+
+is you should be more granular so it's
+
+
+not update user you just you change your
+
+
+email
+
+
+and adrian rails engines belong to the
+
+
+application layer
+
+
+and
+
+
+uh
+
+
+active admin and avo are okay
+
+
+only if they can allow connecting to
+
+
+service objects or commands so you can
+
+
+answer whether avo is fine
+
+
+okay thank you
+
+
+yeah if you're using things like active
+
+
+admin admin or ava i don't really know
+
+
+them exactly very well i mean i tried
+
+
+active admin and i deleted it
+
+
+immediately after i tried
+
+
+because they just try to make this magic
+
+
+for you they like avo tries to find you
+
+
+all the models and then it will try to
+
+
+magically create ui for them probably so
+
+
+you will create active records they like
+
+
+directly and this is exactly what you
+
+
+don't want to have i mean it's it's good
+
+
+like we talked with adrian about this
+
+
+it's good because like for many like
+
+
+rails programmers are like how did you
+
+
+call them shippers and builders
+
+
+yes so some people ship quickly and
+
+
+obviously with active administrative
+
+
+quickly so if your goal is to ship stuff
+
+
+in one week then this is your tool to
+
+
+choose
+
+
+but if you want to
+
+
+somehow manage this later probably you
+
+
+want to remove it later
+
+
+okay
+
+
+yeah
+
+
+mapping requirements to those building
+
+
+blocks is easy
+
+
+you need testing domains are units
+
+
+the input is clear commands output
+
+
+events or output is an exception
+
+
+read models are units the input is
+
+
+events the outputs is some kind of data
+
+
+structure or html or json
+
+
+processors are units the input is events
+
+
+the output is commands it's all very
+
+
+easily testable those are units not some
+
+
+like you don't write
+
+
+tests for each class for example
+
+
+integration testing
+
+
+you can
+
+
+treat your whole application as black
+
+
+box where service objects are the input
+
+
+and read models are the output
+
+
+and you don't you no longer care about
+
+
+at this level of integration don't care
+
+
+about what are the domains inside
+
+
+when pavel has his talk about even
+
+
+sourcing there is a question about gdpr
+
+
+and this is a solved problem with events
+
+
+you encrypt events and if someone wants
+
+
+to have deleted data you delete the key
+
+
+which is which was used to encrypt
+
+
+this is uh there's a link to rails event
+
+
+store
+
+
+we have a documentation page about how
+
+
+to do gdpr with race event store
+
+
+this is the event browser which comes
+
+
+with race event store it's a ui it's
+
+
+actually written in elm
+
+
+and this is uh
+
+
+something that used once you start using
+
+
+it it basically reduces your debugging
+
+
+time to a minimum because
+
+
+uh you know exactly what happened at one
+
+
+point of time so if you have granular
+
+
+events granular commands uh and you use
+
+
+some kind of ui
+
+
+for the events then you can quickly see
+
+
+where was the problem
+
+
+and the bold claim ahead
+
+
+who here uses rails event store so far
+
+
+15 people maybe good
+
+
+release even store is most productive
+
+
+tool for ddd not only in ruby uh i've
+
+
+i've compared this to how you use ddd in
+
+
+java and dot net and python and python
+
+
+they almost have this concept of not
+
+
+existing
+
+
+so
+
+
+yeah i
+
+
+obviously i'm biased i'm
+
+
+one of the people behind relative store
+
+
+okay if you want to learn more
+
+
+go to the race even store e-commerce
+
+
+repository just
+
+
+clone this repository
+
+
+it's a simple order management system
+
+
+slash e-commerce there is no javascript
+
+
+so you can easily add new tickets and
+
+
+before you start experimenting with
+
+
+those concepts in production in your
+
+
+client projects or your products
+
+
+first experiment in this code base
+
+
+so you can choose one of the existing
+
+
+good first issue tickets on github on
+
+
+this project or just ask me
+
+
+if you want to add something or just do
+
+
+something in your on your machine just
+
+
+to experiment with this whether you can
+
+
+find yourself in such code bases and
+
+
+how to do it our plans for this project
+
+
+is to
+
+
+uh reuse the amazing client project so i
+
+
+was talking about reusability i'm not
+
+
+the one to make an impression that it's
+
+
+already it's already happening but we
+
+
+are very close to reuse some of the
+
+
+domains in our client projects and a
+
+
+reminder arkansas takes existing legacy
+
+
+rails code bases and we turn them into
+
+
+something nicer over time so we very
+
+
+easily we spot all those domains in the
+
+
+existing projects that we worked on
+
+
+uh we want to work on hanami application
+
+
+which will is actually in progress so we
+
+
+want to show that the domains could be
+
+
+reused in not only in rails but also in
+
+
+hanami because there's no coupling to
+
+
+active record
+
+
+[Music]
+
+
+i would like to have less boilerplate
+
+
+code for the read models processes but i
+
+
+think we are doing quite well anyway for
+
+
+us for now and i would like to create a
+
+
+scaffold generator for race applications
+
+
+together with the domain so that you can
+
+
+easily start you can say i have pricing
+
+
+i have inventory i have shipment i have
+
+
+such read models i have such processes
+
+
+and have it generated because
+
+
+all this code is already written and you
+
+
+shouldn't write it over and over again
+
+
+and that's it from me thank you very
+
+
+much
+
+
+and this conference is about confronting
+
+
+ideas so if you disagree with me have a
+
+
+lightning talk and say how you disagree
+
+
+with me
+
+
+but obviously i will take questions now
+
+
+inj um you were a big fan of
+
+
+aspect-oriented programming
+
+
+but it failed and
+
+
+was there was the reason what do you
+
+
+think
+
+
+um
+
+
+at the rails framework level uh even dhh
+
+
+when he was uh promoting rails in 2004
+
+
+he was like showing how many of those
+
+
+concepts are aop so if you use ray's
+
+
+callbacks it's basically aop
+
+
+in java
+
+
+aop is part of spring so it's quite
+
+
+successful there
+
+
+those
+
+
+if you look at how i showed you so what
+
+
+is aop iop is trying to find some
+
+
+uh separation of concerns where you say
+
+
+whenever this happens do this right
+
+
+that's basically the aop approach
+
+
+so then they say before this happens to
+
+
+this or after this happens to this and
+
+
+with domain driven design we solve it
+
+
+basically by saying we have an event so
+
+
+after the event happens we do this we
+
+
+don't have a concept of before the event
+
+
+happens to this but it's very rarely
+
+
+required
+
+
+so i would say we are kind of simulating
+
+
+aop here in with eddy thanks for your
+
+
+question
+
+
+um hey you said that gdpr is now solved
+
+
+in raceminster but if we are only
+
+
+encrypting them then the encryption key
+
+
+are through presenting backups
+
+
+so how to handle that because there is
+
+
+limited time we have to forget the user
+
+
+don't remember exactly how we have this
+
+
+in our
+
+
+project probably we don't put them in
+
+
+the backups or
+
+
+we store them somewhere else
+
+
+but there are those events
+
+
+like all data in even is encrypted
+
+
+the ones that you need the person okay
+
+
+so only the pais okay thanks
+
+
+hello um i have two questions um the
+
+
+first of all is um you mentioned that
+
+
+you guys do a lot of um legacy rewrites
+
+
+in terms of uh taking something that is
+
+
+uh written well
+
+
+kind of bad and rewriting into a domain
+
+
+driven design but uh in this particular
+
+
+case you have um already know the domain
+
+
+and you can easily identify the
+
+
+particular components
+
+
+but uh in my experience if you do
+
+
+modularization you usually the worst
+
+
+cost you can have especially in the
+
+
+microservices but also in other kinds of
+
+
+modularization misidentifying the
+
+
+domains and rewriting them to match the
+
+
+processes what are your experiences with
+
+
+such cases in which you've identified
+
+
+the domains and had to
+
+
+re-architecture them
+
+
+yeah it depends like what kind of
+
+
+modularization technique was used i was
+
+
+once involved in a project where they
+
+
+immediately started with microservices
+
+
+and they were so certain about the
+
+
+domains that they put each domain in
+
+
+another
+
+
+microservice and it was a really bad
+
+
+split
+
+
+so
+
+
+over time what we did was we merged back
+
+
+those microservices into the
+
+
+monolith and then we re-modularized them
+
+
+into something better
+
+
+i would say it's very it can be a trap
+
+
+that you start modularization too early
+
+
+when you don't know
+
+
+but if you start learning those and
+
+
+identifying those concepts that i
+
+
+mentioned like at least the generic
+
+
+domains that were listed today
+
+
+if you have a price you have a pricing
+
+
+there's no questions about it if you
+
+
+have a payment you have payments there
+
+
+are specific domains and they're generic
+
+
+i don't think it would be dangerous to
+
+
+to go with this modulation from the
+
+
+start because that's the they are there
+
+
+okay so browse broad strokes and then
+
+
+you uh specify further yeah just don't
+
+
+go with some crazy modernization
+
+
+techniques like microservices or engines
+
+
+or stuff okay and second question is
+
+
+that you mentioned that this kind of
+
+
+approach is a junior friendly
+
+
+um i kind of sort of disagree with at
+
+
+least parts of it and the reason for
+
+
+this is that if you look at this
+
+
+application from a perspective of a
+
+
+junior developer
+
+
+it doesn't really match the thing that
+
+
+you have and and all the rails tutorials
+
+
+uh courses and anything so it's kind of
+
+
+um i would say experience shock for them
+
+
+to see some kind this kind of a thing
+
+
+and i think that this will
+
+
+at least affect some ability to deliver
+
+
+code for them which agree
+
+
+i mean it's always a matter of choice
+
+
+right so either you have this uh if you
+
+
+have a smaller race application as from
+
+
+tutorials it's easy for juniors who
+
+
+agree it's better for them uh but if you
+
+
+have like the the existing i see the
+
+
+rails projects many of them and when you
+
+
+have a 1000 line of code
+
+
+class
+
+
+then it's a bit of a problem for juniors
+
+
+and we all know that not that's not the
+
+
+smallest classes that we see right
+
+
+um so with this building blocks they
+
+
+help you structure your thinking and i
+
+
+can agree that it requires some time to
+
+
+explain to juniors
+
+
+uh but i
+
+
+usually those building blocks those
+
+
+classes will not be bigger than 100
+
+
+lines of code
+
+
+if you do it well so i i i will claim
+
+
+that this is easier
+
+
+another question
+
+
+do you think it makes sense to do ddd
+
+
+without even sourcing
+
+
+i mean it's the even sourcing part is uh
+
+
+optional uh so you can do it without
+
+
+uh
+
+
+but i would say ddd without even driven
+
+
+this would be problematic i wouldn't
+
+
+like to do it
+
+
+but even sourcing is just a detail even
+
+
+sourcing is just a persistence mechanism
+
+
+that's at least to my definition so
+
+
+this means that
+
+
+we somehow want to save the state of the
+
+
+object of the business object
+
+
+and you can do it with active record if
+
+
+you really really like and then you
+
+
+publish the event so you still publish
+
+
+the event but you persist the state in
+
+
+the in as active record
+
+
+which is
+
+
+basically a duplication because you have
+
+
+those events and you have those if you
+
+
+have those small objects then even
+
+
+sourcing is becoming like an almost
+
+
+transparent thing to you you don't
+
+
+really care about it so i'm choosing to
+
+
+go with even sourcing always uh but it's
+
+
+okay
+
+
+mostly for existing applications where
+
+
+existing stuff is usually active record
+
+
+is you usually start with publishing
+
+
+events and only later usually at the end
+
+
+you will think about whether to go even
+
+
+sourcing or not that's the last choice
+
+
+so if i decide not to do even sourcing
+
+
+in like in your approach to building
+
+
+software
+
+
+where would i read from the database
+
+
+would i read those in the domain or in
+
+
+the command handler
+
+
+you would still use
+
+
+read models because even sourcing is
+
+
+only for building the objects you're
+
+
+still go to even driven and you would
+
+
+publish the events and the read models
+
+
+will subscribe to events and the read
+
+
+models they are persisted in a database
+
+
+so they are not even sourced they are
+
+
+just even driven
+
+
+which means they are still using the
+
+
+database
+
+
+but i think in yesterday's presentation
+
+
+it was said that you should not use read
+
+
+models for business decisions only for
+
+
+reading
+
+
+oh sorry i thought you were just for
+
+
+exposing so
+
+
+yeah it's
+
+
+um you can build like uh
+
+
+all this all the source of truth is in
+
+
+the events so you need to you would need
+
+
+to either persist the state of like
+
+
+whatever data you want to access for
+
+
+your decision you can persist it in an
+
+
+active record in the last state of this
+
+
+and you can access it so there is no
+
+
+reason no like no requirement to do it
+
+
+only via even sourcing so this is more
+
+
+like an infrastructure requirement to me
+
+
+whether you do even sourcing or
+
+
+persistent to a database it's not really
+
+
+a business decision or not really like
+
+
+this is this is a technic technical
+
+
+detail so i could i would say you can
+
+
+like for example the process managers
+
+
+they can be even sourced if you want to
+
+
+build their state
+
+
+if they if they work if they are
+
+
+composed of many events but it's it's
+
+
+okay if you have active record backed
+
+
+persistence and it's also fine
+
+
+okay thank you for your answer thanks
+
+
+uh thank you for your presentation one
+
+
+question uh you mentioned that products
+
+
+in all your units are are units so how
+
+
+you test it do you mock dependencies or
+
+
+maybe you use substitutions or maybe you
+
+
+have some third option to test
+
+
+and
+
+
+[Music]
+
+
+to mark the dependencies for your tests
+
+
+mean did you ask for a specific building
+
+
+block or just in general in general
+
+
+because uh if you have unit it probably
+
+
+has some dependencies with other units
+
+
+so you have two options for at least i
+
+
+know two options substitutions and
+
+
+mock the dependencies maybe you have
+
+
+anything else
+
+
+usually okay so i will try to avoid the
+
+
+coupling to other units as much as
+
+
+possible but sometimes you have to go
+
+
+for it i will you just usually use some
+
+
+kind of fake object so uh i'll just it
+
+
+can be a stop for example so you will
+
+
+just say okay what is the how the unit
+
+
+responds and that's that's all of this
+
+
+that you need
+
+
+the nice thing with commands and events
+
+
+is basically all the building blocks are
+
+
+either even based or command like they
+
+
+either produce events or they produce
+
+
+commas for example processes produce
+
+
+commas or services produce commas so all
+
+
+you need to do is to check the command
+
+
+bus whether the command and you can use
+
+
+like a failed command bus
+
+
+to check whether the command was there
+
+
+or whether an event was there so that's
+
+
+usually all you assert the events or
+
+
+commands
+
+
+thanks
+
+
+okay so maybe last question so that we
+
+
+don't
+
+
+oh hi at first thank you for your talk
+
+
+and i really appreciate
+
+
+that you put it in an easy way and
+
+
+self-explanatory so i feel very
+
+
+encouraged to give it a try
+
+
+even i'm looking for some new kind of
+
+
+architectures to try
+
+
+and i've got two questions uh first of
+
+
+all i see
+
+
+uh when you saw a few examples of uh
+
+
+commands that's for sometimes in
+
+
+initializers you call and other commas
+
+
+on another service objects and
+
+
+i'm just wondering with all those talks
+
+
+about dependency injection and craziness
+
+
+about it so is this policy like if uh
+
+
+those services or comments belongs to
+
+
+the same model the same domain then you
+
+
+can call each other from each other
+
+
+um service objects never call each other
+
+
+uh
+
+
+command is handled by one specific
+
+
+domain and never handles like the
+
+
+command is never handled twice or no a
+
+
+command handler never calls another
+
+
+command directly
+
+
+so all the communication happens that if
+
+
+you deal with one command
+
+
+it will result in some events
+
+
+and then those events can be
+
+
+triggering because we are using pops up
+
+
+so there will be triggering some new uh
+
+
+like the read model will try to react to
+
+
+it to save a new data for example
+
+
+uh so
+
+
+this is like not the dependency
+
+
+injection is a very important pattern
+
+
+but in such with such building blocks
+
+
+it's not really often used because you
+
+
+have less dependencies you have so
+
+
+strong decoupling that you don't need
+
+
+the dependencies as much
+
+
+but if you do then dependency injection
+
+
+is a good pattern
+
+
+and the second one uh
+
+
+do you feel like um
+
+
+when you build such an architecture from
+
+
+scratch
+
+
+do you feel is an overhead from the
+
+
+beginning because uh my obvious question
+
+
+was how to face it with the
+
+
+business part of the project to explain
+
+
+that it will be a little bit slower than
+
+
+for example using raceway at the
+
+
+beginning and of course we know that it
+
+
+will uh
+
+
+uh it will pay back in the future
+
+
+because the project will be probably uh
+
+
+better maintainable but still at the
+
+
+beginning it
+
+
+it might it might be a little bit slower
+
+
+in building
+
+
+yeah it's a important question and it's
+
+
+hard to answer easily
+
+
+my mission is to simplify this stuff so
+
+
+much so that people will be so effective
+
+
+as they are with the railway
+
+
+the goal i think we are a bit
+
+
+our ecosystem the business ecosystem
+
+
+around rails projects and expectations
+
+
+for rails programmers is weird because
+
+
+we are so fast during the first weeks
+
+
+and then we slowed down so dramatically
+
+
+uh and it's always like hard to explain
+
+
+to the business people like what
+
+
+happened after three months you were so
+
+
+quick in the first weeks like okay what
+
+
+what what what's the problem and i think
+
+
+we are sometimes uh i don't know
+
+
+seducing the business people by how fast
+
+
+we are with rails with avo with active
+
+
+admin uh how quickly it's it's created
+
+
+and then only we know that there is a
+
+
+technical depth
+
+
+uh the business people usually are not
+
+
+communicated that we are just we are
+
+
+taking shortcuts
+
+
+um so my mission is to simplify the ddd
+
+
+part and the ecosystem the tooling so so
+
+
+that you can be very very quick with
+
+
+this and they're still like okay i said
+
+
+there's still radius parts so the the
+
+
+rails parts are the views the
+
+
+like for example the hot wire if you go
+
+
+with this approach
+
+
+um so all this stuff is still like rails
+
+
+uh so you can still be quick but
+
+
+obviously there is some code to be
+
+
+written and there is usually like more
+
+
+boilerplate code so you create commands
+
+
+and events and usually you don't need
+
+
+that
+
+
+but also
+
+
+usually you are not limited to your
+
+
+typing speed right so it's not that you
+
+
+are spending time typing comments and
+
+
+events it's more about getting used to
+
+
+it and then do it quickly so that you
+
+
+start thinking in those in those terms
+
+
+and the typing time is not relevant
+
+
+usually and when you have this code
+
+
+actually typed and it's very explicit uh
+
+
+i've had some conversations recently
+
+
+like how uh even in a rails legacy code
+
+
+base they just started introducing
+
+
+events uh gradually and there was just
+
+
+one event for
+
+
+changing the price of our product
+
+
+and this
+
+
+this would be hard to implement in
+
+
+typical rails way
+
+
+approach where you would like to send
+
+
+emails to clients that the price has
+
+
+changed and with events it's basically
+
+
+one line handler right so just send
+
+
+email about this new price
+
+
+so over time you can build with events
+
+
+and
+
+
+gradually replace but if you start from
+
+
+scratch uh unless you and that's why
+
+
+i've created the commerce project unless
+
+
+you experiment somewhere else you will
+
+
+not be so fast as with
+
+
+as with releases like not not overnight
+
+
+thanks so much thanks
+
+
+okay i think it's enough so thank you
+
+
+for attention you were a great audience
+
+
+see you after lunch
+
+
+you

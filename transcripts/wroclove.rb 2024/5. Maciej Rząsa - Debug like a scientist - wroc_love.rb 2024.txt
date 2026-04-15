@@ -1,0 +1,2512 @@
+[Applause]
+
+
+hello folks I'm machik uh so far we've
+
+
+been talking about one half of our of
+
+
+our job about WR about writing features
+
+
+now we'll be talking about writing
+
+
+boxs uh and specifically some box some
+
+
+box are just harder than the other ones
+
+
+right have you even been there you sit
+
+
+at work starting at the code starring in
+
+
+the code and that doesn't work and you
+
+
+are stuck because you've changed every
+
+
+code PA twice and it still doesn't
+
+
+work or you debug as a team and use a
+
+
+report for the 10 time that it doesn't
+
+
+work and nobody cares that it works on
+
+
+your computer and then
+
+
+uh a guy with a hero complex arrives
+
+
+saying I know and he disappears for two
+
+
+days returning with 1,000 lines of
+
+
+changed code you deployed it to the
+
+
+production with high hopes and yeah it
+
+
+it doesn't work right and then the worst
+
+
+happens because people start venting off
+
+
+right everybody's frustrated so you
+
+
+start looking for a scapegoat maybe in
+
+
+your team or maybe outside right so the
+
+
+bu becomes a hot potato if you are in in
+
+
+a bigger organization like I was uh you
+
+
+basically think okay I can't fix it so
+
+
+let's reassign it to the other team and
+
+
+after a week this bu returns to you
+
+
+right yeah that's that
+
+
+happens uh and at the end your manager
+
+
+comes asking what have you been doing
+
+
+for the last week uh the bug
+
+
+so how many Bucks have you fixed uh
+
+
+none okay yeah I think you you have been
+
+
+there right because the my question
+
+
+should be not have you ever been there
+
+
+but how many times you have been there
+
+
+right because I heard it's a conference
+
+
+for a senior developers I I always high
+
+
+highly regarded this conf uh because of
+
+
+this so yeah how many times have you
+
+
+been there I have been there numerous
+
+
+times because I have I've been in in
+
+
+Ruby development over 10 years and right
+
+
+now I work for an application that has
+
+
+terabytes of datab of of data in
+
+
+database we um sorry we orchestrate a
+
+
+dozen of machine learning Services it's
+
+
+awesome but it's also complex so it's
+
+
+very easy to get stuck in some weird
+
+
+buxs and it's just the last year what
+
+
+about what about the pr previous 10
+
+
+years right uh yeah I have been there
+
+
+and I must say that when you are there
+
+
+you start questioning your life choices
+
+
+right maybe I should maybe anybody was
+
+
+studing here in in this room hands show
+
+
+of hands yeah you this the moment when
+
+
+you think maybe I should go to the other
+
+
+side of this building and become a
+
+
+journalist right or maybe when I when I
+
+
+get stuck on this kind of back I think
+
+
+yeah I I can still work remotely but for
+
+
+me working remotely should mean working
+
+
+for remote parts of Polish Mountain as a
+
+
+Shepherd not working monly from my
+
+
+desk yeah you've been there I see it in
+
+
+your
+
+
+eyes but I haven't switched my job I I'm
+
+
+still a developer I used to be a
+
+
+principal I used to be a how is it
+
+
+called a team lead now I'm just a senior
+
+
+developer but the compan is awesome so I
+
+
+stay there
+
+
+um and I bring you
+
+
+hope uh I'm I want to share with you a
+
+
+method that is very effective for me
+
+
+that's a way out of the the bugging hell
+
+
+and I'm here mostly because I've seen it
+
+
+used I've seen it applied by other
+
+
+developers other than me uh
+
+
+independently so I noticed yeah I use
+
+
+this highly effective method and they
+
+
+use it too even though I didn't tell
+
+
+them so it means it's good right um I
+
+
+want to tell you to start debugging like
+
+
+a
+
+
+scientist uh I work for company called
+
+
+chattermill I told you that's the the
+
+
+moment of introduction 10 years of
+
+
+experience I told you Ruby development I
+
+
+told you yeah let's move on I'm not a
+
+
+scientist so uh why why should I tell it
+
+
+to the back like scientist and more uh
+
+
+and moreover uh sorry David now a bit of
+
+
+grilling why should we the back like
+
+
+scientists they are weird right they are
+
+
+highly
+
+
+impractical they don't know anything
+
+
+about bus because what they do they coin
+
+
+some weird theories they write boring
+
+
+papers nobody want to read and they
+
+
+spent public money that could have been
+
+
+spent on I don't know trains or or
+
+
+highways or I know kindergartens so why
+
+
+why should we be like
+
+
+scientists nobody knows so I'll tell you
+
+
+uh let's let's get back to the end of
+
+
+19th century when the physics was in
+
+
+kind of split State split brain State uh
+
+
+on one hand physicists thought they they
+
+
+got it they understand the world it was
+
+
+a nice feeling on the other hand
+
+
+they were in a state of a small crisis
+
+
+regarding the the light the the speed of
+
+
+light they knew a lot about the nature
+
+
+of the light they knew it's both the uh
+
+
+wave and particle they were able to
+
+
+measure the speed of light which is
+
+
+wonderful
+
+
+still they thought that the that the
+
+
+light to propagate need some kind of
+
+
+medium just that like sound needs to
+
+
+prop a medium to propagate right so they
+
+
+they propose a hypothesis of luminiser
+
+
+ether that is UNM moving medium uh that
+
+
+light is using to propagate and it's all
+
+
+around all around in the space uh
+
+
+because we can see the stars right um so
+
+
+they thought it would be nice to measure
+
+
+how um how fast what's the speed of
+
+
+Earth uh relative to to the Elph ether
+
+
+so mikelson mle in 1887 proposed this
+
+
+very smart experiment when they sent two
+
+
+rays of light in orthogonal Direction
+
+
+and then they want to measure the the
+
+
+speed difference right because uh based
+
+
+on the classical physics the classical
+
+
+gallan
+
+
+Transformations um this speed should be
+
+
+different and they measured it and the
+
+
+speed was the same it was a surprising
+
+
+behavior of the reality this kind of
+
+
+surprising behavior of the reality in
+
+
+computer science we called a
+
+
+bug yeah yeah and surely they were
+
+
+bugged so what they do they did the same
+
+
+as we do they patched it they proposed
+
+
+some ad hoc the some some ad hoc
+
+
+hypothesis um they that were rather weak
+
+
+and didn't work and this crisis uh went
+
+
+on until a young clerk from a patent
+
+
+office arrived uh writing two papers two
+
+
+boring papers that nobody
+
+
+reads um and one important thing is that
+
+
+Einstein decided to describe the reality
+
+
+instead of yelling at the reality and he
+
+
+said okay so from the observations and
+
+
+from the theory I can say two things for
+
+
+sure two assumptions that the laws of
+
+
+physics are the same in every frame of
+
+
+reference and that the speed of light is
+
+
+independent of the state of motion he
+
+
+started with those two assumptions and
+
+
+then he was able to deduce uh what we
+
+
+now call the length Contra contraction
+
+
+and time dilation and he was able to
+
+
+deduce the LA the lawence transform that
+
+
+you can see on the bottom it was known
+
+
+there but it was it wasn't well
+
+
+grounded and yeah it was just a
+
+
+hypothesis it was a weird Theory but
+
+
+some young guy that nobody knew but then
+
+
+physicist started to uh make experiments
+
+
+and experiments confirm this Theory
+
+
+that's something that we call special
+
+
+relativity at at least at my times it
+
+
+was something normal to learn at high
+
+
+school it's you know it's not a rocket
+
+
+science it's a high school physics
+
+
+physics we yet but
+
+
+still so what happened here the results
+
+
+are less important the method is
+
+
+important uh physicists saw a weird a
+
+
+weird state of of reality that was uh
+
+
+surprising so they guessed how to
+
+
+explain it that they formulated the
+
+
+hypothesis then they formulated they
+
+
+proposed some experiments they made
+
+
+predictions and they made experiments to
+
+
+confirm and or reject it and for the
+
+
+first hypothesis the luminiser is ether
+
+
+they had to reject it but for the second
+
+
+hypothesis I told about for the special
+
+
+relativity they kept it they very they
+
+
+very fight it uh and that's how physics
+
+
+goes forward and that's something I
+
+
+believe we can apply but still you you
+
+
+can ask it was it was a cool story bro
+
+
+let's go have a
+
+
+lunch um but now it was the simpler part
+
+
+because I have no emot emotional
+
+
+connection to Mr Einstein or to crisis
+
+
+in in physics but I do have emotional
+
+
+connections with the worst stories I'll
+
+
+be tell telling about and if somebody
+
+
+starts shaking there are some survivors
+
+
+uh in this room I believe um so let me
+
+
+tell you about the first one we had
+
+
+weird errors in our integration testing
+
+
+suit in our cucumber suit who loves
+
+
+cucumber show of
+
+
+hands yeah it's stable right it never
+
+
+breaks um we introduced we were
+
+
+optimizing a graphql
+
+
+API and we introduced a library to
+
+
+pre-load
+
+
+uh SQL to preload data from the
+
+
+database and this Library started cising
+
+
+errors uh those errors were were rather
+
+
+shameful because we were calling a
+
+
+method that didn't exist so it was
+
+
+serious and in front of our uh door we
+
+
+had an angry mop with peach Forks
+
+
+yelling remove the gem remove the gem
+
+
+remove the gem fortunately I was working
+
+
+remotely so it was virtual mob with
+
+
+virtual pitchforks but the yell was real
+
+
+we removed the gem and we didn't want to
+
+
+because It sped it up and we were able
+
+
+to deliver on time so we really needed
+
+
+this gem so we started investigating and
+
+
+we we noticed we started reading the the
+
+
+source code of the gem and we noticed
+
+
+that everything should be all right it
+
+
+works on my computer right because we
+
+
+have this special um configuration
+
+
+constant that uh is used in the god
+
+
+statement but the back happens loaded
+
+
+right so we could start yelling at the
+
+
+reality saying it's impossible it's some
+
+
+it does it didn't happen it doesn't
+
+
+happen yeah but unfortunately it did
+
+
+happen and the the the pitforks were
+
+
+viritual but but dangerous um so we duck
+
+
+deeper and we realized that indeed we
+
+
+changed this uh configurational variable
+
+
+in a before filter but then we change it
+
+
+back so everything should be good
+
+
+and that was the moment that I started
+
+
+staring at the monitor thinking uh I
+
+
+know
+
+
+it I have seen something like this and I
+
+
+thought yeah I guess it might be a race
+
+
+Condition it's not that I've seen it too
+
+
+many times as a ruby developer but it
+
+
+looks like a race Condition it's my wild
+
+
+gas I need to verify it now the stakes
+
+
+were high because I was promised a PhD I
+
+
+I'm still waiting for a
+
+
+uh but you know uh I lied a bit I wasn't
+
+
+guessing because I'm a software engineer
+
+
+I'm a professional it wasn't a
+
+
+guess I formulated a
+
+
+hypothesis and for this hypothesis I had
+
+
+some supporting
+
+
+evidence the supporting evidence was uh
+
+
+that uh the thing first thing is that
+
+
+this before filter changing the uh the
+
+
+configuration was introduced around the
+
+
+time when the CI problems started to
+
+
+happen that was good and the second
+
+
+thing was that we were using Puma for uh
+
+
+integration tests and uh we had threads
+
+
+threading enabled in Puma so yeah it was
+
+
+possible that it was a uh a Threading
+
+
+problem so I I tried to experiment and
+
+
+the first experiment with threats
+
+
+failed but it wasn't simple enough so I
+
+
+decided to do something simpler and I
+
+
+simulated threats I wrote a script the
+
+
+first one the first part was with the
+
+
+business logic those three lines this
+
+
+business logic that could raise an error
+
+
+and then I interlift it with the uh
+
+
+before filter and after filter uh that
+
+
+could run in another thread but I
+
+
+interlift it manually like line by L
+
+
+line in the same screen RP I run it and
+
+
+wow we failed
+
+
+successfully uh we confirmed that it is
+
+
+possible that it is uh because of
+
+
+the uh race condition so we had a good
+
+
+reason to revert the uh pool request
+
+
+that introduced this race condition and
+
+
+the problem was removed fortunately it
+
+
+was introduced by another team
+
+
+fortunately and unfortunately um because
+
+
+uh in normal uh case we would go to the
+
+
+Steam and say yeah it's it's your fault
+
+
+try to fix it and they would say no it's
+
+
+your gem try to fix it and here we had a
+
+
+very strong evidence saying the gem is
+
+
+okay guys it's the change that you made
+
+
+that's not
+
+
+100% robust uh please please fix it and
+
+
+they did and everything was good it
+
+
+wasn't a hot potato it was a well
+
+
+described B that can be
+
+
+fixed uh so what happened here is that
+
+
+we started with some observations about
+
+
+the guard variable about the place of
+
+
+the the error then they there was a wild
+
+
+hypothesis uh that it's race condition
+
+
+that was verified with a very simple
+
+
+experiment that allowed us to understand
+
+
+the reality to describe it correctly and
+
+
+propose a fix you you know the state The
+
+
+Bu is fixed not when you push something
+
+
+to production very often but when you
+
+
+understand what happens
+
+
+right and what also happened is that we
+
+
+started with Gathering data with ob
+
+
+observation a bit in the lab in a bit in
+
+
+the
+
+
+library we verified we made uh we
+
+
+proposed a hypothesis we verified it and
+
+
+then we got to the understanding it
+
+
+looks like a scientific method a bit uh
+
+
+I I proposed the name hypothesis driven
+
+
+development because because it's uh
+
+
+looks good and it you can you can write
+
+
+a book with something driven something
+
+
+right
+
+
+um and yeah it worked but it was a
+
+
+simple case right I was able to debug
+
+
+locally but sometimes you can't Deb back
+
+
+locally sometimes the code fails only on
+
+
+CI so what then yeah you should have
+
+
+reproducible CI environment locally
+
+
+right everybody does this time we
+
+
+weren't able to reproduce it locally but
+
+
+only this time right uh and again it was
+
+
+about cucumber and we had an a
+
+
+distributed environment several Services
+
+
+everything was uh orchestrated with
+
+
+Docker
+
+
+compose and the setup of the docker
+
+
+compose was failing from time to time
+
+
+with some ugly errors about the timeouts
+
+
+or
+
+
+about that suggested that something
+
+
+doesn't work the
+
+
+infrastructure um so I started digging
+
+
+because yeah we needed to work we needed
+
+
+this to work
+
+
+badly H and I thought yeah maybe it's
+
+
+it's it looks like a timeout so maybe
+
+
+it's when we push the data to the graph
+
+
+CLE Gateway so maybe we push too
+
+
+much and that was my hypothesis so let's
+
+
+try to make a lighter request and
+
+
+instead of doing a huge post let's try
+
+
+try to do a head simple head and what
+
+
+happens and puts the the results because
+
+
+I puts the B the bugger um and there was
+
+
+a retry and at first it was 404 but and
+
+
+the second try it was reach timeout I
+
+
+thought oh read timeout it's different I
+
+
+put it in my notes it's different it's
+
+
+weird what is a read timeout what's the
+
+
+difference between various time ups I
+
+
+don't know so let's read Around let's
+
+
+get back to the library I
+
+
+and find I found a piece of uh
+
+
+documentation explaining the read
+
+
+timeout and that it's different from the
+
+
+open timeout and I thought okay so it's
+
+
+a read timeout it means that the the
+
+
+container is started the process is
+
+
+probably started because the port is
+
+
+opened but the process doesn't react to
+
+
+my request that's weird let's put it in
+
+
+my notes I I don't understand it but
+
+
+let's dig around so I was Googling
+
+
+another day and I found out in compose
+
+
+issues that somebody had an issue that a
+
+
+container froze and it was because uh of
+
+
+excessive logging and some weird
+
+
+configuration state in doer compos I
+
+
+thought yeah it looks similar but I
+
+
+don't know yeah but we log a lot we have
+
+
+a health check that logs a lot like like
+
+
+a crazy
+
+
+so let's let's make a hypothesis that
+
+
+it's because of logging it's weird but
+
+
+maybe and the simplest uh possible
+
+
+um experiment let's
+
+
+um sorry let's disable the loging for
+
+
+the health check and let's see what
+
+
+happens and it was fixed so again it's
+
+
+very easy it gave out this the
+
+
+understanding it's because of the doer
+
+
+compost it's it's very easy to blame
+
+
+with the dependency right it's this next
+
+
+level of hot potato it's not us it's the
+
+
+infra um but this time we knew very well
+
+
+it it's not generic infra it's because
+
+
+we have two old Docker composed that has
+
+
+this weird error infra guys please
+
+
+please please upgrade it for us we had a
+
+
+very good uh way to saying this uh and
+
+
+you can see we started with some random
+
+
+observations I was taking notes for
+
+
+everything and I understand very little
+
+
+I connected the dots saying it might be
+
+
+a bug in Docker compose I made a simple
+
+
+experiment I didn't break anything but I
+
+
+had I guess I had to push it to to
+
+
+master um and it gave us the
+
+
+understanding and we were more than
+
+
+halfway there when we reached
+
+
+here uh but still it was a simple case
+
+
+it was uh one team debugging it wasn't
+
+
+very
+
+
+urgent it was just urgent enough but
+
+
+there was another case the last one I'm
+
+
+going to talk you
+
+
+about uh to tell you about um it was
+
+
+disgusting it was shameful it was
+
+
+embarrassing because production was
+
+
+failing in a regular Cadence every 30
+
+
+minutes and we had no idea
+
+
+why we saw those those 502s our business
+
+
+so saw 52s our clients saw far 52s and
+
+
+we didn't know why
+
+
+uh I joined the working group trying to
+
+
+fix it collected from various uh teams
+
+
+or rather a task force I believe some
+
+
+Veterans of this task force can be in
+
+
+this room um give them some
+
+
+comfort and we we were trying to um to
+
+
+understand what happens and we had a lot
+
+
+of hypothesis maybe we have an
+
+
+application Level Chron A Clockwork that
+
+
+everything 30 minutes does something or
+
+
+maybe we have an infrastructure level uh
+
+
+cron that does something low level like
+
+
+I don't know lock harvesting that kills
+
+
+our discs or or our Network or maybe we
+
+
+have a client that send a slow requests
+
+
+every 10 or 30 minutes or or another
+
+
+service in our in our environment send
+
+
+this slow request or a bunch of slow
+
+
+requests um we had a lot of hypothesis
+
+
+and the work was going in parallel and
+
+
+that was the moment when I understood
+
+
+that the method that was very convenient
+
+
+for me working with hypothesis
+
+
+experiments uh in a repeated manner was
+
+
+used by my colleagues that were
+
+
+definitely smarter than me and I thought
+
+
+yeah that's a good method I should tell
+
+
+somebody about it uh so we working like
+
+
+this and with little progress they they
+
+
+passed we were more and more embarrassed
+
+
+there were no Simple Solutions
+
+
+but we had some observations first of
+
+
+all somebody noticed that it's just a
+
+
+single Noe a time it's not that the
+
+
+whole uh application stops the error is
+
+
+re reisen by just a single note so we
+
+
+had an a hypothesis that it's some kind
+
+
+of stab ling up it's rather obvious
+
+
+right uh some people started checking
+
+
+the database uh load
+
+
+balancer my hypothesis is was that it
+
+
+must be a memory leak because a couple
+
+
+months back I was debugging memory leak
+
+
+and it stayed with me and yeah there was
+
+
+a memory peek around the time of the
+
+
+errors and I started taking
+
+
+notes trying to correlate what we have
+
+
+one important detail is that we were
+
+
+seeing the problems in grafana because
+
+
+we were we had uh a metric of uh the the
+
+
+length of Passenger q and when the
+
+
+request Q was growing like crazy like
+
+
+you can see here it meant that we have
+
+
+the
+
+
+problems and that was the the
+
+
+symptom so I was taking notes okay when
+
+
+exactly the pro the problem starts okay
+
+
+it starts at 10:20 then the Q saturates
+
+
+in about uh 4 minutes and then it drops
+
+
+and after half an hour it happens again
+
+
+okay I understand a bit so I correlated
+
+
+it and I noticed that the first timeout
+
+
+happens before the state buildup in the
+
+
+passenger que so yeah that's that's
+
+
+curious so it's it's just the symptom
+
+
+and the memory pick is not
+
+
+before the buildup but after the buildup
+
+
+so it's not a cause it's it's an
+
+
+effect and I was uh I sited down to work
+
+
+on it late evening it's a bad practice
+
+
+never do this please please please but I
+
+
+did it because I kept it in my head and
+
+
+I added some more stats to grafana
+
+
+because we weren't showing everything
+
+
+that we had from Passenger and I notice
+
+
+a curious thing it's too small probably
+
+
+the yellow chart is number of processes
+
+
+in passenger that's decreasing and below
+
+
+this are spawn events when passenger
+
+
+spawns and new process so I was staring
+
+
+at this thinking so so the number of
+
+
+passengers
+
+
+number of processes drops why passenger
+
+
+should yeah passenger kills processes
+
+
+but it should spawn new processes right
+
+
+maybe they are not killed in the right
+
+
+in the right way yeah
+
+
+um then what may why why do we spawn new
+
+
+processes so rarely um I don't know so
+
+
+what I did I put a notes on slack and I
+
+
+go back to bed uh and I went back to bed
+
+
+um those are rather questions and
+
+
+answers so I put my observations and I
+
+
+said yeah so I I don't understand why
+
+
+new process is not started I don't
+
+
+understand why the buildup happens on a
+
+
+certain threshold but I do understand
+
+
+that I was wrong it's not a memory
+
+
+league and when I went back when I
+
+
+returned to work the next day I saw some
+
+
+answers because a guy from Argentina was
+
+
+working later and picked up uh what I
+
+
+left and gave some answers so he noticed
+
+
+that there are uh some some error logs
+
+
+in passenger saying that passenger uh
+
+
+gets start that gets time out on start
+
+
+and that enters a deployment reses mode
+
+
+that's a special feature of Passenger
+
+
+that if something bad happens on uh on
+
+
+Startup new processes are not started
+
+
+and it was the explanation why the
+
+
+problem
+
+
+happens so we started Gathering what we
+
+
+have yeah so it's just in one one
+
+
+instance it's it's a localized problem
+
+
+uh we have the passenger reses mode we
+
+
+understood it we understood very well
+
+
+how passenger process model worked I
+
+
+didn't know before so we also noticed
+
+
+that when a new note was started the
+
+
+problem didn't happen there so it was
+
+
+really a local problem and somebody
+
+
+noticed that we have a huge boot snap
+
+
+cach do you know boot snap it's a
+
+
+Shopify Jam that helps you start your
+
+
+rails processes faster because it's cash
+
+
+cash is a lot uh but when this cash
+
+
+reached I don't know 10 gigs or 16 gigs
+
+
+reading the cache was so slow that
+
+
+passenger was timing out on Startup I at
+
+
+least that was our hypothesis so what
+
+
+what was the simplest way of testing it
+
+
+we removed the boot snap cash
+
+
+and we hold our breath because the
+
+
+problem stopped appearing but it it mean
+
+
+meant nothing maybe it reappears in next
+
+
+half an hour right but it didn't and
+
+
+after a day we get to the we got to the
+
+
+understanding that it was the boot snap
+
+
+cach that was the problem so how come
+
+
+right it's a good
+
+
+gem so the history we need to get back
+
+
+half a year before when my team upgraded
+
+
+the boot snap uh Gem and I maybe I was
+
+
+even uh reviewing this but it was yeah a
+
+
+number change small upgrade it's okay uh
+
+
+but with the small upgrade came a change
+
+
+in config uh and boot snap started
+
+
+keeping the cash in different
+
+
+directory and we didn't change our
+
+
+deployment script so the boot snap was
+
+
+adding stuff to the cach but we never
+
+
+cleared it and after half a year it got
+
+
+to this 10 or 16 gigs and it started
+
+
+kicking us really so all the classical
+
+
+methods revert the last deployment or
+
+
+check the code changes for the last
+
+
+week did we didn't have chance
+
+
+right uh but there is one more important
+
+
+thing that it was a a stupid error right
+
+
+and there is an important thing it
+
+
+showed me how to scale debugging effort
+
+
+it's easy to debug as a single person
+
+
+but what about the whole team right uh
+
+
+we were able to follow multiple Paths of
+
+
+inquiry without blocking each other
+
+
+because we have multiple hypothesis and
+
+
+we tested many of them in parallel also
+
+
+we were working in small teams or a
+
+
+single on a single hypothesis because
+
+
+very often one person had an idea it
+
+
+might be something with the database um
+
+
+load balancer a developer could say this
+
+
+but he needed an infra person to really
+
+
+work with the load balancer and to
+
+
+verify it uh we also were also to work
+
+
+around the clock not because we were
+
+
+tied to uh our keyboards but because we
+
+
+were spread geographically and the next
+
+
+time zone was able to pick up what we
+
+
+prepared right and next it was possible
+
+
+because we didn't have this hero problem
+
+
+we were publishing every small piece of
+
+
+evidence every small observation every
+
+
+small hypothesis so that we were we were
+
+
+able to uh work we were standing on on
+
+
+each other's shoulders right uh what was
+
+
+required was that it was a kind of a
+
+
+safe space where we knew that it's about
+
+
+fixing the problem not about being a
+
+
+hero and we work as a team and we will
+
+
+be rewarded in one way or another and
+
+
+also something that might be uh that
+
+
+might be important for you if you want
+
+
+to pay attention for us 30 seconds
+
+
+that's this moment it's a great way to
+
+
+work with Junior team members if uh
+
+
+instead of saying yeah you are too dump
+
+
+to fix it let me debug it you say okay
+
+
+so you're debugging this and you seem to
+
+
+be stuck right yeah right so what's your
+
+
+hypothesis oh okay what's your OB you
+
+
+don't have a hypothesis but what's the
+
+
+weird thing that you observe let's let's
+
+
+write this down right let's write down
+
+
+what the internet says about this
+
+
+Behavior okay so what's your hypothesis
+
+
+now how to connect the dots um and then
+
+
+how to verify it uh okay but you need
+
+
+two days for this right right so let's
+
+
+find a simpler way maybe let's verify it
+
+
+in next two hours and then okay it's not
+
+
+this or yeah it's this we understand it
+
+
+better so maybe we can fix it you can
+
+
+use the Socratic method working with
+
+
+your your Junior team members or with
+
+
+your peers to help them grow instead of
+
+
+being the guy that says okay uh I'm the
+
+
+hero I'll fix it that's that's the more
+
+
+uh that's the better way of of scaling
+
+
+your effort um and you do you remember
+
+
+what where we started with that
+
+
+frustration being stuck with the Vel uh
+
+
+with the bugging and thinking about
+
+
+working
+
+
+remotely um there is a way out and this
+
+
+way way out place in science but it's
+
+
+not about scientific results it's about
+
+
+looking at the way the scientists work
+
+
+and trying to apply this method of
+
+
+working uh to our daily practice and
+
+
+it's more than just proposing hypothesis
+
+
+it's also about good practices starting
+
+
+with the mindset so when you arrive at
+
+
+the problem don't jump to solution don't
+
+
+be a guy with a or a girl or a girl with
+
+
+a pitch fu yelling remove the gem remove
+
+
+the gem revert the last
+
+
+commit uh because without an Evidence
+
+
+it's just your opinion it doesn't matter
+
+
+if somebody's saying this is an
+
+
+architect a manager a CEO it's just his
+
+
+opinion or her opinion and it's um it's
+
+
+not actionable really it might be a good
+
+
+way of for uh coining of proposing a
+
+
+hypothesis to experiment but but not
+
+
+something real actionable uh then it's
+
+
+about habits um The crucial habit for me
+
+
+during the bugging is taking notes of
+
+
+everything and when I don't understand
+
+
+asking questions in the same notes it's
+
+
+the local way of rubber duck debugging
+
+
+and also it's a great way of being
+
+
+focused even during the interruptions
+
+
+you for sure you've read the hundred
+
+
+hundreds of blog posts you cannot
+
+
+interrupt the developer at work because
+
+
+he will be uh removed from the state of
+
+
+flow and it takes half an hour to get
+
+
+back right rubbish it's rubbish folks uh
+
+
+we can't get back to the state of the
+
+
+flow we can't rebuild the mental state
+
+
+because we are very better at taking
+
+
+notes with the notes we are far faster
+
+
+to get back to work and Inter
+
+
+interruptions is a it's our daily life
+
+
+so let's accept it instead of yelling at
+
+
+it right and next thing there are two
+
+
+types of developers one can spend them
+
+
+month in library just to avoid doing
+
+
+anything in the workshop in a lab and
+
+
+the other one uh tries to fix the code
+
+
+for a month instead of reading how it
+
+
+works for one day right be neither of
+
+
+them balance this because those two
+
+
+practices uh really help each other to
+
+
+to make the bugging faster and finally
+
+
+communication uh to learn effectively
+
+
+you need to say I think it's this I
+
+
+might be wrong but if you say it out
+
+
+loud if you write it in your notes if
+
+
+you say it on slack uh you are attached
+
+
+to this and you understand better why
+
+
+you why you failed and you know better
+
+
+what you checked uh then uh it's a
+
+
+scientific approach that you publish
+
+
+everything that you know otherwise
+
+
+you're not a good science
+
+
+uh you disappear and it's the same if
+
+
+you know something publish it uh because
+
+
+in ideal word of course not in the real
+
+
+word the science uh should work that
+
+
+somebody has a theory and publishes a
+
+
+paper and then someone else wants to
+
+
+check it so proposes an experiment and
+
+
+and verifies it and somebody else
+
+
+reproduces this they all publish
+
+
+papers and in this asynchronous and
+
+
+decentralized manner the science is put
+
+
+forward and that's the way to debug in a
+
+
+uh to take debugging as a collective
+
+
+effort and also to make it working
+
+
+scientists shouldn't be awarded for the
+
+
+volume of their uh Publications in they
+
+
+shouldn't um and it's the same in the
+
+
+bugging it doesn't matter how much you
+
+
+type on slack it matters if you're
+
+
+observations your
+
+
+hypothesis uh push the effort forward
+
+
+maybe you were wrong but at least you
+
+
+cut some branches and there
+
+
+is one last thing that I want to uh
+
+
+remember uh if you want uh the bugging
+
+
+was a very hard lesson and the way to
+
+
+make sure that you understand what you
+
+
+understand well what you learned is to
+
+
+transfer the knowledge is to tell it to
+
+
+someone to somewhere else to write a
+
+
+note on slack to uh tell it on a local
+
+
+Meetup uh to tell it over a beer to a
+
+
+friend why because that's the best way
+
+
+to make sure you remember it h and you
+
+
+are faster to fix it the next time uh
+
+
+you can see it thank you I'll now I'll
+
+
+answer any
+
+
+[Applause]
+
+
+questions thanks that was great since I
+
+
+could see myself myself in many of those
+
+
+situations there so that was good um I
+
+
+wonder if as parts of this because
+
+
+there's more uh formalization on top of
+
+
+something that we end up doing in a very
+
+
+natural way so I wonder if we have
+
+
+anything to share about practices more
+
+
+process things that's happen in your in
+
+
+your teams related to to that like um
+
+
+every every situation like that there is
+
+
+a postmart that people need to share if
+
+
+there are documentations that are Tak
+
+
+can um um um around that for some kinds
+
+
+of bugs the pr needs to like try to
+
+
+reproduce the inar things like that that
+
+
+were introduced as part of the cuture of
+
+
+the team as in a way for those
+
+
+situations to um help avoid them in the
+
+
+future which kind of things more process
+
+
+are taken that you could that work for
+
+
+the team that you work on that you could
+
+
+suggest for other teams as well um so
+
+
+the question is about more about the
+
+
+processes on the company level that a
+
+
+manager could introduce and that could
+
+
+be helpful of course I do believe that
+
+
+postmortem have are helpful and in the
+
+
+company that I work before it it was a
+
+
+big company so we did have uh the rule
+
+
+that we have post-mortems still this
+
+
+rule is not enough because you you can
+
+
+write a real blame blameless but an
+
+
+honest postmortem that reads like a
+
+
+crime novel and everybody reads it or
+
+
+you can be in in a culture when you when
+
+
+your biggest concern during postmortem
+
+
+is that to put the blame on somebody
+
+
+else and not because you are a bad
+
+
+person but because the compan is so
+
+
+bad um so yeah postmortem is are a good
+
+
+idea but you need a lot of cultural work
+
+
+around this to make sure that they are
+
+
+helpful um in a small company I don't
+
+
+think you need a formal postmortem but
+
+
+as I said an internal rule yeah we
+
+
+screwed up let's write it on
+
+
+slack I think it's I think it's enough
+
+
+uh would it help us to
+
+
+avoid problems in the
+
+
+future ah for the same problems probably
+
+
+yes but then the set of problems is
+
+
+infinite so yeah the thing that
+
+
+surprised me was that uh in one instance
+
+
+I was watching a postmortem it was the
+
+
+description of the problem then actions
+
+
+taken and then I was waiting for a
+
+
+long-term fix and there was none when I
+
+
+yelled around that there should be a
+
+
+long-term fix the manager he was a smart
+
+
+guy said uh and introducing a long-term
+
+
+fix would be too heavy for a problem
+
+
+that will not probably happen too often
+
+
+so and it was a good call instead of
+
+
+making the process very very uh heavy to
+
+
+cover every corner case we say okay we
+
+
+go fast sometimes we break things
+
+
+did you consider writing a paper about
+
+
+this uh I would love to you need to uh
+
+
+advise me where to publish
+
+
+it okay uh so if there is no more
+
+
+questions uh folks PhD of B
+
+
+ma Jona

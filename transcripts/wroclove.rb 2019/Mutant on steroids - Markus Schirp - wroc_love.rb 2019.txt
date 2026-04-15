@@ -1,0 +1,2536 @@
+I'm happy to be here again it's a unique
+
+
+situation for me because we had a
+
+
+workshop yesterday and I know lots of
+
+
+faces and I still recall lots of faces
+
+
+from yesterday and even you sit at the
+
+
+same positions it's great so um just as
+
+
+a quick to warm up my heart for the
+
+
+crowd who was at the workshop yesterday
+
+
+please raise your hand having that much
+
+
+crowd control it makes me happy thank
+
+
+you okay so obviously this talk is again
+
+
+on mutation testing I found a cool title
+
+
+but the asteroid's part is just because
+
+
+the salt school I needed to a new title
+
+
+after four years of doing these kinds of
+
+
+talks I'm talking about mutation testing
+
+
+it's a super old technique and it's a
+
+
+strong form of coverage it's so old that
+
+
+the oldest references I could fight go
+
+
+back to the 1970s
+
+
+I forgot the names of all the original
+
+
+discoverers of these techniques I second
+
+
+them it's a great idea okay so what is
+
+
+mutation testing in a nutshell you all
+
+
+have been to Martin's talk before he
+
+
+talked about checks he talked about
+
+
+automatable checks imitation testing is
+
+
+what I call it derive check it takes
+
+
+artifacts you have into your system in
+
+
+your system right now which is basically
+
+
+code and automated tests and throw them
+
+
+into derive check this drive check is
+
+
+out it's by itself automatable and it
+
+
+instead of spilling out clear violations
+
+
+it's built out semantics or
+
+
+representation of semantics which are
+
+
+not covered and there's nothing you can
+
+
+do about it this tool is just super dump
+
+
+it applies a set of transformations and
+
+
+whether it be some black magic it just
+
+
+shows you here unspecified semantics and
+
+
+an unspecified semantics may look like
+
+
+this this is a unified diff and I just
+
+
+made this up I could have posted a full
+
+
+report but I wanted to have it as small
+
+
+as possible so this is a typical ruby
+
+
+message we do two things and the two a
+
+
+real report yeah we'll do such a report
+
+
+everybody should be able to read it
+
+
+everybody who ever worked with git and
+
+
+ever anybody who ever saw Raj if should
+
+
+be able to identify we are removing a
+
+
+method call and this removal in this
+
+
+case represents unspecified semantics
+
+
+ifs it will repulse unspecified
+
+
+semantics cannot be overrated further by
+
+
+this technique
+
+
+human now has to decide what should we
+
+
+do with these kinds of unspecified
+
+
+semantics on a mature codebase it almost
+
+
+always means that the unspecified
+
+
+semantics needs to be removed on an not
+
+
+mature codebase and yesterday's a buck
+
+
+shop was everything was on non mature
+
+
+basis you typically have to add another
+
+
+automated check to prove to the tool yes
+
+
+we actually need this kind of semantics
+
+
+which you're reported as unspecified so
+
+
+you have to prove to the tool by adding
+
+
+a test hey I really want the semantics
+
+
+and I do not want it to be gone and I
+
+
+want to nail nail for my future self or
+
+
+my future coworker or the future intern
+
+
+this was important this is a maybes it's
+
+
+a call to Z we eighty calculation or
+
+
+it's a call to to initialize your
+
+
+discount logic or whatever but we this
+
+
+tool spilt salt all not all obviously I
+
+
+cannot claim this spill sod unspecified
+
+
+semantics and it's quite good at it okay
+
+
+so because naming is fun and because I'm
+
+
+the author of the tool I was in the
+
+
+fortunate position to make up lots of
+
+
+names and we need to go through these
+
+
+names to be able to explain four other
+
+
+concepts if you later get a hand on the
+
+
+slide everything which is blue links to
+
+
+the mutant documentation you should be
+
+
+able to click on it and then get a
+
+
+marshmallow both version of then I can
+
+
+present in this talk under time
+
+
+constraints there is the subject a
+
+
+subject is anything which has tests and
+
+
+can be mutated currently Ruby her
+
+
+currently Ruby or mitral mutant only
+
+
+supports instance message and class
+
+
+methods there are other possibilities in
+
+
+future I could expand it into class
+
+
+level DSL I could expand it into
+
+
+constants I could expand it into
+
+
+inheritance declarations in for classes
+
+
+but for now a subject is just an instant
+
+
+methods and class method and I would
+
+
+hope that everybody has a bag of the
+
+
+logics here then we have the match
+
+
+expressions the match expression is a
+
+
+mutant specific concept which just tells
+
+
+the engine where to look for your
+
+
+subjects so imagine you were wanting a
+
+
+mutation to see engine again against
+
+
+your project you have 100 dependencies
+
+
+you have 100 thousand lines of code but
+
+
+unless you specify to the tool which are
+
+
+the subjects of your interest you're out
+
+
+of luck so I made up the concept of
+
+
+match expressions the first Mexican
+
+
+expression is a recursive enumeration
+
+
+you
+
+
+give it your parrot namespace and it
+
+
+will recurse into all subjects it can
+
+
+automatically identify the second much
+
+
+expression just scopes the engine to
+
+
+discover or to to to work on subjects
+
+
+within some class instance methods and
+
+
+single to methods the search much much
+
+
+expression specifies to only work with a
+
+
+specific instance method and since false
+
+
+one goes with specific singleton method
+
+
+ok the next thing I made up is Citarum
+
+
+selection selection is a process to find
+
+
+corresponding tests to your subject
+
+
+selection is very important selection
+
+
+defines on how fast your mutation
+
+
+testing will work because if you were to
+
+
+run the discovery of unspecified
+
+
+semantics against all your tests and
+
+
+everybody knows how slow tests couldn't
+
+
+can be you will be out of luck to have
+
+
+any proactivity visit tools so we need a
+
+
+form of a method of selecting tests
+
+
+automatically executable tests and these
+
+
+are the selected test our form a subset
+
+
+of search essence they use meter data
+
+
+for a spec everybody uses describe head
+
+
+context and all these really nifty and
+
+
+nesting primitives and they typically
+
+
+doesn't do not do not produce anywhere
+
+
+you're outside of mutation testing their
+
+
+mutant uses these kinds of metadata to
+
+
+form an implicit selection criteria so
+
+
+when you just start to use a tool like
+
+
+mutant it suddenly becomes important to
+
+
+be honest in your describe statements
+
+
+because if you are not honest in your
+
+
+describe statements you miss to give
+
+
+fine-grained enough metadata the tool
+
+
+might select far too many or far too few
+
+
+tests which in case of far too many
+
+
+tests results in terrible runtime and
+
+
+far too a few test results in tabular
+
+
+coverage so you need to stay a lot and
+
+
+learn the concept of selection many test
+
+
+is a little bit different because mini
+
+
+test is too low on implicit metadata
+
+
+because typically there two forms of
+
+
+using maintenance as you described
+
+
+syntax where I didn't which is more
+
+
+r-spec r-spec esque but a so far didn't
+
+
+implement any kind of metadata
+
+
+extraction you have to go with explicit
+
+
+coverage declaration CD just to clear
+
+
+this specific test class covers this
+
+
+specific expression which will mouton
+
+
+say which britain's end will internally
+
+
+use to do a good subject selection
+
+
+the next thing this is a not about what
+
+
+I was fortunately to make up its in the
+
+
+literature imitation operator imitation
+
+
+operator takes a concrete subject into a
+
+
+different form that if when applied to
+
+
+your tests doesn't get noticed by the
+
+
+test and this application of a different
+
+
+form forms your reports report a short
+
+
+before here this is the report of
+
+
+applying a specific operator against the
+
+
+subject foo which is an instant message
+
+
+so this for example is a semantic
+
+
+reduction operator we have to if Z Z Z
+
+
+body the body of this message is formed
+
+
+with of two method calls and removed one
+
+
+which is an operator which reduces
+
+
+semantics there is another class of
+
+
+operator I didn't show so far it's an
+
+
+auto color replacement you have been
+
+
+fighting auto burn placements yesterday
+
+
+a lot on the range example in the
+
+
+workshop where mutant was taking the
+
+
+mutant was taking lower than to a lower
+
+
+than equals or it was inverting an end
+
+
+to a turn or you cannot argue which of
+
+
+these operators have less semantics and
+
+
+that causes opera all tribunal
+
+
+replacements okay a mutation a mutation
+
+
+is an application of an operator against
+
+
+the subject and the result of the tests
+
+
+ran for this subject our mutation if the
+
+
+test is green the imitation is alive
+
+
+alive rotations are the ones you you are
+
+
+dealing with most of the time elect
+
+
+notations are bad because they why an
+
+
+automated derive and proof is proof that
+
+
+something is not specified in your code
+
+
+base and I will just beat the dead horse
+
+
+over and over again because it's the
+
+
+most important message if some things
+
+
+and if an automated process can find
+
+
+unspecified semantics in your code base
+
+
+you have two options you remove these
+
+
+semantics or you specify them and it
+
+
+circles back to the talk martin has been
+
+
+doing before this is an automated
+
+
+derived check and each of these alive
+
+
+mutations should be threatened should be
+
+
+should be should be that's right in the
+
+
+wrong world it should be identified as a
+
+
+flag which has been done automatically
+
+
+on your code base by a human as the
+
+
+humans asking you why can we do this
+
+
+change and we do it on a system
+
+
+CAIR a process doesn't care about this
+
+
+change there was something there was
+
+
+wiggle room in or in your coat and this
+
+
+has to be taken really seriously because
+
+
+and a life rotation represents something
+
+
+which an intern your future self your
+
+
+coworker will do while you're on your
+
+
+wedding night and it will rent in
+
+
+production because without dealing with
+
+
+select mutations the reason there is
+
+
+basically a great aggression about to
+
+
+happen it's it's very likely the case
+
+
+that you is that your quote as is right
+
+
+now I will show you again this report
+
+
+it's very likely the Kate the case that
+
+
+your code is correct the problem is it's
+
+
+not proven to stay correct over time
+
+
+required semantics change code gets
+
+
+changed commits land unless you are able
+
+
+to specify what you're required
+
+
+semantics are in a way they cannot be
+
+
+changed unnoticed you will have
+
+
+regressions and the only the only way we
+
+
+have in written in Ruby Ruby is a
+
+
+dynamic language we have we have a
+
+
+really limited set of dimensions of
+
+
+enforcing correctness and the only way I
+
+
+found to be valuable on the long term is
+
+
+really strict semantics test coverage
+
+
+and mutant is a tool which basically
+
+
+only exists because we were suffering
+
+
+from regressions and we were like ok so
+
+
+we did this change which was bad and
+
+
+nothing nothing in a process was able to
+
+
+detect this change what could we have
+
+
+done
+
+
+what kind of automated check we could
+
+
+have derived from this information and
+
+
+we came back to mutation testing and
+
+
+said ok so if we had a tool which would
+
+
+run all possible changes against our
+
+
+code base and ask your tests if this
+
+
+change is in some form covered then we
+
+
+could potentially avoid in the future
+
+
+doing bad changes without us noticing
+
+
+because if the changes are comment
+
+
+accompanied by a test and the test shows
+
+
+we want to do vhe calculation and i have
+
+
+to remove this change to make a bad
+
+
+change going into the code base without
+
+
+violating a check then if i still merge
+
+
+it i'm a but ok ok let's go back
+
+
+to Norman Clyde sure because I like it
+
+
+so much
+
+
+now all the preconditions to run a
+
+
+mutation testing tool or test suite or a
+
+
+process needs to produce the following
+
+
+artifacts we need green tests they do
+
+
+not have to be when you
+
+
+when you're working on a when we are
+
+
+working on a pyramid not all your tests
+
+
+have to pass but the tests which are
+
+
+selected for your current subject you
+
+
+were working on rez mutation testing
+
+
+have to pass in the first place else
+
+
+limitation testing engine cavity rifle
+
+
+signal if the tests are initially read
+
+
+simulation testing engines objective is
+
+
+to find the right test if they initially
+
+
+issue initially read they the variation
+
+
+testing engine just build just bits out
+
+
+and the first step of the range example
+
+
+from yesterday actually like to
+
+
+instruction before it's the first step
+
+
+of the range example from yesterday
+
+
+stop the engine was a so-called no op
+
+
+error it was telling you your tests do
+
+
+not pass in the first place
+
+
+fixes and we have to start with green
+
+
+tests we have to have idempotent tests
+
+
+mutation testing runs your tests should
+
+
+lots of times so you will have on 10
+
+
+mutation operators on a selection with
+
+
+of 10 tests you end up with 100 test
+
+
+executions if your tests are not
+
+
+idempotent because they use it i our
+
+
+resource anything in a in a non
+
+
+repeatable way mutation testing will
+
+
+fail you you have tests need to be
+
+
+randomized double because mutation
+
+
+testing engines try to minimize the
+
+
+amount of tests being executed
+
+
+permutation which means that you will
+
+
+have an arbitrary subset you will not
+
+
+always have the same sequence imitation
+
+
+testing engine will decide to run your
+
+
+code if your if you have two tests which
+
+
+depend on being both ran in the same
+
+
+order because one test creates an
+
+
+artifact in your database and the second
+
+
+test depends on the artifact to be
+
+
+present imitation testing engine will
+
+
+fail you if you want first mutation
+
+
+testing which interesting is a really
+
+
+really easy to convert to to paralyze
+
+
+operation you want concurrency hard
+
+
+tests which is really hard on a certain
+
+
+just on a certain web framework who
+
+
+everybody will mention in a few seconds
+
+
+and tests have to have selection
+
+
+metadata if you just have if you have
+
+
+tests which can fail but there is
+
+
+nothing attached for a mutation testing
+
+
+to derive a good selection from you
+
+
+won't have any fun with mutation testing
+
+
+and first and foremost test needs to be
+
+
+need to be discoverable and people have
+
+
+an ultimate we will have a panel about
+
+
+auto loads and bringing stuff into score
+
+
+and to global scope later which leads me
+
+
+to raise
+
+
+and all of all of the points here all
+
+
+the preconditions are more challenged on
+
+
+Rails because red defies all these
+
+
+preconditions in some form let's go back
+
+
+discoverable subjects so what kind of
+
+
+process you can apply to a red code base
+
+
+to probably nr8 every concert which may
+
+
+come into scope you have to false you
+
+
+have to follow forced to expend all auto
+
+
+loads but many auto loads are hidden
+
+
+inside some kind of code branch which
+
+
+only gets evaluated after a certain URL
+
+
+is hit and after certain third-party
+
+
+library is loaded whatever so
+
+
+discoverability is hard dream tests on
+
+
+rails are more heart than there should
+
+
+be but I would say it's not a big issue
+
+
+because most people should preview
+
+
+screen tests idempotent test a as a
+
+
+consultant I see too many test Suites if
+
+
+you run them two times in a row they
+
+
+fail is they can only run successfully
+
+
+on a very pristine CI environment or
+
+
+with some extra command in between which
+
+
+clears or DB State or remove some remove
+
+
+some some some temp file whatever so
+
+
+it's typically an issue randomized
+
+
+double tests many tests which I I have
+
+
+to work where so I'll start with depend
+
+
+on an implicit sequence test a has to be
+
+
+run before tests B because we are
+
+
+creating the payment method and it leaks
+
+
+into the next test and all this
+
+
+influence and semantics concurrency
+
+
+hardness yes I would argue it's not
+
+
+really right specific it's just if
+
+
+you're using an external IR resource and
+
+
+you don't mint you do not manage
+
+
+concurrency correctly you will have a
+
+
+hard time if your tests touch the DB you
+
+
+have a shared resource it's okay let's
+
+
+say it's the right specific it's still a
+
+
+problem and selection meter data is not
+
+
+done too much a big problem for rails
+
+
+okay so if you were to start now with
+
+
+mutation testing it you started
+
+
+yesterday the most frequent question I
+
+
+got after the talk is if I were to start
+
+
+now
+
+
+we are in the deep problems the test run
+
+
+we have thousands of subjects and I just
+
+
+learned from the experiments in the
+
+
+workshops that even on a small on a
+
+
+single subject it takes ten seconds to
+
+
+get a good result so how would I start
+
+
+on a real commercial codebase
+
+
+incremental mutation testing is a key
+
+
+your mind will rightfully refuse to deal
+
+
+with an alive mutation of a subject
+
+
+which was not written by yourself and is
+
+
+in the code base 10 for 10 years ago but
+
+
+why even work on these kinds of subjects
+
+
+we all we all as human beings our
+
+
+attention level is our attention level
+
+
+is focused on the current task we are
+
+
+working on feature we're working on a
+
+
+specific class we are working on a
+
+
+subset of subjects so with incremental
+
+
+mutation testing which is the key to
+
+
+start today or tomorrow next week with
+
+
+mutation testing you are automatically
+
+
+focusing the tool to only look at these
+
+
+subjects which had been touched a touch
+
+
+your current iteration and mutant a
+
+
+particular loses his since Fleck it was
+
+
+not in the workshop yesterday because
+
+
+since yesterday we had we have
+
+
+established a big foundation see we are
+
+
+not writing our own code we are not
+
+
+creating future branches and so on but
+
+
+if you like to get a hold on the slides
+
+
+there is again a blue word which means
+
+
+it's linked to the mutant documentation
+
+
+incremental mutation testing is a way to
+
+
+start your journey today tomorrow
+
+
+whenever you want to and here are some
+
+
+links to check out later here is yours
+
+
+thank thank you slide and you will
+
+
+notice that the order of the elements
+
+
+doesn't matter but it does matter
+
+
+because we have an established rule if
+
+
+the order of elements do not matter we
+
+
+just sort them alphabetically to just
+
+
+document it doesn't matter to remove the
+
+
+noise and with that I'm already closing
+
+
+this talk because this talks only about
+
+
+establish the nomenclature ceding the
+
+
+idea and then move on to the workshop
+
+
+which we had yesterday so I'm a little
+
+
+bit ok and I really hope for a good Q&A
+
+
+which you can start any moment
+
+
+[Applause]
+
+
+and I really hope I didn't answer all
+
+
+questions yesterday if there are no
+
+
+questions I will ask your audience
+
+
+questions are you I don't see you I need
+
+
+a contact thank you
+
+
+I'm feeling that it's kind of an
+
+
+overhead in a lot of projects or from
+
+
+the client point of view and from your
+
+
+your experience what do you would
+
+
+recommend is it a mutation testing for
+
+
+every in your opinion for every kind of
+
+
+project every client yes like we should
+
+
+start from them don't mine and like the
+
+
+core domain or business herbs these
+
+
+features and then it slowly go and wider
+
+
+ok just requesting just in one and we'll
+
+
+just try to start with the first one but
+
+
+I may forgets a second insert so I would
+
+
+have to come back to you what is more
+
+
+expensive your coworker trying to find
+
+
+trying to mentally disambiguate is a
+
+
+specific branch of my code carrot is the
+
+
+semantic effect of a method I could
+
+
+remove carrot is this more expensive in
+
+
+terms of use of clients money which gets
+
+
+encoded into or holy right or is it more
+
+
+expensive to run a tool ten seconds
+
+
+which which irons out 90% of all
+
+
+questions a human reviewer could ask
+
+
+already that's that's what I took
+
+
+because my clients managed to his M
+
+
+using mutation testing it takes ten
+
+
+seconds twenty seconds for a single
+
+
+subject to get mutation tested typically
+
+
+and it runs more experiments on finding
+
+
+uncovered than a human could run in this
+
+
+time frame
+
+
+CCI integration in the current
+
+
+incremental mode is relatively cheap to
+
+
+achieve so the question is a no-brainer
+
+
+when you have a client which understand
+
+
+set human time is the most precious and
+
+
+most expensive resource in a project so
+
+
+that's a typically a really nice way to
+
+
+alleviate these concerns because in
+
+
+effect it reduces the amount of time you
+
+
+have to spend on ask
+
+
+stupid questions like is it's the equal
+
+
+sign here actually is a magically
+
+
+relevant is all shouldn't we use greater
+
+
+than equals or should we use so and so
+
+
+on so as all these questions had been
+
+
+answered before because the mutation
+
+
+testing engine came back to you and said
+
+
+yes I couldn't change it to something
+
+
+else which is close
+
+
+I couldn't remove this method call
+
+
+reviews go faster and have higher
+
+
+quality because it's just a lower bound
+
+
+of coverage but you will never truly
+
+
+never have a bad day where humans will
+
+
+have so clients which much of my
+
+
+experience clients clients our clients
+
+
+typically actually do not care they only
+
+
+care about the amount of progress per
+
+
+time units they pay for and it's my duty
+
+
+to increases this meet is this metric
+
+
+and using this technique makes me faster
+
+
+because I get I get 90% of all dumb
+
+
+questions answered by a machine so
+
+
+that's that's basically the point and I
+
+
+your are you also had some questions on
+
+
+the business logic and domain-driven use
+
+
+the core domain I mean the core features
+
+
+or yes but the thing is any line of code
+
+
+can blow up in your face so I'm using it
+
+
+everywhere it's just in my opinion I
+
+
+wrote it it doesn't matter if the buck
+
+
+is in your core domain or if the buck is
+
+
+in rendering of you of for all rendering
+
+
+basically you could change the code
+
+
+which renders the Year introduce a
+
+
+copper idea in the future it's on every
+
+
+page and if set one blow is not to call
+
+
+domain to write not that one correctly
+
+
+but if it blows up text on the entire
+
+
+application so just trying to find the
+
+
+perfect place to do mutation testing is
+
+
+in my opinion fruit right because
+
+
+especially in Ruby everything can kill
+
+
+everything so I would recommend to run
+
+
+it every every time because it's so
+
+
+cheap compared to human time no no I
+
+
+don't do this
+
+
+question was how do I integrated with
+
+
+CCI so I've used rabid generic magic
+
+
+very general match expression so let me
+
+
+go back to the slide so expression so we
+
+
+use as a kind of magic is the first line
+
+
+match expression so fortunately because
+
+
+we're doing this for a long time all our
+
+
+code is namespace into one namespace so
+
+
+we can just tell it here this find all
+
+
+subjects in there and then subset it it
+
+
+was incremental so let's say this much
+
+
+expression ever lates to 1,000 subjects
+
+
+2,000 subjects but in incremental mode
+
+
+and I really hope you'll follow the
+
+
+documentation link because I couldn't go
+
+
+into it it will automatically subsets is
+
+
+to 1025 subject which we are touch in
+
+
+the current PR and in this mode it's
+
+
+fast enough to run on CIN in your normal
+
+
+cycle and in case you have a great
+
+
+application which is a little more
+
+
+canonical where everything is just a
+
+
+separate controller living in the
+
+
+top-level namespace you can write a
+
+
+small wrapper which just enumerates all
+
+
+the diskens and creates this great end
+
+
+subject expression so a mutant takes you
+
+
+could you could of the sort of the
+
+
+second line where you can just say these
+
+
+are my classes you can just specify ten
+
+
+hundreds of them on the command line and
+
+
+if you write our small wrapper which
+
+
+just finds all of them you can just
+
+
+retrofit it a little bit but I really
+
+
+recommend to go with a good top-level
+
+
+namespace for various reasons good
+
+
+questions thank you yes this basically
+
+
+what's interesting outputs and many of
+
+
+them the basic engine basically output
+
+
+divs and each of these this represents
+
+
+one of these automated to verify
+
+
+automatically found flex to a code base
+
+
+which you could apply to your code base
+
+
+today and all your just Nextel persons
+
+
+and you have to ask yourself why so this
+
+
+is how the output looks it's just about
+
+
+many of them I just presented one ok and
+
+
+also it doesn't only do only move stuff
+
+
+so it flips it flips integers from
+
+
+positive to negative it strips
+
+
+zero-zero a really big list and on the
+
+
+operator slide there is a link class of
+
+
+changes to this link goes to all
+
+
+mutation operations mutant dozen thank
+
+
+you what questions yes is it possible to
+
+
+run this much in this tool and find out
+
+
+let's say were strands possible that you
+
+
+have in your code base that when you are
+
+
+like so that all output a lot of
+
+
+mutations for it there's a you should
+
+
+focus on the parameter to fix tests for
+
+
+it so the tool was written in a way on
+
+
+how I like to use it it was a constraint
+
+
+I have run it for this open source
+
+
+project it is all everything I presented
+
+
+here since your source but for other
+
+
+reasons is this open source project will
+
+
+not be development me myself anymore but
+
+
+I only use this tool in incremental mode
+
+
+on commercial code bases so I never and
+
+
+because or turnaround time we touch
+
+
+basically everything within twelve
+
+
+months so I never had this I need a list
+
+
+of bad things I need to deal with and
+
+
+some kind of a some kind of a bucket
+
+
+list I never I never had the urge to do
+
+
+this because I know I will touch
+
+
+anything and because it has to come
+
+
+green on green on the CI and I have to
+
+
+do this expression commits which Martin
+
+
+explained I never had to need to do this
+
+
+but conceptually it's definitely
+
+
+possible and I would even argue that the
+
+
+amount of mutations generated per say
+
+
+per subject is a better complexity
+
+
+matrix and track cyclomatic complexity
+
+
+so you could run only limitation
+
+
+generation engine result is a killing
+
+
+part and just measure which subject
+
+
+generates the most mutations because
+
+
+this is much better measurement of
+
+
+complexity in my opinion since
+
+
+achromatic especially cyclomatic is hard
+
+
+because in Ruby you have problems are
+
+
+aesthetically assessing the control flow
+
+
+hi do you have experience with mutation
+
+
+testing from another ecosystem yes so I
+
+
+think so so my experience started when I
+
+
+was joining the data mapper one team and
+
+
+there was a very ambitious sub project
+
+
+for data mapper - which is the axiom
+
+
+relation algebra
+
+
+engine and this was developed with
+
+
+Haeckel which is some kind of a logical
+
+
+predecessor to mutant it had all sorts
+
+
+of problems and this is this is where I
+
+
+was introduced but meanwhile I've have
+
+
+written lots of private integrations
+
+
+against company or domain-specific DSL
+
+
+in many languages because the concept is
+
+
+very universally transferable and Sarah
+
+
+made sure mutation testing language
+
+
+testing engines in lots of different
+
+
+ecosystems we will find a good one for
+
+
+JavaScript there was a recently new one
+
+
+for Scala C shops there so it's it's
+
+
+it's gaining traction community-wide
+
+
+development computing about not only
+
+
+Ruby thank you more questions mutant to
+
+
+test existing popular libraries only
+
+
+when I had to fix and when I had to do a
+
+
+bug fix because of clients work so I
+
+
+have a strict policy to not go broke and
+
+
+open source yet because open source is
+
+
+when you do it it's to me very addictive
+
+
+and if I were to start if I were to
+
+
+start other people and get a little
+
+
+bit of praise out of it it works like
+
+
+cocaine for my brain and and I need to
+
+
+avoid this because I need to make a
+
+
+living so I need yes it's basically a
+
+
+experience but only for bug fix I
+
+
+submitted to these libraries and then I
+
+
+don't typically mention mutant I just
+
+
+sent the code which is mutation tested
+
+
+and because I don't have the time to
+
+
+educate other people because that would
+
+
+lead to this open source spiral it
+
+
+depends so it's very often the case that
+
+
+then you cannot kill a mutation there's
+
+
+an underlying
+
+
+so sometimes you have a mutation from
+
+
+one form to another
+
+
+form and imitation is equivalent in
+
+
+cement in terms of semantics
+
+
+observability is called it's called an
+
+
+element mutation and when you go to the
+
+
+literature all these scientists and all
+
+
+the computer societies freak out on them
+
+
+and like this is the biggest problem we
+
+
+have to solve it and unless we solve the
+
+
+equivalent mutation problem stool is
+
+
+worthless and so on but I don't agree
+
+
+because it happens so infrequently
+
+
+especially when you only go with somatic
+
+
+reduction operators but what happens
+
+
+most of the time is that your your code
+
+
+delegates to some library and there is a
+
+
+semantic weak spot in the library and
+
+
+sanitation on your site cannot be killed
+
+
+and then you look into oh this library
+
+
+accepts a nil here but it should
+
+
+actually blow up or silently swallows an
+
+
+input inconvenience malformed and then
+
+
+you just upstream the fix to the library
+
+
+and then your commutation comes back
+
+
+dead
+
+
+so this is typically the case but I've
+
+
+seen other people using mutation testing
+
+
+forms once also and probably you can ask
+
+
+them Thanks so if you hit the situation
+
+
+that you have a mutation that you decide
+
+
+to not kill because you you think it's
+
+
+equivalent or yes so so if I have this
+
+
+situation Zehra basically is the
+
+
+following things to do I just sit back
+
+
+and ask myself why does this mutation
+
+
+exist this Malaysian exists because of a
+
+
+certain axiom which is redundancy
+
+
+provides no value so if if I have
+
+
+imitation which is it comes from a
+
+
+semantic reduction operator and I cannot
+
+
+kill it really to ask myself I cannot
+
+
+kill it because it should obviously have
+
+
+less semantics than before
+
+
+and if I have no proof of the extra
+
+
+semantics it's very like it's the case I
+
+
+can kill it we're just changing his code
+
+
+to the one the imitation showed me
+
+
+because in zextras metrics have gone on
+
+
+simulation testing never goes back to
+
+
+his original form because that would be
+
+
+adding semantics and what violates a
+
+
+core principle of this mutation operator
+
+
+so it happens to be it frequently what
+
+
+happens sometimes is an auto gullible
+
+
+placement for example if you you have a
+
+
+negative number and you multiply it with
+
+
+and you multiply it with a constant and
+
+
+this constant turns and you then wraps
+
+
+this into an absolute
+
+
+and this constant but it's positive in
+
+
+your code and mutants would just change
+
+
+it to the negative concept but because
+
+
+it's written it's later going into into
+
+
+the absolute anyway it doesn't matter if
+
+
+you multiply with a negative number or
+
+
+the positive number to my experience
+
+
+it's happens so infrequently that I can
+
+
+at some point just do something really
+
+
+stupid which is do message expectation
+
+
+to make sure that the positive number is
+
+
+is used you can do the stupid things in
+
+
+Ruby they can reach deep into some code
+
+
+and just say hey I expect that the
+
+
+multiply method call happened with
+
+
+positive or / returns and this petition
+
+
+is dead it happens so infrequently on a
+
+
+really big red code base in one I'm on
+
+
+with Martin we have lots of beside me
+
+
+one or two of these cases I would not
+
+
+get discouraged from this tool because
+
+
+of his really but it's not possible to
+
+
+tell him your turns to ignore this no
+
+
+it's very deliberate because I if I ever
+
+
+had offend myself in the position to
+
+
+adopt what's imitation does then I
+
+
+always had to cycle back and was
+
+
+basically just identifying I was by
+
+
+relating a core principle because I
+
+
+insisted on using something complex
+
+
+where something simply would work so
+
+
+that's the reason zzzzz operators are
+
+
+laid out alongside these axioms so I
+
+
+don't usually have to have to run into
+
+
+this problem because if I run into a not
+
+
+killable romantic reduction meditation I
+
+
+have to crash I have to fight against a
+
+
+long legacy of axioms and I will
+
+
+probably not win thank you and by the
+
+
+way mutation testing when you have a
+
+
+green code base after mutant it does not
+
+
+guarantee your code is correct and all
+
+
+it doesn't guarantee it's good test it
+
+
+it only guarantees that automated tool
+
+
+couldn't fight any holes so for me it's
+
+
+the first line of code reviewer I
+
+
+typically didn't ever hand code to my
+
+
+co-workers which is not mutation tested
+
+
+because it's just it would be a disgrace
+
+
+because why would ask the co-worker to
+
+
+verify something a machine could do it's
+
+
+just like asking a co-worker to do a
+
+
+type check if it were no type of
+
+
+language it's stupid sure so I want to
+
+
+ask if sometimes beside the regression
+
+
+detection feature you can use it
+
+
+- just check which prices should be a
+
+
+factor because I don't know there is so
+
+
+many mutation that the first points you
+
+
+see that the culture beautif actor so
+
+
+basically the question is if you could
+
+
+use more than TAS I detect which code we
+
+
+should refactor - yes yes so so so what
+
+
+what very often happens is that when I
+
+
+have to touch a class which was never
+
+
+touched before that the first thing I do
+
+
+is I I just run mutant and look at all
+
+
+the reduction operators and just my
+
+
+first refactoring commit is just to kill
+
+
+everything from the method which to
+
+
+remove for me where I had no proof and
+
+
+after many verification I could verify
+
+
+that it's actually useful so I you can
+
+
+use it as you don't you don't have to
+
+
+you can use this tool to just to just
+
+
+learn about possible refactorings so you
+
+
+can just just run it result test
+
+
+integration no killed just show me all
+
+
+the mutations which sometimes gives you
+
+
+an idea on valid transformations you
+
+
+could do yeah basically or what's really
+
+
+helpful is when you have to let's say
+
+
+you have this typical 20 arm case
+
+
+statement you will find it some business
+
+
+logic when you take over a project
+
+
+before you refactor it into a nice
+
+
+private method visit dispatch table and
+
+
+all and so on what's really helpful is
+
+
+sometimes I just specify this mess to
+
+
+past mutant and then I move the public
+
+
+interface to specify everything from one
+
+
+public interface and then I'm free to
+
+
+refactor the heck out of it by keeping
+
+
+the coverage at the same level that's
+
+
+really nice to read you thank you we
+
+
+successfully answered all questions or
+
+
+somebody I only see subs up it's not a
+
+
+question ok so let's conclude thank you
+
+
+[Applause]

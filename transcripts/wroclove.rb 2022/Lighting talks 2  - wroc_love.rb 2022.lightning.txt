@@ -1,0 +1,1732 @@
+hey everyone uh I just wanted to to do a
+
+
+quick follow-up uh after presentation of
+
+
+Chris presentation uh he created a
+
+
+repository and I uh helped him quickly
+
+
+draft the uh all the advices from the uh
+
+
+his presentation into this repository
+
+
+and this is a follow-up I strongly
+
+
+invite you to go there if you have issue
+
+
+with that maybe we can solve it all
+
+
+together if you have like a good
+
+
+solution uh good Silver Bullet for
+
+
+improving test speed then please share
+
+
+and that's it
+
+
+foreign
+
+
+[Applause]
+
+
+I was just encouraged to
+
+
+[Music]
+
+
+give you a hint on something that you
+
+
+might want to
+
+
+introduce in your everyday workflows or
+
+
+behavior in the project and think that
+
+
+it's a simple takeaway that you you
+
+
+could greatly
+
+
+see your clients benefiting from it and
+
+
+the thing is called blameless
+
+
+accountability I've learned about it in
+
+
+one of the
+
+
+episodes of stack Overflow podcast
+
+
+um the thing was that uh
+
+
+there were some guests
+
+
+um
+
+
+marketing some tool which I'm not
+
+
+marketing right now because I cannot
+
+
+even recall the name but the thing was
+
+
+that uh what
+
+
+um
+
+
+is
+
+
+generally perceived as valuable for a
+
+
+client when we react upon some
+
+
+um
+
+
+failure uh in production is that we
+
+
+um
+
+
+act as quickly as possible we through
+
+
+all resources to overcome the the
+
+
+failure and fix it as quick as possible
+
+
+but we do not inform anybody about that
+
+
+especially the client so because we're
+
+
+perceiving it as
+
+
+um
+
+
+it is good enough that we just act on it
+
+
+without telling about that and it is
+
+
+actually false what and the metric for
+
+
+for this uh what people usually do is
+
+
+mean time to resolve
+
+
+we Developers
+
+
+tend to think that this is the thing
+
+
+that
+
+
+makes the client uh the most happy but
+
+
+the truth is and the some research uh
+
+
+backs it that what
+
+
+is
+
+
+even more important and it actually
+
+
+costs us nothing is to
+
+
+that the metric would be a mean time to
+
+
+respond so
+
+
+before we
+
+
+get our hands dirty and jump into the
+
+
+console we just
+
+
+notify the client that hey somebody's
+
+
+working on that
+
+
+um
+
+
+and I get a feeling I started to
+
+
+uh
+
+
+implementing it so that if if there is a
+
+
+some problem or even a request it
+
+
+doesn't have to be uh I don't know
+
+
+database is down but there is a
+
+
+something some request from client you
+
+
+can just uh react on slack or just write
+
+
+short message I'm on it and I get a
+
+
+feeling that the NPS score and overall
+
+
+client satisfaction with
+
+
+um much better since I started doing
+
+
+that and
+
+
+I I can recommend to to start doing that
+
+
+I believe that in your new next
+
+
+uh
+
+
+peer review or next uh MPS probe it will
+
+
+be reflected and actually that's it
+
+
+thanks
+
+
+[Applause]
+
+
+I don't know how to use it but
+
+
+how to find Mentor or mentee yesterday
+
+
+was presentation about mentoring so
+
+
+inspire me to say how to find it and uh
+
+
+I heard when you start with GIF it's
+
+
+much easier so there is much to learn uh
+
+
+still to have and the first thing where
+
+
+you can find Mentor Elementary is the
+
+
+company and I'm the from I'm from
+
+
+Monterey and I should say this is the
+
+
+easy way join us but we have a really
+
+
+awesome blog post how we are doing
+
+
+mentoring from both sides how to be a
+
+
+mentor or mentee but and you can read it
+
+
+and maybe Inspire and do something
+
+
+similar in your company because this is
+
+
+not only wave and you can do it your own
+
+
+way but there are a lot of services
+
+
+external Services where you can find
+
+
+your Mentor or your mentee and for
+
+
+example my face is on this side it's
+
+
+coding coach IO and there is really good
+
+
+place to find people after some boot
+
+
+camps or self-learned people to
+
+
+mentoring I have
+
+
+or right now I have one mentee from this
+
+
+website and in past I have few of them
+
+
+so if you want to find some someone to
+
+
+mentoring it's really good site but
+
+
+there is also mentoring Club where you
+
+
+can find people from services like
+
+
+Netflix Google
+
+
+meta when you I think on
+
+
+our way it's much experienced people and
+
+
+you can discuss a lot of stuff which
+
+
+could help in your
+
+
+current work there is also Plateau but
+
+
+as I know Plateau cost
+
+
+over 200 dollars per month and this is
+
+
+money for Plateau not for mentors so
+
+
+probably it's not a good place to to use
+
+
+so but remember the money is for Plato
+
+
+not for mentors but also there are a lot
+
+
+of place places where you can be a
+
+
+mentor there is variety there is Tech
+
+
+leaders and probably much much more
+
+
+groups where you can mentoring or find
+
+
+mentors
+
+
+and I'm tobesh vashek and you can find
+
+
+me on LinkedIn so if you have any
+
+
+questions
+
+
+I probably can help you and once again
+
+
+I'm from Monterey and tomorrow we host
+
+
+the drag so this is local Ruby group and
+
+
+tomorrow at 7 pm in our office it's this
+
+
+meeting so thank you
+
+
+[Applause]
+
+
+[Music]
+
+
+so hey again
+
+
+um I wanted to talk a bit why
+
+
+password validation on the website often
+
+
+sucks
+
+
+uh
+
+
+I mean everyone so probably like
+
+
+this you need a special character we
+
+
+need the uppercase lowercase letter
+
+
+numbers blah blah blah
+
+
+if you are using password manager that's
+
+
+not a problem and you should be using
+
+
+one but if you believe everybody will be
+
+
+using one I don't know the world you are
+
+
+on but I want some
+
+
+um
+
+
+the problem with that is
+
+
+users are lazy and they came up with
+
+
+something like the first passwords on
+
+
+the list
+
+
+eight passes all validations
+
+
+it has lowercase uppercase number
+
+
+special character it's at least eight
+
+
+character long
+
+
+but I think you can all agree it's weak
+
+
+password
+
+
+and the second case uh is a sentence
+
+
+it's easy to remember
+
+
+and
+
+
+it's much much more secure the first one
+
+
+and yet it doesn't have special
+
+
+collectors it doesn't have numbers
+
+
+so it will not pass the validations on
+
+
+that site and just and so I'm not empty
+
+
+minded
+
+
+there are programs to validate password
+
+
+strengths and
+
+
+I'm always joking than 100 tries per
+
+
+hour is sending it to India so somebody
+
+
+can solve the back route for you on on
+
+
+paper
+
+
+uh so it's still 10 minutes
+
+
+and
+
+
+yeah
+
+
+you are not waiting for this to be
+
+
+cracked
+
+
+so what's the solution and why is it
+
+
+important so as I said uh users will
+
+
+always with that type of validations try
+
+
+to hack it they will replace s's with
+
+
+dollars and replace o's with zeros and
+
+
+those rules are very very very easy to
+
+
+implement in cracking software all of
+
+
+them support it of the box you can run
+
+
+hashgrad
+
+
+it's a cracking hashes software that
+
+
+supports almost anything you go with
+
+
+basic dictionary just run it with
+
+
+defaults and it will crack things like
+
+
+that in milliseconds
+
+
+so
+
+
+a great project to use is that
+
+
+xcvbn which is terrible name in theory
+
+
+we'll get back to that uh it's a Dropbox
+
+
+project which is originally in
+
+
+JavaScript but has bindings in almost
+
+
+everything will be included
+
+
+and it returns
+
+
+score from 0 to 4. so you can represent
+
+
+it like that on your side so you don't
+
+
+tell user wall is wrong but they know
+
+
+when it's good enough
+
+
+and to remember the name that's just the
+
+
+lower row of your keyboard without M I
+
+
+don't know why they skipped am but they
+
+
+did thank you very much
+
+
+good I don't know what time it is uh I'm
+
+
+a bit far from home uh so I am from
+
+
+Zimbabwe or I guess I need to
+
+
+uh change slide so
+
+
+yeah so Zimbabwe we've uh it's quite an
+
+
+interesting country
+
+
+um I am not black which is surprising
+
+
+they are white people in Africa believe
+
+
+it or not
+
+
+um oh I don't know what's happened uh I
+
+
+apologies
+
+
+the the Linux is the solution not the
+
+
+problem
+
+
+uh sorry about that yeah that's the user
+
+
+error not Linux error
+
+
+um so yeah this is Zimbabwean currency
+
+
+in 2008 and 2009 on the left hand side
+
+
+um so I think I may have been one of the
+
+
+youngest billionaires in history
+
+
+um there was about 16 million
+
+
+billionaires that's the population of
+
+
+Zimbabwe uh so yeah we there was quite a
+
+
+few billionaires uh in in 2008
+
+
+and on the right hand side we've got a
+
+
+couple days ago
+
+
+we've got a rate of we've got a couple
+
+
+currencies we've got four current season
+
+
+Zimbabwe one is card currency and then
+
+
+we've got cash currency and all of them
+
+
+have different rates and then we've also
+
+
+got mobile
+
+
+card currency it's an absolute oh
+
+
+sorry it's an absolute joke
+
+
+um but
+
+
+at the bottom you can see
+
+
+um the current inflation rate so I think
+
+
+my advice to anyone worrying about
+
+
+inflation don't worry about it rookie
+
+
+numbers so at the moment we're at
+
+
+285 percent which is we're just getting
+
+
+started
+
+
+um
+
+
+so there's there's this great uh thing
+
+
+in in Zimbabwe called corruption uh it
+
+
+it works in your favor most of the time
+
+
+if you can afford it
+
+
+um so if if you have a look at the
+
+
+police roadblock uh you can see that the
+
+
+the
+
+
+Barrel which is supposed to stop cars
+
+
+has been hit by quite a few cars and the
+
+
+the reason is is that if you hit the
+
+
+barrel you could just pay the the
+
+
+policeman a couple couple of dollars and
+
+
+you could be on your way the other great
+
+
+thing about it is the police don't have
+
+
+cars I I
+
+
+and yeah and we also have had fuel
+
+
+shortage crisises so that's also pretty
+
+
+great you can see on the bottom picture
+
+
+that is a fuel queue there's probably
+
+
+two pumps but about five ten ten lines
+
+
+to try and get fuel and that is also
+
+
+solved by paying the pump attendant and
+
+
+you will be first in line so corruption
+
+
+is very useful
+
+
+um
+
+
+ah presidents these are the two
+
+
+presidents I've known my whole life uh
+
+
+the one is no longer president because
+
+
+he got kicked out by the other one who
+
+
+was his vice president so it's a doggy
+
+
+dog world but yeah two presidents I I
+
+
+don't know whether it's for educational
+
+
+purposes that they want us to be able to
+
+
+remember our president's name so they
+
+
+keep him in power longer but
+
+
+I I mean it did help in the in the uh
+
+
+exams and that sort of thing but yeah
+
+
+two presidents my whole life and the the
+
+
+Oneness dead finally he took his time
+
+
+um but he's gone
+
+
+uh public transport
+
+
+Zimbabwean public transport is very
+
+
+different to polish public transport
+
+
+um and as you can see it's again it's a
+
+
+joke
+
+
+um this these are unfortunately
+
+
+this is the situation on the ground yeah
+
+
+Kate I did get the most chaotic looking
+
+
+picture it's it's not always that bad
+
+
+but you can't see things like that
+
+
+um whereas polish public Transporters
+
+
+rather delightful
+
+
+ah okay so so our national dish in
+
+
+Zimbabwe is called saza not to be
+
+
+confused with satsa
+
+
+um so yeah there's as you can see from
+
+
+my search phrases we've got sudsa PL and
+
+
+sudsa ZW
+
+
+and they return very different images
+
+
+um so yes this is our national food and
+
+
+yeah please don't confuse it with Sada
+
+
+um we have water in Africa well I won't
+
+
+speak for the whole of Africa just for
+
+
+Zimbabwe my part of Africa
+
+
+um yeah we have lovely uh well we
+
+
+actually have the second largest lake in
+
+
+the world uh man-made lake uh Dam
+
+
+actually because the lake is like
+
+
+anything I don't know some technical
+
+
+jargon um but yeah we do have water and
+
+
+we do have wild animals and it's a great
+
+
+great country
+
+
+and uh we do we've got very dry places
+
+
+so I was saying we have water it's in
+
+
+places there are places where you where
+
+
+you won't find water
+
+
+um and so in the low fault the lower
+
+
+lying areas it's much hotter and dry and
+
+
+in the high areas it rains pretty much
+
+
+the whole time so yeah we've got a mixed
+
+
+bag great great destination
+
+
+and uh everyone always asks me why why
+
+
+are you in Poland I hope that gives you
+
+
+some context and I hope you appreciate
+
+
+Poland a lot more it's
+
+
+thank you very much
+
+
+[Applause]
+
+
+okay so uh I'm gonna talk a little bit
+
+
+about 3D printing so it's not related to
+
+
+Ruby or Loosely related to programming
+
+
+you'll see and so I bought my 3D printer
+
+
+back in like 2016. it's a prusa Mark II
+
+
+it was it came with in a plastic box so
+
+
+you can like assemble it on your own
+
+
+it's a DIY kit uh it's it's fun like to
+
+
+assemble it so you can get a little bit
+
+
+more understanding of how it works as
+
+
+well
+
+
+uh yeah so uh the United States things
+
+
+about these printers is they they
+
+
+provide upgrades so it's like the there
+
+
+are some improvements along the way and
+
+
+you can you can upgrade your printers
+
+
+uh and it's also like I don't it to be
+
+
+an advancement of Prussia but it they're
+
+
+really reliable printers you can like if
+
+
+you break something you can find a
+
+
+replacement parts they're quite popular
+
+
+and they have like pretty good support
+
+
+Czech Republic
+
+
+um okay so when it comes to like
+
+
+designing stuff most people I think
+
+
+that's the most popular one uh so most
+
+
+people use Fusion 360 for designing
+
+
+stuff so it's like proprietary uh
+
+
+software works on only on Windows and
+
+
+probably Mac os2
+
+
+uh uh yeah so it's it's it's it's cool
+
+
+it's really cool cool I used it a couple
+
+
+times but um I for my purposes I think I
+
+
+used mostly uh open s-cap so it's a it's
+
+
+like a programming approach to to
+
+
+modeling
+
+
+uh you'll see in a second but and the
+
+
+cool things about these uh open Ascot is
+
+
+that you it's like you you write code
+
+
+actually so you can store it you can
+
+
+version it you can store it on GitHub
+
+
+uh it's pretty cool so the code looks
+
+
+like this
+
+
+uh yeah so yeah now we can see the
+
+
+uh an example okay so uh another thing
+
+
+that you have to do after like you model
+
+
+you think is like to slice it to
+
+
+different layers so uh the printer works
+
+
+like it just uh puts like layers on top
+
+
+of each other
+
+
+and for that you you can use pressure
+
+
+slicer so they provide you with a uh
+
+
+their own slicer you can use so it's a
+
+
+pretty cool piece of software as well
+
+
+um uh yeah I think it's written in
+
+
+Python by the way
+
+
+um Okay so
+
+
+you can print like different types of
+
+
+plastic different colors Etc so it's
+
+
+it's it's it's really yeah that's that's
+
+
+how that's what it looks like like
+
+
+okay so uh funny story is like when when
+
+
+my friends came and asked me to fix his
+
+
+uh solar stream machine so if you've
+
+
+heard about solar stream maybe you've
+
+
+encountered it uh maybe you used it uh
+
+
+it's a sparkling water maker and it has
+
+
+like a design flow I think so it tends
+
+
+to like that the button here it tends to
+
+
+break at some point uh and obviously uh
+
+
+you can't get it anywhere because the
+
+
+manufacturer does does not provide you
+
+
+with any like replacement parts
+
+
+obviously you can throw it away
+
+
+basically and um so yeah my friends know
+
+
+that I I just like love fixing stuff so
+
+
+my my friend asked me to design and
+
+
+print it for him
+
+
+uh
+
+
+and basically it worked it looks like
+
+
+this and
+
+
+it's a little bit different than the
+
+
+original part because of differences in
+
+
+like production method but because the
+
+
+original part is like injection molded
+
+
+and
+
+
+it's like I put it on like polish eBay
+
+
+and like people starting buying it and
+
+
+they just keep buying it like all over
+
+
+again like I don't know I've sold like
+
+
+200 uh 200 of these buttons already and
+
+
+they still keep buying it so it's like a
+
+
+very common issue I guess so it's like
+
+
+probably there is like a uh other uh
+
+
+places where you can probably like
+
+
+provide some replacement parts for other
+
+
+other other devices as well so if you
+
+
+have any idea like if you have like
+
+
+something broken maybe that there's a
+
+
+way to to fix it and yeah that's it so
+
+
+thank you very much
+
+
+hi everyone it was quite a tough
+
+
+decision to have this speech for me
+
+
+because I have one friend in Road slow
+
+
+which showed me
+
+
+um roadstuff nightlife and yeah
+
+
+um they want to speak with you regarding
+
+
+one interesting feature which I as I see
+
+
+is not really uh raised on some new
+
+
+projects or projects that uh upgrade to
+
+
+um rail 7.
+
+
+um but I think it's quite interesting
+
+
+this load I think in rail 7 which was
+
+
+recently released
+
+
+um yeah let's uh see and um
+
+
+find these examples this is a really
+
+
+simple example of controller index and
+
+
+we have three instances to load as I
+
+
+think in some applications it's a usual
+
+
+situation when we need to load users
+
+
+applications and invoices and just show
+
+
+and render it on a view and as you can
+
+
+see we have these three models and
+
+
+they're pretty straightforward what's
+
+
+going on here
+
+
+um yeah users they have apps and
+
+
+invoices and we need to show and render
+
+
+it on view
+
+
+and yeah how to configure this load to
+
+
+sync I think we need to set up this
+
+
+async query executor
+
+
+um we have two options Global thread
+
+
+pool and multi-thread pool the first
+
+
+option is suitable when your application
+
+
+uses only one database
+
+
+and the second one you can use if you
+
+
+have multiple databases and you can
+
+
+configure this
+
+
+um maximum pull size per each of these
+
+
+databases in database yaml
+
+
+yeah let's um focus on this example why
+
+
+do we need to use this feature sometimes
+
+
+it might be really helpful if we have
+
+
+such situation we have this View and
+
+
+this view includes these three instances
+
+
+we render them users applications and
+
+
+invoices and once we reach users
+
+
+um
+
+
+rails tries to corross it to array and
+
+
+um it takes some time to execute user's
+
+
+query then we convert to array then we
+
+
+reach these apps and we also
+
+
+make this select query it takes some
+
+
+time then we have to convert it to array
+
+
+and at the end we reach these invoices
+
+
+and the this whole process is repeated
+
+
+and yeah we make it step by step and if
+
+
+we have one second per each query it
+
+
+will take a general three seconds
+
+
+um we can just try to change the bit and
+
+
+make um
+
+
+in controller try to convert to array
+
+
+from the start but it doesn't really
+
+
+help us because it just moves this
+
+
+process of converging to array
+
+
+um to a controller method but it doesn't
+
+
+really help because we still need to
+
+
+make it step by step load users and apps
+
+
+and invoices in the end
+
+
+okay and now if we you slow the thing
+
+
+how it will work
+
+
+we use this load the sync method and
+
+
+once we have this View
+
+
+and we reach users we still have to wait
+
+
+once users loaded
+
+
+but at this time we also simultaneously
+
+
+load of these applications and invoices
+
+
+and once we reach these applications on
+
+
+a view and the devices there are already
+
+
+loaded so if each request takes
+
+
+one second
+
+
+in the best case it will take as well
+
+
+one second to load all of these three
+
+
+instances
+
+
+and I really
+
+
+want to
+
+
+that some people they would use this
+
+
+feature and share with your experience
+
+
+this is quite interesting because this
+
+
+feature was released I don't know
+
+
+several months ago maybe six months ago
+
+
+but I didn't faced it on any projects or
+
+
+I really I don't hear that people
+
+
+talk regarding that and for me it will
+
+
+be really interesting to
+
+
+discuss this
+
+
+and
+
+
+probably that someone share with this
+
+
+experience
+
+
+okay and
+
+
+this slide is quite interesting this is
+
+
+uh evaluation of languages yeah and as
+
+
+you can see
+
+
+yeah we're looting and Ruby at the end
+
+
+yeah thank you for this um thank you for
+
+
+your time and please try out this
+
+
+feature and share with your experience
+
+
+all right so now the last part so I'm
+
+
+not really giving a lightning talk I'm
+
+
+just we have five ebooks to give away
+
+
+from pragmatic programmers so you can
+
+
+yeah give a clap for uh for the
+
+
+programmatic programmers
+
+
+[Applause]
+
+
+um yeah so as usual we are doing this
+
+
+like random out of the all lightning
+
+
+talks I hope that any of you who give
+
+
+who gave lightning talk can see yourself
+
+
+on the list
+
+
+uh you can mobile program my uh or code
+
+
+review my my script
+
+
+right it's visible I think so yeah
+
+
+all right and this is these are the
+
+
+winners
+
+
+[Applause]

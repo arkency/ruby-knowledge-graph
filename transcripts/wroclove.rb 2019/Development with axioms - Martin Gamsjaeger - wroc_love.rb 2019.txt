@@ -1,0 +1,2692 @@
+hello everyone my name is Martin and I'm
+
+
+a software developer working in a in a
+
+
+small team together with the close
+
+
+friend of man Markus who will be having
+
+
+his talk right after this one and you'll
+
+
+be going into the details that we use on
+
+
+a day-by-day basis when working on our
+
+
+project so he'll be talking about
+
+
+mutation testing and I'll be hoping to
+
+
+set the stage with respect to the core
+
+
+axioms we have identified and that we
+
+
+used to back our process and we always
+
+
+are on the lookout to find new rules
+
+
+that enable us to minimize the time that
+
+
+we have to think about simple things
+
+
+actually because it's boring to think
+
+
+about the simpler things and it just
+
+
+takes time that could be spent way
+
+
+better by thinking about the actual hard
+
+
+problems that you have to solve on a
+
+
+day-by-day basis and our thinking was
+
+
+that if we lay down rules that we can
+
+
+all agree upon so to say that we can
+
+
+form a shared set of values that we'll
+
+
+just do away with a lot of questions
+
+
+that we that we typically encounter when
+
+
+we are programming especially in a team
+
+
+and our our team is completely remote so
+
+
+everyone is working actually almost from
+
+
+some other continent and the only means
+
+
+of communication we have is written
+
+
+because we decided that talking or video
+
+
+conferencing or stand-ups or something
+
+
+like that is actually just hurting our
+
+
+productivity and so it has a lot of
+
+
+value if everyone can agree that if
+
+
+we're facing a decision
+
+
+we will actually reach at the same
+
+
+answer because then you don't have to
+
+
+discuss about it right and they'll
+
+
+always be things that you'll have to
+
+
+discuss but it's better if these are the
+
+
+interesting ones right so yeah with that
+
+
+I want to go to the objectives that we
+
+
+all probably have as software developers
+
+
+and those are to minimize bugs first and
+
+
+foremost probably because clients hate
+
+
+bugs
+
+
+and not only clients hate bugs
+
+
+we as programmers hate bugs too because
+
+
+when they occur it means that we have to
+
+
+interrupt our our usual flow right and
+
+
+we just have to go to something that
+
+
+might be might have happened months or
+
+
+years ago maybe so yeah obviously I mean
+
+
+we want to minimize these and just as a
+
+
+heads up for the whole talk I hope that
+
+
+most of the things I'll be saying will
+
+
+be like yeah of course I mean so when
+
+
+you when I say something I actually want
+
+
+to say some sort of universal truth no
+
+
+that's probably the wrong word but
+
+
+that's the reason why we use the term
+
+
+axioms actually because axioms are sort
+
+
+of that there are statements of
+
+
+universal truth that you can then use to
+
+
+build upon right so the next important
+
+
+thing that we also always want to do is
+
+
+minimize downtime right so I should add
+
+
+that the setting the project we're
+
+
+working on is is in a web application so
+
+
+I mean that probably goes without saying
+
+
+so it just needs to be live all the time
+
+
+because as soon as it isn't clients are
+
+
+angry I've already said the part that we
+
+
+want to minimize the thinking about
+
+
+simple things right but there is a
+
+
+really important aspect to and
+
+
+that is that we've agreed upon that we
+
+
+actually want to learn as a team every
+
+
+day when we do work right so we're keen
+
+
+to find a process that actually allows
+
+
+us to learn while we work on it we don't
+
+
+just want to solve problems for clients
+
+
+I mean we obviously won't do but we want
+
+
+to learn while doing so because part of
+
+
+being program is some form of curiosity
+
+
+to improve your craft right and I think
+
+
+once you've stopped improving then it
+
+
+gets boring in a way right so that's a
+
+
+key aspect also so we are constantly
+
+
+questioning our process and see if maybe
+
+
+we've done something wrong in the past
+
+
+or maybe it wasn't so much wrong but it
+
+
+can still be improved so we are always
+
+
+on the lookout to to learn something new
+
+
+another aspect is that we want to share
+
+
+responsibility within our team so we
+
+
+don't want to run in a situation where
+
+
+someone is to blame for a bug right
+
+
+because eventually you will be the guy
+
+
+who writes a commit and it's your code
+
+
+and you put it live and as we know bugs
+
+
+happen I mean the best process can
+
+
+cannot prevent all bugs but if it
+
+
+happens it's better if you don't feel
+
+
+too bad about it and one way to reach
+
+
+that is to ensure that your process has
+
+
+in its very core the aspect that you are
+
+
+not responsible alone but you're acting
+
+
+as a team and the team carries the
+
+
+weight with you right it's it's not like
+
+
+you should go home and start I don't
+
+
+know crying because you lost I don't
+
+
+know how many dollars for you for your
+
+
+client right so you want to share that
+
+
+responsibility with your with your team
+
+
+members and that most obvious objective
+
+
+is of course that we want to satisfy our
+
+
+clients because that makes them happy
+
+
+and that leaves us in our job right with
+
+
+that said we'll start with the axioms
+
+
+we've identified and these as I said are
+
+
+the sentences that are supposed to be
+
+
+well duh
+
+
+of course of course so what is an act an
+
+
+axiom I've already said it before it's
+
+
+basically a sentence that forms a truth
+
+
+that you don't need to question because
+
+
+when you hear it you're like of course
+
+
+that's true and once you have these form
+
+
+these sort of sentences or statements
+
+
+you can then and it's universally
+
+
+accepted that they are true then you can
+
+
+build on top of them that you can apply
+
+
+logical reasoning not in the strictest
+
+
+mathematical sense but still you can say
+
+
+if this is true then this is very likely
+
+
+to be true also so you can use the core
+
+
+axioms to build assumptions that will
+
+
+after discussing with team and refining
+
+
+them are almost or even exactly and you
+
+
+can be sure that they are true as well
+
+
+so with that said we're right now I'm
+
+
+listing a few definitions of terms that
+
+
+will be used throughout that talk and
+
+
+axiom is the most important one so we
+
+
+all probably agree on what an axiom is
+
+
+the next thing I've already mentioned it
+
+
+is assumptions those are the next level
+
+
+second level sentences that we derive
+
+
+from our axioms and that's basically
+
+
+what we did and what we do every day we
+
+
+reiterate on our on the axioms on the
+
+
+decisions on the assumptions that we we
+
+
+made and we constantly try to find new
+
+
+assumptions that we all can agree upon
+
+
+that they are true and this talk will
+
+
+basically
+
+
+mentioned a few of those assumptions and
+
+
+because these form these can then form
+
+
+the basis for some kind of constraints
+
+
+that you can put or enforce in your
+
+
+development process one of the most
+
+
+prominent things in in this sense is the
+
+
+concept of transformation and it's not I
+
+
+mean
+
+
+I'm using this as a definition for
+
+
+transformation and it's obviously just
+
+
+in this very narrow context but
+
+
+transformation basically when we talk
+
+
+about transformations we talk about any
+
+
+update to system artifacts like every
+
+
+kind of code change every kind of
+
+
+infrastructure change we do every kind
+
+
+of data change also which as we all know
+
+
+happens through code because no one
+
+
+I don't know edits production data life
+
+
+in some client right so it's all code
+
+
+and when we talk about transformations
+
+
+we are talking basically about commits
+
+
+so every commit you do is a
+
+
+transformation to the source code and it
+
+
+turns out that there are actually only a
+
+
+very small set of transformations that
+
+
+you typically do when you write commits
+
+
+and this talk will go on to introduce
+
+
+there are those kinds of transformations
+
+
+and the fact that they seem to us to
+
+
+have implicit ordering when you do them
+
+
+which again relieves you from thinking
+
+
+about it right if you have just a few
+
+
+just a few possible transformations then
+
+
+you know that the next commit you will
+
+
+be doing will be one of these
+
+
+transformations right and then you're
+
+
+like okay I can do this then I can do
+
+
+that then I can do that another term
+
+
+that probably doesn't really need a
+
+
+definition is regression but I figured
+
+
+I'd edit nevertheless because we use it
+
+
+not in the most common sense like where
+
+
+you say a regression is a bug well of
+
+
+course a bug is some misbehavior in your
+
+
+production application but a regression
+
+
+is slightly more abstract because we
+
+
+consider a congressional to be a
+
+
+regression to be everything that puts
+
+
+the system into a worse State it needn't
+
+
+necessarily be a bug that clients call
+
+
+you afterwards and are like the system
+
+
+isn't working no it can be it can be way
+
+
+more than that already like when you
+
+
+commit something into your repository
+
+
+that violates your rules that regresses
+
+
+the codebase the quality of your
+
+
+codebase and that's a regression already
+
+
+and you want to minimize those because
+
+
+if you can make sure that every commit
+
+
+is an improvement then you don't have
+
+
+regressions obviously regressions will
+
+
+land in the project but the goal is
+
+
+always to minimize them which not
+
+
+directly leads me to this very important
+
+
+aspect but I've been mentioning before
+
+
+that we're doing transformations to a
+
+
+code we commit to our code repository
+
+
+and I've already said that we have a
+
+
+very small set of transformations and
+
+
+the key aspect for every single one of
+
+
+those transformations is that it should
+
+
+be atomic which basically means you
+
+
+cannot make it smaller if you change a
+
+
+running system you want to do those
+
+
+changes in the most minimal way possible
+
+
+because not only is it easier to review
+
+
+for your teammates but also the impact
+
+
+it has on the running application is
+
+
+very small that is not to say that we
+
+
+want to say that we want to do small
+
+
+impacts obviously
+
+
+want to make a lot of progress but if
+
+
+you change a complex system in tiny tiny
+
+
+tiny tiny steps and always make sure
+
+
+that you're making progress while doing
+
+
+so that seems to us to be a smart way of
+
+
+doing it and it has a few consequences
+
+
+like it can be applied very easily it
+
+
+can be reverted very easily by extension
+
+
+and as we know bugs will end so if we
+
+
+can rework quickly and we know that the
+
+
+state will be reverting to is valid then
+
+
+it's not so much of a problem if
+
+
+something goes wrong obviously it is but
+
+
+the reward will be easier there is
+
+
+another concept that we are youing that
+
+
+we're doing and we're having a lots of
+
+
+checks for for the code we we commit and
+
+
+we have the distinction that everything
+
+
+we we do to see if if proposed commit
+
+
+matches our intentions we call a check
+
+
+but there's actually two different kinds
+
+
+of checks you can have automated checks
+
+
+and we call them tests right we use
+
+
+continuous integration obviously and
+
+
+we're referring to the checks that can
+
+
+be automated as tests whereas we refer
+
+
+to reviews where as we refer to manual
+
+
+checks as as reviews read so they are
+
+
+equally important both the key
+
+
+differentiator is that an automated
+
+
+check allows you to minimize the time
+
+
+you spend checking on it which again
+
+
+leads to or is based on the premise that
+
+
+you actually want to minimize the time
+
+
+thinking about simple things so there's
+
+
+no point in constantly repeating making
+
+
+a human two checks that a machine can do
+
+
+it's not possible for the human to be
+
+
+replaced by a machine but you want to
+
+
+minimize the attention the human has to
+
+
+pay and
+
+
+reviews what we typically do is we'll
+
+
+slag violations of any of the rules that
+
+
+we've established so we call that a flag
+
+
+and it's basically the result of a
+
+
+manual check it will almost it will
+
+
+always appear as some form of comment
+
+
+and github reviews because that's what
+
+
+we use but yeah a flag is basically a
+
+
+failed check that was identified by a
+
+
+human okay two very quick ones axioms I
+
+
+think we can all agree that clients hate
+
+
+bugs
+
+
+we can all agree that clients love
+
+
+progress so that should be very obvious
+
+
+the most important axiom that we have
+
+
+identified and actually we think that
+
+
+almost everything can be boiled down to
+
+
+this is that redundancy redundant called
+
+
+redundant semantics they don't provide
+
+
+value right if it's redundant it doesn't
+
+
+add value so why would you want to add
+
+
+something to your codebase that doesn't
+
+
+add value right it makes no sense this
+
+
+will be key and everything is boiled
+
+
+down to that and markers will have his
+
+
+talk after mine where he is introducing
+
+
+his two mutant which is a tool for
+
+
+mutation testing and this is key to our
+
+
+process as it helps us to remove
+
+
+redundant semantics because what mutant
+
+
+does is it tells you hey you can do
+
+
+something simpler or hey you don't need
+
+
+this at all
+
+
+so it's an automated way to check Ruby
+
+
+code for redundant semantics for
+
+
+redundancy which we want to remove the
+
+
+next axiom and that's obviously kind of
+
+
+related to redundancy provides no value
+
+
+is that inconsistency provides no value
+
+
+we've been discussing if it's even worth
+
+
+mentioning because it can be reduced
+
+
+the first one but my thinking is that
+
+
+it's a bit more obvious if we mention
+
+
+inconsistencies specifically because
+
+
+it's mostly about style right so
+
+
+semantics are observable on the one hand
+
+
+and inconsistencies are the things where
+
+
+your colleagues wants to read it this
+
+
+way you wanna write it that way find a
+
+
+shared way to do it so you want to look
+
+
+at your code and you don't want to spot
+
+
+any difference if you or your coworker
+
+
+wrote it ideally so that's what we're
+
+
+referring to by inconsistency it's
+
+
+basically things like white space do you
+
+
+align your code with two spaces with
+
+
+four spaces whatever style issues like
+
+
+this one very important other axiom is
+
+
+that humans human attention just varies
+
+
+over time right not everyone is in
+
+
+perfect mood in a perfect mental you
+
+
+don't always are equally smart right
+
+
+there are days where you're smarter
+
+
+there are hours during a day where
+
+
+you're smarter and that will vary and
+
+
+you want to catch that times when you're
+
+
+not so smart right
+
+
+so you want to have automated checks in
+
+
+place a lot of the time for when you're
+
+
+not so smart right so that's a key thing
+
+
+you have to accept that
+
+
+first and foremost you probably not as
+
+
+smart as you think but even even when
+
+
+you're especially smart there will come
+
+
+a time when you're actually not so smart
+
+
+a few minutes later one obvious truth is
+
+
+also that automation reduces the need
+
+
+for human attention right if you have
+
+
+something automated you don't have to
+
+
+think about it another obvious truth is
+
+
+that required semantics change over time
+
+
+right what your clients tell you you
+
+
+have to do this
+
+
+next day they tell you you have to do
+
+
+this so the required semantics change
+
+
+over time that's why we commit to our
+
+
+repositories in the first place right
+
+
+an interesting one is that we all know
+
+
+that the tools we use aren't perfect but
+
+
+we can imagine what a perfect tool would
+
+
+do actually right that's not so hard
+
+
+it's hard oftentimes to write the tool
+
+
+and make it close to the perfect but
+
+
+it's easy to say ah the tool should have
+
+
+spotted this it doesn't but I supported
+
+
+it as a human so I will check for this
+
+
+as well so if you have an agreement in
+
+
+your team that on reviews on manual
+
+
+reviews performed by humans
+
+
+you actually act as if you were a
+
+
+perfect tool right so if you if you can
+
+
+agree that the tool should identify this
+
+
+you should flag that on review because
+
+
+it is a problem you have agreed upon an
+
+
+assumption that we're basing on all
+
+
+these axioms is that a well-defined
+
+
+process can actually help a team to
+
+
+increase its performance and that's
+
+
+basically what we're getting at so we
+
+
+want to we want to define a process that
+
+
+will help us to eliminate most of the
+
+
+various inconsistencies questions things
+
+
+we need to think about and another very
+
+
+obvious the conclusion is that automated
+
+
+checks are to preferred over reviews
+
+
+then I'm sorry if this is repeating more
+
+
+or less but I want to stress the fact
+
+
+that these are seem to us to be very
+
+
+obvious truth another thing that kind of
+
+
+relates to the fact that you're probably
+
+
+not as smart as you think is that it's
+
+
+actually not possible to understand all
+
+
+the required semantics that your clients
+
+
+think of in a very different way than
+
+
+you do usually you have business clients
+
+
+and they are on a much higher
+
+
+action level than you are you are
+
+
+programmer they communicate their intent
+
+
+to you but you will probably never
+
+
+really really really know a hundred
+
+
+percent what they actually want so it
+
+
+it's impossible to always know what it
+
+
+should work exactly like and I'm not
+
+
+talking about and sorting algorithm
+
+
+which is supposed to sort exactly
+
+
+exactly
+
+
+yes exactly
+
+
+the interesting thing or that's a
+
+
+personal observation clients tend to
+
+
+think that they know precisely who what
+
+
+they want
+
+
+we programmers do as well but I'm here
+
+
+to remind that actually no we we don't
+
+
+either
+
+
+but it's a good point yeah kind of
+
+
+related to this is that the metal model
+
+
+you've formed about your project will
+
+
+probably be wrong it's not so much that
+
+
+it's wrong at any point in time
+
+
+I mean if it's really wrong then you
+
+
+have a problem but the key thing is that
+
+
+it will change so you'll identify a flaw
+
+
+in your mental model and it will happen
+
+
+every day right why do we refactor if we
+
+
+have a perfect mental model then there
+
+
+is no need to refactor we just write the
+
+
+perfect code no we can't so our mental
+
+
+model is wrong most of the time and it
+
+
+will change which kind of not directly
+
+
+leads but makes us think that if we
+
+
+identify constraints that we think
+
+
+constrain the model we should ingrain
+
+
+that in the system as deep as possible
+
+
+we shouldn't edit somewhere on top and
+
+
+to use one of they're probably very few
+
+
+Ruby mentions in this talk
+
+
+it's nice to have validations on an
+
+
+active record model but you want to move
+
+
+those checks down into the database you
+
+
+actually want to make check constraints
+
+
+and constraint triggers and and and
+
+
+whatnot so you have to push those down
+
+
+you want to make sure at the at the
+
+
+lowest level in the system that bad
+
+
+stuff cannot enter coming from the other
+
+
+direction is that well you should push
+
+
+down your constraints as far as possible
+
+
+you should reject invalid input as soon
+
+
+as possible right as soon as someone is
+
+
+sending you data that your should
+
+
+process you should immediately check it
+
+
+and if it has problems just rejected you
+
+
+return some appropriate HTTP error
+
+
+status and be done with it
+
+
+it's coercion of data sometimes this is
+
+
+the right thing to do but most more
+
+
+often than not I'm thinking that if the
+
+
+data is wrong reject it another
+
+
+assumption that relates to reviews is
+
+
+that you should never self censor read
+
+
+when you are reviewing code from one of
+
+
+your colleagues and you think that it
+
+
+has a problem and you spot it don't be
+
+
+shy and hold it back don't think that
+
+
+your colleague may think that you are
+
+
+not smart just be open about it say that
+
+
+you think it you have there is a problem
+
+
+the best thing that can happen or the
+
+
+worst thing depending on the way you
+
+
+look at it I tend to think of the best
+
+
+thing is that you learn something new
+
+
+right it's not like your colleagues will
+
+
+be well you dump that's obvious no a
+
+
+good team says Morris thanks for the
+
+
+comment but here's the way I look at it
+
+
+ok so that was kind of the introductory
+
+
+part about the core axioms that we use
+
+
+and now we come to the to the
+
+
+transformations that I've been
+
+
+mentioning before so basically the way
+
+
+we allow ourselves
+
+
+to change the codebase and you'll see
+
+
+it's five five of them that's not a lot
+
+
+and that's nice because those are the
+
+
+only options you have and if you combine
+
+
+them with the atomic principle so that
+
+
+every transformation has to be atomic
+
+
+and to reiterate it has to be the
+
+
+smallest possible transformation you
+
+
+cannot break it up further combined with
+
+
+that those are actually the ways you can
+
+
+change your system right you can remove
+
+
+something you can remove code right
+
+
+you can fix code you can reflect the
+
+
+code and you can change code which
+
+
+basically is changing the semantics
+
+
+right or you can add new code or to be
+
+
+even more precise you can add new public
+
+
+API because if you're adding just a
+
+
+private method I'm not sure if if that
+
+
+qualifies as as a as a true addition to
+
+
+the to the source codes because as long
+
+
+as you don't add new public API that
+
+
+will be used somewhere else it's
+
+
+probably a refactoring otherwise right
+
+
+a key thing that you might have noticed
+
+
+in that table is that we have assigned
+
+
+priorities for these right and those
+
+
+priorities are a guideline first and
+
+
+foremost probably those are not hard
+
+
+rules but to maybe jump a bit ahead is
+
+
+that these works that are called
+
+
+transformations here you have come your
+
+
+commit messages your commit messages
+
+
+maybe should start with those hours -
+
+
+and if a commit message does not start
+
+
+with one of these verbs then it will be
+
+
+rejected by CI continuous integration
+
+
+will say no
+
+
+your commit message is wrong because
+
+
+what kind of transformation are you
+
+
+doing that is not in this list and there
+
+
+will be a slight amendment to that but
+
+
+we'll come to that in a bit
+
+
+so when I'm talking about priority again
+
+
+it's a guideline and they'll be
+
+
+tiebreakers right so if you're not sure
+
+
+if you should put this first or you
+
+
+should put that first then you want to
+
+
+be able to fall back to some rules that
+
+
+help you decide where to really put them
+
+
+at the most important rule of these is
+
+
+kind of obviously functional
+
+
+dependencies so when and this list say
+
+
+we want to remove first and sorry for
+
+
+not mentioning it this that priority
+
+
+order is actually within a pull request
+
+
+right so these transformations they
+
+
+actually apply on the commit level but
+
+
+they also apply on a pull request level
+
+
+so when you when you do a commit or when
+
+
+you do a pull request make it this way
+
+
+and you want to remove something and you
+
+
+want to add something you typically want
+
+
+to remove first you always want to
+
+
+remove first because everyone likes
+
+
+removing code under one hand but you can
+
+
+also look at it from a way if it's if
+
+
+you are able to remove something then it
+
+
+puts the system in a better state
+
+
+because it's less code let's go to
+
+
+maintain let's go to think about less
+
+
+possibility for bugs right the next
+
+
+thing you typically want to apply is
+
+
+fixes right because you want to get
+
+
+fixes merged into your pros into your
+
+
+project as soon as possible the only
+
+
+thing that might be even nicer to do
+
+
+before that is to remove code because it
+
+
+removes the potential for you to have to
+
+
+do a fix in the first place
+
+
+right so this is all based on on the
+
+
+assumption that
+
+
+you want to you want your in changes to
+
+
+the code base to land as fast as
+
+
+possible on master and and we're doing
+
+
+continuous deployment so every pull
+
+
+request when we hit the merge button it
+
+
+gets deployed zero downtime and you want
+
+
+to have it live as as fast as possible
+
+
+right so these are two actually very
+
+
+important like there's we rarely find
+
+
+reasons that these should not be should
+
+
+not come before a part or that anything
+
+
+else should come before them apart from
+
+
+the fact that we sometimes need to
+
+
+respect functional dependencies between
+
+
+our changes right so if we have to
+
+
+reflect something to then be able to
+
+
+remove something that's that's what we
+
+
+mean by functional dependencies so in
+
+
+this case you might end up having a pull
+
+
+request where you actually have
+
+
+refactoring commits before you can then
+
+
+do the final removal of the code right
+
+
+also it's it's it has the aspect of risk
+
+
+associate to it because if you have nice
+
+
+test coverage and you should strive to
+
+
+have that a remove is actually not
+
+
+really risky because if you have tests
+
+
+for all the call sets and obviously you
+
+
+need to do some acceptance testing
+
+
+before merging as well then it's fairly
+
+
+safe to remove because if your tests
+
+
+aren't even able to catch that some
+
+
+important code has been removed and you
+
+
+have other problems and should probably
+
+
+be working on your on your test coverage
+
+
+right fixes equally I mean if we find
+
+
+and agreed or if we can agree about
+
+
+what's wrong at the moment and you have
+
+
+a team that can review and assert that
+
+
+the commit is actually fixing something
+
+
+then it's probably not too risky this
+
+
+will always depend but
+
+
+say that the tendency is that removes
+
+
+and fixes are fairly riskless depending
+
+
+on the quality of your tests and your
+
+
+review process the next thing which is
+
+
+kind of interesting transformation is a
+
+
+refactoring because it's actually the
+
+
+only the only type of transformation
+
+
+that kind of performs a look ahead right
+
+
+the others you can you can always you
+
+
+can almost always say or you can measure
+
+
+objectively if they form an improvement
+
+
+on the one hand or if they at least
+
+
+don't introduce a regression you don't
+
+
+need to look further in the pull request
+
+
+you don't need to look at the next
+
+
+commit or the next commits to identify
+
+
+if these are really an improvement know
+
+
+the intention is that every commit must
+
+
+be improvement I've established that
+
+
+before every commit should not leave the
+
+
+system in a worse debt no it should make
+
+
+that it should leave the system in a
+
+
+better state refactorings are different
+
+
+because you have to explain to your
+
+
+co-workers why you think that this
+
+
+change at this specific time actually
+
+
+leaves you a system in a better state
+
+
+because you will in the future use the
+
+
+new code to to perform the next
+
+
+transformations that you're using and
+
+
+it's more optimal to perform it on the
+
+
+refactored code then it is to do it in
+
+
+some state where the code is not yet
+
+
+optimal so you you oftentimes want to do
+
+
+refactorings as fast as possible right
+
+
+or as soon as possible
+
+
+actually so if you want to have some
+
+
+addition you want to add something and
+
+
+you find that the system isn't isn't in
+
+
+an optimal state to actually perform the
+
+
+addition you want to refactor it first
+
+
+because then you can operate on more
+
+
+optimal state you don't want to add
+
+
+something to some state that you know
+
+
+that is suboptimal why not make the
+
+
+state optimal first also that has the
+
+
+nice
+
+
+consequence that if a pull request is
+
+
+going on for a very long time then you
+
+
+can say okay I have ordered my comets in
+
+
+on a few dimensions and I've moved
+
+
+things that we agree that should be
+
+
+merged first I moved them to the top of
+
+
+the of the pull request so I can just
+
+
+extract another pull request from that
+
+
+right and try to get the uncontroversial
+
+
+transformations merged early and then
+
+
+just leave the remaining commits in in
+
+
+the pull requests because these might
+
+
+need further discussion right but you
+
+
+can get there the agreed upon less
+
+
+riskier stuff you can get it out of the
+
+
+way which in turn reduces the deficit
+
+
+your reviewers have to have to look at
+
+
+which again reduces the mental overhead
+
+
+for the reviewer which again reduces the
+
+
+time the review takes which again makes
+
+
+clients happy because you can progress
+
+
+faster so reflect refract earrings you
+
+
+typically want to move them highest up
+
+
+in the change so this priority should
+
+
+actually be read in a way that
+
+
+everything wants wants to move up there
+
+
+is another kind of transformation a
+
+
+change and that's basically something
+
+
+where you say okay that the system has
+
+
+had a specific behavior initially and
+
+
+it's not that this behavior is wrong
+
+
+okay it's not that this behavior is
+
+
+wrong but the behavior has to change so
+
+
+that's a very common thing I think
+
+
+usually all our commits we think of them
+
+
+as changes but some of them are actually
+
+
+or a change is something more specific
+
+
+an addition like I said before is an
+
+
+addition to the public API you're adding
+
+
+new code you're not changing any
+
+
+semantics you introduce new semantics
+
+
+and then we have a few synonyms and I'll
+
+
+just go quickly over these because these
+
+
+aren't the last four words that we allow
+
+
+in our commit messages and they are
+
+
+basically just shortcuts for the various
+
+
+kinds of changes so we move something if
+
+
+we move some code from here to there we
+
+
+want to happen we want that to happen
+
+
+early and it's basically just changing
+
+
+the location if we rename something it's
+
+
+a sort of a move where we just give a
+
+
+different name and again it's better to
+
+
+have the optimal name in the system
+
+
+first and do the rest later
+
+
+upgrade and downgrade are very obvious
+
+
+it's when your deal with your
+
+
+dependencies and these should always
+
+
+actually like if you're working on a
+
+
+pull request
+
+
+you always want these to be the only
+
+
+commit in your pull request right if you
+
+
+upgrade some system you want to merge
+
+
+the upgrade so that you can just read
+
+
+that the upgrade and not mix it with any
+
+
+of your other code okay and I'll really
+
+
+go quickly over these constraints those
+
+
+are the one that we actually put into
+
+
+place in our system again redundant
+
+
+semantics must be eliminated Marcus will
+
+
+do is talk on mutant and how it helps
+
+
+greatly with that goal automated test
+
+
+coverage must not regress it must be at
+
+
+a certain level if you add a commit to
+
+
+it you should not allow regression a
+
+
+coverage to regress if you have known
+
+
+bugs give priority to fix them because
+
+
+that makes clients happy as I said every
+
+
+commit must be an improvement every
+
+
+commit must be atomic it should be the
+
+
+smallest possible change that you can do
+
+
+every commit must pass all automated
+
+
+tests and review so all checks needs to
+
+
+pass and every commit must be deployable
+
+
+like if you make a commit it must be in
+
+
+a state that you can deploy if you take
+
+
+one commit out of a pull request you
+
+
+want to deploy it you want the system to
+
+
+have no problem every single commit must
+
+
+pass all checks and then you are able to
+
+
+deploy it master is deployed right every
+
+
+deploy must be approved by a reviewer I
+
+
+think we've established that for now
+
+
+everything a perfect tool would flag
+
+
+must be flagged
+
+
+just in case code should be rejected
+
+
+because why why do you want just in case
+
+
+good it's redundant at this point right
+
+
+and we said redundancy doesn't provide
+
+
+value I've already said that the commits
+
+
+can be ordered along the priorities of
+
+
+the transformations and this should be
+
+
+checked is a check that can only be done
+
+
+by a human most of the time and the
+
+
+obvious things that we that I've
+
+
+mentioned before that the limits we
+
+
+place on our commit messages so the
+
+
+conclusions redundancy provides no value
+
+
+that's really the key thing if you have
+
+
+something that you're not sure if it
+
+
+provides value don't do it
+
+
+why would you humans our attention level
+
+
+is unstable respected adjust your
+
+
+process around that and with that I
+
+
+think I'm moving the code from the
+
+
+refactoring in my understanding however
+
+
+it usually means that tests will change
+
+
+and so what do you would like to comment
+
+
+on that is it difficult is it something
+
+
+else or typically these are the move and
+
+
+renamed commits we can just go back to
+
+
+these really quickly right you can if
+
+
+you if you if you're developing atomic
+
+
+commits and you say that a move is
+
+
+actually when you move something you
+
+
+can't really break that up further when
+
+
+you are refactoring oftentimes you can
+
+
+extract a move
+
+
+from that refactoring so our move is
+
+
+probably formed some subcategory of a
+
+
+refactoring but it qualifies as a as a a
+
+
+separate improvement by itself so again
+
+
+it's about making things smaller you can
+
+
+reflect the code and move stuff around
+
+
+with it or you can say hey I move it to
+
+
+a better location
+
+
+that's the improvement and that's worth
+
+
+it without the rest of the refactoring
+
+
+because if I move it I'm already in a
+
+
+better state and the change I do is
+
+
+smaller the transformation I do a
+
+
+smaller representation I was wondering
+
+
+how the process of introducing this
+
+
+approach looked like because I guess it
+
+
+wasn't like overnight that you said no
+
+
+no and that leaves me with a very
+
+
+important point actually I'm deeply
+
+
+sorry I haven't done that further I'm
+
+
+all this work or all those insights
+
+
+arrived after years of discussions
+
+
+initially studying with my colleague
+
+
+Marcus and 10-cup which is a team leader
+
+
+and I think we both owe him great and
+
+
+many thanks and it's they're insisting
+
+
+on and trying to refine the process to
+
+
+to reach the goals in a more consistent
+
+
+way that that made these simple truth is
+
+
+that men's happened so no that's not
+
+
+that that definitely didn't happen
+
+
+overnight that's been a refinement of
+
+
+years and this talk was probably just
+
+
+able to touch the surface of everything
+
+
+but it needs you need to be very rigid
+
+
+you need to have you you want you need
+
+
+to be a person that wants to be that
+
+
+rigid yeah the nice thing is if you if
+
+
+you can agree on it then it's actually
+
+
+very simple to establish the hard thing
+
+
+might sometimes be that you
+
+
+have clients that accept that level of
+
+
+strictness that allow you to have the
+
+
+room to do those decisions as a as a
+
+
+programming team while not saying no you
+
+
+have to deliver deliver deliver even
+
+
+though this whole process is meant to be
+
+
+able to deliver faster and actually
+
+
+leads to to fast faster delivery thank
+
+
+you I thank you very much um could you
+
+
+please switch priorities oh yeah so I
+
+
+was thinking how is actually fix and
+
+
+change different from removal and
+
+
+addition because what I'm thinking about
+
+
+it seems to me that when you're fixing
+
+
+or changing code you're essentially
+
+
+removing or adding some features in
+
+
+college yes so a remove is what you
+
+
+always have to keep in mind is that we
+
+
+are talking about the smallest possible
+
+
+change right atomic changes so I remove
+
+
+would typically like if you see it if
+
+
+it's red lines right you remove those
+
+
+lines you see no green lines or maybe
+
+
+you see at the call set some adjustments
+
+
+but it's really removing things a fix
+
+
+and I think that's that's the
+
+
+distinction you were looking for is
+
+
+basically a violation of any kind of the
+
+
+rules we have established so those are
+
+
+things like if there is redundant
+
+
+whitespace somewhere in your code you
+
+
+don't want to interleave that whitespace
+
+
+fix with with other fixes you just
+
+
+extract that and that's one example
+
+
+right but the key the key discriminate
+
+
+the four fixes is actually that you had
+
+
+suboptimal state and you are fixing it
+
+
+to be better it's not necessarily a bug
+
+
+fix where there is bad behavior and
+
+
+production but like I said before it's
+
+
+you spotted the regression that made it
+
+
+into the code base and you're fixing it
+
+
+that way but I think that your question
+
+
+boils down to to the concept of atomic
+
+
+commits
+
+
+where you're really trying to make each
+
+
+change as small and indivisible as
+
+
+possible so it's very easy to have an ad
+
+
+commit that contains a few removals that
+
+
+contains a fix along the way that
+
+
+changes semantics along the way and 90%
+
+
+of the difference are green so you could
+
+
+say well I'm adding code right but if
+
+
+you really apply atomic transformations
+
+
+then these fall into smaller categories
+
+
+and a typical ad commit cook more often
+
+
+than not probably be broken up into a
+
+
+sequence of these smaller
+
+
+transformations that then have can be
+
+
+ordered the way thank you I think we are
+
+
+out of time so you have to catch Martin
+
+
+in the after party too so thank you
+
+
+I think we're start five minutes later
+
+
+anyway
+
+
+[Applause]

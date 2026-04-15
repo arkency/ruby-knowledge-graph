@@ -1,0 +1,6265 @@
+yeah thank you very much um let's see if
+
+
+we get a picture here it would be
+
+
+amazing oh yeah a picture worked
+
+
+wonderful so um
+
+
+good evening world Slav this is my very
+
+
+first ruby conference and it's amazing
+
+
+that so many Ruby developers actually
+
+
+practice Ruby I didn't know that and
+
+
+since this is not the official keynote
+
+
+but the first talk of the conference I
+
+
+consider myself now a ruby developer
+
+
+conference keynote speaker cool so um
+
+
+but I'm not talking about Ruby tonight
+
+
+I'm talking about something that is
+
+
+programming language agnostic and that
+
+
+is domain driven design so just to get a
+
+
+picture of the room who here has heard
+
+
+of domain driven design before this talk
+
+
+that's almost everybody that is great
+
+
+cool so this guy that's me I hate these
+
+
+slides I just show you what you did in
+
+
+your career and nobody really cares so I
+
+
+love domain driven design to a very
+
+
+unhealthy degree and since of today I
+
+
+can actually make a statement for that I
+
+
+got up this morning at 4 o'clock I took
+
+
+a train I missed my flight I took the
+
+
+next plane and I just arrived here 30
+
+
+minutes before this talk starts so and I
+
+
+will leave tomorrow morning at 5 but I
+
+
+will have a party with all of you guys
+
+
+afterwards and talk about domain driven
+
+
+design for the rest of the night thank
+
+
+you
+
+
+applaud me after the beer but I also
+
+
+started the German domain driven design
+
+
+community and found that a small
+
+
+conference that is annually in Berlin in
+
+
+October so if any of you wants to go to
+
+
+Berlin and talk about DDD learn a lot
+
+
+and have some hands-on workshops fliers
+
+
+are here in the entrance and please join
+
+
+us in October so let's talk about domain
+
+
+driven design um to give you a small
+
+
+overview I want to talk about what two
+
+
+main driven design is and especially
+
+
+what it's not because there seems to be
+
+
+a bit of confusion in the industry I
+
+
+want to talk about when to use domain
+
+
+driven design in your projects and who
+
+
+should learn about domain driven design
+
+
+we will talk in an example of how you do
+
+
+DDD we will actually work together to
+
+
+build a small domain and a domain model
+
+
+that we can implement and then good
+
+
+weather outside then we'll talk about
+
+
+why we do domain driven design and what
+
+
+are the risks and side effects if you do
+
+
+it because nothing in this world is free
+
+
+everything is a trade-off and even DDD
+
+
+even if I love
+
+
+there are certain cases where this is
+
+
+risky or where you do not want to use it
+
+
+so what is domain driven design domain
+
+
+driven design was a book by Eric Evans
+
+
+in 2003 published in 2004 with a
+
+
+subtitle texting complexity in the heart
+
+
+of software so this was not about the
+
+
+complexity of technical frameworks of
+
+
+course this was about the complexity of
+
+
+the business that you try to implement
+
+
+in working software he wrote this in a
+
+
+time where most developers were Java
+
+
+developers that worked in business
+
+
+software and did third normal form
+
+
+databases and object on yet programming
+
+
+the state of the art of 2003 and
+
+
+problems were really interested in the
+
+
+next framework and the next attraction
+
+
+and ORM and stuff like that but not
+
+
+really in the business so what we're
+
+
+trying to solve him what Eric try to
+
+
+solve was his book was how can we get
+
+
+this mapping of business people talking
+
+
+to programmers and then programmers
+
+
+looking into code and then translating
+
+
+back and being human compilers and
+
+
+translating to the business people what
+
+
+the code actually does and translating
+
+
+to the code what the business people
+
+
+mean how can we get this mapping as slim
+
+
+as possible this is already a best-case
+
+
+scenario from 2003 right the developer
+
+
+talking to the business people who's
+
+
+ever done that still impressive but not
+
+
+that many hands so I'm back in the year
+
+
+2003 this was really rare now it becomes
+
+
+more and more applicable that people
+
+
+actually do that but usually if you have
+
+
+something like a business analyst in the
+
+
+middle or another team that actually
+
+
+does the design for you and then hands
+
+
+you what you should build and the
+
+
+developers actually implement what
+
+
+they've heard you have very very long
+
+
+feedback loops if you add all can give
+
+
+feedback back to the customers and their
+
+
+needs so what we want is to have this
+
+
+mapping as slim as possible and what is
+
+
+the slimmest possible mapping you can
+
+
+get zero so the trick here is we're
+
+
+going to use a ubiquitous language which
+
+
+is a funny word it's a ubiquitous
+
+
+language it's very hard to pronounce
+
+
+especially for a German but um this is
+
+
+something the DDD book does all the time
+
+
+is all about language and getting better
+
+
+understanding of your domain but then
+
+
+you have all these terms that are hard
+
+
+to
+
+
+announcer understand but nonetheless
+
+
+ubiquitous language is a language that
+
+
+is ubiquitous means it's everywhere is
+
+
+everywhere in the spoken and written
+
+
+form that you have to deal with in your
+
+
+solution of the business problem meaning
+
+
+it's in the code it's in the head of the
+
+
+users it's in the documentation but it
+
+
+doesn't come naturally ubiquitous
+
+
+language is something that you design
+
+
+that you develop so you have your
+
+
+natural language usually being it polish
+
+
+German English or whatever your domain
+
+
+people talk and then you have your
+
+
+business language if you are in finance
+
+
+you have special terms that have meaning
+
+
+if you are in logistics the same terms
+
+
+can have different meaning so there is a
+
+
+specific business language that people
+
+
+in the business know and in use when
+
+
+they talk about business terms and
+
+
+behavior and now when you break this
+
+
+down into source code you sometimes have
+
+
+to find one word for an ambiguous term
+
+
+some people say employee others say
+
+
+colleague but basically they mean the
+
+
+same and it's just one term that you can
+
+
+use in code so what should we actually
+
+
+use as a class name and this design is
+
+
+called a ubiquitous language you will
+
+
+have one language in the end that most
+
+
+parties agree upon when we talk this
+
+
+means that that so let's define really
+
+
+clear and crisp ubiquitous language from
+
+
+a domain that everybody knows this is
+
+
+our living room and tonight I'm gonna
+
+
+sit on my multi bat supporter
+
+
+maybe alone maybe with some friends and
+
+
+we gonna watch some movies on the house
+
+
+it called entertainment provider system
+
+
+cool singer - thank you
+
+
+my favorite pattern there's a whisky
+
+
+called singer but let's get into that
+
+
+later um yeah so what's the problem here
+
+
+this is good code right I mean we've all
+
+
+written code like this we know what it
+
+
+is and what it does so let's name it
+
+
+that way we're done the problem here is
+
+
+you have a lot of weasel words there are
+
+
+prefixes and suffixes all over the place
+
+
+that don't add meaning to the domain
+
+
+understanding its just describing and a
+
+
+technological level what we find but we
+
+
+don't care when we write or read domain
+
+
+code we just want to see what's the
+
+
+actual business case and behavior
+
+
+something is a repository is interesting
+
+
+for someone who develops repositories
+
+
+but not if I read hey I'm using this
+
+
+because I want to get stuff done weasel
+
+
+words is a analogy from from Shakespeare
+
+
+weasel can suck X and leave only an
+
+
+empty shell that is meaningless so
+
+
+there's a lot of weasel words showing up
+
+
+in source code for example I don't know
+
+
+if you can see it from up there let me
+
+
+reduce them you have the party heads you
+
+
+have class prefixes like my customer or
+
+
+a customer of the customer Who am I what
+
+
+does that mean if I read a class name my
+
+
+customer you also have the Hungarian
+
+
+notation this is a boolean so let's call
+
+
+it B something something or bull
+
+
+something something so we know it's a
+
+
+boolean right well we have IDs
+
+
+today that help us with that so we don't
+
+
+need it actually to understand and
+
+
+usually if you have written source code
+
+
+in you if your domain behavior sentence
+
+
+by sentence it doesn't matter what data
+
+
+type is in there I pay you your salary
+
+
+and you take your salary and take
+
+
+another loan so yeah that's fine you
+
+
+don't need to know that the salary is
+
+
+int or decimal or double that doesn't
+
+
+matter for the business case in the case
+
+
+of a buck you have to write a test that
+
+
+actually checks if everything is all
+
+
+right of course but you don't need to
+
+
+read if in - celery - bla bla bla double
+
+
+d's you don't need the technical terms
+
+
+to understand the business value now
+
+
+we're way not done here you have
+
+
+philosophers you have something like the
+
+
+maitre or the layer or the superorder
+
+
+the obvious prayer prefixes to classes
+
+
+they only have meaning for the person
+
+
+who actually wrote them the next person
+
+
+has very hard time understanding what it
+
+
+actually means then we go to the
+
+
+importance we have the advanced or the
+
+
+general we have the simplicity the abbé
+
+
+of the opposite of the important things
+
+
+and it doesn't stop there we go through
+
+
+all the the pattern languages even in
+
+
+domain-driven design we have
+
+
+repositories and aggregates and you have
+
+
+the Gang of Four patterns like facade
+
+
+and decorators who here has ever
+
+
+enriched the class names with the
+
+
+pattern that they're actually using
+
+
+now I'm happy that I see all the hands
+
+
+up so this doesn't add to readability
+
+
+it's just explaining the next person
+
+
+what you're doing here but what if you
+
+
+change the pattern that you're using but
+
+
+the business thing is the same then you
+
+
+will change your source code and meaning
+
+
+changes people now read a different text
+
+
+but actually nothing and the behavior
+
+
+changed you just had some different
+
+
+implementation detail at that point and
+
+
+this doesn't end you have so many
+
+
+different of those you can take the
+
+
+slides later and go through all of them
+
+
+and I'm very very eager to to fight
+
+
+against each and every one of those
+
+
+usages up until the point where I say
+
+
+the suffix ID should be forbidden in
+
+
+source code if I have a customer ID
+
+
+that's a very bad pattern because unless
+
+
+it's a domain thing that you actually
+
+
+have an ID that you can show around you
+
+
+never have a real customer in your
+
+
+source code the real customer is here
+
+
+outside of the world in the real world I
+
+
+am in your shop I want to buy stuff but
+
+
+in your source code you have objects
+
+
+that do domain behavior and you have
+
+
+representations and you have information
+
+
+and sometimes you just have a reference
+
+
+like okay this customer or the name
+
+
+so having customer ID never adds meaning
+
+
+from a business perspective so why would
+
+
+you use it it doesn't differ if I if I
+
+
+have a function and this function needs
+
+
+a customer and some line items that they
+
+
+bought then I can pass in a customer
+
+
+doesn't matter if it's a it's a complex
+
+
+object or it's just an ID the function
+
+
+will work if I put in the right object
+
+
+so we try to avoid weasel words let's do
+
+
+it in our source code example now the
+
+
+weasel words are gone we still have a
+
+
+problem we actually have two different
+
+
+problems the main problem we have is we
+
+
+still didn't get more meaning we just
+
+
+left out some words that weren't adding
+
+
+meaning but now our multi but is really
+
+
+weird the problem we had here is the
+
+
+same term had a technical meaning as
+
+
+well as a domain meaning it was a multi
+
+
+but supporter because it supported
+
+
+multiple butts to sit on
+
+
+and supporter pattern is something
+
+
+technical and how programs are all
+
+
+confused like yeah what should I do with
+
+
+those words if you only use domain terms
+
+
+in your source code you would not
+
+
+scratch the supporter here because it's
+
+
+actually part of the domain but is it
+
+
+though
+
+
+if we just use the words that people
+
+
+actually use in our source code now we
+
+
+can talk about business once I look
+
+
+through the peephole all my friends are
+
+
+there let's get on the sofa and watch a
+
+
+movie on the television yeah this is how
+
+
+people talk so I really want to see how
+
+
+people talk in the business in my source
+
+
+code because then I can reason about it
+
+
+then the coherence between what the
+
+
+mental image of the business people is
+
+
+and what my code actually tells them is
+
+
+very high so when my my source code has
+
+
+a bug and the business people tell me oh
+
+
+when I do this and then I buy stuff but
+
+
+when I when I reject it and then this
+
+
+happens I can just look into my source
+
+
+code reads the story I'm like yeah this
+
+
+is where it happens because here are the
+
+
+words they just said a new programmer on
+
+
+the team can just read the source code
+
+
+and if you write it really really well
+
+
+the domain stories are in the code so
+
+
+the next person doesn't have to read
+
+
+documentation and source code the source
+
+
+code is basically your documentation if
+
+
+you write good tests and you do this
+
+
+with domain driven objects and function
+
+
+names everything becomes very very very
+
+
+reduced down to the business problem
+
+
+let's do an exercise and just raise
+
+
+hands or shout in the room if you if you
+
+
+have an idea something is bad in this
+
+
+code might have something to do with
+
+
+weasel words might not so what could we
+
+
+optimize it's not Ruby yeah this is a
+
+
+big problem this is not Ruby I should
+
+
+have prepared for that right yes yes so
+
+
+we have a customer repository and we
+
+
+they we then say get customer you could
+
+
+just scratch that you don't need to get
+
+
+customer so scratch the customer scratch
+
+
+the get as well just customer
+
+
+posit ori by year of birth sounds
+
+
+natural right nope yes daytime is not a
+
+
+year that's a very important fact a
+
+
+daytime the first of January 1950 and
+
+
+the second of January 1950 is a
+
+
+different daytime but it's the same year
+
+
+and we want the year so what do we do an
+
+
+int a year yes we just use a value
+
+
+object which is the low-hanging fruit of
+
+
+domain-driven design when you want to
+
+
+start with DDD the first thing you can
+
+
+actually do is just use value objects
+
+
+for every primitive data type you can
+
+
+find in your domain code there should be
+
+
+no primitives at all there is no string
+
+
+in the real world in some domain series
+
+
+but for all intents and purposes there
+
+
+is not so unless your domain of math and
+
+
+you actually have instant doubles you
+
+
+only have celery and you have payments
+
+
+and you have height and you have age and
+
+
+names and all those things there is no
+
+
+string and no int whenever you find a
+
+
+primitive kill was fire and had a domain
+
+
+type a value type can just be the
+
+
+primitive datatype underneath and then a
+
+
+shell around it but it makes it explicit
+
+
+so now you can have a constructor
+
+
+preventing illegal values and you can
+
+
+have a two string method that gives you
+
+
+beautiful code or beautiful test results
+
+
+and you have parallel parameters in your
+
+
+functions that tell you what they want
+
+
+they want to hear
+
+
+now you can't give it a wrong value you
+
+
+have to put in a valid year but there's
+
+
+more that's way more yes yeah that's the
+
+
+easiest thing right it's a Weedle word
+
+
+customer repository from the inside it
+
+
+makes sense now we see this is a
+
+
+repository cool but how often are you
+
+
+inside of your classes you write them
+
+
+they work and then you never go back
+
+
+into them until there's a bug but you
+
+
+always have to read customer or posit or
+
+
+redo stuff that's not how business
+
+
+people talk so I want to read customers
+
+
+and then buy here of birth and then I
+
+
+enter a year cool so I have an interface
+
+
+here I find customers and I could have
+
+
+implemented a class customers that has
+
+
+only one method born in and it takes a
+
+
+year and then it
+
+
+the list of customers cool hmm the eye
+
+
+is a wheel award and this is you are
+
+
+holy Ruby developers your code is so
+
+
+crisp and pristine I come from the very
+
+
+dirty C sharp world where people still
+
+
+use I for interfaces and yeah so I come
+
+
+from a world of pain so if you have to
+
+
+use interfaces and if in your company
+
+
+culture everybody's telling you we will
+
+
+not do this DDD
+
+
+interfaces need an eye just do this I
+
+
+find stuff if you don't have interfaces
+
+
+you're lucky so customers born in here
+
+
+that's awesome the only new thing in
+
+
+domain driven design is actually that
+
+
+you have one ubiquitous language per
+
+
+bounded context so what is a bounded
+
+
+context a bounded context is a semantic
+
+
+encapsulation inside of your domain
+
+
+there is no natural boundary that is
+
+
+always true a bounded context is as the
+
+
+ubiquitous language itself it's a design
+
+
+thing if a ubiquitous and if it don't if
+
+
+a bound of context is small it fits in
+
+
+your head very well and you can reason
+
+
+about it easily but then you have
+
+
+multiple bounded context and the
+
+
+interaction between them becomes hard if
+
+
+you only have one bounded context for
+
+
+everything there is no interaction
+
+
+problem you know it's like a distributed
+
+
+system of ideas everything is is always
+
+
+consistent but then if you want to do
+
+
+something in there you need to
+
+
+understand the whole domain before you
+
+
+can start working so usually after some
+
+
+initial modelling you have a context map
+
+
+of your domain looking like this we have
+
+
+shopping carts and warehouses and
+
+
+payment and delivery and each of those
+
+
+contexts have their own ubiquitous
+
+
+language meaning every term in that
+
+
+language has a specific meaning to that
+
+
+context and is completely oblivious of
+
+
+the rest of the world thank you very
+
+
+much mama okay so um
+
+
+for example customer we had customers
+
+
+all those contexts have a customer but
+
+
+you would never build a customer class
+
+
+that does all the behavior from other
+
+
+contexts because then if you add credit
+
+
+cards to your payment system now you
+
+
+have to test your warehouse again
+
+
+because you change the customer class
+
+
+and maybe it's broken
+
+
+you do not want to couple those things
+
+
+so what do we do we build our own
+
+
+customer classes for all the different
+
+
+boundary contexts each customer has only
+
+
+the data and only the behavior they need
+
+
+for their specific context so in Germany
+
+
+we have to adhere to the new in whole of
+
+
+Europe to the new data privacy
+
+
+protection law in a few weeks we we
+
+
+build our own bounded context called
+
+
+just customer information or employee
+
+
+information which holds all the data
+
+
+that don't belong to any behavior so
+
+
+your name your address there's no real
+
+
+behavior there's no business rules
+
+
+saying if your name starts with P behave
+
+
+differently so all those information are
+
+
+just data and it's his own bounded
+
+
+context and the only thing that all
+
+
+bounded context share about the natural
+
+
+customer or the natural employee is an
+
+
+ID it's just a UUID or whatever that
+
+
+gets passed around so my customer class
+
+
+in the payment system has an ID and some
+
+
+data it needs for behavior like credit
+
+
+cards information stuff like that but
+
+
+there is no name if I want to show you
+
+
+an employee or a customer on screen I
+
+
+just take the ID ask the information
+
+
+context get a screen name and that's it
+
+
+and when you want to forget that
+
+
+customer you just ditch that on the
+
+
+context and the rest still works sorry
+
+
+no I did not say having IDs is wrong I
+
+
+said putting ID as a suffix in your
+
+
+class name is wrong so if you have a
+
+
+reference to your customer I would call
+
+
+it customer reference because that's
+
+
+what it does and I would put it as a
+
+
+value type inside of my business object
+
+
+umm I good point so um if you do that if
+
+
+you have your own language and your own
+
+
+name like customer for all the different
+
+
+contexts then you can figure out maybe
+
+
+it's not the real word that we're using
+
+
+here in payment you don't really have a
+
+
+customer you have a creditor in debitor
+
+
+so you have actually two different
+
+
+objects with two different names and
+
+
+it's not the customer at all and in
+
+
+delivery you don't have a customer you
+
+
+have a shipping address so something
+
+
+goes to the shipping address they don't
+
+
+care about a customer as a concept at
+
+
+all the warehouse it doesn't even know
+
+
+that customers exist it just gets an
+
+
+order and has to put stuff into boxes
+
+
+and then give it to the to the delivery
+
+
+system
+
+
+only the shopping cart might have a real
+
+
+customer with some behavior of if you
+
+
+bought this you should also be
+
+
+interested in this so we will advertise
+
+
+for you so this is what bounded context
+
+
+does for you
+
+
+you have your own very unique semantic
+
+
+barrier and you you can reason about
+
+
+every meaning of every word inside of
+
+
+that bounded context so in your source
+
+
+code this is usually a namespace or a
+
+
+different project or a different
+
+
+solution I have actually no clue how
+
+
+Rubies separates projects how do you do
+
+
+it
+
+
+gems gems or sounds beautiful yeah so
+
+
+whatever works works so finding the
+
+
+finding of the bounded context is
+
+
+important I'm not bashing Ruby by the
+
+
+way I just have no clue
+
+
+so finally bounded context is really
+
+
+important um also for strategic planning
+
+
+because some contexts are more important
+
+
+than others you need all those bounded
+
+
+context we've seen before to actually
+
+
+make your domain work but Amazon would
+
+
+not put the same creativity people power
+
+
+and then programming efforts into each
+
+
+of those context payment you can just
+
+
+buy that from from PayPal or maybe you
+
+
+build a little system yourself but it's
+
+
+okay if it just works it works if it's
+
+
+broken you fix it but it's not your core
+
+
+domain it's not what you what makes you
+
+
+better than the rest of the market so
+
+
+for Amazon this might actually be the
+
+
+shopping cart context and the shopping
+
+
+cart context was or is for many years
+
+
+the core domain what you do with this
+
+
+context map is you define where is my
+
+
+core domain what is where I put all my
+
+
+power in and what domains are supporting
+
+
+domains the supporting domains are
+
+
+specific to your context so only you can
+
+
+build them but they are not that
+
+
+important so you can put your Junius to
+
+
+it or just let them be built-in in a
+
+
+quick manner you do credit application
+
+
+whatever payment is something you can
+
+
+actually buy in in most cases because
+
+
+there's no specific behavior for payment
+
+
+for most domains and if you now know
+
+
+what is the core domain what's
+
+
+supporting there's a problem because for
+
+
+example the shopping cart and the
+
+
+warehouse have a relationship meaning
+
+
+the real world has a relationship these
+
+
+two interact and the programmers also
+
+
+have a relationship there's a team
+
+
+building the warehouse system and
+
+
+there's another team but in the shopping
+
+
+cart system and if those teams are not
+
+
+aligned in the same way that the
+
+
+business actually is aligned Conway's
+
+
+law coming through then you have the big
+
+
+problem of misalignment of needs between
+
+
+the development world and the real world
+
+
+so if shopping cart is core domain and
+
+
+they say we need more information or we
+
+
+need to change our behavior they would
+
+
+do that meaning that the warehouse
+
+
+always has to react on that like oh my
+
+
+god
+
+
+they change the interface again that
+
+
+sucks if the warehouse people now are
+
+
+sitting in the same office they can say
+
+
+look we have a customer-supplier
+
+
+relationship you know you are kind of
+
+
+like upstream this is a und up there
+
+
+you're kind of upstream from the
+
+
+importance value and we're kind of
+
+
+downstream so it's your model you define
+
+
+it but please take care of us and don't
+
+
+just change your code don't just change
+
+
+your definitions talk to us first
+
+
+because we need time to adapt or
+
+
+sometimes it's not a customer-supplier
+
+
+relationship warehouse really hurt I
+
+
+mean and shopping cart really doesn't
+
+
+care if there's a warehouse in the end
+
+
+or not they just do their stuff because
+
+
+the other team is not in Seattle the
+
+
+other team is on the other side of the
+
+
+world and we don't really like them so
+
+
+we don't care their problem
+
+
+let's also upstream downstream
+
+
+relationship but with hmm silo CSS is
+
+
+Baumer contexts are a good candidate for
+
+
+building silos and that's dangerous and
+
+
+trying to avoid that but you want to
+
+
+have a silo to put the people that have
+
+
+the knowledge inside of that thing and
+
+
+not worry about the rest so it's kind of
+
+
+like a pro and cons at the trade-off
+
+
+like everything in in software and it
+
+
+depends so um what can we do
+
+
+when warehouse says I'm down Street a
+
+
+we're downstream as a team and and they
+
+
+hate us and they really manipulate us
+
+
+all the time we just build an anti
+
+
+corruption layer which is a simple tool
+
+
+to say there's a there's a little
+
+
+barrier in between which is a real-world
+
+
+communication thing that we also can
+
+
+build in code when they change their
+
+
+model we only have to adjust our
+
+
+anti-corruption layer but this will talk
+
+
+on the outside to whatever they give us
+
+
+on the inside we will have the clean
+
+
+boundary that we can define ourselves so
+
+
+that said there's a whole plethora of
+
+
+communication patterns in the book of
+
+
+DDD and we're not going through all of
+
+
+them now because
+
+
+it's so much psychology and it's late
+
+
+but it's super important that to
+
+
+understand that software is not
+
+
+something that exists outside of social
+
+
+context and social organization of your
+
+
+company can't work without Alliance
+
+
+software development if you do anything
+
+
+with software so you have a socio
+
+
+technical context all the time and you
+
+
+should align your teams and your
+
+
+communication structures with a system
+
+
+that you're actually building and
+
+
+domain-driven design on a strategic
+
+
+level gives you actually a tool that
+
+
+helps you after modeling your domain to
+
+
+align your teams one team can work on
+
+
+multiple domains of course but two teams
+
+
+can't work in the same domain if I have
+
+
+to separate teams and they get the same
+
+
+domain to work on now two teams do
+
+
+separate decisions on the same codebase
+
+
+and model that doesn't work so it's
+
+
+basically one team or you have a
+
+
+misalignment to be friendly inwards so
+
+
+as I just quoted organization and
+
+
+technical boundaries should co-evolved
+
+
+now that's surprising it's not just the
+
+
+vision or the business people that
+
+
+define the model it's also the code
+
+
+because this is something that goes from
+
+
+all directions when we encode figure out
+
+
+oh this doesn't work we have bounded
+
+
+context the organization's said look
+
+
+this is strategic this is important
+
+
+let's just divide the domain that way
+
+
+but then you code and you can you can't
+
+
+fit it in your head
+
+
+this model is way too big and no
+
+
+programmer actually understands it so
+
+
+there's a lot of confusion and you
+
+
+always make mistakes as a team this is a
+
+
+good moment to say look the code doesn't
+
+
+fit we need to split the model this is
+
+
+actually two different things and then
+
+
+program is pushed back under the
+
+
+strategical planning has to adjust
+
+
+otherwise they hurt themselves and you
+
+
+can also figure out oh yeah the language
+
+
+sounded really clear when we were
+
+
+talking about it we were modeling and
+
+
+post-its and everything was cool and we
+
+
+had our little circles and colors but
+
+
+now that we code we have a clash of
+
+
+clouds and now we see oh this doesn't
+
+
+fit all so push back so domain driven
+
+
+design fits very well with an agile
+
+
+project management style because you
+
+
+need a lot of feedback loops to make it
+
+
+work now to show you how
+
+
+kote can look and this is it's not only
+
+
+not ruby it's also not polish or English
+
+
+so I did this on purpose to confuse you
+
+
+this is German domain code and you see a
+
+
+language that only consists of shift
+
+
+planning and holidays and stuff like
+
+
+that there is no primitive datatype in
+
+
+there everything that you see is
+
+
+enumerations and functions and class
+
+
+names derived from talking to business
+
+
+people and years of painful experience
+
+
+of things that didn't work but in the
+
+
+end we pushed everything on the outside
+
+
+that was primitive datatypes and
+
+
+technology and now we have a pure
+
+
+language that we can work with and this
+
+
+is just a test scenario you know this is
+
+
+not running code it is just a test but
+
+
+these methods are actually just calling
+
+
+the business code there is no framework
+
+
+in between there's no magic happening
+
+
+but there's something beautiful
+
+
+happening with this code if you do two
+
+
+string for every value type you have
+
+
+because now we're using value types you
+
+
+can say look everything that has an
+
+
+underscore should just become a space so
+
+
+it's readable for humans all of a sudden
+
+
+and every property you can define
+
+
+because it's a value type how to string
+
+
+should look and then when you run this
+
+
+test you get something like this an
+
+
+explanation of the calculation it's just
+
+
+the methods that run they just put out a
+
+
+two string okay I'm running and this is
+
+
+a decision I've made so this happened
+
+
+events come out and then all the values
+
+
+have changed just get formatted in a
+
+
+readable way and put on screen and this
+
+
+is just a test result why we needed no
+
+
+extra framework for but now if if your
+
+
+server is running and you want to see
+
+
+what's happening in the business at the
+
+
+moment you can just put all the console
+
+
+outs to the screen and you can see life
+
+
+what your computer is doing in domain
+
+
+language this is just a present that you
+
+
+get is just a gift on top if you do
+
+
+domain modeling and every class and
+
+
+every function you have is purely domain
+
+
+language you can just put it on screen
+
+
+and read the story of what's happening
+
+
+so how do we discover bounded context
+
+
+like these there are multiple ways one
+
+
+clue is the the contextual language this
+
+
+is what we discussed my language changes
+
+
+you have a different bound
+
+
+next another one is domain expert
+
+
+localization if you take different
+
+
+domain experts into the room and you
+
+
+talk to them and you have three experts
+
+
+standing over here and they're talking
+
+
+about this and two other experts are
+
+
+always here now you see oh there might
+
+
+be two different barnett context because
+
+
+those people don't mix maybe they're
+
+
+working in different contexts that
+
+
+they're at the client this is never a
+
+
+law it's always just a good hint you
+
+
+have data cohesion now information that
+
+
+changed together stay together so maybe
+
+
+they belong to the same bond context
+
+
+business process steps once you have a
+
+
+drafting phase you know is an order
+
+
+mutable or immutable hard to say it's
+
+
+both talking to different bounded count
+
+
+different business people some will say
+
+
+sure you can you can modify the order
+
+
+take stuff out again because you can't
+
+
+afford it yet but it's fine and then at
+
+
+some point you say now deliver this to
+
+
+me
+
+
+so the drafting phase of the order is
+
+
+actually mutable but after you ordered
+
+
+it's immutable so an order is some two
+
+
+different things to in from Berner
+
+
+context and the one is mutable the other
+
+
+not and the last thing is when you find
+
+
+a bottleneck
+
+
+whenever you see some people or some
+
+
+parts of the process are waiting another
+
+
+others that might be a bonnet context
+
+
+barrier and now you can model the
+
+
+interact between them and optimize a
+
+
+business flow so that is DDD basically
+
+
+you have bound of context in those
+
+
+bounded context you have developers and
+
+
+business people talking to each other
+
+
+and the language they develop together
+
+
+they use in all the documents be it code
+
+
+or documentation or tests or
+
+
+specifications and everybody learns
+
+
+about the business language that's what
+
+
+the main roof design is in its core what
+
+
+is it not well it's not new that's a
+
+
+misconception you know I mean 2003 is
+
+
+not new for some people but it's not
+
+
+even that new everything in ddd has been
+
+
+written in other books years and years
+
+
+and decades before the only one single
+
+
+concept that is completely new is one
+
+
+ubiquitous language per bounded context
+
+
+I've never written there reason that I
+
+
+read that anywhere else before but
+
+
+everything else is is just a good mix of
+
+
+things that fit together if you want to
+
+
+focus on business behavior and it's also
+
+
+not hard even if it seems like a lot of
+
+
+effort to do modeling to get business
+
+
+people in the room and talk to them to
+
+
+actually shorten your language and
+
+
+refactor your code
+
+
+without changing behavior just to
+
+
+reflect understanding that seems like a
+
+
+lot of effort but in your core domain
+
+
+you will do that effort anyway but if
+
+
+you don't model it upfront or with the
+
+
+business people you will do it whenever
+
+
+something breaks and then you will learn
+
+
+through very many steps that are very
+
+
+painful and you will never reach that
+
+
+quality in the end so domain driven
+
+
+design is not hard because if you if you
+
+
+work in your codomain you have to do it
+
+
+and without the core domain modeling
+
+
+without the context map you can't decide
+
+
+where to put that effort in and where to
+
+
+just leave it be so therefore it's no
+
+
+overhead because you actually need to do
+
+
+it to distribute your your your
+
+
+brainpower in the process and it's not
+
+
+only for complex domains complex domain
+
+
+the other one that benefit the most from
+
+
+DDD of course because then you can
+
+
+harness all the architectural patterns
+
+
+and all the great wordings and modeling
+
+
+techniques but even the most simplest
+
+
+thing you you build your own video
+
+
+library for your home using value types
+
+
+instead of primitive data types makes it
+
+
+immediately clearer if you return to
+
+
+your project in a year oh oh what were
+
+
+you thinking here you can read it
+
+
+because your source code is actually
+
+
+speaking your own ideas in your own
+
+
+language and domain driven design is not
+
+
+all of these building blocks
+
+
+ever since 2011 or 12 or since DDD
+
+
+became popular more and more and more
+
+
+people are running around Europe and and
+
+
+giving talks about aadd is great you can
+
+
+do aggregates and value objects and
+
+
+entities and that's not really deep
+
+
+these are just building blocks if you
+
+
+live in 2003 and you do Java and you
+
+
+have an SQL database these are perfect
+
+
+patterns to get started with better
+
+
+domain language and it's not that
+
+
+they're not useful today I mean a lot of
+
+
+my business code is actually entities
+
+
+and aggregate that's fine it helps me
+
+
+with DDD but this is not the sum of
+
+
+things that you can use it's just a few
+
+
+examples and whatever technical pattern
+
+
+helps you to get more semantic is the
+
+
+one you should use
+
+
+so if you can go pure functional
+
+
+reactive that's fine go there if you
+
+
+have any other kind of methods or events
+
+
+or thing or whatever that make your code
+
+
+more semantic just use them and
+
+
+therefore it's also not sakura-san
+
+
+micro-services and
+
+
+other architectural patterns
+
+
+specifically bounded context are not
+
+
+microservices please never confuse them
+
+
+sometimes they fit well together and
+
+
+more often than not they don't so when
+
+
+do you use domain driven design now
+
+
+subtitle of the book was complexity in
+
+
+the heart of software but what does
+
+
+complexity actually mean anyone know
+
+
+this graphic ok yeah so there was a hand
+
+
+yeah this is a Keynesian framework it's
+
+
+a frame of reference for complexity so
+
+
+if you have an obvious problem at hand
+
+
+you know you see it since there is no
+
+
+beer then you categorize Lee so problem
+
+
+what should we do but you can respond
+
+
+and say you bring beer and put it there
+
+
+it's a simple task it's an obvious
+
+
+problem that has a well-known solution
+
+
+you can use your team and delegate
+
+
+obvious scenarios so obvious complexity
+
+
+in your domain is something that
+
+
+everybody can solve or that even people
+
+
+without knowledge can just be delegated
+
+
+and and then they can solve it you have
+
+
+complicated parts of your domain and
+
+
+complicated means you need to have
+
+
+special knowledge or thinking power you
+
+
+need people that studied or have years
+
+
+of experience if you find a complicated
+
+
+problem you sense it oh my gosh the car
+
+
+isn't driving anymore so now you need to
+
+
+analyze it you need to understand the
+
+
+matter that you're working with you need
+
+
+to understand the problem and after a
+
+
+phase of analysis you know actually how
+
+
+to respond and then you can solve your
+
+
+problem coming to complex complex is
+
+
+when you have systems that interact with
+
+
+other systems and it's so chaotic and
+
+
+there are so many variables at play that
+
+
+you can't determine the right solution
+
+
+no matter how much you think one of my
+
+
+favorite examples suspicious
+
+
+specifically in Germany is Tex law
+
+
+there's like whole libraries just full
+
+
+of books of Tex law and it's an
+
+
+append-only domain so whenever there's a
+
+
+problem they just add another book to it
+
+
+and it gets more complex and has more
+
+
+problems so when you say are no problem
+
+
+we can solve it you know everybody has
+
+
+an opinion
+
+
+yeah the politicians should just do this
+
+
+and then it's solve yeah cool let's try
+
+
+that experiment if we do just this this
+
+
+problem is solved but now we have
+
+
+different problems and then in the end
+
+
+the whole system breaks down who doesn't
+
+
+work that way so it's way too complex
+
+
+you have the fiscal market and you have
+
+
+the whole economy that interact and then
+
+
+you have the banking system and they all
+
+
+are intertwined and what do we do we
+
+
+can't analyze it we can sense a problem
+
+
+and then we can probe it meaning we have
+
+
+to do small controlled experiments or
+
+
+small uncontrolled experiments for that
+
+
+matter you need to do small steps and
+
+
+then analyze what happens after we did
+
+
+an experiment we can gather inside and
+
+
+you iterate on problems that are complex
+
+
+and after long iterations you might find
+
+
+a solution that is so obvious in
+
+
+hindsight that you think oh why didn't
+
+
+you think of it the first time then you
+
+
+know you have a good model if you think
+
+
+this is too simple to be true but it's
+
+
+cool you have a good model but you can't
+
+
+think of this perfect model in the
+
+
+beginning you need to iterate on that
+
+
+that's a complex domain so chaotic I've
+
+
+worked in a chaotic company not stating
+
+
+that I am right now because I'm filmed
+
+
+but well so in a chaotic company or in a
+
+
+chaotic complex domain what you can do
+
+
+is you can just act do anything and just
+
+
+see what happens it's not probing you
+
+
+know probing is with a scientific mind
+
+
+you have a you have a hit a clue of what
+
+
+might happen and then you just check if
+
+
+it fits out when you act it's just like
+
+
+let's just throw fire in there and see
+
+
+what happens
+
+
+oh yeah burns cool so if you have a
+
+
+chaotic domain or part of your domain
+
+
+just Act see what happens and then try
+
+
+to make sense of it in the long run and
+
+
+try to reform that part into something
+
+
+that is in the other complexities or
+
+
+just get rid of it or leave the company
+
+
+that's your solution
+
+
+but so you have now four different types
+
+
+of complexity
+
+
+whether you use two men driven design
+
+
+all of them the good answer so all of
+
+
+them would be um yes you can use
+
+
+something of domain resign in every kind
+
+
+of domain but you will not use the whole
+
+
+power of DDD in every one of them and
+
+
+this is why bounded context thing is so
+
+
+important
+
+
+so my bounded contexts are either
+
+
+obvious problems you know payment is an
+
+
+obvious problem and there's a solution
+
+
+for that
+
+
+or maybe it's complicated but PayPal
+
+
+made it obvious for us cool so if you
+
+
+have your context map and you can figure
+
+
+out do we have this is this type of
+
+
+complexity here you already know should
+
+
+I do events drawing big designer from
+
+
+modeling whirlpool design or should I
+
+
+just stick to some value object and be
+
+
+done with it so DDD gives you the tools
+
+
+to optimize your development process
+
+
+before you get into a lot of accidental
+
+
+complexity that will hurt you in the end
+
+
+now who should learn about TDD obviously
+
+
+all of the Ruby developers and all of
+
+
+the search app developers of this world
+
+
+so therefore programmers of course but
+
+
+also the architects if you have them in
+
+
+your company and the CTO and the
+
+
+customers and the facilitator that helps
+
+
+you moderating your event store means so
+
+
+basically everyone involved in your
+
+
+process a process in your business
+
+
+solution process should learn about
+
+
+domain driven design if your customer
+
+
+doesn't know what you're doing if they
+
+
+don't believe that developers aren't
+
+
+people who sit in a basement and they
+
+
+get pizza and coke and they produce
+
+
+great code in the end but they're
+
+
+actually empathic people who care about
+
+
+the behavior of the developer of the of
+
+
+the domain and they try to improve your
+
+
+business process if they don't believe
+
+
+that they will not interact with you in
+
+
+the way that you need them to to
+
+
+actually solve their problems so when my
+
+
+customers approach me is like oh yeah
+
+
+he's a developer and yeah I need a table
+
+
+in two buttons please so how do you help
+
+
+those people building them nicer tables
+
+
+and more buttons that doesn't help you
+
+
+need to talk to them about business
+
+
+stuff so there are methods for that and
+
+
+you need to teach the respective people
+
+
+the certain amount of TDD they need to
+
+
+know to be able to work together to a
+
+
+solution how do we do that three steps
+
+
+now we go through a little exercise we
+
+
+have three steps the first one is
+
+
+extract the right model and the right
+
+
+model means the model that is able to
+
+
+help actually you do not extract the
+
+
+real world model you know I have a
+
+
+customer cool the customer has dreams
+
+
+and a hair color and different shirts in
+
+
+his and whatever drives a car I don't
+
+
+care about all those information there
+
+
+are certain information I need for the
+
+
+behavior in my domain so I extract the
+
+
+right be the right model be it behavior
+
+
+or information to be
+
+
+able to help with his business problems
+
+
+then I put that model into semantic code
+
+
+meaning I define a ubiquitous language
+
+
+and I built my code only in that
+
+
+ubiquitous language
+
+
+whenever I figure out I can't there's
+
+
+something in this case and you know I
+
+
+need to use a framework don't do that
+
+
+just write semantic code and then secure
+
+
+that code from corruption by influent
+
+
+through any kind of messaging or data
+
+
+layer or whatever you have I don't want
+
+
+to see any framework calls inside of
+
+
+your domain code that all belongs on the
+
+
+outside so these three simple steps are
+
+
+the key to success with domain driven
+
+
+design cool now you're done whenever
+
+
+someone comes along and says everything
+
+
+is simple it's just three simple steps
+
+
+this is very wrong it's a very
+
+
+simplified model but the essence of it
+
+
+is very important and even if I'm a
+
+
+German this is not a marsh this is a
+
+
+dance so you don't do step one extract
+
+
+it it's the two semantic code and then
+
+
+framework thank you very much no I do it
+
+
+that way but you don't please what you
+
+
+do is you go through these phases
+
+
+usually in that order in the beginning
+
+
+but not necessarily and then whenever a
+
+
+problem occurs or some learning happens
+
+
+you step to the next phase go back and
+
+
+force and do whatever is necessary to
+
+
+complete your system so if you learn
+
+
+more about the domain you'll figure out
+
+
+oh they don't say employee they say
+
+
+colleague which is not important for my
+
+
+code it still works but now I've learned
+
+
+something and I refactor to deeper
+
+
+inside I reflect on my code to reflect
+
+
+my understanding of the domain put it in
+
+
+semantic code cool we changed our data
+
+
+layer from in hibernate to event
+
+
+sourcing holy crap yeah we do that but
+
+
+we need to protect our domain code from
+
+
+the corruption of whatever is underneath
+
+
+my domain code should not reflect that
+
+
+it's using hibernate or an event store
+
+
+or whatever my domain coach would only
+
+
+be the methods and classes that I need
+
+
+for domain behavior so I can write them
+
+
+pool purely so let's do this exercise
+
+
+let's extract the right model to be able
+
+
+to help I invited two domain experts and
+
+
+they will describe you their domain
+
+
+I will give you a minute what do we do
+
+
+we drink that is a good start that's the
+
+
+best start of every modeling session
+
+
+building up some trust and stuff
+
+
+yeah cool so but now we drink enough
+
+
+what do we do we have so yes yes we
+
+
+extract the model and we ask questions
+
+
+what is your first question what is
+
+
+fleep what does this word mean we have
+
+
+flip and flip Jews and plumbers and
+
+
+trembles and flu is cool I asked them
+
+
+what those things mean so now we have a
+
+
+glossary all the nouns are written down
+
+
+and we have a specific definition of
+
+
+what it is now we build software no this
+
+
+is a initial impulse every
+
+
+object-oriented program or had in their
+
+
+life ask for the nouns and it doesn't
+
+
+add a lot of value it's not none but it
+
+
+doesn't add a lot of value because if a
+
+
+domain expert explains to me the nouns
+
+
+they explain from their point of view so
+
+
+they have a lot of implicit knowledge
+
+
+that they don't know that I don't know
+
+
+and they will explain to me what the
+
+
+plumb versus in context of all those
+
+
+other words and maybe I get it maybe I
+
+
+don't I will just have another
+
+
+definition that is very complex way
+
+
+better is asked for those things if you
+
+
+get a story like that and it's very
+
+
+confusing because I don't understand the
+
+
+domain at all it's like gibberish to me
+
+
+but they said oh this is important
+
+
+because get into those points when
+
+
+someone says this is important and they
+
+
+stress it the reasons are something that
+
+
+you could explore so they say because
+
+
+the flip has all of the flip juice
+
+
+that's not a reason it sounds like a
+
+
+reason because I say because but that is
+
+
+not a reason maybe it's something
+
+
+present knowledge that I don't have why
+
+
+do we need flip juice could we take
+
+
+orange juice instead yes no what would
+
+
+happen if we don't have enough leaf
+
+
+juice how much is enough so if someone
+
+
+gives me a story and says oh this is
+
+
+important because and then I get a fake
+
+
+reason I asked for the real reason and
+
+
+this is the most simplest thing you can
+
+
+do is play the 5y game you know ask why
+
+
+is it important and they will tell you
+
+
+and then you say why is that important
+
+
+and you can do that only for so often
+
+
+you know if you do it two or three times
+
+
+and people get annoyed and stop
+
+
+explaining stuff for real so there are
+
+
+some heuristics you can use the simple
+
+
+heuristic is go for time frame if they
+
+
+say this happens then that then that
+
+
+always ask what would happen in an
+
+
+alternative order even if this seems
+
+
+nonsensical to you you are blank you
+
+
+don't know you just want to model and
+
+
+this is he who is sick so they say first
+
+
+this has to happen then they repurpose
+
+
+it and then you say can't they just
+
+
+repurpose it and then the stuff happens
+
+
+if your domain expert says like it makes
+
+
+no sense at all cool now we're on the
+
+
+same page but if they say wait a minute
+
+
+yeah I never thought about it but that
+
+
+would actually work with so now both
+
+
+learned a little you learn about the
+
+
+model by by shifting the timeframe and
+
+
+asking what would happen if this is in
+
+
+parallel or after one another or if this
+
+
+step doesn't happen at all and be really
+
+
+be really aggressive with that go for
+
+
+all the things we're seeing there might
+
+
+be some value here even if it sounds
+
+
+stupid just ask the question domain
+
+
+experts emotional reaction will give you
+
+
+a lot of information and you're laughing
+
+
+but this is actually very important
+
+
+reading the emotions of people while
+
+
+talking to them gives you more
+
+
+information than the words they say more
+
+
+is maybe a little stretch but it will
+
+
+give you a lot of more information that
+
+
+you need so you have some things
+
+
+sounding like they cut they do this they
+
+
+do that it's not really time they're
+
+
+using here but it seems like because
+
+
+they told that in that order it might be
+
+
+in a timely manner might be a process or
+
+
+it might just be a description of things
+
+
+that happen in general explore that you
+
+
+find adjectives and this
+
+
+which is like a regular old plumber's
+
+
+what is an airing irregular old
+
+
+plumber's and how does regular new
+
+
+plumber's look like it's a stupid
+
+
+question maybe regular old is just you
+
+
+know the phrase for standard it's just a
+
+
+regular plumbers but maybe regular
+
+
+orders very specific to main term you
+
+
+don't know that and more often than not
+
+
+when we talk to business people
+
+
+everybody has their own mental model and
+
+
+the implicit scenes in your brain and in
+
+
+their brain nobody challenges them
+
+
+I hear regular Holt and I'm thinking
+
+
+it's Rick Lord so I don't ask try to be
+
+
+the dumbest person in the room when you
+
+
+model but don't be annoying this is a
+
+
+very fine line and it's hard to walk but
+
+
+this is something that you can actually
+
+
+practice so a good thing with a good
+
+
+heuristic that works for me well is
+
+
+going for one dimension higher matthias
+
+
+ver a thought me that trick he said
+
+
+whenever someone says oh this is this is
+
+
+true or false this is black or white
+
+
+always ask is it really binary or is a
+
+
+continuum is it says some gray area okay
+
+
+not really of course and you get more
+
+
+information if someone says oh yeah this
+
+
+is like somewhere between here and there
+
+
+ask them if there's not one more
+
+
+dimension like always go one level up
+
+
+from whatever they tell you always go
+
+
+one dimension more and ask if there's
+
+
+some hidden value behind behind that
+
+
+it's always the emotional reaction from
+
+
+the domain expert that gives you an
+
+
+answer so can we build software now we
+
+
+know what's important and we got the
+
+
+timeframe and the process order of
+
+
+things and now we actually understood
+
+
+what is several is it five or 50,000 or
+
+
+what do those values mean and we even
+
+
+have the definition of an ounce so
+
+
+basically we know everything right
+
+
+awesome
+
+
+we don't know what the moving problem is
+
+
+so they came to us and they told us a
+
+
+story cool
+
+
+what's a problem are they're trying to
+
+
+open in your market are they trying to
+
+
+improve their plumbers producing
+
+
+software are they trying to figure out
+
+
+better ways to make plumb buy or
+
+
+whatever we don't know we need to find
+
+
+out so asking the right questions is
+
+
+really really hard and I've stamped of
+
+
+us asking the right questions is really
+
+
+really hard and this is the most
+
+
+important thing you can ask but if you
+
+
+ask someone hey what's your problem
+
+
+they would not give you the right answer
+
+
+so you need some kind of collective
+
+
+modeling techniques for that you have in
+
+
+domain division you have events storming
+
+
+and you have domain whirlpool in two
+
+
+main storytelling we will get into those
+
+
+in a few slides so if we extract a model
+
+
+and we try to put that model into a
+
+
+semantic code this code and the model
+
+
+basically align so we will model now and
+
+
+the model should be so dense that we
+
+
+could actually write code from it but
+
+
+the problem is when you build software
+
+
+the whole software development process
+
+
+is learning learning process you learn
+
+
+about the business all the time you
+
+
+learn about the behaviors the
+
+
+definitions you learn about the
+
+
+intricacies and the edge cases and
+
+
+software is just a side effect that
+
+
+comes out once in a while and that
+
+
+reflects your actual understanding for
+
+
+the moment but you drop a software
+
+
+developers is to provide business value
+
+
+so where's the bottleneck in this whole
+
+
+thing where's the bottleneck and
+
+
+software development compilation time
+
+
+maybe not so um access to the business
+
+
+people yes this is a very very big
+
+
+bottleneck but it's only one part of the
+
+
+biggest bottleneck ever it's a learning
+
+
+if you don't have access to business
+
+
+people you can't really learn about the
+
+
+domain even if you have access learning
+
+
+is really hard and it's not measurable
+
+
+and you can't plan it I can't plan how
+
+
+long I take to learn the domain this is
+
+
+nothing you can you can work for a lot
+
+
+so have a meeting I stole this graphic
+
+
+from a bettors book so please don't sue
+
+
+me
+
+
+hi Alberto so um having me
+
+
+put people in a in a on a table in a
+
+
+circle let them talk nothing smart ever
+
+
+comes from this setting because people
+
+
+that sit next to you are your allies you
+
+
+sit shoulder-to-shoulder you can whisper
+
+
+like that guys need cool people directly
+
+
+behind that are opaque to me I can't see
+
+
+them I can't talk to them so there's a
+
+
+one person I have a hight interaction
+
+
+with another person I don't talk to at
+
+
+all and people sitting opposed to me are
+
+
+kind of my enemies because we're like
+
+
+you know facing each other so a lot of
+
+
+psychology goes into this and it's bad
+
+
+it's really really bad and you have
+
+
+something that I can see in this room
+
+
+people checking out people take their
+
+
+mobile phone and check Facebook or sit
+
+
+on the computers and their apples and so
+
+
+people check actually out and then don't
+
+
+participate in the modeling anymore
+
+
+and that is really bad you lose a lot of
+
+
+collaboration power and you lose a lot
+
+
+of of emotional bonding that you need to
+
+
+build good software a good business
+
+
+processes so instead of having people
+
+
+just talk the whole day and then sit in
+
+
+a circle and do presentations and maybe
+
+
+someone will produce a you and her
+
+
+diagram woohoo don't let the words
+
+
+vanish make them stick put the words on
+
+
+sticky notes and are better bandolini
+
+
+invented events drumming for that which
+
+
+is my favorite modeling method which is
+
+
+why I have and I slept for that um in
+
+
+events drumming which is a mixed word of
+
+
+domain events and brainstorming
+
+
+techniques domain events meaning things
+
+
+that happen in the past tense that you
+
+
+can describe in your domain something
+
+
+that has value for your business in
+
+
+domain event storming you take the right
+
+
+people so people who have questions
+
+
+about the process and people who can
+
+
+actually answer them be it users or
+
+
+domain experts or maybe the program is
+
+
+that has been in the business for twenty
+
+
+years and knows the business better than
+
+
+anyone else
+
+
+and you give them a limited amount of
+
+
+time like four to six hours unlimited
+
+
+modeling surface so this wall couldn't
+
+
+be long enough just put paper on the
+
+
+wall and then everybody gets a ticket
+
+
+and markers so they can start writing
+
+
+down events on orange stickies and model
+
+
+the process in a timeline which would
+
+
+look like this kinda the benefit from
+
+
+this kind of modeling technique is you
+
+
+have a very high collaboration rate and
+
+
+I can stand shoulder-to-shoulder next to
+
+
+you and we can talk about this problem
+
+
+and once I think oh this this gets
+
+
+boring or I can't add any more value or
+
+
+I have heard something they said I can
+
+
+just walk over there and continue
+
+
+modeling with those people and we're
+
+
+never faced we're never opposed I'll
+
+
+never like arguing with you we stand
+
+
+against the model and if my idea and
+
+
+your idea don't align we have two ideas
+
+
+that we can now try to make fit and we
+
+
+can add a third idea that maybe fix the
+
+
+whole problem and the great thing here
+
+
+is nobody can check out it's not is
+
+
+you're not sitting around it's not you
+
+
+know getting you tired because sitting
+
+
+gets you tired you can walk around and
+
+
+it gives you a lot of energy and you see
+
+
+when people get tired and actually get
+
+
+decision fatigue after a few hours you
+
+
+can stop the modeling process but if you
+
+
+have this whole chaotic way of modeling
+
+
+you will have all the three phases of a
+
+
+good game storming there's a divergence
+
+
+phase in the beginning everybody is
+
+
+adding stickies in parallel you have
+
+
+total chaos in the room because there's
+
+
+not one person guiding the whole tour
+
+
+everybody is talking with everyone
+
+
+whatever they think it goes on the wall
+
+
+so you do not lose ideas it's not the
+
+
+boss that dominates what gets modeled or
+
+
+it's not the customer that everybody's
+
+
+just agreeing to if I have a different
+
+
+idea of the model it's somewhere on the
+
+
+wall and in the end or in the in the
+
+
+process structures will emerge some
+
+
+people will talk about this part some
+
+
+people will talk about that part hey I
+
+
+can immediately see my context
+
+
+boundaries cool so you will get a
+
+
+picture like this where you have the
+
+
+drafting phase of your shopping card and
+
+
+then after the orders something gets
+
+
+ordered and then the payment happened or
+
+
+maybe not and you can see the whole
+
+
+business process and parts of it and how
+
+
+they interact just in written language
+
+
+you just use events and then of course
+
+
+the sources of events you know why did
+
+
+stuff happen because I as a customer
+
+
+ordered stuff I gave a command or
+
+
+because time happened every end of the
+
+
+month this event starts and you build
+
+
+your whole business process only
+
+
+language but those little post-its from
+
+
+the wall translate directly into source
+
+
+code who here has heard of or used
+
+
+seeker as an event sourcing
+
+
+awesome cool so if you do CQRS and event
+
+
+sourcing you take your post-its from the
+
+
+wall and you have your events the orange
+
+
+stickies and those events exist because
+
+
+a user with information from the real
+
+
+world and the view on the screen issues
+
+
+of commodities as okay or a shopping
+
+
+cart and then in your domain you have
+
+
+behavior the yellow stickies the
+
+
+behavior that is from the wall okay if
+
+
+stuff is still in in storage and if a
+
+
+customer has enough money then yes
+
+
+customer ordered otherwise order denied
+
+
+and then you can take the stream of
+
+
+events on the one hand to actually
+
+
+propagate your attitude to rehydrate
+
+
+your objects for the domain or to
+
+
+propagate them and project them into
+
+
+read models so whatever information you
+
+
+want to project on the screen you can
+
+
+just take from the events that you just
+
+
+took from from the wall of the modelling
+
+
+so talking to business people is not
+
+
+about code it's just about the business
+
+
+process but if you use a message driven
+
+
+seekers events or style of architecture
+
+
+for example you can directly take the
+
+
+model from the wall that you just talked
+
+
+about with business people and build
+
+
+your software and your tests for example
+
+
+your test would look like given these
+
+
+events happened in the past when I issue
+
+
+this command and then I expect this
+
+
+event to happen so you can even take the
+
+
+whole BDD as the whole event storming
+
+
+process and in the end gather some BDD
+
+
+test from there or get you those stories
+
+
+out of there because you have the users
+
+
+and issue commands you can just go along
+
+
+the whole path and write your stories
+
+
+that you just put in code and it
+
+
+compiles so this is as close as we can
+
+
+get nowadays to have compiled able
+
+
+natural language that actually checks
+
+
+out and that you after it compiles and
+
+
+runs you can put it to string on it and
+
+
+it goes on to the screen as we've seen
+
+
+before so now we extracted the right
+
+
+model to be able to help we modeled with
+
+
+the business people we talked to them
+
+
+they explained what these words mean but
+
+
+actually we did the process modeling and
+
+
+figure out where's your problem where's
+
+
+your bottleneck or where do you try to
+
+
+get more value and now we need to secure
+
+
+that code that we wrote that we've put
+
+
+into events and commands and messages
+
+
+and we need to secure it from corruption
+
+
+so
+
+
+this is the hexagonal architecture from
+
+
+the DDD book and I hate that word
+
+
+because it always gives people the
+
+
+mental image of a hexagon and now I made
+
+
+it even worse because I drew a hexagon
+
+
+on there forget that that six-sided
+
+
+nobody cares about these six sides the
+
+
+hexagonal architecture is actually just
+
+
+parts and adapters that's what they
+
+
+meant when they wrote it in the books so
+
+
+what it says you built your server
+
+
+architecture you built everything that
+
+
+is around your domain in a way that your
+
+
+domain stays pure your domain is on the
+
+
+highest level of your layer architecture
+
+
+you don't do database layer domain layer
+
+
+and then UI or stuff like that you say
+
+
+my domain is only behavior and all the
+
+
+things that are needing the language of
+
+
+the business but somehow if a command
+
+
+comes in and says look fire this
+
+
+employee or order this stuff for this
+
+
+customer you need to load those objects
+
+
+right all this information so how do you
+
+
+get those information if a database is
+
+
+not part of your domain well there's
+
+
+patterns like the repository for example
+
+
+and this repository would be on the
+
+
+outside of the domain this would be can
+
+
+I use this here it's like magic no it's
+
+
+not okay so this would be like you see
+
+
+this some rest interface you know the
+
+
+thing on the left bottom corner
+
+
+so there's rest method is coming in
+
+
+there's someone sending a command then
+
+
+you have this teeny tiny bit on the
+
+
+boundary to your domain which is in a
+
+
+circle and this teeny tiny bit says oh
+
+
+when this command comes in I know I need
+
+
+to load from the repository this
+
+
+customer and this product list and now I
+
+
+can just call the methods and the domain
+
+
+stays pure the domain doesn't know how
+
+
+it get rehydrated so you make your
+
+
+architectural concerns and your domain
+
+
+concerns orthogonal by building a unit
+
+
+of work around it that does all the
+
+
+infrastructure stuff and then just call
+
+
+the pure functions the domain purity and
+
+
+restores whatever happened after that so
+
+
+this is easy if you just do seeker as an
+
+
+event sourcing but it gets really hard
+
+
+if you have for example a legacy
+
+
+database which is a some kind of third
+
+
+normal form tables but also a small part
+
+
+of the new software that is event
+
+
+sourced we did a little trick and it's
+
+
+dirty but it's working
+
+
+I would not recommend it as a single
+
+
+solution but if you have the same
+
+
+problem we said okay let's just build up
+
+
+our own event store it's just a table
+
+
+called events
+
+
+or in the SQL database now your unit of
+
+
+work can actually use the transaction of
+
+
+the SQL to say whenever stuff in my
+
+
+domain happens the new event stuff and
+
+
+the changes in the old tables only
+
+
+happen together or not at all
+
+
+it has a few drawbacks for example you
+
+
+can't now you can't say I could scale
+
+
+this up because you need to make sure
+
+
+that your event store is always
+
+
+completely in sync with the whole rest
+
+
+of the database but depending on the
+
+
+size and scalability of your domain that
+
+
+might be a valuable option so um your
+
+
+party adapters can be any technology of
+
+
+course so if you have like rest
+
+
+interfaces or if you have your own 0 mq
+
+
+or a rabid mq or whatever messaging
+
+
+pipeline however you get into the calls
+
+
+doesn't matter the whole infrastructure
+
+
+decisions can be made again and again
+
+
+and you can change it again the domain
+
+
+is the important part that you can use
+
+
+kubernetes is nice but or if you use
+
+
+Khadgar I don't know what Ruby people
+
+
+use the gems and other stuff so whatever
+
+
+you use it's always just solving a
+
+
+problem in a technological space so you
+
+
+want to scale up cool but that doesn't
+
+
+change your domain behavior and in your
+
+
+core domain that's the most important
+
+
+part if you're not in your core domain
+
+
+if you're just in some generic or very
+
+
+unimportant sub domain you can ignore
+
+
+this pattern you can just say let's just
+
+
+scramble the information into the
+
+
+database
+
+
+we just SQL them whenever you need
+
+
+that's fine but in your core domain you
+
+
+really want to separate your domain
+
+
+behavior from all of the technology
+
+
+because you want to change technological
+
+
+things without hurting your domain so
+
+
+why do we do the main driven design
+
+
+basically for two main reasons the main
+
+
+reasons why business people generally do
+
+
+things you want to mitigate risk or you
+
+
+want to increase the quality of what
+
+
+you're doing to make some profit so we
+
+
+do two main driven design to be able to
+
+
+adjust our teams to our business needs
+
+
+when we have a strategic map of our own
+
+
+business we can now say those people
+
+
+have knowledge they should work here
+
+
+those people are juniors or they refuse
+
+
+to work at the new technology or
+
+
+whatever we give them something where
+
+
+they are valuable without hurting them
+
+
+so we can align our team and our
+
+
+strategical business components so that
+
+
+it works it's risk mitigation domain
+
+
+driven design gives the business
+
+
+people a tool for risk mitigation that
+
+
+is a really really cool benefit it's
+
+
+also making the coherence between
+
+
+business language of the customers and
+
+
+what the program is actually understand
+
+
+and write higher so when I read the code
+
+
+I I don't have to try to understand oh
+
+
+yeah they told me this happened later
+
+
+but now this should happen my source
+
+
+code has an array of 200 fields and if
+
+
+the array option one is zero and there's
+
+
+a null then hey now I have to be a human
+
+
+compiler I don't wanna do that this is
+
+
+waste of my time and waste of my
+
+
+brainpower so if I can read the story of
+
+
+the domain in the source code and can
+
+
+actually care about that and improve on
+
+
+that that's something where I can add
+
+
+value so code is in harmony with
+
+
+business we have high internal trust we
+
+
+know our components work because they
+
+
+are tested on a business level and we
+
+
+are safe from external influence we
+
+
+don't care if the message frame occurs
+
+
+exchanged I know it doesn't break my my
+
+
+domain code then it also is really
+
+
+valuable for the programmers themselves
+
+
+it gives you oughta know me because now
+
+
+you can say I'm in this bounded context
+
+
+and we work in this bonnet context we
+
+
+don't have to adhere to any rules this
+
+
+is our core domain we can design our
+
+
+system as we see fit other people in
+
+
+other bounded context can choose their
+
+
+own architecture this is where maybe
+
+
+micro services actually fit to a bounded
+
+
+context barrier so you can't choose your
+
+
+own architecture pro-bono context and
+
+
+you don't have to adhere to some we do
+
+
+it this way in this company rule it also
+
+
+makes you able to to harness your
+
+
+mastery in in multiple levels you can
+
+
+become a master in DDD itself you can
+
+
+just understand how people work how
+
+
+language works how you do events
+
+
+storming really well how you build
+
+
+better aggregates and all those things
+
+
+but you can also become a master
+
+
+programmer or tester or there are so
+
+
+many different layers that we talked
+
+
+about today that you need to be able to
+
+
+do to do good to main ddd a domain
+
+
+driven design so you can become a master
+
+
+in wherever your interests and your
+
+
+capabilities lie and purpose is
+
+
+something that's kind of like a free
+
+
+giveaway if you do domain driven design
+
+
+you focus on the purpose that you give
+
+
+your customer either the benefit you
+
+
+give your customer so you actually have
+
+
+a purpose in the domain of that you're
+
+
+programming for your purpose is not
+
+
+being a better reactive L appear or
+
+
+being a better Ruby user or
+
+
+being a better c-sharp 7.1 user or
+
+
+whatever that's not a purpose my purpose
+
+
+is shift planning for hospitals I
+
+
+improve that day by day so you actually
+
+
+have some purpose and these three things
+
+
+are from David Pink's book Drive this is
+
+
+what most people are motivated by money
+
+
+is a very bad motivator forgive you more
+
+
+money tomorrow you will not work harder
+
+
+maybe for a few weeks but if you
+
+
+actually become better because I give
+
+
+you more money that would mean you would
+
+
+have worked less than you could now
+
+
+because you were angry for not getting
+
+
+enough money that's a really weird
+
+
+relationship to have with a development
+
+
+team so when you actually want to
+
+
+motivate people you need to give them
+
+
+these three different values everyone
+
+
+has a different level there but this is
+
+
+what motivates people so these are good
+
+
+reasons to do DDD but there are risks
+
+
+and I just have one slide I think for
+
+
+that the risks of domain driven design
+
+
+that I have encountered so far is
+
+
+hierarchies hierarchies is my main pain
+
+
+point
+
+
+so if DDD comes from the bottom up the
+
+
+developers said oh we went to Markos
+
+
+talk and he was so entertaining
+
+
+we want to do this now cool then you you
+
+
+try to implement this in your company
+
+
+but there are people in the middle
+
+
+management who say hey look I have power
+
+
+because information is mine and if the
+
+
+team does something good I bring it to
+
+
+the next level so if I let everyone talk
+
+
+to the customers now and we do like
+
+
+collaboration this won't work because
+
+
+then I lose my power so hierarchies are
+
+
+destined to to hinder you in becoming
+
+
+better domain driven design errs you
+
+
+need to find a way as if you do agile
+
+
+you need to find a way to give them job
+
+
+security but not all security if it
+
+
+comes from top to bottom so if the if
+
+
+the boss says we do DDD now you have a
+
+
+lot of developers saying but I've been
+
+
+doing SQL for over 20 years and it works
+
+
+fine and I had my fair share of painful
+
+
+discussions for over two years with an
+
+
+employee with a colleague and we were
+
+
+never agreeing it was just I'm
+
+
+impossible to to make them understand
+
+
+why this is important they always had an
+
+
+answer and a good example of how they
+
+
+couldn't do it better up until the point
+
+
+that you actually think maybe SQL is a
+
+
+solution but so
+
+
+don't get sucked into that how so
+
+
+hierarchies are a problem if you have
+
+
+hierarchical structures is really hard
+
+
+to enforce DDD into the whole company
+
+
+but if the whole company is not taking
+
+
+part in this effort the benefits are
+
+
+very limited
+
+
+another thing is perfection of them this
+
+
+is the other side we as domain-driven
+
+
+design as or as programmers we want to
+
+
+be perfect you know I need to learn
+
+
+everything about TDD and I will not
+
+
+reflect with this code until I actually
+
+
+understood these patterns and you are
+
+
+not domain driven design errs your
+
+
+business solution deliveries you help
+
+
+business people be better at what they
+
+
+do by giving them software that's your
+
+
+purpose make that better if didi helps
+
+
+cool if just a part of didi hubs and the
+
+
+rest is not really understood experiment
+
+
+with it transparently but that's also
+
+
+cool you don't have to be perfect if you
+
+
+try CQRS it doesn't really work do
+
+
+something else it's not a problem
+
+
+don't try to make DDD perfect or
+
+
+anything in that matter perfectionism is
+
+
+actually frustration and frustrating and
+
+
+you have a third thing that frustrates a
+
+
+lot is constraints so if you have
+
+
+constraints in a company like for
+
+
+example you can only use mssql which is
+
+
+a constraint we have because our
+
+
+customers have administrators they say
+
+
+we can't back up anything else this is a
+
+
+printer button this is how we do back up
+
+
+and then you're like okay I could use
+
+
+neo4j here or I could use a gate event
+
+
+or something cool no I can't
+
+
+it's just a constraint and it's
+
+
+frustrating it's important to know that
+
+
+when you do something like domain design
+
+
+you try to change your company it
+
+
+doesn't just change a bit of code it
+
+
+changes everything and if you try to
+
+
+change everything people tend to work
+
+
+against that systems try to stay the way
+
+
+they are that's just a system effect and
+
+
+you need a long breath to to see it
+
+
+through so but if you do and EDD
+
+
+transforms code and culture and agile
+
+
+and architecture and everything in your
+
+
+company so if you want to read more
+
+
+about domain driven design these are the
+
+
+books that are read about it um the the
+
+
+core book of course is Eric Evans DDD
+
+
+from 2004 which is kind of like a hard
+
+
+read if you ever start reading it who
+
+
+has read it by the way I mean you all
+
+
+have your hands up all the
+
+
+I'm here koalas don't even have a
+
+
+through ha so the rest of you have some
+
+
+homework to do if you read two men
+
+
+driven design by Eric Evans start at
+
+
+chapter 7 or 8 don't start at start of
+
+
+chapter 1 it's something that Eric
+
+
+himself says nowadays I've written the
+
+
+book in the wrong order I wrote it for
+
+
+developers in 2003 so he tried to get
+
+
+them at the technical level he starts
+
+
+with all the patterns like aggregates
+
+
+entities repositories and explains how
+
+
+to do them that's not the important part
+
+
+the good knowledge comes in the later
+
+
+half of the book after you've read that
+
+
+you can start reading the first off
+
+
+that's fine but the later part is a
+
+
+really important part and this book is
+
+
+so dense that when you read it every two
+
+
+or three years you get more and more
+
+
+insights so it's a very bad book for for
+
+
+for beginners I would recommend
+
+
+domain-driven design patterns practices
+
+
+and principles by Scott millet and Nick
+
+
+tune this is a book and it's written in
+
+
+the water that I would actually write a
+
+
+book if I had the time and effort to
+
+
+write a book but it gives you all the
+
+
+strategical analysis ideas and the
+
+
+modeling techniques and some
+
+
+architectural patterns and in the end
+
+
+even implementation examples it's it's
+
+
+light it doesn't go that deep but it's a
+
+
+very good overview about the whole scene
+
+
+and it's very very up-to-date so you get
+
+
+modern ideas and they're from the last
+
+
+five or four or five years if you're a
+
+
+witch you are not a c-sharp developer
+
+
+jiminy it's a nice book if your Java
+
+
+developer von Verner is a good book but
+
+
+your Ruby developers I don't know if
+
+
+there's a DDT author there maybe some of
+
+
+you will start now writing a book and of
+
+
+course event storming which is a lean
+
+
+PAP book by Alberto and because he's
+
+
+very busy doing event storming she's not
+
+
+very busy writing his book so it's 80%
+
+
+for over two years now and it's fine
+
+
+just buy it or limp up and read it it
+
+
+will never be finished but it's
+
+
+worthwhile so and that's it for today if
+
+
+you want to hear more about two men
+
+
+driven design and actually practice for
+
+
+two days I still invite you to my
+
+
+conference fliers are over here and then
+
+
+I thank you very much
+
+
+[Applause]
+
+
+thank you very much Marco do you have
+
+
+any questions or comments ok so there is
+
+
+a one thing that interests me very much
+
+
+do you think that there is a like
+
+
+correlation between a DDD and
+
+
+object-oriented programming is there a
+
+
+intersection between two things no I
+
+
+don't think so so the question was a
+
+
+microphone yes everybody would um just
+
+
+to repeat it no so I don't think that
+
+
+there's a correlation it started at the
+
+
+net world it's just where where no even
+
+
+Eric started in the Java world Seacrest
+
+
+are in the.net world but um they started
+
+
+with object orientation because that was
+
+
+a main focus of the program's in 2003
+
+
+but you can do functional reactive
+
+
+programming and extra models and you can
+
+
+do projections and perfect semantics you
+
+
+can just use F net F sharp or Scala in
+
+
+the Java world or does Ruby have
+
+
+functional parts yeah Alex you're
+
+
+perfect is on the bean VR right so it's
+
+
+it's on the Erlang system yes so all
+
+
+those things you can use them and use
+
+
+perfect semantics so because you have a
+
+
+function and the function is just
+
+
+written in words and it only takes in
+
+
+parameters that are types that are
+
+
+actually function types value types so
+
+
+it's not an object-oriented thing the
+
+
+thing is whatever you have be it
+
+
+object-oriented or functional or dynamic
+
+
+or static typed or whatever your your
+
+
+constraints are you can find ways to be
+
+
+more semantic and whatever helps you to
+
+
+be more business C and less technique e
+
+
+it's the right thing so DDD is by no
+
+
+means is whatsoever focusing on on
+
+
+object-oriented programming it's
+
+
+completely agnostic in that matter and
+
+
+even seeker has an event sourcing is by
+
+
+the way they go more in the functional
+
+
+now than in the beginning where they
+
+
+were more object oriented but everything
+
+
+is possible nowadays I see I see how DDD
+
+
+works in explaining existing business
+
+
+process
+
+
+and how businesses work do you see DDD
+
+
+being as efficient applying applied to
+
+
+startups when new ideas are being
+
+
+developed yes daily basis yes totally um
+
+
+when you do startup you have different
+
+
+constraints and you have to work
+
+
+differently so what you will not do is
+
+
+you will not do big process modeling
+
+
+upfront and have your immense business
+
+
+story and then write yours your all your
+
+
+events upfront because you don't know
+
+
+how they evolve but this knowledge that
+
+
+you don't know how they evolve goes into
+
+
+your modeling what you can do is you can
+
+
+do an event storming for startups by
+
+
+exploring different startup ideas or
+
+
+different business models so you have a
+
+
+small wall here for business model a
+
+
+awhile there for business model B and
+
+
+whenever you we figure out why we model
+
+
+oh we actually diverge here let's let's
+
+
+not try to converge let's build two
+
+
+different models and explore them both
+
+
+so you get more insights and then you
+
+
+can plan your your small control
+
+
+experiment on experiment on them so if
+
+
+you have two business models and you
+
+
+figure out oh these might work both
+
+
+let's implement a prototype really it's
+
+
+this is what Eric Evans calls the domain
+
+
+driven design whirlpool where you say I
+
+
+have stories in my head just examples it
+
+
+might be just a handful take those
+
+
+stories and then try to design a model
+
+
+that would solve all those problems and
+
+
+then coat that model in a very rough
+
+
+prototype that's not meant for delivery
+
+
+it's just to see if it would compile and
+
+
+then take the the insights from modeling
+
+
+and building and find another use case
+
+
+or another story
+
+
+that challenges the code of the model
+
+
+and then model again and then you do
+
+
+this whole whirlpool thing and let it
+
+
+grow from there using using value types
+
+
+is immediately powerful from the very
+
+
+first second you write anything I have a
+
+
+customer I use it word so I have a class
+
+
+customer it's just an ID inside but it's
+
+
+my customer not my UUID that's
+
+
+immediately valuable question Thanks I
+
+
+was just wondering how to apply ddd and
+
+
+project where a client is
+
+
+well DDD agnostic and how to teach him
+
+
+to use this ubiquitous language and and
+
+
+all this stuff because actually the
+
+
+client is the domain expert he has the
+
+
+the the knowledge about this domain so
+
+
+he needs to just fit introduce
+
+
+methodology yeah so you have the problem
+
+
+of a client who is a domain expert and
+
+
+they do not share you because language
+
+
+with you and they do not learn whatever
+
+
+you teach try to teach them okay that's
+
+
+hard um well violence is always not know
+
+
+so um what you what you can do is yeah I
+
+
+know I know good old days but what you
+
+
+can do is write your specifications if
+
+
+you do test-driven development
+
+
+write them in what you think is a domain
+
+
+language and then take the test output
+
+
+print it and give it to them to check if
+
+
+they give you new specifications give
+
+
+them some kind of dsl that they can
+
+
+write without needing to program just
+
+
+they see the expression that you allow
+
+
+them these commands these events these
+
+
+are the things we have in code and then
+
+
+you just have a product for example so
+
+
+you have your class name or your method
+
+
+name buy stuff and you just tell them
+
+
+not in technical terms but this is what
+
+
+we can use so could you please write me
+
+
+the specification for this next case
+
+
+because they come to you and they say
+
+
+and this doesn't work and they should be
+
+
+a different value because this will and
+
+
+you're like okay this is very rough I
+
+
+can't really make code from this so if
+
+
+they don't collaborate with you you have
+
+
+to do the work you give them what you
+
+
+think is right and show it to them and
+
+
+then they read the code and say no this
+
+
+is wrong and if they never collaborate
+
+
+you just have to iterate on this and
+
+
+it's your hard work to do so then you
+
+
+have to always give it back to them
+
+
+until they say yeah this is right and
+
+
+then you have your business language in
+
+
+code but that sucks so I don't have a
+
+
+really good idea of how to influence
+
+
+people that are unwilling to learn
+
+
+usually if they see the benefit they
+
+
+will learn and they will see I mean this
+
+
+is now something that you know it
+
+
+defines itself if you show them that the
+
+
+code is better and if you show them the
+
+
+product is better because of what you do
+
+
+and you have
+
+
+I said and they believe you then they
+
+
+are willing to collaborate with you
+
+
+usually yes yes so if you can get them
+
+
+involved in an event storming that's
+
+
+what gets most business people to
+
+
+co-developers are asking good questions
+
+
+they ask business questions amazing they
+
+
+don't ask me what table I should use
+
+
+they ask me about the behavior so yeah
+
+
+try that and the other questions hi I do
+
+
+you have any tips for remote yeah it
+
+
+doesn't work so it's a problem this is a
+
+
+huge problem actually oh oh they try to
+
+
+or something yeah I know I'm interested
+
+
+[Music]
+
+
+sorry so what we're doing is real-time
+
+
+board is a white boarding software where
+
+
+you can collaborate with I don't know 10
+
+
+people you have unlimited space yeah so
+
+
+you can put post-it notes on there you
+
+
+see the most pointer of everyone
+
+
+actually adding to the white space board
+
+
+and you can have really like regular
+
+
+people in that space and collaborating
+
+
+at the same time asking questions yes
+
+
+and it works to some degrees so um we've
+
+
+explored multiple tools this one there's
+
+
+also a VR tool called sink space if you
+
+
+have an HTC vive or gear VR at home you
+
+
+can put it on and then you can meet in a
+
+
+virtual space and people can just
+
+
+collaborate and you can also do and
+
+
+there's a website I've forgot the air is
+
+
+something like event storming online.com
+
+
+or something where you can just move
+
+
+post-its around on your computer screen
+
+
+so everybody is just virtually on the
+
+
+screen all those things and this whole
+
+
+if you have this big screen this is like
+
+
+one of the best things you can actually
+
+
+do nowadays but all those things don't
+
+
+harness the full power of event storming
+
+
+you
+
+
+lose a lot and what you lose is very
+
+
+important it's the ability of being
+
+
+physically in the same room taking a
+
+
+step back seeing that two people are
+
+
+just arguing over there and just going
+
+
+and talk to them and building small
+
+
+alliances and having discussions in
+
+
+small groups throughout the whole day
+
+
+that's what makes it really valuable if
+
+
+you have a domain that's already very
+
+
+good explored so you did what we usually
+
+
+do do the main a you do you you do
+
+
+events storming calorically so you bring
+
+
+people together but once the big-picture
+
+
+model is explored and people have their
+
+
+local model that I work on remoting is
+
+
+fine it works a little because you
+
+
+already have a shared context so if you
+
+
+want to clarify ideas or explore some
+
+
+small ideas that works but every now and
+
+
+then you have to bring the people
+
+
+together because only physical context
+
+
+gets uses deep exploration phase and now
+
+
+this is something the whole DDD
+
+
+community is exploring and working on so
+
+
+my biggest stick would be the virtual
+
+
+reality stuff because I'm totally into
+
+
+VR and I love how it feels if you walk
+
+
+it around and we are but the problem is
+
+
+then you need per person an empty room
+
+
+with a helmet and that's totally weird
+
+
+so yes yeah that's what I meant in the
+
+
+beginning when I said the emotional
+
+
+responses tell you more than the actual
+
+
+words spoken this is in a modeling
+
+
+session the most important things that
+
+
+come from it is - you see people
+
+
+standing looking shrugging all those
+
+
+things are super important because you
+
+
+can act on them okay thank you once
+
+
+again thank you very much
+
+
+you

@@ -1,0 +1,1699 @@
+thank you guys
+
+
+i think it's the worst decision in my
+
+
+life
+
+
+but i'm here okay
+
+
+we can start
+
+
+so there was a presentation about
+
+
+sidekiq and there was a question about
+
+
+sidekick batches
+
+
+so i remembered that i used them once
+
+
+in all my four years and i can share
+
+
+with you how you can do it
+
+
+so
+
+
+the first one we need the source for
+
+
+all our work in my time
+
+
+for me it was a file
+
+
+where's around thousands of rows which
+
+
+which
+
+
+should be executed
+
+
+with some comment
+
+
+comment
+
+
+and have a result
+
+
+so
+
+
+um
+
+
+if we do not do it like in a sink way
+
+
+they're gonna be
+
+
+our business gonna cry
+
+
+so
+
+
+we try to optimize it somehow so we used
+
+
+a sidekick and batches
+
+
+so how we did it we parsed our file and
+
+
+for each road we put a worker
+
+
+inside of the batch so it's like one
+
+
+up to i don't know hundred
+
+
+so
+
+
+each
+
+
+and we do a worker
+
+
+so
+
+
+if we have 100 rows and we're going to
+
+
+have 100
+
+
+workers
+
+
+and
+
+
+i designed to
+
+
+set a unique identifier for all this
+
+
+source
+
+
+for me it was like time
+
+
+name
+
+
+and
+
+
+and maybe that's all
+
+
+yeah so to work here i passed
+
+
+time name and the sequence number
+
+
+like let's be people it's going to start
+
+
+with one
+
+
+so
+
+
+what we do here i have a unique id for
+
+
+this road
+
+
+which
+
+
+identifies the sequence
+
+
+and when i execute the command the
+
+
+result i put to the reddis
+
+
+where there's a key with this sequence
+
+
+number
+
+
+like it starts with search sequence
+
+
+number
+
+
+and
+
+
+unique number and ends with sequence so
+
+
+i put it to the radius and while i
+
+
+finish all my 100 jobs i will have in
+
+
+redis
+
+
+like
+
+
+100 results
+
+
+and that is the end
+
+
+but
+
+
+i set a callback for all these batch and
+
+
+it and it knows their
+
+
+unique source name
+
+
+so in callback i write one more worker
+
+
+why not
+
+
+like
+
+
+finnish
+
+
+result which knows
+
+
+this unique name and it knows that we
+
+
+have 100
+
+
+rows in our file so
+
+
+when all the jobs from the batch were
+
+
+finished
+
+
+i start this finish result worker which
+
+
+goes like where people
+
+
+1 up to
+
+
+100
+
+
+and reads from redis the source name
+
+
+and
+
+
+and each sequence
+
+
+so
+
+
+here i go the result of all my jobs and
+
+
+i make one more file
+
+
+one more file with this as you got
+
+
+result file
+
+
+and i have
+
+
+as a result i have source params
+
+
+then i made some comment on them
+
+
+and then i have the result of this
+
+
+comment here and they have the same
+
+
+sequences
+
+
+uh as in the source file
+
+
+and
+
+
+business is happy
+
+
+so that's all actually
+
+
+i hope nobody has question
+
+
+but anyway
+
+
+so uh the question is um
+
+
+how fast does an rtms rocket need to be
+
+
+going to escape earth's atmosphere and
+
+
+reach a stable orbit
+
+
+and now
+
+
+the answer is i honestly don't care if
+
+
+you know how to do this because i'm
+
+
+assuming you're not rocket scientist um
+
+
+and i'm assuming that everyone here is a
+
+
+kerbal space fan
+
+
+program but i highly recommend it no
+
+
+i'm actually interested in a very
+
+
+different question is nobody flinches
+
+
+when you ask how fast were you going
+
+
+and you think this is normal but it's
+
+
+not normal it's a modern invention
+
+
+because if we go back a long long time
+
+
+with a working
+
+
+clicker
+
+
+so the time of aristotle
+
+
+and
+
+
+socrates um
+
+
+these guys were working with maths right
+
+
+but the mass they were working with was
+
+
+mostly geometry and trigonometry and
+
+
+they were working with this idea that
+
+
+the world is perfect there's perfect
+
+
+circles perfect triangles angles so
+
+
+forth and so forth
+
+
+they were not worried about the real
+
+
+world and how mathematics applies to the
+
+
+real world and they also
+
+
+could not explain momentum and how
+
+
+things move because from their
+
+
+perspective
+
+
+it was a side effect kind of thing you
+
+
+know things were changing and they
+
+
+didn't like that so much and it turns
+
+
+out that that was the way of the world
+
+
+for a really long time
+
+
+because as soon as my screen updates
+
+
+i don't know what's going on
+
+
+all right so
+
+
+my updates my slides are not updating
+
+
+but what should be shown is uh galileo
+
+
+and descartes
+
+
+and dave and galileo among all his other
+
+
+contributions what he did was he
+
+
+realized that time
+
+
+is a unit of measurement
+
+
+and it turns out that before him nobody
+
+
+kind of figured out or made it explicit
+
+
+so
+
+
+galileo figured out that time is a unit
+
+
+of measurement and then descartes among
+
+
+all his other contributions
+
+
+created the cartesian coordinate system
+
+
+which actually figured out that geometry
+
+
+and algebra are not separate fields of
+
+
+study they're actually the same thing
+
+
+just two sides of the same coin
+
+
+and then
+
+
+after that
+
+
+descartes was able to on the cartesian
+
+
+plane
+
+
+you know plot time on the x-axis
+
+
+and it turns out that we have sort of
+
+
+modern mathematics almost because then
+
+
+leibniz and
+
+
+newton came along
+
+
+and
+
+
+they both invented calculus right in one
+
+
+another at the same time basically
+
+
+using those things that galileo and
+
+
+descartes invented like seven years
+
+
+before them
+
+
+and
+
+
+why are we talking about all this
+
+
+because
+
+
+the important thing is time
+
+
+and
+
+
+the important thing is until galileo
+
+
+figured out
+
+
+that time is a unit of measurement and
+
+
+sort of gave people and gave like to the
+
+
+world this idea that here's an idea see
+
+
+how far you can run with it
+
+
+nobody ever figured it out and for them
+
+
+this concept of how fast are you going
+
+
+was science fiction but for us it's
+
+
+common knowledge right when we think of
+
+
+how fast are you going you're thinking
+
+
+some cop is giving me a speeding ticket
+
+
+you're not thinking i'm reinventing
+
+
+mathematics
+
+
+so
+
+
+why are we talking about this i'm giving
+
+
+a talk tomorrow that's theoretical about
+
+
+functional programming but it's not
+
+
+about functional programming it's about
+
+
+giving new names for things that i want
+
+
+you to start thinking about
+
+
+because
+
+
+what we have today
+
+
+whether it's functional programming ddd
+
+
+it's all crap we're in the time of like
+
+
+pre-socrates what we need is we need new
+
+
+ideas
+
+
+that are going to spur the fur like the
+
+
+next future generations that are going
+
+
+to be the newtons and the like the
+
+
+newtons and the and the limenesses of
+
+
+our time until we can get to our you
+
+
+know until we can actually get into
+
+
+outer space
+
+
+so
+
+
+every time you listen to a talk by andre
+
+
+or anyone else where they're where
+
+
+they're giving ideas and concepts i want
+
+
+you to sort of think about that that the
+
+
+important thing is not the current
+
+
+library or the queen whatever thing it's
+
+
+can i take whatever they're doing and
+
+
+sort of
+
+
+figure out what is the ascension like
+
+
+the essence of it and can i take that
+
+
+essence and apply it to whatever i'm
+
+
+actually working on can i create new
+
+
+names for things
+
+
+that can then be
+
+
+defined as like
+
+
+because once you name something you can
+
+
+actually then figure out what are the
+
+
+properties of this thing that i've just
+
+
+named right
+
+
+so that's all i've got really i'm
+
+
+actually before time aren't i or you
+
+
+just stop the clock
+
+
+all right i'm done whatever um
+
+
+[Applause]
+
+
+one two
+
+
+nice
+
+
+we can start okay hi everyone my name is
+
+
+andrew
+
+
+i work as a outsourced company it's a
+
+
+main
+
+
+developer at the project sometimes tech
+
+
+lead depends on a project
+
+
+and
+
+
+for sure at all uh outsourced companies
+
+
+projects change from time to time our
+
+
+teams change from time to time and
+
+
+um at our
+
+
+company we have different levels of
+
+
+projects and for sure sometimes there
+
+
+are junior projects which you need to
+
+
+mentor
+
+
+and for sure this
+
+
+opportunity comes usually to the main
+
+
+developer or the tech lead
+
+
+and
+
+
+not everybody likes this yeah but why i
+
+
+decided to choose this topic because i'm
+
+
+totally the opposite i like it a lot
+
+
+i mentor at work uh at my project just
+
+
+in the company and i mentored during my
+
+
+free time
+
+
+and i have a list of options why i do
+
+
+that
+
+
+it helps me to study because at certain
+
+
+level you just fed up with courses books
+
+
+conferences and stuff and you want some
+
+
+not trivial questions which often comes
+
+
+from
+
+
+juniors
+
+
+because i experienced a lot of such
+
+
+questions which indicate me
+
+
+it can be both it can be with your
+
+
+technical skills and it can be with your
+
+
+soft skills because uh for sure we want
+
+
+to develop both of them
+
+
+you help to dedicate engineers of your
+
+
+company and it means you help to
+
+
+make your company become better
+
+
+and
+
+
+if you don't like it you can ask your
+
+
+company to pay for mentoring if you need
+
+
+more money
+
+
+and very important point for me is that
+
+
+you help to grow your community because
+
+
+uh
+
+
+to struggle to this this question that
+
+
+ruby is dying no it's not dying we're
+
+
+making more
+
+
+engineers
+
+
+and
+
+
+i really like the social aspect of that
+
+
+because apart from the company you want
+
+
+and i want to show
+
+
+to help community
+
+
+not only ruby but all people that's why
+
+
+in my free time i mentor
+
+
+refugees from ukraine and political
+
+
+immigrants from belarus
+
+
+and
+
+
+i hope
+
+
+this key points maybe motivate one of
+
+
+you and you had find motivation to do
+
+
+the same
+
+
+and for me in all the volunteering stuff
+
+
+the main point is find what motivates
+
+
+you
+
+
+yeah it's maybe one point from this list
+
+
+or it may be your own list or your own
+
+
+points
+
+
+that's it thank you
+
+
+um the question on the whiteboard still
+
+
+bothers me because it's unanswered about
+
+
+ruby dying and i am wondering like why
+
+
+do we even ask this question what are
+
+
+the what's the motivation behind this
+
+
+because we are
+
+
+i see this all the time like ruby is
+
+
+dead or
+
+
+like is ruby dying uh
+
+
+and i'm wondering like where does it
+
+
+come from
+
+
+okay
+
+
+so i didn't want to make anybody sad
+
+
+today
+
+
+yeah
+
+
+i'm just asking
+
+
+but i saw different companies and
+
+
+usually they move from the ruby because
+
+
+ruby is too slow and we're trying to use
+
+
+jruby but now rust is coming and
+
+
+maybe
+
+
+i just can't get
+
+
+[Music]
+
+
+how we can support ruby and i don't want
+
+
+to change it but i see that every
+
+
+company i work i agree maybe they're
+
+
+wrong but anyway
+
+
+they
+
+
+trying to use and move on different
+
+
+language
+
+
+so that is my point
+
+
+i'm not sad like i don't believe this i
+
+
+mean i believe your arguments because
+
+
+some people are claiming this but
+
+
+uh i'm not sure if this is just the
+
+
+cycle that new things pop up like rust
+
+
+and which is great
+
+
+uh i didn't hear about g ruby for quite
+
+
+some time so it's good to hear that it's
+
+
+somewhere it's still there uh
+
+
+yeah so
+
+
+i just think that we like some of us
+
+
+here are in ruby world for a long time
+
+
+here and some of us are maybe more
+
+
+newcomers and
+
+
+uh like even when i joined ruby i can
+
+
+say for myself it was obviously the
+
+
+argument of the new shiny thing so i
+
+
+switched from java to ruby
+
+
+um
+
+
+but then i think many people stay at
+
+
+ruby so that's like that that's a good
+
+
+thing the only
+
+
+and i have to admit there is this uh
+
+
+precedence that some people move to
+
+
+elixir that's that's that was a movement
+
+
+in the ruby community
+
+
+uh but apart from elixir i didn't see
+
+
+really a bug a big uh like outflows of
+
+
+people in the community
+
+
+like if you look at those you know for
+
+
+example
+
+
+every year they publish this
+
+
+data and basically
+
+
+like i didn't study the exact numbers
+
+
+but usually the trend is like uh the
+
+
+proportions are um
+
+
+the proportions are changing so ruby
+
+
+relatively for example to python or to
+
+
+javascript might be slower in popularity
+
+
+increase
+
+
+but usually when i looked like some
+
+
+years ago when i looked at the numbers
+
+
+the numbers of
+
+
+number of ruby developers is increasing
+
+
+instead of decreasing it's just we are
+
+
+sad sometimes because the number of
+
+
+python developers is increasing faster
+
+
+and you would like it to be like at the
+
+
+same pace at least which is not the case
+
+
+and probably we shouldn't try to compete
+
+
+with python but also if we try to
+
+
+compete with python for example python
+
+
+is used for so many different purposes
+
+
+right now for data science for web for
+
+
+and many many other parts while ruby is
+
+
+only for web
+
+
+so even if we look at the communities we
+
+
+should probably split the communities
+
+
+like python web python data science and
+
+
+then compare because i'm not sure like
+
+
+if ruby web is really much lower than
+
+
+python web for example or rust web maybe
+
+
+not okay that was just me taking some
+
+
+time when jan is ready so
+
+
+let's welcome you is it working okay
+
+
+it's working thanks
+
+
+so let's talk about configuration and
+
+
+configuration states for configuration
+
+
+polish
+
+
+and what is the state of the art right
+
+
+now in ruby world and raceward so you
+
+
+have race credentials you have
+
+
+global race application config
+
+
+you have config 4 helper that allows you
+
+
+to load yum configuration files
+
+
+you have environment variables
+
+
+you have libraries like figaro or don't
+
+
+end that allows you to
+
+
+handle configuration values on different
+
+
+ways
+
+
+and all these
+
+
+solutions have different problems
+
+
+like
+
+
+you have to know where is your specific
+
+
+configuration i mean your code has to
+
+
+know where is the configuration like i
+
+
+mean the example
+
+
+uh you have to use nf or some other
+
+
+source
+
+
+directly
+
+
+it's hard to handle defaults or override
+
+
+them
+
+
+you have to base on ifs or ors
+
+
+it's hard to distinct that some of the
+
+
+defaults
+
+
+should be available only in development
+
+
+and not on a specific deployment
+
+
+lack of questions
+
+
+lack of verification that that you
+
+
+actually provided values that should be
+
+
+provided
+
+
+unless the application explodes on the
+
+
+production
+
+
+and and it's easy to end up with
+
+
+environment hell with dozens of
+
+
+variables and and
+
+
+a complete mess with configuration
+
+
+uh so
+
+
+it ends up with that the problem that
+
+
+your code
+
+
+has to know the infrastructure
+
+
+infrastructure leaks into your code base
+
+
+but you can better and uh
+
+
+i really encourage you to watch this
+
+
+presentation uh that
+
+
+introduce
+
+
+for example uh
+
+
+noa config library that takes this
+
+
+approach completely differently or from
+
+
+different perspective
+
+
+so instead of knowing where is your
+
+
+configuration you provide classes
+
+
+how you would like to configure your
+
+
+application with some specific
+
+
+keys
+
+
+and that's all
+
+
+the rest is done by the library itself
+
+
+and it has different loaders that goes
+
+
+one by one
+
+
+and tries to load variables from
+
+
+different sources like from environment
+
+
+from
+
+
+from a young config that
+
+
+follows the convention of naming etc
+
+
+and you end up with
+
+
+specific values in a class that is
+
+
+completely independent
+
+
+how your infrastructure looks like on a
+
+
+development on specific stage
+
+
+on deployment etc
+
+
+um
+
+
+and this this solution is really cool i
+
+
+really like it but i don't like the
+
+
+syntax it's really um
+
+
+not so friendly at least for me
+
+
+so i thought that maybe we can use this
+
+
+concept
+
+
+uh but
+
+
+uh with different syntax that is
+
+
+familiar with dry struct
+
+
+and this is how configuration again was
+
+
+born um
+
+
+so it's the same the same concept you
+
+
+have class where you define what kind of
+
+
+values you would like to have
+
+
+uh you can use uh questions from the
+
+
+drive struct
+
+
+and it has different loaders you can
+
+
+easily create your own loader that for
+
+
+example will load data from i don't know
+
+
+volt
+
+
+aws some source s3 whatever
+
+
+and it will go one by one try to load
+
+
+data if there exists and if not it will
+
+
+just go to another loader
+
+
+and simply provide you
+
+
+values that you want to use on on uh
+
+
+in your application um
+
+
+it's still not production ready it's
+
+
+very early development
+
+
+but you can at least watch it on on
+
+
+github and follow for for releases
+
+
+that's all thanks
+
+
+okay hello again
+
+
+i have a lightning talk write a blog
+
+
+basically that could be it but i'll say
+
+
+a couple of more things so
+
+
+i've heard somewhere that the human
+
+
+brain is wired up not so much to like
+
+
+memorize
+
+
+stuff but to solve problems
+
+
+and well uh sometimes i fix some kind of
+
+
+like uh
+
+
+uh
+
+
+heavy thin like i do some kind of uh
+
+
+heavy sequence of tasks like
+
+
+implementing a new api or like creating
+
+
+some kind of uh flow and uh
+
+
+a few months later or a few years later
+
+
+i want to do it once again and uh i kind
+
+
+of nearly have to learn it uh all once
+
+
+again like i don't remember these things
+
+
+really well and the thing that i've
+
+
+started doing a couple of years ago that
+
+
+i wish i started like
+
+
+10 years ago is writing a blog and the
+
+
+main target audience is not like the
+
+
+world but your self in the future so
+
+
+like
+
+
+it helps you i think at least helps me
+
+
+become a better developer uh while
+
+
+writing you kind of uh
+
+
+better understand the concepts of what
+
+
+you've implemented and
+
+
+i often come back to my blog just to see
+
+
+how i did something in the past so
+
+
+just most importantly write for the
+
+
+future self and
+
+
+it will reward you in the future
+
+
+[Applause]
+
+
+you

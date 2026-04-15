@@ -1,0 +1,2935 @@
+[Applause]
+
+
+hi
+
+
+everyone so today I I will explain how
+
+
+to how I uh decrease this LCP so uh on
+
+
+the slide you can see that there is 350
+
+
+milliseconds uh the number is quite is
+
+
+actually a bit lower but I didn't want
+
+
+to uh put the real number here because
+
+
+you may think it's
+
+
+unrealistic so first uh I will give you
+
+
+some intro and show you how it works uh
+
+
+at the demonstration uh then uh then we
+
+
+will uh think about uh how it works
+
+
+internally uh then there will be basic
+
+
+implementation
+
+
+instructions uh which is more most
+
+
+important part later I I will show you
+
+
+how how uh full implementation um what
+
+
+you need to know about fully fully
+
+
+implementing it and uh the main benefits
+
+
+lies there ER and uh uh besides I don't
+
+
+have PhD in debuy uh I will show you uh
+
+
+ways to to debug it and also to test
+
+
+it uh and there will be this this part
+
+
+regarding uh measurement of the impact
+
+
+so first LCP uh largest contentful paint
+
+
+is one of core web vitals which tells
+
+
+you how much uh how performant is your
+
+
+page uh it is largest element on the
+
+
+website if you if you can see the
+
+
+conference website uh the largest uh
+
+
+content full paint element is
+
+
+marked visibly
+
+
+so now when you know what L LCP is uh
+
+
+let's let's think about why to optimize
+
+
+it and there are two main benefits first
+
+
+one uh is that Google uh encourag web
+
+
+Masters to lower the LCP uh by uh giving
+
+
+them higher positions in Google uh so if
+
+
+your LCP is below 2 and A2 second then
+
+
+uh you are higher in
+
+
+serps uh and probably uh lowering it
+
+
+more uh does not have much SEO
+
+
+impact but there is also conversion rate
+
+
+impact and there are multiple studies
+
+
+that show that uh the less the the lower
+
+
+LCP the higher conversion rate and it
+
+
+goes to zero if you it's best to have
+
+
+zero LCP
+
+
+C so something about to give you context
+
+
+I am founder co-owner
+
+
+and and CTO of planu V which is a
+
+
+wedding vendors
+
+
+directory it allows you to find
+
+
+photographer for your wedding music Bond
+
+
+Etc so we are R application uh we
+
+
+started 16 years ago
+
+
+uh and recent some time ago we uh
+
+
+introduced nextjs as a front end part of
+
+
+the application we are still migrating
+
+
+our front
+
+
+end and the very important aspect of our
+
+
+website is that most of the traffic
+
+
+comes from
+
+
+Google so now let's go to the demo part
+
+
+so it's it's just a
+
+
+movie is it working with this
+
+
+microphone okay uh so uh we can see that
+
+
+this is just a
+
+
+movie and first uh the first thing I do
+
+
+is clear browsing data so that we can
+
+
+ensure that uh the cach is empty
+
+
+next thing is typing some search phrase
+
+
+in Google you see the results you can
+
+
+see my website is at the second position
+
+
+next I am throttling the traffic to slow
+
+
+3G to simulate slow connection and then
+
+
+I click it and you can see that the page
+
+
+show shows immediately and the LCP you
+
+
+can see
+
+
+it's 140 milliseconds
+
+
+[Music]
+
+
+so this is how it looks
+
+
+like so you can ask how how I achieved
+
+
+that H so did I used P Piper compression
+
+
+to quickly send this amount of
+
+
+data uh I can tell you that I just use
+
+
+good old prefetching so that the website
+
+
+is being pre prefetched at Google search
+
+
+results right
+
+
+if you don't remember how prefetching
+
+
+works it's just a single HTML tag uh
+
+
+where you specify URL and when browser
+
+
+sees this tag it prefetches the link
+
+
+when user uh travels there uh it is
+
+
+fetched from the cache not from the
+
+
+network so now we will have reverse
+
+
+engineering session so we will try
+
+
+to find out how it works on an living
+
+
+example yeah
+
+
+[Music]
+
+
+so can you hear me
+
+
+yeah uh so uh let's start with Google
+
+
+search so first uh let's open developer
+
+
+tools
+
+
+and we can see there is a network tab
+
+
+too and we will be we will see all the
+
+
+network requests that are made by this
+
+
+page now I am entering the search
+
+
+phrase which means music bands wedding
+
+
+music bands in jash of
+
+
+city and let's execute this
+
+
+query oh there is some
+
+
+capture it's
+
+
+probably I'm using
+
+
+VPN so
+
+
+[Music]
+
+
+may I haven't expect
+
+
+that there will be more
+
+
+[Laughter]
+
+
+probably you can do it
+
+
+yeah yeah there are there are still
+
+
+more oh this is not a motorcycle
+
+
+yeah I think one more and we will be
+
+
+ready to go
+
+
+yeah I don't know why it does not work
+
+
+still okay there is slow
+
+
+connection so now you can
+
+
+see oh there was some error
+
+
+here maybe I will refresh the
+
+
+page yeah that's probably because of the
+
+
+slow
+
+
+connection one more
+
+
+time uh not it's
+
+
+um there is no throttling here
+
+
+right yes so something is is is wrong
+
+
+and I I it's it's it's for connection
+
+
+but uh it's actually not not very needed
+
+
+I will refresh once
+
+
+again okay and you can see
+
+
+here if you scroll the connection the
+
+
+the one in red which which resulted in
+
+
+error uh yeah there is this Turtle here
+
+
+so it was SL slow it was probably
+
+
+cancelled because uh the the response
+
+
+time was slow
+
+
+I I don't know but but you can see that
+
+
+it is being prefetched right so now
+
+
+let's let's go to
+
+
+the yeah because you can see it is on
+
+
+the first place now we we should exam
+
+
+examine the HTML of the page to see uh
+
+
+how's the this magic thing
+
+
+work yeah so you can see here
+
+
+clearly right there is this this uh link
+
+
+prefetch and yeah that's
+
+
+it I can I can hear some Smiles hear
+
+
+some laughing laughing and see some
+
+
+Smiles maybe that's because you you
+
+
+notice that I'm sorry I I should should
+
+
+close those pages
+
+
+okay so I I think now it's
+
+
+better H so yeah those of you who have
+
+
+owed
+
+
+uh I should explain that this is not
+
+
+real uh
+
+
+but why it's not
+
+
+real why Larry haven't decided to use
+
+
+this approach
+
+
+do you think do you know why why the the
+
+
+page is not being pre prefetched in such
+
+
+a way such a simple naive way on Google
+
+
+search results do do you have any
+
+
+idea okay so maybe I will um uh I will
+
+
+try to add some hints so the first one
+
+
+is privacy
+
+
+because uh you can see that when the
+
+
+request to my website is being done from
+
+
+Google search uh I can see entire
+
+
+requests at my infrastructure I can see
+
+
+the IP of the user searching at Google
+
+
+he he may not decide to visit my page
+
+
+right but but I can see it and I
+
+
+consider Google search as
+
+
+a
+
+
+confession you you want it to be secret
+
+
+right uh every every request contains
+
+
+referer which which can contain a query
+
+
+string but actually it is already uh
+
+
+solved Google does not send
+
+
+referer so yeah the first thing is
+
+
+privacy most important and the second
+
+
+one is that Google has no control over
+
+
+what is being prefetched you can
+
+
+prefetch something for this particular
+
+
+user which you identify by IP you can
+
+
+for example send 10 megabytes to some
+
+
+mobile user to to uh saturate his
+
+
+traffic uh so probably Google don't want
+
+
+uh those things to happen on and and
+
+
+they don't even see that it's happening
+
+
+because it's between user and my server
+
+
+right so that's maybe it was one of the
+
+
+reason in
+
+
+2015 uh accelerated mobile page pages in
+
+
+short were
+
+
+introduced so the basic idea is to keep
+
+
+the simplified version of a page on
+
+
+Google servers and prefetch it from
+
+
+there from Google search
+
+
+results so uh they invented uh entire
+
+
+HTML framework for uh creating these
+
+
+simplified Pages uh and this solution
+
+
+offers much better privacy because there
+
+
+is no referral there is no IP passing
+
+
+Etc to original server everything is
+
+
+served from Google infrastructure there
+
+
+is more control because all the content
+
+
+is cached at Google servers so the
+
+
+website owner can't uh do any malicious
+
+
+things and of course the framework is
+
+
+very lightweight the pages loads super
+
+
+fast
+
+
+and there are also downsides the
+
+
+framework is very limited you don't have
+
+
+full power of HTML at and all the
+
+
+Technologies uh it is mobile only and uh
+
+
+it it has this ugly looking URLs the URL
+
+
+starts at go Google because it's served
+
+
+from Google
+
+
+infra and you may think what would
+
+
+happen if Google goes Rock and Google
+
+
+becomes evil they may modif y those
+
+
+pages right for example for particular
+
+
+uh
+
+
+users uh so you we need to trust Google
+
+
+100% on
+
+
+that so maybe we can fix it
+
+
+somehow
+
+
+today so I would suggest first ditching
+
+
+this entire light white framework let's
+
+
+unlock developers and uh allow them to
+
+
+use full power of
+
+
+HTML uh then let's cryptographically
+
+
+sign the page and keep it on Google
+
+
+servers like before so that uh the user
+
+
+the the Web Master will be happy that uh
+
+
+the website is not altered uh and the
+
+
+rest is uh the same let's prefetch this
+
+
+uh cached version of Page from
+
+
+Google and let's modify our browsers to
+
+
+check the signature and if the signature
+
+
+is valid we can uh display original URL
+
+
+in url
+
+
+bar so what's what the name should be uh
+
+
+how should we name this
+
+
+technology there are a lot of data flows
+
+
+from uh from server to Google and from
+
+
+Google to browser so every request
+
+
+response is an exchange of data and a
+
+
+lot of exchanges need to
+
+
+happen and cryptographic is
+
+
+involved so what's about signed
+
+
+exchanges and actually in 2018 signed
+
+
+exchanges were born uh it's called sxg
+
+
+in
+
+
+short uh it is at the it currently
+
+
+current level of standardization is its
+
+
+draft standard however draft standards
+
+
+uh is almost uh totally complete it's is
+
+
+very near to to real standard
+
+
+uh the fun fact is that if you type in
+
+
+Google s exchanges Wikipedia you won't
+
+
+see any results for that it's not very
+
+
+known however it's it's quite it has
+
+
+quite good support because all
+
+
+chrome-based browsers support
+
+
+it uh and Cloud flare has support for
+
+
+that there is an engx module and uh
+
+
+recently I learned that uh if you use
+
+
+fast CDN you can use it also but it
+
+
+requires some manual
+
+
+work so this is how it
+
+
+works
+
+
+so first Google bot tries to index your
+
+
+page uh and uh performs a request to
+
+
+website but it specified it accept
+
+
+header to to sign exchange so this is a
+
+
+signal to website to return sxg package
+
+
+I call it package because it's uh this
+
+
+HTTP response is packed um uh and
+
+
+signed uh so now Google bot could uh put
+
+
+that package to Google cash this is
+
+
+critical component and it caused me a
+
+
+lot of
+
+
+problems uh it is OPAC it is uh
+
+
+underdocumented
+
+
+uh so now when it is is in cash the
+
+
+Brower could um the user could search
+
+
+for this um query uh get some results
+
+
+and the prefetching happened from the
+
+
+Google cache the browser puts it in uh
+
+
+in prefetch Cache and later when user
+
+
+decides to click the link uh he think
+
+
+that he visits the website but the
+
+
+website won't even see his request
+
+
+because the request goes to the prefet
+
+
+cash and sxg package is being returned
+
+
+right so you can think of it as as
+
+
+method of offloading traffic from your
+
+
+website
+
+
+so how Google decides which uh pages to
+
+
+prefetch uh they they use uh this your
+
+
+current
+
+
+position um so they use the position you
+
+
+have in Google search results so um from
+
+
+my experience about three or five first
+
+
+uh results
+
+
+are prefetched it's it's quite logical
+
+
+because prefetching everything would be
+
+
+a waste of users bandw uh bandwidth the
+
+
+the the the first three or five results
+
+
+are much more likely to be
+
+
+clicked so uh how to enable sxg it's
+
+
+it's very simple uh if you use if you
+
+
+are cloud cloud FL
+
+
+customer uh cloud fler has very uh nice
+
+
+packages subscriptions uh I think I paid
+
+
+$20 or something it's it's not costly so
+
+
+it is one click of a button right you
+
+
+can enable it and Cloud flare uh acts as
+
+
+a reverse proxy to your website and uh
+
+
+creates those sxg
+
+
+packages and at this time I could tell
+
+
+tell that that it's all however uh
+
+
+Steven already did that trick so I can't
+
+
+use it
+
+
+so there is
+
+
+more so in apart from apart from uh
+
+
+clicking this button you have to rewire
+
+
+your brain
+
+
+because because you have to think about
+
+
+cont you have to distinguish between
+
+
+content uh
+
+
+creation generation and content
+
+
+distribution those are two separate
+
+
+things so in other ways in in other
+
+
+words you can we should decou request
+
+
+from the
+
+
+response because the same response could
+
+
+be used could be reused for many
+
+
+requests because it's cashed so the
+
+
+response began begins life of its
+
+
+own and there are some constraints your
+
+
+response has to met uh to be uh sxg
+
+
+friendly and and most important thing is
+
+
+that sxg friendly means it should be
+
+
+cash
+
+
+friendly so we should set this cash
+
+
+control header with Max H set to some
+
+
+value and public because cash is
+
+
+public the value of Max H should be
+
+
+between 120 seconds and to 7 Days uh if
+
+
+you set it lower the sxg won't be
+
+
+generated by Cloud flare uh if you set
+
+
+it higher it will be capped to 7
+
+
+days so I uh did a lot of thinking about
+
+
+uh which uh which value should I choose
+
+
+for my website and I came up with this
+
+
+24 hours so pages are crashed for 24
+
+
+hours and it works better than expected
+
+
+because I was expecting that if someone
+
+
+visits the page uh other other person
+
+
+should wait 24 hours to see fresh
+
+
+version uh but uh Google bot uh visits
+
+
+uh visits most of the pages more
+
+
+frequently and it updates the cash
+
+
+cash so this is how it's done in
+
+
+R uh in nextjs there is no way to
+
+
+override cash control header because
+
+
+it's used for uh internal nextjs things
+
+
+so we need to have a hack uh we create
+
+
+some uh other header and later rename it
+
+
+uh at uh web server for
+
+
+example yeah what are the other response
+
+
+requirements uh the most important is
+
+
+you can't do server s side
+
+
+personalization and it may be a big pain
+
+
+for ra rails developers because rails um
+
+
+is based on server site
+
+
+personalization so if you take if you
+
+
+for
+
+
+example uh return different response
+
+
+based on user agent language country or
+
+
+IP you should forget about that and do
+
+
+it differently because there are ways to
+
+
+do
+
+
+that and you can't have
+
+
+cookies you maybe some of you know I'm
+
+
+keto follower so I I should encourage
+
+
+you to go keto and forget about cookies
+
+
+but actually as in keto there is also
+
+
+keto
+
+
+cheating there are cheat
+
+
+days
+
+
+so uh the requirement uh is Rel related
+
+
+only to server side cookies if you are
+
+
+on front end on on the cookie uh the
+
+
+Cent side cookies are allowed aot right
+
+
+so you can have Google analytics for
+
+
+example cookie Banner
+
+
+cookie so the first uh most important
+
+
+cookie in rice is session cookie uh the
+
+
+way I um resolved um the
+
+
+issue is I created a diff special
+
+
+endpoint just for fetching session
+
+
+cookie so my website is
+
+
+static but it contains a JavaScript
+
+
+which which fetches this cookie from
+
+
+this endpoint and uses it at uh to to in
+
+
+later
+
+
+requests and other cookies I had to grab
+
+
+code for cookie string and uh replaced
+
+
+it with client side Solutions or remove
+
+
+it entirely if it is not
+
+
+used currently locked user so there is
+
+
+this pattern that currently locked users
+
+
+in the upper right corner of the screen
+
+
+there is this Avatar image and username
+
+
+right it should also be moved to client
+
+
+side uh to we can uh create some
+
+
+endpoint returning current Avatar URL
+
+
+and and name and it should be hit by
+
+
+front
+
+
+end yeah and there is also csrf which
+
+
+which security mechanism in
+
+
+RS uh it's prevents sxg from being
+
+
+generated because it uh generates unique
+
+
+content on each page rendered for each
+
+
+user for each session oh probably for
+
+
+each page view uh the the the result is
+
+
+different so one way is to disable this
+
+
+uh this mechanis but I don't recommend
+
+
+it because it's very
+
+
+important uh the other way is to move it
+
+
+also to client side it can be done I I
+
+
+show it how it's how to do that on on
+
+
+the blog
+
+
+and there is a uh HTTP strict Transport
+
+
+Security mechanism uh which also
+
+
+prevents sxg uh page to be generated uh
+
+
+the the fix is quite easy because you
+
+
+just need to remove one header if you do
+
+
+this at uh for example engin x uh you
+
+
+can also reconfigure rails to not
+
+
+include this hsds header uh and if you
+
+
+use CL Cloud flare it contains the
+
+
+switch to enable it at the cloud flare
+
+
+site in a way compatible with
+
+
+sxg yeah I also did first impression
+
+
+optimiz optimization it's not strictly
+
+
+related to sxg but it uh contributes to
+
+
+uh faster page loading uh so I so the
+
+
+website assumes that user is visiting
+
+
+its it for the first time so uh for
+
+
+example user assumes that that user is
+
+
+not logged in uh so this way uh the API
+
+
+end point for checking if user for for
+
+
+uh returning username and Avatar is not
+
+
+being hit uh it may seem as a very small
+
+
+optimization because we save one request
+
+
+right but it's not only for humans it's
+
+
+only for Bots it if there is a c Co
+
+
+concept called crawler budget craw
+
+
+budget uh so each crawler has some
+
+
+amount of request some some limit of
+
+
+request to perform or your on your
+
+
+website and if the limit is reached it
+
+
+stops indexing your page for given day
+
+
+for example right so shaving one request
+
+
+makes uh the B index more pages which is
+
+
+beneficial
+
+
+and you can see
+
+
+here yeah this this is a place where I
+
+
+introduced uh this and other
+
+
+optimizations you can see that average
+
+
+response
+
+
+dropped right and the uh number of
+
+
+indexed crawled Pages
+
+
+increased so all those things I set up
+
+
+until now are related to uh optimizing
+
+
+HTML response and HTTP headers of of the
+
+
+main document containing your
+
+
+page and if you think of the amount of
+
+
+work you need to put to make it work up
+
+
+to until now it's it's quite uh quite
+
+
+achievement is and you gain very small
+
+
+results the because only the HTML will
+
+
+be prefet prefetched HTML is quite small
+
+
+and the gain is very
+
+
+low but then when you prefet also sub
+
+
+so-called sub resources so a CSS which
+
+
+is critical for displaying the page if
+
+
+the until the CSS is loaded the page is
+
+
+white right uh there are also images to
+
+
+prefetch which directly affects
+
+
+LCP fonts and JavaScript for uh to make
+
+
+the page
+
+
+interactive and the graph the curve
+
+
+looks different because it's just few
+
+
+simple things if you know how to do that
+
+
+for me it looked differently because
+
+
+there was lot of debug I needed to
+
+
+do so how to prefet sub
+
+
+resources uh we use Link HTTP header for
+
+
+that this link is used also for
+
+
+mechanism called early hints uh which is
+
+
+Advanced optimization technique uh used
+
+
+in some servers Cloud flare supports it
+
+
+uh I like
+
+
+it uh but um for sxg we need to U use
+
+
+different format for this
+
+
+link uh so each sub
+
+
+resource should be hashed and the hash
+
+
+should be included in this link header
+
+
+for each URL prefetched for for a given
+
+
+uh main document we we have to have the
+
+
+hash of uh given sub
+
+
+resource so it needs to be
+
+
+generated so it may be uh not very
+
+
+simple to do if you have terabytes of
+
+
+assets stored sored in S3 for example
+
+
+you will have to download it uh hash it
+
+
+save it to database Etc right but but uh
+
+
+Cloud flare automated signed exchanges
+
+
+called sxg ASX ASX can do it for you
+
+
+right they just download those things uh
+
+
+at each request hash it and uh include
+
+
+it link
+
+
+header yeah so this is what it does um
+
+
+it parses the HTML of response finds all
+
+
+ring link Rel preload uh links inside
+
+
+your head or body generates hash for
+
+
+each sub resource and adds it to link
+
+
+header and the problem is that rail
+
+
+already has optimization is optimized
+
+
+for early hints it generates its own
+
+
+link uh headers if you use uh helpers
+
+
+for uh Sub sub resources for some sub
+
+
+resources such as stylish it link tag or
+
+
+JavaScript Etc
+
+
+uh and there is no way to remove this
+
+
+functionality it is buried very deeply
+
+
+uh in
+
+
+implementation
+
+
+so uh the rails generated link header
+
+
+takes pre precedence
+
+
+over uh yes it takes precedence which
+
+
+breaks
+
+
+prefetching so I had to deal with
+
+
+that uh my my solution
+
+
+was to remove the link header but only
+
+
+for X sxg responses and I used uh Cloud
+
+
+flare worker for that so Cloud flare
+
+
+worker contains if condition if the
+
+
+request is sxg then remove this header
+
+
+right otherwise keep it to have early
+
+
+hints
+
+
+working there are more constraints on
+
+
+pre uh on sub resources
+
+
+uh you should uh use cash control and
+
+
+it's best to use uh the higher amount
+
+
+you you can we use one year because sub
+
+
+resources uh don't
+
+
+change uh you you can't use cookies
+
+
+which is very infrequent infrequent in
+
+
+static assets you can't use hsts x but
+
+
+there are ways to work work around it as
+
+
+I told you uh there is one required M um
+
+
+which I needed to address uh the assets
+
+
+should be loaded from the same domain
+
+
+the main document was loaded right so if
+
+
+you have some
+
+
+CDN uh I resolved it by rewriting URLs
+
+
+also using cloudflare worker for
+
+
+that uh oh and uh very important uh rule
+
+
+there there should be no more that 20
+
+
+sub resources if there are more they are
+
+
+at and not
+
+
+used oh and sub resources are like
+
+
+Musketeers uh and after After
+
+
+experiencing BK presentation yesterday I
+
+
+told that sub resources are are like uh
+
+
+how how it's
+
+
+called Bambinos
+
+
+yeah they they uh they uh care for each
+
+
+other and they um they don't like some
+
+
+resource is uh excluded from the group
+
+
+so there is this one All or Nothing
+
+
+approach
+
+
+uh the browser refuses to use already
+
+
+prefetched
+
+
+resources even if only one failed so
+
+
+imagine you are at the Google page you
+
+
+are prefer catching 1 megab of resources
+
+
+but one failed one which weighs for
+
+
+example 10 kiloby right and you go to
+
+
+the website and your browser just
+
+
+discards all those prefetched resources
+
+
+and do it again that's for privacy
+
+
+reasons too but I won't delve into
+
+
+details yeah so for example how how how
+
+
+it may happen that not all resources
+
+
+were prefetched maybe user was quick or
+
+
+has slow connection and pre PR
+
+
+prefetched prefetching failed uh in
+
+
+because there was not enough time so the
+
+
+hint is to uh not serve too much and too
+
+
+heavy sub
+
+
+resources oh and there are there are I
+
+
+used red color for that because it took
+
+
+me a long time to De back there are the
+
+
+course errors and I I put a put an
+
+
+question mark there because uh the the
+
+
+course message you see in browser in the
+
+
+the developer tools just masks the real
+
+
+issue uh the real issue is that the sub
+
+
+resour is missing from Google
+
+
+cach and it's normal that some sub
+
+
+resources are
+
+
+missing uh and certain error rate is
+
+
+normal
+
+
+that's because uh the storage on cash is
+
+
+not unlimited the Google has to some
+
+
+some maintain its cash uh so it has to
+
+
+expire old entries and evict uh even
+
+
+fresh entries if it has not enough
+
+
+space so you will have to measure it uh
+
+
+and check what do
+
+
+you you have to find balance because
+
+
+page compl completeness so you you can
+
+
+prefetch all the sub resources on the
+
+
+page so user clicks and have entire
+
+
+website working uh but you risk that
+
+
+many users will have this failed
+
+
+prefetching experience so it looks like
+
+
+no no optimization at all right uh but
+
+
+and you can on other hand uh prefet only
+
+
+critical sub resources which will lead
+
+
+to small error rate but uh after
+
+
+visiting the page the user will have to
+
+
+fetch uh some additional
+
+
+resources yeah and this is this is the
+
+
+case this is the reason I spent so so
+
+
+much time um preparing this this this
+
+
+because uh Google cach is
+
+
+underdocumented uh and sometimes refuses
+
+
+to cach
+
+
+things so it took me weeks of blackbox
+
+
+testing because you know I saw that oh
+
+
+this website this page is not prefetched
+
+
+because those sub resources are not
+
+
+prefetch everything is correctly
+
+
+generated at my server cloud flare seems
+
+
+to work but for some reason it doesn't
+
+
+work and uh I don't know if yeah and
+
+
+it's it's magical because uh to make it
+
+
+more complex U Cloud flare generates
+
+
+different response for Google bot that
+
+
+for normal people
+
+
+so if you try to De it using curl you
+
+
+won't see anything suspicious
+
+
+right yeah there were there are many
+
+
+things for example there are some some
+
+
+magic headers you need to includ include
+
+
+which is not documented
+
+
+anywhere so now I will go to the demo
+
+
+this time for real
+
+
+okay so let's Let Let Us open Google
+
+
+results let us open Chrome developer
+
+
+tools there is this network and let's
+
+
+type this
+
+
+query okay I will clear the
+
+
+okay so you can see that the result is
+
+
+on the second place and here you can see
+
+
+the uh
+
+
+requests yeah and you can see the
+
+
+request is still pending because the
+
+
+network is slow however you can see
+
+
+there are some data maybe I will filter
+
+
+only sxg traffic it's it's oh it is
+
+
+already filtered okay
+
+
+so
+
+
+first you can see here in this
+
+
+line you can see that the type of the
+
+
+request is signed
+
+
+exchange and if you examine examine it
+
+
+you will see it is being fetched from
+
+
+Google sxg cach right web PKG
+
+
+c.com uh the response
+
+
+contains con contains link header here
+
+
+here which
+
+
+contains the sub resources for example
+
+
+here also served
+
+
+from from Google sxg
+
+
+cach and here you can see there is a
+
+
+font preloaded right you can see also
+
+
+yeah there is a
+
+
+type yeah there is no hash here but I
+
+
+will show it to you later actually
+
+
+now uh Chrome can decode sxg
+
+
+so you can see SG decoded
+
+
+here because here is a normal HTT
+
+
+response it contains sxg package which
+
+
+is which can be previewed here uh and
+
+
+you can see some hashing here and here
+
+
+is the link
+
+
+header for sxg and you can see it
+
+
+contains real URLs or css in this case
+
+
+uh and and it is duplicated is for
+
+
+technical reasons and you can see here
+
+
+this header
+
+
+Integrity uh it's it's a hash right so
+
+
+this is the the hash I told you that
+
+
+cloud generates
+
+
+automatically so we can close this and
+
+
+see sub resources being prefetched you
+
+
+can see there are more more signed
+
+
+exchange requests such as this CSS
+
+
+and uh yes it's it's uh just as before
+
+
+prefetched from web PKG cach and if you
+
+
+inspect sxg you can see for example that
+
+
+cash control is set to one
+
+
+year yeah I don't
+
+
+think there are other interesting
+
+
+things so that's it
+
+
+so sxg is fragile because if you are
+
+
+working in the team and
+
+
+somebody uh for example implements some
+
+
+cookie it will break a XG right or you
+
+
+use some server s side personalization
+
+
+Etc so so you need tests and the tests
+
+
+are actually quite easy to to write at
+
+
+least for B basic use cases uh because
+
+
+you
+
+
+have the sxg requirements clearly
+
+
+documented at um Cloud flare uh and
+
+
+Google
+
+
+pages so so so for example you have list
+
+
+of prohibited headers to not use or
+
+
+prohibited cash control
+
+
+directives uh and uh how to debac
+
+
+it uh I I found Chrome Dev tools uh the
+
+
+best tool for for debugging uh you you
+
+
+just have to remember to enable or
+
+
+disable cash uh because sxg is based on
+
+
+caching so if you want to test it that
+
+
+way enable cach but otherwise disable
+
+
+because you will get stale
+
+
+data uh there is a very nice uh page
+
+
+simple page sxg prefetch page which
+
+
+simulates what occurs on Google results
+
+
+page so you don't need to wait until
+
+
+your website is at top three you have
+
+
+you can do this on on one page there is
+
+
+sxg validator browser extension uh which
+
+
+tells you if given page is U doesn't
+
+
+contain any problems and it also shows
+
+
+you some uh hints how to improve it uh
+
+
+however I found it
+
+
+unstable it's working I use I use it but
+
+
+sometimes it gives you false Nega atives
+
+
+it tells you that the website does not
+
+
+Implement sxg while it implements it and
+
+
+you have you you can use Carl to verify
+
+
+it just uh curl and there there is also
+
+
+CLI utility which I haven't used which
+
+
+is uh distributed um in one of repos
+
+
+related to sxg uh but you need to
+
+
+remember that if you use cloud flare
+
+
+there is this nice feature called uh bot
+
+
+fight mode which
+
+
+prevents Bots from accessing your page
+
+
+so you need to disable it if you want to
+
+
+Deb back it with curl because curl is
+
+
+considered a bot there is also requestly
+
+
+which is a browser extension which
+
+
+modifies headers there are ton of such
+
+
+tools uh and this has uh this benefit
+
+
+that it's not recognized as a bot uh
+
+
+because it's used by in inside your
+
+
+browser and there is Google search
+
+
+console so as I told you previously um
+
+
+cloudfare serves different returns
+
+
+different sxg response to Google so you
+
+
+can use Google search console uh I don't
+
+
+know how it is called inspect URL uh
+
+
+functionality which uh instructs Google
+
+
+bot to visit your page and extract it
+
+
+and you can see even HTTP headers uh so
+
+
+this way you can debug
+
+
+it uh yeah and one thing that helps is
+
+
+to uh when you check some new thing want
+
+
+to debac Y things. work uh incre
+
+
+increase assets uh your assets version
+
+
+to invalidate all those caches in
+
+
+between because there are uh cash at
+
+
+Cloud flare there is cash at Google and
+
+
+there is a browser cash right so it's
+
+
+easier to change it in one
+
+
+place and there is
+
+
+measurement uh
+
+
+so I don't like me measurements because
+
+
+it involves using Excel and the the
+
+
+worst thing about measuring things is
+
+
+that you have some expectations you
+
+
+implemented you you spend hours
+
+
+implementing something and you expect it
+
+
+to work flawlessly but it it will never
+
+
+work flawlessly so uh measure me
+
+
+measuring it gives you contact with
+
+
+reality which is sad
+
+
+feeling so uh I measure two I measured
+
+
+two things LC LCP which is easy to
+
+
+measure and conversion rate which is
+
+
+important but not
+
+
+easy so what's the naive approach of
+
+
+measuring knif approach is that I
+
+
+measure things how LC and conversion
+
+
+rate works before deployment and then I
+
+
+wait some time and compare with results
+
+
+after deployment but it has C many
+
+
+problems that's because sxg AFF effects
+
+
+only slow only amount is a percentage of
+
+
+your visits so the results will have low
+
+
+signal to noise ratio which which means
+
+
+you have to collect very large amounts
+
+
+of data to see some patterns there uh
+
+
+and yeah you have to get appropriate
+
+
+amount of traffic uh so the results are
+
+
+stat statistically
+
+
+significant uh and a lot of traffic
+
+
+means long data capture uh it it may
+
+
+take weeks or months and during this
+
+
+time you have to restrain from any
+
+
+optimization to not influence the
+
+
+results and you have also seasonal bias
+
+
+uh for for example for my website the
+
+
+season seasonal bias is very
+
+
+large so the better
+
+
+approach is to compare sxg traffic with
+
+
+normal traffic from the same time
+
+
+interval so we don't have seasonal
+
+
+bias but we need a way to distinguish
+
+
+sxg traffic from normal traffic and uh
+
+
+we have uh the mechanism uh Cloud FL
+
+
+gives you this special variable set of
+
+
+window it just because Cloud flare
+
+
+controls your entire
+
+
+HTML it can uh inject some code uh and
+
+
+it injects setting this variable to True
+
+
+is
+
+
+sxg uh so you can integrate it with your
+
+
+analytics and uh the per and performance
+
+
+meas measurement tools to distinguish
+
+
+those uh two types of
+
+
+traffic
+
+
+yeah uh however there is also a problem
+
+
+with this approach because sxg users are
+
+
+not normal users because sxg users saw
+
+
+your website on very top positions right
+
+
+so there's a difference if if someone
+
+
+visits your page from the third Google
+
+
+page it means he's very persistent and
+
+
+he has very strong need right uh so so
+
+
+those um that's that's why comparing
+
+
+those users is like comparing apples to
+
+
+oranges so yeah Windows this this this
+
+
+variable is almost useless in my
+
+
+opinion
+
+
+but
+
+
+the yeah there is also there is also a
+
+
+second problem there is no documented uh
+
+
+way to check if sub resources were
+
+
+prefetched correctly because if you
+
+
+if you happen to have this course
+
+
+error uh the user almost uh didn't want
+
+
+not is any difference because the he
+
+
+will need to wait for all the sub
+
+
+resources and we don't have clear way to
+
+
+do
+
+
+that so I used this all or nothing
+
+
+remember
+
+
+Musketeers uh rule to detect prefetching
+
+
+I used canar sub
+
+
+resource which
+
+
+maybe I don't know if it's
+
+
+uh I will explain on my blog in
+
+
+details there is Canary resource which
+
+
+sometimes is loaded sometimes is not
+
+
+loaded and I can uh use JavaScript
+
+
+to um to tell if this particular sub
+
+
+resource was loaded or not right this is
+
+
+the main
+
+
+idea so so this way I can uh tell my
+
+
+analytics and performance measurement
+
+
+tools uh that sub resources were
+
+
+prefetched
+
+
+correctly uh yeah and uh I haven't done
+
+
+this yet but I have an idea for another
+
+
+uh sub resource poisonus poisonous sub
+
+
+resource which always fail and I can
+
+
+inject it on specific Pages for a tests
+
+
+right yeah so the modified approach to
+
+
+measure
+
+
+for LCP you can compare normal traffic
+
+
+with sxg traffic but with loaded sub
+
+
+resources and for conversion
+
+
+ratio uh you compare sxg traffics with
+
+
+internationally broke broken sub
+
+
+resources prefetching to sxg traffics
+
+
+with prefetching working
+
+
+correctly
+
+
+so probably I spent so much time
+
+
+telling you about difficulties in sxg
+
+
+that you are already you already don't
+
+
+like it but still I think it's it's
+
+
+great
+
+
+technology uh for improving user
+
+
+experience and performance it is under
+
+
+underdocumented and contains
+
+
+quirks uh and each deployment has to be
+
+
+measured uh to find the Swit spot
+
+
+between number of sub resources and
+
+
+error
+
+
+ratio and that's it I invite you to
+
+
+subscribe my blog uh I will write more
+
+
+about that uh in upcoming posts post
+
+
+[Applause]
+
+
+thanks okay we have time for one short
+
+
+question is it
+
+
+short hey I'm really impressed by the
+
+
+level of research and debugging you went
+
+
+to optim
+
+
+sxg um I'm wondering so you said that
+
+
+after each deployment you have to
+
+
+measure but do you also have to measure
+
+
+without deployments does it break from
+
+
+time to time especially that it's not
+
+
+documented does Google change things
+
+
+over time and then you have to fix fix
+
+
+it somehow okay thanks thanks for the
+
+
+question so uh first thing is that the
+
+
+measurement is not just right after
+
+
+deployment it takes many days right you
+
+
+you have to collect dat
+
+
+uh and and uh compare it to I don't know
+
+
+you have to collect one week of data and
+
+
+and see how it performs so so for
+
+
+example the thing I measure is the error
+
+
+rate so each time there is sub resource
+
+
+problem I sent event to Google analytics
+
+
+and then I compare failed with total
+
+
+number of um page
+
+
+loads so I don't know if I answered your
+
+
+question uh if you didn't change
+
+
+anything on your website does it break
+
+
+sometimes okay due to
+
+
+Google actually I don't know I don't
+
+
+know because I started uh measuring this
+
+
+error rate because I Was preparing for
+
+
+this
+
+
+talk so let us know if it breaks at some
+
+
+point
+
+
+okay as Pavo said to find out you need
+
+
+to subscribe to his
+
+
+blog all right thank you very much pav
+
+
+poka
+
+
+[Applause]

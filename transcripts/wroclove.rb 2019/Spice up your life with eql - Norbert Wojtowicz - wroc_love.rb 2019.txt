@@ -1,0 +1,3442 @@
+okay so I'm not a bird this is not my
+
+
+fur
+
+
+not Swofford although I've been here
+
+
+before there's like two or three people
+
+
+audience who know who I am the rest of
+
+
+you maybe it's better that you don't I
+
+
+was here in 2015 and I gave a talk about
+
+
+how as a ruby back-end developer I have
+
+
+reignited my love for front-end
+
+
+development when I've discovered that
+
+
+there's this thing called closure script
+
+
+and react and it turns out that
+
+
+front-end development isn't crazy it's
+
+
+just that the tooling was and if
+
+
+everything is just view equals function
+
+
+of data then everything becomes nice and
+
+
+pleasant it actually turns out I
+
+
+actually enjoyed front-end development
+
+
+and then I came back two years later and
+
+
+I told you guys that listen I've been to
+
+
+the woods and I'm coming back and it
+
+
+turns out that you can't even do back in
+
+
+development with closure and immutable
+
+
+data structures and it turns out that
+
+
+you can build entire systems in this and
+
+
+it's not just a front-end thing it turns
+
+
+out you can build everything in it and
+
+
+there's all this great tooling with
+
+
+closure spec and stuff that gives you
+
+
+the equivalent of what type checkers
+
+
+give you without some of the hassle that
+
+
+type checkers give you and then as it
+
+
+goes two years later I went to people
+
+
+rock in the Raviv and I gave a talk
+
+
+about how it turns out not only can you
+
+
+do front ends with this you can do back
+
+
+into with this but you can also replace
+
+
+your database with this concept of what
+
+
+happens if you just have immutable data
+
+
+and you have this data flow concept and
+
+
+that's all you've got
+
+
+how would databases look like and it
+
+
+turns out that they look really nice and
+
+
+this is actually people rock was really
+
+
+awesome because they made a really nice
+
+
+recording so if you want to find out
+
+
+more about how you can replace your
+
+
+relational database or your no sequel
+
+
+database or your front-end redux state
+
+
+machine with something more sensible
+
+
+that actually scales with how your
+
+
+domain changes over time then I highly
+
+
+suggest you go check out this video and
+
+
+I decided I'm not gonna give you this
+
+
+talk because you can just go and watch
+
+
+it on YouTube so we are here right new
+
+
+slot new talk and I sort of wanted to
+
+
+close the loop because I've I did
+
+
+something about fronting I did something
+
+
+back and I did I replaced my databases
+
+
+and it turns out that the only missing
+
+
+pieces api's right because then we
+
+
+sort of have a full picture and I can
+
+
+just go home and write Lisp all day long
+
+
+so this is a talk about how to build ap
+
+
+eyes using these ideas that I've been
+
+
+basically telling anyone who would
+
+
+listen for the last five or so years
+
+
+right and you know who you are so
+
+
+there's a recurring theme all right what
+
+
+is the recurring theme except for the
+
+
+fact that I'm here every two years the
+
+
+recurring theme is someone tweeted this
+
+
+photo last time I was here with a
+
+
+caption that read when you use closure
+
+
+and haven't told anywhere from five
+
+
+minutes and I was really disappointed
+
+
+and I will tell you why because they
+
+
+completely missed the point of my talks
+
+
+because this is not what is important if
+
+
+they had tweeted this then I am guilty
+
+
+as charged because my face looks exactly
+
+
+like they like a vein is popping out
+
+
+every time I hear people describing
+
+
+their problem and it turns out that they
+
+
+could just use declarative data
+
+
+structures and simple functions to solve
+
+
+their problem that's exactly how I look
+
+
+and anyone who hasn't talked to me after
+
+
+party knows this to be true right and so
+
+
+the question that remains is how can we
+
+
+take this approach and sort of build ap
+
+
+eyes with it and so I tried to I tried
+
+
+to bring it down to something that like
+
+
+is like a four step process because if
+
+
+it takes more than four steps nobody's
+
+
+going to do it and so I came up with
+
+
+this I'm not sure if it's totally
+
+
+irrelevant but we're gonna give it a
+
+
+shot
+
+
+and so the question is how do you build
+
+
+an API with these concepts of
+
+
+immutability edn context-free and flat
+
+
+and don't worry we'll get into it so we
+
+
+need an API so you two why not all right
+
+
+it's good as any API this is what
+
+
+YouTube looks like if someone has been
+
+
+living under a rock for the last 20
+
+
+years single page app lots of stuff
+
+
+going on here right so imagine if you're
+
+
+a front-end developer and you have to
+
+
+build this single page app with all
+
+
+these weird interactions and now imagine
+
+
+that you're the only person hired at
+
+
+YouTube so it actually turns out you
+
+
+have to also be the back-end developer
+
+
+who handles all of the requests to
+
+
+render all this information and that's
+
+
+what we're gonna trying to solve today
+
+
+so we're gonna blur out the details
+
+
+because they're irrelevant and we're
+
+
+just gonna look at the structure what's
+
+
+happening here well first of all we're
+
+
+getting a bunch of data from the API
+
+
+about what is the video and all the
+
+
+details about how to actually render the
+
+
+frames and you know just run their
+
+
+actual process of watching a video but
+
+
+it turns out that there's a lot more
+
+
+going on here because there's video
+
+
+details which is things like the titles
+
+
+and how many licenses that have how many
+
+
+views all the share links and all this
+
+
+kind of stuff related to the actual
+
+
+video metadata and then you have a
+
+
+channel which could be a user or it
+
+
+could be a physical Channel it turns out
+
+
+in the YouTube API user equals channel
+
+
+there is no separate concept for a user
+
+
+and this this idea of a channel means
+
+
+that on this view you have to render and
+
+
+fetch a bunch of data about you know
+
+
+like what is the channel title what is
+
+
+their avatar how many subscriptions or
+
+
+how many subscribers they have and all
+
+
+this kind of other information and then
+
+
+here on the bottom you have basically an
+
+
+infinite loading screen of comments
+
+
+right depending on how popular a video
+
+
+is for each of those comment scenes and
+
+
+load a bunch of data bots when it was
+
+
+posted what is the body and who did it
+
+
+who wrote this post and it turns out -
+
+
+in order to render who wrote this post
+
+
+you actually need to render they're
+
+
+tight in their name but also things like
+
+
+their avatars since when are they like a
+
+
+user of YouTube and so forth and so
+
+
+forth and if this wasn't complicated
+
+
+enough there's all these things on the
+
+
+side here right there's this little div
+
+
+all around the top of there that says
+
+
+next video that I'm going to show you
+
+
+and in order to render that little div
+
+
+you need to know things like what is the
+
+
+video title what is its thumbnail and
+
+
+YouTube tries to explain why that
+
+
+particular video showed up so it'll show
+
+
+you things like how many people are
+
+
+subscribed to the channel because they
+
+
+they gave you this to the feed because
+
+
+it's a popular channel or a lot of
+
+
+people similar to you watch this video
+
+
+or a million other reasons a million
+
+
+other data points that need to be
+
+
+fetched in order to do that single video
+
+
+and then repeat it for all the other
+
+
+videos in the feed right all of this
+
+
+data needs to be fetched in order to
+
+
+render this single view and it's not a
+
+
+dashboard it's a sink it's a page for a
+
+
+single view of a video so how would you
+
+
+do this well if we're in rest
+
+
+it would look something like this right
+
+
+you basically fudge the video fetch the
+
+
+channel related info fetch the comments
+
+
+for each comment fetch the author
+
+
+information fetch the next video fetch
+
+
+its channel information and so forth and
+
+
+so forth so obviously nobody does is
+
+
+because YouTube would take forever to
+
+
+render load and render and then you
+
+
+probably put the you know like the back
+
+
+end system down because of the amount of
+
+
+data fetching for a single view so
+
+
+nobody does this what YouTube does is it
+
+
+does this is anyone play with the
+
+
+YouTube API so imagine what is happening
+
+
+here they've realized that they can't
+
+
+give you all the data so they call this
+
+
+thing called a part and they say
+
+
+different pizza pieces of information
+
+
+are in different parts and you need to
+
+
+fetch the right part to get the right
+
+
+information and even on top of that
+
+
+we're gonna even add like little quotas
+
+
+like different pieces of information are
+
+
+more or less
+
+
+I don't know hazardous to our health so
+
+
+like our back-end server so they're
+
+
+gonna cost you more quota points so does
+
+
+anyone want to take a guess if I wanted
+
+
+to get the channel title this is a
+
+
+channel API right so like get channel
+
+
+which part would I need to send as my
+
+
+parameter to get the title is incorrect
+
+
+it's not content details it's not
+
+
+content owner details its snippet
+
+
+YouTube has this concept of a snippet
+
+
+and snippet in air quotes is the most
+
+
+likely information you want to fetch for
+
+
+a specific entity yeah so there's that
+
+
+so rest is done let's move on I mean I'm
+
+
+not even gonna discuss this issue so if
+
+
+you don't have rest what do you have
+
+
+well obviously YouTube is not the only
+
+
+person with this problem Facebook has
+
+
+this problem they made graph QL Netflix
+
+
+has this problem to make Falkor I'm
+
+
+gonna talk about graph QL more just
+
+
+because I feel it has more market share
+
+
+but they're pretty much identical except
+
+
+for some slight implementation
+
+
+differences so how does graph QL solve
+
+
+this problem basically you
+
+
+define types and you say a video type
+
+
+has things like an idea title
+
+
+description has a relationship to a
+
+
+channel to next videos and so forth and
+
+
+then you define what what it means to be
+
+
+a channel and then you define what it
+
+
+means to be your comment and once you
+
+
+have all these types down you can write
+
+
+a query and this is what a query would
+
+
+look like it would just be basically
+
+
+saying given a scope of video with some
+
+
+ID here all the attributes I'm
+
+
+interested in to render this webpage and
+
+
+it would be things like ID title
+
+
+description and notice what's happening
+
+
+here with the channel in the comments
+
+
+it's using a map notation to say that
+
+
+we're going to be joining a relationship
+
+
+with something else in our system right
+
+
+and the same thing for next video and
+
+
+related videos and it turns out that's
+
+
+all you need to render this really
+
+
+complex web page and so it's this is
+
+
+wonderful
+
+
+compared to Ross I mean this is a huge
+
+
+step up and it's primarily it primarily
+
+
+works because it puts all the control in
+
+
+the hands of the client so first of all
+
+
+the client is responsible for fetch it
+
+
+for describing exactly which pieces of
+
+
+information it wants without having to
+
+
+understand that there's a snippet and
+
+
+content details and all this other stuff
+
+
+it's it only if you only want the title
+
+
+that's all you're gonna give back
+
+
+nothing else the second thing is that
+
+
+once you build a client and the server
+
+
+keeps adding new features the API keeps
+
+
+adding new features you're never gonna
+
+
+break old clients because if you add new
+
+
+features and you Nate and you give them
+
+
+new names new attribute names old
+
+
+clients not gonna ever request new
+
+
+features so by definition they're never
+
+
+gonna break as long as you never remove
+
+
+old attributes you just always add new
+
+
+ones if there's new features you're
+
+
+interested in and the other wonderful
+
+
+like idea behind graph QL and the fact
+
+
+that it's controlled by the client is
+
+
+that you remove tons and tons of
+
+
+boilerplate because a lot of code that's
+
+
+written on the front end is
+
+
+unfortunately nothing more than fetch
+
+
+this arbitrary API endpoint that's going
+
+
+to give me back a blob of JSON and map
+
+
+that blob of JSON from the documentation
+
+
+to the things that I'm interested in
+
+
+right so that's exactly what you do with
+
+
+YouTube you say I need to read the
+
+
+YouTube documentation I need to know
+
+
+that I need to ask for the snippet and
+
+
+it's going to
+
+
+give me this snippet and some really
+
+
+weird arbitrary JSON structure and I
+
+
+need to know that fetch that specific
+
+
+thing to actually get the video title as
+
+
+soon as you have a graph QL system this
+
+
+problem completely disappears because
+
+
+the client by specifying the structure
+
+
+of the query it wants is going to get
+
+
+the exact same structure back so it
+
+
+turns out that you get the exact same
+
+
+representation back to you right no
+
+
+questions asked so there's no
+
+
+boilerplate related to how do you build
+
+
+these systems so it's wonderful and this
+
+
+will be the end of the talk except graph
+
+
+QL isn't perfect it has certain problems
+
+
+and all of them basically boil down to
+
+
+this the idea of the type so you can't
+
+
+define arbitrary attributes in graphic
+
+
+QL you always have to scope it to a
+
+
+certain type of thing that it's designed
+
+
+for so imagine you build an arbitrary
+
+
+comment react component that is only
+
+
+interested in author title and body
+
+
+you can't arbitrarily ask a server for
+
+
+give me all the comments for videos
+
+
+users and channels and use it as if it
+
+
+was as if you know if like a UI
+
+
+perspective you honestly don't care if
+
+
+this is a comment from a video or a
+
+
+channel or user it it has the exact same
+
+
+semantics it has an author and body
+
+
+attribute but unfortunately in graph QL
+
+
+you actually need to create three
+
+
+different types because the attributes
+
+
+themselves are always nested within the
+
+
+scope of a specific type so you get type
+
+
+explosion you get the exact same
+
+
+problems anybody has ever seen with any
+
+
+kind of type system that doesn't allow
+
+
+for basically interesting ways of
+
+
+expanding the types without right
+
+
+basically rewriting the code millions of
+
+
+times right graph QL gives you tons and
+
+
+tons of type explosions which is you
+
+
+don't see it at an hello world programs
+
+
+but you see it when you build big
+
+
+applications anytime you want to design
+
+
+a different kind of scope for a query
+
+
+and keep the same attribute to create a
+
+
+new type right so this is just this is
+
+
+an explosion of types but we can solve
+
+
+this problem well graph QL won't save
+
+
+you and since this is a ruby conference
+
+
+and i'm
+
+
+developer you have to give the standard
+
+
+rich hikiko of you solve this problem by
+
+
+D complexing it and for anyone who isn't
+
+
+familiar with this quote basically D
+
+
+complexing is the process of taking
+
+
+things apart that were unintentionally
+
+
+coupled together but really don't need
+
+
+to be and at this point you know I'm
+
+
+sure DHHS is writing a some diatribe
+
+
+somewhere about why this is wrong and
+
+
+where is gray shake you know where you
+
+
+are okay how do you decomp like this
+
+
+problem what are the things that are
+
+
+completely independent of each other
+
+
+that shouldn't be together some ideas
+
+
+one more time
+
+
+no comments are part of the video and so
+
+
+that this if you remove the comments
+
+
+part then basically you're going back to
+
+
+rest
+
+
+nope same problems comments it's part of
+
+
+the video it's this part it's the scope
+
+
+there's no reason why the scope is part
+
+
+of the query the query describes get
+
+
+this is the stuff I'm interested in the
+
+
+scope describes how do I get the thing
+
+
+and then pull out the data that I'm
+
+
+interested in gravity ball doesn't do
+
+
+this but it turns out if you do it then
+
+
+you get a lot of interesting properties
+
+
+that fall out so that's essentially what
+
+
+eql is but if you sort of squint at it a
+
+
+little what is this that this caught
+
+
+this idea of here's the thing I have and
+
+
+here's the thing I'm really interested
+
+
+in if you squint at it just a bit it
+
+
+looks like something that you do on
+
+
+daily basis and it's called select keys
+
+
+or an herb you'll and it's hash slice
+
+
+right it's this concept of here is a
+
+
+hash map of things I have and here's a
+
+
+list of keys I'm actually interested in
+
+
+so give me a new map just with those
+
+
+things and nothing more this is
+
+
+essentially what we need to do
+
+
+at an API level and so it looks
+
+
+something like this right like the 8 I
+
+
+have a map with ID and title but I'm
+
+
+only interested in the title so select
+
+
+keys will give me exactly that nothing
+
+
+more all right this is simple enough so
+
+
+that's select but what about traversals
+
+
+does hash slice give you the
+
+
+capabilities to say I want the title but
+
+
+I also want the body from the comments
+
+
+field right hash slice doesn't give you
+
+
+this concept so like keys and closures
+
+
+doesn't give you this a bit it doesn't
+
+
+have the proper notation to describe
+
+
+traverse into a set of vectors and maps
+
+
+and give me this specific thing I'm
+
+
+interested in but there is something
+
+
+that does this and you might also use in
+
+
+a daily basis and it's called JQ who
+
+
+here has heard of JQ right this is
+
+
+exactly what JQ does JQ says here's this
+
+
+weird pearl like string notation for how
+
+
+you pull out things from traversals
+
+
+right and it gives you the thing you're
+
+
+interested in but even Jake you can't
+
+
+solve the problem of derivation so
+
+
+derivation is idea that if I have the
+
+
+idæan title I'm interested in the title
+
+
+in the URL and you might ask you get the
+
+
+URL it wasn't in the context but it is
+
+
+because the URL is nothing more than a
+
+
+string concatenation of some base URI
+
+
+and the ID and the idea is something you
+
+
+do have so JQ I mean as far as I know
+
+
+doesn't give you the ability to derive
+
+
+new kinds of data although I might be
+
+
+wrong because they have some really
+
+
+crazy stuff on that website but it's
+
+
+definitely not something I can sit down
+
+
+sit down at terminal I don't know what
+
+
+the notation for derivations of
+
+
+functions JQ is and I try to look for it
+
+
+in ten minutes on the tutorial and I
+
+
+couldn't find it so it might as well not
+
+
+exist but this is essentially what we
+
+
+want to do at a higher level we want to
+
+
+basically be able to write something
+
+
+like JQ with a proper notation to give
+
+
+you selection traversals and derivations
+
+
+and ideally you don't want to use a
+
+
+string notation because a string
+
+
+notation like sequel like graph QL is
+
+
+really hard to modify programmatically
+
+
+it's something that you you know you
+
+
+same problem with sequel you can't
+
+
+programmatically manipulate it right
+
+
+you always have to build some concept on
+
+
+top of it and then sort of push it back
+
+
+into a string which is real pain and ass
+
+
+okay so now we go back to the beginning
+
+
+let me check on one more time so the
+
+
+question is how can we build something
+
+
+like this using these concepts and it
+
+
+turns out and conveniently there is a
+
+
+closure library already that does this
+
+
+it's called pathum and I'm gonna
+
+
+describe it to you and the trick is that
+
+
+not that this thing exists in closure
+
+
+and we use it on a daily basis the thing
+
+
+is that there's the ideas behind this
+
+
+aren't hard and there's no reason why
+
+
+you shouldn't be able to just port this
+
+
+to Ruby because I think there are a lot
+
+
+of nice consequences from doing this so
+
+
+the first thing is immutability right
+
+
+it's like this is our cornerstone let's
+
+
+figure out how much of the stuff we do
+
+
+is stuff that is moderately scientific
+
+
+free and let's push everything that has
+
+
+side effects in IO to the edges of the
+
+
+system as much as possible because it
+
+
+makes everything else easier to test so
+
+
+if we want immutability an API basically
+
+
+it comes down to this it's the idea that
+
+
+we have some arbitrary parse function
+
+
+that has a context in a path and that's
+
+
+all anything and the assumption is that
+
+
+if the path wants to describe some bit
+
+
+of information the context needs to feed
+
+
+it in there's nothing else coming into
+
+
+the system to make any kind of decision
+
+
+you need to sort of pass everything in
+
+
+through the context so that's simple
+
+
+enough the second step is let's use Eden
+
+
+wherever possible well it turns out
+
+
+that's really easy because basically
+
+
+we're gonna replace path which is
+
+
+arbitrary with eql which is a very
+
+
+specific notation and this is actually
+
+
+how I approach problems I basically say
+
+
+how much of this stuff can I make
+
+
+immutable and then how much of this
+
+
+stuff can I describe an Eden or in this
+
+
+case EQL because what is eql it's the
+
+
+Eden query language it seems kinda
+
+
+obvious right
+
+
+what is Eden it's the extensible data
+
+
+notation
+
+
+aren't you happy there's in like third
+
+
+slide with more acronyms but what is
+
+
+this really this is what
+
+
+it is it's a data notation is literally
+
+
+how do we express things as data in such
+
+
+a way that you can put on the wire you
+
+
+can serialize it and you can do
+
+
+serialize it back into programs and it's
+
+
+a notation that describes things like
+
+
+how do I serialize things like numbers
+
+
+and rationals and decimals and big
+
+
+integers how do I serve all those things
+
+
+like instances and date times bullying's
+
+
+nil string keyword symbols like these
+
+
+are examples of scalars and then you
+
+
+have examples of collections things like
+
+
+vectors and sets and maps and lists
+
+
+right and eden is basically a
+
+
+specification that says these are the
+
+
+kinds of things we're gonna support and
+
+
+here's the protocol for how do you see
+
+
+ERISA and do civilize it and so it's
+
+
+cross cross language compatible right
+
+
+there's like an Eden parser for Ruby
+
+
+there's one for Java and so forth now if
+
+
+this looks a lot like closure that is no
+
+
+coincidence because closure uses Eden as
+
+
+a way of expressing closure programs
+
+
+so essentially what closure does is it
+
+
+says given an eden-like file I'm going
+
+
+to use this representation to compile it
+
+
+into an ASD which compiles it to
+
+
+bytecode right so it's no coincidence
+
+
+that this looks a lot like closure but
+
+
+that's not because this is closure it's
+
+
+that closure uses eden as a way of
+
+
+writing its own programs but it turns
+
+
+out that eating is useful besides just
+
+
+close your write because we use it
+
+
+everywhere too as a way of communicating
+
+
+between services as a way of storing
+
+
+stored procedures and databases as a way
+
+
+of storing any kind of configuration and
+
+
+so forth you can think of it as
+
+
+basically a safe Y amyl because it
+
+
+supports extending it with custom types
+
+
+or you can think of it as a json plus
+
+
+plus because it supports things like
+
+
+vectors and lists and sets something
+
+
+that Jason doesn't support or you can
+
+
+serialize things like instances which is
+
+
+something you can't do in JSON right so
+
+
+basically the way you think about is
+
+
+this is all the kind of data that we
+
+
+need to basically store any kind of
+
+
+information ever okay so that's even so
+
+
+what is the eat in query language well
+
+
+it could look something like this right
+
+
+so when you look at it all right I
+
+
+didn't mention one thing keyword and
+
+
+symbol is flipped right compared to Ruby
+
+
+I don't know why Matt's did that Matt
+
+
+Matt's inspired was Ruby was inspired by
+
+
+Lisp and Lisbon all these other
+
+
+languages this is a key word and this is
+
+
+a symbol but for some reason in Ruby
+
+
+it's the exact opposite of what is a
+
+
+simple and what is a key word but that's
+
+
+irrespective so this is this is a this
+
+
+is called a symbol in Ruby right yeah
+
+
+and I don't know why he did that all the
+
+
+other languages do it the other way so
+
+
+key word is something what is a symbol
+
+
+in Ruby and symbol is basically like if
+
+
+and deaf and deaf and things like that
+
+
+like you things that come things that
+
+
+are constants in your in your language
+
+
+of choice okay sorry
+
+
+just tangent this is graph QL and this
+
+
+is what EQL could look like so the only
+
+
+things that really changed was we
+
+
+switched from an arbitrary string
+
+
+notation to using data structures which
+
+
+is nice because it means that you can
+
+
+manipulate it using code we basically
+
+
+instead of some arbitrary string
+
+
+identifier we just use keywords because
+
+
+there are things that are programmable
+
+
+and notice that what happens with thee
+
+
+with things like channel and comments is
+
+
+you use a map to describe the fact that
+
+
+you're doing some kind of a joint so
+
+
+you're using vectors to describe lists
+
+
+of attributes and you're using maps to
+
+
+define and to describe this is a join of
+
+
+some kind of a relationship so in the
+
+
+simplest case this is what it will look
+
+
+like and except for the convenience of
+
+
+having a programmable data structure
+
+
+this is probably not enough of a good
+
+
+reason to switch but there's more
+
+
+because we're just on stuff 2 out of 4
+
+
+number three is context-free whenever
+
+
+possible we strive to build context-free
+
+
+systems when describing our data what
+
+
+does that mean what is this it's an ID
+
+
+it's an identifier
+
+
+is an ID for you we don't know we don't
+
+
+know because we're missing some context
+
+
+but it turns out that you can uniquely
+
+
+identify things without putting it into
+
+
+context you can give it a name space
+
+
+right as soon even supports this concept
+
+
+of name space keywords and as soon as
+
+
+you do this you know exactly what this
+
+
+is if you see this summer in your
+
+
+codebase you don't have to ask what is
+
+
+this an ID of you know it's a video ID
+
+
+right the namespace tells you exactly in
+
+
+which context it's being used and what
+
+
+does it represent
+
+
+and you will never confuse this with a
+
+
+user ID or some other kind of identifier
+
+
+and so when we apply this kind of
+
+
+transformation this is what our query
+
+
+starts to look like right you have a
+
+
+bunch of like things like this is a
+
+
+video I want some video ID notice that I
+
+
+can look at channel title and I know
+
+
+exactly what it is without even looking
+
+
+where it came from like what is the
+
+
+relationship from everything else right
+
+
+I just see channel title and I know
+
+
+exactly what I'm looking at now this is
+
+
+already much much better because we have
+
+
+context free identifiers but we can do
+
+
+even better because if I see video ID in
+
+
+my system I may not know exactly what
+
+
+I'm talking about because if I am some
+
+
+kind of video aggregation service this
+
+
+could be a YouTube video this could be a
+
+
+v-mail video this could be some video
+
+
+that was uploaded from disk so to make
+
+
+it let's just make a super explicit and
+
+
+let's just call it a YouTube video ID
+
+
+right and we'll see later why this is
+
+
+important so now our code looks like
+
+
+this and yes it looks a lot more verbose
+
+
+I admit but the nice thing is it's
+
+
+completely context free and you don't
+
+
+need you basically always know where you
+
+
+are in the system and so now we can
+
+
+apply the fourth rule which is once you
+
+
+have context-free identifiers you can
+
+
+flatten things and that has a really
+
+
+interesting property this is what
+
+
+happens notice what just happened here
+
+
+at the same level as a YouTube video ID
+
+
+I can
+
+
+have I can ask for YouTube channel title
+
+
+we've lost the neccessity to do a join
+
+
+because a video has a 2-1 relationship
+
+
+to a channel it always up is uploaded to
+
+
+a specific channel so at the level of an
+
+
+API I as an API user do not need to know
+
+
+that there is some kind of relational
+
+
+database that Maps videos to channels as
+
+
+far as I'm concerned a YouTube video and
+
+
+a YouTube channel title is all in the
+
+
+same level right just like it is in the
+
+
+in the web UI the only things that need
+
+
+to be still and created with
+
+
+relationship join are things where it's
+
+
+a too many relationship because you
+
+
+can't flatten a too many relationship
+
+
+mean you a vector of things does this
+
+
+make sense
+
+
+perfect so we've been ignoring scope up
+
+
+to now and so the question is how do you
+
+
+do scoping well turns out you've already
+
+
+been doing it you just haven't realized
+
+
+that this is a scope any kind of a map
+
+
+that is a as a joint is a way of scoping
+
+
+information it's saying I want the
+
+
+common body and the author title but the
+
+
+scope is the key of this map right so
+
+
+it's I want this for the video comments
+
+
+and the way you implement this in pathum
+
+
+is you basically do this you say give me
+
+
+a resolve I want to create a new
+
+
+resolver the input is given of it if you
+
+
+give me a video ID I have a function
+
+
+here that knows how to return comments
+
+
+and body in title specifically of the
+
+
+comment so what I'm creating here is I'm
+
+
+creating nodes in a graph that says if
+
+
+you give me a video ID I can give you
+
+
+this data back by calling this function
+
+
+and this function you can just imagine
+
+
+is just calling the YouTube JSON API and
+
+
+basically just fetching the data we're
+
+
+interested in so that's one thing the
+
+
+question is where does a YouTube video
+
+
+ID come from right well it turns out
+
+
+that the resolver doesn't care when
+
+
+you're building this resolver all you
+
+
+care about is that I have a video ID I
+
+
+know how to get
+
+
+I don't care where the video ID came
+
+
+from I no longer have global scope I no
+
+
+longer have type explosions basically
+
+
+any way you can give me a video D which
+
+
+is tell me what video idea it is or give
+
+
+me a playlist ID and I'll fetch all the
+
+
+video IDs related to it or any other
+
+
+kind of method of getting a video ID at
+
+
+this point I don't care this is just a
+
+
+graph in the node that knows if I have a
+
+
+video ID this is I can get your comments
+
+
+and that's all you do but at some point
+
+
+you're gonna have to build that top
+
+
+query like the how do you even begin to
+
+
+build a query if you don't have some
+
+
+kind of root scope right so the question
+
+
+is what kind of root scopes make sense
+
+
+well there's only two of them that
+
+
+really makes sense one is I have a
+
+
+specific identifier and that's I want
+
+
+you to start there so it's a tupple with
+
+
+it it's a tool manufacturer that says I
+
+
+have some ID and based on this idea I
+
+
+want the title and the resident a ssin
+
+
+this is the entire implementation in the
+
+
+code it basically says here's the input
+
+
+this is the stuff I can guarantee if you
+
+
+give me an ID with this function and
+
+
+that's it and honestly it doesn't matter
+
+
+where in the query I'm asking for a
+
+
+video title if I have a video ID I can
+
+
+do your work for you and the other kind
+
+
+of thing you might want to do in a root
+
+
+scope is basically a singleton a global
+
+
+identifier so you're not scoping to a
+
+
+specific video you're basically saying
+
+
+there's some concept in our API called
+
+
+favor videos maybe basically we look at
+
+
+the user session and we figure out how
+
+
+to fetch the user favorite videos and
+
+
+then get the video title so how do you
+
+
+implement this notice there's no input
+
+
+because it's a global singleton it just
+
+
+says that if you're asking for favorite
+
+
+videos I know how to get you an ID
+
+
+I noticed that we're asking for the
+
+
+title but that's okay because we already
+
+
+have a different resolver that given an
+
+
+ID we'll know how to get the title okay
+
+
+next thing you might want to do is you
+
+
+want to do some kind of parametrization
+
+
+and this is where so like you want to
+
+
+give it like some limits and some
+
+
+searching and stuff and so that's where
+
+
+this even list notation comes in because
+
+
+it's a way of telling the data structure
+
+
+this is a way of parametric
+
+
+the thing I was already asking for
+
+
+previously and again the implementation
+
+
+is actually identical because basically
+
+
+the params are just part of NF and you
+
+
+can sort of fetch them get them out if
+
+
+you are interested in them and the last
+
+
+thing is mutations right because
+
+
+graphical except for doing reads
+
+
+actually does writes and it is a ways of
+
+
+sending commands so it turns out that
+
+
+all you need to do in Eden is use the
+
+
+parentheses and a symbol we haven't used
+
+
+symbols up to now but because we have
+
+
+symbols in Eden we can actually specify
+
+
+completely different semantics for it so
+
+
+any time it sees a symbol new user it's
+
+
+gonna look for like a CQRS command
+
+
+called new user give it the following
+
+
+commands and execute that specific thing
+
+
+well what is this doing down here with a
+
+
+command this is a join that basically
+
+
+says here's the command here's the
+
+
+mutation I'm I want you to do and here
+
+
+is the read I want you to do after you
+
+
+finish the mutation so this gives you
+
+
+the ability to send mutations with read
+
+
+after write semantics right for free and
+
+
+the implementation is basically the
+
+
+stuff mutation with some params and the
+
+
+output so this gives you the ability to
+
+
+say do the mutation after you have
+
+
+succeeded do the original query I was
+
+
+asking for and you have read after write
+
+
+semantics for free so I know this is
+
+
+really boring but I want you to show you
+
+
+something because maybe it'll be easier
+
+
+if I just show you here's a little
+
+
+application that uh lets me write
+
+
+queries in the system I'll just do some
+
+
+copy pasting to make this faster so
+
+
+what's happening here I'm fetching a
+
+
+YouTube video ID I'm in specifying the
+
+
+scope the scope is a YouTube video ID
+
+
+and I want the snippet title and
+
+
+statistics view account and basically
+
+
+what's happening here is I'm getting
+
+
+back the video ID in the snippet title
+
+
+and the view counter from my 2015 talk
+
+
+right
+
+
+so far so good so basically what has
+
+
+happened here is I've wrote I've written
+
+
+an application that parses the path I'm
+
+
+API and parses the part of the Union
+
+
+I've been talking about to this point
+
+
+and basically just does a resolve by
+
+
+calling the actual YouTube API nothing
+
+
+more so that's simple the other thing
+
+
+you can do is if you can of course
+
+
+replace this with the Global's which is
+
+
+like my videos right so this is some
+
+
+custom endpoint a custom resolver that
+
+
+says my videos is basically the 3 some
+
+
+arbitrary 3 IDs in database and what it
+
+
+does is for each of those IDs it fetches
+
+
+the title and the view account now you
+
+
+may have noticed that this editor
+
+
+actually sort of tells me what things I
+
+
+can reach from the things we're from the
+
+
+place I am because essentially my videos
+
+
+is a resolver that says here is a list
+
+
+of video IDs that I'm interested in and
+
+
+this says that given a list given you
+
+
+have a video ID these are the places you
+
+
+can reach right so one thing you can do
+
+
+is you can reach the channel how would I
+
+
+reach the channel let's go back to that
+
+
+previous one so the YouTube API when you
+
+
+call the video details will return
+
+
+something called a channel ID and a
+
+
+channel title and their snippet because
+
+
+they figure that this is the kind of
+
+
+information that is used often enough
+
+
+that we're going to add it as part of
+
+
+the video API but what would happen if I
+
+
+wanted to also get the make the channel
+
+
+view count you would get a not found is
+
+
+this legible enough for everyone to read
+
+
+ok
+
+
+so why is this happening because the
+
+
+people at YouTube when they were writing
+
+
+their API snippet concept they figured
+
+
+channel ID and channel title are used
+
+
+often enough that we're gonna add it as
+
+
+part of our video payload but they never
+
+
+considered that viewcount is something
+
+
+that is relevant enough so you can't
+
+
+actually fetch it you need to make a
+
+
+separate fetch the rest fetch for the
+
+
+channel title snippet the channel
+
+
+snippet stuff right but this right here
+
+
+is the channel ID so if I create a
+
+
+resolver that alias is this to the
+
+
+channel ID and I've actually done this
+
+
+so this returns right correctly this
+
+
+returns a correct ID and the way this
+
+
+resolver works is basically says if you
+
+
+have this I will give you this and all
+
+
+it does is it's a one-to-one mapping but
+
+
+once you have this YouTube channel ID
+
+
+you can resolve anything that was
+
+
+related to the channels themselves so
+
+
+you can do something YouTube doesn't let
+
+
+you do which is in the same query say I
+
+
+want the video count and the view count
+
+
+for the channel itself right so there's
+
+
+there's a hundred sixteen videos on the
+
+
+channel title so the channel Vratil Irby
+
+
+has a hundred sixteen videos and that's
+
+
+its statistics for his view count even
+
+
+though I'm scoping it to a YouTube ID
+
+
+right and maybe it will be easier if I
+
+
+show the tracer so what is happening
+
+
+here these are the things I'm interested
+
+
+in and it turns out that calling the the
+
+
+video API I can get the channel ID and
+
+
+the snippet title but as soon as I want
+
+
+the video count that's not part of this
+
+
+API call so it needs to do a second API
+
+
+call to get the video account in the
+
+
+view account for their channels and the
+
+
+way this is working is it basically just
+
+
+builds a graph of all the kind of
+
+
+attributes and the ways you can reach
+
+
+those attributes and then it figures out
+
+
+this is the minimal amount of API calls
+
+
+and needs to do to get all the data
+
+
+you're interested in so
+
+
+same thing is for playlist so here's a
+
+
+playlist ID and I'm just gonna give you
+
+
+know like get the title on the channel
+
+
+and what you're seeing is it's just a
+
+
+single API call to the playlist API but
+
+
+similarly to how channels and videos
+
+
+work if you're in a playlist and that's
+
+
+your scope the playlist ID knows which
+
+
+channel and the playlist returns
+
+
+something called the channel ID and if I
+
+
+create an alias and say this is actually
+
+
+the same as if you were just said
+
+
+YouTube channel ID then I can get any
+
+
+information about the channel itself and
+
+
+I can also fetch you know join and fetch
+
+
+the items and then from the items get
+
+
+things like the video stuff and so at
+
+
+this point I'm basically fetching all
+
+
+the videos for a playlist lots of every
+
+
+2018 and I'm fetching its titles and if
+
+
+you look at the API call what it's doing
+
+
+is in parallel it's asking it's calling
+
+
+the video stuff it's calling the
+
+
+playlist API and then it's only calling
+
+
+the channel via ad when it knows which
+
+
+channel it's related to and it needs to
+
+
+resolve the video API before you can do
+
+
+that but once it does that notice that
+
+
+there's like four or five videos but it
+
+
+only does a single API call because it
+
+
+knows that it can batch because YouTube
+
+
+supports a batching API that says if you
+
+
+give me a list of video IDs I can get
+
+
+the the video ID in the planner snippet
+
+
+title from that which some of them
+
+
+thanks for more minutes I'll show you
+
+
+something cool I promise this is the
+
+
+same query this is look at what's
+
+
+happening here we're starting with a
+
+
+user brought stuff we're joining we're
+
+
+fetching the the channel title then
+
+
+we're joining the playlist we're
+
+
+fetching all the playlist related to vol
+
+
+so that'll be we're getting the title of
+
+
+the playlist we're fetching the items
+
+
+for the specific playlist and for each
+
+
+of the playlist we're fetching the video
+
+
+titles we get lots and lots of
+
+
+back and notice what the semantics of
+
+
+the API call is we needed to fetch the
+
+
+channel we needed to do this care query
+
+
+before we could get anything more done
+
+
+then we needed to fetch the playlist but
+
+
+once we did that
+
+
+notice that in parallel we can fetch all
+
+
+of the different playlist items because
+
+
+they're unrelated to each other by
+
+
+building a very by byte honestly if this
+
+
+is no more code than what I showed on
+
+
+those slides it the DEF resolver all it
+
+
+does it just says given this attribute
+
+
+and these kind of attributes I know how
+
+
+to get from here to here and you build
+
+
+this graph in memory and it knows how to
+
+
+batch and correctly resolve this using
+
+
+the minimal amount of API calls it needs
+
+
+to do and one more interesting thing is
+
+
+HTTP errors so this is that video I
+
+
+showed initially and I'm fetching file
+
+
+details file details is something that I
+
+
+don't have access to because I was not
+
+
+the uploader of the video and so what
+
+
+happened here and maybe this is even
+
+
+more relevant if I just do it here so
+
+
+notice what happened I hit the YouTube
+
+
+API I got a 403 so I hit it again with
+
+
+it 200 what happened what happened was
+
+
+that the first time I hit it I tried to
+
+
+fetch the part file details I don't have
+
+
+permissions to get the file details so
+
+
+it aired out but then it realized
+
+
+because I created two resolvers one with
+
+
+the ability to fetch file details one
+
+
+without the ability to fetch file
+
+
+details so once it hit a dead end in the
+
+
+graph it tried to figure out a different
+
+
+way to reach the things that I asked for
+
+
+so it called a completely separate API
+
+
+that was able to return the title and
+
+
+the channel ID but was not able to
+
+
+return file details so for free you get
+
+
+this ability to say this is what I have
+
+
+this is what I want you try to figure
+
+
+out any way possible to first reach it
+
+
+as fast as possible and if that doesn't
+
+
+work try the back door try any way to
+
+
+reach the attributes it's a simple graph
+
+
+traversal problem at this point
+
+
+and now we get to something that's
+
+
+really interesting
+
+
+I also integrated SpaceX API so this is
+
+
+just an API that returns things like the
+
+
+launcher right or here's a so it just
+
+
+returns the launcher and in actually it
+
+
+returns a bunch of other stuff related
+
+
+to SpaceX right like the fairings
+
+
+recovered and launched details and
+
+
+everything you want related to a launch
+
+
+but one of the things the API also
+
+
+returns is this what is this this is a
+
+
+YouTube ID so what do you think happens
+
+
+if I create an alias that says this used
+
+
+hoop ID is in fact the same thing as the
+
+
+YouTube video ID
+
+
+I have everywhere else in my system it's
+
+
+the exact same ID and once I have that
+
+
+it turns out and this is the reason why
+
+
+I use fully named space qualified
+
+
+keywords because you can integrate
+
+
+multiple services in one API so imagine
+
+
+you reeling a front-end dashboard for a
+
+
+SpaceX fan site and you're saying give
+
+
+me the stuff related to SpaceX launch
+
+
+like the launch I don't know site name
+
+
+and also while you're at it give me the
+
+
+YouTube title and not the channel title
+
+
+actually let's find out which chat yeah
+
+
+let's find out what channel it was
+
+
+posted on but also let's find out what
+
+
+is the title of the video itself and
+
+
+while we're at it let's find out how
+
+
+many people watch the video I can't type
+
+
+video of your account so this was this
+
+
+is the YouTube video title it was posted
+
+
+on the SpaceX Channel and it had half a
+
+
+million views right no joints right this
+
+
+is the power of having context free
+
+
+identifiers and their power of building
+
+
+graph API is that and you know like
+
+
+using all of this information from the
+
+
+sixties about how to do graft reversals
+
+
+and graph optimization problems
+
+
+and by the way this is all flat but
+
+
+imagine you're building a front-end
+
+
+application and sometimes you want to
+
+
+create additional structures for your
+
+
+convenience so what you can do is you
+
+
+can do things like you can create we
+
+
+call in path another called placeholder
+
+
+namespaces
+
+
+it basically says if you see this kind
+
+
+of namespace just ignore it but what
+
+
+that means is you can do something like
+
+
+you can build a dashboard that says this
+
+
+is the like this is the video details
+
+
+space X details and you can do a
+
+
+separate joint because there is no such
+
+
+thing as a root join you can join
+
+
+anywhere in the system if I wanted to I
+
+
+could start here and say my videos
+
+
+alright it's it's completely arbitrary
+
+
+they don't care nobody cares and so what
+
+
+you can do is you can do things like
+
+
+this you can say this is the space X
+
+
+details and then here are my favorites
+
+
+and basically here we're going to join
+
+
+so this is we're gonna join this and
+
+
+we're gonna take the favorites and we're
+
+
+gonna for example just return the sum
+
+
+going to join the fact that this is my
+
+
+videos org so from my videos let's just
+
+
+get the title as you can see there's
+
+
+lots of data available and so what
+
+
+happens here is the client can create
+
+
+what when you have a flat data structure
+
+
+that has context free identifiers the
+
+
+client can specify custom arbitrary
+
+
+nesting that makes sense for his
+
+
+application in his domain and since
+
+
+you're not enforcing it they can do
+
+
+anything they want with it so that was
+
+
+that I think we're basically out of time
+
+
+which is nice because we're basically
+
+
+out of out of content one thing I might
+
+
+want to mention is because I think
+
+
+that's kind of neat so this is all
+
+
+obviously closure script this is
+
+
+something called workspaces that
+
+
+basically lets you build imagine you a
+
+
+bunch of react components and
+
+
+this basically lets you mount this whole
+
+
+thing I've been showing you is just a
+
+
+react component that basically triggers
+
+
+the the pathum api but you can build a
+
+
+bunch of these like workspaces like you
+
+
+know like live life coding of react
+
+
+components and then you can create
+
+
+basically all these kind of views you
+
+
+would do in a real application and this
+
+
+is all built in and up in a framework
+
+
+library called full CRO and what's funny
+
+
+is if you notice so I built full core
+
+
+applications I embed them into this
+
+
+workspace which is a full core
+
+
+application that lets me embed
+
+
+applications into applications and the
+
+
+full CRO itself has a debugger that runs
+
+
+it's called full CRO inspect that
+
+
+basically runs in your chrome dev tools
+
+
+and gives you things goes you access
+
+
+things like what were the operations
+
+
+that were done you like what were the
+
+
+network calls and all this other stuff
+
+
+this itself is a full CRO application as
+
+
+well so it's like Turtles all the way
+
+
+down honestly this is the not one I
+
+
+think about it this is what probably
+
+
+rails engines should have been because
+
+
+it actually works right and when you
+
+
+when you think about it look at what
+
+
+look at what is happening here with this
+
+
+concept of globally unique identifiers
+
+
+hello see this thing on the bottom all
+
+
+the way in the bottom of our API call
+
+
+this calm voice code path and trace that
+
+
+is a piece of globally unique
+
+
+information that was attached on top of
+
+
+all the stuff I was asking for because
+
+
+that's what the backend returns in order
+
+
+to have this tracing information so we
+
+
+can display this metadata for me like
+
+
+this tracing route stuff right this is
+
+
+the power of having flat globally unique
+
+
+identifiers that you can do stuff like
+
+
+this and you can basically do all this
+
+
+kind of stuff okay I'm pretty much out
+
+
+of time I don't know if I time for
+
+
+questions but I can definitely talk to
+
+
+you afterwards
+
+
+you

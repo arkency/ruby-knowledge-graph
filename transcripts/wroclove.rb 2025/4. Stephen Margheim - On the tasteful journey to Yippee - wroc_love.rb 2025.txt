@@ -1,0 +1,4246 @@
+Okay, keep your hands up. Who converted
+
+
+to SQite?
+
+
+You're an
+
+
+influencer. All right, so our next
+
+
+speaker is Steven Mahim and his software
+
+
+engineer uh which is now developing his
+
+
+new framework and he will tell us a
+
+
+little bit more about Yepy. Did I say
+
+
+that correct? Yes. uh about EAP and the
+
+
+philosophy that stands behind it. So,
+
+
+Stephen, the stage is
+
+
+[Applause]
+
+
+yours. Thank you. Okay. Can you hear me
+
+
+well
+
+
+enough? All
+
+
+right. So, as Luc said, I'm Stephen. You
+
+
+can find me basically everywhere on the
+
+
+internet at Fractalmind. Um and I blog
+
+
+at fractalmind.github.com.
+
+
+github.io. Nice to meet you all. Those
+
+
+of you I met last year, nice to see you
+
+
+again. Those of you I'm meeting for the
+
+
+first time, nice to meet
+
+
+you.
+
+
+Um, you might be familiar with this is
+
+
+uh a small selection of some of my open
+
+
+source
+
+
+projects. Plume is actually my my newest
+
+
+project. If you're interested in
+
+
+learning more, I'm introducing it to the
+
+
+world next week at Ruby Kai. So, keep
+
+
+your eyes out for that YouTube video.
+
+
+But that is a uh a parser for SQLite's
+
+
+dialect of SQL uh in Ruby.
+
+
+Um, if you do know me, you likely know
+
+
+me for the work I've done to make the
+
+
+Ruby ecosystem and Rails the framework
+
+
+the best way to build web applications
+
+
+using the SQLite database engine.
+
+
+And just because I have a captive
+
+
+audience, I thought I would take the
+
+
+opportunity to plug the course I had the
+
+
+opportunity to make earlier this year
+
+
+with Aaron Francis
+
+
+um to sort of lay out everything that I
+
+
+know and everything that I think about
+
+
+how to build incredibly high leveraged
+
+
+applications with Rails. Um, so that
+
+
+course is called highleveraged rails.
+
+
+You can find it at
+
+
+highleverils.com. It is a paid course.
+
+
+So this is an ad, but I have disclosed
+
+
+that. So you cannot sue me
+
+
+now. Um, I have been working for the
+
+
+last I don't know three years or so with
+
+
+Joel who spoke yesterday about one of
+
+
+his open source projects literal. He
+
+
+maintains a number of projects that you
+
+
+also probably know about Flex or
+
+
+Quickdraw uh and a number of
+
+
+others. And we had the opportunity to
+
+
+have a longer more in-depth conversation
+
+
+about how we think about web development
+
+
+on the podcast that he uh runs with his
+
+
+co-host Colin. I don't know two years
+
+
+ago or
+
+
+so. And those conversations, the the
+
+
+short one that we had and recorded and
+
+
+the many longer ones
+
+
+offline, led us to start to realize that
+
+
+we shared a really deep similarity when
+
+
+it comes to taste.
+
+
+And taste is something that
+
+
+is hard to define and hard to put your
+
+
+finger on it and and hard to get a sense
+
+
+of whether or not you share it with
+
+
+someone without just talking a lot and
+
+
+working together some and and seeing and
+
+
+comparing code that you like and code
+
+
+that you dislike and why do you like
+
+
+this and why do you like it slightly
+
+
+more than
+
+
+that.
+
+
+But as we
+
+
+talked, we came to appreciate that we
+
+
+had a really similar vision for what
+
+
+really
+
+
+beautiful,
+
+
+powerful,
+
+
+simple developer experiences could and
+
+
+should look like. And we realized that
+
+
+we were both interested in trying to
+
+
+make as many of those things real as
+
+
+possible.
+
+
+So, we sort of started off on this
+
+
+crazy
+
+
+project without like a ton of planning
+
+
+or direction to see like what would it
+
+
+look like to try to build a new web
+
+
+application framework from a blank sheet
+
+
+of
+
+
+paper and to do so in a way where the
+
+
+very best most interesting ideas could
+
+
+be completely separate from the
+
+
+application framework and could just be
+
+
+gems that anyone could use. You could
+
+
+use them in a Rails app. You could use
+
+
+them in a Hanami app. Um, but you could
+
+
+also use them inside of a framework that
+
+
+uh was designed to be philosophically
+
+
+and and tastefully aligned with them.
+
+
+And that is what led us to starting what
+
+
+we call the the Yippi project, a project
+
+
+to make web
+
+
+development exciting
+
+
+again.
+
+
+And I'm going to be upfront with you,
+
+
+all right, from the
+
+
+outset that this is a teaser trailer.
+
+
+I'm not going to be showing you a GitHub
+
+
+URL at the end of this talk.
+
+
+um because we don't have one. I mean, we
+
+
+do have one, but it's private and half
+
+
+of the code in there doesn't work with
+
+
+the other half of the code because
+
+
+everything is changing all the time. But
+
+
+what I do want to do is I want to take
+
+
+this
+
+
+opportunity
+
+
+to give you a taste of where we're at,
+
+
+where we're going, and what
+
+
+the vision is for what this thing is
+
+
+about. And so in order to do
+
+
+that uh I thought we would just break
+
+
+things down into two parts. The first
+
+
+part is pretty straightforward. I am
+
+
+going to say a lot of things about a lot
+
+
+of things. It's just going to be a bunch
+
+
+of bullet points in slides and a and
+
+
+some some code
+
+
+samples. And then I'm going to do that
+
+
+relatively quickly because I want to
+
+
+save enough time for us to just talk.
+
+
+There's like literally a thousand
+
+
+different discreet interesting ideas
+
+
+that Joel and I have talked about for a
+
+
+long time and I don't know
+
+
+like what you would be more interested
+
+
+in talking about. So I'm just going to
+
+
+throw a whole bunch of stuff at you and
+
+
+then you respond back, hey, I'd like to
+
+
+go a little bit deeper here or there or
+
+
+there or all three of them. So I would
+
+
+like to actually have a a longer Q&A
+
+
+session. Um, and then of course we can
+
+
+continue the conversations over the next
+
+
+two
+
+
+days. Now, as I
+
+
+said, this project is probably best to
+
+
+describe as
+
+
+vaporware. It isn't like fully
+
+
+vaporware. There's lots of code on my
+
+
+machine and Joel's machine and in
+
+
+different repositories,
+
+
+but for the sake of setting
+
+
+expectations, I'm going to say this is
+
+
+vaporware. I I am presenting a
+
+
+vision. Basically everything I'm going
+
+
+to talk about today we have working code
+
+
+experiments with in a few different
+
+
+things. So um but at the very end I'll
+
+
+give you some of our hairbrain ideas
+
+
+that we haven't experimented with in
+
+
+code but have talked about and thought
+
+
+about. So we will get to fully fully
+
+
+vaporware parts by the end of the talk.
+
+
+So what are we going to talk about? Uh I
+
+
+say we what am I going to talk
+
+
+about? I want to walk through some of
+
+
+the key elements of a web application
+
+
+framework and just share with you what
+
+
+we're thinking. So we're going to start
+
+
+with persistent data. What are we doing
+
+
+there? Then I'm going to talk about the
+
+
+model layer. What are we thinking about
+
+
+at the model layer? Then we're going to
+
+
+move up to the controller layer, the
+
+
+view layer. talk some about
+
+
+testing and then hosting and
+
+
+deployment and then finally
+
+
+accessories. And now you have a very
+
+
+clear sense of what the rest of the
+
+
+talk's going to look like. We're going
+
+
+to walk through bullet points. It's
+
+
+exciting
+
+
+stuff. All right. Persistent data.
+
+
+This was one of the very first decisions
+
+
+that Joel and I made because we we
+
+
+shared a very similar thought from day
+
+
+one, which was what if you just made a
+
+
+web application framework that only
+
+
+worked with one
+
+
+database? Like why do we need
+
+
+options?
+
+
+Genuinely, like it's great that there
+
+
+are web application frameworks that have
+
+
+adapters for all of the different
+
+
+databases. Like that's genuinely great,
+
+
+but those things
+
+
+exist. How am I going to out
+
+
+compete? You know, you got to you got to
+
+
+make some some cuts and less is more.
+
+
+And what's interesting is if you make a
+
+
+decision at the beginning, you say, you
+
+
+know what, I'm going to build a
+
+
+framework that only works with SQLite
+
+
+that is only ever going to work with
+
+
+SQLite. some interesting things start to
+
+
+come up because now you can really
+
+
+target the exact unique benefits of that
+
+
+database. You don't have to take the
+
+
+subset of features that are common to
+
+
+all the databases and see what you can
+
+
+do. It's like all right let's let's see
+
+
+what juice can I squeeze out of just
+
+
+SQLite. And when I say SQLite only, I I
+
+
+mean it. There's going to be a SQLite
+
+
+database for your primary data. There's
+
+
+going to be a SQLite database for your
+
+
+cache data. There's going to be a
+
+
+different SQLite database for your job
+
+
+queue. There's going to be a different
+
+
+SQLite database for your message pub.
+
+
+There'll
+
+
+be full text search on top of any of
+
+
+those databases that you want all that
+
+
+set up. like there going to be a lot of
+
+
+SQLite databases and only SQLite
+
+
+databases and it's going to be beautiful
+
+
+and
+
+
+exciting. Now, one of the things that I
+
+
+have been talking about for a
+
+
+while, but is genuinely worth noting
+
+
+like when you go allin on SQLite, it it
+
+
+really does change the way in which you
+
+
+think about how to architect a framework
+
+
+and how to build apps on top of that
+
+
+framework. It is genuinely true that
+
+
+when you are using SQLite, N plus1's are
+
+
+a feature and not a bug. And I'm going
+
+
+to just take two minutes to try to
+
+
+convince you of that
+
+
+fact. What is philosophically,
+
+
+mathematically the fastest possible read
+
+
+that you could make from a relational
+
+
+database? What are the characteristics
+
+
+that you would need? Right? You would
+
+
+need an index, right? So if you're
+
+
+making an indexed read, way faster than
+
+
+a non-index read. If all or the large
+
+
+majority but definitely all if all of
+
+
+your data is in the engine's in-memory
+
+
+cache, right? The databases, no database
+
+
+engine today is constantly reading and
+
+
+writing from disk. They have a pool of
+
+
+memory and they keep data around in
+
+
+memory. So if you make an indexed read
+
+
+where all of the data is already in
+
+
+memory and there's no latency, no HTTP
+
+
+latency, no interprocess latency, no
+
+
+serialization or des
+
+
+serialization,
+
+
+then you have like the definitionally
+
+
+fastest possible read in the world. So,
+
+
+how do you make more reads like
+
+
+that?
+
+
+Well, the simpler your
+
+
+queries, the easier it is to have
+
+
+indexes that cover them all the time.
+
+
+Where do we where do we hit queries
+
+
+where the index falls down? It's like
+
+
+well I kind of you know I need to join
+
+
+these three tables in this particular
+
+
+way with this one CTE and then I get the
+
+
+data that I need and I've minimized HTTP
+
+
+handshakes. So so I'm doing it and
+
+
+that's good but I have a really
+
+
+complicated query to cover with an
+
+
+index or you have these complicated
+
+
+queries that are less
+
+
+common. So the they're not kept in the
+
+
+hot pass. the database engine is like,
+
+
+"Yeah, I see this every now and again.
+
+
+I'm not going to like keep this data hot
+
+
+and
+
+
+fresh." If you just write a whole bunch
+
+
+of really small
+
+
+queries, select these columns from that
+
+
+table and these columns from that table
+
+
+and these columns from that table and
+
+
+I'll merge them together in
+
+
+Rubyand. It's way easier to have a much
+
+
+larger number of the fastest possible
+
+
+read queries in the world. Like you can
+
+
+have many queries that execute in two
+
+
+nanoseconds. And when there's no
+
+
+serialization overhead, there's no
+
+
+latency overhead. Like there's literally
+
+
+there's literally no reason to not have
+
+
+200 queries per request. And in fact,
+
+
+you can way increase your index hit
+
+
+rate, your cache hit rate, and that is
+
+
+going to make your whole application
+
+
+faster. So, how does that change how you
+
+
+think about a web application framework?
+
+
+There are many ways, and we'll talk
+
+
+about some of them as we
+
+
+go, but I really want to hit this point
+
+
+hard. The fundamental reason that we are
+
+
+going all in on SQLite is that it is the
+
+
+only database engine in the world that
+
+
+has wide adoption and extensive usage
+
+
+and you can feel confident that it like
+
+
+works where latency effectively does not
+
+
+matter. Like there's just not really
+
+
+much of a point in thinking about
+
+
+it. And that really changes how you
+
+
+think about building
+
+
+applications. So we wanted to like
+
+
+explore all of the ripples. So
+
+
+persistent data equals
+
+
+SQLite. Now it does come with some
+
+
+interesting ripples. The very first most
+
+
+important one that we realized like on
+
+
+day one
+
+
+was well if I want all of these really
+
+
+awesome benefits all of these
+
+
+performance
+
+
+benefits there's really only one type of
+
+
+deployment that makes
+
+
+sense and that is single machine
+
+
+deployments with persistent file
+
+
+systems. If you're doing anything else
+
+
+you're not going to reap all of these
+
+
+awesome benefits. So we decided day
+
+
+one like literally three years ago we're
+
+
+having conversations like this is what
+
+
+it's going to be and it has not changed
+
+
+and it will not
+
+
+change. We are building the best web
+
+
+application framework in the
+
+
+world for building single machine
+
+
+deployments that exclusively use SQLite
+
+
+for any and all persistent data. Now, if
+
+
+you're not into
+
+
+that, I'm confident that I can get you
+
+
+into it over the next couple of years.
+
+
+But also, there are a lot of great other
+
+
+options. Use Hanami, use Rails, use
+
+
+whatever tickles your fancy. But if you
+
+
+accept these two
+
+
+constraints, it is amazing how much
+
+
+leverage is given to you.
+
+
+And we're going to explore some of that.
+
+
+But this is the original core defining
+
+
+constraints. What if you had a framework
+
+
+that only worked with one database and
+
+
+you're interested in building apps that
+
+
+you only deploy on one machine? How far
+
+
+can you go?
+
+
+And as this
+
+
+project moves its way out of the
+
+
+vaporware stage into the software stage,
+
+
+I I'm going to be more and more excited
+
+
+to show you how far you really can go. I
+
+
+will just say now, I'm pretty confident
+
+
+this is true, except for a couple people
+
+
+over there. However far you're thinking
+
+
+right now, like this is the limit. This
+
+
+is the mathematical limit of how far I
+
+
+can go. You're at least one order of
+
+
+magnitude wrong. and I look forward to
+
+
+building an app and proving it to you
+
+
+and then laughing in your
+
+
+face. All right, let's move on. Model
+
+
+layer. What do we want to do differently
+
+
+here?
+
+
+Well, we want to have a really
+
+
+object-oriented approach that very
+
+
+cleanly slices the essential parts of a
+
+
+model. There's a lot I really love about
+
+
+Rails. And when you have a scenario
+
+
+where your web resource, the way that
+
+
+you represent the world, to the HTTP
+
+
+response has a very direct mapping to
+
+
+your model, the way that you represent
+
+
+the entity to your application and that
+
+
+entity has a very direct mapping to your
+
+
+table. There are very few developer
+
+
+experiences that can compete with Rails
+
+
+in that scenario. If you have a oneto
+
+
+one to one mapping between resource
+
+
+model and
+
+
+table that framework sings as soon as
+
+
+you have a little bit of a gap right
+
+
+you're like for the web page I really I
+
+
+wanted to like have one form I say one
+
+
+name but I kind of need to write to two
+
+
+tables or I kind of want to represent
+
+
+this entity to my system as one thing
+
+
+but I I kind of need to read and write
+
+
+from two tables.
+
+
+Rails doesn't sync. There aren't really
+
+
+strong conventions
+
+
+there. And what we want to do is we want
+
+
+to really cleanly slice and define these
+
+
+types of objects. There is a resource. A
+
+
+resource is an entity that you present
+
+
+to your request response cycle. The
+
+
+model is the entity that you present to
+
+
+your application. The table is the
+
+
+entity that understands the schema of a
+
+
+particular persistent table on your
+
+
+database. A table is the most common
+
+
+type of a data source. Of course, you
+
+
+have other data sources. You can build a
+
+
+dynamic data source. That's what joins
+
+
+are. Say like I'm selecting some data
+
+
+from this data source. It's not mapped
+
+
+to a single table. it's this particular
+
+
+cartisian product or or scoped cartisian
+
+
+product of these two or three
+
+
+tables and then you can also have values
+
+
+right and if you define these layers
+
+
+really cleanly and really
+
+
+well you can collapse them when they
+
+
+need to be collapsed expand them when
+
+
+they need to be expanded yes this is the
+
+
+accordion we'll talk about it more in a
+
+
+bit so we want to make it as easy as
+
+
+possible to work with the model layer.
+
+
+Whether you've got one model per table,
+
+
+three models per
+
+
+table, one model for three
+
+
+tables, or some mix
+
+
+thereof. Now, in order to do
+
+
+this, this is like a remix of the
+
+
+repository pattern, right? What's the
+
+
+repository pattern in its simplest form?
+
+
+It's to say let's separate the
+
+
+responsibility of talking to a data
+
+
+source from the responsibility of
+
+
+presenting structured data to our
+
+
+application. Let's make those two
+
+
+different types of classes and let's
+
+
+define a really clear contract between
+
+
+those types of classes such that I can
+
+
+get data from the database and hydrate a
+
+
+model and I can make whatever ad hoc
+
+
+queries I need against the data sources.
+
+
+But I'm just going to be honest with
+
+
+you. While I like the concept of the
+
+
+repository pattern, I hate the names.
+
+
+So I like these names better. But it's
+
+
+the same basic idea and I'm uh we are
+
+
+100% borrowing it with some some minor
+
+
+tweaks.
+
+
+The other defining characteristic of our
+
+
+model layer is that we are embracing
+
+
+query building as opposed to the sort of
+
+
+active record style approach of
+
+
+uh everything is driven through a model
+
+
+which is itself really just a table in
+
+
+in this parlance. Right? So what would
+
+
+it look like to give you the full
+
+
+expressive power of
+
+
+SQL in Ruby from anywhere at any point
+
+
+to talk to any data source to craft any
+
+
+data source to craft any query however
+
+
+you need it whenever you need it with as
+
+
+much ease
+
+
+as working with active record
+
+
+today. Um this is one of the use cases
+
+
+for having a SQL parser.
+
+
+one of the reasons why uh we started
+
+
+that
+
+
+project. Um but in general it sort of
+
+
+shifts the way that you think about
+
+
+things to say like we're going to have
+
+
+queries. Those queries we can have
+
+
+relationships to tables or sources. They
+
+
+have relationships to models like I go
+
+
+to a table to get the data. I take the
+
+
+data and I hydrate a model. So queries,
+
+
+tables, and models are going to be
+
+
+central, but they're going to be
+
+
+different things. Um things that you can
+
+
+collapse together such that you don't
+
+
+need to see any of them, right? So we
+
+
+can we can build a very active record-l
+
+
+like interface where you don't need to
+
+
+have three different files or call three
+
+
+different classes, but behind the
+
+
+scenes, that's what's there and you can
+
+
+eject into those layers at whatever
+
+
+point you need.
+
+
+Um,
+
+
+so code sample just to give you a little
+
+
+bit of a concrete sense what I'm talking
+
+
+about. What would a query builder look
+
+
+like in in Ruby? Here we go. This is um
+
+
+a
+
+
+query I I use quite often um to do
+
+
+basically tagging on top of SQLite.
+
+
+Um, so here we
+
+
+are getting our
+
+
+artists, but we only want those artists
+
+
+that have certain tags. And so inside of
+
+
+this wear condition, we need like a a
+
+
+nested select. How could we make that
+
+
+easy to build? If you've ever done this
+
+
+in
+
+
+AL, then you you will know that this is
+
+
+much simpler than AL. If you haven't,
+
+
+uh, take my word for it. This is much
+
+
+simpler than auto. But beyond just
+
+
+having this fluent Ruby interface at the
+
+
+very core, one of the things um we're
+
+
+going to have behind it, I'm also really
+
+
+excited
+
+
+about is this. Now, this is going to
+
+
+look a little bit crazy for a moment.
+
+
+I'm going to give you a moment to like
+
+
+study it. And it might be crazy. I I
+
+
+admit that. But it's also beautiful and
+
+
+profound.
+
+
+This is
+
+
+Ruby. This is a Ruby hash using basic
+
+
+Ruby
+
+
+primitives. You've got uh a constant
+
+
+all. You've got a constant that maps to
+
+
+some sort of object. Artist. This could
+
+
+be a class. This could be a module. We
+
+
+don't know at this point. We've got
+
+
+nested hashes. We've got some basic
+
+
+primitives. We've got like a boolean
+
+
+true. Uh we've got a a method call on a
+
+
+constant. We've got an array and some
+
+
+primitives. Okay,
+
+
+but really study th this is just SQL.
+
+
+There's no extra
+
+
+words. This is just taking SQL and
+
+
+structuring it.
+
+
+And what this does is provide the most
+
+
+important missing feature that SQL has
+
+
+which is
+
+
+composability. You can take that hash
+
+
+that is the value there to the exist
+
+
+key. You can build that however
+
+
+dynamically you want. You can store that
+
+
+wherever you want in a constant in a
+
+
+variable and you can compose it
+
+
+incredibly easy, right? Like we know how
+
+
+to build Ruby hashes. We understand the
+
+
+composability that they
+
+
+provide. And if you have a
+
+
+tur fully expressive, right? Like every
+
+
+single thing you can do in SQL you can
+
+
+do in this way. Now you just have
+
+
+composability and SQL plus composability
+
+
+is radically powerful. There's like all
+
+
+kinds of things that spin out of that.
+
+
+So these
+
+
+layers you're going to see like we like
+
+
+layers but having these layers of
+
+
+control
+
+
+um are going they are the sort of
+
+
+defining characteristic of our model
+
+
+layer. So these are queries these are um
+
+
+how we are thinking about uh doing
+
+
+queries. That's the model layer. Let's
+
+
+keep torrenting. All right,
+
+
+controllers. What if you had a router
+
+
+and a controller in a single
+
+
+class? For those of you who have used
+
+
+it, you would think I have a sense.
+
+
+Okay, this is this is ROA. Yeah. Yeah,
+
+
+exactly. ROA is a really really cool
+
+
+idea.
+
+
+I don't have the time to like get into
+
+
+it fully, but it's the idea of a routing
+
+
+tree. The core core difference here is
+
+
+let's just use Rails as an example. In
+
+
+Rails, you have your routes file and at
+
+
+boot time, Rails goes and parses that
+
+
+text file and says, "Okay, I'm going
+
+
+to build a um they build a state
+
+
+machine." So, there's a source text, a
+
+
+parse step. That parse step presume
+
+
+produces a state tree. That state tree
+
+
+is stored in memory as a Ruby object and
+
+
+then requests come in and they match
+
+
+against that whole state tree to figure
+
+
+out what controller do I initialize and
+
+
+what action do I call. And what that
+
+
+means is that your startup time, your
+
+
+boot time has to eat the cost of
+
+
+figuring out all of your routes.
+
+
+And you need to have computed everything
+
+
+that there is to know about every single
+
+
+route in your entire application every
+
+
+single time. And a routing tree just
+
+
+says like we know how code works. Like
+
+
+what if we just execute code
+
+
+paths for our request to get to our
+
+
+response
+
+
+handler. So then like you don't have to
+
+
+do anything at start time and it doesn't
+
+
+matter if you have 10 routes or you have
+
+
+10 million routes, you have constant
+
+
+start time cost. right? There's no added
+
+
+cost to having a million more
+
+
+routes. Whereas, uh, in Rails, there are
+
+
+like you just have more stuff to
+
+
+parse. Um, this benefit is really at the
+
+
+heart of the decision on top of just
+
+
+like some taste preferences, but we're
+
+
+going to talk more about this. One of
+
+
+the the the central sort of goals we're
+
+
+we're shooting for here is every app
+
+
+regardless of size should start in
+
+
+milliseconds like as like ideally
+
+
+singledigit
+
+
+milliseconds. All right, we deserve so
+
+
+much better from our developer
+
+
+experience. Like we we accept so much
+
+
+lag everywhere in every tool and we
+
+
+shouldn't and we should stop and we
+
+
+should start kicking people who build
+
+
+slow tools and make them build fast
+
+
+tools. Fast is important so zero startup
+
+
+cost. Now one of the things that the
+
+
+we're really inspired by roa and this
+
+
+idea of a routing tree but we're
+
+
+building a completely different routing
+
+
+tree. There's there's no code shared and
+
+
+we really wanted to focus on having a
+
+
+very flexible approach. What do I mean
+
+
+by
+
+
+that? What if you just want one
+
+
+controller prep? This is what ROA is and
+
+
+what ROA does, right? You have a
+
+
+controller. It's just like your app
+
+
+basically,
+
+
+right? Um, cool. You can do that. What
+
+
+if you want to go the complete opposite
+
+
+direction? You want to go hanami. You
+
+
+want one controller per action. You like
+
+
+atomize everything.
+
+
+Let me have a class per action. Cool.
+
+
+Let's make that possible. What if you
+
+
+want one controller per resource like
+
+
+Rails does? Okay. You know, I'm going to
+
+
+group actions together. I can take these
+
+
+seven actions and put them in one class.
+
+
+No need to have seven different classes
+
+
+for that. I'll just do one file. Yeah.
+
+
+All right. Let's make that
+
+
+possible. What if you want one
+
+
+controller for all of your member
+
+
+actions for this resource, but a
+
+
+different controller for all of your
+
+
+collection actions for a resource? That
+
+
+should also totally be possible. All of
+
+
+these should be equally as easy to build
+
+
+and to run and be able to mix and match
+
+
+all of them however you need for
+
+
+whatever part of your application they
+
+
+are best appropriate
+
+
+for. And what if you had some parts
+
+
+where it's like we don't need to even
+
+
+execute some code. Here's a freaking
+
+
+hash. Here's the key. Call this right
+
+
+like 01. you have parts of your app
+
+
+where the routing is quite simple or you
+
+
+don't have a lot of pre-logic or post
+
+
+logic. Let's do that too. Let's do all
+
+
+of it all the time
+
+
+anywhere. How would you make that
+
+
+work? Well, it could look like this. So,
+
+
+I'm going to Here are the code
+
+
+samples. All right. So, this is a
+
+
+resource
+
+
+controller. This is Rails style. So,
+
+
+controllers have a handle method. And
+
+
+this says, how do you handle this
+
+
+request as it's coming
+
+
+through? You have all of the HTTP verbs
+
+
+and you say, all right, like if you're
+
+
+at this point and you're a get request,
+
+
+let's just call this method. So here at
+
+
+the in the private methods here of this
+
+
+class, we define an index method. That
+
+
+index method would take the params and
+
+
+the captures and whatever all it needed,
+
+
+make some queries, do whatever it needs,
+
+
+render a view, you know, response stuff.
+
+
+um collection actions at the top, member
+
+
+actions at the bottom, all in one
+
+
+controller. What if we wanted to split
+
+
+and we wanted to take our member actions
+
+
+and put them in a separate controller?
+
+
+What would that look like? It just look
+
+
+like this, right? We're going to make a
+
+
+new controller called a controller's
+
+
+article. That
+
+
+object, like every yippy
+
+
+controller, as we also saw from Joel's
+
+
+literal talk, is going to respond to two
+
+
+proc. So you can just
+
+
+say delegate that right? So if you have
+
+
+the article ID segment, you match on
+
+
+that. Uh I don't know what to do. Talk
+
+
+to controllers article. It'll manage
+
+
+that. You could
+
+
+also do some hashbased routing. Say look
+
+
+if you if you see at this point, right?
+
+
+So we break the route down as you're
+
+
+parsing. So this could be high or low.
+
+
+In this case, we're at the the root
+
+
+controller. Like look, if you just have
+
+
+if your route is just
+
+
+articles, you don't need to call and
+
+
+process the Ruby of the handle method.
+
+
+Just go straight to the articles
+
+
+controller. Um, also here you see
+
+
+inline responding, right? So if it's not
+
+
+articles, if we're just on the root
+
+
+route and it's a get request, here's
+
+
+what you do. All right? So you don't you
+
+
+can put a method call in there. You
+
+
+could extract this out into a method you
+
+
+call root or base or whatever. Or you
+
+
+can just inline. This is obviously a
+
+
+single line proc. You could have a
+
+
+multi-line
+
+
+proc. Um we love
+
+
+callables. So those are controllers.
+
+
+Those are some of the core ideas. Those
+
+
+are the code samples. Got to move on.
+
+
+View
+
+
+layer. I mean I don't know what else to
+
+
+say.
+
+
+Flex is great if you haven't used Flex.
+
+
+Um, genuinely Flex is a lot like
+
+
+Tailwind in that you look at it. The
+
+
+very first time I had this experience
+
+
+with both of these projects, you look at
+
+
+it and you're
+
+
+like, "What is that? That's weird. I
+
+
+don't like it." And then you try it,
+
+
+you're like, you've seen this
+
+
+meme and you try it for another week.
+
+
+Oh, if you haven't. So, I'm just trying
+
+
+to make the point. You really do need to
+
+
+try it. You can't look at code and
+
+
+really get an appreciation for whether
+
+
+or not you're going to enjoy it. You
+
+
+will enjoy it. That's kind of the
+
+
+magical thing. You're Ruby programmers.
+
+
+Believe me, you will like building views
+
+
+in
+
+
+Ruby. I promise you, because you like
+
+
+Ruby. Just try it out. You'll
+
+
+see. It really comes with the benefit of
+
+
+being like highly testable. That's a
+
+
+nice side effect. Testing is important.
+
+
+We'll get to that in a bit. We're going
+
+
+to fully embrace all of Flex. You're
+
+
+going to have views. You're going to
+
+
+have components. You're going to have
+
+
+kits. If you haven't used kits in
+
+
+Flex, you can make building views so
+
+
+beautiful. These Ruby files are elegant
+
+
+pieces
+
+
+of code pros.
+
+
+We're going to take advantage of
+
+
+selective rendering. We're going to do
+
+
+some really cool stuff. You don't have
+
+
+to execute all of the code paths. Flex
+
+
+is a really powerful
+
+
+layer of abstraction, right? So you can
+
+
+say, I just need in this context, we're
+
+
+not going to use turbo, but let's
+
+
+imagine like a turbo frame, right? I
+
+
+just I just need this turbo frame. We're
+
+
+going to replace the
+
+
+content. Hit the controller. Hit the
+
+
+view. I just need this flex can just
+
+
+noop up every method call that is not
+
+
+related to building that part of the
+
+
+view. Just wait. I don't know. Ignore
+
+
+it. Ignore it. Ignore it. Ignore it.
+
+
+Ignore it. Oh, that's a turbo frame
+
+
+we're looking for. Cool. Now I'll turn
+
+
+on these methods actually doing
+
+
+something. Render. Render. Render. And
+
+
+cool. Done. Early return. Send it
+
+
+back. Very fast. And you get tiny
+
+
+payloads over the wire. Really cool
+
+
+stuff.
+
+
+is going to work with literal. Again, I
+
+
+I don't know what to say. We took all of
+
+
+our best ideas, we put them in gems. The
+
+
+gems are great. You now know everything
+
+
+you need to know about literal. Uh so,
+
+
+every flex component, every flex view is
+
+
+going to be yippy. Every yippy
+
+
+component, every yippy view is a a flex
+
+
+class that extends literal properties.
+
+
+Um those two things work very well
+
+
+together. Um
+
+
+yeah, guess what?
+
+
+You are going to have hundreds of
+
+
+queries in your views and you're going
+
+
+to love it because it's awesome. Do you
+
+
+know the reason why you don't have
+
+
+queries in your views? Do you know the
+
+
+actual
+
+
+reason? It's because if you put them in
+
+
+your views, you can't really tell if
+
+
+you're making 200 queries or two queries
+
+
+in one request. And we're like, got to
+
+
+be safe. You can't have 200. So, let's
+
+
+put them all in one place so that if I
+
+
+see 200 lines in this controller action,
+
+
+I know I [ __ ]
+
+
+up. But if it doesn't matter whether you
+
+
+do 200 queries or two queries, if in
+
+
+fact it might be better for you to do
+
+
+200 queries, I promise you it is better
+
+
+for your application architecture to put
+
+
+your data fetching next to your data
+
+
+use. In reality, it is better. The
+
+
+reason we don't do it in Rails and we
+
+
+don't do it with my SQL and Postgress is
+
+
+because we can very easily destroy our
+
+
+P50 performance just through
+
+
+recklessness. It's like I've got 50
+
+
+partials that I render in this view and
+
+
+stuff sprinkles around and you just you
+
+
+never really see the overview. You never
+
+
+really see oops this is the straw
+
+
+that'll break the camel's back. When you
+
+
+don't have that problem, you can embrace
+
+
+the benefits of putting data fetching
+
+
+right next to data usage. And it is
+
+
+better. Locality of behavior is a great
+
+
+thing. And when you can, you should, and
+
+
+we
+
+
+will. Um, this is a a sort of simple
+
+
+example. If you've used flex or you've
+
+
+used literal, uh, this will look pretty
+
+
+straightforward to you.
+
+
+Um, when we have literal arrays, that'll
+
+
+be a literal array of albums.
+
+
+An album here is a model by the way, not
+
+
+a table. This is an immutable data
+
+
+repres
+
+
+uh SQL making
+
+
+methods. All right, let's talk about
+
+
+testing. We're rubists. We like testing.
+
+
+We're rubious, too. We like
+
+
+testing. So, this is our goal.
+
+
+You should be able to run an application
+
+
+suite of 10,000
+
+
+tests, browser tests, unit tests, system
+
+
+tests in one second maximum. I mean, it
+
+
+should be 100 milliseconds, but I'm
+
+
+giving myself a little bit of wiggle
+
+
+room.
+
+
+Okay, this is what we deserve. Like,
+
+
+we're adults. We're
+
+
+professionals. Like, we deserve like
+
+
+actually good software. Here's the
+
+
+thing. Um, this is possible. Let's think
+
+
+about what we would need to make it
+
+
+possible. Like step number one,
+
+
+absolutely you need to be running tests
+
+
+on every single core of your machine. We
+
+
+all have multi-core
+
+
+machines. How many of us are running
+
+
+single threaded tests? A lot of
+
+
+us. So you absolutely need to be running
+
+
+tests across your multi-core machine.
+
+
+But importantly as well, you need to
+
+
+saturate those
+
+
+cores. like we don't I love my laptop. I
+
+
+don't need to treat it like a baby. I
+
+
+need to use it. Saturate your
+
+
+computational
+
+
+resources. Now, quick draw is the
+
+
+testing framework that is again like
+
+
+take all of the very best ideas, extract
+
+
+them into completely isolated and
+
+
+separate gems. This is just a completely
+
+
+generic testing
+
+
+framework with a testr runner. And the
+
+
+defining characteristic of the testr
+
+
+runner is this. It has a customuilt work
+
+
+distribution system that's going to use
+
+
+every single one of your cores as much
+
+
+as possible. It's just going to hammer
+
+
+your cores to run your tests as fast as
+
+
+is computationally
+
+
+possible. And if you like fully saturate
+
+
+all of your cores on I've just got an
+
+
+M1, you
+
+
+know, guess what? You can run tens of
+
+
+thousands of tests in less than a
+
+
+second.
+
+
+What else are we going to do to make
+
+
+10,000 tests of all kinds uh run in less
+
+
+than a
+
+
+second? Yeah, we're going to take
+
+
+advantage of
+
+
+SQLite. In-memory SQLite databases are
+
+
+incredibly powerful. This is why Rails
+
+
+sets this as the default as well.
+
+
+So if you have one in-memory database
+
+
+per thread and there's multiple threads
+
+
+that you're going to run per core
+
+
+um your data fetching is microscond I
+
+
+mean in in simple cases it's it's crazy
+
+
+nanocond
+
+
+but you need to manage this a
+
+
+bit so let's think it through we should
+
+
+make sure to use a single fixture
+
+
+step right one time set up your fixtures
+
+
+do it in the minimal number of SQL
+
+
+queries like this needs to run in
+
+
+milliseconds and now we have a database
+
+
+that we use as a template and we clone
+
+
+our in-memory databases right so if you
+
+
+spin up 100 threads across 10 different
+
+
+cores you you don't want to run 100
+
+
+fixture
+
+
+steps all right that's overhead
+
+
+so I'm just trying to walk you through
+
+
+some of the key sort of like thinking
+
+
+here but run a lot of tests super super
+
+
+fast defining characteristic of of
+
+
+testing in yippy. So the final sort of
+
+
+strategy we're embracing here to make
+
+
+this true find and implement high
+
+
+leverage shortcuts just to give you one
+
+
+example. How do you test views today in
+
+
+Rails fundamentally like what do you
+
+
+have to do? You have some Ruby code that
+
+
+you execute that produces a string. You
+
+
+then run some more Ruby code to take
+
+
+that string and produce a syntax tree.
+
+
+And then you take your test code to
+
+
+write assertions against that syntax
+
+
+tree. What if the Ruby code when you're
+
+
+writing tests produce the syntax tree
+
+
+instead of the string? The browser needs
+
+
+the string. The tests need the syntax
+
+
+tree. So if I'm in test mode, I should
+
+
+just have the Ruby code produce a syntax
+
+
+tree. save a
+
+
+step. And one of the high lever points
+
+
+about flex is that because it gives you
+
+
+this clean layer of
+
+
+abstraction. You can in certain cases
+
+
+make those methods noop, right? That's
+
+
+selective rendering. In another case,
+
+
+you can have those methods build a
+
+
+completely different type of data
+
+
+structure than they would in
+
+
+production. It's very I wouldn't say
+
+
+easy. It's not easy, but it is possible
+
+
+to have flex
+
+
+drive completely
+
+
+different execution behaviors depending
+
+
+on these contexts. Selective rendering,
+
+
+no op production, build out a string,
+
+
+testing, build out a syntax tree. So
+
+
+testing super super super fast. That's
+
+
+the number one goal. We want to run a
+
+
+whole bunch of tests really really fast.
+
+
+We're going to be doing various
+
+
+different tricky and devious things to
+
+
+make that happen.
+
+
+I forgot I had that bullet point. Um,
+
+
+another example, if you haven't seen
+
+
+this project, this is a uh a project. I
+
+
+believe it's written in Zigg. Um,
+
+
+they're building a new headless browser.
+
+
+It's only ever going to be a headless
+
+
+browser. I like highly constrained
+
+
+software, by the way. It runs super
+
+
+fast, right? Integrate into it. Make a
+
+
+highly opinionated choice. Make system
+
+
+tests, browser tests run super
+
+
+fast, right? So just look for leverage
+
+
+and execute that leverage as much as
+
+
+possible. Let's talk a little bit about
+
+
+hosting and deployment. I hope that at
+
+
+this point you're thinking this is an
+
+
+odd slide to have when talking about a
+
+
+web application
+
+
+framework. But frameworks should in the
+
+
+modern day take on more
+
+
+responsibility in my opinion. You should
+
+
+constrain certain things and use those
+
+
+constraints to spend in other areas. So,
+
+
+we want Yippi to spin up Digital Ocean
+
+
+or Hezner machines for you. Yeah, give
+
+
+me an API key. They've got APIs. You own
+
+
+it. You pay for it, but I can write the
+
+
+scripts to get the machine set up for
+
+
+you. We also want to make deployment
+
+
+easy to do and hard to [ __ ]
+
+
+up. How do you [ __ ] up deployments?
+
+
+conceptually like what's the mistake?
+
+
+The mistake is you mix different types
+
+
+of deployments because the primitives
+
+
+that are available to us today are too
+
+
+coarsely grained. We need fine grain
+
+
+primitives. One type of deployment is
+
+
+deploying your app. You've got Ruby
+
+
+files. You make a change to the Ruby
+
+
+files. You want Ruby to execute
+
+
+differently in production. Version one,
+
+
+version two. Version one runs this Ruby.
+
+
+Version two runs that Ruby. That's an
+
+
+application deployment. Those
+
+
+are relatively well understood types of
+
+
+deployments for us to do well, right?
+
+
+But it's completely different from doing
+
+
+an infrastructure deployment. I've got
+
+
+version XYZ of this C utility I'm using
+
+
+and now I want to upgrade it to version
+
+
+XY1 to fix a security patch.
+
+
+It's very easy to send both of those
+
+
+types of deployments to production at
+
+
+the same time and you shouldn't. You
+
+
+should isolate your different types of
+
+
+deployments. You should do an
+
+
+infrastructure deployment when you need
+
+
+to do infrastructure, not change any of
+
+
+your Ruby. And then once that's done,
+
+
+deploy a Ruby change. And you can do
+
+
+them one after the other if you want,
+
+
+but you should always isolate them. And
+
+
+both of these types of deployments are
+
+
+completely different from making a
+
+
+schema change.
+
+
+If you need to change your
+
+
+database, make that change. Now, it is
+
+
+often the case that you need to
+
+
+orchestrate multiple of these types of
+
+
+deployments to get to the end state that
+
+
+you
+
+
+want. But by isolating them, it's much
+
+
+easier to do safe and sane
+
+
+deployments. But what do you need? Well,
+
+
+you need a deployment queue. You need a
+
+
+way to ensure that one at a time start
+
+
+wait till it's done successfully done
+
+
+cool okay move on to the others but like
+
+
+for me as a developer let me just say
+
+
+make these
+
+
+changes now do it right I don't want to
+
+
+have to make you be the deployment Q
+
+
+manager because let's be honest you and
+
+
+I will [ __ ] it up at least once right
+
+
+this is the kind of thing that software
+
+
+should do so a framework should also
+
+
+manage a deployment Thank
+
+
+you. Here's another thing.
+
+
+Um, YAML config
+
+
+is this isn't recorded, right? This is
+
+
+just Among Us. Uh, it's a scourge and a
+
+
+cancer. Um, and we should burn it with
+
+
+hot
+
+
+fire. So, here's a promise I am making
+
+
+to you about this vaporware that you
+
+
+can't see the code of it. Uh, it's not
+
+
+going to have YAML config.
+
+
+Okay, for some of you that'll make you
+
+
+sad. For those people, come talk to me
+
+
+later. We can do some therapy. But there
+
+
+should also be very minimal generated
+
+
+configuration. Rails, what was like the
+
+
+defining characteristic of Rails? What
+
+
+made it spark 20 years ago? Convention
+
+
+over configuration. Run rails new today.
+
+
+Tell me how many configuration files you
+
+
+have. Okay. Yes, we're going to embrace
+
+
+Docker for infrastructure.
+
+
+Docker is a really great tool for
+
+
+managing your set of infrastructure
+
+
+dependencies. Oh, I thought I had a
+
+
+bullet point
+
+
+there.
+
+
+But you don't need to use Docker for
+
+
+your
+
+
+app infra deployments. Yes, Docker. App
+
+
+deployments, no Docker. How do you get
+
+
+really fast deployments? Don't build a
+
+
+full Docker image from scratch every
+
+
+time you change a character in a Ruby
+
+
+file. Okay, that's how. So, we're not
+
+
+going to do that because we also want
+
+
+deployments to be submillisecond. Okay,
+
+
+let's talk about
+
+
+accessories. Web
+
+
+frameworks should be way more
+
+
+generous. We deserve batteries included
+
+
+frameworks. What are some batteries? You
+
+
+should have exception
+
+
+monitoring. It is ridiculous to imagine
+
+
+putting an application in production,
+
+
+even a side project, a thing for just
+
+
+like your mom and your cousins to plan
+
+
+their Disney vacation. Whatever it is,
+
+
+if it's on the internet, it should have
+
+
+exception monitoring, including CSP
+
+
+violations, right? Just like you should
+
+
+be able to see what has happened and
+
+
+gone wrong in your application. That
+
+
+should be available to
+
+
+you. You should have performance
+
+
+monitoring. You should be able to see
+
+
+like how is this application actually
+
+
+performing? Where are bottlenecks? Where
+
+
+should I go and look to make things
+
+
+better? That should just be
+
+
+there. You should be able to monitor
+
+
+your background jobs. Again, like you
+
+
+just need to be able to see things. You
+
+
+can't make intelligent decisions without
+
+
+information and the information has to
+
+
+be available to you. Otherwise, it's
+
+
+barely information. You should have
+
+
+logs.
+
+
+Why in God's green earth are we having
+
+
+to pay for logs? Just just show them to
+
+
+me on the screen. There doesn't have to
+
+
+be a thousand features, but I should be
+
+
+able to see my logs in like a usable
+
+
+way. You should be able to inspect your
+
+
+database. This is not rocket
+
+
+science. We're going to build all this
+
+
+into Yippi because it's what you
+
+
+deserve. We're adults.
+
+
+Now, if that doesn't get you excited,
+
+
+um, you're Polish,
+
+
+but eventually it'll start to bubble up.
+
+
+You'll get some warmth. I I understand
+
+
+there's a certain coldness. I get it. I
+
+
+married a Russian. I understand the
+
+
+culture. But at some point in your
+
+
+heart, all right, it'll come. Now, I
+
+
+want to talk just a little bit about the
+
+
+philosophy here. Fundamentally, we are
+
+
+building a framework from first
+
+
+principles, right? Like blank sheet of
+
+
+paper. What would it look like to make
+
+
+the developer experience for rubists
+
+
+amazing in 2025? What are the tools and
+
+
+technologies available to us that we can
+
+
+build on? I want to be very clear. I
+
+
+love Rails. I work in a Rails app. I
+
+
+will continue to work in Rails apps for
+
+
+many years. Rails is great, but
+
+
+fundamentally there is no way that it
+
+
+can
+
+
+change the fact that it came into
+
+
+existence 20 years ago and the world was
+
+
+very different 20 years ago. Yes, Rails
+
+
+evolves very well. As open source
+
+
+projects go, it evolves incredibly well.
+
+
+But there are foundational decisions
+
+
+that were made 20 years ago that they
+
+
+can never change. They're too deep in
+
+
+the very core of that framework. And
+
+
+there are things we can do if we just
+
+
+start from scratch and we just rethink
+
+
+what's possible and what should be
+
+
+there, right? Like deployment should
+
+
+take less than a second. Test should
+
+
+take less than a second. What do you
+
+
+have to do on day one to make those
+
+
+things
+
+
+true obviously as well? Yippi is
+
+
+grounded in an
+
+
+aggressive love of simplicity.
+
+
+We don't need the options that we think
+
+
+we need. I'm just telling you, you don't
+
+
+need five servers to run your web app.
+
+
+You
+
+
+don't. I will prove it to you.
+
+
+But in the absence of proof, I'm the one
+
+
+with the microphone. So, trust
+
+
+me, you don't need different database
+
+
+engines. There's so much that we don't
+
+
+need. And with simplicity comes
+
+
+leverage. If you apply simplicity
+
+
+correctly, you get leverage. And if you
+
+
+apply leverage correctly, you get value.
+
+
+And that's what Yippi is all about.
+
+
+Where can we find simplicity that gives
+
+
+us leverage? How can we use the leverage
+
+
+to provide value to us as professional
+
+
+developers to make our lives not just
+
+
+better, but more
+
+
+enjoyable. This is what the accordion of
+
+
+complexity is all about. give me
+
+
+freedom when I have a situation where
+
+
+everything can be
+
+
+compressed where I only need one file
+
+
+and it can be my router and my
+
+
+controller and do my data fetching and
+
+
+do my rendering all together because
+
+
+it's really simple what I'm doing here
+
+
+and I only need 30 lines. Let me put all
+
+
+30 lines in one file. Don't make me have
+
+
+five different files.
+
+
+But in the case where I'm doing
+
+
+something complicated, let me
+
+
+name each layer. Let each layer have a
+
+
+very clear relationship and contract to
+
+
+the other layers, strong conventions,
+
+
+and let me do that work. And I know for
+
+
+a fact every single application that we
+
+
+have built or will built will have
+
+
+certain places where it's very simple
+
+
+and you could do it in one file and
+
+
+certain places where it's quite
+
+
+complicated and it would be nice to have
+
+
+10 different files. And you should be
+
+
+able to mix and match the degree of
+
+
+complexity that your application needs
+
+
+in the parts of your application that
+
+
+need
+
+
+it as needed. This is what it means to
+
+
+play the accordion. You expand in the
+
+
+places that need to expand and you
+
+
+collapse in the places that need to
+
+
+collapse. And you aren't forced to
+
+
+always expand or always
+
+
+collapse because that's what the
+
+
+framework told you and that's the only
+
+
+way that the framework works. And when
+
+
+you can expand and collapse as needed,
+
+
+where needed, then you can start to make
+
+
+music. And that is beautiful. So, couple
+
+
+wild ideas. And I also do realize I
+
+
+completely screwed my ability to do Q&A,
+
+
+but we can talk outside. Um, just a few,
+
+
+this is full vaporware, but
+
+
+I want to share with you what does
+
+
+Bootnap do?
+
+
+Bootstrap takes all of your Ruby and it
+
+
+processes it and it gets the actual Ruby
+
+
+VM instructions and then it takes all
+
+
+those VM instructions and it writes them
+
+
+to
+
+
+files and then it says whenever Ruby
+
+
+needs to do stuff it's like don't
+
+
+reinterpret you don't have to reparse
+
+
+all this stuff just execute the VM
+
+
+instructions. Now, for those of you who
+
+
+might not know, one of the most sort of
+
+
+famous taglines of SQLite,
+
+
+SQLite, 30% faster than the file system.
+
+
+So, very early on, we thought like it
+
+
+would be kind of nice if we could have
+
+
+bootstrap write to a SQLite database
+
+
+instead of to the file system. It'll
+
+
+just be a bit faster. And we started
+
+
+exploring that. As we're we're as we're
+
+
+doing that code, we're like, wait a
+
+
+minute. How do you get really fast
+
+
+deployments? You simplify things. Which
+
+
+is faster? Sending a 100
+
+
+files that total to 100 megabytes over
+
+
+HTTP to another server or sending one
+
+
+file that totals 100 megabytes over an
+
+
+HTTP
+
+
+server? Well, I don't know to be honest.
+
+
+I haven't done this experiment, but I
+
+
+think that there's a fair chance that
+
+
+the one file and if it isn't faster, it
+
+
+is certainly a lot easier to ensure that
+
+
+you get a full clean successful
+
+
+deployment, right? I don't have a
+
+
+whoops, 50 files made it, but the other
+
+
+50 didn't. So, what if we just like took
+
+
+your whole
+
+
+app, parsed it, got all the Ruby VM
+
+
+instructions, threw them in a SQLite
+
+
+database, and that's what you
+
+
+deployed. I don't know. That's a wild
+
+
+idea. We'll see if we build. I don't
+
+
+know. Uh, here's another wild
+
+
+idea. Well, there is another wild idea,
+
+
+but it's in my speaker notes. So, we're
+
+
+going to look at the speaker notes for a
+
+
+moment. Oh, of course. Now I remember.
+
+
+Um, what if you had purely declarative
+
+
+migrations? What does that mean? Don't
+
+
+tell me the migrations you need. Just
+
+
+say this is my schema and let me make
+
+
+some edits. No, this is my schema. And
+
+
+then the framework migrated you from
+
+
+schema A to schema B in the way that was
+
+
+safest and fastest. Uh we already talked
+
+
+about like you should be able to deploy
+
+
+in less than a second. You should be
+
+
+able to in fact here's the wild idea.
+
+
+Run CI from your
+
+
+laptop once everything is green then do
+
+
+deployments. And all of that should take
+
+
+less than one second.
+
+
+That's a wild
+
+
+idea. There are a whole bunch of other
+
+
+wild ideas. Most of what Joel and I do
+
+
+is talk about wild ideas and then every
+
+
+now and again we actually do some typing
+
+
+and make some software. But mostly it's
+
+
+wild ideas.
+
+
+So technically I spoke for 57 minutes
+
+
+but are there any questions?
+
+
+I guess we can take one.
+
+
+I told you I would save time for
+
+
+questions though. I'm a man of my word.
+
+
+Well, we're one minute past the time,
+
+
+but we'll make an exception. Okay. Thank
+
+
+you for your presentation. It was
+
+
+brilliant.
+
+
+Um I have some notes. So, uh the SQL as
+
+
+a hash representation was beautiful to
+
+
+me. Um another one, the queries in the
+
+
+views.
+
+
+Um in my mind it was like uh if if the
+
+
+database is so fast you can treat it as
+
+
+a variable. Yes, that's a good way of
+
+
+saying it. Um and uh my question is
+
+
+about the routing trees because I'm not
+
+
+familiar familiar with ROA. So uh the
+
+
+cost is uh for me is like the cost is
+
+
+moved from the boot time to execution
+
+
+time, right? So uh if the request comes,
+
+
+how do you find the controller that
+
+
+should
+
+
+um uh handle the the
+
+
+request? Thank you. Yeah. So it is the
+
+
+the the cost is moved from from boot
+
+
+time to request time. Here is um the
+
+
+core thought. Uh is it is Ruby
+
+
+slow? And like what's the Yeah. Okay. I
+
+
+mean that's a whole debate, but you know
+
+
+what I mean. Um, simplicity and
+
+
+leverage. Which is more
+
+
+important to have every single
+
+
+development experience, every single
+
+
+production experience have to eat 5
+
+
+seconds of boot time. Joel did a uh a
+
+
+poll a while back, right? Like write an
+
+
+assertion, assert true into your
+
+
+application, run just that one test. How
+
+
+long did it take? The average time was 5
+
+
+seconds.
+
+
+some 3 seconds, some 12 seconds, right?
+
+
+That's an incredibly large startup time
+
+
+for your app and for your tests. And
+
+
+Ruby is fast enough and you don't have
+
+
+to process everything, right? Like you
+
+
+just hit the code pass, you start
+
+
+finding your way through the tree pretty
+
+
+quickly. Um, and then finally, like if
+
+
+you really have hot
+
+
+paths, you do direct hashbased routing.
+
+
+this is 01, like this is super fast. So
+
+
+you always have the hatch. If you have a
+
+
+truly hot path, you're like, I want this
+
+
+to respond in a five milliseconds,
+
+
+right? Then you're optimizing
+
+
+everything, then you're going to lean
+
+
+into this hashbased routing. But in a
+
+
+lot of other cases, really is everything
+
+
+is fast enough. And the benefit of those
+
+
+super fast startup times is what allows
+
+
+for the possibility of tests plus
+
+
+deployment in less than a second. And
+
+
+that is
+
+
+like we're not going to give up anything
+
+
+for that.
+
+
+All right, that sounds really great. Uh
+
+
+just one disclaimer, Stephen. Uh,
+
+
+regarding YAML, we were recorded. Oh, so
+
+
+it's not between us, but you know, we
+
+
+can always talk to with that. Just to
+
+
+big YAML, I love you. Um, I use lots of
+
+
+YAML configuration. Uh, big fan, you
+
+
+know, screw TML. Um, so don't don't
+
+
+cancel me. This is the part where nobody
+
+
+is going to reach. I hope they
+
+
+will. Okay, we'll just make marketing
+
+
+around that. Uh, ladies and gentlemen,
+
+
+Stephen Mark.
+
+
+[Applause]

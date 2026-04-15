@@ -1,0 +1,2245 @@
+In our industry, you often say that you
+
+
+should move fast and break things and
+
+
+that works really well for a lot of
+
+
+applications and a lot of products. But
+
+
+there are some products which in which
+
+
+if you make a mistake then it costs you
+
+
+a lot of money or it causes very serious
+
+
+problems. And this talk will not be
+
+
+about moving fast and breaking things
+
+
+but it'll be about how you can modernize
+
+
+a product in a very confident way. And
+
+
+uh please welcome Shiman Fer from
+
+
+[Applause]
+
+
+Argency.
+
+
+Hello. A few months back our team faced
+
+
+a challenge that many of you might
+
+
+recognize. We needed to implement a new
+
+
+flow that would eventually replace a
+
+
+legacy process but with three major
+
+
+constraints. First, user experience
+
+
+couldn't be compromised. Any discrepancy
+
+
+between systems would impact customers
+
+
+and potentially create legal issues.
+
+
+Second, cost efficiency meant we had
+
+
+just three months to understand,
+
+
+replicate and improve a complex
+
+
+flow that had evolved organically over
+
+
+years. 30 team members were already
+
+
+working on our customer side. Third, we
+
+
+needed to break from obsolid data while
+
+
+preserving essential business rules
+
+
+embedded in the legacy codebase.
+
+
+The obstacles were significant.
+
+
+Documentation was sparse. Original
+
+
+developers had moved on and business
+
+
+rules existed in explicit, implicit and
+
+
+conditional
+
+
+forms. No single person understood all
+
+
+the
+
+
+rules. Traditional approaches wouldn't
+
+
+work. Full test coverage would take
+
+
+months. We didn't
+
+
+have what we needed was a methodology to
+
+
+systematically identify, isolate, and
+
+
+verify each business rules independently
+
+
+of its
+
+
+implementation. A way to rewrite with
+
+
+confidence. My name is Sherman Fidler.
+
+
+I'm a software engineer at ARNC. Today
+
+
+I'm going to share this methodology with
+
+
+you. How to rewrite with confidence by
+
+
+treating existing system behavior as a
+
+
+specification and validating business
+
+
+rules through isolated
+
+
+testing. If you have asked me three
+
+
+years ago if insure tech can be
+
+
+exciting, I would probably laugh a lot.
+
+
+But it can be.
+
+
+There are many definitions of legacy
+
+
+software, but I particularly like this
+
+
+one. Lemonade is the innovative
+
+
+insurance company. They've hit 1 billion
+
+
+in premiums, 10 years from funding. It
+
+
+took other wellestablished insurance
+
+
+brands 30 to 60
+
+
+years. Even companies like Microsoft,
+
+
+Netflix, Salesforce, and Tesla, please
+
+
+don't burn my slides, needed more time
+
+
+to achieve that.
+
+
+It is not the real
+
+
+cost. When we joined Lemonade over two
+
+
+years ago to support the mission, the
+
+
+director of engineering, Elad told us a
+
+
+story about an issue with roof coverage
+
+
+in one of the product
+
+
+lines. They had to hire a legal team to
+
+
+do some six-monthl long sprint to fix
+
+
+things and this exceeded the overall
+
+
+cost of it.
+
+
+They used rails monolith as a
+
+
+foundation. My favorite
+
+
+architecture. There is no coincidence
+
+
+that they had become
+
+
+successful. Since few years they
+
+
+transformed to microservices
+
+
+architecture. New product lines are
+
+
+released with use of their internal uh
+
+
+framework. But all the home and renters
+
+
+insurance and more is still handled
+
+
+within our beloved rails
+
+
+monolith. Insurance is a risk management
+
+
+system where you transfer financial risk
+
+
+to an insurer. You pay small certain
+
+
+cost called premium to avoid large
+
+
+uncertain cost potential
+
+
+loss. It works because risks are spread
+
+
+across many policy holders. It provides
+
+
+financial coverage against specific
+
+
+unexpected
+
+
+events. We couldn't break
+
+
+things. We had to be 100 sure that the
+
+
+new flow provides the same outcome. We
+
+
+had to pick a deliverable
+
+
+scope. Together with Lemonade's team, we
+
+
+agreed that limiting the scope of the
+
+
+work to a single product line within us
+
+
+would be the best approach. This vastly
+
+
+help us to make this project measurable,
+
+
+deliverable and in the end
+
+
+successful. So let's spend some time to
+
+
+explain basic insurance concepts which
+
+
+we were actually interacting with during
+
+
+this project.
+
+
+HO4 is a type of insurance policy
+
+
+specifically for renters in the
+
+
+US. It's financial coverage for damages
+
+
+or losses to your staff, legal fees if
+
+
+you're sued by the homeowner. Uh other
+
+
+medical bills if you're at fault and
+
+
+temporary living expenses if your place
+
+
+becomes
+
+
+uninhabitable. Policy is the legal
+
+
+contract between you and the insurance
+
+
+company. It specifies all the terms,
+
+
+conditions and details of your
+
+
+coverage. Includes information about
+
+
+premiums, deductibles, coverage
+
+
+limits, your proof of insurance and
+
+
+reference documents for
+
+
+claims. Coverage defines what your
+
+
+insurance protect against. Specify
+
+
+covered risks, fire theft,
+
+
+accidents. Sets maximum payouts
+
+
+limit and lists exclusions means what's
+
+
+not
+
+
+covered. Premium is the amount you pay
+
+
+for the insurance. It's not price price,
+
+
+it's
+
+
+premium. It can be monthly, quarterly or
+
+
+annual. Lower means risk means lower
+
+
+premium. It creates a pool of money used
+
+
+to pay claims.
+
+
+Deductible is what you pay before
+
+
+insurance kicks in. For example, if you
+
+
+file a claim for $5,000 and your
+
+
+deductible is
+
+
+$1,000, you pay the 1,000, the insurer
+
+
+pays $4,000. Lower deductible, higher
+
+
+premium. Higher deductible, lower
+
+
+premium. We all love estimates, don't
+
+
+we? Quote is an estimate of your
+
+
+insurance cost.
+
+
+It's based on information you provide.
+
+
+It's valid for a limited time. It's not
+
+
+binding until you pay. And quote becomes
+
+
+policy in the
+
+
+end. Underwriting is about how insurers
+
+
+assess your risk by evaluating the
+
+
+quote. It evaluates factors like
+
+
+property location, protective devices,
+
+
+etc. It determines if you get coverage
+
+
+and at what
+
+
+price. Different companies may do uh
+
+
+assessment differently. At lemonade,
+
+
+this process is automated. It relies on
+
+
+external providers and internal
+
+
+processes utilizing data science
+
+
+models. So we had to create quote the
+
+
+modern way and have very same outcome
+
+
+from underwriting
+
+
+process. There was no place for mistakes
+
+
+here. If the proposed premium would be
+
+
+too high, people would
+
+
+resign. ensuring reckless guys like
+
+
+Ricky is sell for the lemonade. As
+
+
+simple as
+
+
+that. So how this process used to look
+
+
+like from customers
+
+
+perspective. The first question is just
+
+
+to check if you have account because
+
+
+maybe we already know something about
+
+
+you. Select the interesting
+
+
+product. Enter your address because we
+
+
+insuring certain uh
+
+
+home. Let's select protective devices so
+
+
+we so our premium can be lowered because
+
+
+they mitigate risk and some may be
+
+
+mandatory in certain
+
+
+states. Is anybody else need to be
+
+
+covered
+
+
+and the dog that bites people is not the
+
+
+one we want to offer coverage for
+
+
+definitely.
+
+
+Okay. What's happening behind the
+
+
+scenes? In fact, a lot of HTTP calls.
+
+
+The quote model is updated constantly
+
+
+with new
+
+
+information. And the following slides
+
+
+will give you an overview of the
+
+
+fraction of the data we had to deal with
+
+
+and decide what's relevant and what's
+
+
+not.
+
+
+As you probably expect also column
+
+
+representing its current
+
+
+status. Actually there are more statuses
+
+
+defined but some of them are no longer
+
+
+in use or
+
+
+simply are irrelevant in scope of of
+
+
+this presentation.
+
+
+The business raised very very valid
+
+
+point that they don't want quotes which
+
+
+are pending or stubbed. Pending
+
+
+represents abundant quote and doesn't
+
+
+bring any value to the
+
+
+system. Stubbed means that we weren't
+
+
+able to make risk assessment due some
+
+
+third party
+
+
+issues. This state was meant not to lose
+
+
+customers and show them some sub data.
+
+
+But Lemonade found a better way of doing
+
+
+this. The data model was polluted. there
+
+
+was a whole bunch of logic to filter out
+
+
+those irrelevant quotes at different
+
+
+levels. So it's especially problematic
+
+
+for the data science team. If they
+
+
+wouldn't filter out such quotes, uh
+
+
+their models would be far away from
+
+
+accurate. During the underwriting
+
+
+process, we wanted to receive a code
+
+
+which is ready to bind or decline it.
+
+
+Nothing in
+
+
+between. This changed a lot. Instead of
+
+
+creating code at the beginning of the
+
+
+flow and updating it on every step, uh
+
+
+we will receive all the data gated by
+
+
+gathered by the front- end client web or
+
+
+mobile and perform our task at the very
+
+
+end of the flow. We had to decide which
+
+
+data is required and which can be simply
+
+
+dropped. But we have to had to overcome
+
+
+the
+
+
+unknown. We tried to perform static
+
+
+analysis of the code to figure out which
+
+
+quote attributes and data in serialized
+
+
+columns are necessary to put quotes in
+
+
+bindable or underwriting the client
+
+
+status. We quickly figure out that we
+
+
+unable to do this as there are too many
+
+
+branches in the code. Imagine every
+
+
+state has its own regulations affecting
+
+
+the certain insurance product. Multiply
+
+
+this over product additions. Those are
+
+
+versions which change over time due to
+
+
+legal concerns or business
+
+
+needs. We also share the data model and
+
+
+flow with other product
+
+
+lines. Then we figure out that we can
+
+
+use module prepend and instrument
+
+
+accessors in quote to check which data
+
+
+is involved. This gave us some better
+
+
+overview and the foundation for unit
+
+
+tests of the new feature. But still the
+
+
+amount of quote attributes was simply
+
+
+overwhelming.
+
+
+But we haven't even touched the HTTP
+
+
+communication which takes place during
+
+
+the quoting and
+
+
+underwriting. All the first and third
+
+
+party calls allowing us to perform
+
+
+underwriting. Pick the appropriate
+
+
+coverages, deductible and premium for
+
+
+the
+
+
+customer. How to ensure that new flow
+
+
+gives the same
+
+
+outcome? Maybe let's write more tests.
+
+
+We weren't able to cover all the
+
+
+possible scenarios but just a fraction
+
+
+of them.
+
+
+We don't have all the microservices
+
+
+in continuous inter integration
+
+
+environment. We would need to write
+
+
+stops for dozen of HTTP endpoints and
+
+
+differentiate their behavior. Mixing
+
+
+this with existing uh mock didn't sound
+
+
+doable. So let's make a custom
+
+
+environment which utilizes production
+
+
+data. It would induce a lot of
+
+
+infrastructure work and high cost. We
+
+
+would also run into compliance issues by
+
+
+using production data in non-production
+
+
+environment. Still, we would have to
+
+
+implement comparison mechan
+
+
+mechanisms. So let's test this on
+
+
+production. So
+
+
+persistence, we needed a place to store
+
+
+quote snapshots. HTTP requests involved
+
+
+to first and third party and a column to
+
+
+store results of our comparison. A
+
+
+simple active record model with a
+
+
+dedicated table was an ideal choice for
+
+
+that. We added two scopes to filter out
+
+
+results which were verified and those
+
+
+who required
+
+
+review. But never not every quote is
+
+
+interesting for
+
+
+us. Here is a piece of code we called
+
+
+around filter. Thanks to Ruby prepend
+
+
+method, we could safely overwrite method
+
+
+run prepare for preview in chat quotes
+
+
+module if the conditions were met. Run
+
+
+prepare for preview is the entry point
+
+
+for underwriting process and what
+
+
+follows pricing, deductible, coverages,
+
+
+all the terms that we learned at the
+
+
+beginning of this
+
+
+presentation. That's how we infected the
+
+
+code with our sampling
+
+
+mechanism. After initialize hook was
+
+
+used to be sure that all the application
+
+
+code is successfully loaded and then the
+
+
+game
+
+
+begins. We only wanted to
+
+
+uh sample data from first time policy
+
+
+buyers for renters policy inside
+
+
+us. So quote has to be pending. It has
+
+
+to be renters quote
+
+
+uh and the feature flag had to be
+
+
+enabled.
+
+
+So we initially start that looking for
+
+
+1% of samples then gradually increased
+
+
+it the exposure but believe me the scale
+
+
+is so big that one or 2% is completely
+
+
+enough. We wanted the data as row as
+
+
+possible
+
+
+because we didn't want to get tricked by
+
+
+custom attribute readers and type
+
+
+casting the HTTP
+
+
+part. Let's look at the
+
+
+recorder. It turned out that TPUs has a
+
+
+nice callback system which allows to
+
+
+hook when the request is completed. So
+
+
+we can access both request and response
+
+
+response details. A perfect match for
+
+
+our use
+
+
+case. That's how we serialize request to
+
+
+persist. The key consists of base URL
+
+
+params method and HTTP method and body.
+
+
+The value is respond code response code
+
+
+and
+
+
+body. So that's how sample recording
+
+
+look like.
+
+
+Later on we will use those values to set
+
+
+up
+
+
+stabs. So okay that's how it looks all
+
+
+together. So we query address for given
+
+
+quote then we made a snapshot of code
+
+
+before underwriting started. We started
+
+
+recording all the HTTP requests. Then
+
+
+the actual process is yielded. We
+
+
+assigned recorded request to a variable
+
+
+and release all the HTTP
+
+
+recording. Then we could store two
+
+
+snapshots of quote address and all the
+
+
+requests. We ignore the exclusions from
+
+
+sentry not to miss anything if something
+
+
+weird happened. Uh you want to get
+
+
+informed. So one more look how it was
+
+
+organized at the top
+
+
+level.
+
+
+Okay. We had to be sure that no
+
+
+background job is scheduled within
+
+
+uncommitted transaction before we could
+
+
+process proceed with our idea of testing
+
+
+on
+
+
+production. Since R 7.2 this feature is
+
+
+built in, but we weren't there yet.
+
+
+However, one of the greatest things
+
+
+about working at Arcy is that if you
+
+
+need a solution for a certain problem,
+
+
+it's a great chance that we've already
+
+
+faced it in the past and the solution
+
+
+lives somewhere. for example in race
+
+
+event
+
+
+store or someone described it like 10
+
+
+years ago on our blog nine years before
+
+
+Ray introduced it. Kudos
+
+
+Robert.
+
+
+Uh so let's make a wrapper which will
+
+
+check if there's a joinable transaction
+
+
+and we did allow uh and it will add our
+
+
+async record mimicking active record
+
+
+behavior. Quack like an active record
+
+
+when transaction is committed on all the
+
+
+objects inside transaction uh inside uh
+
+
+transaction records committed is
+
+
+invoked. So there's a collection of of
+
+
+all the objects and each one receives
+
+
+committed method in the
+
+
+end. Okay, the
+
+
+verifier.
+
+
+So let's use snapshot of code before
+
+
+underwriting process. Use snapshot of
+
+
+code after underwriting process is
+
+
+completed. Use the same address data.
+
+
+Provide HTTP stabs recorded within our
+
+
+old flow and compare it with quote after
+
+
+underwriting done in the new
+
+
+flow.
+
+
+Okay. We build quote the modern way
+
+
+using make quote method. I won't go into
+
+
+implementation because it doesn't matter
+
+
+and I don't want to expose any critical
+
+
+information and let's run the
+
+
+underwriting process. The whole thing is
+
+
+wrapped with an active record base
+
+
+transaction. This transaction is rolled
+
+
+back at the end meaning no trace of
+
+
+additional quote is left in the
+
+
+system. We couldn't pollute the
+
+
+production systems with quotes which are
+
+
+duplicates of real ones. This would
+
+
+break many things like data science
+
+
+models. Due to after commit background
+
+
+job processing, we were sure that no job
+
+
+will be scheduled from our verification
+
+
+flow and no side effects will
+
+
+occur. We couldn't mutate state in other
+
+
+microservices within lemonade. We
+
+
+couldn't make additional requests to
+
+
+third party services and break things in
+
+
+external systems like someone's credit
+
+
+score.
+
+
+Some APIs are expensive, some are slow
+
+
+responding. Rate limiting is also a
+
+
+thing. There are three CL HTTP clients
+
+
+used in the application, but we had to
+
+
+care only about
+
+
+two. Fire uses Net HTTP along with some
+
+
+libraries like AWS one. Types is the
+
+
+client of choice for communication with
+
+
+microservices and third-party
+
+
+services. Did you know that type use has
+
+
+built-in stubbing
+
+
+mechanism?
+
+
+Anyone? Okay. So, let's block all
+
+
+outgoing HTTP HTTP
+
+
+requests. This code effectively blocks
+
+
+all requests performed via TPUs. We
+
+
+insert callback blocking requests at the
+
+
+very beginning of TPU's request stack.
+
+
+Then we can yield code we want to
+
+
+execute and remove stops. So code
+
+
+outside block has no issues with HTTP
+
+
+communication. Here you can see our with
+
+
+HTTP stops mechanism
+
+
+applied along with roll back
+
+
+one. Okay, but we blocked all the
+
+
+traffic. Now let's now let's use all
+
+
+HTTP calls we recorded in the original
+
+
+flow as steps for the new flow.
+
+
+Okay, sorry. So here you can see we take
+
+
+all the steps except few uh we are not
+
+
+interested in and then we evaluate each
+
+
+key value par which is request data and
+
+
+response data from response uh from
+
+
+request we want base URL and params we
+
+
+want to com stop those two and match our
+
+
+stop by those two values and return the
+
+
+original old flow
+
+
+uh received
+
+
+So that's how it's uh tied
+
+
+together. But this is not always an
+
+
+option. Okay. AWS client use N uh uses
+
+
+net HTTP directly. We have found that
+
+
+this as the easiest way to override
+
+
+behavior of the library code while still
+
+
+being able to download the desired
+
+
+resource from S3 with bold assumption
+
+
+that get is not mutating any resources.
+
+
+It depends you
+
+
+know Ruby meta programming capabilities
+
+
+shine in cases like
+
+
+that but there were a lot more specific
+
+
+cases requiring special
+
+
+care.
+
+
+Yeah. But we could experiment safely
+
+
+because all the requests were blocked.
+
+
+The main idea was to separate the
+
+
+samples collection from the
+
+
+verification. This allowed us to do this
+
+
+process
+
+
+asynchronously. If any issues were
+
+
+discovered, we could fix the code of the
+
+
+new flow and run verification again to
+
+
+check if the situation has improved.
+
+
+It's all about gradually polishing the
+
+
+rough edges.
+
+
+So we fed the verifier uh with the
+
+
+sample and HTTP stops results different
+
+
+than Neil from verify method means that
+
+
+there is no misalignment between the new
+
+
+flow and the old
+
+
+one. So it's just a method allowing us
+
+
+to process uh batches of samples.
+
+
+Nothing fancy here but it improved our
+
+
+workflow.
+
+
+This is a method for displaying
+
+
+differences between underwriting the
+
+
+quote created with the new flow and the
+
+
+old
+
+
+one. So here you can see piece of
+
+
+uh a
+
+
+diff there is wrong status and wrong
+
+
+policy addition we determined in the
+
+
+flow. It also played very well for
+
+
+nested structures which was crucial for
+
+
+our case. Those are those horror slides
+
+
+from the beginning with all the EMLs.
+
+
+I'm also a huge EAL
+
+
+fan. Uh, okay. It turned out that there
+
+
+are some attributes that are impossible
+
+
+to compare directly like ids, timestamps
+
+
+which we only had to check in unit test
+
+
+if those are present and reasonable.
+
+
+So implemented method which is called
+
+
+invariable
+
+
+attributes where we excluded some of
+
+
+them from the
+
+
+comparison. This geometrically helped
+
+
+with simplifying the code that handles
+
+
+quoting process in the new flow. There
+
+
+is also ongoing project to abandon a lot
+
+
+of no longer relevant data and our work
+
+
+was fundamental to make this
+
+
+happen. Yes, we're getting there.
+
+
+So there were two separate processes. We
+
+
+divided collection of sample data from
+
+
+the
+
+
+verification. So let's record the state
+
+
+of quote from the old chat flow before
+
+
+and after the underwriting
+
+
+step. Besides the state, we also
+
+
+recorded all HTTP interactions executed
+
+
+through the
+
+
+underwriting. Let's run the new quote
+
+
+creation flow based on the selected data
+
+
+from snapshots.
+
+
+use the recorded HTTP
+
+
+calls to stop them for the new flow so
+
+
+we can make sure that no that there are
+
+
+no side effects when running the
+
+
+validation
+
+
+mechanism. Let's store the discrepancy
+
+
+if there's
+
+
+any. And then let's clean up. We roll
+
+
+back the transaction to clean up the
+
+
+test data and remove all the HTTP stops.
+
+
+We were able to analyze the differences
+
+
+in behavior without breaking things and
+
+
+easily adapt to it. There were fewer
+
+
+questions asked in new flow. It was
+
+
+simpler in
+
+
+general with the very same
+
+
+outcome. So this is the part of the
+
+
+message the project leader Gana shared
+
+
+across the organization.
+
+
+Please do notice how big in general was
+
+
+this
+
+
+project and the cooperation with our
+
+
+client was one of the best in in my
+
+
+entire
+
+
+career. Here is a little proof that you
+
+
+had a chance to go through the authentic
+
+
+case
+
+
+study. Big shout out to my teammates who
+
+
+helped me with
+
+
+this. And yeah, it definitely deserved a
+
+
+conference speech.
+
+
+But there was a panic
+
+
+moment. Gana reached out to me on Friday
+
+
+evening on the day the feature was
+
+
+exposed to a big number of
+
+
+customers. It was a day before mine and
+
+
+his holidays. Both he and I were going
+
+
+for skiing trips with our
+
+
+families. I've jumped on a Zoom call
+
+
+just after quick cross check on the back
+
+
+tracker. But he just wanted to thank for
+
+
+one of the best releases he has ever
+
+
+experienced.
+
+
+Both of us could take welldeserved
+
+
+rest. Thank
+
+
+you. Thank you, Shiman. Any questions?
+
+
+Hi. Uh, thank you. As I understood, you
+
+
+recorded many HTTP requests to different
+
+
+services and then the new flow was using
+
+
+those recorded requests to do its own
+
+
+logics, right? Yes. Why it never
+
+
+happened that you need to send maybe
+
+
+requests to a third party service but
+
+
+with different parameters or like
+
+
+slightly different requests to a third
+
+
+party service. Um I haven't shown this
+
+
+part because I decided that it would be
+
+
+too confusing uh too
+
+
+confusing. We in fact
+
+
+uh evaluated those steps before passing
+
+
+it. We evaluated those requests which
+
+
+were stored in the DB with params
+
+
+matching the new flow. So if we detect
+
+
+for example that there's user ID which
+
+
+has certain pattern it's public
+
+
+identifier which is prefix and has
+
+
+certain format we updated it to our uh
+
+
+desired format of a new flow. So we were
+
+
+acting like with the with the data from
+
+
+the new flow but using stops from the
+
+
+old old flow and it never happened that
+
+
+you need to make like a new HTTP request
+
+
+to like another service. No no no the
+
+
+the underwriting process itself remained
+
+
+the same but the whole preparation to it
+
+
+was totally different.
+
+
+Thank you.
+
+
+Any other questions?
+
+
+Uh, how long did it took this whole
+
+
+process? Three months. Okay.
+
+
+With uh Christmas included.
+
+
+Thanks for presentation. Uh so my
+
+
+question is that uh did this uh new flow
+
+
+uh was this new flow uh rolled out to
+
+
+production gradually step by step or uh
+
+
+just in one piece? uh it was exposed
+
+
+gradually by feature flag expo exposed
+
+
+to the bigger uh amount of users every
+
+
+day of situations when you had to like
+
+
+roll back uh
+
+
+there was no no such situation in this
+
+
+project to to roll back. Thank you.
+
+
+Yeah, thanks for the talk. I wonder what
+
+
+other strategies have you considered and
+
+
+which of them you think might also work.
+
+
+Uh I think that I showed two of them
+
+
+like I I we didn't find any other viable
+
+
+strategy for that because
+
+
+uh there are few dozen microser few
+
+
+dozens
+
+
+microservices. So we had like few dozens
+
+
+HTTP interactions recorded
+
+
+uh in our flow. So,
+
+
+uh, I'm afraid we wouldn't be able to to
+
+
+do it in a time by stabbing everything
+
+
+by hand and all the potential variants
+
+
+because
+
+
+yeah, I love America, you know,
+
+
+but every each state has its own uh its
+
+
+own regulations, its own law, and uh
+
+
+each product has to has to be different
+
+
+for each
+
+
+state. So it's
+
+
+yeah for me it's impossible to to do it
+
+
+differently and be sure that you do you
+
+
+are doing the
+
+
+same. That's going to be a hard
+
+
+question. No it's an easy one. So I mean
+
+
+we've all seen this multiple kinds of
+
+
+problems multiple times. Every time I
+
+
+see this, I keep thinking when will we
+
+
+learn to write a proxy in this case a
+
+
+proxy HTTP layer, right? Like would you
+
+
+agree that if you had gone back in time,
+
+
+you would have made sure that all the
+
+
+HTTP requests go through a class that
+
+
+you own so you don't need to sort of do
+
+
+this internally. I would love to if uh
+
+
+there wouldn't be like
+
+
+um I don't
+
+
+know too many flavors of how HTTP
+
+
+clients behave in this project. Yeah.
+
+
+Yeah. But yeah, so like what I'm
+
+
+thinking
+
+
+is does it make sense if someone's
+
+
+building a project now that they think I
+
+
+know it seems like overengineering but
+
+
+it isn't to make a class that we call
+
+
+HTTP request and we make sure everything
+
+
+goes through that even if it just expose
+
+
+hides fairday or something else. Yeah, I
+
+
+would love this idea, but I think that
+
+
+uh we wouldn't have enough time for
+
+
+that. And yeah, for is for sure
+
+
+um great um how to say
+
+
+that
+
+
+improvement. Yeah, you propose. Yeah,
+
+
+HTTP proxy. the simplest things are
+
+
+sometimes the best and and doesn't come
+
+
+to to your mind early enough. But yeah,
+
+
+we chose this way. Um, you know, you
+
+
+some sometimes have limited scope of
+
+
+view
+
+
+and you evaluate some options. Some some
+
+
+of them are dump, some of them are maybe
+
+
+not dump, but but you don't have time to
+
+
+to do anything smarter. And yeah, that's
+
+
+that's how it went, I believe.
+
+
+Hey, Shimon. Hello. So, my question is
+
+
+how tough it was to convince clients to
+
+
+agree on that considering that he
+
+
+probably was aware how risky it would be
+
+
+if you up.
+
+
+I I I didn't understand part of your
+
+
+question. Everything were so my my
+
+
+question was it was just like client was
+
+
+believing in you so much that he doesn't
+
+
+have a problem with that. Yes. Yes. Our
+
+
+relation is yeah over two years. Okay.
+
+
+And if it was wasn't be like that how
+
+
+you would try to convince him that there
+
+
+is no other way to do it properly than
+
+
+that approach.
+
+
+I mean testing on production. I think
+
+
+that you know speaking in in
+
+
+the best uh possible uh language which
+
+
+is money how much it would cost do doing
+
+
+it differently.
+
+
+Any other?
+
+
+Yeah.
+
+
+Uh, silly question. Were all those
+
+
+dynamic changes thread safe? Yes. Yes.
+
+
+Hopefully. Yes. Yes. Yes. Because you
+
+
+were using unicorn or why? Unicorn. Mhm.
+
+
+Got it. Yeah.
+
+
+Yes. Yeah. There there's Yeah, I can say
+
+
+that we Yeah, I had the slide, but I
+
+
+removed it because it was too abstract.
+
+
+Yeah, we have uh concurrent Ruby in the
+
+
+project.
+
+
+uh and we use concuring and tassing
+
+
+objects but we did nasty little trick to
+
+
+make them in line. So we sure we were
+
+
+sure that they hap that they will happen
+
+
+in in uh in our block within our
+
+
+process and nothing will go
+
+
+anywhere. Yeah. Yeah. Thanks for this
+
+
+question.
+
+
+Okay, we got time for one
+
+
+more. All right, thank you for your
+
+
+questions. Thank you Shimon for
+
+
+presentation.

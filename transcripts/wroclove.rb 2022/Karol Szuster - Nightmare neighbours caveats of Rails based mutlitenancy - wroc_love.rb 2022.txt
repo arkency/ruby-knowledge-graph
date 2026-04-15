@@ -1,0 +1,2938 @@
+um so hey everyone uh I'm really happy
+
+
+that you made it here I had my doubts
+
+
+whether I am going to make it here but
+
+
+in the end cooler has prevailed and here
+
+
+we are so
+
+
+uh maybe I'll just go in with the
+
+
+formalities my name is Carol I'm a
+
+
+software engineer and I work at upside
+
+
+um and today I wanted to talk to you
+
+
+about nightmare Neighbors
+
+
+and
+
+
+maybe that that sounds confusing without
+
+
+the subtitle but I don't mean the guy
+
+
+that lives next door to you
+
+
+um even though those kind of neighbors
+
+
+they can also cause you to lose quite a
+
+
+bit of sleep
+
+
+and just you know to make it a little oh
+
+
+yeah let me check this as well
+
+
+and we're gone
+
+
+yeah
+
+
+just to make it a little less vague
+
+
+maybe I'll demystify why what I mean by
+
+
+neighbors and I mean the multi-tenant
+
+
+application pattern
+
+
+so maybe just to fill the waters around
+
+
+here by a show of hands could I could
+
+
+you tell me who here had previous
+
+
+experience with such an architecture
+
+
+yeah so quite a bit quite a lot of
+
+
+people I hope you guys will serve as
+
+
+sort of fact checkers I also hope that
+
+
+maybe you will also learn something
+
+
+today but in the end this presentation
+
+
+really assumes very little previous
+
+
+knowledge about this pattern
+
+
+so uh maybe I will uh you know begin
+
+
+with a small introduction
+
+
+multi-tenancy is a pattern a software
+
+
+development where a single instance of
+
+
+an application serves multiple clients
+
+
+and we can visualize it in a graph or a
+
+
+diagram
+
+
+uh
+
+
+like this so in this case users should
+
+
+probably name something different uh
+
+
+this is by users on the slide I mean
+
+
+customers so businesses that user
+
+
+applications so these are the tenants
+
+
+for which we will separate data and we
+
+
+can confront this pattern with the let's
+
+
+say traditional approach maybe
+
+
+traditional is the wrong word here as
+
+
+well but the single tenant so as opposed
+
+
+to multi-tenancy here each of those
+
+
+customers clients has uh quite has a
+
+
+separate application of
+
+
+instance of our application and you guys
+
+
+are probably able to tell the difference
+
+
+between those two slides but
+
+
+multi-tenancy in general is about
+
+
+creating an illusion for the users so
+
+
+for the customers that those two are
+
+
+actually maybe not equivalent but we
+
+
+want them to make them seem the same so
+
+
+we really like the clients to feel that
+
+
+hey I'm the only one using this
+
+
+application this application is just for
+
+
+me
+
+
+and I'll quickly go over why would we
+
+
+even do that and I think there are three
+
+
+main reasons
+
+
+first of all the setup is much much
+
+
+quicker so if we have multiple clients
+
+
+then spinning up a new instance for each
+
+
+and one of them is going to be very very
+
+
+costly and complicated also maintenance
+
+
+is something that's going to be really
+
+
+really unscalable if we use the single
+
+
+tenant application pattern and also the
+
+
+cost if we have
+
+
+just a single tenant using a single
+
+
+instance then we really run the risk of
+
+
+you know under utilizing certain
+
+
+resources and just not getting our bank
+
+
+for the buck that we pay for the
+
+
+infrastructure the transfer application
+
+
+and immediately we can
+
+
+see the pivotal concern in this pattern
+
+
+which is how to partition the data so
+
+
+how to actually isolate the tenants
+
+
+because this is something that our
+
+
+reputation is the company really relies
+
+
+on we
+
+
+our main responsibility is to create
+
+
+this isolation and do not allow leaks
+
+
+anywhere
+
+
+to you know maintain this illusion that
+
+
+I mentioned even further
+
+
+so our pivotal concern should be how do
+
+
+we ensure that the uh data is separated
+
+
+and it's leak proof so there's no way to
+
+
+leak data between tenants which is
+
+
+especially for important if we
+
+
+um if our clients are Enterprise then
+
+
+this situation is really unacceptable
+
+
+and there are multiple ways to do that
+
+
+there are three main levels let's say at
+
+
+which we can separate the data and I
+
+
+will go through them one by one and
+
+
+maybe we'll
+
+
+um going to some smaller details in each
+
+
+and one of them to really illustrate
+
+
+what are the
+
+
+uh what are the advantages so pros and
+
+
+cons of each and each of them
+
+
+so the first one is row level
+
+
+partitioning this is something that we
+
+
+do almost every day because the idea is
+
+
+super simple each record in the database
+
+
+has a tenant assigned so they wrote the
+
+
+records themselves they they know to
+
+
+which tenant they belong so this is a
+
+
+super simple concept that we use in
+
+
+relational databases all the time
+
+
+and immediately we could start to think
+
+
+of something like this
+
+
+so we'd have uh maybe a tenant stable in
+
+
+the database
+
+
+that then have users for example and
+
+
+then users have some other relation and
+
+
+in our minds this is this would be
+
+
+probably correct because this data this
+
+
+this schema is normalized so users and
+
+
+tasks it doesn't really immediately make
+
+
+sense to store the tenant in both of
+
+
+them
+
+
+but I would really Advocate to use
+
+
+something like this so maybe the
+
+
+normalize the data database a little
+
+
+because as they say you know we you
+
+
+normalize until it hurts and denormalize
+
+
+until it works
+
+
+this approach really makes it simple to
+
+
+uh
+
+
+you know to to work with the data in a
+
+
+practical manner without having to refer
+
+
+to separate relationships along the way
+
+
+each and every each time
+
+
+and
+
+
+I kind of extracted a
+
+
+stand-up implementation of this pattern
+
+
+from all the implementations uh that are
+
+
+out there so most gems that cover this
+
+
+topic this is not really
+
+
+perfectly named named now don't to pay
+
+
+too much attention to the details as
+
+
+they could say on Friday this is all
+
+
+senseless but the idea is there in my
+
+
+opinion so
+
+
+to achieve this partitioning we can use
+
+
+default scopes so just not to have a
+
+
+where clause in each and the query we
+
+
+can use a default scope
+
+
+which will scope the tenants or the
+
+
+records to a particular tenant
+
+
+and
+
+
+oops
+
+
+and we can handle certain you know
+
+
+conditions in the scope as well so for
+
+
+example we can handle tenants not being
+
+
+set at all
+
+
+and in the end what we want to achieve
+
+
+is having this workload so this is all
+
+
+this is what the whole approach hinges
+
+
+upon that the application actually
+
+
+injects the workloads in all the
+
+
+relevant queries
+
+
+um we can take a little detail from the
+
+
+partitioning because here I touched upon
+
+
+two topics which should be uh covered in
+
+
+my opinion and they are not really that
+
+
+complex so we can go of them immediately
+
+
+so how to actually extract the tenant
+
+
+and there are multiple ways each depends
+
+
+on your particular use case
+
+
+there are advantages disadvantages to
+
+
+each and one of them but you can just
+
+
+extract it from the host maybe the first
+
+
+last subdomain from the puff itself so
+
+
+maybe you have like a slash I don't know
+
+
+and the organization name and also the
+
+
+header which is often used in Mobile
+
+
+implementations
+
+
+and then how we do actually how do we
+
+
+actually start the current tenant and
+
+
+um there's really no
+
+
+um like standard way
+
+
+all the ways hinge upon the thread
+
+
+current
+
+
+method or the thread current object
+
+
+because we really need to store the data
+
+
+in each thread separately you can have
+
+
+just like a global Singleton
+
+
+and some implementations use request
+
+
+store to do that which is
+
+
+um like an older gem there's also
+
+
+something in active support natively
+
+
+which is called current attributes this
+
+
+is basically a per request Singleton
+
+
+which can help us to achieve this so
+
+
+just to give you an example we can have
+
+
+a pair request Singleton called current
+
+
+which is we have the tenant attribute
+
+
+and we will populate that for each
+
+
+request we can also populate that
+
+
+either in a rock middleware maybe you
+
+
+can also populate that in an application
+
+
+controller then we will just inherit
+
+
+from That Base Class and we this
+
+
+attribute will be accessible in our in
+
+
+our code
+
+
+so as you can see this is pure rails
+
+
+we don't need special infrastructure to
+
+
+implement this
+
+
+does not impact the deployment process
+
+
+at all
+
+
+and there's also very low overhead of
+
+
+creating tenants which is probably the
+
+
+oh sorry about that
+
+
+which is probably the most important
+
+
+Point here that creating new tenants
+
+
+with this approach is very simple it
+
+
+just boils down to
+
+
+inputting a record into the database so
+
+
+whenever we have a situation or a use
+
+
+case where
+
+
+um there are the tenants are much more
+
+
+maybe granular so it you can just create
+
+
+a new tenant Maybe by registering so you
+
+
+can have a lot of low value tenants in
+
+
+the database this is probably the way to
+
+
+go because the overhead of creating
+
+
+internet also storing them is super low
+
+
+and the only caveat here is that the
+
+
+application is fully responsible for the
+
+
+separation
+
+
+so we need to make sure in the
+
+
+application that all the requests are
+
+
+scoped correctly and also the
+
+
+validations because whenever we use for
+
+
+example validates in our model we don't
+
+
+really want to validate uniqueness of a
+
+
+record globally in the database we
+
+
+always want to scope the uh it by the
+
+
+tenant so we want for example it to be
+
+
+unique but only in the context of a
+
+
+single tenant
+
+
+and we can kind of offload this
+
+
+responsibility that rests on our
+
+
+Shoulders by using existing
+
+
+implementations
+
+
+so there are gems out there that
+
+
+implement this exact Behavior so for
+
+
+example access tenant or active record
+
+
+multi-tenant
+
+
+and these are subject to peer review so
+
+
+people use them there's really no point
+
+
+in re-implementing the wheel or
+
+
+Reinventing the wheel sorry
+
+
+so we can really take advantage of you
+
+
+know someone having done that before us
+
+
+but
+
+
+sometimes that's not really
+
+
+enough for us so scenarios in sub
+
+
+scenarios we really want to
+
+
+have the data Integrity like
+
+
+put more emphasis on separating the data
+
+
+and
+
+
+um and focus on Integrity so this
+
+
+situation where we forget our workloads
+
+
+for example is going to be much more
+
+
+impactful on our business and we really
+
+
+can't handle that because the issue here
+
+
+is that this approach fails by default
+
+
+or maybe not failed but
+
+
+it leaks by default whenever we forget
+
+
+the workloads then we'll just get the
+
+
+data that was not supposed to be sent
+
+
+and
+
+
+the issue is here also is that this is
+
+
+super simple we'd really like this to uh
+
+
+be our database scheme because this is
+
+
+understandable it's super easy to
+
+
+maintain but we somehow want to you know
+
+
+make it more robust
+
+
+and here we can use a mechanism called
+
+
+rollover security
+
+
+which is a mechanism in database
+
+
+Management systems that allows us to
+
+
+restrict
+
+
+on a per user basis or a per session
+
+
+basis which rows can be returned or
+
+
+inserted created so
+
+
+there's a mechanism in the database
+
+
+themselves that can help us to filter
+
+
+the data
+
+
+and just to give you you know give you
+
+
+some example of how that works
+
+
+you can enable rollover security per
+
+
+table by using the enable security
+
+
+clause or the command
+
+
+and then we have to Define policies for
+
+
+those tables
+
+
+so in this example
+
+
+we let's say we have the users table
+
+
+that I showed previously and we want the
+
+
+users to be scaled by tenants so we want
+
+
+to always explicitly say that which
+
+
+tenant we are and which data we want to
+
+
+return
+
+
+so in this case
+
+
+you can see that there's a function or a
+
+
+comparison which says that we only want
+
+
+return we won't only want records where
+
+
+the tenant ID is equal to some current
+
+
+setting and that current setting is a
+
+
+session parameter which will send which
+
+
+will be responsible for setting for each
+
+
+request
+
+
+yeah apparently I even made it easier
+
+
+yeah and there are also there's a small
+
+
+thing to remember here not
+
+
+and this mechanism is also not applied
+
+
+to every user in the database there are
+
+
+certain users that are Exempted from
+
+
+these Behavior so for example super
+
+
+users table owners
+
+
+and roles that have bypass role security
+
+
+set so
+
+
+we really need to make sure that our
+
+
+application is not using one of them so
+
+
+obviously we don't want our you to run
+
+
+our production database as the super
+
+
+user
+
+
+but we probably are the table owner
+
+
+usually because migration is great
+
+
+tables Etc the role that we're using is
+
+
+able to create databases and tables so
+
+
+here we need to make sure that we for
+
+
+example this is the simple solution that
+
+
+we fall through the security this
+
+
+basically removes stable owners from
+
+
+this list so now the table owner
+
+
+themselves they can't even uh they will
+
+
+also be subject to this mechanism
+
+
+and here you can see that
+
+
+we kind of shifted the responsibility so
+
+
+as before we had to
+
+
+input the workloads for each request
+
+
+and now it's a little simpler so now we
+
+
+just want to set the database session
+
+
+parameter once
+
+
+and then everything will fall into place
+
+
+with this mechanism so this is just this
+
+
+will be just the area of error will be
+
+
+much smaller in this case
+
+
+and the way you can do that is to create
+
+
+some switch function
+
+
+which will set this session parameter so
+
+
+in this case I named it up current
+
+
+tenant ID but this is arbitrary this is
+
+
+just to demonstrate the mechanism
+
+
+we will yield the block so we want to
+
+
+you know use this to wrap some behavior
+
+
+and it's super important to also reset
+
+
+session parameters for in in rails
+
+
+because of connection pooling and the
+
+
+connection is not being actually closed
+
+
+and session and connection are kind of
+
+
+synonymous in the sense that the session
+
+
+parameter is actually lives as long as
+
+
+the session or which is the connection
+
+
+so active record doesn't remove
+
+
+connections because it's inefficient so
+
+
+if we don't reset this then someone can
+
+
+reuse the connection which will have
+
+
+some garbage in it and we can
+
+
+potentially leak the leak data that way
+
+
+as well
+
+
+um and we can use it as a rock
+
+
+middleware this is how most
+
+
+implementations deal with that so we can
+
+
+create some uh Rock middleware which
+
+
+will extract the tenant which we already
+
+
+know how to do and it will use this to
+
+
+um call the entire stack that's further
+
+
+down below but wrapped within this
+
+
+switch
+
+
+yeah and here we have this little
+
+
+distinction that whereas using where
+
+
+clauses
+
+
+leaked by default this fails by default
+
+
+so if we don't explicitly say which
+
+
+tenant we are that we won't get
+
+
+the records so if I don't say that I'm
+
+
+I'm tenant one for example I will just
+
+
+get nothing or get an error that I do
+
+
+not I use that session parameter that
+
+
+doesn't exist
+
+
+so
+
+
+does that mean that it's
+
+
+which solves all our problems though
+
+
+definitely not because as you can
+
+
+imagine this introduces some form of
+
+
+implicit state
+
+
+what else previously it was also
+
+
+stateful we had to store this current
+
+
+tenant somewhere now it's much more
+
+
+veiled now the state is actually
+
+
+embedded within the connection
+
+
+so it's a little like a shady let's say
+
+
+and historically this this mechanism
+
+
+also had some performance issues
+
+
+most of them are solved I think it's
+
+
+supposed to just stand in the case of
+
+
+postgres in this case
+
+
+but this you can imagine it will impact
+
+
+the performance of our application
+
+
+because it has to evaluate that the
+
+
+condition and only return rows for which
+
+
+it returns true so there is some
+
+
+overhead defensively
+
+
+and there's also like a caveat here that
+
+
+whereas it will fail by default if we
+
+
+don't set a tenant
+
+
+you can imagine a scenario where we set
+
+
+a tenant and then leak that somewhere
+
+
+further down the line so
+
+
+like I mentioned for example with the
+
+
+connections maybe we'll reuse the
+
+
+connection that already had a tenant set
+
+
+and this will lead to some undefined
+
+
+Behavior probably leaking data and other
+
+
+scenarios like that out there in the
+
+
+world and definitely they are there are
+
+
+so whenever we actually we scale our
+
+
+application for example we have multiple
+
+
+replicas
+
+
+uh then
+
+
+we really probably want to invest into
+
+
+some form of external connection pooling
+
+
+in the case of postgres this is usually
+
+
+done via PG bouncer which will limit the
+
+
+number of connections to the database it
+
+
+will you know deal with idle connections
+
+
+so this will definitely improve our
+
+
+throughput
+
+
+and there are multiple modes of such
+
+
+pulling but probably the most common one
+
+
+the default as well is transaction
+
+
+pooling which is uh I think it on
+
+
+average it yields the best results
+
+
+and what it means in a nutshell is that
+
+
+instead of connecting to the database
+
+
+directly our application will connect to
+
+
+the pg bouncer pool or whatever of tool
+
+
+that we use here
+
+
+and on a on a query basis so whenever we
+
+
+create a transaction
+
+
+a new connection from the pool will be
+
+
+allocated by are not allocated but will
+
+
+be assigned to that transaction by the
+
+
+puller so for example we set the current
+
+
+tenant to zero
+
+
+and since everything is a transaction
+
+
+basically even something like this this
+
+
+will be assigned to a connection that is
+
+
+managed by the pool
+
+
+and there's no guarantee that when I now
+
+
+select something from the database
+
+
+that I will have the same connection as
+
+
+before
+
+
+so now you can imagine the blue
+
+
+connection having another tenant set so
+
+
+this is just a small caveat but
+
+
+something that definitely you should
+
+
+keep in mind maybe even if you are a
+
+
+migrate existing
+
+
+um
+
+
+existing code bases a via mechanism like
+
+
+that that
+
+
+sometimes there are things that you have
+
+
+to remember that are completely external
+
+
+and that brings us to schema level
+
+
+partitioning which is let's say the next
+
+
+level
+
+
+um is here the approach is a little
+
+
+different so instead of having rows that
+
+
+are that know which then they belong to
+
+
+we have schemas in the database so
+
+
+schema is basically just a set of tables
+
+
+like a namespace basically
+
+
+and instead of having a tenants table
+
+
+which then has relations to all them and
+
+
+instead of having the internet ID in
+
+
+each of the tables we just have schemas
+
+
+that are names based and inside of
+
+
+schemas
+
+
+tables that are separate for each
+
+
+student will live
+
+
+and it uses actually the exact same
+
+
+mechanism as row level security it works
+
+
+by via the search path session parameter
+
+
+which we can use exactly the same as we
+
+
+used rollover security so we just set
+
+
+search path and then we have to set it
+
+
+something else for example reset it to
+
+
+the default which is user in public or
+
+
+maybe reset to the previous one which is
+
+
+something that a lot of the
+
+
+implementations of their use
+
+
+and this is very low effort so like I
+
+
+mentioned uh previously with
+
+
+migrating existing code bases this is
+
+
+very transparent to the entire
+
+
+application so there's there are very
+
+
+few things that we can manage manage
+
+
+configure and it's really easy to
+
+
+migrate something to this approach so we
+
+
+just need to you know scope them by the
+
+
+namespace maybe move some data around
+
+
+and
+
+
+uh the footprint of that Solution on our
+
+
+code base it shouldn't be read that much
+
+
+but it definitely has a lot of drawbacks
+
+
+and just to give you a few the migration
+
+
+process is going to be completely custom
+
+
+so race one can't handle migrations like
+
+
+this it also it only migrates the
+
+
+uh the the public schema and so we have
+
+
+to invest into a process that's going to
+
+
+be a little custom
+
+
+and we have to make sure that the
+
+
+migrations will work for every tenant in
+
+
+the database so there might be failures
+
+
+somewhere in the middle
+
+
+creating Newtons is much more expensive
+
+
+we have to create a new schema we have
+
+
+to migrate it
+
+
+so the footprint is much higher whenever
+
+
+we have tenants that we don't really
+
+
+care about or maybe distance are not
+
+
+really critical to us and that's a lot
+
+
+of them they are going to have much
+
+
+bigger impact on the entire system
+
+
+backups are much harder this is
+
+
+something that Heroku for example
+
+
+um this is why Heroku Advocates against
+
+
+this approach so they actually have a
+
+
+little snippet in their documentation
+
+
+that where they say that
+
+
+this approach makes it really hard for
+
+
+the backup tools internal tools to
+
+
+uh to be up to be efficient so
+
+
+definitely something to keep in mind and
+
+
+also you have to manage shared and
+
+
+tenant schemas which is something that's
+
+
+really use case specific but we have
+
+
+this notion of a public schema where the
+
+
+data is shared and also the pertinent
+
+
+schemas so you have to sort of balance
+
+
+the two
+
+
+and also uh the users I mean they use
+
+
+the original offers of a gem in rails
+
+
+called apartment which
+
+
+um which was the de facto standard
+
+
+implementation of this Behavior they
+
+
+they themselves said that in the long
+
+
+term in the long run this approach
+
+
+didn't work for them I think the uh the
+
+
+post that they posted is uh unaccessible
+
+
+right now so I can't really quote as to
+
+
+why but definitely is telling that
+
+
+someone who
+
+
+uh who was responsible for this uh has
+
+
+thoughts like that
+
+
+so that brings us to the
+
+
+the next level of partitioning which is
+
+
+very extreme and it's database level
+
+
+partitioning so now for each standard
+
+
+we'll have a completely separate
+
+
+database
+
+
+and this is where uh
+
+
+certain things are not that clear-cut
+
+
+because database schema they can mean
+
+
+different things depending on the
+
+
+context you're in so for example for
+
+
+mySQL database and schema are pretty
+
+
+much synonymous
+
+
+so all the things that we said
+
+
+previously apply and in postgres
+
+
+switching databases requires us to
+
+
+re-establish the connection so we can
+
+
+just switch databases we have to create
+
+
+a new connection pool in terms of in the
+
+
+context of layers
+
+
+and apartment actually so the gem which
+
+
+was the de facto standard for things
+
+
+like this uh it had this feature where
+
+
+you could do
+
+
+re-establishing new connections for each
+
+
+tenant and it looks something like this
+
+
+they just had a previous connection
+
+
+which they remembered they established a
+
+
+connection to the new database and then
+
+
+at the end they established connection
+
+
+to the previous database and yeah I
+
+
+forgot that I had this yeah
+
+
+yeah and here we have a weird issue
+
+
+because either I don't understand the uh
+
+
+the goal of that approach or why it
+
+
+exists in the gem
+
+
+but it's really uh it really doesn't
+
+
+work at all so there's an issue here
+
+
+that's in the in the long term maybe a
+
+
+little elusive so you can imagine just
+
+
+jumping right into
+
+
+uh into multi-tenancy maybe creating a
+
+
+little proof of concept to test things
+
+
+out
+
+
+and you see this gem apartment and you
+
+
+just plug it in and start using that you
+
+
+want to test the database per database
+
+
+connection switching and now it's kind
+
+
+of it works and you may seem that it
+
+
+works but actually
+
+
+um
+
+
+well connection the connection pool
+
+
+itself is Street safe so whenever a new
+
+
+thread wants a connection this is
+
+
+completely thread safe just
+
+
+re-establishing connection for a model
+
+
+especially a model that's used
+
+
+everywhere it's not thread safe so each
+
+
+connection or each thread will actually
+
+
+register that change
+
+
+so whenever we use the fork server for
+
+
+example unicorn we might not even run
+
+
+into this issue because there's only one
+
+
+process there's one process so and there
+
+
+are no threads that you know can Clash
+
+
+so we may not even notice this issue and
+
+
+in threaded servers for example Puma
+
+
+under very low load or if you have
+
+
+multiple workers then we also can you
+
+
+know just by chance never notice and
+
+
+that's an issue
+
+
+so it's an extreme case
+
+
+and
+
+
+but it has some
+
+
+it has some merits I have to I have to
+
+
+admit because
+
+
+having unlimited concern about where the
+
+
+data is coming from and well which where
+
+
+the database is so we can have
+
+
+like arbitrary connections it's really
+
+
+powerful because it allows us to
+
+
+um
+
+
+first of all scale it much better
+
+
+because we uh we won't have we want to
+
+
+like run into issues where we you can
+
+
+you know we can scale vertically the
+
+
+database server anymore and it's just
+
+
+starting to unravel
+
+
+and it also allows us to be compliant
+
+
+with stuff like I don't know maybe HIPAA
+
+
+or PCI or uh that data sovereignty laws
+
+
+where we need to
+
+
+um store the data in a particular region
+
+
+for example for European companies maybe
+
+
+in Europe
+
+
+but so these are the lessons which you
+
+
+can get from that and this basically
+
+
+horizontal sharding
+
+
+which means that we
+
+
+we have multiple databases but I have
+
+
+the same schema
+
+
+and this is actually natively supported
+
+
+in rails since version 6.1
+
+
+and actually
+
+
+can be used to scale multi-tenant
+
+
+applications natively
+
+
+so just to give you a little example
+
+
+shardling is done by just defining the
+
+
+databases in the database.tml files so
+
+
+here we have a primary in a shard
+
+
+and then we can specify that our records
+
+
+connect to those charts which we defined
+
+
+in the
+
+
+in the database that down so here we say
+
+
+it connects to the primer and primary
+
+
+one primary Result One shards
+
+
+and then we can switch the sharp
+
+
+pertinent so whenever there's a request
+
+
+we will select The Shard which we will
+
+
+use so now we can separate the tenants
+
+
+arbitrarily however you want and started
+
+
+data in multiple places or one place
+
+
+pertinent
+
+
+and this is actually correct in this
+
+
+case because now we have separate
+
+
+connection pools so there's no there's
+
+
+no more of this issue
+
+
+that I uh
+
+
+that I mentioned and there's way more to
+
+
+this topic in general so now that I
+
+
+mentioned shards there are there's a
+
+
+topic of balancing shards so uh
+
+
+you have to optimize in the long term
+
+
+whenever you have multiple or a lot of
+
+
+tenants that the data distribution and
+
+
+how they are rooted really matters to
+
+
+the overall performance for example if
+
+
+you have tenants that have very similar
+
+
+usage patterns they all have spikes at
+
+
+the same time
+
+
+we can you know exhaust the resources of
+
+
+our system and lead to crashes this is
+
+
+called a noisy tenant a Noisy Neighbor
+
+
+problem where uh tenants is the system
+
+
+can impact other tenants so separating
+
+
+them in a smart way is actually really
+
+
+critical
+
+
+and there's also some you know all the
+
+
+application Level tools that we have to
+
+
+take care of which I won't go into
+
+
+details since this is more use case
+
+
+specific today I wanted to
+
+
+you know maybe uh lay the groundwork of
+
+
+this approach because it's very generic
+
+
+this is something that you will have to
+
+
+know regardless of your use case but for
+
+
+example handling sidekick delayed jobs
+
+
+Etc are creating elasticsearch indexes
+
+
+separately for internet this is
+
+
+something that you also have to take
+
+
+into account where deciding which which
+
+
+approach to use maybe in this case it's
+
+
+not even that couple with the approach
+
+
+so I really struggle to pinpoint a
+
+
+certain like a specific lesson from the
+
+
+stock
+
+
+uh I hope I you know yeah I didn't give
+
+
+the impression that I'm winging it too
+
+
+much but I definitely was
+
+
+um
+
+
+so I think it all comes down to a
+
+
+specific scenario so there are business
+
+
+requirements uh growth plans legal stuff
+
+
+which you have to take into account and
+
+
+that all impacts the decision in the
+
+
+long term so I don't think there's any
+
+
+an easy question easy answer to the
+
+
+question which one should I use
+
+
+and if I have to create like decide on
+
+
+one thing which I wanted to you know
+
+
+throw out there is that you should
+
+
+decide early which approach you want to
+
+
+use
+
+
+because selecting uh you know you can
+
+
+lock yourself into a particular decision
+
+
+and then decide uh you know that it
+
+
+wasn't really
+
+
+good approach so if you have a good if
+
+
+you make a good informed decision as
+
+
+early as possible it can really save you
+
+
+time from rework and
+
+
+minimize you know losses
+
+
+so on that note I wanted to thank you
+
+
+all for coming and
+
+
+uh yeah I think I managed to do it in
+
+
+time
+
+
+and I guess that's it
+
+
+yeah and obviously questions if any
+
+
+so which of those solutions would you
+
+
+recommend if you need to sometimes have
+
+
+aggregated computations
+
+
+if I if I need to what you need to
+
+
+sometimes aggregate per multiple tenants
+
+
+because that's the usual scenario for
+
+
+staff members and admins yes definitely
+
+
+so
+
+
+uh both the schema level and row levels
+
+
+approaches they both allow you to do
+
+
+exactly that because you can just
+
+
+reference cross schema you can prefix
+
+
+the tables for example tenant a DOT
+
+
+table name so you can freely
+
+
+um so you can freely join this data as
+
+
+you want obviously we probably have a
+
+
+low level approach it's much easier it
+
+
+just comes down to
+
+
+extending the workload but splitting it
+
+
+by schema also has some more have has
+
+
+different issues if you want to
+
+
+aggregate data uh because for example
+
+
+well it allows you to easily backup one
+
+
+tenant
+
+
+backuping everything like I mentioned
+
+
+becomes a problem so uh
+
+
+so if I had to decide on one uh one
+
+
+approach which I would like design as
+
+
+default because it handles most stuff
+
+
+then probably the row level approach is
+
+
+uh the way to go in most cases
+
+
+I think Shopify which is one of the most
+
+
+recognizable multi-tenant architectures
+
+
+uh they use this approach also
+
+
+Salesforce so it's definitely battle
+
+
+tested and scalable
+
+
+thanks
+
+
+um yeah hello Carol left and software
+
+
+presentation there's one thing I'm a bit
+
+
+wary about so when talking about uh row
+
+
+level multi-tenancy you mentioned a few
+
+
+times that you should be a bit to vary
+
+
+with their Clauses but I've just shared
+
+
+the documentation of acts as tenant and
+
+
+the small simulation and basically like
+
+
+if if a modal a model is scoped to a
+
+
+tenant and you try to do any active
+
+
+record queries on it then you'll get an
+
+
+error that like no tenant is set so if
+
+
+you use an active record but not that
+
+
+database directly you won't kind of have
+
+
+this where close problem it is
+
+
+definitely a good point it was also sort
+
+
+of
+
+
+um uh on the slide when when I raise an
+
+
+exception whenever a sentence is not set
+
+
+it's the it's a similar uh similar
+
+
+approach but it's you know if you are
+
+
+perfectly confident that the application
+
+
+is the only thing that will access the
+
+
+data and everything will go for that
+
+
+default scope then it's different that's
+
+
+not a problem if it was a problem then
+
+
+this is this this wouldn't be a valuable
+
+
+option long term
+
+
+but it's more about you know managing
+
+
+all the all the things on the side so
+
+
+uh definitely I don't want to know you
+
+
+know uh
+
+
+give the impression that this is like an
+
+
+actual risk that you take every time you
+
+
+use a rollover approach
+
+
+it's more of a something that you need
+
+
+to to to always remember about that uh
+
+
+that this is actually hinges on the
+
+
+workloads and whenever you have to
+
+
+you know go around this mechanism then
+
+
+that might be a problem
+
+
+I don't know if that's uh addresses your
+
+
+statement correctly yeah that's a build
+
+
+point I also liked what you said about
+
+
+like uh that database for example being
+
+
+accessed not just by the application but
+
+
+by other stuff
+
+
+could you repeat that please
+
+
+um yeah I said that you've got a valid
+
+
+point and uh it makes sense if like the
+
+
+database for example is being accessed
+
+
+not only by the rails application but by
+
+
+other services okay yeah definitely yeah
+
+
+that's also my point
+
+
+so I guess we're on the same page
+
+
+thank you for the question hi Carol
+
+
+thank you very much for the talk
+
+
+um when you told us about the row level
+
+
+version
+
+
+and you also set
+
+
+um
+
+
+you also said that you have to scope
+
+
+everything by by the standard you have
+
+
+to remember about the workflows
+
+
+but from the database performance
+
+
+perspective
+
+
+um
+
+
+it seems to me that if you have to have
+
+
+everything scored by the tenant and also
+
+
+like Unicity is called by the tenant
+
+
+uh yeah that was the point sorry
+
+
+when Unicity is caught by the tenant you
+
+
+[Music]
+
+
+um kind of also have to have all the
+
+
+indexes scoped by the tenant right is
+
+
+that the consequence
+
+
+um
+
+
+it is a good question whether you you
+
+
+mean like multi-column indexes instead
+
+
+of single indexes yes
+
+
+uh not necessarily I never actually I
+
+
+don't have a good question a good answer
+
+
+to this uh
+
+
+it would definitely help if you uh if
+
+
+you sculpt it at least intuitively I
+
+
+think we'd have to check
+
+
+uh but also on the note of performance
+
+
+you know index indexing definitely helps
+
+
+there's also partitioning inside the
+
+
+database which you can also use when uh
+
+
+when using the rollover approach so you
+
+
+can physically partition the data by
+
+
+tenant ID for example and then it can do
+
+
+partition pruning which probably will
+
+
+split things up but that's you know we I
+
+
+think it's
+
+
+um
+
+
+very long
+
+
+down the road that you actually have to
+
+
+worry about stuff like that
+
+
+uh but there is a good point about the
+
+
+indexes this is something that
+
+
+uh would be good to include in a
+
+
+presentation like this I think
+
+
+so
+
+
+I can you know I can I can I can check
+
+
+and go back to you if that's okay thank
+
+
+you very much no problem
+
+
+uh okay I have a question so the next
+
+
+thing is it may not help because for
+
+
+ranges it would help but for looking up
+
+
+specific IDs you might actually make it
+
+
+slower
+
+
+I think one and because you mentioned
+
+
+elasticsearch before in your talk and I
+
+
+think one thing that may not have been
+
+
+covered was what about read models
+
+
+because even at the database level you
+
+
+can create custom read models right so
+
+
+um so the database I know this is not
+
+
+particularly popular in the rails
+
+
+Community but theoretically you could be
+
+
+General you could be using you know like
+
+
+procedural uh callbacks at the
+
+
+procedural at the P SQL level to create
+
+
+read models that are per tenant and then
+
+
+have your models directly access those
+
+
+um okay I don't know if I uh no read
+
+
+models that well but if you mean like a
+
+
+like a maybe like a like a view yeah
+
+
+like database views yeah yeah definitely
+
+
+uh there's definitely something that I
+
+
+encountered I never actually worked with
+
+
+this approach but that's something that
+
+
+really quite interesting is instead of
+
+
+like having this all this the normalized
+
+
+I mean data that I showed having uh
+
+
+maybe materialized or not materialized
+
+
+with you maybe materialized it would be
+
+
+based in this case
+
+
+um it's also another approach to
+
+
+um to separate it
+
+
+by what we thought really separating it
+
+
+so it's
+
+
+I mean it's it's it's an interesting
+
+
+question as well
+
+
+uh I definitely get what you mean but I
+
+
+don't know how to address that maybe is
+
+
+that is something that you're looking
+
+
+for in particular that I can help you
+
+
+with or was that like a remark I think
+
+
+that was a remark yeah I apologize yeah
+
+
+I mean that's a definitely a valid
+
+
+remark so so thank you for you know
+
+
+making the presentation complete
+
+
+last question anyone
+
+
+okay no questions so thank you Carl
+
+
+thank you so much

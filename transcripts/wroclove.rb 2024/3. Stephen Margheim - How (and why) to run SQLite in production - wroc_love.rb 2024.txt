@@ -1,0 +1,4753 @@
+[Applause]
+
+
+thank
+
+
+you so in a multirack conference I would
+
+
+typically say wow how awesome to see so
+
+
+many people excited to learn about
+
+
+running SQL item production but I
+
+
+recognize that you're all stuck with me
+
+
+um but I'm hoping that by the end of
+
+
+this talk you will actually genuinely be
+
+
+excited about the potential of running
+
+
+SQL item production so to start let me
+
+
+reintroduce myself my name is Stephen
+
+
+you can find me on Twitter at fractal
+
+
+mind and as lucash said I am an American
+
+
+living in Germany um I've been in
+
+
+Germany 5 years and four weeks ago my
+
+
+wife and I got
+
+
+married uh but it was a bit of an
+
+
+international Adventure thank you thank
+
+
+you it turned into an international
+
+
+Adventure um we both live in Germany but
+
+
+neither of us are German citizens and
+
+
+German bureaucracy made it actually
+
+
+functionally impossible for us to get a
+
+
+marriage license in Germany so we ended
+
+
+up having to take a train North to
+
+
+Denmark to get a marriage license but
+
+
+none of our friends or family could come
+
+
+to Denmark so we then planned a
+
+
+destination wedding in Jamaica so that
+
+
+we could have some friends and family
+
+
+around uh in order to get to Jamaica we
+
+
+had to fly through New York so we went
+
+
+ahead and had our photo shoot in New
+
+
+York um we finally made it back to
+
+
+Berlin we are now legally married and
+
+
+we've had the ceremony it only took four
+
+
+countries um we live in Berlin with our
+
+
+two dogs Ruby and Tuck um I think they
+
+
+bear a striking resemblance to the two
+
+
+dog emojis um but that might just be
+
+
+luck uh at my day job I'm the head of
+
+
+engineering at test.io that is a crown
+
+
+driven quality assurance testing company
+
+
+uh and in my free time I'm an open
+
+
+source developer uh contributing to and
+
+
+maintaining a number of gems in the Ruby
+
+
+and rails
+
+
+ecosystem and along the way I write a
+
+
+fair bit on my
+
+
+blog so what I want to talk about today
+
+
+is why this is how I start all of my new
+
+
+rails projects whether those are
+
+
+projects at work or demo apps for blog
+
+
+posts or side projects and spefic
+
+
+specifically I want to talk about why I
+
+
+use sqlite as my database engine and I
+
+
+want to suggest that it might make sense
+
+
+for some of you some of the time to
+
+
+choose sqlite as well and in fact I want
+
+
+to suggest that it might make sense to
+
+
+use sqlite as the driver for all of your
+
+
+application's persistent data needs not
+
+
+just to back your
+
+
+models and whenever I make this suggest
+
+
+question the first question I get
+
+
+inevitably is why would I do
+
+
+that isn't sqlite for toy applications
+
+
+isn't it just for running local tests
+
+
+faster and while it certainly isn't just
+
+
+for toy applications I do think that
+
+
+that is a fair question and I'm actually
+
+
+curious to hear from you all like what
+
+
+are some of the reasons that you have
+
+
+hesitated or
+
+
+thought that seems risky to run sqlite
+
+
+in production and you can just shout out
+
+
+some thoughts like why have you not used
+
+
+it just a single node fair point what
+
+
+else Cloud hosting
+
+
+okay already have post
+
+
+Crest yeah we've gotten used to postest
+
+
+very true
+
+
+so I want
+
+
+to address some of these concerns some
+
+
+of these realities over the course of
+
+
+the
+
+
+next few
+
+
+minutes um I want to start off though by
+
+
+addressing one of the most common
+
+
+reasons why people think sqlite can't
+
+
+possibly be production grade software
+
+
+and that is the fact that it only
+
+
+supports linear rights right and this is
+
+
+a true fact you can only have one right
+
+
+right operation at a time on sqlite um
+
+
+but does that really mean that it can't
+
+
+possibly be used in
+
+
+production and I think that I mean
+
+
+obviously I think that the answer is no
+
+
+but I want to dig into why and the most
+
+
+important sort of insight is to step
+
+
+back and consider how many linearly
+
+
+ordered right operations can SQL like
+
+
+perform in the same amount of time that
+
+
+postest would perform one right
+
+
+operation right let's get a sense of
+
+
+like the difference that we're looking
+
+
+at and luckily I don't need to do this
+
+
+work Ben Johnson the creator of light
+
+
+stream uh who's now working at
+
+
+fly.io uh did some postmark uh do some
+
+
+benchmarking for a conference talk he
+
+
+gave at gophercon in
+
+
+2021 looking at running postgress in
+
+
+three different contexts right and what
+
+
+you can see is even when you're running
+
+
+postgress that process on the same
+
+
+machine as your
+
+
+application just the overhead of
+
+
+crossprocess communication means that
+
+
+you could run 10 SQL light wrs in the
+
+
+same amount of time that you could write
+
+
+run one
+
+
+postgress now of course it's not very
+
+
+common for rails applications in
+
+
+production to self-host and self-manage
+
+
+their own postgress on the same machine
+
+
+as their application on that single node
+
+
+typically you're going to have postgress
+
+
+running on a a separate machine its own
+
+
+machine if that is in the same Ava
+
+
+availability Zone as your application
+
+
+that's
+
+
+already twice as slow to three times as
+
+
+slow to just running it locally so we're
+
+
+at about 20 to 30 sqlite rights if that
+
+
+postgress instance is in the same region
+
+
+as your application that is about three
+
+
+times slower so maybe 60 rights but of
+
+
+course the most common situation today
+
+
+and the most marketed solution right is
+
+
+like you need to use a cloud hosted
+
+
+managed database service and odds are in
+
+
+that instance your postgress server will
+
+
+be in a different region than your
+
+
+application and if you have your
+
+
+application spread out across multiple
+
+
+regions definitionally at
+
+
+least almost all of them except for
+
+
+maybe one will be in a different region
+
+
+and even if those two regions are
+
+
+neighbors so here this is looking at us
+
+
+east1 and Us East 2 we
+
+
+see yeah
+
+
+you could run 1,000 sqlite ride
+
+
+operations in the same amount of time
+
+
+that your postest is running one so sure
+
+
+yes sqlite only supports linear rights
+
+
+but you can pack a lot of linearly
+
+
+ordered rights in the same amount of
+
+
+time that you make your call to crunchy
+
+
+data or Planet scale or what have
+
+
+you now I don't want to spend all of
+
+
+this time
+
+
+uh talking about the
+
+
+reasons why you aren't using sqlite I
+
+
+want to spend some time talking about
+
+
+why I think you
+
+
+should and I'm sure many of you have
+
+
+seen the growing
+
+
+articles uh about surprise Cloud bills
+
+
+somebody wakes up one day checks their
+
+
+dashboard and like
+
+
+whoops I don't have
+
+
+$20,000
+
+
+um while sqlite is one of the cheap
+
+
+databases in the world because it's free
+
+
+um even just running it uh is quite
+
+
+cheap but I think more importantly the
+
+
+cost is incredibly stable and Incredibly
+
+
+predictable that's a nice
+
+
+bonus and for those managed database
+
+
+Services we are seeing that they are
+
+
+dropping their free tiers left and right
+
+
+um it is harder and harder to start a
+
+
+side project
+
+
+where you definitely don't have any
+
+
+revenue and be able to get a highquality
+
+
+performant crow
+
+
+cloudbased managed database service for
+
+
+free and in fact one of the last free
+
+
+generous free tiers in the managed
+
+
+database space is turo which is managed
+
+
+Cloud sqlite um and they've talked a lot
+
+
+about why the nature of sqlite and its
+
+
+predict and lowcost um nature is what
+
+
+allows them to have a generous free
+
+
+tier and more and more people are
+
+
+starting to see this right it's not just
+
+
+in the rails Community people are
+
+
+beginning to see that sqlite really does
+
+
+make sense as a part of
+
+
+your application stack for running
+
+
+production web applications and as more
+
+
+and more people experiment with it and
+
+
+give it a chance they are finding that
+
+
+yes uh it is capable of handl
+
+
+production grade
+
+
+load in his rails World keynote dhh
+
+
+reemphasize the fact that rails at its
+
+
+core is conceptually focused on being
+
+
+that oneperson framework right it's it's
+
+
+aimed at making it possible for the
+
+
+smallest possible team right just you as
+
+
+a full stack developer and an idea to
+
+
+build
+
+
+featur valuable applications and I think
+
+
+sqlite is unique uniquely aligned with
+
+
+that
+
+
+vision for me I think there are three
+
+
+reasons why right that that rails as the
+
+
+oneperson framework and sqlite maybe as
+
+
+like the oneperson database engine make
+
+
+good bedfellows and the first is
+
+
+Simplicity right your database is
+
+
+literally just a file on disk your
+
+
+database engine is a single executable
+
+
+that runs inside of your applications
+
+
+process and that
+
+
+Simplicity drives a unique amount of
+
+
+control because you can embed every
+
+
+single aspect of your database the
+
+
+engine its
+
+
+configuration into your
+
+
+repository and this
+
+
+control unlocks some unique developer
+
+
+experiences right whether that's uh
+
+
+Branch specific databases whether that
+
+
+is controlling the actual compilation
+
+
+Flags to tweak the nature of the sqlite
+
+
+executable you can do that just through
+
+
+bundler um you have the opportunity to
+
+
+have an experience that is actually akin
+
+
+to Docker but without the need to
+
+
+actually run Docker right like I have
+
+
+multiple applications I'm not using
+
+
+Docker but I have everything I need in
+
+
+my git repository I get push main my CI
+
+
+builds that um on production uh
+
+
+everything lives inside of the
+
+
+Repository
+
+
+and then of course naturally sqlite is
+
+
+fast right we've seen it can be a
+
+
+thousand times faster than cloud-driven
+
+
+postgress and that speed
+
+
+is hard to really wrap your mind around
+
+
+the kind of Freedom that it gives you
+
+
+until you try it out right there's um a
+
+
+sort of famous SL Infamous part of the
+
+
+sqlite docs that say U when you're using
+
+
+sqlite you should probably not pre
+
+
+prematurely optimize away n plus1
+
+
+queries they have a whole section about
+
+
+it and um it sounds
+
+
+heretical but it actually makes sense in
+
+
+certain context and it's something that
+
+
+makes that sqlite makes possible
+
+
+um so why do I choose sqlite I choose
+
+
+sqlite because it allows me to build
+
+
+featur
+
+
+Rich valuable fast applications
+
+
+quickly to maintain them
+
+
+easily and to have them running in
+
+
+production both resiliently and
+
+
+performant and at this point I'm curious
+
+
+just to get a sense does anyone here
+
+
+actually have an application running in
+
+
+production using sqlite for for any
+
+
+purpose yeah
+
+
+sure if it gets me a hand then it
+
+
+counts right and and this is to be
+
+
+expected so what I want to do now is I
+
+
+want to turn to the Practical and I want
+
+
+to talk about how can you actually make
+
+
+this work how can you get an application
+
+
+in production that's running that's
+
+
+running performant that runs resiliently
+
+
+like what are the steps that you need to
+
+
+take what does it look like so that we
+
+
+can all end this session feeling
+
+
+comfortable and confident that I could
+
+
+go and I could start a new application I
+
+
+could use sqlite I could get it in
+
+
+production it would work well I
+
+
+understand what's happening so how do we
+
+
+do
+
+
+it well I need to be honest with you at
+
+
+the
+
+
+outset
+
+
+unfortunately right now today running
+
+
+sqlite on Rails out of the box if you
+
+
+use that command from before rails new
+
+
+database
+
+
+equilite that isn't viable you are going
+
+
+to have problems it won't be as
+
+
+performant as you want it won't be as
+
+
+resilient as you want and you're going
+
+
+to be like damn that Steven guy he
+
+
+really screwed me
+
+
+um now it's my personal goal uh for
+
+
+rails 8 to make this statement true to
+
+
+allow you to run rails new and the outof
+
+
+the-box experience is production ready
+
+
+and there's nothing else that you need
+
+
+to do but that just isn't true today and
+
+
+I'm not going to hide that from you I'm
+
+
+not trying to shill for big equ light um
+
+
+but that doesn't mean that it isn't
+
+
+possible to get there so let's talk
+
+
+about the steps that are necessary why
+
+
+they're necessary and what it looks like
+
+
+to make the production experience
+
+
+viable so these are the steps it's
+
+
+pretty complicated uh you're going to
+
+
+want to add the enhanced adapter gem
+
+
+this is a gem that I have written that's
+
+
+going to give you performance okay then
+
+
+you're going to want to add the light
+
+
+stream gem this is a wrapper for the
+
+
+light stream
+
+
+utility that's going to give you point
+
+
+in time backups that's resilience you're
+
+
+going to want to run the installer for
+
+
+light
+
+
+Stream So three CLI commands if you want
+
+
+to see more of those QR codes you've got
+
+
+the GitHub repos some blog post talking
+
+
+more about
+
+
+them thank you uh I had a really great
+
+
+time I hope you did too now you know how
+
+
+and why to run SQL item
+
+
+production okay okay to be fair um I do
+
+
+have a 100 more slides
+
+
+um that is though the takeaway so if I
+
+
+lose your attention for the rest of the
+
+
+time that's okay I understand it's the
+
+
+morning I'm trying my best but I have
+
+
+self-diagnosed ADHD to I understand the
+
+
+struggle I want to take the time though
+
+
+to really dig into what these gems are
+
+
+doing and today specifically I'm going
+
+
+to walk through what the enhanced
+
+
+adapter gem is doing to ensure that our
+
+
+applications are going to
+
+
+work performant right so I'm going to
+
+
+really dig deep on performance because
+
+
+there are a number of problems um and we
+
+
+are solving them automatically for you
+
+
+in the gym but it's doing some magic and
+
+
+I want to make sure that we're all on
+
+
+the same page about like what is
+
+
+happening what the problems are what the
+
+
+solutions are and how we were able to
+
+
+wrap them up in a gem that you can just
+
+
+run bundle ad ad
+
+
+okay so as a foundation for this journey
+
+
+I made a rails application this is
+
+
+lauram
+
+
+news um it is a basic Hacker News clone
+
+
+you have users that can make posts and
+
+
+comments and all of the content is Laura
+
+
+msum in the original version of this
+
+
+talk I was going to do a lot more live
+
+
+coding um but I'm not that good with one
+
+
+hand so I last last night I went and
+
+
+took a bunch of screenshots and we're
+
+
+just going to sort of look at the code
+
+
+on slides but the it's all up on GitHub
+
+
+I'll get the repository information out
+
+
+shortly so to start I am going to run it
+
+
+on my local machine in the rails EnV
+
+
+production
+
+
+mode and I'm going to use this load
+
+
+testing CLI utility to simulate load and
+
+
+we're going to use that to sort Drive
+
+
+our investigation like where the pain
+
+
+points are then we're going to figure
+
+
+out how to resolve those pain points so
+
+
+if we start running it I have this
+
+
+benchmarking uh controller which just
+
+
+simulates a lot of the standard Crut
+
+
+actions right so you can create a post
+
+
+you can create a comment you can go to
+
+
+the Post index view you can go to the
+
+
+Post Show
+
+
+view we're going to hit post create
+
+
+right we're going to hit a right end
+
+
+point because this is where sqlite's
+
+
+bottleneck lies we're going to start off
+
+
+sending uh concurrency of one right so
+
+
+just a wave of one request after another
+
+
+for 5
+
+
+seconds when we do that oh hey things
+
+
+look pretty good not too bad we've got
+
+
+all
+
+
+302s decent stats things look nice maybe
+
+
+I was wrong maybe it is viable well of
+
+
+course it isn't if we bump that
+
+
+concurrency up to just four so we're
+
+
+going to send waves of four requests at
+
+
+a time to our
+
+
+server we're going to see oh some 500s
+
+
+right so this is the first problem this
+
+
+is what you're going to see if you just
+
+
+take rails new you put it up on the
+
+
+internet you're going to get a lot of
+
+
+reports in your airor monitoring service
+
+
+um 500s we go back and we look in the
+
+
+log and see what are these 500s what's
+
+
+happening we're going to see the dreaded
+
+
+for those of us who run sqlite in
+
+
+production the dreaded sqlite 3 busy
+
+
+exception this is the bane of my
+
+
+existence right and this is the error
+
+
+that is thrown when your database is
+
+
+locked right so as we said sqlite only
+
+
+supports linear rights and in order to
+
+
+ensure that only one right operation
+
+
+happens at a time it has a locking
+
+
+mechanism right so if one
+
+
+connection acquires the lock and begins
+
+
+performing a right operation while that
+
+
+right operation is occurring if another
+
+
+connection comes in and says ooh I need
+
+
+to write to the database the database
+
+
+says I'm busy come back later now it
+
+
+doesn't actually do that for every sing
+
+
+single operation though it has a queuing
+
+
+mechanism and you have a timeout and
+
+
+it'll you can set that but we're still
+
+
+getting in this case 20 plus busy
+
+
+exceptions so what's the problem here
+
+
+and how do we fix it well I'm going to
+
+
+start with how we fix it we're going to
+
+
+work backwards to the
+
+
+problem um just to give you a sense of
+
+
+the scope of the problem as we double
+
+
+our load right uh and just for reference
+
+
+I didn't add this slide as I was
+
+
+transferring over from live coding to
+
+
+showing a bunch of slides my machine has
+
+
+uh it's a M1 MacBook has 10 cores so I'm
+
+
+running with web concurrency of 10 so
+
+
+I'm spinning up 10 Puma workers um so
+
+
+this jump from 8 to 16 is a notable jump
+
+
+because there the amount of load that we
+
+
+are putting on the server is greater
+
+
+than the amount of Puma workers that we
+
+
+have and that'll become more relevant
+
+
+later I forgot to add that slide but we
+
+
+see right like our percentage of Errors
+
+
+how many of our requests return error
+
+
+responses um jumps up over 50% as we get
+
+
+concurrent load this is obviously a
+
+
+production level uh disaster right this
+
+
+is not production rate software
+
+
+so the solution is immediate
+
+
+transactions so let me give a little bit
+
+
+of context what the hell this means um
+
+
+because sqlite only supports linear
+
+
+rights it has to support two different
+
+
+behaviors for transaction
+
+
+right uh and the terminology that it
+
+
+uses is deferred and immediate
+
+
+transactions so if you're looking at a
+
+
+transaction the
+
+
+default Behavior so you don't specify
+
+
+anything explicitly is deferred mode and
+
+
+what deferred mode means is that it's
+
+
+not going to attempt this connection is
+
+
+not going to attempt to acquire the
+
+
+right lock until a right operation is
+
+
+seen inside of that transaction so
+
+
+sqlite basically presumes that
+
+
+transactions going to be readon until it
+
+
+sees an actual right transaction so
+
+
+begin transaction comes in no need to
+
+
+acquire the right luck select star comes
+
+
+in no need select star comes in no need
+
+
+it sees update users okay now I need to
+
+
+acquire the right lck and the problem
+
+
+here is
+
+
+that because sqlite needs to keep its
+
+
+isolation guarantees if it retries this
+
+
+update inside of this transaction it's
+
+
+going to get a different snapshot of the
+
+
+database and it can't guarantee that
+
+
+that snapshot was the same as the
+
+
+snapshot when the transaction started
+
+
+right so it has to immediately airor
+
+
+this default makes sense for the context
+
+
+that sqlite was originally built for we
+
+
+have one connection and maybe you have a
+
+
+high degree of transactions that are
+
+
+readon right it's like avoid the
+
+
+overhead of acquiring the right lock but
+
+
+for our rails applications this is uh a
+
+
+terrible default because rails is going
+
+
+to rrap every single right operation
+
+
+that it runs in a transaction when we
+
+
+write transactions we're basically
+
+
+guaranteed to have a right operation
+
+
+somewhere in there so readon
+
+
+transactions are incredibly rare and we
+
+
+are going to have multiple connections
+
+
+to the database active record has a
+
+
+connection pool by default it'll have
+
+
+five Connections in that pool this is
+
+
+always going to be throwing errors for
+
+
+us so what we
+
+
+need in the rails context transactions
+
+
+are always right so what we need is to
+
+
+Ure that we attempt to acquire the right
+
+
+lock when we begin the transaction and
+
+
+this will allow the retry mechanism that
+
+
+is built into sqlite to actually have
+
+
+some effect because we can retry this
+
+
+begin statement this is just trying to
+
+
+grab a snapshot right it's like can I
+
+
+get a snapshot now no okay I'll wait how
+
+
+about now no I'll wait how about now
+
+
+okay perfect now I will begin and then
+
+
+everything inside of it can run
+
+
+successfully so this is the solution to
+
+
+our problem conceptually how do we
+
+
+actually bring this into our rails
+
+
+application well it's luckily pretty
+
+
+easy um since version 1.6.9 of the
+
+
+sqlite 3 ruby gem which is the driver
+
+
+that connects Ruby to
+
+
+sqlite um you can actually set the
+
+
+default transaction mode and since rails
+
+
+will pass any of the top level keys in
+
+
+your database AML straight to the
+
+
+database initializer in the gem you can
+
+
+just set default transaction mode to
+
+
+immediate and all of the transactions
+
+
+that rail spins up are going to now be
+
+
+immediate mode transactions not deferred
+
+
+mode transactions and we're not going to
+
+
+see these 500s we can validate that we
+
+
+can run our load
+
+
+tests and we'll
+
+
+see a much more beautiful graph now at
+
+
+16 we start to see H we still got some
+
+
+errors this is a signal that we're not
+
+
+quite done we're not quite at production
+
+
+ready
+
+
+software what's the next problem well if
+
+
+we dig into our latency we start to get
+
+
+sense of what the problem is so here
+
+
+we're looking at the P95 and P99 latency
+
+
+as we increase
+
+
+concurrency and we see at 16 concurrent
+
+
+requests right and this is where we jump
+
+
+over the number of Puma workers that we
+
+
+have some of our requests are taking
+
+
+over 5 Seconds when we get to 32
+
+
+concurrent requests it pushes down to
+
+
+the P95 right more than 5 seconds and if
+
+
+that 5-second number is ringing a bell
+
+
+it's because in the last slide we saw
+
+
+we have this timeout this is what rails
+
+
+new is going to generate in your
+
+
+database yaml for you and this is
+
+
+setting the maximum amount of time that
+
+
+a query can try to acquire the right
+
+
+lock and if it takes longer than this
+
+
+it's going to throw that sqlite busy
+
+
+exception after 5 Seconds instead of
+
+
+immediately which was our problem with
+
+
+immediate uh with deferred
+
+
+transactions so clearly What's Happening
+
+
+Here is that we have some queries that
+
+
+are trying to acquire a lock the whole
+
+
+time can't ever acquire it eventually
+
+
+throw an
+
+
+error so this configuration is getting
+
+
+converted into this sqlite Command right
+
+
+there's a pragmas are how sqlite allows
+
+
+you to configure your
+
+
+connection and sqlite comes with this
+
+
+busy timeout fragment it just takes a
+
+
+number of milliseconds this is how long
+
+
+your connection can attempt to reacquire
+
+
+the right lock before it will throw the
+
+
+busy exception
+
+
+and the problem we have here is some of
+
+
+our connection some of our requests and
+
+
+the connections that they get um are
+
+
+taking longer than this
+
+
+timeout but we saw before right this
+
+
+this is a simple right query it should
+
+
+take micros seconds why why are we
+
+
+having any of them take more than 5
+
+
+Seconds to understand that we have to
+
+
+understand how sqlite and Ruby interact
+
+
+um rewind first let's understand how the
+
+
+retry mechanism Works um so if you get
+
+
+four concurrent queries sent into sqlite
+
+
+one of them is going to acquire the
+
+
+right lock and the other three are going
+
+
+to stay
+
+
+cued after the first one finishes you'll
+
+
+get one acquire the right lock the other
+
+
+two stay cued right they sort of have
+
+
+this queuing system built into sqlite
+
+
+directly and it'll figure out what is
+
+
+the linear order that these operations
+
+
+are going to run in and this is actually
+
+
+super useful that this all lives in
+
+
+sqlite you don't have to write this
+
+
+queuing logic in your
+
+
+application but the problem for us is
+
+
+that because sqlite runs as an embedded
+
+
+database inside of your application and
+
+
+actually runs inside of your
+
+
+applications process in the context of
+
+
+Ruby with the global VM lock we have to
+
+
+really be attentive to how we work with
+
+
+an embedded database
+
+
+because if we
+
+
+aren't really
+
+
+careful we're going to have this
+
+
+situation which is that our iio working
+
+
+with the database is embedded inside of
+
+
+our Ruby process it's not really seen as
+
+
+distinct IO like I'm talking to another
+
+
+process and so while we are waiting for
+
+
+the database to actually come back and
+
+
+do something Ruby continues to wait and
+
+
+the the VM lock is continued to be held
+
+
+so the fact that we have two workers
+
+
+here isn't helping we're not getting any
+
+
+concurrency they're not able to mix Ruby
+
+
+and external IO because it's not seen as
+
+
+external IO it's seen as internal IO
+
+
+what we want is we want to be able to
+
+
+intermix Ruby work with not Ruby work
+
+
+right and sqlite work is not Ruby work
+
+
+we should treat it as external IO and
+
+
+allow us to actually have concurrency
+
+
+where we can have multiple Puma workers
+
+
+picking up requests as they're doing
+
+
+their Ruby work sqlite can be doing its
+
+
+work and and they can swap back and
+
+
+forth so how do we achieve this well
+
+
+we're going to need to make use of the
+
+
+lower level tool that is driving the
+
+
+busy timeout sqlite has this C API you
+
+
+you can set a busy Handler this is the
+
+
+call back that's going to be run
+
+
+whenever your connection tries to
+
+
+acquire the right lock and it can't
+
+
+right so you can Define your own call
+
+
+back sqlite's busy timeout is just the
+
+
+one already implemented callback
+
+
+function
+
+
+this is what the logic of sqlite's busy
+
+
+timeout looks like in
+
+
+Ruby and we're actually going to step
+
+
+through it in just a bit bit uh step by
+
+
+step so we don't have to study it too
+
+
+closely the key point though is like if
+
+
+we implement it in Ruby instead of using
+
+
+sqlite's C function we can use the Sleep
+
+
+Method and Ruby's Sleep Method is going
+
+
+to release the
+
+
+gvoo right and this is going to allow us
+
+
+to get to that diagram we had before
+
+
+where Ruby work is separate from
+
+
+database
+
+
+work so if we put this into our
+
+
+application right we can just use an
+
+
+initializer initializer and Patch um
+
+
+how uh active record configures
+
+
+sqlite when we run our loow test again
+
+
+we see a flat graph right this is what
+
+
+we want we do not want to see any
+
+
+requests taking more than 5 Seconds
+
+
+right we don't want to have this
+
+
+internal IO blocking other Puma workers
+
+
+from even doing any sort of web
+
+
+processing but we're still not I think
+
+
+at fully production grade software we
+
+
+see a bit of a stairstep here if we dig
+
+
+in deeper to like our 49es of latency
+
+
+distribution we still we still see a
+
+
+stair step right I want to keep these
+
+
+graphs flat I think production grade
+
+
+software we're really going to strive
+
+
+for um aggressive thoughtful performance
+
+
+and even at 49s I think we can do better
+
+
+so what's the problem here and how can
+
+
+we solve
+
+
+it well the problem is in our busy
+
+
+timeout SQL lights native or it its
+
+
+algorithm for how to handle queuing
+
+
+these queries Up penalizes Older
+
+
+queries and to understand what I mean by
+
+
+that I want to like walk through three
+
+
+scenarios of calling this busy time out
+
+
+right so if we think about when it's
+
+
+called the very first time count as zero
+
+
+when count to zero that's less than the
+
+
+size of our array which is 12 so we're
+
+
+going to enter the if block we're going
+
+
+to get that first item from our delays
+
+
+array so we're going to delay for one
+
+
+millisecond we want to compute how long
+
+
+has this query already been delayed well
+
+
+this is the first time so it's going to
+
+
+be zero that computation is just grab
+
+
+everything in the array up to that point
+
+
+and sum them up
+
+
+we add those two things up see if
+
+
+they're greater than the timeout our
+
+
+timeout is 5,000 milliseconds as a
+
+
+reminder 1 plus 0 is not greater than
+
+
+5,000 so we're going to sleep for 1
+
+
+millisecond let's think about what
+
+
+happens the 10th time the 10th time this
+
+
+query runs the call back 10 is still
+
+
+less than 12 so we're going to stay
+
+
+inside of our if block we're going to
+
+
+get the tenite of out of our array and
+
+
+that's
+
+
+50 we sum up
+
+
+all of the items up to 50 that's 178 so
+
+
+it's going to wait 50 milliseconds to
+
+
+this point it has weighted 178
+
+
+milliseconds the sum of those is not
+
+
+greater than 5,000 so we're going to
+
+
+keep sleeping for 50
+
+
+milliseconds if we imagine the 58th time
+
+
+this is greater than 12 so we're going
+
+
+to jump down to the else
+
+
+block and what we see in the El block is
+
+
+that once we're past the 12th iteration
+
+
+we're just going to always wait 100
+
+
+milliseconds
+
+
+the sum a little bit different right
+
+
+we're going to take the full sum of the
+
+
+array figure out how many times have we
+
+
+run more than 12 take that multiply by
+
+
+100 that gives us our total amount that
+
+
+we've waited thus far in this case 4,928
+
+
+milliseconds we had those two things up
+
+
+that is greater than
+
+
+5,000 so at this point we're going to
+
+
+raise the busy exception okay so this is
+
+
+how sqlite if you go and read their C
+
+
+code this is what their busy timeout is
+
+
+doing we just implemented it in Ruby so
+
+
+we could use
+
+
+sleep the problem here here and we can
+
+
+just look at this delays array is
+
+
+that as we back off if a query starts
+
+
+waiting three four times it's waiting a
+
+
+fair amount of time before it even tries
+
+
+to acquire the right lck and to see how
+
+
+this is problematic how this penalizes
+
+
+older queries let's go back to looking
+
+
+at our queued up queries and consider
+
+
+one change to the scenario so first one
+
+
+acquires the right lock the other three
+
+
+are Q they've tried once and they're
+
+
+going to wait to try again one of them
+
+
+requires best case scenario we're just
+
+
+going to increment our count by one in
+
+
+reality these are probably going to jump
+
+
+two or three steps um each time all
+
+
+right we get to the next one so at this
+
+
+point the last cute query is on its
+
+
+third retry and if you recall from like
+
+
+our array that means it's going to wait
+
+
+10 milliseconds before it tries to
+
+
+acquire the right luck again and let's
+
+
+imagine at this moment right now a new
+
+
+right query comes
+
+
+in it hasn't attempted to acquire the
+
+
+right lock at all it comes in it's like
+
+
+I need to do work can I have the right
+
+
+lock sqlite says
+
+
+no
+
+
+okay I'll try again zeroth time it's
+
+
+going to wait one millisecond it waits a
+
+
+millisecond tries again hey I need to do
+
+
+work can I acquire the right lock no
+
+
+still this query is a longer running
+
+
+query okay I'll wait first time it's
+
+
+going to wait 2 milliseconds it waits 2
+
+
+milliseconds hey are I really need to do
+
+
+my
+
+
+work this query that was only on its
+
+
+third generation right waiting 10
+
+
+milliseconds isn't even going to attempt
+
+
+to acquire the right lock before the new
+
+
+query gets three opportunities to
+
+
+reacquire it and as we get further into
+
+
+this delay array right we see it only
+
+
+gets worse so if you have a steady
+
+
+stream of Rights right new rights are
+
+
+coming in regularly as soon as a query
+
+
+becomes three generations old old it's
+
+
+statistically very likely to be 12 13 20
+
+
+Generations old and now you have this
+
+
+latency just like sitting there waiting
+
+
+for 100 milliseconds and all of the new
+
+
+queries they get to acquire the right
+
+
+lock they're waiting one two
+
+
+milliseconds so any query that gets a
+
+
+little bit old is going to get very old
+
+
+and that's going to push our longtail
+
+
+performance right so what we want to
+
+
+flatten out that p999 graph is to make
+
+
+our retry mechanism Fair
+
+
+well that's easy enough now that we
+
+
+understand what's happening let's just
+
+
+make every query wait one millisecond
+
+
+before it retries the right line right
+
+
+we're going to presume that we're going
+
+
+to have a high degree of right frequency
+
+
+and we're going to treat them all the
+
+
+same now if we treat them all the same
+
+
+we don't need all of this logic with the
+
+
+delays array and how we're going to sum
+
+
+stuff up we can simplify this whole call
+
+
+back and we could just write it like
+
+
+this and in fact this is the code that
+
+
+is now in the sqlite three main branch
+
+
+it's not yet in a point release
+
+
+hopefully that point release will come
+
+
+out soon as soon as it does we're going
+
+
+to put a pull request into rails to map
+
+
+that that timeout configuration variable
+
+
+in your database EML to this the
+
+
+non-blocking fair timeout instead of The
+
+
+Blocking unfair timeout that sqlite has
+
+
+right so work in progress but this logic
+
+
+is in sqlite now it'll be in rails by
+
+
+rails 8 hopefully um and this with a
+
+
+fair
+
+
+sleep flattens out our
+
+
+p999 latency graph right now this looks
+
+
+good flat our queries are being treated
+
+
+fair this this I feel like is pretty
+
+
+production grade
+
+
+software so when we look at performance
+
+
+I think there are really Four Keys when
+
+
+it comes to running a sqlite on Rails
+
+
+applications
+
+
+performant you want to use immediate
+
+
+transactions you want to ensure that
+
+
+your timeout mechanism right the
+
+
+mechanism for queuing up queries as they
+
+
+wait for the right lock doesn't block
+
+
+the gvl you want to ensure that your
+
+
+retry interval is fair and fourthly you
+
+
+want to ensure that you're in right
+
+
+ahead logging Journal mode I haven't
+
+
+talked about the fourth one and the
+
+
+reason why is that that is already in
+
+
+rails right so as of version 71 these
+
+
+are the new default configurations for
+
+
+sqlite and if you want to read more un
+
+
+like why these six and what they do and
+
+
+how they're going to make your
+
+
+application more resilient and more
+
+
+performant uh I have a whole blog post
+
+
+on how um we came to these new
+
+
+configurations for rails but the key
+
+
+Point here is that the journal mode is
+
+
+wall right aead log and the point here
+
+
+is that by default originally sqlite
+
+
+used a journal mode that actually had
+
+
+reads and writes both contend with each
+
+
+other so you could only have one
+
+
+operation at a time whether it be read
+
+
+or write write aad log mode allows you
+
+
+to have multiple concurrent reads while
+
+
+you only have one right so you could
+
+
+have 15 reads happening as you have your
+
+
+one stream of
+
+
+Rights and that actually brings me to
+
+
+the fifth point I don't think that this
+
+
+is necessary for production grade sqlite
+
+
+on Rails application but I've been
+
+
+thinking about it for a while and I
+
+
+finally figured out how to do it and I
+
+
+wanted to talk to you all about it
+
+
+because to be honest I'm just
+
+
+excited if you think about write ahead
+
+
+log mode and the fact that you can have
+
+
+multiple concurrent reads with your
+
+
+linear rights
+
+
+you might start to feel well rails is
+
+
+kind of screwing me a little bit because
+
+
+the connection pool doesn't know about
+
+
+the difference between reads and write
+
+
+queries right it's just like picking up
+
+
+connections so if we imagine like five
+
+
+queries come in we've got three writes
+
+
+and two reads what happens if we have a
+
+
+connection pool with three connections
+
+
+and the three connections that get
+
+
+picked up are
+
+
+rights well sqlite could run those re
+
+
+queries while these right queries are
+
+
+happening but
+
+
+rails is got a saturated connection
+
+
+pool it is going to have to these read
+
+
+queries are going to have to wait to get
+
+
+a connection from the active record
+
+
+connection pool which means they're
+
+
+going to have to wait for these rights
+
+
+one of the first right to finish up
+
+
+before one of them can come in and of
+
+
+course we know that these rights are
+
+
+only going to be resolved one at a time
+
+
+linear rights so the nature of active
+
+
+record is actually holding us back from
+
+
+as performant a SQL iton rails
+
+
+application as we could have if we
+
+
+wanted something more performant ideally
+
+
+we would want to isolate those
+
+
+connection pools we want to have one
+
+
+connection pool for reads and one
+
+
+connection pool for rights and that way
+
+
+we never saturate the connection pool
+
+
+for reads with our
+
+
+rights and I spent a couple of months in
+
+
+the back of my head trying to think how
+
+
+could I actually get rails to do this
+
+
+and I figured it out and I want to talk
+
+
+about how we do it we're going to abuse
+
+
+use um active record support for
+
+
+multiple
+
+
+databases so as you might remember if
+
+
+you have read the rails guide on
+
+
+multiple databases you can define a
+
+
+three- tiered database configuration
+
+
+file right
+
+
+and when you do that you're just telling
+
+
+rails I want to set up some new
+
+
+databases and in all of the docs what
+
+
+they talk about about in the mental
+
+
+model that they have is like I actually
+
+
+want to talk to physically separate
+
+
+databases I've got my primary and my
+
+
+replica this is the classic example that
+
+
+you're going to find in the guides but
+
+
+there's nothing about the actual
+
+
+implementation that requires that you
+
+
+could just as easily point two different
+
+
+named connection configurations to the
+
+
+same physical database it could be
+
+
+sqlite it could be post it could be
+
+
+anything active record doesn't care so
+
+
+in this example we're just going to
+
+
+create a reader configuration and a
+
+
+writer configuration they're both going
+
+
+to point to the same file on
+
+
+disk but we're going to tweak their
+
+
+configuration just a little bit right so
+
+
+for our reader we're going to ensure
+
+
+that every single connection that is
+
+
+created inside of this connection pool
+
+
+is a readon connection right uh this is
+
+
+a flag that you can pass down to sqlite
+
+
+when it spins up a new connection and it
+
+
+tells sqlite from the beginning oh I
+
+
+only expect to do reads it'll throw
+
+
+errors if you try to do writes and
+
+
+because of that it can optimize some of
+
+
+its internals
+
+
+then for our writer connection pool
+
+
+we're going to say I only want one
+
+
+connection right we can only do linear
+
+
+wres let's move the locking up from
+
+
+sqlite into active record that's going
+
+
+to be beneficial to us because sqlite
+
+
+has to use a file based lock and an
+
+
+in-memory lock just like I don't have a
+
+
+connection free weight to get one is
+
+
+just going to be a bit
+
+
+faster so once we have this new
+
+
+configuration we're just going to follow
+
+
+the rails guide still we got to tell our
+
+
+application record how to map these new
+
+
+configurations to the writing and
+
+
+reading role easy enough the writing
+
+
+role will use the writer connection and
+
+
+the reading role will use the reader
+
+
+connection I try to be creative in my
+
+
+naming um once we have set this
+
+
+up you might think because I did think
+
+
+perfect I'm done active record knows
+
+
+about my roles and it'll know if I call
+
+
+Select on my post record I want to do a
+
+
+reading operation it'll use my read
+
+
+connection I do insert on my post record
+
+
+it'll know right unfortunately no active
+
+
+record there's no magic there um this is
+
+
+just some configuration you have to
+
+
+manually tell active record which
+
+
+connection to use for your
+
+
+operations to do that
+
+
+you I think are going to want to do
+
+
+something that I like conceived of as
+
+
+deferred requests it's like deferred
+
+
+transactions at the level of web
+
+
+requests right we want to presume that
+
+
+every web request is a readon web
+
+
+request like use our reader connection
+
+
+and inside of that web request whenever
+
+
+it needs to make a WR like we call post.
+
+
+create for that one operation let's
+
+
+switch into our writer connection pool
+
+
+use it for that one operation and then
+
+
+fall back to the reader right so to get
+
+
+this to work we're going to need to use
+
+
+the automatic switching that rails has
+
+
+for multiple
+
+
+databases so they have a an initializer
+
+
+or generator you can run which will
+
+
+create an
+
+
+initializer um and we're going to tweak
+
+
+it some this is the The Tweak version
+
+
+you you basically have three things that
+
+
+you configure so there's this database
+
+
+selector delay by default you're going
+
+
+to see two seconds um the original
+
+
+default implementation with the primary
+
+
+and a replica you know in the guides
+
+
+they talk about we want to ensure that
+
+
+we're always reading uh our same right
+
+
+so they have this delay there to say if
+
+
+uh a request comes in and it's a post
+
+
+and so we switch over to our primary and
+
+
+then immediately therea the same user
+
+
+makes a get request let's go ahead and
+
+
+keep talking to the primary and not
+
+
+switch over to the replica that way we
+
+
+don't have to deal with replication lag
+
+
+we'll just ensure you're reading that
+
+
+same
+
+
+data we don't need to mess with any of
+
+
+that because we're talking to the same
+
+
+database right the there there's no
+
+
+difference these are just connection
+
+
+pools that we're spinning
+
+
+up we want to use a custom resolver you
+
+
+can read the details of resolver but the
+
+
+the core point and the one thing we want
+
+
+to patch is how do we determine whether
+
+
+a request is a reading request or Not by
+
+
+default it's going to say head or get
+
+
+requests our reading request everything
+
+
+else is Right request so replica or
+
+
+primary we want every web request to go
+
+
+to our reader connection pool right
+
+
+these are our deferred request setup so
+
+
+we'll just set that to True resolver
+
+
+context that's just where it's going to
+
+
+store the last right and it uses that
+
+
+for determining if you're within the
+
+
+delay window we don't need any of it but
+
+
+it has to be set up so we'll just use
+
+
+the default so what this is going to do
+
+
+is this going to point every single web
+
+
+request it's going to wrap it in a
+
+
+connected to block that points it to our
+
+
+reader connection
+
+
+pool so that's good but how do we get
+
+
+our rights the right operations inside
+
+
+of those requests to actually switch to
+
+
+the
+
+
+writer well unfortunately we have to
+
+
+patch active record I really wish that
+
+
+we didn't I would love to figure out how
+
+
+to tweak active record to not make this
+
+
+require a patch and I'm thinking about
+
+
+that and working on that and maybe I'll
+
+
+be able to get that into rails at some
+
+
+point but for now we have to patch it
+
+
+but I think we can do it pretty lean
+
+
+right um so if we patch the transaction
+
+
+method you can dig into rail Source like
+
+
+I have I'm pretty sure this is all we
+
+
+need to do it's I'm not 100% sure
+
+
+because I haven't read every single line
+
+
+of rails I won't lie to you um so I call
+
+
+this
+
+
+experimental but I'm pretty sure that
+
+
+all of the right operations create
+
+
+insert update all what have you right
+
+
+they maybe not update all uh they use
+
+
+the transaction so if we wrap that
+
+
+method in our connected 2 block and
+
+
+point that to our writing role and then
+
+
+just call
+
+
+Super for that operation we're going to
+
+
+explicitly say use this connection pool
+
+
+and that'll switch us
+
+
+over um patching active record is pretty
+
+
+easy with propen which is nice um and
+
+
+this should give us everything we need
+
+
+for these deferred requests so by
+
+
+default the request comes in we're going
+
+
+to pick the reader connection pool
+
+
+whenever we do a write operation for
+
+
+that just that operation inside of that
+
+
+request we'll switch to the writing
+
+
+connection pool and now we don't have
+
+
+the problem of a saturated connection
+
+
+pool
+
+
+now I ran this uh comparing the standard
+
+
+setup with all of the performance
+
+
+improvements that we've made thus far
+
+
+with and without these isolated
+
+
+connection pools
+
+
+and I think it looks good I'll confess I
+
+
+don't totally have an explanation for
+
+
+you why so purple is without why is
+
+
+there a jump from 16 to 32 I'm not 100%
+
+
+sure uh maybe there were some errors
+
+
+there you get higher request per second
+
+
+if you have errors because they happen
+
+
+really fast and just like blow up um
+
+
+wasn't able to dig into it a ton last
+
+
+night when I ran this and made these
+
+
+graphs um but what we do see in blue
+
+
+right 411 423 it's a bit faster and it's
+
+
+consistently
+
+
+fast so um I think that this
+
+
+is a nice feature I say it's
+
+
+experimental I haven't yet guaranteed
+
+
+that all we need to do is patch
+
+
+transaction that every single right
+
+
+operation uh is going to be there
+
+
+but I'm going to start trying this out
+
+
+I'll find the places where it's not
+
+
+quite covering everything we'll get it
+
+
+to a place where it's as resilient as
+
+
+the other four but these five if you
+
+
+wrap them all together you're going to
+
+
+have a really performant rails
+
+
+application
+
+
+so I don't think that every rails
+
+
+developer should have to know all of
+
+
+this I hoped that some of you would be
+
+
+interested in this you know I I've heard
+
+
+about the reputation of rol RV right
+
+
+like this is a place for advanced topics
+
+
+and serious developers so Welcome to the
+
+
+Jungle we dug into rails but uh for most
+
+
+developers you shouldn't need to mess
+
+
+with all of this that's why I created
+
+
+the enhanced adapter gem right it's
+
+
+going to automatically patch your
+
+
+configuration to bring all of these
+
+
+features into your application
+
+
+automatically you don't have to do
+
+
+anything you run bundle ad it's going to
+
+
+set up its own initializers it's going
+
+
+to patch things correctly every single
+
+
+thing that we have walked through is in
+
+
+the gem proc nicely as I have described
+
+
+it and if you want to use the new
+
+
+isolated connection pools as I said I'm
+
+
+marking it as experimental I literally
+
+
+figured it out like four days ago
+
+
+um and I haven't put it in production
+
+
+myself and I haven't read every single
+
+
+right you know so experimental so I put
+
+
+it behind opin uh configuration so you
+
+
+have to manually decide you want to turn
+
+
+it on but it's also in the gem you don't
+
+
+have to do all of those different
+
+
+configuration points
+
+
+and beyond that it's going to bring some
+
+
+other features it's going to backport
+
+
+some of these um active record adapter
+
+
+features that are in rails main aren't
+
+
+in a point release or in like a newer
+
+
+Point release so if you're in rail 70 up
+
+
+you can get deferred foreign keys right
+
+
+so if you wanted to set up when you add
+
+
+a reference that it is a deferred
+
+
+foreign key so you could have circular
+
+
+references like this um you get that
+
+
+that's in rails main not yet in a point
+
+
+release also going to give you virtual
+
+
+columns um I remember when this came for
+
+
+postrest I was like awesome it'd be so
+
+
+cool sqlite had that I went and looked
+
+
+in sqlite docs it's like oh it's had it
+
+
+for 15 years uh why doesn't rails have
+
+
+these little keywords to support it so
+
+
+added that also in rails main not in a
+
+
+point release you know hopefully all of
+
+
+the stuff comes together for rails 8 but
+
+
+it's in the gem right so you bring in
+
+
+the gem now you can use Virtual columns
+
+
+you also get the ability to set custom
+
+
+return values
+
+
+um and it going to do the whole feature
+
+
+as it exists now like for postgress so
+
+
+if you have like these virtual columns
+
+
+they automatically are going to get
+
+
+hydrated on inserted um that whole
+
+
+feature is very cool um also there for
+
+
+sqlite but not in a point release um
+
+
+it's that
+
+
+story also going to give you the ability
+
+
+to set up your pragma configuration
+
+
+Direct ly in your database
+
+
+yl uh this is also rails main not in a
+
+
+release but um a very cool feature if
+
+
+you want to do other uh
+
+
+configuration also allows you to um set
+
+
+up extensions through your database
+
+
+configuration as well so if you add an
+
+
+extension like in this case this is an
+
+
+extension for Vector similarity search
+
+
+um it's wrapped up in a gem you can just
+
+
+add the gem but you need to activate the
+
+
+extension uh and it provides an easy
+
+
+hook in your database emo file for that
+
+
+as well so the gem brings a lot of
+
+
+various features um just generally
+
+
+enhancing the sqlite 3
+
+
+adapter um of course it's going to bring
+
+
+the fair non-blocking busy Handler for
+
+
+us uh as I said we're bringing this into
+
+
+the sqlite gem itself and then that's
+
+
+going to get piped into rails but that
+
+
+is also work in progress that's all just
+
+
+in the
+
+
+gem and of course are immediate
+
+
+transaction mode don't have to do that
+
+
+yourself you can just run rails new and
+
+
+bundle ad and all of these things are
+
+
+just there um it doesn't even add it to
+
+
+your database EML it's just conceptually
+
+
+that's what it's
+
+
+doing um so you want to have a
+
+
+performant SQL addon rails app those are
+
+
+the five Keys you understand how they
+
+
+all work but you don't need to do any of
+
+
+that work you can just run the bundle ad
+
+
+command um what about resilience well I
+
+
+don't have a lot of time so we're going
+
+
+to move quickly through resilience I I
+
+
+wanted to go deep on performance I was
+
+
+into it I I got to just confess that
+
+
+just wanted to take the opportunity to
+
+
+really dig in but um there is so much
+
+
+more right the future of rails is
+
+
+leaning into a default world where the
+
+
+database is the foundation for all of
+
+
+our IO bound components right we already
+
+
+have solid cache and solid Q solid
+
+
+cables being worked on sqlite is a
+
+
+really wonderful foundation for this new
+
+
+version New Vision of the world right
+
+
+you can just spin up separate files in
+
+
+my apps I've got cache. sqlite 3 q.
+
+
+sqlite 3 I look forward to the time I
+
+
+can have my cable. sqlite 3 file
+
+
+um it naturally has the benefit when you
+
+
+just have these separate files well they
+
+
+all get to be concurrent relative to
+
+
+each other right like they all have
+
+
+their own individ ual right lock um and
+
+
+they're lean and fast and cheap and free
+
+
+and as a future where outof the Box
+
+
+rails is simple and cheap and easy
+
+
+sqlite with the solid gems is going to
+
+
+be interesting if not for everyone
+
+
+exciting for me
+
+
+exciting as I talked about before you
+
+
+can configure the actual compilation of
+
+
+the sqlite executable through bundler um
+
+
+this is some really exciting work that
+
+
+uh Mike delesio and I did earlier uh in
+
+
+2023 um so you just set the build.
+
+
+sqlite configuration with whatever C
+
+
+Flags you want there's a whole page on
+
+
+the sqlite documentation detailing all
+
+
+of them this would be uh my recommended
+
+
+set just if you want to default for your
+
+
+rails application I would I use this I
+
+
+would recommend you use this if you want
+
+
+to read more about why have a blog post
+
+
+um talked a little bit about Branch
+
+
+specific databases this is a really cool
+
+
+uh developer experience that I have
+
+
+found right so your database is just a
+
+
+file on disk I don't want to have to
+
+
+deal with um I'm working on a feature
+
+
+Branch uh one of my colleagues comes in
+
+
+says hey I really would like you to
+
+
+review my Branch like cool okay uh check
+
+
+out their Branch I had some migrations
+
+
+in my feature Branch they have some
+
+
+migrations in their feature Branch my
+
+
+postgress database is now confused Ah
+
+
+hell
+
+
+well what I realized pretty early on is
+
+
+like huh these database yam
+
+
+configuration files they run through the
+
+
+Erb engine you can throw Erb in them
+
+
+inside of Erb I can run shell commands
+
+
+Okay so I can just get my current branch
+
+
+and say that's going to be my database
+
+
+name and then I just need to ensure that
+
+
+that file actually gets sort of like
+
+
+hydrated with my full database well
+
+
+rails makes that pretty easy it's it's
+
+
+got this active record tasks database
+
+
+task module you can call your prepare
+
+
+rake task it'll run your migrations get
+
+
+everything there if you've got seeds
+
+
+it'll run that right get everything set
+
+
+up so now every time you switch into a
+
+
+branch you've got an isolated datab base
+
+
+and it'll spin up as soon as you spin up
+
+
+if you do this after initialize anytime
+
+
+you spin up your app so this is your
+
+
+server your console you run rails Runner
+
+
+what have you I use this all the time I
+
+
+think it's cool and it's two lines
+
+
+to get
+
+
+that resiliency I really thought about
+
+
+going super deep on it and it's like I
+
+
+don't know light stream is awesome right
+
+
+it's just going to take every single
+
+
+operation that is put on the wall file
+
+
+and it's going to stream it to any S3
+
+
+compatible bucket that's it the
+
+
+configuration for it you just say here's
+
+
+the URL of my bucket here are the
+
+
+credentials here are the paths to the
+
+
+database I want you to watch
+
+
+um there are other Alternatives this is
+
+
+the simplest this is the most robust I
+
+
+use it all the time um I will
+
+
+note if you aren't paying
+
+
+attention pay attention now if you're
+
+
+running a database a rails application
+
+
+with SQL as your
+
+
+database do this I'm telling you that
+
+
+because yes of course I've deleted my
+
+
+production database who hasn't um and it
+
+
+ducked and I tried to like go into the
+
+
+memory and recover the file and I
+
+
+couldn't big pain in my butt
+
+
+um every app should run this from the
+
+
+beginning resiliency is very important
+
+
+and I put a lot of work into making it
+
+
+stupid simple for rails applications uh
+
+
+we're going to wrap the go executable we
+
+
+get all of the configuration mapped into
+
+
+your rails application um I want this to
+
+
+be easy because it really is important
+
+
+and nobody else should go through the
+
+
+stress and pain of Whoopsie Daisy uh
+
+
+that file is
+
+
+gone and I hope after all of this you
+
+
+start to have some heart eyes for sqlite
+
+
+I didn't talk I'll be fair I did not
+
+
+talk about single node happy to talk
+
+
+about it more um I'll just say one quick
+
+
+Point
+
+
+um single nodes are all
+
+
+right they get the job done surprisingly
+
+
+well surprisingly often if you have an
+
+
+application where you need you need need
+
+
+need need multiple
+
+
+nodes okay maybe sqlite's not the best
+
+
+choice I'm not trying to say it's a
+
+
+silver bullet if you have already
+
+
+invested a lot into your sqlite
+
+
+architecture there are multiple tools to
+
+
+allow you to run sqlite multinode that
+
+
+is not an impossibility the light stream
+
+
+utility by Ben Johnson he's also built
+
+
+the successor to that light FS which is
+
+
+multinode sqlite right so you can do it
+
+
+um I would just recommend that everyone
+
+
+start if you're starting a a new project
+
+
+like start with this mindset of what is
+
+
+the bare minimum that I can
+
+
+do to build something that is actually
+
+
+an excellent application for users and
+
+
+you would be surprised how little is
+
+
+needed to write excellent software
+
+
+hatchbox makes it really easy to throw
+
+
+an application onto a single note um the
+
+
+speed of light is actually pretty
+
+
+freaking fast and if you make um a
+
+
+really well architect application and
+
+
+you don't have a lot of bottlenecks and
+
+
+you've made these performance
+
+
+improvements
+
+
+um even 200 milliseconds or whatever 200
+
+
+300 milliseconds around the globe um is
+
+
+probably going to allow you to get to
+
+
+revenue and at that point you can start
+
+
+to figure out what you want to do so I
+
+
+really appreciate your attention I know
+
+
+we went super deep into stuff that is
+
+
+ultimately wrapped up into a gem I want
+
+
+everything to be easy but I also wanted
+
+
+everyone to feel like confid confident
+
+
+about like oh
+
+
+I know what these tools are doing like
+
+
+it's not just like a black box of dark
+
+
+magic um I really thank you for your
+
+
+time and
+
+
+attention attention right I get it but
+
+
+um if there are any questions happy to
+
+
+take some now and also of course happy
+
+
+to have any conversations on any topics
+
+
+over the course of the conference thank
+
+
+you
+
+
+[Applause]
+
+
+thank you for amazing talk uh my
+
+
+question is um you talked uh 99% of your
+
+
+talk was about performance uh about 1%
+
+
+was about resilience but I haven't heard
+
+
+security word at uh one time uh so I
+
+
+think it should be thought uh thought
+
+
+that
+
+
+uh uh this whole idea of embedding
+
+
+database inside application process
+
+
+trades security um one of most important
+
+
+security principles which is isolation
+
+
+for performance right so so in case
+
+
+there are some security problems um in
+
+
+uh in SQL light uh the the attack
+
+
+surface surface is larger right so my
+
+
+question is is it worth to trade this
+
+
+few micros seconds uh
+
+
+which which is um where SQ SQ light is
+
+
+better than postgress uh running locally
+
+
+via for example unique socket uh is it
+
+
+worth for from the security
+
+
+perspective
+
+
+um so that's a difficult to answer
+
+
+question objectively um so let me just
+
+
+give some of my like thoughts on how I
+
+
+would some of the considerations right
+
+
+so one is
+
+
+uh you you mentioned relative to running
+
+
+postris locally um and there I think
+
+
+that there are some key similarities
+
+
+often of course you're running postgress
+
+
+on a separate machine and I do think
+
+
+that it's important to at least note the
+
+
+trade-off there between um a single
+
+
+point of security vulnerability as well
+
+
+as the a single point to harden your
+
+
+security right so if I have one machine
+
+
+um make sure this machine is protected
+
+
+we got two machines I have to make sure
+
+
+these two machines are protected and
+
+
+they're doing different work and I have
+
+
+to protect them differently and I have
+
+
+to understand those security patterns um
+
+
+so there is a trade-off there right like
+
+
+two machines they're isolated from each
+
+
+other but I have to secure both of them
+
+
+one machine it's one attack Vector but
+
+
+it's also one hardening um surface as
+
+
+for like the difference between postest
+
+
+and sqlite on the same machine um in
+
+
+general my perspective is um I want to
+
+
+do the absolute best that I can I'm
+
+
+looking for the highest leverage choice
+
+
+right what is 20% of the effort to give
+
+
+me 80% of the value and then I'm going
+
+
+to figure out what to do at that other
+
+
+20% and um if someone has gotten access
+
+
+to my machine I'm probably
+
+
+hosed right so I can there are certain
+
+
+applications where it's really important
+
+
+to have really strong multiple layers of
+
+
+security and if you have that kind of
+
+
+application you should make sure that
+
+
+you're thinking very critically about
+
+
+what architectural decisions do I need
+
+
+to make on on day one to ensure that I'm
+
+
+doing that does every single application
+
+
+have those characteristics they don't
+
+
+right and for my my core thought is that
+
+
+I really want to switch over the mindset
+
+
+for a lot of developers to say doing
+
+
+your job well does not mean choosing the
+
+
+absolute best tool and technology that
+
+
+is theoretically possible for every
+
+
+single slice of your stack all right I
+
+
+did it like I micro services are smart
+
+
+and good and I need to isolate um doing
+
+
+your job well is like finding the right
+
+
+set of tradeoffs and for many
+
+
+applications having a single attack
+
+
+Vector that you actually think through
+
+
+how to harden like how do I make this
+
+
+machine on the internet but secure on
+
+
+the
+
+
+internet and just learn how to do that
+
+
+well probably makes sense and for
+
+
+applications where you really need
+
+
+Harden security you really need to think
+
+
+through what do you need um is it going
+
+
+to be a smart trade-off and that's a a
+
+
+whole whole different conversation and
+
+
+consideration and maybe sqlite doesn't
+
+
+make sense there and that's
+
+
+okay uh thank you let's say I'm
+
+
+investing in this approach for my hobby
+
+
+project and at some point it gets big
+
+
+and instead of like uh going all in into
+
+
+escolite and like investing in uh for
+
+
+further
+
+
+investigation how to make it running I
+
+
+just want to switch to pogress is there
+
+
+anything in this approach locking me to
+
+
+escal light forever or it is just
+
+
+doable yeah
+
+
+um short answer is no uh just to add two
+
+
+sentences on top of it um sqlite is
+
+
+simpler and looser than postgress and
+
+
+it's generally easier to go from the
+
+
+simple and loose thing to the more
+
+
+complicated and thing than it is to go
+
+
+in the opposite direction so sqlite
+
+
+schema is uh a looser schema um you can
+
+
+make it like more strict but it's got
+
+
+less data types um and it's a subset of
+
+
+postgress data types um of course
+
+
+naturally if you're in a rails
+
+
+application and you're using active
+
+
+record you have an intermediary layer
+
+
+naturally already um and that makes it
+
+
+more possible and more likely that
+
+
+you'll be able to switch out databases
+
+
+at my day job we actually just finished
+
+
+migrating from my SQL to postgress
+
+
+across three different applications that
+
+
+was made possible because of active
+
+
+record
+
+
+um so there isn't anything in this
+
+
+approach that like locks you in
+
+
+especially if you're just using the gems
+
+
+right because you don't even have to
+
+
+change the source files you can just say
+
+
+bundle remove active record and it's not
+
+
+going to uh patch those configuration
+
+
+files anymore and uh the schema itself
+
+
+are if you're doing some very very
+
+
+specific stuff there are some slight
+
+
+differences but in general sqlite tends
+
+
+to have um a subset of features than
+
+
+postgress so it's it's possible to
+
+
+migrate I think that uh we should finish
+
+
+this Q&A session let's continue later on
+
+
+um especially in after party sorry
+
+
+Philip uh so uh once again thank you
+
+
+stepen
+
+
+[Applause]

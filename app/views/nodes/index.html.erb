@@ -1,0 +1,62 @@
+<%= form_with url: nodes_path, method: :get, data: { controller: "search", turbo_frame: "nodes-results" }, class: "search-form" do |f| %>
+  <%= f.search_field :q, value: @query, placeholder: "Search nodes...", class: "search-input",
+      autofocus: @query.present?, data: { search_target: "input", action: "input->search#search" } %>
+<% end %>
+
+<div class="graph-layout">
+  <aside class="sidebar">
+    <nav class="kind-nav">
+      <% @kind_counts.each do |kind, count| %>
+        <%= link_to nodes_path(kind: kind),
+            class: "kind-nav-item #{'active' if @current_kind == kind}" do %>
+          <span class="kind-nav-label"><%= kind.titleize %></span>
+          <span class="kind-nav-count"><%= count %></span>
+        <% end %>
+      <% end %>
+    </nav>
+  </aside>
+
+  <%= turbo_frame_tag "nodes-results" do %>
+    <main class="graph-main">
+      <h1 class="page-title">
+        <% if @query.present? %>
+          Search: "<%= @query %>"
+        <% else %>
+          <%= @current_kind&.titleize || "Knowledge Graph" %>
+        <% end %>
+        <span class="count"><%= @nodes.size %> nodes</span>
+      </h1>
+
+      <% if @nodes.any? %>
+        <% @nodes.each do |node| %>
+          <%= link_to node_path(slug: node.slug), class: "card", data: { turbo_frame: "_top" } do %>
+            <span class="card-title"><%= node.name %></span>
+            <div class="card-meta">
+              <span class="badge badge-kind badge-kind-<%= node.kind %>"><%= node.kind %></span>
+              &middot; <%= node.outgoing_edges_count + node.incoming_edges_count %> connections
+              <% if node.search_sources %>
+                <span style="font-size: 0.75em; color: #888; margin-left: 0.5em">
+                  <%= node.try(:similarity)&.then { |s| "#{(s * 100).round}%" } %>
+                  <%= node.search_sources.join("+") %>
+                </span>
+              <% end %>
+            </div>
+            <% if node.short_description.present? %>
+              <div class="card-desc"><%= node.short_description %></div>
+            <% elsif node.description.present? %>
+              <div class="card-desc"><%= truncate(node.description, length: 120) %></div>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% else %>
+        <div class="empty-state">
+          <% if @query.present? %>
+            <p>No nodes found matching "<%= @query %>".</p>
+          <% else %>
+            <p>No nodes yet. Ingest some transcripts to build the knowledge graph.</p>
+          <% end %>
+        </div>
+      <% end %>
+    </main>
+  <% end %>
+</div>

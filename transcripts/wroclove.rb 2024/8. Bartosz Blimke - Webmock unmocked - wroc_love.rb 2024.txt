@@ -1,0 +1,1924 @@
+[Applause]
+
+
+hello
+
+
+everyone um today I'm going to talk to
+
+
+you about web mock uh Ruby Jam for
+
+
+mocking HTTP
+
+
+requests um first a little bit about
+
+
+me um I'm developing software for over
+
+
+years um back in 2006 when I was still a
+
+
+Java
+
+
+developer my friend Andre KDA came to me
+
+
+and said hey have you heard of that new
+
+
+language called
+
+
+Ruby and I'm using Ruby ever since
+
+
+professionally since
+
+
+2007 I'm I'm living in waro um but I
+
+
+work remotely since before that was
+
+
+trendy and I'm the author and the single
+
+
+maintainer of web
+
+
+Moog
+
+
+um uh yeah today I'm a little bit
+
+
+stressed because it's my first
+
+
+presentation in 14
+
+
+years um and yeah after seeing all this
+
+
+great presentations
+
+
+today I feel that their bark has been
+
+
+raised and yeah being the final speaker
+
+
+of of the day is a special
+
+
+experience
+
+
+so this is also my second uh
+
+
+presentation about webmo the previous
+
+
+one was in London 15 years
+
+
+ago and uh
+
+
+yeah I was still stressed nothing has
+
+
+changed um and after seeing uh David
+
+
+Halas speaking yesterday about about all
+
+
+these formal languages I thought I also
+
+
+want to have a slide about something I
+
+
+learned at my university brw
+
+
+university and I thought
+
+
+about
+
+
+extrapolation so I have
+
+
+extrapolated when my next talk about
+
+
+webm will
+
+
+be
+
+
+uh so we have unique chance to learn
+
+
+something about webm
+
+
+today okay
+
+
+so what webm is for uh webm has two core
+
+
+functionalities it allows you to stop
+
+
+HTTP requests but what does it mean it
+
+
+means you can declare fake
+
+
+responses so that when your application
+
+
+attempts to make an HTTP request no
+
+
+connection will be made but instead a
+
+
+fake response will be
+
+
+returned and second functionality it
+
+
+offers it allows you to verify that HTTP
+
+
+requests have been executed whether
+
+
+stopped HTTP request or a real
+
+
+request the idea is not original there
+
+
+was a gem called fake web
+
+
+before uh and I tried to use
+
+
+it but it's request matching
+
+
+capabilities were too limited for me and
+
+
+it only supported net
+
+
+HTTP therefore I decided to write my own
+
+
+solution and I created webm during a on
+
+
+day company hakon the first version of
+
+
+webm and what's very important is that I
+
+
+created web Moog to address my own needs
+
+
+as a ruby
+
+
+developer and these needs happened to be
+
+
+the needs of many other Ruby Developers
+
+
+and hence webm has been downloaded more
+
+
+than 250 million times up until
+
+
+now um it has almost 4,000 stars on
+
+
+GitHub by the way if you haven't started
+
+
+yet please do I'm aiming for
+
+
+4,000 um over 260 people contributed to
+
+
+webmo over the last 15
+
+
+years and I would very much like to
+
+
+thank everyone who ever contributed to
+
+
+webm Mo thank
+
+
+you uh webm MO is used by thousands of
+
+
+public projects on
+
+
+GitHub and almost 8,000 registered gems
+
+
+dependon
+
+
+it some of the projects that depend on
+
+
+web Moog are listed here and you might
+
+
+have maybe heard about them or used some
+
+
+of them and and if you haven't had a
+
+
+chance to use any of
+
+
+them then you probably used this
+
+
+one and uh Machi today said that if you
+
+
+know something publish
+
+
+it so I want to encourage you if you
+
+
+have a solution that works for
+
+
+you then publish it maybe it will be
+
+
+useful to others
+
+
+webm also became an inspiration for
+
+
+developers in other languages in Ruby
+
+
+who created Solutions inspired by
+
+
+webmock and I even heard I saw many
+
+
+times a term called Web mocking that
+
+
+refers to mocking HTTP
+
+
+requests so what can you do with
+
+
+webm well first webm gives you this nice
+
+
+domain specific language for
+
+
+declaring request
+
+
+steps it's easy easily readable and
+
+
+understandable and second it offers you
+
+
+domain specific language for verifying
+
+
+that HTTP requests have been
+
+
+made both dsls are HTTP client agnostic
+
+
+so you can use it with any HTTP
+
+
+client weok follows stop execute verify
+
+
+Paradigm which I borrowed from a Java
+
+
+framework for testing called
+
+
+moito
+
+
+and it separates the stubbing phase from
+
+
+verification phase which you might find
+
+
+different for example to what you get
+
+
+with arpec where a single expect
+
+
+declaration defines both the Stop and
+
+
+the expectation here the steps are
+
+
+separated which allows us to stop
+
+
+without verifying or verifying without
+
+
+stubbing webm offers request call
+
+
+backs and with this call box you can
+
+
+record
+
+
+requests there is a gem called
+
+
+VCR uh for recording web requests HTTP
+
+
+requests and it it uses webm under the
+
+
+hood uh webm offers many features when
+
+
+stabing you can for example stop
+
+
+requests to
+
+
+timeout or you can stop request with
+
+
+basic
+
+
+authentication or you can even replay
+
+
+row responses recorded with curl
+
+
+webm supports all popular HTTP clients
+
+
+in
+
+
+Ruby and it supports all major testing
+
+
+Frameworks but then you might ask why
+
+
+mocking HTTP request at all why should
+
+
+we care
+
+
+well first it allows you to run your
+
+
+tests without having an internet
+
+
+connection so if any of you like me
+
+
+arrived here by train and have been
+
+
+working in a train know that this is a
+
+
+useful
+
+
+feature if you misconfigure your testing
+
+
+environment and accidentally said
+
+
+production
+
+
+credentials uh with web mock your tests
+
+
+are not going to make any for example
+
+
+delete requests on a production third
+
+
+party
+
+
+API you always get stable environment
+
+
+for running your tests so even if a
+
+
+third party service is down or
+
+
+temporarily returns 500
+
+
+responses your tests are still going
+
+
+going to go through and
+
+
+pass and you get fast tests so you don't
+
+
+have to wait for any API
+
+
+delays uh Network delays your responses
+
+
+are
+
+
+instant you can also test all various
+
+
+test Cas test cases uh like different
+
+
+status codes different error responses
+
+
+and see how your app reacts to
+
+
+them and all this test setup is done in
+
+
+Ruby
+
+
+files but moing HTTP is not only useful
+
+
+for test
+
+
+environment so you can actually Define
+
+
+your request steps in development
+
+
+environment and work
+
+
+offline you can also set request stabs
+
+
+for various scenarios and test your app
+
+
+manually simulating various
+
+
+scenarios and the feature I have used
+
+
+many times in the past is it allows you
+
+
+to develop without actually having
+
+
+access to a third party
+
+
+API so once I worked on a project which
+
+
+went started heavily relied on a third
+
+
+party API from the beginning and yet we
+
+
+have received access to it about after a
+
+
+month and a
+
+
+half we just read the documentation the
+
+
+API specification created some stuffs
+
+
+and we're ready to
+
+
+go and you can do the same instead in
+
+
+environment to demo the the features
+
+
+that have been implemented even if you
+
+
+don't have access to the external API
+
+
+yet so this is how a sample rails
+
+
+initializer for development and staging
+
+
+environment can look
+
+
+like okay so we know that H stubbing HTP
+
+
+requests can be useful at
+
+
+times but then why would we use webm
+
+
+instead of creating our own
+
+
+solution so let's say we find a piece of
+
+
+code like that in our in our
+
+
+app uh it makes an HTTP request with
+
+
+basic
+
+
+authentication and we are supposed to
+
+
+make a change to it it so we search for
+
+
+a test because we do test first right
+
+
+and we change the test first and then we
+
+
+change the
+
+
+behavior so we find the test and the
+
+
+setup looks like
+
+
+that and it's completely
+
+
+unreadable so what do I do first well
+
+
+first I do G blame and find the person
+
+
+who did
+
+
+it and then I realized it was me 5 years
+
+
+ago
+
+
+happened many
+
+
+times um and then I take web
+
+
+Moog and I change my
+
+
+test and the setup is way
+
+
+simpler and then I can actually change
+
+
+my code and I don't have to use this
+
+
+complicated complicated net HTTP
+
+
+interface instead I can for example use
+
+
+HTTP
+
+
+gem that has this nice
+
+
+DSL for making
+
+
+requests webmock is great for
+
+
+tdd um so you can write your tests first
+
+
+focusing on the behavior on testing the
+
+
+behavior you don't have to think about
+
+
+what library am I going to use or even
+
+
+what methods I'm going to call on that
+
+
+Library what parameters I just want to
+
+
+define the behavior the expected
+
+
+behavior that HTTP requests will be made
+
+
+and certain response will be returned
+
+
+that's all I focus on I'll think about
+
+
+the implementation
+
+
+later but webm is also
+
+
+used very useful for legacy applications
+
+
+so one of the first things I would do
+
+
+when taking over some Legacy rise up is
+
+
+import web Moog and enable it and now
+
+
+I'm safe now I know that when I run the
+
+
+app in development or run the test the
+
+
+app won't make any unexpected request to
+
+
+a third party API that I'm not aware
+
+
+of and if it makes any request webm will
+
+
+alert
+
+
+me webm allows me also to Define request
+
+
+stabs with unescaped versions of the URL
+
+
+and I
+
+
+find I find this feature very useful for
+
+
+having credible
+
+
+tests and escaped URLs are way more
+
+
+difficult to
+
+
+read and the feature I very much like
+
+
+about webmo is the stubbing instruction
+
+
+so when you have a request stop that
+
+
+doesn't match the request
+
+
+and for any reason either the request St
+
+
+is wrong or the wrong request is
+
+
+executed than the one that was
+
+
+expected web Moog will intercept the
+
+
+request raise an error and print this
+
+
+nice instructions telling you how to
+
+
+stop the request it will also tell you
+
+
+what are the currently registered
+
+
+request steps
+
+
+so basically I created web Moog to make
+
+
+things simpler for myself and it
+
+
+happened to make that it was also it
+
+
+also made things simpler to
+
+
+others but with all this
+
+
+DSL there comes some magic right because
+
+
+you see the DSL declaration but you lose
+
+
+the control you don't know what actually
+
+
+happens
+
+
+underneath and if you are like me you
+
+
+like to understand how things work
+
+
+underneath so I went to this
+
+
+presentation by chavier about two months
+
+
+ago and he
+
+
+explained side work
+
+
+internals and I really liked it and I
+
+
+thought thought okay I'll do the same
+
+
+for mag webm I'll explain how webm Works
+
+
+underneath but to understand how webm
+
+
+Works underneath we first have to
+
+
+understand how HTTP clients in Ruby
+
+
+work so let's take a sample HTTP client
+
+
+in
+
+
+Ruby it will usually have some public
+
+
+interface public methods that usually
+
+
+represent HTTP verbs HTTP
+
+
+methods and you can use that
+
+
+client like
+
+
+this but this methods are usually very
+
+
+very simple right they don't do much
+
+
+they usually call some private methods
+
+
+that does all the heavy
+
+
+lifting so let's see how that method
+
+
+might look like and what it
+
+
+does so first it will build the request
+
+
+it will parse the headers parse the URL
+
+
+add any default
+
+
+headers
+
+
+then it will will create the complete
+
+
+request object if HTTP client supports
+
+
+it it might run some request middleware
+
+
+on it and after all the request data is
+
+
+complete it will send it through TCP or
+
+
+SSL
+
+
+connection and when uh response is
+
+
+received from that connection
+
+
+it might run some response middleware on
+
+
+it and return the final
+
+
+response and that's it that's how a
+
+
+typical HTTP client works of course
+
+
+there are many differences right so
+
+
+there are asynchronous clients where the
+
+
+flow is slightly different um there are
+
+
+clients who
+
+
+use Cur car c bindings right instead of
+
+
+talking to TCP uh or SSL connection
+
+
+directly talking to sockets it will use
+
+
+the C bindings underneath but more or
+
+
+less this is how typical HTTP client in
+
+
+Ruby how it
+
+
+works so now that we know how HTTP
+
+
+clients in Ruby work we can understand
+
+
+how webm Works internally so let's first
+
+
+focus on stabbing what happens when we
+
+
+actually call stab request
+
+
+so if we have a stop request declaration
+
+
+like that what webm will do
+
+
+underneath is it will create a request
+
+
+stop
+
+
+object and then it will register that
+
+
+request stop object inside Global stop
+
+
+registry and the request stop object
+
+
+consists out of request pattern that
+
+
+request pattern is then used too much
+
+
+requests and it also contains a
+
+
+collection of fake responses that will
+
+
+be returned if a fake if a Stop's
+
+
+request is
+
+
+matched and stop request method Returns
+
+
+the request stab itself and this is very
+
+
+useful because we can then chain
+
+
+additional
+
+
+calls so we can call
+
+
+with on it and with with somebody in
+
+
+headers will extend the request
+
+
+pattern with additional criteria so from
+
+
+now now on our request stab will only
+
+
+match requests that have body of
+
+
+F and content type Json
+
+
+header and again our request stop is
+
+
+being
+
+
+returned which allows us to call
+
+
+another to return method and to
+
+
+return creates a fake response object
+
+
+and Associates it with the request
+
+
+stab okay so how does registering callbo
+
+
+work this is way simpler we just pass it
+
+
+a block and the block is being
+
+
+registered in the
+
+
+Global callback
+
+
+registry okay but so now we have this
+
+
+Global stop registry with registered
+
+
+request stop that matches some requests
+
+
+and has some declared fake
+
+
+response and then we have a call back
+
+
+registered but nothing actually changes
+
+
+right no requests are being intercepted
+
+
+so what's actually responsible for
+
+
+intercepting requests
+
+
+and that's what webm uses adapters
+
+
+for so webm has a has implemented
+
+
+adapter for each of the HTTP clients in
+
+
+Ruby one adapter per
+
+
+client so let's Implement an adapter for
+
+
+our sample HTTP client
+
+
+what will it do well first it
+
+
+will create a copy if you remember the
+
+
+handle request method that does all the
+
+
+heavy lifting webm will take the class
+
+
+that contains that
+
+
+method and create a copy of it by
+
+
+subclassing and then it will start
+
+
+monkey patching
+
+
+it so the first thing it will do after
+
+
+the request is built it will create a
+
+
+request signature and register that
+
+
+signature in request
+
+
+registry that signature contains all
+
+
+required information to match the
+
+
+request and then it will check against
+
+
+the stop registry if there is any
+
+
+request stop matching that
+
+
+request if there is it will return a
+
+
+fake response
+
+
+if there isn't it will make a really
+
+
+request but wait web mock blocks all
+
+
+real connections by default right so we
+
+
+have to extend the handle request method
+
+
+to only allow making the real request if
+
+
+this was specifically
+
+
+configured if not we are going to raise
+
+
+an error and as a result of that error
+
+
+we are going to get get this nice
+
+
+stubbing instructions
+
+
+printed when we have the response
+
+
+however we are going to run any
+
+
+registered callbox on
+
+
+it and then run any middleware if
+
+
+supported by HTTP client and finally
+
+
+return the
+
+
+response so now we have now we have the
+
+
+copy of a class that has been
+
+
+instrumented by monkey
+
+
+patching but it still doesn't change
+
+
+anything right because if I call sample
+
+
+HTTP client get it will still call the
+
+
+original class and make the real request
+
+
+so the adapter needs to do something
+
+
+more um so let's reiterate how handle
+
+
+request works first it first builds the
+
+
+request it creates the request signature
+
+
+and register registers it in the request
+
+
+registry if a request stop is found that
+
+
+matches that request a fake response is
+
+
+being
+
+
+used if this request is
+
+
+allowed uh if a real request is allowed
+
+
+we'll make a request and return a real
+
+
+response otherwise we are raising the
+
+
+error and printing stabbing
+
+
+instructions we call an registered
+
+
+callbox rer response
+
+
+middleware and return to
+
+
+response
+
+
+so how does it how does webm
+
+
+actually affect how does webm affect the
+
+
+original sample HTP client
+
+
+class well first it creates a reference
+
+
+to the original
+
+
+class which will be useful for the
+
+
+future and
+
+
+then it will replace the original class
+
+
+by using constant
+
+
+replacement so a
+
+
+class originally referenced by the
+
+
+client constant will be
+
+
+replaced by our new monip part
+
+
+class so the client constant will now
+
+
+point to
+
+
+our monkey ped
+
+
+version
+
+
+and while Mony patching is
+
+
+bad I find this solution quite
+
+
+neat because we are not modifying the
+
+
+original class and then if needed we can
+
+
+always revert all the changes
+
+
+by doing constant replacement and
+
+
+setting the original class
+
+
+again so now if we enable web Moog this
+
+
+will enable the adapter and replace the
+
+
+original class with our Mony patch class
+
+
+then when we call stop request it will
+
+
+register the stop in the stop
+
+
+registry with a fake response
+
+
+declared when we execute the request a
+
+
+fake respon response from the registry
+
+
+will be
+
+
+returned and now we can do something
+
+
+more so if you remember the request
+
+
+signatures that we have been
+
+
+registering in the handle request
+
+
+method we can now verify that this have
+
+
+been executed so we create a request
+
+
+pattern and then we are going to check
+
+
+in the request registry is there any
+
+
+request signature matching that
+
+
+pattern and this is how webm
+
+
+works and there is
+
+
+something
+
+
+special and very important to
+
+
+me that I want to share with you
+
+
+so I told
+
+
+you I
+
+
+created web Moog to address my own needs
+
+
+as a ruby
+
+
+developer
+
+
+and I
+
+
+created
+
+
+webm uh during a company
+
+
+hakatan but it wasn't just any company
+
+
+and not with any
+
+
+people back in
+
+
+2009 I lived in London and I worked for
+
+
+a company called new
+
+
+bamboo
+
+
+and new
+
+
+bamboo was a team of very passionate
+
+
+developers and
+
+
+we at new
+
+
+bambo called
+
+
+ourselves
+
+
+Bambinos and I believe each of one was
+
+
+very proud of being part of this team I
+
+
+was very
+
+
+proud
+
+
+and we shared our
+
+
+passion we motivated each
+
+
+other we inspired each other
+
+
+we supported each other and we
+
+
+encouraged each
+
+
+other
+
+
+and during my over 20 years of building
+
+
+software I have learned that the most
+
+
+important thing for your
+
+
+growth is the people you work with and
+
+
+what you learn from
+
+
+them and when
+
+
+L stal said that Ruby people are
+
+
+strange I believe he was
+
+
+right because to me Ruby was always not
+
+
+only about the nice code not only about
+
+
+rails it was mainly about the
+
+
+people the
+
+
+people who share their
+
+
+passion the people who Inspire each
+
+
+other the people who are
+
+
+friendly the people who are motivating
+
+
+each
+
+
+other
+
+
+and the
+
+
+people who are nice to each
+
+
+other and this event here this
+
+
+conference Ros
+
+
+RB is the essence of it
+
+
+so I would very much like to thank
+
+
+everyone who
+
+
+organizes Ros RB or whoever organized
+
+
+Ros RB because what you guys are
+
+
+doing is really important for our
+
+
+community thank you
+
+
+[Applause]
+
+
+all right do we have any
+
+
+questions sorry just ice
+
+
+breaker okay no one all right oh there
+
+
+is
+
+
+one um first I just like to thank you
+
+
+because I've been using web mock for I
+
+
+think since the first version you
+
+
+pushed like as long as I remember I've
+
+
+been using web Mock and still use it
+
+
+today so that is great um I just GL to
+
+
+mention like um something that I it's
+
+
+very important with web mock is to know
+
+
+when the mock is not valid anymore right
+
+
+so U on the applications that I used
+
+
+that deal with that we've been doing
+
+
+contract testing to know when things
+
+
+changed and then the mocks had to be
+
+
+updated I wonder if you ever thought or
+
+
+tried or maybe I'm not up to date to
+
+
+build anything for contract testing
+
+
+sides web mock itself or as a separate
+
+
+Library um no I have I have not um but
+
+
+yeah the the the scope of the the scope
+
+
+of stuff validation is actually
+
+
+something that's constantly on my mind
+
+
+so the fact that webm uses Global
+
+
+Registries is is a problem right because
+
+
+you you have to either reset them or
+
+
+keep using them so it's not trivial to
+
+
+say oh I want this smoke to only be
+
+
+valed within this scope or within this
+
+
+threat um and this is something that I
+
+
+hear now and then from webm users that
+
+
+they would like to reduce the scope and
+
+
+hopefully some next web Mo major version
+
+
+will support
+
+
+that thank you in the other words parter
+
+
+is saying that he needs
+
+
+contributors
+
+
+yes okay there's one more
+
+
+question thanks for great presentation
+
+
+uh I wonder um because webm U depends
+
+
+not not depends it cooperates with
+
+
+various uh HTTP libraries and I wonder
+
+
+how do you follow the changes in those
+
+
+libraries libraries to make sure that uh
+
+
+webm
+
+
+correctly monkey patches them yeah so
+
+
+webm
+
+
+tries thank you thank you for that
+
+
+question um webm Mo tries to be up to
+
+
+dat with the latest versions so the web
+
+
+mock gem file doesn't have hardcoded
+
+
+versions or any version restrictions so
+
+
+the test would will always update to the
+
+
+latest version of a gem when
+
+
+testing um
+
+
+which
+
+
+uh which means that yeah some old
+
+
+versions might not work with with webm
+
+
+Mo anymore and webm tries to always be
+
+
+uh up to date with the with the latest
+
+
+version of HTP Jam uh but no there is no
+
+
+uh there is no automated system for that
+
+
+so I usually learn that there is
+
+
+incompatibility by either rerunning the
+
+
+test Suite or by people raising issues
+
+
+um but often what will happen is people
+
+
+will open an issue in the HTTP client
+
+
+repository first and the maintainer of
+
+
+the of of that specific gem will then
+
+
+submit uh submit a PO request or or
+
+
+someone from the of from the comp
+
+
+contributors uh will submit one uh or
+
+
+they will just raise additional issue on
+
+
+web mock please fix
+
+
+it these kind of issues are usually
+
+
+served first because they affect people
+
+
+like this is
+
+
+emergency okay there's one more chance
+
+
+to ask a question
+
+
+anyone okay I see no one okay ladies and
+
+
+gents BOS blim once again
+
+
+[Applause]

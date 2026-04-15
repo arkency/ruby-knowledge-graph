@@ -1,0 +1,4000 @@
+good morning guys
+
+
+um wow it's all set up that's very very
+
+
+unusual because there's a very first
+
+
+conference happening for me after the
+
+
+Cavite and I I haven't been
+
+
+giving any physical bless you uh talks
+
+
+on um
+
+
+for real people
+
+
+and usually that's uh that's what I
+
+
+remember from the past
+
+
+uh real talks never happens smoothly
+
+
+right so usually the first thing you
+
+
+need to explain is how to connect like
+
+
+your computer which is all like specific
+
+
+to your projector and it eats up like 30
+
+
+of the time so we've done it so fast and
+
+
+it's very cool thanks for showing up
+
+
+that's a very cool for
+
+
+so many people having here I expect that
+
+
+you have like 15 or 10. like after
+
+
+yesterday's party that's that's really
+
+
+like appreciate so cool making me a
+
+
+little bit more nervous but still very
+
+
+nice
+
+
+uh and for the lighting docks I believe
+
+
+it's going to be like really lightning
+
+
+docks when it's like lightning strikes
+
+
+outside and people making talks uh on
+
+
+the inside
+
+
+uh cool yeah so
+
+
+um
+
+
+I used to give you I used to give
+
+
+lectures for for 10 years
+
+
+uh giving like real academical stuff for
+
+
+for students so my talk will be so
+
+
+boring and very very like academical
+
+
+which I try to definitely avoid so I
+
+
+have like my timer not to talk one slide
+
+
+40 minutes so that's that's kind of the
+
+
+reminder for me just to move on move on
+
+
+and I have like 30 slides and um
+
+
+so the limitation is one minute for the
+
+
+slide if you see me talking like 10
+
+
+minutes on the slide just like raise
+
+
+your hand saying like move on move on
+
+
+like you have some stuff to show and the
+
+
+interesting stuff is usually at the end
+
+
+uh so my my name is Sergey sergianka
+
+
+I've been doing Ruby like for 15 years
+
+
+at the moment
+
+
+and um I wanted to highlight two
+
+
+projects of my life
+
+
+that I I really proud of one is the the
+
+
+longest project which is Belarus Ruby
+
+
+user group it's 12 to 12 year old baby
+
+
+so it's not still like it's still
+
+
+underage
+
+
+but it's growing and I hope to see this
+
+
+community getting really like mature
+
+
+after some time and another one that is
+
+
+one year old baby which is Ruby news so
+
+
+that's a news aggregator in the weekly
+
+
+monthly digest with weekly updates so
+
+
+we're trying to make more fun there
+
+
+uh so if you're interested check it out
+
+
+and if you have any ideas about that
+
+
+just
+
+
+come by and talk to me so I worked for
+
+
+cybergeizer that software consulting
+
+
+company and we are six year old at the
+
+
+moment
+
+
+uh and we train back to normal so we
+
+
+switch fully remote and now we're trying
+
+
+to open again like real people real
+
+
+offices and to some extent like real
+
+
+interesting projects which I'm excited
+
+
+excited about and uh one of the projects
+
+
+that we are working at the moment
+
+
+and uh
+
+
+some outcomes I will try to highlight
+
+
+today during the talk so my talk is
+
+
+about data management
+
+
+it's
+
+
+been like a buzzword for some years
+
+
+starting with data science machine
+
+
+learning AI uh Big Data so let's do some
+
+
+definitions here oh no before before we
+
+
+go just for me to understand who work
+
+
+with data just raise your hand if you
+
+
+work with data
+
+
+so not me oh okay yeah
+
+
+it's like 20 which means that I cannot
+
+
+tell anything that I want so some people
+
+
+could recognize me like fooling you so I
+
+
+will try to stick with with like real
+
+
+facts and not giving you like rubbish
+
+
+information so what's uh what's the data
+
+
+it's very hard to like data management
+
+
+specifically uh it's very hard to give a
+
+
+really like holistic definition
+
+
+so let's start with saying what it is
+
+
+not so data management it is not
+
+
+database management obviously right so
+
+
+managing your database it's not managing
+
+
+the data so like different approaches
+
+
+and a different concept
+
+
+it is not data governance which is like
+
+
+really high level and it is not ETL
+
+
+uh sometimes people
+
+
+you know who knows what is ETL again
+
+
+race
+
+
+the same people okay so the match like
+
+
+this the the perfect match so in this
+
+
+case like sometimes when you work with
+
+
+data you say like I do ETL and people
+
+
+think that it's some kind of a black
+
+
+magic nobody knows like mostly people
+
+
+don't know what is that I'm like oh okay
+
+
+you do it yeah good like your ETL
+
+
+engineer that's fine so ETL and data
+
+
+management is not the same thing even
+
+
+though they are intersect a lot so who's
+
+
+data engineer in this case so it's very
+
+
+easy to say it's not database
+
+
+administrator because we know that
+
+
+managing data databases is different and
+
+
+it is now data analyst sometimes people
+
+
+think that you know data analytics
+
+
+it is data management which is not and
+
+
+it is not data science
+
+
+so data science it's some kind of a
+
+
+buzzword
+
+
+but not real
+
+
+not really and this is not about data
+
+
+management at all so data management
+
+
+it's of like very huge holistic topic
+
+
+that includes everything that was
+
+
+described before
+
+
+so starting from structure and
+
+
+architecture and data shaping it
+
+
+protecting it transforming it into some
+
+
+extent so
+
+
+data management now brings the whole
+
+
+variety of professions
+
+
+so if you go
+
+
+and Google or go to LinkedIn and see
+
+
+what kind of a jobs you can get if you
+
+
+know what is the data the 20 of the
+
+
+audience you will get
+
+
+huge variety of professions with a very
+
+
+nice salaries
+
+
+and um
+
+
+so it's data engineer data tester data
+
+
+means database administrator data
+
+
+architect data analyst I would love to
+
+
+be like data project manager or data
+
+
+scrum Master it is not invented yet but
+
+
+you can bet on that so kind of a
+
+
+contribute toward some data data
+
+
+spectrum of professions
+
+
+and um
+
+
+and the good point that based on the
+
+
+statistics
+
+
+the like HR companies and the companies
+
+
+who do data they are specified most
+
+
+required languages for data which is
+
+
+five of them and surprisingly Ruby
+
+
+Strikes Back
+
+
+getting into the data field as the
+
+
+required languages for people who's
+
+
+supposed to work with data so
+
+
+answering to the question is Ruby dad
+
+
+if it's true then it's a zombie Ruby
+
+
+kind of a stuff intruding into the data
+
+
+world but on the opposite side I think
+
+
+it is not because data management and
+
+
+data staff opens completely New Horizons
+
+
+for Ruby
+
+
+and for Ruby Engineers to work with that
+
+
+so what is the Ruby engineer to some
+
+
+extent
+
+
+so if you get back 10 years like if you
+
+
+travel
+
+
+in time back meeting nick uh 10 years
+
+
+back saying about Trial Blazer or maybe
+
+
+just preparing to to talk about that you
+
+
+will see that Ruby engineer
+
+
+back then is responsible for everything
+
+
+in a project
+
+
+so you do starting with like
+
+
+choosing which framework rails not rails
+
+
+and like 10 more different options doing
+
+
+the back end and the front end dealing
+
+
+with like Capistrano or other stuff like
+
+
+Chef dealing with infrastructure of
+
+
+course writing tests
+
+
+and dealing with data in the databases
+
+
+and so nowadays if you're a ruby
+
+
+engineer you don't really want to deal
+
+
+with anything but Ruby so even like we
+
+
+have this like separation for Ruby
+
+
+engineers and Ruby API Engineers so
+
+
+those who do like Ruby Ruby and those
+
+
+who do like Ruby API which brings now
+
+
+after 10 years
+
+
+more professions like in data so for
+
+
+example rails engineer so you can find
+
+
+somebody who say hey I'm a rails
+
+
+engineer and if you talk to them
+
+
+surprisingly not of them use Ruby not
+
+
+all of them use Ruby so sometimes they
+
+
+don't know how to use Ruby you like
+
+
+interviewing them you ask questions and
+
+
+they use rails and they are surprised
+
+
+that Ruby Works differently
+
+
+so I I I'm not going to talk anything
+
+
+about front end so here so just like
+
+
+skip that devops
+
+
+so devops started with the
+
+
+with Chef
+
+
+which was like really huge and like step
+
+
+forward and they definitely know how to
+
+
+use Ruby like what is Ruby but again
+
+
+they apply it differently
+
+
+QA automations and data Engineers so
+
+
+if you go and see data Engineers with no
+
+
+regards to the language
+
+
+even like python so if you ask like what
+
+
+do you do I'm a data engineer what is
+
+
+your language python you ask them python
+
+
+and they cannot do anything but scrapers
+
+
+like in parsers use some academical like
+
+
+models so not kind of a cool
+
+
+and for me now it's like a really good
+
+
+point for being like Ruby engineer is
+
+
+the mature guy like real senior guy who
+
+
+understands how application works
+
+
+all the architecture plus how data
+
+
+interacts with the with the application
+
+
+so
+
+
+I think if you do Ruby in most of the
+
+
+cases you can wear a hat of data
+
+
+engineer
+
+
+who is like if you do like migrations if
+
+
+you prepare data if from time to time
+
+
+you need to insert some kind of a like
+
+
+large amount of data in your database
+
+
+in your resume you can say I'm working
+
+
+like with ETL I'm doing ETL
+
+
+uh nobody really
+
+
+you know wanted to be like database
+
+
+administrators but we do that still it's
+
+
+like normal process to doing like
+
+
+database management
+
+
+and
+
+
+working just with software right so we
+
+
+need to write some code that makes the
+
+
+application work so General uh General
+
+
+development
+
+
+and when it comes to the
+
+
+to the responsibilities
+
+
+in a team or running like get into the
+
+
+new uh to the new project you need to
+
+
+figure out where is your responsibility
+
+
+so even if I'm writing Ruby code then
+
+
+where it is like where is leave
+
+
+sleeve like on the backhand side on the
+
+
+server or it's lived somewhere like
+
+
+between like cloud or third parties or
+
+
+something so it turns now
+
+
+that as we separation separate in
+
+
+different roles nobody wants to work in
+
+
+this red square selected block so
+
+
+it's
+
+
+like Terra incognita so it happens
+
+
+but you're not sure who's responsible
+
+
+for that so who should prepare data who
+
+
+should do parsing who should do
+
+
+normalization who should really care
+
+
+about different stages of your data
+
+
+and you have to care like you really
+
+
+have to care because if your application
+
+
+growing you need to think about maturing
+
+
+your app
+
+
+you need to think about like how make
+
+
+this app not to be data dependent
+
+
+because writing your code in a very
+
+
+isolated way
+
+
+can lead you someday doing huge
+
+
+refactoring or throwing it away because
+
+
+you didn't think up front that like your
+
+
+application is not suitable for dealing
+
+
+with some kind of a data so you should
+
+
+care
+
+
+when you work with like City in your
+
+
+databases when you work like
+
+
+preparing
+
+
+testing uh like testing performance
+
+
+integration like multiple environments
+
+
+uh you need to care about you clean your
+
+
+data
+
+
+how many of you knows how to delete data
+
+
+from the database
+
+
+just raise your hand
+
+
+and how many of those who keep your hand
+
+
+like how many of those do that like
+
+
+really in production system how many of
+
+
+you like really clean up the data
+
+
+because like not that many because what
+
+
+we usually do we'll just get more data
+
+
+get more data like we're greedy on the
+
+
+data we just put it somewhere there and
+
+
+we think like okay one day maybe in the
+
+
+future we will develop something we're
+
+
+gonna need that we hire uh machine
+
+
+learning stuff something buzzwords
+
+
+and this data is going to be needed it
+
+
+is not that's not true so deleting data
+
+
+is gold
+
+
+migrating data between different
+
+
+databases
+
+
+so those of you who used to use like
+
+
+hiroku
+
+
+and now facing the issues like moving
+
+
+out from hiroku choosing what's going to
+
+
+be the
+
+
+not of course like for pets project
+
+
+but for those projects that has some
+
+
+kind of a value
+
+
+how to move data out of it so how do you
+
+
+like get data from one server and put it
+
+
+to another one server uh for example if
+
+
+you cannot expose it anyhow in public so
+
+
+you cannot like download it to the
+
+
+computer
+
+
+and upload it to Whatsapp click to the
+
+
+system administrator or to somebody who
+
+
+can do that
+
+
+uh preparing data so more data we have
+
+
+less information we get so more data we
+
+
+can gather from the internet less
+
+
+information we can extract from it so
+
+
+normalizing data cleaning it up that's
+
+
+very important and lastly
+
+
+so actually
+
+
+what is my talk is really about
+
+
+I I told you right about like too many
+
+
+academic things right so we are still on
+
+
+the 10th slide and I still have 20
+
+
+minutes running good it's compliance and
+
+
+security
+
+
+which
+
+
+I don't think people accept seriously at
+
+
+the very beginning when you start
+
+
+working with your application you think
+
+
+like okay
+
+
+when we grow
+
+
+we'll do audit we'll find somebody who
+
+
+can help us to deal with security so
+
+
+let's do quick and dirty solution now
+
+
+and then we'll fix it back which is not
+
+
+true and um
+
+
+and that's we will see
+
+
+a little bit later in a couple of slides
+
+
+so the last question I want to like
+
+
+answer
+
+
+finally is this Ruby good enough to deal
+
+
+with data there is a number of data
+
+
+warehouses the data shops that manage
+
+
+data warehouse let's manage data
+
+
+warehouses that do data Logistics and do
+
+
+like a lot of other data stuff
+
+
+and um in this year
+
+
+they published again another report that
+
+
+says that we in like data world we don't
+
+
+really care about performance
+
+
+so if we need more performance we buy
+
+
+more servers
+
+
+like if we need to do like more data
+
+
+processing we can get more powerful
+
+
+machines and what do we really care it's
+
+
+about human who work with data
+
+
+so it's more important for us to
+
+
+produce code faster than to produce
+
+
+faster code
+
+
+in other words if we can solve a problem
+
+
+with one line in Ruby
+
+
+it's way more better than produces a
+
+
+little bit more efficiently with 20
+
+
+lights in Python
+
+
+so if we manage to build application
+
+
+in a like DDD manner or whatever with a
+
+
+little bit of a highlight architectural
+
+
+view it's way more better than right
+
+
+single file and all the logic with no
+
+
+highlight using emacs or Vim whatever is
+
+
+like hard code and make it like super
+
+
+performant
+
+
+so they say like 80 of their work
+
+
+is just scraping and preparing data
+
+
+which Ruby is absolutely perfectly suits
+
+
+instead of running some highly
+
+
+performant stuff
+
+
+so
+
+
+and for this like if Ruby is good and
+
+
+that's proven now so you can do Ruby for
+
+
+data management so if you were thinking
+
+
+about like switching your job next you
+
+
+can actually apply for yourself the
+
+
+the Ruby data management so do you need
+
+
+to know SQL and like no like let's start
+
+
+from edl do you need to know ETL in
+
+
+order to start this like Ruby data
+
+
+engineering career
+
+
+and the answer is yes
+
+
+so actually if you don't know how to
+
+
+work with this stuff it's going to be
+
+
+harder at least to get you know into the
+
+
+point where people working with data but
+
+
+is it like really necessary like is this
+
+
+it's like with SQL right so you you have
+
+
+to know it
+
+
+so if you go for interview
+
+
+people will ask you how do you work with
+
+
+SQL
+
+
+but after you get a job
+
+
+it's not necessarily going to use it
+
+
+so you know how it works you like
+
+
+understand how the system design and
+
+
+structure so the same for ETL you have
+
+
+to know those tools you have to know how
+
+
+to apply it you have to know the
+
+
+Highlight a level uh structure and the
+
+
+process but all those tools in most of
+
+
+the cases are really really with high
+
+
+thresholds so you need to dig deeper and
+
+
+it's very hard to connect it to the app
+
+
+and lastly
+
+
+this will bring you to the vendor lock
+
+
+so you will probably have another
+
+
+language to implement like ETL tooling
+
+
+enter your app and as you grow you will
+
+
+hire separate like Engineers or separate
+
+
+Department who will deal with it
+
+
+so what's the
+
+
+what's the main in general tips for you
+
+
+to start doing like data Ruby data
+
+
+engineering or to at least consider
+
+
+yourself as a ruby data engineer so you
+
+
+if you don't know how to deal with n
+
+
+plus one learn it that's not only the
+
+
+question that is asked on the technical
+
+
+interview that's the thing that you
+
+
+really need to care when you do like
+
+
+working with data
+
+
+you need to care about like merging
+
+
+joints understand how work like how
+
+
+database works
+
+
+uh
+
+
+how high level tools like orms works and
+
+
+how to optimize it because sometimes
+
+
+when you design like
+
+
+structure of your database and it's
+
+
+empty it's easy to work with that as
+
+
+soon as it has data it works differently
+
+
+what is indexes how to use this approach
+
+
+uh I've heard sometimes people say just
+
+
+put indexes everywhere that's that's the
+
+
+index is great just put it everywhere
+
+
+like or another good tip use it as much
+
+
+as you can like use indexes as much as
+
+
+you can that's the solution that's not
+
+
+true so you need to understand how they
+
+
+work what kind of indexes they are how
+
+
+to apply them and so on and so forth
+
+
+um
+
+
+that's a good question who knows the
+
+
+difference between destroy all and
+
+
+delete all
+
+
+okay and uh
+
+
+and who like you know how it works and
+
+
+how like do you really use that in your
+
+
+production system like destroying all
+
+
+data
+
+
+okay that's good so that's very good
+
+
+don't destroy your data in production
+
+
+that's like a very good tip so if you if
+
+
+you know how those tools works if you
+
+
+read it through
+
+
+there the significant difference is that
+
+
+eating like
+
+
+so many like if you use destroy all that
+
+
+is so heavy procedure it so nicely works
+
+
+for for you to like really clean up all
+
+
+the data but it's so heavy in comparison
+
+
+to the leader all that is like
+
+
+super fast and it gives you like a lot
+
+
+of inconsistent data so you using using
+
+
+those tools and understanding how to
+
+
+apply them and that's just like one
+
+
+example there is a lot of other things
+
+
+for inserting data as well
+
+
+it's very good don't don't be greedy
+
+
+about the data so if you don't need the
+
+
+data don't get it like it's like with
+
+
+food right
+
+
+so if you eat some not healthy food or
+
+
+good food you have some kind of a
+
+
+you know make mechanism that your body
+
+
+says like oh I don't need to get it back
+
+
+so database doesn't do that so we have
+
+
+to care about it so database eats
+
+
+everything that we give her right so we
+
+
+give her some data it hits it up
+
+
+it's getting bigger and bigger
+
+
+and
+
+
+sorry for acronym right I I I've seen
+
+
+you
+
+
+that's yours but uh
+
+
+this one I invaded right okay so it's
+
+
+still DDD I will we'll figure out how to
+
+
+like how to shorten this one so
+
+
+um I would say data dictated development
+
+
+so avoid data dictated development so
+
+
+you are our masters
+
+
+data is not so you have to make your
+
+
+data serve you but not to make the
+
+
+application on the opposite side so we
+
+
+have so crazy data we need to figure out
+
+
+how to manage with it just delete it all
+
+
+shape it in a good like in a good form
+
+
+and get it to the app
+
+
+so that's the introduction
+
+
+now let's
+
+
+[Laughter]
+
+
+let's think about the use case so we
+
+
+work with the healthcare application
+
+
+that is HIPAA compliant and when we're
+
+
+first seeing HIPAA which is like this is
+
+
+something like hip-hop atoms like this
+
+
+is so funny we don't really we're not
+
+
+gonna really care about it and when
+
+
+clients ask like do you know how to work
+
+
+with HIPAA compliance we say yes
+
+
+yes we know how to work with HIPAA
+
+
+compliance Googling it like aside it
+
+
+says like that's the medical compliance
+
+
+for that easy
+
+
+not easy like no problem at all we'll do
+
+
+that so now we work with this project
+
+
+and um
+
+
+so we inherited some parts of the data
+
+
+from other vendor providing this data
+
+
+structure
+
+
+and it looks like the vendor didn't know
+
+
+what is pii
+
+
+as we didn't know
+
+
+a little bit later as we're picking it
+
+
+up so we inherited a lot of data
+
+
+that is really sensitive
+
+
+and nobody ever care that some data
+
+
+doesn't like some data it's Pi this like
+
+
+personal identification compliance that
+
+
+is exposed
+
+
+everywhere
+
+
+so and we treat it as a normal database
+
+
+okay like usernames like patient names
+
+
+what the heck is the difference right so
+
+
+if it's if somebody who goes to the
+
+
+clinic is the same users as they go to
+
+
+the like supermarket
+
+
+we're gonna treat them the same way
+
+
+um and along with that we have a few
+
+
+more like challenges as we figure out
+
+
+that using
+
+
+the
+
+
+this Pi data
+
+
+bring us the idea that we cannot
+
+
+actually
+
+
+identify users so when we insert a lot
+
+
+of data
+
+
+we cannot identify that they are unique
+
+
+so because until they provide you
+
+
+consent that you can use like my last
+
+
+name
+
+
+or like first name last name whenever
+
+
+like data can identify you which becomes
+
+
+like unique User it's just a non-unique
+
+
+user
+
+
+and we scraping and inserting a lot of
+
+
+data and it turns out like we figure out
+
+
+that we have so many duplicates in the
+
+
+database because we we don't have
+
+
+ability to validate uniqueness until
+
+
+people say you can use my data there
+
+
+it turns out we cannot deploy this up
+
+
+anywhere we want
+
+
+so if we have HIPAA compliant
+
+
+application we cannot just throw it on
+
+
+the Amazon like hey this is going to be
+
+
+our staging boom Amazon works for that
+
+
+like test it it looks like we have to
+
+
+use some kind of a compliant hosting
+
+
+and we found one
+
+
+I've blurred it a little bit just to not
+
+
+make it uh publicly because it's like
+
+
+very good saying bad things about
+
+
+something but those who use this the
+
+
+same hosting will know
+
+
+so that's a very bad thing you you don't
+
+
+have any abilities to manage your your
+
+
+actual infrastructure so it lives
+
+
+somewhere there and you can send email
+
+
+to technical support
+
+
+we've attached some kind of a SQL stuff
+
+
+to execute that and pass you back the
+
+
+the result
+
+
+and
+
+
+and business as it was Healthcare
+
+
+had like a really huge demand on
+
+
+analytics so they wanted to use like
+
+
+power bi
+
+
+to blow whatever tools that can build
+
+
+them Graphics build projections
+
+
+when they were small they use Excel so
+
+
+what the previous vendor did they uh
+
+
+download all the database in CSV
+
+
+give them to the business owners the
+
+
+business owner use Excel spreadsheet to
+
+
+build Pilots like pivot tables whenever
+
+
+and after a few months
+
+
+as the database that started to grow
+
+
+it's absolutely like Excel doesn't
+
+
+okay it's not it's not working actually
+
+
+and we cannot like extract this data and
+
+
+give it to the third party so you cannot
+
+
+connect
+
+
+whenever service that you have to your
+
+
+application even like data monitor like
+
+
+monitoring for example if you want to
+
+
+use New Relic or whatever
+
+
+unfortunately there is no chance for you
+
+
+to manage that and uh
+
+
+and because we already signed the
+
+
+contract
+
+
+we get all this data that has a lot of
+
+
+like exposure
+
+
+there is no chance to manage it there is
+
+
+no chance to use like uh the way how we
+
+
+know how data works for example how to
+
+
+create a user that is not unique
+
+
+no idea
+
+
+um we started to think about okay
+
+
+if we cannot do like real compliance
+
+
+with the system that we have because
+
+
+it's too late to redesign it from
+
+
+scratch because everybody you know do
+
+
+that when you get application that
+
+
+you're not working from scratch you say
+
+
+like to the client okay let's like those
+
+
+guys who develop that they were badass
+
+
+right we're gonna do that right let's
+
+
+start it from scratch we give you 10
+
+
+discount so and like all the two years
+
+
+of development just let's throw it away
+
+
+it's rubbish no use
+
+
+unfortunately we couldn't do that so we
+
+
+we had to use what we have
+
+
+and to fix that it's too hard so we
+
+
+decided to make it
+
+
+at least if it's not perfect now
+
+
+just to hide like do some hacks just to
+
+
+hide this sensitive data and try to use
+
+
+it as a normal data but at the same time
+
+
+make it not too bad in order for users
+
+
+to use that so we decided to in order to
+
+
+make it a HIPAA compliance to use data
+
+
+obfuscation so what is data obfuscation
+
+
+whoever
+
+
+heard or use data obfuscation in your
+
+
+system okay
+
+
+I'm not going to ask the same people
+
+
+really like the same people you're
+
+
+raising your hand okay so I know those
+
+
+guys those guys who work with data use
+
+
+data obfuscation so that's um
+
+
+that's a good tool we learn that's data
+
+
+obfuscation can be a compliant way of
+
+
+managing sensitive data that was enough
+
+
+for us to make a decision so if we can
+
+
+like without learning any kind of a
+
+
+HIPAA compliant stuff we see that data
+
+
+obfuscation make us hyper compliant fine
+
+
+let's let's use this one
+
+
+um
+
+
+so benefits are obvious
+
+
+we use the same data with the same
+
+
+volume with the same quality with the
+
+
+same standard but it's not real
+
+
+and this data it's not generated data
+
+
+because it has all
+
+
+uh
+
+
+things to prepare to to pretend that all
+
+
+this data is connected so it's not dummy
+
+
+data even though
+
+
+it is hidden
+
+
+we needed to use it for
+
+
+uh business intelligence to to give it
+
+
+to business to build like high level
+
+
+graphs
+
+
+we also need it for testing because we
+
+
+couldn't do any testing with this super
+
+
+strictly high security like compliance
+
+
+level hosting so we built like hiroku
+
+
+and put all the data in a public Heroku
+
+
+which is easy for us right but then
+
+
+there's the same data
+
+
+but we can expose it anywhere because
+
+
+there is no use for anybody and there is
+
+
+no traceability back to get this like
+
+
+real data uh
+
+
+from the system
+
+
+we didn't use much of this list but for
+
+
+example if your system is big and
+
+
+deployment process takes long time for
+
+
+example you have some migration that
+
+
+lock your database more data you have
+
+
+more outage for the app you can get and
+
+
+you would never test it until you
+
+
+simulate it so having real amount of
+
+
+data
+
+
+on your staging integration environment
+
+
+really gives you a clue how your app
+
+
+behaves and how you should manage it
+
+
+and uh
+
+
+and the last one
+
+
+for design people and for people who
+
+
+actually built like the user flow or for
+
+
+non-technical people it's very nice way
+
+
+to give them
+
+
+feeling of the whole application
+
+
+workflow because it doesn't again it
+
+
+doesn't have like dummy data
+
+
+so there is three
+
+
+even like there's many more techniques
+
+
+but uh we needed to choose one of three
+
+
+techniques that you can use for data
+
+
+obfuscation so the first one
+
+
+encryption which didn't work for us
+
+
+right so it saves data even it provides
+
+
+you some chance to get this data back
+
+
+but it's completely not readable so if
+
+
+you start
+
+
+you know using your application instead
+
+
+of like usernames you have this kind of
+
+
+a hash all your HTML stuff you know goes
+
+
+away you you cannot distinguish what is
+
+
+those user what is those emails how to
+
+
+pretend those emails we can send somehow
+
+
+so perfect but not suitable for us
+
+
+another one was tokenization of the data
+
+
+which is kind of a
+
+
+the same approach as uh uh encrypting it
+
+
+but with the ability to like really get
+
+
+it back so if you want to hide some data
+
+
+or do not show data for everybody even
+
+
+like in your production system you can
+
+
+use tokens and those tokens are getting
+
+
+back from the data for those people who
+
+
+can be like exposed to this data or data
+
+
+to be exposed to those people
+
+
+didn't work for us as well it's a little
+
+
+bit nicer but still not usable
+
+
+and data masking so data masking is
+
+
+absolutely perfect
+
+
+because it takes your real data
+
+
+and make the same real data but it's not
+
+
+related to your specific
+
+
+so it makes actually like obfuscation of
+
+
+the data
+
+
+in the way as the data is shaped so if
+
+
+we have you ask for numbers it will
+
+
+generate you fake U.S phone numbers if
+
+
+you have like
+
+
+Arabic names it will get back to Arabic
+
+
+names but with uh not real people
+
+
+and we started like to search
+
+
+this one the not one you need to see
+
+
+uh and we started the search
+
+
+which tool can do some kind of a data
+
+
+obfuscation for us
+
+
+and it turns to be that faker
+
+
+uh was the one and it's again Port from
+
+
+Pearl to Ruby
+
+
+that was so so very well shaped
+
+
+even like python PHP
+
+
+and a few more languages
+
+
+use the same approach for Faker as it's
+
+
+done in Ruby so I think this one is the
+
+
+real reason to be proud for Ruby
+
+
+Community having this guy to be like
+
+
+implemented for those who never use
+
+
+Faker that's the library that generates
+
+
+fakes data and it has a number of
+
+
+dictionaries that you can use for
+
+
+example like this is the basic library
+
+
+that Faker has with like a huge database
+
+
+in it so you can actually structure your
+
+
+database
+
+
+with the the like particular specific
+
+
+even like if you Game of Thrones fans
+
+
+you can find like a specific for
+
+
+you know the context
+
+
+of like a real media
+
+
+and uh
+
+
+even like what
+
+
+so figure ask what of smart people
+
+
+and you can play with it like different
+
+
+people
+
+
+and uh of course Matt's one of them
+
+
+but Faker is not gonna work
+
+
+so Faker provides fake data so it's good
+
+
+for seeding data so you can use this
+
+
+data for factories you can build like
+
+
+automation testing suite for uh with
+
+
+Faker but our case was a little bit
+
+
+different so we have already data so we
+
+
+don't need to populate data in the
+
+
+database
+
+
+but we need to find a way to click
+
+
+somehow
+
+
+in a smart way
+
+
+hide it
+
+
+and there's a lot of like tools that
+
+
+provides it using masking but it's again
+
+
+providing very limited amount of
+
+
+templates so you can get the
+
+
+for example was great dump
+
+
+use some kind of online tool like line
+
+
+uh terminal line tool
+
+
+to replace all sensitive data but it's
+
+
+going to be ugly so it's going to be
+
+
+like
+
+
+one two three five variants and that's
+
+
+it so you're going to have like the same
+
+
+users with the same name like
+
+
+and the faker that gives like super cool
+
+
+data if you don't know like what to read
+
+
+this might know how but in Faker install
+
+
+it on your app just open news get news
+
+
+and it will give you random news so you
+
+
+can read news from faker it's so cool
+
+
+yeah know how thank you if you don't
+
+
+know how to command your posts or you
+
+
+want to post some you know uh commands
+
+
+on like link it in for HR people who's
+
+
+sending you some stuff use Faker just
+
+
+get some quotes get some it has commands
+
+
+it is so cool because they are like
+
+
+really good commands sometimes I really
+
+
+think I need to follow the advice that
+
+
+fakers give me
+
+
+so use it
+
+
+but we didn't find a solution so because
+
+
+we're all ruby Engineers we decided to
+
+
+create one so what if we make
+
+
+faker
+
+
+to be working with production database
+
+
+yay that's a good idea let's let Faker
+
+
+fake the production database in the ways
+
+
+we need and again there is no solution
+
+
+we asked a few people and they say hmm
+
+
+because there is no solution probably
+
+
+that's a good deal it's a bad idea
+
+
+nobody would need it
+
+
+maybe it is but we decided to you know
+
+
+go our way and we started like
+
+
+implementing this uh tool called Grazer
+
+
+so Grazer not like a Trailblazer but
+
+
+Grazer I hope you know 10 years back
+
+
+we'll have multiple talks about here uh
+
+
+about this one here so the Grazer from
+
+
+from English is the guy who is eating uh
+
+
+food in the store like you're getting
+
+
+like oh it's peanuts it is okay it's
+
+
+exactly the same what we need it for for
+
+
+this guy so we need to go into the like
+
+
+our data store and randomly eat some
+
+
+food and replace replace it with uh with
+
+
+a nutshell so in the basic version which
+
+
+is like zero zero one
+
+
+uh the Grazer has pretty simple
+
+
+pretty simple interface
+
+
+um Let's see we have this model
+
+
+it's not real data just yeah just yeah
+
+
+we are safe I hope
+
+
+so we have the the EHR records which is
+
+
+uh electronic Healthcare records for for
+
+
+us it gives us some idea of Pai so some
+
+
+data
+
+
+that is sensitive and shouldn't be used
+
+
+in the app so we cannot expose it there
+
+
+in the same way as you cannot for
+
+
+example like store credit card numbers
+
+
+so we cannot store
+
+
+uh like EA number first last name and
+
+
+the phone and the rest of the things so
+
+
+it's illegal you cannot like have it in
+
+
+your database but we have already right
+
+
+so it's there
+
+
+what are we gonna do with that
+
+
+so Grazer goes as
+
+
+the standard generator
+
+
+it scans all the structure of your
+
+
+models parseed it and gives you a number
+
+
+of configs so it generates you the same
+
+
+structures you have in your models maybe
+
+
+it's not perfect still we we use it that
+
+
+way
+
+
+and uh for each and every config you
+
+
+could identify a number of rules for
+
+
+which field should be height hidden
+
+
+which are of them sensitive
+
+
+and what's the strategy for obfuscation
+
+
+so at this stage we just use faker
+
+
+just to fake this data in the ways we
+
+
+need keep a uniqueness of the data
+
+
+keeping the proper uh way of generated
+
+
+like regions for the phone addresses for
+
+
+example if we need to use a particular
+
+
+zip code which is not Pai so we can use
+
+
+zip code freely but the address should
+
+
+be related to the particular zip code so
+
+
+we can use zip code for the faker to
+
+
+generate a particular address within the
+
+
+range of this ZIP code
+
+
+for the future
+
+
+this one is not limiting us
+
+
+so we can use any other dictionary even
+
+
+your own like your built-in dictionary
+
+
+to get into the config files and
+
+
+generate data that makes it work for you
+
+
+know other other users
+
+
+so you get it
+
+
+um
+
+
+you get it in the config and then the
+
+
+second one and the most I think
+
+
+questionable issue how to then extract
+
+
+this data because it's like already
+
+
+sensitive
+
+
+but nobody knows so how we extract this
+
+
+data in the way that we again do not
+
+
+break anything so we cannot load the
+
+
+dump so we cannot dump database and
+
+
+download it
+
+
+and we cannot use environment of our
+
+
+server
+
+
+so the only way and maybe this is the
+
+
+way it's to generate the dump in a
+
+
+number of SQL
+
+
+inserts
+
+
+that you can use against the
+
+
+you know the your
+
+
+replica database to get already
+
+
+obfuscated data for example in testing
+
+
+and you can make like it's
+
+
+full set like all all volume of the data
+
+
+or limited set you can say like I need
+
+
+every
+
+
+you know
+
+
+100 records from the database just to
+
+
+give some kind of a slice
+
+
+and and you never
+
+
+get your database out of the server
+
+
+you never get like actual down from the
+
+
+server but you get the instruction that
+
+
+gets this data uh to the place where you
+
+
+need that
+
+
+so
+
+
+and here it comes
+
+
+this is the result so it gives you
+
+
+exactly the same it still works not
+
+
+perfectly with uh uh with zip codes it
+
+
+gives you like
+
+
+perfectly shaped data
+
+
+that nobody would actually recognize as
+
+
+it is fake
+
+
+so this is data it's connected it has a
+
+
+number of models different models has
+
+
+comments we generate comments and do the
+
+
+rest of the things the last thing that
+
+
+is important here
+
+
+is as we start maintaining two kinds of
+
+
+data so one data is real one data is
+
+
+fake
+
+
+but the fake data is important in the
+
+
+same way as a real data so we don't want
+
+
+you you know
+
+
+uh
+
+
+recreate all the time the data that is
+
+
+faked and it is used already in
+
+
+different sources so we need to track
+
+
+the consistency like consistence of the
+
+
+data every time that they want to get a
+
+
+new slice so first before for example
+
+
+like on a daily
+
+
+routine or weekly you you decided by
+
+
+yourself
+
+
+you have a job that validates the
+
+
+consistency of the data not of the
+
+
+structure of the data again but of the
+
+
+data data so it's like any new records
+
+
+any updates for existing records you
+
+
+need to go through the through the old
+
+
+records and see like okay this is the
+
+
+Delta and the next worker that gives you
+
+
+new slide inserts new and updates the
+
+
+the ones that were uh that were actually
+
+
+changed
+
+
+an update
+
+
+so you update the data for the source
+
+
+that you need at so you validated on the
+
+
+like initial source and you update it to
+
+
+the source for the destination
+
+
+um thank you
+
+
+yeah that's it
+
+
+please questions
+
+
+um thank you for presentation uh can you
+
+
+go back to the syntax of uh grazer
+
+
+yeah uh I have two questions uh can you
+
+
+for encrypted password uh reference for
+
+
+example like ID because usually
+
+
+encrypted password is using assault uh
+
+
+to create a real encrypted password so
+
+
+I'll address as an example uh can you
+
+
+reference other fields that's very bad
+
+
+idea of course you have like the same
+
+
+passwords for all the records this is
+
+
+just this one is used just to give an
+
+
+idea that you can put any data for your
+
+
+own I know but yeah I'm asking if you
+
+
+can reference other fields from other
+
+
+fields other fields from for example
+
+
+like encrypted passwords related to the
+
+
+the generated like how it was done right
+
+
+yeah yeah of course it's like it keeps
+
+
+the old data and all connection so we do
+
+
+not actually change the like if you have
+
+
+password and you have the
+
+
+the other fields that makes this
+
+
+password like encrypted decrypted and to
+
+
+like to some extent it has the same way
+
+
+of
+
+
+um
+
+
+joining
+
+
+disables it's not working at this in
+
+
+this version so I'm just you know
+
+
+imagining a little bit but of course
+
+
+yeah it keeps it keeps it linked
+
+
+so if you have not for example for the
+
+
+password if you have a
+
+
+like different models that rely one to
+
+
+another one so for example if you have
+
+
+some kind of a record and the statement
+
+
+or report and in the report there is
+
+
+used first and last name you could
+
+
+identify that here is the strategy after
+
+
+you change the first and last minute of
+
+
+the passion you need to go to extract
+
+
+for the report and do not forget to to
+
+
+make this data again so yes it is linked
+
+
+now we don't like we do that manually
+
+
+but in an ideal word it should work like
+
+
+automatically that's amazing thank you
+
+
+and what is the second question
+
+
+about this okay
+
+
+hey so I have a question about for
+
+
+example what if uh one of the fields is
+
+
+like important like the value of this
+
+
+field is important for like the
+
+
+structure of the table so for example if
+
+
+a patient is underage so it's like based
+
+
+on the date of birth field and maybe you
+
+
+in that case you need a separate record
+
+
+like reference to other tables for a
+
+
+like card taker or someone like that
+
+
+like so like how do you ensure that your
+
+
+data will be consistent like in some you
+
+
+know that that I will be reasonable oh
+
+
+yeah
+
+
+okay so this project
+
+
+is related to kids under three years
+
+
+so that's like early intervention
+
+
+and uh we really care about the like age
+
+
+for for like for kids for example as
+
+
+soon as they at the age
+
+
+on a particular date like in August they
+
+
+turn sport
+
+
+uh we have to like we have a number of
+
+
+logic that makes for example like
+
+
+therapists to notify parents that their
+
+
+kids are out of the you know the range
+
+
+of age that is applicable for early
+
+
+intervention and they need to switch to
+
+
+another one
+
+
+so
+
+
+um
+
+
+in this case
+
+
+you have two options the first one is to
+
+
+use your own generator for like this
+
+
+specifically related data or if for
+
+
+example we work with like you know zip
+
+
+codes or data regions if it's not
+
+
+existing faker you add it as like
+
+
+standard Library it's very easy to
+
+
+contribute to there because like Faker
+
+
+out of the box allow you to use your own
+
+
+libraries in the same fashion as you do
+
+
+but
+
+
+um
+
+
+so how we do that we change the date
+
+
+like date birth with a small random
+
+
+number of days
+
+
+so we actually losing the precise of
+
+
+exact birth date when they change but
+
+
+we're providing and traceability in this
+
+
+case so it's like adding some kind of a
+
+
+like a couple of days back and forth
+
+
+changes it completely and makes it
+
+
+absolutely untraceable
+
+
+yeah like it's like a hack but it works
+
+
+thank you
+
+
+what do you think about the active
+
+
+record encryption in the context of pii
+
+
+data obfuscation
+
+
+it's it's good to encrypt data when you
+
+
+can it like you have always encrypt your
+
+
+data in case it's like sensitive data
+
+
+no like that
+
+
+sorry cancel cancel this answer like uh
+
+
+you like if you can not store the data
+
+
+on your own
+
+
+do not store it like if you can use
+
+
+third parties that can store sensitive
+
+
+data for you like you know use EHR
+
+
+system that can hold records of your
+
+
+passions or everything that is related
+
+
+to them
+
+
+use third party and you like work with
+
+
+the metadata
+
+
+so the answer is do not store or try not
+
+
+to store sensitive data on your own
+
+
+but if you need to store it think about
+
+
+like encryption for the records that's
+
+
+the must
+
+
+you you have to encrypt it
+
+
+and uh in case of data obfuscation
+
+
+the data that is was encrypted and then
+
+
+you get decrypted it back uh you
+
+
+obfuscate it and they use like
+
+
+encryption and decryption on your
+
+
+develop like staging development
+
+
+whatever with different Keys it doesn't
+
+
+matter
+
+
+but you substitute data with fake then
+
+
+encrypt it and use it for for you know
+
+
+integration testing development whatever
+
+
+so they not inter like they do not
+
+
+interfere one and another one
+
+
+so encryption is hygienic we have to
+
+
+care and obfuscation that's uh
+
+
+convenience
+
+
+like
+
+
+thank you
+
+
+uh I have two questions one a small one
+
+
+and one big one let's start with a
+
+
+smaller one
+
+
+um I've actually stumbled upon this
+
+
+problem before do you exactly using
+
+
+Faker to to obfuscate the data without a
+
+
+nice gem of course and the main problem
+
+
+I run into was the performance if the
+
+
+database was big enough then uh
+
+
+basically generating fake data for each
+
+
+row it's extremely slow
+
+
+how do you handle that
+
+
+uh you mean like it's slow because of
+
+
+Faker or it's slow because of iterating
+
+
+through the whole records in your
+
+
+database iterating through the records
+
+
+because you have to fetch the data and
+
+
+yeah like that's the the only solution
+
+
+that we have here is to uh
+
+
+uh this one
+
+
+like you've done it once
+
+
+and you try to keep it consistently by
+
+
+validating the changes of the data and
+
+
+updating it instead of inserting all the
+
+
+data over and over and over again okay
+
+
+the second question is slightly more
+
+
+complex because uh when I use this kind
+
+
+of approach I found that there is some
+
+
+let's say hidden data in terms of
+
+
+accounts of the records which will help
+
+
+you unencrypt the data in terms of um
+
+
+being able to identify particular
+
+
+records especially outliers like for
+
+
+example if you have a
+
+
+let's let's use the old data like a
+
+
+caretaker that has like seven children
+
+
+even though you obfuscate the details of
+
+
+those children you can still identify
+
+
+that these people are family because of
+
+
+account and this particular person is a
+
+
+caretaker for this family because it's
+
+
+the biggest one the database
+
+
+do you guys handle this kind of cases
+
+
+with like randomly deleting or adding
+
+
+records
+
+
+we didn't face exactly the same way of
+
+
+like data traceability in order of some
+
+
+kind of a you know
+
+
+similarity just to keep in that but we
+
+
+had a huge issue the the slide that I
+
+
+just skipped so thanks for asking we're
+
+
+gonna reuse this one
+
+
+sorry
+
+
+this one
+
+
+um but we had like excessive data
+
+
+exposure issue which means that
+
+
+uh even we obfuscated some data
+
+
+in other fields that are not sensitive
+
+
+therapists can provide sensitive
+
+
+information in the way that it's not
+
+
+expected to be there
+
+
+and for example when we use third
+
+
+parties like New Relic we had leakage of
+
+
+the sensitive data into the third party
+
+
+so we'll look through the New Relic
+
+
+dashboard and see like what the heck
+
+
+right so and you have this kind of a
+
+
+like data it's it's not exactly like
+
+
+what you're saying like this data
+
+
+traceability but it gives a feeling that
+
+
+when you have
+
+
+not like related data that is not
+
+
+obviously like uh shouldn't be should be
+
+
+obfuscated
+
+
+that's like human factor and every you
+
+
+you cannot like get a silver bullet so
+
+
+for all of those cases and that's why we
+
+
+actually keep it here in the way that
+
+
+you can you know
+
+
+like this
+
+
+so if you know that there is some kind
+
+
+of situation that you can identify you
+
+
+just can write custom things that like
+
+
+for example randomly changing the number
+
+
+of kids for the families all right thank
+
+
+you thank you
+
+
+how often is it of a problem that you uh
+
+
+change or randomize the structure
+
+
+um
+
+
+I would expect this to be more
+
+
+data analysis problem that uh
+
+
+when you your data shows that that there
+
+
+is as it was mentioned this many
+
+
+outliers and the data suggests
+
+
+these and some
+
+
+trends when you randomize uh
+
+
+be delete or uh increment
+
+
+uh some attributes you manipulate that
+
+
+and judging from your experience how
+
+
+often
+
+
+it is a problem or
+
+
+not not really that important so let me
+
+
+is this a question of validation of run
+
+
+generated the or
+
+
+could you rephrase it yeah yeah sure uh
+
+
+so what you have those uh number of uh
+
+
+children right so that you you can
+
+
+identify that these records are
+
+
+um associated
+
+
+when you randomly delete I don't know
+
+
+two of them uh you
+
+
+change the
+
+
+uh
+
+
+data uh in general the trends
+
+
+what they mean what can be information
+
+
+can be inferred so uh
+
+
+okay so yeah maybe the answer for a
+
+
+question is that the this this situation
+
+
+is a little bit of static
+
+
+so changing it once
+
+
+you don't need to change it every time
+
+
+you update the data so if you just
+
+
+obfuscated the number of children for a
+
+
+particular family or like a participal a
+
+
+particular therapist
+
+
+or whatever you're not going to change
+
+
+it every time you like it's not like
+
+
+randomizer that runs constantly so
+
+
+change it at once it would perfectly fit
+
+
+uh if this data somehow interferes to
+
+
+the like analytics or any other reports
+
+
+huh you know it's
+
+
+it's kind of a problem of reports
+
+
+so okay yeah because like this is the
+
+
+data that you have and you know that you
+
+
+cannot like blindly rely on the of the
+
+
+of the you know the exact quality of the
+
+
+data so when you do like Analytics
+
+
+the higher you get like on a
+
+
+helicopter's view it's like perfect and
+
+
+gives all the trends getting lower lower
+
+
+and deeper of course like the you know
+
+
+the precise is going to be losing so if
+
+
+you do like analytics for how
+
+
+number of children in a family relates
+
+
+to the overall usage or frequent usage
+
+
+of the particular service of course this
+
+
+like
+
+
+you cannot get actually any insights but
+
+
+if you get on the very top saying like
+
+
+the the overall trend that in December
+
+
+people using 40 or 50 percent less
+
+
+Services of a therapist because of
+
+
+holidays that's a very precise data
+
+
+so again like human factor so you you
+
+
+cannot like do that manually
+
+
+all right we're running out of time so
+
+
+thank you Sergey thank you thank you
+
+
+guys
+
+
+[Applause]

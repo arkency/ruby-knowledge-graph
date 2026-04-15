@@ -1,0 +1,1825 @@
+so hi everyone jesh welcome to my talk
+
+
+about smuggling hijacking and proxying
+
+
+in nothing disorder sockets with wreck
+
+
+and Ruby my name is David
+
+
+I pronounce my name as Hollis not as
+
+
+hellish as polish people would think we
+
+
+had this deal with Hungarians and polish
+
+
+had this deal with let's confuse the
+
+
+world how we pronounce the SC you can
+
+
+find me on twitter under this handle
+
+
+feel free to tweet about bad stuff so
+
+
+let's get into this
+
+
+so I'm from Hungary and speaking part of
+
+
+Slovakia but I live in the Czech
+
+
+Republic in a town called Brenau which
+
+
+is famous for beer not my type motogp if
+
+
+anyone's watching it and there was a
+
+
+genetical experiment in Brno a really
+
+
+famous one but not that one if you heard
+
+
+about you hungry or Mendel he was
+
+
+experimenting with beasts and the city I
+
+
+worked for Red Hat an open-source
+
+
+company if you would guess and I'm
+
+
+working on a manager IQ project which is
+
+
+an open-source hybrid cloud
+
+
+infrastructure management platform if
+
+
+you have a cloud or an on-premise
+
+
+infrastructure we were able to manage it
+
+
+doesn't matter what kind of providers
+
+
+you use even multiple at the same time
+
+
+the important part about this for you at
+
+
+the conference is that it's written in
+
+
+Ruby and rails and it has over a million
+
+
+lines of code so stuff I'm working on
+
+
+mostly is in browser remote consoles
+
+
+which are basically remove des
+
+
+obsessions in a browser surprisingly so
+
+
+if someone wouldn't know what remote
+
+
+console is Remote Desktop session is
+
+
+there is a nice example from Windows
+
+
+where I don't know the password but you
+
+
+will get the idea
+
+
+you see wandering faces so you never
+
+
+sell this right yeah so the same
+
+
+in-browser
+
+
+basically the same stuff in browser here
+
+
+you can see a flux box Desktop Manager
+
+
+running in a browser window in manager
+
+
+queue we have implemented it in a way
+
+
+that you have a summary screen of a
+
+
+virtual machine you click on access and
+
+
+VM console and you have a pop-up window
+
+
+with the VNC session something like this
+
+
+the architecture you have your VM and
+
+
+your browser the VM runs on a hypervisor
+
+
+which runs VMs and it provides you a VNC
+
+
+endpoint even if you are running like
+
+
+VMware or or VirtualBox on your local
+
+
+workstation you can set this VNC
+
+
+endpoint up and run a VNC session so you
+
+
+can try this out unfortunately the
+
+
+browser doesn't really understand VNC
+
+
+the closest thing to your streaming is
+
+
+WebSocket so we need something in the
+
+
+middle let's call it proxy and if you
+
+
+look into this proxy a little closer
+
+
+even closer then we see some scary stuff
+
+
+from computer science class like threads
+
+
+and events and a synchronous i/o and
+
+
+blocking rate and all those things we're
+
+
+gonna touch all of it
+
+
+don't worry so if we look into the proxy
+
+
+inside the proxy we have two endpoints
+
+
+or more but in a simplified version just
+
+
+to one for the WebSocket part and one
+
+
+for the VNC part and you need to
+
+
+transmit data to one direction and to
+
+
+the other direction and somehow
+
+
+translate between the two endpoints I
+
+
+think it's pretty clear for now but not
+
+
+Google so what the hell is this what
+
+
+what is it when I'm talking about
+
+
+endpoints and if we uncover it
+
+
+they are basically sockets not this kind
+
+
+of sockets but
+
+
+I was speaking and I was Australia they
+
+
+didn't get this joke so here is an
+
+
+example of sockets in Ruby you need to
+
+
+require it if you are not running rails
+
+
+because in rails it's fortunately there
+
+
+because you're using webserver sin' you
+
+
+know so here I'm opening an HTTP
+
+
+connection on port 80 to the website of
+
+
+the conference I'm setting some headers
+
+
+writing them I'm getting back some
+
+
+headers and I'm getting some payload
+
+
+that I'm not using HTTPS so well played
+
+
+organizers yours you have a secure site
+
+
+if you look at the operations I'm doing
+
+
+right read close what things from from
+
+
+the other worlds come into your mind
+
+
+right so basically they are files but
+
+
+for networking and if you remember your
+
+
+old hard rice which were spinning or if
+
+
+you are younger than they were hard
+
+
+drives that were spinning they were a
+
+
+little slower because you needed some
+
+
+time to to the head to get to the data
+
+
+if you were reading so they came up with
+
+
+the idea of buffering in both directions
+
+
+in both reading and writing so when you
+
+
+were writing data you actually wrote to
+
+
+a buffer anyway when you're reading data
+
+
+you were eating from a buffer which was
+
+
+like prefetched for you and this thing
+
+
+is actually really useful still for
+
+
+sockets so when you use sockets and you
+
+
+write the sockets you actually write to
+
+
+your buffer and when the operating
+
+
+system the scheduler in your network
+
+
+card sees that there is free time on the
+
+
+network card it's able to send some data
+
+
+to the network it starts forming packets
+
+
+from this data and sends it out you
+
+
+don't have to care about it problem is
+
+
+what happens if the buffer is full and
+
+
+the answer is easy you wait wait until
+
+
+the buffer gets empty or there is some
+
+
+space in the buffer this is why it's
+
+
+called blocking right you block until
+
+
+you don't have the time to
+
+
+it and for reading I was lazy to make
+
+
+slides so use your imagination a naive
+
+
+implementation of proxy using blocking
+
+
+read and write would be something like
+
+
+this you have to endless loops because
+
+
+you can block here you can block here
+
+
+and you need some translation in the
+
+
+middle and to actually be able to run
+
+
+both of these stuff you need one of them
+
+
+in at read this implementation is
+
+
+probably the worst possible never use it
+
+
+Ruby doesn't really handle well threads
+
+
+and if you have 50 connections then you
+
+
+need 100 threads so it doesn't scale
+
+
+really well so there is a solution for
+
+
+that called non-blocking i/o you have
+
+
+the same methods with an unblocked
+
+
+prefix methods aren't waiting if the
+
+
+buffer is full or empty when reading it
+
+
+just drops you an evil block or a again
+
+
+error or depending on the context and
+
+
+the testing of readiness is extracted
+
+
+out to a separate method or system call
+
+
+basically you can use a single loop to
+
+
+handle all selects so if you want to
+
+
+read from multiple sockets you would
+
+
+want to do something like this you have
+
+
+a thread the transcend event loop that
+
+
+iterates through all the sockets with
+
+
+i/o select which gets you the ready
+
+
+ready sockets into an array you iterate
+
+
+through it and read from it and write to
+
+
+your screen it's really good if you do
+
+
+it in one direction but when you try to
+
+
+produce write a proxy for this kind of
+
+
+things and you don't want to use threads
+
+
+then you get into problems so this is my
+
+
+first try of writing a proxy I cannot
+
+
+really see the screen so you know walk
+
+
+here I hope I won't get some echo so you
+
+
+have a pairing of sockets you have two
+
+
+sockets a and B and you have a method
+
+
+pair to that to translate both
+
+
+directions and you do an i/o selecting
+
+
+an endless loop iterate through all the
+
+
+old already sockets and if
+
+
+other part isn't ready you just skip it
+
+
+skip the iteration and here you do the
+
+
+same transmission as we did in the
+
+
+threading example but with non-blocking
+
+
+i/o problem with this is these two lines
+
+
+can cause you an endless loop a spin
+
+
+lock because if only socket a is ready
+
+
+for reading and so I could be isn't
+
+
+ready for reading yeah loop feedback
+
+
+loop so it's it's not ready for writing
+
+
+then this I of select we return the
+
+
+reach array will have one element the
+
+
+rights will be empty and this next gets
+
+
+figured and we get back here again where
+
+
+the I also like will again return with
+
+
+the same data and it will eat up your
+
+
+CPU on 100% and just waste your
+
+
+resources that's not really good if you
+
+
+want to use this in production so I
+
+
+started looking into alternatives first
+
+
+was dropping Ruby but we're not going to
+
+
+talk about it a ruby conference using
+
+
+threads with blocking i/o is a bad idea
+
+
+because you need a lot of threads and
+
+
+that doesn't scale well or you can use
+
+
+some libraries like even machine or
+
+
+celluloid which would be cool if we
+
+
+wouldn't use Postgres in async mode in
+
+
+our application so they are just failing
+
+
+crashing there is a cool library async
+
+
+which is kinda new and it wasn't
+
+
+available when I started working on this
+
+
+also if I would do it now I would just
+
+
+use it but then we will not have this
+
+
+talk I kind of don't have the font of
+
+
+the like emoji but it should be like
+
+
+emoji then we can have all two fibers
+
+
+which are also cool because fibers were
+
+
+already explained so I'm not going to do
+
+
+that they are automatically yielding on
+
+
+I await normal fibers don't do that
+
+
+until you yield in your context they
+
+
+will just run and you need to explicitly
+
+
+old without the fibers this will happen
+
+
+automatically if you have a sleep or
+
+
+weight or i/o select call inside the
+
+
+fiber it's very similar how crystal
+
+
+implements concurrency here is an
+
+
+example a hypothetical example with all
+
+
+the fibers you basically have a pool of
+
+
+fibers and you put the two endless loops
+
+
+into that and call them
+
+
+it's basically magic that converts your
+
+
+blocking Gayo into a non-blocking i/o
+
+
+with same as you would do in go or
+
+
+crystal unfortunately it's not available
+
+
+in Ruby until the version three they
+
+
+promised it into the version three but
+
+
+we don't have that much time so the idea
+
+
+I came up with is called bouncing select
+
+
+the main concept is to make to those
+
+
+arrays storing storing the sockets
+
+
+dynamic so here is the code a little on
+
+
+steroids and I marked all the lines I
+
+
+added to those dynamic arrays and after
+
+
+an i/o select basically I'm removing the
+
+
+ready sockets from the original arrays
+
+
+and if a transmission happened this is a
+
+
+little off sorry for that if the
+
+
+transmission happened we bounced them
+
+
+back so if socket a is only ready you
+
+
+get to the eye of select here you get
+
+
+through it it gets removed from the to
+
+
+read on the iteration it fails because
+
+
+suck it B isn't ready for writing but
+
+
+when we get back to the eye of select
+
+
+it's no longer there so can we can wait
+
+
+passively not eating up the CPU
+
+
+problem solved unfortunately IO select
+
+
+is an ideal if you have thousands of
+
+
+sockets because it's a system call to
+
+
+the kernel and you need to pass all your
+
+
+sockets into the system call every time
+
+
+you call it so if you have like 500 you
+
+
+have to wait until you copy the socket
+
+
+descriptors into the kernel space before
+
+
+actually waiting for it so the Linux
+
+
+kernel developers came up with the idea
+
+
+of eople where you split up select into
+
+
+two calls one of them is for registering
+
+
+the socket and the other one is for
+
+
+actually doing the wait so this way you
+
+
+don't have to pass all the time all the
+
+
+sockets you just register one and two
+
+
+it's available only on Linux
+
+
+unfortunately so sorry Mac users but you
+
+
+can use KQ which is kind of similar or
+
+
+it's possible to fall back to the eye of
+
+
+select bouncing in a bouncing version
+
+
+I've when I was playing with it I found
+
+
+a really interesting feature in a flag
+
+
+called a pole one shot which basically
+
+
+after a socket is ready for reading or
+
+
+writing it gets removed from the array
+
+
+automatically so basically doing for us
+
+
+this operation sorry this operation here
+
+
+for free unfortunately when I was
+
+
+looking into the Ruby wrappers around
+
+
+eople I found like five or six on the
+
+
+internet none of them were working well
+
+
+with equal one shot so I had to
+
+
+implement it on my own in C this is
+
+
+absurd the code let's say from from my
+
+
+codebase where I have the register
+
+
+function with some with a socket and and
+
+
+all in out and one should flex and this
+
+
+is the Select call where I enter 8
+
+
+through this equal weight results and I
+
+
+remove the Ruby code which actually sets
+
+
+the readiness of the sockets that can be
+
+
+consumed in the future this works well
+
+
+on Linux sorry for the Mac users but
+
+
+here is a repo if you would like to
+
+
+contribute and write the actual KQ
+
+
+implementation I will be really happy to
+
+
+merge it because we also have some Mac
+
+
+developers who are still using the old
+
+
+fallback mechanism this was like the
+
+
+computer science part of the thing all
+
+
+the i/o I would like to talk about
+
+
+WebSockets all the remote consoles we
+
+
+use are using WebSockets
+
+
+they are basically HTTP on steroids
+
+
+upgraded for bi-directional HTTP 1.1 not
+
+
+HTTP 2 to be precise they are used for
+
+
+bi-directional transfer after an HTTP
+
+
+upgrade which I will explain now so when
+
+
+you have your browser in your web server
+
+
+your browser sends an HTTP GET request
+
+
+with the upgrade header which tells the
+
+
+web server that hey I'm opening an HTTP
+
+
+connection but I would like to talk in
+
+
+WebSockets so the web server sent back
+
+
+an HTTP 101 switching protocols and
+
+
+after that the protocol changes it
+
+
+upgrades to WebSocket
+
+
+as you know all the Rubies servers are
+
+
+employed servers are implemented in rec
+
+
+if you look at rec you basically can
+
+
+have anything as a rec server response
+
+
+to a call method and return this three
+
+
+elemental array with the HTTP status the
+
+
+headers and the body here we can
+
+
+implement your own server it doesn't
+
+
+have to be a lambda it can be whatever
+
+
+you want basically the whole idea is
+
+
+that you run the server and any incoming
+
+
+request calls this function or method or
+
+
+whatever so it's basically a function as
+
+
+a server
+
+
+no so rec is really good for request
+
+
+response model but if you are using
+
+
+WebSocket you don't really want here to
+
+
+hang on on an incoming request so it's
+
+
+not really good for for long-running
+
+
+requests so the developers of rec
+
+
+implemented a way to actually get out
+
+
+from this loop or from this function
+
+
+call when you have a persistent
+
+
+connection
+
+
+it's called socket hijacking yeah
+
+
+I'm sorry for that gifts it's a video
+
+
+about guy trying to hijack the core so
+
+
+when we use this hijacking here in a web
+
+
+server we are able to get the socket
+
+
+that's behind the request that's coming
+
+
+in in the end of hash do some magic
+
+
+function to get the other endpoint in
+
+
+our case the VNC server and push it to
+
+
+the proxy which is outside in a separate
+
+
+thread and be able to serve the next req
+
+
+request we need some dumb is here to
+
+
+make RAC happy so it wouldn't fail that
+
+
+you you did an invalid request or
+
+
+something like that but that's a detail
+
+
+and basically this is how our remote
+
+
+consoles work here you have the upgrade
+
+
+and the proxy as you've seen and I would
+
+
+say thank you but I promised some
+
+
+smuggling in my talk so when I was
+
+
+implementing this upgrade and WebSocket
+
+
+part of the remote consoles I would
+
+
+start thinking about what if we upgrade
+
+
+to something else
+
+
+will it work so when I realize it will I
+
+
+started to have weird ideas of not
+
+
+upgrading but downgrading to something
+
+
+else and my idea was to downgrade to TCP
+
+
+and then send through data in whatever
+
+
+format you want and the answer why would
+
+
+I do something crazy as this is in this
+
+
+old war when we have your browser
+
+
+applications and desktop applications
+
+
+and if you think about it I don't want
+
+
+to offend anyone desktop application is
+
+
+still faster and if you think about how
+
+
+slow can be an html5 canvas and you
+
+
+would like to do stuff like key mapping
+
+
+or clipboard it's not really easy to do
+
+
+or keyboard shortcuts it's not really
+
+
+easy to do in browser so if you want to
+
+
+try to do a VNC remote desktop
+
+
+connection it's much better experience
+
+
+in desktop so I came up with this
+
+
+architecture where you have the VM and
+
+
+the hypervisor that gives you the VNC
+
+
+endpoint on the other side instead of
+
+
+the browser you have the VNC client with
+
+
+the VNC connection it wants to create
+
+
+you have a server proxy that it's very
+
+
+similar to the one we I showed in the
+
+
+previous slides and on the client you
+
+
+would like to have an also client proxy
+
+
+so they can figure out the language here
+
+
+which is basically HTTP but after they
+
+
+upgrade it became becomes VNC let's call
+
+
+it / because why not
+
+
+I have those stickers if someone's
+
+
+interested it actually stands for
+
+
+protocol upgrade raw request so it's not
+
+
+like some something I just made up
+
+
+yeah it's part of the show that I'm
+
+
+showing my cat t-shirt but I get tangled
+
+
+into my sari for that so / is basically
+
+
+HTTP upgrade plus we and see but you can
+
+
+send through SSH or any kind of TCP
+
+
+based protocol so it's basically TCP
+
+
+smuggled through HTTP you open an HTTP
+
+
+connection you downgrade to TCP and send
+
+
+you whatever you want in the case of
+
+
+manage IQ we are imagining a situation
+
+
+where you have your manager IQ appliance
+
+
+with the webserver and our proxy you
+
+
+have a virtualized environment let's say
+
+
+overt with a VM you want to access and
+
+
+you click on a new button called native
+
+
+console that will send a request to the
+
+
+web server that we would like to open a
+
+
+connection that sends back a request
+
+
+that go to / : / / miq which activates a
+
+
+browser plugin because you cannot open a
+
+
+TCP connection from the browser the
+
+
+browser plug-in opens up says I'm
+
+
+assigning a local as 1 2 3 4 which opens
+
+
+page where they ask you to open
+
+
+localhost 1 2 3 4 you open in your
+
+
+favorite client localhost 1 2 3 4 which
+
+
+gets routed to the plug-in plug-in open
+
+
+sir connection yeah it became sui and
+
+
+see the plug-in opens the connection to
+
+
+the web server but because the proxy is
+
+
+inside a web server it will know that it
+
+
+should be sent there with the HTTP
+
+
+upgrade request 2 / HTTP one-on-one
+
+
+arrives you have your / connection in
+
+
+the same time the proxy opens the VNC
+
+
+connection and you have your nice tunnel
+
+
+between the VM and the VNC client
+
+
+there is a problem with all of this and
+
+
+[Music]
+
+
+not talking about it is complicated the
+
+
+browser plug-in cannot really open a TCP
+
+
+connection it's still in the browser
+
+
+sandbox so I kind of lied you actually
+
+
+need a browser plug-in and a client app
+
+
+but the browser plug-in API allows you
+
+
+to call binaries if you have the right
+
+
+permissions this can be all go away in a
+
+
+few years when the they will actually
+
+
+the world w3c will actually implement
+
+
+the draft for opening TCP connections
+
+
+with user permission inside a browser so
+
+
+I came up with this architecture with
+
+
+the server I described the browser
+
+
+plugin and the client which are
+
+
+communicating with each other and then
+
+
+missing front-end library because I
+
+
+don't like writing JavaScript it kind of
+
+
+works I can show you the server part
+
+
+it's really similar to rack you just
+
+
+pass a block where you need to write
+
+
+your own magic function that gives you a
+
+
+host and a port and run with Puma
+
+
+basically this is how you get to the
+
+
+other endpoint nothing more the
+
+
+advantage of this are or disadvantages
+
+
+that it behaves like HTTP so you can do
+
+
+all the routing all the HTTP headers you
+
+
+can do use HTTP to secure it you can
+
+
+have your cookies your favorite rack
+
+
+middleware so you can use it in rails as
+
+
+a route no problems the only
+
+
+disadvantage is that it needs a browser
+
+
+plug-in and the binary for now in the
+
+
+future it might change it's not fully
+
+
+done and really far from production
+
+
+ready but it works and I can prove it
+
+
+I'll give you some time
+
+
+okay so you probably don't believe me so
+
+
+I will show you talk is cheap right I
+
+
+don't know how to exit from full screen
+
+
+and from this thing and it's really hard
+
+
+to see but yes yes so this is a VNC
+
+
+session running in a demo remote
+
+
+container you can see the window and I
+
+
+will show you how it works so I have an
+
+
+actual demo where I'm I'm connecting to
+
+
+this so let's close this window and so I
+
+
+have a VM define is it visible okay so I
+
+
+have a VM running in background Vox I'm
+
+
+installing docker I'm pulling down two
+
+
+containers one for sent to s1 for an SSH
+
+
+server this one has a VNC server I'm
+
+
+setting up on some environment I'm
+
+
+setting up on Etsy host file and
+
+
+installing Ruby so I can run perform the
+
+
+VM and this is the server I'm running
+
+
+basically a ruby 2.4 run Puma which per
+
+
+per looks like this so depending on the
+
+
+endpoint URL connect to the VNC server
+
+
+on this port or the SSH server in that
+
+
+port and we have a nice simple website
+
+
+where we call the plug-in with some
+
+
+event dispatching because I still like
+
+
+the front and library so I open the URL
+
+
+to VNC or SSH when I get the response I
+
+
+displayed on the web on the page so if I
+
+
+show you the site here it is and it's
+
+
+listening on localhost something where
+
+
+I'm actually connected with the VNC if I
+
+
+hit the stop button if you close me the
+
+
+connection
+
+
+so let's try to reopen it it's really
+
+
+bad with the screen
+
+
+so I'm connecting to localhost but it's
+
+
+actually running in a container and it
+
+
+failed typo thank you what did I miss
+
+
+oh yes it's here in the same time we can
+
+
+open an SSH connection I just need the
+
+
+port I have prepared the connection
+
+
+already so here it is we're in and if
+
+
+you don't believe me it's running in the
+
+
+container here I have the background box
+
+
+I'm trying to ping from the inside of
+
+
+box the containers it works and I'm
+
+
+trying to copy now the IP or as it zero
+
+
+- okay so I leave the con the background
+
+
+box 1702 did I write it correctly okay
+
+
+so it shouldn't go through because it's
+
+
+not visible
+
+
+I'm trying to find my slides sorry for
+
+
+that yeah that's all thank you and I
+
+
+believe it was a crazy topic so we have
+
+
+some questions for sure you can win the
+
+
+school bag if you ask a question and I
+
+
+have some stickers of course I have some
+
+
+stickers those nice animals this is the
+
+
+manager IQ mascot George and this is the
+
+
+person yeah thank you it's not a
+
+
+question but can I ask some stickers
+
+
+instead of question seriously yeah yes
+
+
+thank you man any other character
+
+
+questions considering it's a ruby
+
+
+conference it will be my last question
+
+
+before I die but why did you do it in
+
+
+Ruby I think that there are better texts
+
+
+for proxy requests and goodbye guys so
+
+
+we have an environment where we cannot
+
+
+run anything else than Ruby for now so I
+
+
+needed a quick solution and this is what
+
+
+we used for now yes - just make the
+
+
+client install a binary and do it
+
+
+without so if you think about like a
+
+
+role based access control and one-time
+
+
+passwords and all those things you don't
+
+
+want your person who's using using your
+
+
+VM somewhere to use it all the time you
+
+
+want to set some quotas and you just
+
+
+want to give to the person just some
+
+
+temporary access in this sense this one
+
+
+is better because you have a cloud
+
+
+management application that implements
+
+
+you all these access rules and you can
+
+
+limit the whole VNC session into that
+
+
+scope
+
+
+hi thus every Red Hat developer get a
+
+
+Red Hat yes so when you join the company
+
+
+you go to a new hire orientation where
+
+
+you can pick one very cool excuse me we
+
+
+do I'm not sure about how they get their
+
+
+hats but I saw on like videoconferencing
+
+
+in the background of some of my art
+
+
+colleagues so hat so I'm pretty sure
+
+
+they do as well my colleague here we
+
+
+have new hire they have new hire
+
+
+orientation - can you tell us anything
+
+
+about the translation between V and C
+
+
+and the websocket so can you just
+
+
+practice rusev in C frame so do you have
+
+
+to do any kind of post-processing and
+
+
+how efficient is in Ruby it's definitely
+
+
+not the most efficient in Ruby if you
+
+
+are trying to ask about it you can do it
+
+
+with a method call so from the one side
+
+
+from the TCP side is to from the VNC
+
+
+side Eustis route TCP and you are
+
+
+basically pushing roll white translation
+
+
+about the remote console in the browser
+
+
+not in the I do I do of course but in
+
+
+the smuggling you don't have to convert
+
+
+it just route TCP okay and one
+
+
+recommendation for the smuggling you can
+
+
+probably just place the sockets together
+
+
+it's a kernel and never reach the data
+
+
+to the user space there are certain kind
+
+
+of features which allow this and do not
+
+
+often know the exact cause of core
+
+
+system codes to splice two sockets
+
+
+together but it's probably best to
+
+
+investigate it I ride that one as well
+
+
+but it was problematic let's say
+
+
+come get some stickers okay thank you

@@ -1,0 +1,2395 @@
+thank you very much for the warm welcome
+
+
+and for the introduction especially so
+
+
+as has been said my name is diamond and
+
+
+I'm gonna share with you a tool belt for
+
+
+debugging it's a bit more advanced than
+
+
+your typical debugging is putting
+
+
+binding pry and trying to figure out
+
+
+what happens because the the talk that I
+
+
+will give is about covering one a bit
+
+
+more difficult to track back I've been
+
+
+working as a programmer for quite a
+
+
+while and I particularly enjoy /
+
+
+programming so I have a cat
+
+
+I'll actually have two cats this is
+
+
+Midori and together we do programming
+
+
+she purrs I program and that works quite
+
+
+well for us and actually while
+
+
+programming together we've seen a lot of
+
+
+stuff and not all of that has been nice
+
+
+like unmatched parentheses and also bugs
+
+
+we've seen bad bugs bugs that destroy
+
+
+your production database bugs that crash
+
+
+or servers you know bad bugs we've also
+
+
+seen some not so bad bugs essentially
+
+
+bugs that feel a bit guilty about not
+
+
+doing all due diligence you should have
+
+
+done but it's fine no one noticed so
+
+
+let's go however there is another way to
+
+
+talk about bugs we can speak about loud
+
+
+bugs and lower bands are usually easy to
+
+
+notice summer some-something summer has
+
+
+crashed there is a stack trace you see
+
+
+where this sector is points to there is
+
+
+a method missing or a method was
+
+
+misspelled you fix it then life goes on
+
+
+however there are also silent bugs and
+
+
+those are a bit more tricky because they
+
+
+work in the background maybe during some
+
+
+time because they're hard to notice do
+
+
+some bad bad things and when you notice
+
+
+you have no idea what's going on because
+
+
+it's usually a pile of things that got
+
+
+together into really unexpected ways and
+
+
+did some really unexpected things for a
+
+
+lot of time and that's actually what we
+
+
+will be exploring today and that is
+
+
+actual title of a talk 2016 at the
+
+
+bugging Odyssey in six chapters with an
+
+
+epilogue so the story starts basically
+
+
+like any remote programmers job they you
+
+
+go into slack and then you see a message
+
+
+from your CTO thing Oh something bad has
+
+
+happened please go fix it and in this
+
+
+case it was actually running tests in
+
+
+development environment I mean in local
+
+
+environment so we were using guard to
+
+
+automatically run tests after a file has
+
+
+been changed in a rails application and
+
+
+in order to speed up the time that it
+
+
+takes for rails application to start we
+
+
+have been using spring like I assume
+
+
+many of you do and if you are not
+
+
+familiar with spring then let me just
+
+
+give a quick explanation essentially it
+
+
+promotes rails application into memory
+
+
+it keeps it therefore until it gets
+
+
+destroyed or killed explicitly and every
+
+
+time you start tests or try to start a
+
+
+rails application or start the rails
+
+
+console the memory simply caught a
+
+
+copied usually only on change and so
+
+
+that we don't have to read all rails
+
+
+files or all libraries in our rails
+
+
+application and typically the startup is
+
+
+much faster the problem for us was that
+
+
+when tests would start we would wait for
+
+
+a long time after the fire chief has
+
+
+been detected for tests to actually
+
+
+start and it wasn't clear why so chapter
+
+
+one and step one of the bugging
+
+
+reproduce let's make sure that the bug
+
+
+is actually there and we know that we
+
+
+can actually reproduce it see it and
+
+
+experience it so okay let's run tests
+
+
+okay they were working nice as expected
+
+
+so let's change something run test again
+
+
+yeah all works almost ready to say
+
+
+cannot reproduce but let me just write
+
+
+it one more time well actually it kind
+
+
+of felt a bit slower one more time
+
+
+slower again slower and every time I
+
+
+would try to change code and runtastic
+
+
+it would get slower and slower and
+
+
+slower that was an interesting
+
+
+observation but makes our chapter one
+
+
+and with success we have reproduced the
+
+
+back so why I'll actually I didn't ask
+
+
+myself why I tried to answer the
+
+
+question what introduced the bug because
+
+
+if I see a commit in get history that
+
+
+says oh I changed this and that and I
+
+
+can read five lines of code in that one
+
+
+commit I will know what is happening and
+
+
+why it is slower so I use the first one
+
+
+I'm going to mention today get bisect
+
+
+how many of you have used actually how
+
+
+many of you know what is get bisect well
+
+
+almost everyone
+
+
+still I have all these nice lights about
+
+
+how git bisect works and I don't want to
+
+
+skip them so let me just give a quick
+
+
+explanation for those who didn't raise
+
+
+their hands
+
+
+essentially we start to wait two commits
+
+
+one is known to be bad it has a bug and
+
+
+one is known to be good it doesn't have
+
+
+a park so we mark them as good and we
+
+
+mark them we mark another one as bad and
+
+
+then we try to find the commit that is
+
+
+the first known bad commit the way it
+
+
+bisect works is that it finds one commit
+
+
+in the middle and checks whether that
+
+
+commit is good or bad it essentially run
+
+
+your test suit or a script that tries to
+
+
+reproduce a bug in this case I had a
+
+
+script that would check if tests get
+
+
+slower and slower
+
+
+for example they would so let's mark
+
+
+this one is bad and we can ignore all
+
+
+after that because they will be bad as
+
+
+well then we find another another middle
+
+
+commit test it out maybe it turns out to
+
+
+be good so we can proceed with the with
+
+
+our flow and eventually we have just one
+
+
+more committed to check so we run the
+
+
+tests and I'll leave you with a
+
+
+cliffhanger
+
+
+so the rimshot monkey isn't used
+
+
+however in order to be able to use git
+
+
+bisect or to like that every commit in
+
+
+your git history has to be it has to be
+
+
+stable so that you can run your test
+
+
+suit if your tests are randomly passing
+
+
+and failing on random stuff and your
+
+
+initializers get broken then you cannot
+
+
+use git bisect therefore you need to
+
+
+optimize your workflow so that every
+
+
+commit passes I mean makes your whole
+
+
+build green of course except that one
+
+
+part of the script that tests for that
+
+
+specific ibaka so in this case the
+
+
+problem was how to find that one commit
+
+
+that was good
+
+
+I went then commit SiC back 100 commits
+
+
+back and all of them seem to have a
+
+
+slowdown so how do I find the green one
+
+
+you know this green one of course I use
+
+
+my favorite debugging tool which is Ruby
+
+
+programming language I think we all use
+
+
+that debugging tool and I write a script
+
+
+call to find slow what's the script does
+
+
+is it checks out commits one commits the
+
+
+checks if there is a slowdown if there
+
+
+is a slowdown checks previous commit and
+
+
+so on and so on until it eventually
+
+
+finds a commit that doesn't have a
+
+
+slowdown it finds the green one so
+
+
+basically it's not binary search is just
+
+
+a linear search back through git history
+
+
+so I fired the script I go to sleep I
+
+
+wake up in the morning and Wow
+
+
+turns out I forgot the one important
+
+
+detail in my script I forgot to install
+
+
+jams after checking out the commit okay
+
+
+so bundle install let's rerun the script
+
+
+and again feel what did I forget this
+
+
+time I forgot to migrate the database so
+
+
+schema got out of the sync with the code
+
+
+okay easy to fix we write this bin slash
+
+
+setup script that essentially makes sure
+
+
+that jams scheme and everything is up to
+
+
+date with the code and I'll actually the
+
+
+script already existed I Justin to use
+
+
+it so I replace that one install with
+
+
+pin setup I run the script again go to
+
+
+sleep wake up and again script crashed
+
+
+what happened now well actually that one
+
+
+is quite a crazy story there was this
+
+
+guy in the company he wrote a lot of
+
+
+JavaScript he had some personal
+
+
+JavaScript repositories some of them
+
+
+were defining a couple of JavaScript
+
+
+functions it was not all pet he left the
+
+
+company he deleted the repository but we
+
+
+still had a link in our temple to his
+
+
+repository that didn't exist anymore so
+
+
+yeah I just couldn't go past that I mean
+
+
+I could but it would be tricky so you
+
+
+know trying not to have your
+
+
+contributors leave the company with
+
+
+their personal gems in their gem file
+
+
+that's that's not good but actually
+
+
+analyzing the output the script has
+
+
+produced so far I managed to notice that
+
+
+slowdown was getting smaller and smaller
+
+
+as I went you know more further back in
+
+
+time in history so that means that the
+
+
+application was just getting the prom
+
+
+was increasing with time there was
+
+
+something affecting affecting the
+
+
+magnitude of it but I wasn't a hundred
+
+
+percent clear what introduced it because
+
+
+they slowed down you know it was getting
+
+
+smaller smaller and it was hard to see
+
+
+the convergence point where where it was
+
+
+introduced in the first place
+
+
+and it appeared to me that there was one
+
+
+huge merge commit that introduced a lot
+
+
+of commits a lot of changes in the code
+
+
+base that could have been a start of the
+
+
+problem and it was a dawn of mono lens
+
+
+we're in Space Odyssey after all so
+
+
+monolith was actually a library that we
+
+
+implemented and rolled by ourselves to
+
+
+support our monolithic rails application
+
+
+but of course and we called it we
+
+
+describe it as a business action
+
+
+framework a framework built on top of
+
+
+rails that allows you to build business
+
+
+subjects that handle well requests from
+
+
+the browser they implement controllers
+
+
+inside of them they also implement
+
+
+Asians and then process some business
+
+
+logic that touches and models and
+
+
+everything else you know there are some
+
+
+other libraries and frameworks out there
+
+
+that I'm not gonna mention right now
+
+
+that there were other similar things but
+
+
+this is it and well actually monolith is
+
+
+no more it's now granite it's business
+
+
+sections architecture for rails apps and
+
+
+I believe I'm the first public speaker
+
+
+to mention it so I want to announce
+
+
+granite business actions architecture
+
+
+for rails apps as an open-source gem
+
+
+that is available today for all of you
+
+
+at github.com slash dot dot slash
+
+
+granite if you have a monolithic rails
+
+
+application and you want to refactor it
+
+
+so to write objects that encapsulate
+
+
+commands business app actions operations
+
+
+that include validations and conditions
+
+
+and policies and all of that
+
+
+check the repository out you it might
+
+
+help you get your rails application more
+
+
+organized so at this point I'm facing a
+
+
+huge Apple request merge of bull
+
+
+requests and I'm still not 100% sure if
+
+
+that's the cause of the problem but so
+
+
+I'm going to close this chapter with one
+
+
+unsure may be that that's the case but
+
+
+it doesn't have to be let's try a
+
+
+different approach now let's ask a
+
+
+question what could it be and I've been
+
+
+talking with people and a lot of people
+
+
+have mentioned memory leaks as a
+
+
+potential problem because there is
+
+
+something that is getting slower over
+
+
+time and typically memory leaks are a
+
+
+cause of that so let's explore for them
+
+
+and how do we check for memory leaks my
+
+
+first approach instinct was to check
+
+
+memory usage of a rails application that
+
+
+should be easy right we run a command
+
+
+that prints out how much memory the
+
+
+process is using and that's good right
+
+
+I mean ideally with we would see this
+
+
+chart basically as time goes on memory
+
+
+usage increases linearly or in a
+
+
+different way it depends but it just
+
+
+keeps growing and if it keeps growing
+
+
+then obviously there is something
+
+
+somewhere leaking we just need to find
+
+
+it but there is one little trick and I
+
+
+didn't know it at that time
+
+
+it's that Ruby doesn't release memory
+
+
+back to operating system so essentially
+
+
+if you have a spike in your program that
+
+
+uses a lot of memory then Ruby process
+
+
+will increase its usage of memory and
+
+
+there will be objects in Ruby memory
+
+
+that Ruby has used it Ruby's garbage
+
+
+collector has clear that memory has
+
+
+freed that Ruby heap however it won't
+
+
+return that heap to the operating system
+
+
+it's still within the process and Ruby
+
+
+will reuse that memory later on but
+
+
+operating system never gets gets it back
+
+
+and when you check the memory of Ruby
+
+
+process it's will seem as big as it was
+
+
+that will be hopefully a result sometime
+
+
+we don't know for sure but it is what it
+
+
+is so another typical problem another
+
+
+typical chart you see with Ruby
+
+
+processes is this as time increases the
+
+
+memory grows and differentially tree
+
+
+reaches one point and stays stable so
+
+
+when you're dealing with a lot of with a
+
+
+huge variety in counting it's really
+
+
+hard to see if it is memory leak or
+
+
+essentially memory bloat so just
+
+
+checking the memory that process uses
+
+
+over time is not enough we have to use
+
+
+another approach let's use science and
+
+
+science is not a tool it's an approach
+
+
+we put up our hypothesis okay it is a
+
+
+memory leak the result memory leak let's
+
+
+prove it or disprove it let's make an
+
+
+experiment and this one would be to
+
+
+check heap dumps heap as you know is
+
+
+either died Namek memory where all our
+
+
+objects are stored
+
+
+dump is reading that memory and putting
+
+
+it to a next file that we can read read
+
+
+from so basically it's a snapshot of our
+
+
+dynamic memory and such tools exist for
+
+
+essentially every programming language
+
+
+including for including Ruby actually
+
+
+the code for creating hip dumps is built
+
+
+in into Ruby we just have to start
+
+
+tracing object allocations in object
+
+
+space run some code and eventually we
+
+
+can just print out all objects that are
+
+
+known to object space after that so this
+
+
+is the example that defines one method
+
+
+on one class initializes that plus and
+
+
+calls a method on it what do you think
+
+
+how many objects does ruby create or at
+
+
+how many objects is Ruby having heap
+
+
+after this ten thousands 33,000 yeah the
+
+
+order of magnet correct 10,000 was the
+
+
+right order of magnitude yeah so just
+
+
+for saying hi so you know there is a
+
+
+long way to for Ruby to to go to get
+
+
+faster and more manageable but anyway
+
+
+let's see what is in those 33,000 lines
+
+
+they look like this essentially every
+
+
+line is a JSON object the whole file is
+
+
+not a JSON object but every single line
+
+
+is that's so that you can actually read
+
+
+this file and stream I don't expect that
+
+
+you can read this so here is a zoomed in
+
+
+version that is a slightly better format
+
+
+at a single line of that so you can see
+
+
+a couple of things here so address in
+
+
+memory where the object lives a type of
+
+
+the object for some objects you can even
+
+
+see the value like for Springs you can
+
+
+see the content of the string and coding
+
+
+even you can see where that string is
+
+
+where was it initialized method and you
+
+
+can see generation generation
+
+
+essentially a memes home
+
+
+garbage collection generations he has
+
+
+this object survived so since the object
+
+
+was created there have been 13 garbage
+
+
+collections and all of them the string
+
+
+has survived you can also see quite
+
+
+other I mean a few other useful more or
+
+
+less useful things in this case they are
+
+
+not they are not so important so
+
+
+obviously if that example created 33,000
+
+
+lines we don't expect that rails startup
+
+
+process or starting tests of a huge
+
+
+application will give us a file that we
+
+
+can actually parse mentally so direct
+
+
+tools for that one of them is called he
+
+
+p he p is heap dump analyzer it's a gem
+
+
+that you can install and then run as a
+
+
+command that provides an output like
+
+
+this essentially it says that there are
+
+
+two hundred nine thousand this is now a
+
+
+different example taken from the readme
+
+
+there are two hundred nine thousand
+
+
+objects that have been survived mill
+
+
+generations that means that those
+
+
+objects were created before allocation
+
+
+tracer started then there are four
+
+
+hundred objects that have survived
+
+
+fourteen garbage collection generations
+
+
+eight hundred objects that have survived
+
+
+eighteen garbage collection generations
+
+
+and so on and so on and in he PU you
+
+
+also get this you can analyze one
+
+
+generation for example let's analyze all
+
+
+objects that have arrived seventeen
+
+
+garbage collection generations and then
+
+
+you see that the object created on this
+
+
+line timeout dot RB seventy nine he has
+
+
+allocated this much memory so this is
+
+
+very useful manner and when looking for
+
+
+memory leaks when trying to find them
+
+
+and diagnose them and of course fix them
+
+
+but in this case it wasn't useful
+
+
+because the problem was that I was able
+
+
+to run this profiling once when
+
+
+application starts once the
+
+
+when it would start again I would need
+
+
+to look at different memory dump keep
+
+
+them then third time I would need to
+
+
+look at the third keep them so
+
+
+essentially I would have two different I
+
+
+mean or three or four different reports
+
+
+from hippy and I would need to analyze
+
+
+them and compare one with another so
+
+
+again I fall back to using Ruby to find
+
+
+the diffs between different hippie dumps
+
+
+so programming is quite a useful skill
+
+
+turns out and looking at this I find
+
+
+something very interesting and very
+
+
+confusing
+
+
+it's that class dsl objects survived the
+
+
+longest and by class dsl objects I mean
+
+
+objects that represent attribute
+
+
+subjects that represent callbacks and so
+
+
+on and so on essentially something you
+
+
+wouldn't typically expect to be leaking
+
+
+so I really king classes are really King
+
+
+huh what is happening I it wasn't like
+
+
+anything I've seen before and I was
+
+
+confused so it seemed like there is
+
+
+something surviving for a long time
+
+
+so there is still possibility that there
+
+
+is a memory leak it's plausible but
+
+
+let's move on because this still doesn't
+
+
+have a clear answer okay so back to the
+
+
+problem we're faced with facing a
+
+
+performance problem so it's related to
+
+
+time might be related to memory but we
+
+
+don't know for sure let's then explore
+
+
+something else let's let's trace a call
+
+
+stack let's see how long do functions
+
+
+they how much time functions take time
+
+
+to run and to complete so that we can
+
+
+see what is actually taking such a long
+
+
+time maybe this is where we should have
+
+
+started but you know some tools you just
+
+
+don't learn at the right time and this
+
+
+was my first experience using flame
+
+
+graphs and we'll see if they were very
+
+
+useful
+
+
+who knows what the flames are sweet
+
+
+quite quite a lot so again for the
+
+
+uninitiated here are the flame graphs I
+
+
+said let's consider this small ruby
+
+
+program there is a main method main
+
+
+method calls say hello method and called
+
+
+say by method they call a few other
+
+
+methods so when you run a program like
+
+
+that we have to consider a call stack on
+
+
+in call stack we have main method on top
+
+
+it calls method called say hello and say
+
+
+hello calls method rename so in this
+
+
+time frame we have these three stack
+
+
+frames on top of each other then and so
+
+
+we're here with the execution rate name
+
+
+is being executed next step next CPU
+
+
+cycle next couple of microseconds
+
+
+whatever this method has finished and we
+
+
+are calling greeting so right now the
+
+
+cosec looks like this main call say
+
+
+hello calls greeting in another time
+
+
+frame we have finished with greeting we
+
+
+have output the message so now we are
+
+
+remain calling C by and essentially this
+
+
+is what our call stack looks like
+
+
+everything above this is some are some
+
+
+system methods about which we don't
+
+
+really care so this is of course very
+
+
+simplified for plain graphs and this is
+
+
+what it would look like fully rendered
+
+
+but again we're dealing with real
+
+
+startup where a bunch of methods are
+
+
+calling bunch of other methods and who
+
+
+knows how many millions of objects get
+
+
+created so brace yourselves
+
+
+this is rails startup the flame graph
+
+
+actually if you render it by yourself oh
+
+
+sorry
+
+
+three years ago if you render it by
+
+
+yourself opened the SVG in chrome chrome
+
+
+would crash on a very modern computer
+
+
+three years ago that's actually why I
+
+
+started loving Safari so much because
+
+
+Safari didn't crash it was not
+
+
+pleasurable experience but it was
+
+
+possible to see it again looking at one
+
+
+flame graph
+
+
+didn't tell me much I didn't see any out
+
+
+of ordinary spike but then again I
+
+
+wasn't faced with one slow method I was
+
+
+facing with a method that's taking more
+
+
+and more time every next time it's cold
+
+
+I mean every time rails application
+
+
+starts again it gets slower so how do I
+
+
+find it I render one flame graph on
+
+
+first start then on second start I
+
+
+render another flame graph on third
+
+
+start I render another fling graph and
+
+
+then there was something I noticed as I
+
+
+was behold I was I loaded three SVG
+
+
+files in Safari and it worked a second
+
+
+flame graph was here this function that
+
+
+start taking more time than the first
+
+
+one third flame raffle he had that
+
+
+function take him in more time than the
+
+
+second time and I finally had something
+
+
+however there was this problem
+
+
+everything about this is Ruby code
+
+
+everything below this is rails code
+
+
+this is rails code and my application
+
+
+code is somewhere here so out of my
+
+
+hands rails is slow rails buggy Ruby is
+
+
+buggy whatever I don't know this is not
+
+
+us yeah maybe maybe it is but we'll have
+
+
+to find it so another debugging tool is
+
+
+digging digging into code that we don't
+
+
+own that we have never before read and
+
+
+exploring it let's dig into rails so I
+
+
+open this action pack clip action
+
+
+dispatch routing route set dot RB method
+
+
+it has something to do to do with
+
+
+routing for some reason routing of all
+
+
+things is slowing down the application
+
+
+start so at actually there was a line
+
+
+number here it points to this method
+
+
+clear so what does this method to do
+
+
+there is this path helpers which seems
+
+
+to be some kind of an enumerable it goes
+
+
+through every item called helper then
+
+
+the resistance variable called path
+
+
+helpers module to which it sends the
+
+
+method and DEF method apparently it is
+
+
+possible to undefined method in Ruby and
+
+
+it undefined this method helper then for
+
+
+every URL helper in URL helpers it sends
+
+
+a message to your helpers module to one
+
+
+define that method so after you know
+
+
+reading through a bit the few other
+
+
+rails files I finally put the picture
+
+
+together which was essentially this
+
+
+every controller in rails as you know he
+
+
+has methods for rendering for creating
+
+
+your URLs or paths to all other actions
+
+
+in in your rails application and those
+
+
+methods like articles paths for example
+
+
+article paths comments by the article
+
+
+comments bad new comment pad and so on
+
+
+and so on are stored in these two
+
+
+modules banned helpers and URL helpers
+
+
+and those modules are indirectly
+
+
+included in every controller of your
+
+
+application so what what rails is doing
+
+
+it's on every time it reads routes files
+
+
+routes file sorry it clears these two
+
+
+modules removes all methods from them
+
+
+which essentially removes those methods
+
+
+from every controller in your
+
+
+application and then builds those
+
+
+helpers again because every time you
+
+
+really load the code you could have
+
+
+easily removed an action or changed your
+
+
+house completely so it has to do this ok
+
+
+so again what is the problem because all
+
+
+above that's flame prep was robocode
+
+
+we might need to assume that removing a
+
+
+method could be slow so science let's
+
+
+try to prove it the way we'll do it is
+
+
+will create 1000 objects and remove
+
+
+include a model in module into those
+
+
+1000 objects and remove methods from
+
+
+that module add methods and remove
+
+
+methods we'll just count time for
+
+
+removing methods then we'll create 2,000
+
+
+objects and do the same thing eventually
+
+
+ending up with you having 10,000 objects
+
+
+in memory that includes all that one
+
+
+module that one module will have about
+
+
+three thousand methods and we'll add and
+
+
+remove them and see if it gets lower
+
+
+you know if someone asked me how much
+
+
+time I would expect this to take I would
+
+
+say it's probably linear in time as much
+
+
+time as it needs Ruby would need to
+
+
+remove methods from thousand objects
+
+
+from a module that is included into one
+
+
+thousand objects I would expect the same
+
+
+time to take for ten thousand objects at
+
+
+worst case if ruby was doing something
+
+
+silly
+
+
+it could be linear you know in in
+
+
+complex at the end we would see more and
+
+
+more time for more and more objects this
+
+
+is the actual result this is tested with
+
+
+Ruby 2.4 I believe so it's it goes some
+
+
+polynomial way way but then it kind of
+
+
+becomes constant finally I I don't know
+
+
+what would happen with 30,000 objects so
+
+
+definitely not linear definitely not
+
+
+constant but is this a problem in
+
+
+general or is it a problem just in
+
+
+matters Ruby implementation let's double
+
+
+check this Ruby knows which is
+
+
+implementing Ruby in Ruby itself so same
+
+
+set up how much time does Ruby know
+
+
+stick pretty good Ruby knows pretty good
+
+
+so where does the slowdown come from
+
+
+so well dig into Ruby now how much fun
+
+
+would that be
+
+
+we'll see with extension dot C so for
+
+
+the uninitiated it's just like
+
+
+JavaScript right
+
+
+no it's prettier okay let's just zoom in
+
+
+into more important parts and this is
+
+
+basically the code for undefined methods
+
+
+after all checks or most of checks have
+
+
+been made so what is Ruby do to remove a
+
+
+method it actually adds a method it adds
+
+
+a method with the flag V and message
+
+
+type and F so we add a method that says
+
+
+oh this is undefined just skip this
+
+
+place and turns out that this method is
+
+
+taking all the time of on defining the
+
+
+method so the slowest part of on
+
+
+defining a method is adding a method
+
+
+that says this method is undefined and
+
+
+half of that time of adding a method is
+
+
+actually clearing method cache the more
+
+
+you know and I don't know where the
+
+
+other half of that time goes to its I
+
+
+would need to render a flame chart for
+
+
+Roby and I really didn't have enough
+
+
+nerve to do it but very fun and if you
+
+
+do that maybe you can fix Ruby and make
+
+
+it faster for everyone else and you know
+
+
+your Ruby committer so good for you here
+
+
+let's start anyway to recap we had this
+
+
+monolith framework and there is one
+
+
+silly thing we were doing every time we
+
+
+would define business section we would
+
+
+bow and we would mount it onto route
+
+
+basically as I said business section had
+
+
+its own controller so it would just
+
+
+receive params and request directly from
+
+
+a browser parse those params check
+
+
+policies check that that business action
+
+
+makes sense to be executed in the
+
+
+context of the application as it is
+
+
+preconditions it would check user data
+
+
+user submitted data
+
+
+data validations and then it would
+
+
+potentially run business logic so that
+
+
+part were it where we say that that
+
+
+business section responds to some route
+
+
+was creating a controller however the
+
+
+problem was that those controllers that
+
+
+we created would also survive garbage
+
+
+collection and we're very okay so why
+
+
+did they survive garbage collection in
+
+
+it because of the specific way they were
+
+
+have been created and also because of
+
+
+the specific way spring works
+
+
+essentially when as I said when you
+
+
+start the application for the first time
+
+
+spring loads and it keeps the Ruby rails
+
+
+application in memory and if you have
+
+
+created your controllers at that point
+
+
+in time before when spring loaded for
+
+
+the first time those controllers would
+
+
+be kept in memory and maybe you know
+
+
+some other data and basically after
+
+
+spring Forks we would start reloading
+
+
+routes and those controllers would live
+
+
+on and live on live on so controllers
+
+
+would survive GC code reloading would
+
+
+create more controllers and then code
+
+
+reloading clears all routes which means
+
+
+that every time we reload the code we
+
+
+create new controllers that include
+
+
+those gyro helpers and path helpers and
+
+
+then we have to remove all methods from
+
+
+them add all methods again to them so we
+
+
+would just do more and more and more
+
+
+work every time the rails application
+
+
+would resolve and that was it that was
+
+
+finally defining that would allow us to
+
+
+step back and now we know what we're
+
+
+doing wrong we are creating controllers
+
+
+at a boot time of the application which
+
+
+we shouldn't do lesson learned
+
+
+so let's fix it and the fix basically
+
+
+took almost as much time as the whole
+
+
+debugging took and because I'm speaking
+
+
+about this debugging as an odyssey you
+
+
+can expect it wasn't like two days of
+
+
+work it was more like a month
+
+
+I don't remember anymore it was two and
+
+
+a half years ago forgive me
+
+
+but now we know how to fix it and we
+
+
+essentially had at that point to
+
+
+re-implement the whole interface for
+
+
+mounting business sections on to the
+
+
+routes so you know it was a win code
+
+
+reloading now was a constant time we
+
+
+didn't we didn't face any more problems
+
+
+because now we would create controllers
+
+
+only after spring has been worked so
+
+
+they they wouldn't be collected in that
+
+
+primary Spring instance and fixing it
+
+
+was I'll I win again so success and then
+
+
+we have just the final chapter which is
+
+
+the lesson and it boils down to no it's
+
+
+not do not use rails it's no die app and
+
+
+no diet means that you should know the
+
+
+code that you have wrote but not only
+
+
+that your application is also framework
+
+
+you're using and that's rails and
+
+
+knowing rails can be hard and it's also
+
+
+knowing all the libraries that you have
+
+
+made yourself
+
+
+and while easier it's it's still hard if
+
+
+you're working with
+
+
+I know 5060 other developers who are
+
+
+writing code all the time and then if if
+
+
+you have a framework on top of a
+
+
+framework or all the interactions and
+
+
+dependencies make it more and more hard
+
+
+and then again you have your library you
+
+
+have your framework and you have the
+
+
+whole language in there may skew so it's
+
+
+not easy but we this is what we have to
+
+
+deal with and if you don't want to know
+
+
+and if you can't possibly know your
+
+
+framework then maybe we should learn a
+
+
+lesson from this conference and try to
+
+
+find different approaches to writing our
+
+
+applications that doesn't require a
+
+
+monolithic and megalithic frameworks for
+
+
+your code to run I know maybe it's worth
+
+
+giving it a try I didn't so far but III
+
+
+will try to push for that in the future
+
+
+and I promised an epilogue to the talk
+
+
+and an epilogue is just a few lines of
+
+
+code
+
+
+that I have discovered in rails many
+
+
+many years
+
+
+after that it's a small piece in active
+
+
+support in a module called dissonance
+
+
+tracker this Descendants tracker is a
+
+
+module that is included into every
+
+
+object of your rails application and
+
+
+that has this one nice thing it has this
+
+
+class class method as our class variable
+
+
+and in that class variable it constructs
+
+
+a hash that links every class with every
+
+
+class
+
+
+it has inherited from so if you are ever
+
+
+discovered that your classes are not
+
+
+being garbage collected well that's
+
+
+maybe because they have been collecting
+
+
+collected by rails and they live there
+
+
+in that hash happily-ever-after
+
+
+just so that we can speed up tracking
+
+
+this sentence because that's what your
+
+
+framework needs so yeah yeah pity
+
+
+bugging and thank you for the attention
+
+
+[Applause]
+
+
+was it really worth it to debug a
+
+
+development environment issue for such a
+
+
+long time or ditch like spring or guard
+
+
+all together I believe it was worth it
+
+
+very much because at that time I believe
+
+
+we had somewhere between 50 and 200
+
+
+developers in the company all of them
+
+
+running hopefully tests a lot of times
+
+
+throughout the day and spring first
+
+
+three times was taking much less time to
+
+
+run the tests than running that code
+
+
+that test without spring how we were
+
+
+after running spring for four or five
+
+
+times it wouldn't be worth it I mean
+
+
+still using spring he had its benefits I
+
+
+believe it was very much worth it and of
+
+
+course now we can say that our framework
+
+
+is production tested and you can use it
+
+
+freely because it doesn't slow down your
+
+
+development environment
+
+
+thank you
+
+
+[Applause]

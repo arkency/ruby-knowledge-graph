@@ -1,0 +1,1651 @@
+about 90 of smart Madrid's distributed
+
+
+database and distributed in a weird way
+
+
+it stores the same data on all computers
+
+
+and the good thing about aetherium is
+
+
+that you it's not a database for data
+
+
+but it's also a database for code you
+
+
+can create you can write a code and
+
+
+store in a theorem the code is called
+
+
+smart contract and a smart contract is
+
+
+basically a number of functions and some
+
+
+place to store some data but you you
+
+
+can't randomly change this data once
+
+
+you're already uploaded it to etherium
+
+
+you can only change this data according
+
+
+to functions you wrote when you uploaded
+
+
+this code to ethereal so when you need
+
+
+to change your your smart contract data
+
+
+you just create a transaction which do
+
+
+changes according to function and it's
+
+
+simply like : this function one good
+
+
+thing about smart contracts is is well
+
+
+people imagination and people just
+
+
+invite very very funny way to use smart
+
+
+contracts they they decided that we can
+
+
+use smart contracts to kind of create
+
+
+our own currency and how it works
+
+
+basically we create a smart contract
+
+
+which has some mapping it data mapping
+
+
+from addresses to value and it says that
+
+
+some address have some some some amount
+
+
+of tokens or some amount of this
+
+
+currency and yes then everybody can
+
+
+create a transactions which change this
+
+
+mapping
+
+
+into our functions and we can write very
+
+
+interesting things we can write basic
+
+
+things like for example if I create a
+
+
+transaction to a theorem which works
+
+
+according to a mid function it well this
+
+
+function basically adds adds some value
+
+
+to my balance and we can transfer this
+
+
+tokens or we can like do other stuff if
+
+
+you want to learn more about this you
+
+
+can go to a theorem work they have a
+
+
+good tutorials and yeah you will end up
+
+
+you will end up written your own talking
+
+
+your own currency and you even can
+
+
+launch a saw and if you launch I saw
+
+
+come to Belarus because it's actually
+
+
+legal legal to do it in Belarus thank
+
+
+you thank you so hi some months ago I
+
+
+had an idea which actually uses the
+
+
+project and just wanted to quickly
+
+
+present it so it's not a jam or anything
+
+
+it's just technique I used to do some
+
+
+stuff so I have this had this bus and I
+
+
+wanted to drive it I'm just kidding so
+
+
+essentially what it is in my previous
+
+
+talk I talked about commands and events
+
+
+but I haven't talked there is a funny
+
+
+way to decouple things but do I mean
+
+
+well this is just a small code example
+
+
+which says ok this is how do we register
+
+
+things or command handlers to come
+
+
+handle commands so you just built
+
+
+something like this it's very simple you
+
+
+add stuff to the registry and you can
+
+
+fetch stuff from registry for events
+
+
+it's the same except events can be
+
+
+handled by multiple handlers as opposed
+
+
+to commands which can be handled by just
+
+
+a single one so it's a tread same thing
+
+
+so how we have a registration phase
+
+
+which happens at boot time
+
+
+so before we boot our application we
+
+
+register all of our command handlers
+
+
+like this
+
+
+and all of our event handlers like this
+
+
+this is just as an example and then we
+
+
+have execution phase so in order to
+
+
+handle command we just said ok bus come
+
+
+on please handle my command or we want
+
+
+to handle an event and it's the same
+
+
+thing
+
+
+bus event please handle my event why
+
+
+because coupling handlers are registered
+
+
+in boot time publisher needs not know
+
+
+what if anything will handle the message
+
+
+just tell the bus to handle it
+
+
+handlers do not care where messages
+
+
+coming from and interacting parties are
+
+
+completely decoupled is this a good idea
+
+
+I don't know it's a pattern it's used
+
+
+sometimes but if you have an opinion
+
+
+please tell me here thank you very much
+
+
+so I was talking about refinements and I
+
+
+started to show some use cases when he
+
+
+might be willing to use it so I already
+
+
+told about the balance reduction
+
+
+examples so the next thing I was started
+
+
+talking about but I was stopped so it's
+
+
+kind of modernization so if we want to
+
+
+use some features they're not available
+
+
+and older rubies or maybe in older
+
+
+versions of frameworks you want to
+
+
+integrate with you can do this simple
+
+
+trick but let's go further next example
+
+
+is a kind of perfect privacy so in Ruby
+
+
+we private keyword actually doesn't make
+
+
+your code private so safe from invoking
+
+
+from other places so we you always can
+
+
+do something like send and that's it
+
+
+but with refinement you can actually do
+
+
+that I don't know when you need it but
+
+
+that's a kind of feature of Finance Oh
+
+
+the most common use case is to build
+
+
+their cells using refinements to pollute
+
+
+our global namespace but just within
+
+
+this one file that's an example from gem
+
+
+called
+
+
+but earn much think so it's a trying
+
+
+people try always try to build Alex
+
+
+Ephraim Ruby one more example from one
+
+
+of mine gems so it's just a synthetic
+
+
+sugar to convert our lambdas to brats
+
+
+and everyone knows that lambent process
+
+
+broke sorry
+
+
+two different things yeah and there's
+
+
+very subtle differences and sometimes we
+
+
+don't want to care about it and use only
+
+
+perks and of course a lot of syntax
+
+
+sugar could be possible with refinements
+
+
+and actually just kind of broad tip you
+
+
+can use information about activated
+
+
+models with refinements it is the models
+
+
+which I included with using kooky word I
+
+
+don't know where you need it
+
+
+but that's a feature of the language we
+
+
+have almost no one you know about it and
+
+
+just as a quick bonus I guess most of
+
+
+you heard about Rafa will be yet another
+
+
+promising implementation and it supports
+
+
+refinements already so that's a sign
+
+
+that refinements will be in the language
+
+
+for a long time I think because
+
+
+otherwise I don't see what why they
+
+
+decided to waste time on it and of
+
+
+course refinements had some problems
+
+
+well let me show just a few of them well
+
+
+there are a lot of kind of tickets and
+
+
+the Ruby issue tracker which and not
+
+
+exactly bugs but strange behaviors when
+
+
+some conditions requirements do not
+
+
+behave as people expect and there are
+
+
+some interesting API problems so that's
+
+
+example that refinement is activated
+
+
+when you use send but it's not activated
+
+
+when you use public send that's kind of
+
+
+weird things so do know that and if you
+
+
+use their finance and there of course
+
+
+promise without implementations for
+
+
+example with JRuby the behaviors
+
+
+sometimes you need to you know look for
+
+
+workarounds if you want to use your
+
+
+fireman's but overall they works
+
+
+let's all at the end of my talk I know I
+
+
+got it mean it's okay
+
+
+and I want to tell you about as a
+
+
+project of mine which is called Jam
+
+
+check and actually all this stuff about
+
+
+refinements it's a part of this broader
+
+
+project that's a collection of kind of
+
+
+tips for first of all for Jam offers so
+
+
+including this tip with my monkey
+
+
+patching I don't know how to open
+
+
+browser there so sorry please go to that
+
+
+page finance I'll share a link later so
+
+
+it's kind of checklist which I built
+
+
+going to my own experience which helps
+
+
+me to you know write better software for
+
+
+developers so it's not for writing
+
+
+commercial applications but for writing
+
+
+gems for other developers make it easy
+
+
+to use this and gems to extend them and
+
+
+whatever there are some crucial
+
+
+properties that I think every time she'd
+
+
+have almost no gems that help all of
+
+
+them even my gems of course I don't
+
+
+follow all these rules but that's my
+
+
+attempt to you know to help others to
+
+
+build better software there are a lot of
+
+
+useful links to useful tools which helps
+
+
+you to do better documentation you know
+
+
+better linting tools and etc so that's
+
+
+it and since I have one second thank you
+
+
+and goodbye
+
+
+okay please raise your hand if you feel
+
+
+like you're being distracted from your
+
+
+real work too often okay okay and please
+
+
+now raise your hand if you you're the
+
+
+person who distracts yourself by
+
+
+browsing Twitter doing girl and stuff
+
+
+okay great have you heard that
+
+
+distractions make actually dumber than
+
+
+being stoned no now you know okay so I
+
+
+want to tell you how to become smart
+
+
+again so I try to eliminate distractions
+
+
+but I couldn't so I found a way to come
+
+
+tain them and here's how so can I have
+
+
+my sandwich it does one think you
+
+
+remember from the stock this is sandwich
+
+
+okay
+
+
+offline sandwich offline sandwich now we
+
+
+can go or stay and remember this
+
+
+workflow okay so first offline then
+
+
+online and third step of topic so it's a
+
+
+way to organize your workday
+
+
+then repeat it's like let's say around
+
+
+you'd have like four rounds let's say a
+
+
+day where first you work on your real
+
+
+job you put your you turn off your slack
+
+
+you turn off your phone
+
+
+your boss cannot call you you do the
+
+
+real job like let's say one hour or 90
+
+
+minutes this is the time where you can
+
+
+code where you can actually investigate
+
+
+some stuff then when you're done you
+
+
+enter the online face or around where
+
+
+you can actually communicate with your
+
+
+colleagues you can check what they wrote
+
+
+to you you can write them what you are
+
+
+doing and you actually should do it so
+
+
+this is the focus face and this is the D
+
+
+focus face because sometimes the problem
+
+
+is your focus too much and you only see
+
+
+this formatting problem and you can be a
+
+
+little deluded sometimes then of topic
+
+
+face the best face you can browse
+
+
+Twitter you can go for a coffee
+
+
+I suggest like let's say 30 minutes for
+
+
+online face and whatever you think is
+
+
+right for off-topic face and then repeat
+
+
+so you can already see the sandwich
+
+
+somewhere ok so does it make sense a
+
+
+little bit and I can actually say that
+
+
+it brought my brain
+
+
+back to face where I felt it has some
+
+
+more capacity because like when you're
+
+
+being disrupted all the time you'll you
+
+
+actually feel Dumber at least this was
+
+
+my this was my feeling oh there's still
+
+
+two minutes so let's continue okay
+
+
+another way to to call it would be like
+
+
+immersion driven workflow so you
+
+
+actually immerse yourself in such
+
+
+offline face no one can see you
+
+
+immerse like going underwater or you can
+
+
+call it like put yourself into a little
+
+
+jail for some time
+
+
+yeah and now you do the work you cannot
+
+
+escape and the goal would be at the
+
+
+beginning of the offline face to know
+
+
+what you want to do establish the plan
+
+
+yeah
+
+
+put it in paper or whatever and try to
+
+
+accomplish something during the face so
+
+
+a comet or a write-up why you don't want
+
+
+to do it or like the result of the
+
+
+investigation so don't just quit when
+
+
+the time is over just try to accomplish
+
+
+something and then you get the instant
+
+
+gratification which is the primary
+
+
+reason that we look for distractions
+
+
+still one minute okay but it might not
+
+
+work in your workflow work environment
+
+
+it works best if you got remote work
+
+
+environment it works even better if your
+
+
+eyes asynchronous and it works best if
+
+
+you got remote asynchronous and autonomy
+
+
+when it comes to your work so you might
+
+
+go to your boss and convince convince
+
+
+him to do all of that so that's it thank
+
+
+you
+
+
+so in this lightning talk I want to take
+
+
+a little step back and talk about Ruby
+
+
+standard library and I decided to go
+
+
+through it and find and see what and
+
+
+what I can find there and here are some
+
+
+of my findings so for example you have a
+
+
+brief class which lets you to find
+
+
+abbreviations for a bunch of strings
+
+
+that are not ambiguous this is obviously
+
+
+very useful thing and you have it with
+
+
+every Ruby distribution out there next
+
+
+thing is matrix this might be a bit more
+
+
+useful so just for regular operation on
+
+
+matrices just like you would expect to
+
+
+every language to have maybe not in
+
+
+standard library but Ruby has it then
+
+
+primes again some math and you can find
+
+
+like some prime and in sequence or you
+
+
+can make prime divisions
+
+
+that's all also I think you you got
+
+
+right away with with your rube
+
+
+distribution okay but let's talk about
+
+
+some more interesting things so there is
+
+
+three actually classes DBMS DB M and G
+
+
+DBM they are differ by internal
+
+
+implementation only so you need to get
+
+
+to the docks and find out what are the
+
+
+differences but in general it's embedded
+
+
+keys key value store for Strings so for
+
+
+example if you have huge hash of strings
+
+
+as keys as values you can upload it to
+
+
+disk and forget about it let's garbage
+
+
+collector handle it free up some memory
+
+
+and when you're ready to work on it
+
+
+again you can load it and for example
+
+
+print print what's in there so this is
+
+
+what you would expect because this is
+
+
+exactly what you you written in in the
+
+
+beginning so this is also for free
+
+
+next thing is P store this is a bit more
+
+
+complex stuff because be store lets you
+
+
+save
+
+
+a keyaki of objects with their states
+
+
+etc so I didn't include an
+
+
+implementation of state class but you
+
+
+can imagine the system states with a
+
+
+name connected to other states via some
+
+
+named labels and you can you can create
+
+
+all this world and then open MP store
+
+
+and under that key start because why not
+
+
+write the entry point that the first
+
+
+state the starting state and again you
+
+
+can for example stop stop the script and
+
+
+come back later at some point and just
+
+
+read it and everything you did was there
+
+
+and you can you can still have all this
+
+
+hierarchy up and running of course it
+
+
+does not work for literally everything
+
+
+but everything that can be marshaled
+
+
+using using Ruby standard marshalling
+
+
+and can be saved and retrieved
+
+
+another thing is distributed through B
+
+
+this is this is a bit more complicated
+
+
+but really cool you actually create an a
+
+
+class an object and expose it via the
+
+
+Ruby protocol to the outside world so in
+
+
+a separate process you can connect to it
+
+
+and just change its instant variables
+
+
+called methods whatever you want there
+
+
+is option parser which is for parsing
+
+
+options from CL layer CLI and this is
+
+
+quite quite convenient more than
+
+
+environment variables and of course
+
+
+there's much more
+
+
+for example topological sorting of
+
+
+directed graphs and finding strongly
+
+
+connected components that's also Ruby
+
+
+standard library so if you have some
+
+
+time go there read it maybe you will
+
+
+find some use case for them I don't know
+
+
+I haven't thanks alright so I wanted to
+
+
+show you how I play games with Ruby so
+
+
+first show of hands how many of you
+
+
+actually own a desktop computer ok how
+
+
+many of you play games not on this
+
+
+computer but you know
+
+
+okay cool so it all started with the I
+
+
+wanted to play black and white too on my
+
+
+desktop computer and it was running
+
+
+Windows 10 and it nothing worked so
+
+
+first I try to just install the game in
+
+
+Windows 10 didn't work because it needed
+
+
+an emulation layer to combat piracy and
+
+
+that has been removed in Windows 10 so
+
+
+it needed Windows 8 and at the months to
+
+
+install that on my computer so then I
+
+
+try to install the game inside VMware
+
+
+Workstation because it can emulate the
+
+
+GPU didn't work either because it lacked
+
+
+and it's an emulation layer so that was
+
+
+probably why so then I complicated the
+
+
+whole setup I installed a human EMU and
+
+
+I used two different graphics cards I
+
+
+used two networks cards and two screens
+
+
+and that worked so in Linux does
+
+
+something called PS I pass through PCI
+
+
+pass through and using the beefy our
+
+
+driver and that basically says these
+
+
+graphics cuts I want to put this driver
+
+
+into it and that tells the operating
+
+
+system to leave it alone that means that
+
+
+when you actually plug that in Linux
+
+
+won't try to display anything on them
+
+
+and it tells it maybe I want to use this
+
+
+formulation so basically what you can do
+
+
+is that you can have a lot of different
+
+
+graphics cards so some of the CPUs
+
+
+actually come with a little graphic card
+
+
+in it you can run Linux and that I
+
+
+didn't have then you can actually have
+
+
+two keyboards or three keyboards 3
+
+
+Mouse's and you actually start playing
+
+
+games inside of multiple guest operating
+
+
+systems but you can still use the same
+
+
+mainboard so this is the how I run my my
+
+
+stuff I that's a lot of stuff here so
+
+
+basically you want to do the clock
+
+
+apparently in in virtual machines that
+
+
+makes the compute
+
+
+so you want to like use the real cloud
+
+
+for the app you want to put in all the
+
+
+USB devices you want to tell you can see
+
+
+the device vio PCI you want to tell them
+
+
+with graphic cards to use and in the end
+
+
+you want to just say use this steam disk
+
+
+down here and that's why I have all my
+
+
+games on and this becomes very
+
+
+unmanageable very quickly because you're
+
+
+kind of like oh I need a new virtual
+
+
+machine so what do you do oh you just
+
+
+cook the best file and then you run it
+
+
+somewhere else and then at some point
+
+
+when you buy a new USB device like this
+
+
+I use all of this all of them have the
+
+
+the keyboard but sometimes I want to use
+
+
+my headset sometimes and you want to use
+
+
+my goggles sometimes I want to record
+
+
+something so I have to attending a
+
+
+meeting so once you use my microphone
+
+
+sometimes I want to talk in my control
+
+
+for my for my drone and so I want to
+
+
+have a standard way of doing this
+
+
+so I was thinking hmmm this is not
+
+
+that's not enough I don't want to just
+
+
+use like boots and gets into the rubic
+
+
+command line because I want to try
+
+
+something new new it's 30 years old I
+
+
+use curses and I thought ok it's good
+
+
+enough for the standard librarian rupee
+
+
+so it's good enough for me
+
+
+and then I can use something cool like
+
+
+easy but now it was removed from the
+
+
+standard library so to go in and like
+
+
+find the gem and put that in but it
+
+
+actually worked so you can do like like
+
+
+this you can like start the curses Chris
+
+
+interface you can like do all this kind
+
+
+of stuff you can see I'll put the cursor
+
+
+here and I write this stuff and it works
+
+
+but it's very annoying to work with 30
+
+
+years old like uses YX and even in the
+
+
+documentation here it says X Y here you
+
+
+have the window the windows uses x and y
+
+
+four columns and lines but the whole
+
+
+thing but you actually ask how much this
+
+
+is available in your terminal it uses
+
+
+columns Alliance what come on just maybe
+
+
+make a rap or something like that but
+
+
+now if this is what you have to deal
+
+
+with attribute off says that it turns an
+
+
+attribute turns on an attribute
+
+
+and attribute on sets it turns it off
+
+
+what and it actually works as you expect
+
+
+so I don't know who wrote this so
+
+
+yesterday we had an example of heavy
+
+
+heavy application in rails so I
+
+
+replicated that so we have like lists of
+
+
+hundred products and with some ratings
+
+
+so actually we can see that the page
+
+
+loads like thirty hundred three 300
+
+
+milliseconds so it's heavy right
+
+
+so what we have here so we have a
+
+
+standard products controller with a
+
+
+limit of 100 products we have a template
+
+
+we display a product name product and
+
+
+fancy stars from product rating I mean
+
+
+in product rating we have in product we
+
+
+have this this method that calculates
+
+
+the average rating for for each product
+
+
+so looks like a legit recode so what's
+
+
+wrong with that so let's take a peek
+
+
+under the hood so i refresh the page and
+
+
+whoa what's going on yeah and that's the
+
+
+reason of the slowness so so first we
+
+
+load somewhere here I hope you see
+
+
+everything clearly so we select 100
+
+
+products and then on the view we for
+
+
+each row on the table we execute two
+
+
+queries so first we check if there are
+
+
+any product reviews if there are then we
+
+
+calculate the average so Wow so what we
+
+
+can do about about this so let's let's
+
+
+take a look at some SQL I hope you like
+
+
+it
+
+
+so the classic approach is to oxo a
+
+
+product name and then under round of
+
+
+average of product reviews
+
+
+and that writing casted to integer from
+
+
+product joins product reviews on the ID
+
+
+columns group by product ID order by in
+
+
+the average rating and living 10 so so
+
+
+so what this this query returns is the
+
+
+top 10 top rated products from the from
+
+
+the table so I have a data set of you
+
+
+have here some stats so I have two
+
+
+thousand products two thousand users and
+
+
+generated some random reviews we have
+
+
+three hundred thousand reviews in the
+
+
+database so this query
+
+
+works fine execute 140 milliseconds so
+
+
+we can go where so we can use a common
+
+
+table expression which is available from
+
+
+Posterous eighty five point four and
+
+
+from and and on I don't know if any
+
+
+older version supports it so first we
+
+
+calculate at like virtual table of the
+
+
+average ratings then we create this join
+
+
+and with the limit so the time is a bit
+
+
+better
+
+
+99 milliseconds so it's like two-thirds
+
+
+of the first query but we can use
+
+
+another technique which is available
+
+
+from Posterous in nine point three and
+
+
+on which is what are all join so here we
+
+
+have we select from products table and
+
+
+we write a lot of lateral call in which
+
+
+we like simulated the join so so we
+
+
+select the product ID and approach
+
+
+writing from product reviews where
+
+
+there's the earliest so PR is product
+
+
+reviews where the product idea on
+
+
+product reviews equals the product ID
+
+
+which refers to the outer table
+
+
+and we then we order but in the rating
+
+
+and limit the time is similar to the to
+
+
+the previous query but that's not at the
+
+
+end of the story so because we don't use
+
+
+any filtering on oh my god so when we
+
+
+use a filtering so classic approach we
+
+
+are better 47 milliseconds with the
+
+
+common table expression there is no no
+
+
+difference because the the calculation
+
+
+of averages is made up front so so it
+
+
+takes the whole time but with lateral we
+
+
+dropped into five milliseconds so the
+
+
+conclusion is that after the the
+
+
+optimization the page load is 37
+
+
+milliseconds thank you

@@ -1,0 +1,3595 @@
+okay good luck
+
+
+[Applause]
+
+
+thanks right um
+
+
+this talk will uh draw on the topic that
+
+
+we touched today also money so
+
+
+uh let's roll
+
+
+open source software is the backbone of
+
+
+the internet and of the IT industry and
+
+
+it's a bit like the oxygen it's
+
+
+invisible yet essential and similarly to
+
+
+the oxygen it's oftentimes simply
+
+
+not remembered about
+
+
+and at best just taken for granted
+
+
+and this presentation will be about the
+
+
+problems the open source
+
+
+has how these problems affect literally
+
+
+every one of us and how these problems
+
+
+can be fixed
+
+
+my name is
+
+
+I'm a ruby developer and as you might
+
+
+have guessed an open source
+
+
+Enthusiast currently helping upside with
+
+
+developing spree Commerce Rafael did an
+
+
+introduction of spree is so I won't be
+
+
+covering this one
+
+
+um as for the organizational stuff uh
+
+
+this presentation will
+
+
+um comprise of two parts the first one
+
+
+when I will list in detail and explore
+
+
+these problems
+
+
+uh and how they contribute to the whole
+
+
+and build up the quite nasty situation
+
+
+we have and then I will explore and
+
+
+discuss a particular tool that aims at
+
+
+addressing these problems
+
+
+so without further Ado I would like to
+
+
+begin with a tale A fictionary Tale
+
+
+say there is a developer
+
+
+working in a startup company you can
+
+
+imagine a high-rise building Pizza
+
+
+Fridays and all the usual stuff we
+
+
+associate with working in the startup
+
+
+company
+
+
+um
+
+
+he does a typical developer stuff
+
+
+but however there is one recurring theme
+
+
+in his work
+
+
+something that annoys him very much and
+
+
+in fact has been bugging him for months
+
+
+now he hates it
+
+
+it hints on some missing tooling
+
+
+on on some workflow process not being
+
+
+automated yet even though we have a 21st
+
+
+century
+
+
+so it essentially forces him to perform
+
+
+some tasks manually we we are all
+
+
+programmers we hate that we
+
+
+despite the
+
+
+manual labor but he's forced to do so
+
+
+so
+
+
+as any developer having to put up with
+
+
+this once he's done with this tedious
+
+
+work what he does
+
+
+he sets out to a pub with his friends
+
+
+when
+
+
+complaints about it how annoying it is
+
+
+how it simply should not be so because
+
+
+well it's just wasted time and effort
+
+
+and for all these hours uh
+
+
+of complainment
+
+
+his friends just note an agreement and
+
+
+one of them being a very supportive
+
+
+person
+
+
+says that would you just quit bitching
+
+
+about and do something about it because
+
+
+if it were not for all these cries you
+
+
+would have at least has have laid the
+
+
+plan or the thing will be basically half
+
+
+done
+
+
+uh the hero of the story is shocked to
+
+
+hear this but needs to agree that well
+
+
+that there is a point to it so once
+
+
+they're finished drinking he gets home
+
+
+get some sleep and since the following
+
+
+morning
+
+
+um over the course of a couple of weeks
+
+
+he comes up with a piece of software
+
+
+that
+
+
+alleviates the pain he brings it to work
+
+
+and well it clicks
+
+
+does the magic and work is all fun again
+
+
+brilliant
+
+
+um but soon he comes to the realization
+
+
+that hey maybe he was not the only one
+
+
+that was in need of putting up with this
+
+
+tedious manual process so he publishes
+
+
+um this thing as an open source library
+
+
+and initially nothing happens
+
+
+but after a couple of weeks things start
+
+
+to get traction
+
+
+there are more and more users of this
+
+
+Library flowing in every day
+
+
+he's excited about that that what he
+
+
+came up with provided some improved
+
+
+developer experience that it helped
+
+
+actually anyone apart from himself he
+
+
+likes it very much
+
+
+fast forward a couple of months
+
+
+the user base grows exponentially
+
+
+the demand for new features is higher
+
+
+and higher the housekeeping of the
+
+
+package takes more and more time
+
+
+and in fact
+
+
+he's
+
+
+excited about it all this
+
+
+these new users these
+
+
+um resolver bugs and all the help that
+
+
+he is able to deliver to these people
+
+
+and he commits to it and
+
+
+Mainstay maintains it in his free time
+
+
+now in fact after all these months
+
+
+he works to shifts one at the startup
+
+
+company that he is employed for and the
+
+
+second shift maintaining the open source
+
+
+project
+
+
+but
+
+
+he is inspired by this once again
+
+
+and prefers to
+
+
+improve the deliver developer experience
+
+
+for the people all over the world
+
+
+instead of just doing the daytime stuff
+
+
+he had
+
+
+he does for the startup company so
+
+
+without much thinking he quits the job
+
+
+and immerses himself in the open source
+
+
+project of his only well as you might
+
+
+have guessed he
+
+
+in a couple of weeks runs out of money
+
+
+well
+
+
+he realizes that
+
+
+he needs to look for a job in order to
+
+
+sustain himself
+
+
+so he partially abandons this project
+
+
+decreases his presence in it in order to
+
+
+well sustain himself and look for a job
+
+
+he finds a job
+
+
+but being a very mission-driven person
+
+
+and preferring working in the open
+
+
+source over working for a yet another
+
+
+startup
+
+
+he saves up a bit
+
+
+ditches the job and
+
+
+immerses himself back again into the
+
+
+ever-growing pile of issues feature
+
+
+requests and stuff
+
+
+once again as you might have guessed
+
+
+the happiness does not long last for
+
+
+long as he runs out of money again but
+
+
+this time he
+
+
+he is a little bit smarter and looks out
+
+
+for sponsorship options
+
+
+he checks out GitHub sponsorship patreon
+
+
+Kofi and stuff but sadly to no avail
+
+
+um
+
+
+now once again after all these months
+
+
+his project being immensely popular
+
+
+immensely popular to the extent that
+
+
+every developer
+
+
+has heard about it and most likely is
+
+
+using this Library he gets as much as um
+
+
+I don't know a couple of hundreds of
+
+
+bucks
+
+
+uh which for him living in a Bay Area uh
+
+
+is not sustainable at all
+
+
+um so he
+
+
+once again starts looking for a job
+
+
+and this story goes over and over again
+
+
+the cycle vicious cycle repeats for
+
+
+years
+
+
+um
+
+
+and there it is and would like to ask
+
+
+you
+
+
+how do you feel about such people that
+
+
+put their own Financial stability their
+
+
+own Security
+
+
+on the line in order to provide you with
+
+
+some value that that you use I myself
+
+
+feel both compassionate that
+
+
+he needed to to do that and I'm grateful
+
+
+for his decisions for for decisions of
+
+
+such a person and now
+
+
+I lied about the part that this story is
+
+
+made up and it's fictional it is not
+
+
+and this is the person it was about
+
+
+does anyone recognize the the guy
+
+
+I would actually be surprised if anyone
+
+
+is but uh any guesses as for what what
+
+
+the package was the story about what the
+
+
+library
+
+
+anyone
+
+
+this is basically story of Homebrew
+
+
+um
+
+
+um on the other hand you might be
+
+
+familiar with this picture a famous
+
+
+xkcd's dependency comic also dubbed this
+
+
+the Nebraska problem
+
+
+it illustrates the story
+
+
+quite succinctly at least to some extent
+
+
+because Marx has eventually left
+
+
+Homebrew and well
+
+
+the internet runs
+
+
+the pyramid did not collapse and that
+
+
+was because the
+
+
+Homebrew in fact was designed to be
+
+
+viral and
+
+
+that its maintenance and contribution is
+
+
+easy to to to to to start with so in
+
+
+fact Homebrew is the
+
+
+open source project with the biggest
+
+
+number of contributors across all open
+
+
+source software
+
+
+so
+
+
+now there is much there is more breaks
+
+
+than it is depicted now but at least for
+
+
+a
+
+
+some period of time
+
+
+especially since the Inception
+
+
+Max was the only brick holding it all
+
+
+together
+
+
+but this is only one dependency one
+
+
+library and
+
+
+regrettably most of our dependencies are
+
+
+not that uh renowned and do not have
+
+
+that many
+
+
+contributors
+
+
+and one of those uh certainly is lock4j
+
+
+you might have heard about this little
+
+
+Java logging Library as it came to the
+
+
+spotlight some time ago as it turned out
+
+
+it contains a severe security
+
+
+vulnerability
+
+
+um the bad part was well it was widely
+
+
+adopted there were many commercial
+
+
+software enterprise software and
+
+
+even critical governmental systems using
+
+
+it and nobody knew that uh they're
+
+
+depending on
+
+
+unpaid work of a couple of random guys
+
+
+well
+
+
+I don't know if from Nebraska but uh
+
+
+nobody knew that
+
+
+[Music]
+
+
+um
+
+
+and
+
+
+it got dubbed as the single biggest most
+
+
+critical vulnerability of the last
+
+
+decade it was big and all over the news
+
+
+but the worst part about the whole case
+
+
+of lock 4J was that it demonstrated very
+
+
+well how little understanding in the
+
+
+industry
+
+
+is
+
+
+is there as to what open source is and
+
+
+how does it work
+
+
+because what the hit the fan it was
+
+
+the maintainers
+
+
+a couple of dudes from Nebraska that
+
+
+came under Fire scrutiny and took all
+
+
+the issues bidding both from
+
+
+multi-million dollar companies and
+
+
+individuals as well
+
+
+so while being beaten up they just
+
+
+issued a humble plea for furnace and
+
+
+started to work on a patch
+
+
+which they of course provided and well
+
+
+shows over everybody went home
+
+
+and the case got forgotten
+
+
+um and as it turned out that it was not
+
+
+only these maintainers that were abused
+
+
+and harassed it was also other unrelated
+
+
+projects that well received these kind
+
+
+of things and one of them were the guys
+
+
+from curl which have been receiving
+
+
+emails and requests
+
+
+that they should respond to and in fact
+
+
+within some very short time frame I
+
+
+think it was 24 hours that they should
+
+
+undertake
+
+
+uh and they should respond with it
+
+
+within 24 hours they should respond with
+
+
+a list of
+
+
+steps that are willing to undertake in
+
+
+order to mitigate the risk and the
+
+
+funny thing was that this request
+
+
+to put in mildly
+
+
+um came from
+
+
+a company that is certain that is and
+
+
+most likely was and is in top 500
+
+
+company that employs 40 000 people
+
+
+worldwide and
+
+
+they demanded that their dependency will
+
+
+provide such a thing and well
+
+
+just to make sure there were no service
+
+
+level agreements with uh as for that no
+
+
+SLA snow no nobody was on any Duty they
+
+
+basically had no obligation to do
+
+
+anything whatsoever they could laugh
+
+
+as their Empires are collapsing
+
+
+um so they just weld them well are aware
+
+
+of that
+
+
+so
+
+
+you can grew pretty big and
+
+
+don't know that for the most part the 90
+
+
+of your stack is open source and it's
+
+
+maintained by volunteers that
+
+
+when the the
+
+
+asset should get hits the fan uh you're
+
+
+left alone and it is just up to their um
+
+
+benevolent attitude that they think
+
+
+is gonna get fixed so
+
+
+that's about the lack of understanding
+
+
+as to what open source is and how it
+
+
+works
+
+
+um now to the part about the lack of
+
+
+supporting the dependencies
+
+
+um core.js is being downloaded 30
+
+
+million times a week so needless to say
+
+
+it is quite an important piece of
+
+
+node.js world
+
+
+and even though it is so widely adopted
+
+
+it is barely funded and what is even
+
+
+more depressing is that
+
+
+um the readme of this project contains a
+
+
+detailed and elaborate explanation with
+
+
+the reasoning as to why they
+
+
+think they should receive anything
+
+
+if they're um
+
+
+being present in well
+
+
+99 of websites or apps so even though
+
+
+they kindly provided such a plea they
+
+
+received hardly anything
+
+
+well
+
+
+certainly not money what they actually
+
+
+received is um abuse and harassment so
+
+
+this is not nice
+
+
+um but that would be for the Java and
+
+
+JavaScript things this is a ruby
+
+
+conference let's get to something closer
+
+
+to our hearts
+
+
+how's it work okay
+
+
+um there are also packages that we often
+
+
+depend on uh we use them every day
+
+
+yet they're not supported either
+
+
+um
+
+
+these are
+
+
+excerpts from Peter song it's as GitHub
+
+
+sponsorship page uh uh I haven't seen
+
+
+him uh most likely he cannot join this
+
+
+conference as he's busy maintaining some
+
+
+open source
+
+
+but Peter
+
+
+uh points out that open source is
+
+
+basically
+
+
+unsustainable and it boils down to this
+
+
+very simple fact that
+
+
+the less support an open source
+
+
+maintainer receives the less
+
+
+work they're able to deliver right which
+
+
+as similarly to the story of Homebrew
+
+
+effectively puts us on hold we are
+
+
+as the pendants
+
+
+if we use such libraries we are there de
+
+
+facto customers so if they need to
+
+
+perform some other duties first like the
+
+
+daily day job of the Homebrew guy and
+
+
+only then once they're finished with it
+
+
+they can focus on the open source they
+
+
+provide us value as any customer it
+
+
+should be well infuriating for us that
+
+
+we're being put on hold for days if not
+
+
+weeks and adding on top of that all the
+
+
+um
+
+
+fatigue context switching and also sadly
+
+
+burnout this is sub-optimal to say the
+
+
+least
+
+
+um
+
+
+so oftentimes
+
+
+sponsorship pages of Open Source
+
+
+packages look like this this one is of
+
+
+Peter it is depressing to say the least
+
+
+um but don't get me wrong
+
+
+it is not my intention to play the blame
+
+
+game it is neither any one of you
+
+
+to blame nor I'm trying to say that
+
+
+Peter's goal was too ambitious no it was
+
+
+not
+
+
+the root cause of the problem is that
+
+
+the
+
+
+system of supporting the open source is
+
+
+imperfect
+
+
+and
+
+
+to be more precise there is no system
+
+
+whatsoever there is no automation there
+
+
+is no system I'll get back to it in a
+
+
+minute but firstly I would like to list
+
+
+two more
+
+
+so to speak pollutants of the OSS
+
+
+landscape
+
+
+with the first one being a sabotaging of
+
+
+packages every now and then we learn the
+
+
+hard way sadly what does it mean to
+
+
+depend on something and it's being
+
+
+demonstrated numerous times by well
+
+
+packages being sabotaged
+
+
+one of the quite loud cases was left but
+
+
+and The Story Goes uh once again there
+
+
+was a developer
+
+
+that maintained a couple of Open Source
+
+
+projects left but obviously it was one
+
+
+of them but it was due to some other of
+
+
+his projects that all the hell broke
+
+
+Clues
+
+
+um
+
+
+he got into some legal quarrel with some
+
+
+company over uh the naming of one of his
+
+
+libraries
+
+
+and also some intellectual property
+
+
+stuff got involved but um
+
+
+the bad part was that the npm judged in
+
+
+favor of the company and npm hijacked
+
+
+the his Library so they revoked his
+
+
+access rights and granted into the
+
+
+company
+
+
+and he in an act of Revenge yanked all
+
+
+his open source code
+
+
+and by yanked I mean he deleted every
+
+
+his open source project from the
+
+
+registry and left but being that most
+
+
+widely adopted
+
+
+um caused as it turned out many
+
+
+um broken CI pipelines all over the
+
+
+world
+
+
+um
+
+
+and disclaimer
+
+
+I don't mean that
+
+
+um defending yourself and fighting for
+
+
+your rights is bad no this particular
+
+
+case demonstrated that um
+
+
+in an act of Revenge or making us aware
+
+
+which he did he contributed the much of
+
+
+collateral damage down to innocent
+
+
+bystanders and well the company that he
+
+
+tried to punish
+
+
+most likely haven't even heard about uh
+
+
+and wherein heard in fact in any way so
+
+
+uh
+
+
+the case got audible uh company got
+
+
+unpunished and we were left with broken
+
+
+builds
+
+
+so this is one mode of uh well a risk of
+
+
+dependency and the second case was of
+
+
+colors GS and Faker JS libraries
+
+
+and here the maintainer of those got
+
+
+um to put in mildly upset with A
+
+
+continuous lack of support from
+
+
+uh unicorn companies and all those
+
+
+smaller entities as well so we made
+
+
+these two packages malfunctioned in so
+
+
+that
+
+
+these either produced or contained
+
+
+gibberish code which as far as I
+
+
+remember also contributed to unbroken CI
+
+
+Pipelines
+
+
+and once again standing your own ground
+
+
+is totally fine I support it with my
+
+
+whole heart but breaking everyone's toys
+
+
+well
+
+
+it is less than ideal we it could be
+
+
+done
+
+
+um in a more civilized way but I'm not
+
+
+blaming the developer uh either
+
+
+um the second of the aforementioned
+
+
+pollutants is malware worth its own uh
+
+
+presentation if not conference
+
+
+so I will just list two um examples here
+
+
+um event stream this one involved a bit
+
+
+of social engineering in such a way that
+
+
+a developer
+
+
+trying to gain Trust of the maintainer
+
+
+maybe in fact they even provide them
+
+
+with a couple of valuable pull requests
+
+
+maybe close some issues whatever it was
+
+
+all just done to to gain the trust and
+
+
+once they gained it the the attackers or
+
+
+the attacker uh planted the back door
+
+
+which long story short caused the um
+
+
+unsuspecting users uh to lose Bitcoins
+
+
+well
+
+
+sensitive topic people don't like using
+
+
+money if it even if it's crypto stuff
+
+
+um
+
+
+so that's one and the second as you
+
+
+might guess
+
+
+um or this is about the
+
+
+maintainers of the malicious package
+
+
+would hope that you mistype the
+
+
+dependency name into your gem file run
+
+
+bundle install and any guesses what
+
+
+could happen or what happened in that
+
+
+case
+
+
+well in the in this case the
+
+
+environmental valuables were leaked to
+
+
+the attacker's server will not nice
+
+
+um
+
+
+so one more remark regarding the nasty
+
+
+maliciousness in the open source it is
+
+
+estimated by GitHub that 17 of all bugs
+
+
+70 of all bags in the open source is
+
+
+planted there deliberately in order to
+
+
+exploit something and
+
+
+the worst part is that it's hugely
+
+
+unaddressed we're not supporting it
+
+
+in any way or anyhow in an adequate way
+
+
+that
+
+
+there are no um
+
+
+incentives to hunt these bugs down and
+
+
+discover them before either material or
+
+
+data damage is done
+
+
+so getting back to the promised part
+
+
+about the
+
+
+of no system
+
+
+um
+
+
+sometime earlier this year night Burger
+
+
+back uh the Puma maintainer said this
+
+
+during um Rubicon EU that he's proposed
+
+
+way to resolve the problem of Heroes he
+
+
+means open source contributors not being
+
+
+paid adequately well is to start
+
+
+paying them it is up to us as it was
+
+
+said we are their customers so if we
+
+
+value their work if we use their well
+
+
+kind of sort of product then it is up to
+
+
+us to support them and
+
+
+he is only theoretically right
+
+
+because for pragmatical reasons I beg to
+
+
+differ that a good thing that he used
+
+
+donations here I beg to differ that the
+
+
+the donations are the way to go because
+
+
+um
+
+
+the current prevailing to the the the
+
+
+current modes are imperfect the there
+
+
+are two of them it is sponsorship and
+
+
+um bounties sponsorship lets you to
+
+
+choose a package of preference
+
+
+and remunerated
+
+
+um
+
+
+typically only the most prominent
+
+
+well-renowned packages received at rails
+
+
+most likely well if they were they were
+
+
+not well off on their own uh but anyhow
+
+
+they're big they would receive it Puma
+
+
+most likely um I don't know sidekick
+
+
+they have the Enterprise so they're
+
+
+they're as well well on their own but uh
+
+
+most of us know it so there is a high
+
+
+chance that he these highly popular and
+
+
+well-known packages will receive
+
+
+but we've seen the the progress bar of
+
+
+Pete sonisas from dryer B stable
+
+
+um well not much of support uh even
+
+
+though it is included in the gem files
+
+
+and
+
+
+those Leaf nodes like core JS and
+
+
+um
+
+
+log4j wouldn't receive any sponsorship
+
+
+whatsoever so it is either the visible
+
+
+things on top or something that comes to
+
+
+the spotlight because it has been
+
+
+exploited but as log4j case demonstrates
+
+
+one once the patch was uh in place
+
+
+everybody went home and forgotten about
+
+
+them
+
+
+so
+
+
+as for the sponsorship as far as
+
+
+sponsorship goes even if there would be
+
+
+hypothetically a unicorn company say
+
+
+um Shopify they would like to
+
+
+help
+
+
+every single one of their dependencies a
+
+
+ballpark estimate they may have
+
+
+thousands
+
+
+across the whole dependency graph a
+
+
+thousand of dependencies there is no
+
+
+automated way it's not easy to support
+
+
+every single uh dependency they have so
+
+
+if a thing is not easy to perform it
+
+
+won't be done they will just don't
+
+
+bother so usually uh such companies the
+
+
+throws some couple of million dollars a
+
+
+year into a random open source project
+
+
+being I don't know whatever but it's
+
+
+only the one receiving it so it is just
+
+
+a token of uh doing something and the
+
+
+rest is being forgotten
+
+
+um bounties on the other hand oftentimes
+
+
+assume a form by assume a form of
+
+
+um pay by feature request which is
+
+
+totally fine as its desirable
+
+
+by at least one or two customers but the
+
+
+key thing is that even though it is
+
+
+desired by a customer or two it might
+
+
+not be in the best interest of a library
+
+
+in general so at the best it just
+
+
+temporarily temporarily distracts the
+
+
+maintainers from their core duties in
+
+
+order to just sustain themselves and
+
+
+earn some money
+
+
+but there is a all too high risk
+
+
+that the
+
+
+efforts will just drift towards uh the
+
+
+needs of a very particular customer so
+
+
+an abstract thing like a library
+
+
+slowly becomes a product and it's uh
+
+
+passively hijacked by uh
+
+
+customer that uh
+
+
+was issuing the the the the highest
+
+
+number of bounties
+
+
+um so this is less than ideal as for the
+
+
+short summary we have developers
+
+
+contributors and maintainers that are
+
+
+distracted
+
+
+by the need of having a daytime jobs
+
+
+once again a case of Homebrew and
+
+
+pizzonitas as we've seen from the
+
+
+progress bar
+
+
+and adding fatigue burnout and contact
+
+
+switching on on top of it well
+
+
+less than ideal we could do better
+
+
+lack of the awareness as it's been
+
+
+demonstrated by curl and lock for Jay
+
+
+crazy expectations
+
+
+companies should know better that they
+
+
+they maintain that they depend on unpaid
+
+
+work and made squillions of dollars out
+
+
+of unpaid work and having approximately
+
+
+say
+
+
+um 90 of there's uh stack being open
+
+
+sourced and they give nothing in return
+
+
+the security risks
+
+
+um sabotage and malware just because
+
+
+either there is a next an accident
+
+
+somebody deletes a package or
+
+
+um just acts in Revenge or uh
+
+
+npm does some crazy stuff
+
+
+and the well current modes of support
+
+
+that simply don't work
+
+
+um so
+
+
+I could say that it is how it is nobody
+
+
+said that's gonna be easy uh there is
+
+
+just a tough business
+
+
+and well you you'd be right
+
+
+but there is a glimmer of hope though
+
+
+there is a person that is working on the
+
+
+solution and the
+
+
+good part the best part is that you know
+
+
+this person already
+
+
+this is him The Homebrew guy he's
+
+
+brewing something
+
+
+he comes up with tea
+
+
+is a
+
+
+system for
+
+
+rewarding open source developers based
+
+
+on their contributions and in fact not
+
+
+only the OSS developers but all
+
+
+participants over as it was said system
+
+
+um
+
+
+but before we get to these multiple
+
+
+other participants of the network also
+
+
+being rewarded let's get let's break it
+
+
+down to Ports it has a couple of
+
+
+components perhaps unsurprisingly it
+
+
+comprises a new package manager a
+
+
+successor to Homebrew which is an
+
+
+essential piece of the system as it
+
+
+provides it with an information about
+
+
+the dependency structure of each Library
+
+
+you can imagine what you're seeing uh
+
+
+regularly in gem files
+
+
+in in your jam files in your projects
+
+
+and so this information is
+
+
+um
+
+
+goes to the system
+
+
+um
+
+
+the centralized package registry in
+
+
+order to guard ourselves from the
+
+
+hijacking sabotage and stuff
+
+
+a reputation system
+
+
+and a rewards engine and the rewards
+
+
+engine that distributes value based on
+
+
+an algorithm that
+
+
+um
+
+
+determines each entries contribution to
+
+
+the utility of the whole open source
+
+
+essentially evaluates each single
+
+
+library and assigns it a score and this
+
+
+call that has been assigned
+
+
+corresponds to how
+
+
+impactful against whole open source a
+
+
+given library is
+
+
+um
+
+
+perhaps the most groundbreaking thing is
+
+
+that with t
+
+
+every dependency across the whole graph
+
+
+will be rewarded so it will be
+
+
+the ones on top
+
+
+drier B jams as well and the leaf nodes
+
+
+as log4j score.js's left button stuff
+
+
+um
+
+
+the the small ones won't be ignored
+
+
+anymore so this is a a new thing that's
+
+
+the automation that
+
+
+has not been present yet
+
+
+and the the rewards are gonna get
+
+
+distributed recursively from the top
+
+
+ones once again the sidekick or whatever
+
+
+sidekick depends on
+
+
+and it will split down uh to the smaller
+
+
+ones as well and
+
+
+um
+
+
+the rewards are gonna get distributed as
+
+
+a tokens in a proof of stake uh sorry
+
+
+blockchain and for that matter
+
+
+um I would like to clarify two terms
+
+
+staking this is a standard part in every
+
+
+proof of stake blockchain it is an
+
+
+action of locking tokens in order to
+
+
+support the
+
+
+stability of the network so by design it
+
+
+is a must
+
+
+um and steeping on the other hand is a
+
+
+thing particular to T which is
+
+
+an action of locking locking tokens in
+
+
+order to support a certain claim and
+
+
+receive rewards based on validity of
+
+
+that claim and this is a
+
+
+primary mode that's going to be used for
+
+
+supporting the open source developers
+
+
+contribution
+
+
+um
+
+
+few slides back I've mentioned that it
+
+
+is not only the contributors
+
+
+that are going to receive rewards that
+
+
+it's also other participants as well
+
+
+and what I've meant is that
+
+
+t
+
+
+is about incentives it is about fixing
+
+
+the current incentives
+
+
+when you're doing something good
+
+
+for the open source ecosystem in t this
+
+
+is going to be recognized and you are to
+
+
+receive a reward for the good deed that
+
+
+you've just performed
+
+
+so
+
+
+the support is extended across all
+
+
+participants of the network not only the
+
+
+contributors not only the open source
+
+
+maintainers
+
+
+um and so
+
+
+contribution does not necessarily mean
+
+
+code it can be other things as well
+
+
+of course some if not majority
+
+
+might contribute code
+
+
+others might validate the contributed
+
+
+code and others might just provide
+
+
+economical value to either the
+
+
+developers or to support the system so
+
+
+here goes the list of these participants
+
+
+the most important ones of course
+
+
+package maintainers the pillars of the
+
+
+open source which
+
+
+deserve to be empowered and rewarded
+
+
+um a regular everyday normal developers
+
+
+People Like Us that take the open source
+
+
+projects and craft other products not
+
+
+necessarily open sourced
+
+
+um supporters that uh
+
+
+value that the work of Open Source
+
+
+developers and would like to help them
+
+
+so these are the ones that will be
+
+
+tipping the the tokens
+
+
+um
+
+
+quite an interesting role tea tasters
+
+
+there is an asterisk in there as there
+
+
+is a word pun or a word play on tea
+
+
+tasting and testing software and
+
+
+as new
+
+
+packages
+
+
+are getting released or new versions of
+
+
+existing packages are getting released
+
+
+it is good it is worth to have this work
+
+
+validated as well
+
+
+um
+
+
+you can think of it as a third party
+
+
+code review
+
+
+which is in t would be important as
+
+
+we can consider the case
+
+
+if you're a maintainer
+
+
+and you're coming up with a new release
+
+
+say spree
+
+
+4.7
+
+
+um your claim is that I've prepared this
+
+
+new release and my claim is that it's
+
+
+free of bugs
+
+
+of cves and you can use it safely and I
+
+
+support my claim with this much of T
+
+
+tokens
+
+
+um
+
+
+t Asters on the other hand validate this
+
+
+claim if the
+
+
+maintainer
+
+
+indeed provide
+
+
+did everything good and if they did then
+
+
+they're entitled to receive the reward
+
+
+but if not and there is something not
+
+
+okay then ha me as a taster I discovered
+
+
+a bug that otherwise would be undetected
+
+
+and I helped the community to discover
+
+
+some nasty cve before it was too late so
+
+
+this role
+
+
+is mainly responsible for addressing the
+
+
+currently unaddressed need of or need
+
+
+the the 17 percent of bugs just laying
+
+
+lingering out there being undetected
+
+
+[Music]
+
+
+um
+
+
+and now for the midi part
+
+
+how could the contribution look like uh
+
+
+firstly the the foreign Mansion steeping
+
+
+so the primary mode of supporting the
+
+
+open source developers uh by steeping
+
+
+tokens I essentially say that I value
+
+
+this Library I support it I use it and
+
+
+would like to help it so say I take 100
+
+
+tokens
+
+
+a fraction of it stays with me
+
+
+and generates reward for myself that I
+
+
+was willing to get into the the
+
+
+sponsorship that I even started
+
+
+sponsoring or helping a package so this
+
+
+is a new mode that new incentive that uh
+
+
+helps people to start supporting so a
+
+
+fraction once again of this 100 stays
+
+
+with me and generates my interest the
+
+
+rest goes to the package where it gets
+
+
+divided once again a part of it stays
+
+
+with the package so say with spree and
+
+
+the remaining part is being split across
+
+
+its dependencies so this is what um
+
+
+gives us the coverage of the whole
+
+
+dependency graph I myself
+
+
+have chosen only one package that I
+
+
+trust use and like and would like to
+
+
+support and its dependencies
+
+
+whatever they are they're being
+
+
+automatically covered and remunerated as
+
+
+well so this is better than what we have
+
+
+now
+
+
+um
+
+
+staking tokens the in order to support
+
+
+the stability of the network so
+
+
+this is for ones that don't don't even
+
+
+uh
+
+
+need to know that there are packages
+
+
+like this but just support the idea and
+
+
+this is going to work basically as you
+
+
+would have uh money in your savings
+
+
+account
+
+
+this generates you some interest and
+
+
+gives you reward for helping the system
+
+
+stability
+
+
+and the package submission
+
+
+um
+
+
+so the code contribution in order to
+
+
+submit a new package release three
+
+
+things would need to happen atomically
+
+
+the release would need to be registered
+
+
+it will need to be uploaded to a uh to
+
+
+uh decentralized storage and
+
+
+um the trustworthiness would need to be
+
+
+backed up by steeping some uh tokens one
+
+
+it is it's gonna be all these things
+
+
+will be provided then uh
+
+
+the person that submitted the release
+
+
+would receive a token which will act as
+
+
+a key for directing the rewards to them
+
+
+and will will be the the proof that is
+
+
+them that provided the new package
+
+
+release
+
+
+um the Third Way would be reviewing it
+
+
+once again that certain maintainer comes
+
+
+with a claim that we can use it
+
+
+they support it with their tokens and
+
+
+the taste this
+
+
+validate that claim if it's indeed uh so
+
+
+that they're not providing us with yet
+
+
+another I don't know even stream or that
+
+
+type of squatted thing that leaks our
+
+
+environmental variables
+
+
+um
+
+
+um
+
+
+and in case of a review
+
+
+in case of a positive review then
+
+
+everybody receives a reward and it's
+
+
+nice if a review however is negative
+
+
+uh then in the mode of responsible
+
+
+disclosure uh they contact the
+
+
+maintainer so that they can address the
+
+
+issue in a timely manner it has been
+
+
+wonderfully demonstrated last year
+
+
+during
+
+
+um uh last year's edition of this
+
+
+conference when Rafa rotenberger
+
+
+um informed us about uh bug in device
+
+
+when he discovered it some months
+
+
+earlier he firstly contacted the
+
+
+maintainers notified them a
+
+
+about it another thing did not get
+
+
+patched until he's talking informed us
+
+
+in a stage so in t it will work in a
+
+
+similar way if the maintainer that got
+
+
+entrusted with uh
+
+
+by the community uh
+
+
+addresses the issue in a timely fashion
+
+
+and it's all okay
+
+
+um
+
+
+and if not well the sum of their tokens
+
+
+gonna get slashed
+
+
+um
+
+
+so now let's summarize how it's gonna uh
+
+
+look like in a broader sense
+
+
+am I saying that there is a
+
+
+pile of nasty problems and a new shiny
+
+
+package manager blockchain power that's
+
+
+gonna fix it all
+
+
+well there is more to it than just a new
+
+
+package manager and blockchain it is
+
+
+the whole team movement is once again
+
+
+about fixing the underlying incentives
+
+
+that we have
+
+
+um
+
+
+it is willing to stimulate the growth to
+
+
+help
+
+
+people to get on board to the open
+
+
+source
+
+
+um
+
+
+and and start participating in open
+
+
+source and the best part is that it is a
+
+
+very thin extra layer that would be just
+
+
+uh that will come on top over here it
+
+
+doesn't fundamentally change as what the
+
+
+open source is how open source software
+
+
+is being crafted or utilized it is
+
+
+um
+
+
+just nice extra things that come on top
+
+
+without
+
+
+much of extra cost
+
+
+um
+
+
+certainly it won't be perfect since the
+
+
+day one but
+
+
+um
+
+
+Rome wasn't built in a day
+
+
+um
+
+
+now a small disclaimer I'm not
+
+
+associated with t in any way I just like
+
+
+the idea think that their goal is well
+
+
+ambitious but very Noble
+
+
+that they thought this through quite
+
+
+well
+
+
+um
+
+
+and also this is work in progress so
+
+
+even though I did my best in order for
+
+
+for the things to be as accurate and
+
+
+detailed as possible it is all
+
+
+subjective to change well in fact I've
+
+
+learned yesterday that the nft part is
+
+
+gonna be significantly changed in order
+
+
+to support
+
+
+um
+
+
+multi a
+
+
+contributor so that a certain Library
+
+
+can be maintained by multiple people and
+
+
+all of them will get
+
+
+rewarded so once again work in progress
+
+
+it is changing there is a new white
+
+
+paper as for the white papers
+
+
+if anyone is interesting I highly
+
+
+recommend reading their white paper and
+
+
+the the currently available one which
+
+
+discusses the things in much greater
+
+
+detail that I was able to provide you
+
+
+with in this presentation well in two or
+
+
+three weeks there will be a revised
+
+
+version of it
+
+
+um
+
+
+if if you're though uh a fan of some
+
+
+other
+
+
+um modes of learning like podcasts there
+
+
+is a an episode of stack Overflow
+
+
+podcast from last year where the
+
+
+Homebrew guy Max Howell discusses it
+
+
+with the host uh the where he discusses
+
+
+the design and
+
+
+um ambition of tea in detail that's how
+
+
+I learned about them and highly
+
+
+recommend
+
+
+and also as we're drawing near to the
+
+
+end of this presentation I would like to
+
+
+actually dedicate it to a particular
+
+
+open source developer and Ruby committer
+
+
+that in fact was here at this stage if I
+
+
+remember correctly in 2019 and currently
+
+
+is not able to attend this conference as
+
+
+he fights for Ukraine's Freedom Victor
+
+
+shepalev I will just
+
+
+love for this presentation to be
+
+
+my honor to all his contributions
+
+
+um
+
+
+so
+
+
+that would be the end if you'd like to
+
+
+find out more about tea you can do so
+
+
+under these links if you'd like to
+
+
+connect you can find me under this links
+
+
+thank you for your attention
+
+
+[Applause]
+
+
+any questions
+
+
+any question
+
+
+oh clear okay
+
+
+maybe not question but one thing to
+
+
+mention in next month is going to start
+
+
+Oktoberfest I think it's 11th Edition so
+
+
+if someone wants to start contribution
+
+
+to open source it's really good moment
+
+
+to start
+
+
+contributions are welcome
+
+
+certain
+
+
+I just read that some article about also
+
+
+a donation for
+
+
+um
+
+
+for I don't know the sidekick maintainer
+
+
+so also he described how to monetize
+
+
+these open source and so on so it's also
+
+
+good to read this is also some occurs
+
+
+different than uh T project and I also
+
+
+read some articles that they gathered
+
+
+some donations of 90 Millions to to
+
+
+provide this system so very
+
+
+interesting in that actually from from
+
+
+the
+
+
+um from the let's say business yes I
+
+
+think that he received some Grant uh
+
+
+thing they got couple of millions as
+
+
+building these uh types of stuff is
+
+
+costly uh but they're uh well from what
+
+
+I can tell I've been following these uh
+
+
+the developments of tea for a couple of
+
+
+months now they seem to have it well
+
+
+through and consider many Corner cases
+
+
+so anyone that has an idea or any form
+
+
+of feedback also critique
+
+
+it is highly encouraged by them to to to
+
+
+to to provide them with they have a
+
+
+Discord I think it is
+
+
+uh there certainly uh can be uh figured
+
+
+out from the page uh there will be
+
+
+grateful for receiving any
+
+
+feedback so uh
+
+
+you're welcome
+
+
+so it is welcome sorry
+
+
+anyone else
+
+
+um I'll just add maybe a small comment
+
+
+sure sorry uh because I think there
+
+
+there is alternative and
+
+
+vastly rejected by programmers and to
+
+
+learn sales and marketing and just start
+
+
+selling software yes I think I think we
+
+
+reject we are rejecting this as a
+
+
+profession in general I think
+
+
+yeah yeah Sidekick is a good example
+
+
+yes
+
+
+um so this will certainly not do any
+
+
+harm it will help everyone if we would
+
+
+as developers learn salesmanship but um
+
+
+on the other hand people are different
+
+
+and the
+
+
+as it has been demonstrated by Peter
+
+
+sonita's case then well
+
+
+he would prefer to just focus on open
+
+
+source maybe and most likely it is the
+
+
+uh most cost effective way to come up
+
+
+with the thing that as sidekick did or
+
+
+um Puma the Knight runs a rails
+
+
+consultancies agency and then he
+
+
+contributes to pumaso uh
+
+
+it might be that it is
+
+
+a bit
+
+
+too gun for for that task and maybe we
+
+
+don't need to uh roll out a blockchain
+
+
+but
+
+
+I'm curious how it'll play out
+
+
+um
+
+
+we'll see
+
+
+question uh apologies if you already
+
+
+mentioned that in your talk but I was
+
+
+checking this whole thing on my phone
+
+
+when you were talking and my question is
+
+
+because you mentioned blockchain uh
+
+
+their website mentions web 3 at some
+
+
+point they were mentioning nft so all
+
+
+the stuff that I would love to avoid as
+
+
+much as possible in my life forever so
+
+
+my question is uh because you kept
+
+
+saying about t tokens and T tokens and
+
+
+nothing about the actual money so how
+
+
+does the monetization scheme Works yes
+
+
+other than holding hour plus pack of
+
+
+tokens yep uh wonderful question I
+
+
+received
+
+
+um
+
+
+I'm waiting for the reply for for them
+
+
+actually it was voiced in the white
+
+
+paper that at least partially it will be
+
+
+um
+
+
+up to the community to provide the use
+
+
+cases for it certainly they've replied
+
+
+me two days ago that
+
+
+uh it will come similarly to ethereum
+
+
+now in finite Supply so they won't be
+
+
+just printing it infinitely uh
+
+
+um if it's gonna get tradable it will be
+
+
+up to community so
+
+
+it can all be considered a research
+
+
+still
+
+
+um
+
+
+for sure
+
+
+all
+
+
+things crypto receive dually scorn and
+
+
+skepticism uh but they're well aware of
+
+
+that so
+
+
+um actually the in the worst case we'll
+
+
+just receive as I think of it after
+
+
+months of following and digging up a
+
+
+fact about it we will receive a metric
+
+
+that that thing that answers the
+
+
+question how
+
+
+um valuable a given piece of software is
+
+
+for the whole landscape and
+
+
+initially it might be based only on the
+
+
+download count
+
+
+then there is a question of which likely
+
+
+would come up in subsequent releases or
+
+
+refinements of the algorithm that we
+
+
+will distinguish between between run
+
+
+time and build time dependencies and
+
+
+also uh
+
+
+actual usage
+
+
+could be factored into the algorithm
+
+
+well Amazon builds US based on how often
+
+
+a certain piece of code is being
+
+
+executed so
+
+
+things like this are already
+
+
+um we can already be seen in the world
+
+
+so certainly I would expect this to be a
+
+
+part if it goes that far that is
+
+
+going to be mostly a package manager and
+
+
+like right now when I check their
+
+
+website currently they are just
+
+
+mentioning the tokens in like small
+
+
+print and all of it is about that it's a
+
+
+new amazing package manager that will
+
+
+replace chromebrew and it will be super
+
+
+fast and amazing yes the the most part
+
+
+that is done in um live I think is the
+
+
+package manager package manager part the
+
+
+the the put it live some time ago it
+
+
+demonstrates some uh speed benefits over
+
+
+Homebrew
+
+
+um
+
+
+but as for the CTS design it is just a
+
+
+part so the the rest is not yet
+
+
+published I'm well waiting for the the
+
+
+second revision of the white paper
+
+
+um
+
+
+I might follow up on some local Ruby
+
+
+groups meetings with uh some updates if
+
+
+anyone would be interested yeah
+
+
+certainly
+
+
+okay let's cut it here thank you very
+
+
+much
+
+
+thanks

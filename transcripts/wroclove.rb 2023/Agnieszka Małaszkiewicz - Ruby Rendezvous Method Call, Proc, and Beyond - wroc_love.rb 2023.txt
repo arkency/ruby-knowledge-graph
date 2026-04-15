@@ -1,0 +1,2137 @@
+hello
+
+
+um
+
+
+first of all I would like to thanks the
+
+
+organizer organizers for having me here
+
+
+today and I would also like to thank all
+
+
+of you that you came here to listen my
+
+
+talk and
+
+
+um even it is pretty early and yesterday
+
+
+uh party was for late hours uh you're
+
+
+here so thank you very much I really
+
+
+appreciate it
+
+
+uh
+
+
+I want to be honest with you I'm very
+
+
+stressed right now and even after so
+
+
+many years of
+
+
+working I'm not still more con much more
+
+
+comfortable in
+
+
+[Music]
+
+
+talking English English so
+
+
+yeah
+
+
+when I'm stressed I speed up my
+
+
+presentation so who knows maybe after 50
+
+
+minutes we will be after the stock and
+
+
+you will have a break for small sleep
+
+
+between attacks
+
+
+so
+
+
+um yeah when all of that is said we can
+
+
+start
+
+
+I had a problem with what to call this
+
+
+presentation
+
+
+I have a I have a vision what I want to
+
+
+say but those were small pieces
+
+
+in Ruby which were not directly
+
+
+connected to each other
+
+
+so this is this was very hard for me to
+
+
+find the right title so I thought about
+
+
+it by myself for a few weeks then I
+
+
+asked my husband for help
+
+
+and then I decided to ask AI so
+
+
+this is what chat GPT suggests
+
+
+mastering Ruby methodology and lashing
+
+
+the power of prox mapping techniques and
+
+
+Rubin used to proc method
+
+
+so the bar is set high
+
+
+this talk sounds very serious even after
+
+
+even like a university presentation that
+
+
+may be a bit boring
+
+
+so I asked for another title
+
+
+uh
+
+
+sorry
+
+
+uh unlocking uh the potential of Ruby
+
+
+dive deep into method invocation prods
+
+
+utilization and intricacies of map and
+
+
+to proc
+
+
+so I like this part unlocking the
+
+
+potential but the rest still sounds very
+
+
+boring and theoretical
+
+
+so I ask again and after some tweaks I
+
+
+got it
+
+
+Ruby Rendezvous method call prods and
+
+
+Beyond
+
+
+and I think that's a pretty nice title
+
+
+it's interesting but without too many
+
+
+technical words
+
+
+you may say it's marketing well what
+
+
+what can I say
+
+
+but based on that titles you should more
+
+
+or less know what the presentation is
+
+
+about
+
+
+this will be not about race event store
+
+
+this will be more about Ruby itself
+
+
+but did you know that this is not my
+
+
+first speech on this stage
+
+
+the first time I was a rod slow of RB uh
+
+
+speak goal speaker in 2020 the pandemic
+
+
+year so the funny thing is that people
+
+
+congratulate me my first speech on this
+
+
+conference even we didn't have the
+
+
+conference that year
+
+
+so yeah
+
+
+uh
+
+
+as already Andre said I joined the Ruby
+
+
+Community around 2011 2012.
+
+
+and uh
+
+
+that's over 10 years ago and even after
+
+
+[Music]
+
+
+um
+
+
+every time when I come here to
+
+
+vladsworth I feed a bit nostalgic so
+
+
+um well maybe even more than a bit
+
+
+so be aware that the stock can be a
+
+
+little bit nostalgic too
+
+
+I started with Ruby 1.9.3
+
+
+and Rise 3-0
+
+
+and I even remember the old logo of
+
+
+Rod's love RB
+
+
+I wasn't in all editions but maybe some
+
+
+of you were here so do we have someone
+
+
+like that in the room
+
+
+yeah
+
+
+okay nice uh okay I also remember the
+
+
+what lighting talk uh from 2012
+
+
+uh it's not from this conference but
+
+
+it's worth a look
+
+
+and by the way all the links and sources
+
+
+are at the end of the presentation so
+
+
+you don't worry I will just share that
+
+
+with you
+
+
+and I also will give you the slides so
+
+
+yeah
+
+
+we can go back to the topic so I like
+
+
+this lighting talk uh so much that I
+
+
+started looking for fun interesting and
+
+
+little known Ruby flavors and here we
+
+
+are uh I would like to share some of
+
+
+them with you today
+
+
+and I hope you will find something that
+
+
+you didn't know about Ruby during this
+
+
+talk
+
+
+but first let's take a look at what's
+
+
+changed between the World Lighting talk
+
+
+and the current version of Ruby
+
+
+so first a equal a in Ruby 3.2 it's
+
+
+still new
+
+
+Ruby has no better words uh
+
+
+it's still throwing the exception
+
+
+um
+
+
+and if we declare the
+
+
+method missing
+
+
+in the IRB we will get a stack level too
+
+
+deep and the console close so the better
+
+
+word streak no longer works in the Ruby
+
+
+console like it was before
+
+
+and it was for me real magic when I
+
+
+first saw it so it said that this is not
+
+
+working anymore in the Ruby console
+
+
+but
+
+
+we can do something like this so it will
+
+
+work we can combine multiple strings
+
+
+with the spaces between them
+
+
+without any additional method in Ruby
+
+
+and we can also mix different ways of
+
+
+declaring strings
+
+
+and we can do it
+
+
+in multiple lines
+
+
+and
+
+
+it will work not only in the last Ruby
+
+
+but also in older versions uh you can
+
+
+also find this behavior in Python C and
+
+
+C plus plus and you can tell me if you
+
+
+can find another languages that this way
+
+
+of combining strings work also
+
+
+okay but the question how this is
+
+
+possible
+
+
+so
+
+
+[Music]
+
+
+okay so how this is possible to answer
+
+
+this question we need to go to the
+
+
+pars.y file
+
+
+in the Ruby source code for
+
+
+implementation details
+
+
+so here we are
+
+
+and this file has notation similar to
+
+
+BNF back as nor form
+
+
+um which allow us to
+
+
+use meta language to provide the
+
+
+information how the language should look
+
+
+like
+
+
+and we use uh it is it is used by Yak so
+
+
+yet another compiler compiler
+
+
+program for parcel generation
+
+
+and the output of it will be in C
+
+
+but what what did this mean
+
+
+so Ruby is either at teacher a string
+
+
+one
+
+
+or recursive definition of concatenation
+
+
+of string one and C string itself
+
+
+which result in string expression being
+
+
+concatenated
+
+
+as we saw on previous slide
+
+
+so after that I was thinking what else
+
+
+could be interesting in Ruby
+
+
+and for sure calling a method in Ruby is
+
+
+an interesting topic we have several
+
+
+ways to call a method but I will not
+
+
+show you all of them
+
+
+Greg
+
+
+VTEC wrote a great article about this
+
+
+where he showed 12 ways of calling a
+
+
+method
+
+
+I know two more so I will only focus on
+
+
+those two
+
+
+I will stick to the same Convention as
+
+
+we can see in Greg's article
+
+
+so we have a user class
+
+
+and we have a Hello method
+
+
+we can create a object
+
+
+and we can call a method as we often do
+
+
+so everything work so far
+
+
+the first interesting calling method I
+
+
+found was in a Nick schroederer Ruby
+
+
+archaeologic talk I hope that I'm
+
+
+pronouncing his name correctly
+
+
+it was great talk and if you haven't
+
+
+seen it yet I highly recommend it to you
+
+
+by the way I like the title Ruby
+
+
+detective that Nick used to describe
+
+
+what he's doing
+
+
+and I like also think about myself like
+
+
+a ruby detective especially when I'm
+
+
+working with some bug or debugging some
+
+
+problem in the code
+
+
+okay so this way of calling method that
+
+
+he presented was used in the merp
+
+
+framework do you remember that framework
+
+
+okay
+
+
+the time when the map core team merged
+
+
+with the railscore team
+
+
+it's a pretty interesting story and if
+
+
+you didn't hear it I put the link to
+
+
+that at the end
+
+
+okay so uh the the way of calling a
+
+
+method so we can call a method by using
+
+
+a double columns
+
+
+and it looks like a class inheritance
+
+
+but it works we have in this case 13 way
+
+
+of calling a method in Ruby
+
+
+regards to the correct article
+
+
+we can call this double columns operator
+
+
+as a constantial resolution operator or
+
+
+better yet scope resolution operator and
+
+
+we usually use it to manage a scope of
+
+
+the class
+
+
+classes and modules
+
+
+so um
+
+
+yeah I think we we cannot find too much
+
+
+places to use it to call a method in our
+
+
+workout right now
+
+
+um
+
+
+one note that double colon
+
+
+call of the double cone are not exactly
+
+
+the same as a
+
+
+dot so we can change we can use them
+
+
+interchangeably to call a method but
+
+
+they not but but not for the manage
+
+
+scope so they are not the same so
+
+
+let's imagine for a moment that user is
+
+
+in the scope of the workplace so we can
+
+
+use the book double columns here in this
+
+
+case but we cannot do it like that
+
+
+because we will get user is not animated
+
+
+of a workplace
+
+
+um let's stay here for a moment
+
+
+this kind of calling method when I first
+
+
+saw it
+
+
+um was new to me I didn't I hadn't hear
+
+
+about it before Nick's presentation
+
+
+so yeah it was new for me but this is
+
+
+not something completely unknown and you
+
+
+can see a note about it in Robocop DOC
+
+
+for example so we have here use double
+
+
+colon colons only for reference
+
+
+constants
+
+
+this includes classes and modules and
+
+
+Constructors like RI or nokogiri HTML do
+
+
+not use a double colon double columns
+
+
+for a regular method class
+
+
+So based on that
+
+
+um we we have here we decided to forget
+
+
+this way of calling a method in a favor
+
+
+of using a DOT
+
+
+I don't want to judge whether this is a
+
+
+good or bad decision it's a fact we
+
+
+prefer a DOT compared to the columns
+
+
+when we call a method
+
+
+um well for for
+
+
+me in this case the most interesting
+
+
+question was
+
+
+um
+
+
+how does this work
+
+
+on the hood and I think this is not
+
+
+talk for that but if you are if you are
+
+
+interested in that topic I invite you to
+
+
+join me on this on a stack Overflow
+
+
+question about it
+
+
+okay
+
+
+the fourth in way of calling a methods
+
+
+is a call of a proc uh but in a very
+
+
+specific way a proc object
+
+
+is an encapsulation of a block of a code
+
+
+that can be stored in a local variable
+
+
+passed to a method or another proc and
+
+
+invoked and proc is an essential concept
+
+
+of Ruby
+
+
+in on the core of its functional
+
+
+programming feature
+
+
+so
+
+
+we have
+
+
+our proc and how we can call a method by
+
+
+using a proc so we can call it in
+
+
+several ways we can use a call
+
+
+yelled
+
+
+or square brackets and all of these ways
+
+
+of calling a method are in the Greg
+
+
+article
+
+
+but I will show you one more uh way of
+
+
+doing that but before that let's
+
+
+check how this work
+
+
+so
+
+
+I would like to check the implementation
+
+
+of two proc method
+
+
+for a symbol
+
+
+I will check that in the Ruby news
+
+
+which is Ruby written in Ruby the last
+
+
+update of Rubinos was in 20 2020
+
+
+but
+
+
+still it is easier to to read it in Ruby
+
+
+than in C at least for me
+
+
+okay but one more thing do you remember
+
+
+the ion Ruby project the ruby in c-sharp
+
+
+from 2011.
+
+
+it was prepared to.net framework
+
+
+it's pretty old time
+
+
+okay anyway
+
+
+so we have a proc method
+
+
+and first we set our symbol which is in
+
+
+South in semi variable
+
+
+we do this because if self
+
+
+if we use self in the blog below
+
+
+and the blog is passed to instance avel
+
+
+the self become the object install eval
+
+
+was called on and no longer our symbol
+
+
+so to have uh we have to hear the the
+
+
+changing of the context so to have
+
+
+access to our symbol we need to assign
+
+
+it to the instance variable
+
+
+and then we create a proc we combine all
+
+
+the arguments in the arcs variable
+
+
+and we have a b variable to represent
+
+
+the the block of code
+
+
+and then we check that we have at least
+
+
+one argument
+
+
+and we should have one because the
+
+
+method which is now just a symbol
+
+
+needs to be called on some object
+
+
+so the call method needs have an
+
+
+argument
+
+
+and if we call the call method without
+
+
+argument
+
+
+we will get the no receiver given
+
+
+argument error exception
+
+
+and the most important step we take the
+
+
+first arguments
+
+
+which is in our case
+
+
+um
+
+
+which in an object
+
+
+we take a first argument where is the
+
+
+the object we want to call the the
+
+
+method on
+
+
+and we send the method which is in Sim
+
+
+variable to it and then we process the
+
+
+proceed the rest of the argument also
+
+
+with the block
+
+
+so let's check how this will look like
+
+
+for our user example
+
+
+um we have a proc method then we have in
+
+
+our
+
+
+self hello so we assign hello to
+
+
+assemble
+
+
+we create a block where we check if we
+
+
+have at least one argument
+
+
+and we have this is the user object and
+
+
+then we can call on this user object our
+
+
+hello method
+
+
+without any additional arguments
+
+
+so we know how the code works great
+
+
+now let me show you another way of
+
+
+calling a proc I didn't see it in Greg's
+
+
+article so I I asked him about it do you
+
+
+know that the call
+
+
+that you can call a proc with a triple
+
+
+equal sign
+
+
+and Greg replied that he didn't know
+
+
+that approach Greg also asked a great
+
+
+question when was it added to Ruby
+
+
+and the first version of Ruby where I
+
+
+found it
+
+
+uh was 1.9.1.1.1
+
+
+so this is a pretty old way of calling a
+
+
+proc
+
+
+so we have this another way of calling a
+
+
+proc
+
+
+uh by using triple equal sign
+
+
+and this is a good news because since
+
+
+the program response to the triple equal
+
+
+sign and case 2.2 we can use a proc in a
+
+
+case statement
+
+
+so I prepare a method just for the
+
+
+example in this method we have a proc
+
+
+and we create
+
+
+which will check if the phrase include
+
+
+message or not
+
+
+and then we have our case
+
+
+and
+
+
+when
+
+
+we
+
+
+when we use our message type proc and
+
+
+that the condition is fulfilled we will
+
+
+return it's a message type
+
+
+and if not then we will return other
+
+
+type
+
+
+so when we call a
+
+
+check type method with a string that
+
+
+does not contain message phrase we will
+
+
+get other type
+
+
+and in case we will
+
+
+call this method with a string that
+
+
+contains this
+
+
+phrase We Will sorry
+
+
+we will
+
+
+we will get its a message type
+
+
+okay so uh what can be even more
+
+
+interesting in Ruby
+
+
+colleague a method with argument
+
+
+of course so the next thing I thought of
+
+
+was how do I call a method with a
+
+
+argument using a proc
+
+
+so let's go back to our user class
+
+
+we will create a method say my age
+
+
+and
+
+
+when I
+
+
+[Music]
+
+
+did the name of this method the first
+
+
+thing which pop up in my my mind was a
+
+
+pretty bad joke but I had a song of
+
+
+Beyonce say my age say my name yeah
+
+
+so we create another
+
+
+instance of user
+
+
+and we can call our say my age method
+
+
+and 15 is not exactly my age but I know
+
+
+that I'm mostly look like and teenager
+
+
+so I tried very hard today
+
+
+to to look more serious but you can tell
+
+
+me if it work or not
+
+
+so we can call this method uh normally
+
+
+obviously
+
+
+okay
+
+
+so how we will use the proc for that so
+
+
+we can
+
+
+do it in several ways we can do it just
+
+
+by putting a
+
+
+second argument in the call
+
+
+or in the yield
+
+
+so
+
+
+let's check one more time the definition
+
+
+of two proc
+
+
+right now with the
+
+
+argument so we have to proc we assign
+
+
+say my age to our Sim variable we have
+
+
+our proc
+
+
+and then we will have the con we have
+
+
+the condition where we check uh if Arc
+
+
+is empty or not and it's not because we
+
+
+have the user object and also the number
+
+
+15 here
+
+
+and then we have uh we we sent to the
+
+
+user object our method say my age with
+
+
+15 as an argument
+
+
+and without a block
+
+
+so simple enough
+
+
+okay
+
+
+um
+
+
+do we can
+
+
+do something like that with a triple
+
+
+equal sign
+
+
+if we do something like that we will get
+
+
+an error
+
+
+but if we will change the space to a DOT
+
+
+everything will work
+
+
+and it will work because
+
+
+because we will not use the
+
+
+operator syntactic sugar anymore and we
+
+
+will just call it as a normal method
+
+
+so let's look at other possibilities to
+
+
+call a proc with an argument by triple
+
+
+equal sign
+
+
+and we can use a curry not a spice but a
+
+
+method and then we can use a square
+
+
+brackets to call an argument
+
+
+or we can just do it by a call like
+
+
+before
+
+
+I like the complexity of this line so I
+
+
+want to focus on the carry method for a
+
+
+moment it will be helpful later in the
+
+
+stock so
+
+
+we have a curry
+
+
+methods
+
+
+and it allow us to tell the proc how
+
+
+many arguments we need to run the whole
+
+
+logic
+
+
+so in our case we have two arguments
+
+
+and if we run the first proc with a
+
+
+lower ret than we declare at the
+
+
+beginning
+
+
+we will get a carried proc in return
+
+
+and we can say that
+
+
+this new proc is partially executed
+
+
+and only when enough arguments have been
+
+
+passed to satisfy the method signature
+
+
+the method is actually called
+
+
+and we can do it in this fancy square
+
+
+bracket way
+
+
+and as you see here we use double a pair
+
+
+of square brackets we cannot do it in
+
+
+one pair we will get an exception
+
+
+and since I uh talk a lot about procs
+
+
+let's check the map with ampersand
+
+
+and
+
+
+I like to use this shortcut whenever
+
+
+it's possible and people often think
+
+
+that this is shortcut for this line
+
+
+but to be honest it's shortcut for this
+
+
+so we have a call uh we we call a proc
+
+
+in the map as a block argument
+
+
+so this is similar to this we have a
+
+
+proc
+
+
+and we will call it in our
+
+
+in our map
+
+
+so uh
+
+
+I start thinking
+
+
+is it possible to call
+
+
+um
+
+
+this map with Ampersand using an
+
+
+additional argument
+
+
+so
+
+
+if we do something like this it will not
+
+
+work we will get an exception
+
+
+but there are some ways to do something
+
+
+like that
+
+
+so uh
+
+
+in this case we want to increase the
+
+
+number in our RI by 2 not by one
+
+
+as before
+
+
+so as I told you previously we cannot do
+
+
+it like this but we can do it like that
+
+
+and I would like to Focus for a moment
+
+
+on this
+
+
+way of calling that
+
+
+so we have
+
+
+we have our
+
+
+2 as an object and we are
+
+
+creating an method object by using a
+
+
+method method
+
+
+with an argument which is a symbol of
+
+
+Plus
+
+
+and this method is not associated with a
+
+
+specific object sorry it's associated
+
+
+with a specific object not a class
+
+
+uh so uh when we call it's like we do
+
+
+for a procs
+
+
+um
+
+
+we can provide it uh so so this can be
+
+
+provided to our map and the first
+
+
+argument is already there by this
+
+
+two object and the second one is
+
+
+provided normally by RI or a numerable
+
+
+object
+
+
+so let's check other ways of calling the
+
+
+proc we can do it like this so we
+
+
+convert our RI to a numerable object
+
+
+we inject argument into it
+
+
+and in our case this is our this
+
+
+argument is two
+
+
+and then we call a plus method with an
+
+
+upper Ampersand as we did previously and
+
+
+as I say the the second argument will be
+
+
+provided by enumerable object
+
+
+the second way of calling that
+
+
+is to convert our plus methods to a proc
+
+
+then specify the number of arguments
+
+
+in our case we want to have two
+
+
+arguments and we use for that this carry
+
+
+method I told you about previously
+
+
+and then we can provide the first
+
+
+argument and in our case it's also to
+
+
+and the rest will be treated as a proc
+
+
+which can be
+
+
+run in the map
+
+
+okay uh
+
+
+since we are talking about maps and
+
+
+Ampersand did you know that you can call
+
+
+a hash with a map in a map
+
+
+so
+
+
+since hash implements to proc method we
+
+
+can provide it to a map and run map as
+
+
+shown here and we will get an RR in
+
+
+return
+
+
+it works because when we call up two
+
+
+proc method on hash we convert it to a
+
+
+proc in a very specific way
+
+
+um and yeah it's behaved like
+
+
+this
+
+
+so let's go back one more time to
+
+
+implementation details
+
+
+this time we will check the two proc
+
+
+method
+
+
+for a hash
+
+
+um
+
+
+so we have a
+
+
+on self we have a self which is a hash
+
+
+we create a method object on brackets
+
+
+and we convert it to a proc
+
+
+so we will get this line which we can
+
+
+translate it to this one
+
+
+so hash is the last basic object where
+
+
+the two proc method is implemented we
+
+
+have this uh in the symbol
+
+
+object we have that for a method object
+
+
+and also for the hash
+
+
+I don't count the proc itself because it
+
+
+is obvious to me that
+
+
+we can call to proc method on a proc
+
+
+so yeah the one more tip I have for you
+
+
+today
+
+
+related with a map
+
+
+more specifically with how to use the
+
+
+iterator variable is that
+
+
+we can do it like we normally do just by
+
+
+putting an argument in the pipes
+
+
+surrounded by pipes
+
+
+or we can do it like that so by using
+
+
+the underscore number
+
+
+uh way and this will work not only for
+
+
+one argument but also for a multiple of
+
+
+them so you can use underscore one
+
+
+underscore two underscore three and so
+
+
+on
+
+
+that space physically all what I want to
+
+
+say let's summarize it
+
+
+by using the plus one by plus example
+
+
+so we can use no syntactic sugar to call
+
+
+a method like here
+
+
+we can send a send to the object we can
+
+
+send a method to the object also with
+
+
+the argument
+
+
+we can call a method by using triple
+
+
+equal sign
+
+
+or we can do it normally by call
+
+
+and yeah that's all thank you for
+
+
+listening uh
+
+
+you can find me on web on woman on race
+
+
+and the slides are on woman on race.com
+
+
+slash presentation
+
+
+um here you have all the links
+
+
+and yeah here are my social social media
+
+
+Blog Twitter and not trigger not Twitter
+
+
+the X and so on so thank you very much
+
+
+[Applause]
+
+
+do you have any questions
+
+
+I think it's too early to
+
+
+questions
+
+
+yeah thank you for this presentation it
+
+
+was pretty fun to learn something new
+
+
+about Ruby
+
+
+um have you had a chance to use any of
+
+
+these techniques uh in in your projects
+
+
+that you're working on this is
+
+
+this is something I use very often
+
+
+yes for sure the triple equal sign for
+
+
+the proc and call case sorry or yeah
+
+
+when you use rice you always have some
+
+
+small proc uh parts
+
+
+probably
+
+
+some of the this is some of the the
+
+
+examples I show you it's more like a fun
+
+
+and just in interesting topic to this to
+
+
+think and discuss but not the the
+
+
+production ready Solutions so for sure I
+
+
+use Ampersand with
+
+
+um uh name of the method but not with
+
+
+the additional argument uh yeah but some
+
+
+of them I can use in the project but not
+
+
+too often thank you
+
+
+any other question
+
+
+do you use
+
+
+um
+
+
+concatenation of the functions also
+
+
+because there is some functional things
+
+
+which you can you can call the proc in
+
+
+the proc and and pass it within the
+
+
+block uh because I I try to do it uh but
+
+
+it wasn't so easy to read so but it's
+
+
+also like like the Ruby detective uh
+
+
+thing to do to use it to try it so
+
+
+that's my question uh yeah this is
+
+
+mostly for fun uh when I do something
+
+
+like that but yeah as I say not on
+
+
+production because it's not so readable
+
+
+like we do that normally with join or
+
+
+plus uh yeah production
+
+
+yeah
+
+
+apart from readability of those method
+
+
+calls or those techniques which you
+
+
+showed have you compared for example the
+
+
+speed of on no no okay but this is
+
+
+the topic I was wondering whether
+
+
+either of those provided another benefit
+
+
+just to just other than fun
+
+
+thank you
+
+
+anyone
+
+
+okay so I think that's it thank you I
+
+
+just goes amazing thank you
+
+
+foreign

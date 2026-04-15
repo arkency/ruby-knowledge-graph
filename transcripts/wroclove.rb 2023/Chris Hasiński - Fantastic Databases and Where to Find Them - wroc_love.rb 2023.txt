@@ -1,0 +1,2941 @@
+um Andre introduced me as Kristoff but I
+
+
+know that for English-speaking people
+
+
+that's pretty much unpronounceable and
+
+
+difficult to spell so I usually go by
+
+
+Chris
+
+
+and I want to talk to you today about
+
+
+the some mythical creatures
+
+
+so heavy dragons
+
+
+hippie dragons is a phrase that you use
+
+
+when you have a map and you don't know
+
+
+what lines there so you put hippie
+
+
+dragons so people understand that you
+
+
+don't know that and you're supposed to
+
+
+explore
+
+
+this is a phrase that is actually modern
+
+
+the original phrase was here be Lions
+
+
+but uh of course ancient map doesn't
+
+
+have uh dragons in them however there is
+
+
+one particular
+
+
+um not a map but the globe Lennox globe
+
+
+that actually has this phrase written on
+
+
+it there is a small inscription in Latin
+
+
+draconess which means Herbie dragons
+
+
+um I want you guys to remember this for
+
+
+a second why I talked much about the
+
+
+slightly more more scary stuff which are
+
+
+layoffs
+
+
+layouts are the main topic for our
+
+
+industry for the last two years I think
+
+
+but with all the ends come New
+
+
+Beginnings which usually begin with
+
+
+recruitments
+
+
+so we are very much prepared for
+
+
+recruitment interviews and during those
+
+
+you're supposed to ask questions about
+
+
+the project because you're supposed to
+
+
+show that you're interested you actually
+
+
+care about those recruitments after some
+
+
+so long of not caring because you had so
+
+
+many of them
+
+
+so you ask questions
+
+
+um one of the good questions is which
+
+
+rails version do you guys use because
+
+
+you're interested in the project if it's
+
+
+seven that's cool that is his sixth and
+
+
+it's okay if it's five there is a lot of
+
+
+swell
+
+
+unease in the air and if it's for you
+
+
+actually want to charge them extra some
+
+
+other questions is is it DDD because
+
+
+that's a trendy thing yeah to use even
+
+
+sourcing yeah that's that's yeah you
+
+
+might actually want to take a pay hit
+
+
+when you actually get the project like
+
+
+that
+
+
+or maybe you are front-ending line and
+
+
+you want to
+
+
+get some info whatever you're using
+
+
+typescript or perhaps react how do you
+
+
+manage State on the front end
+
+
+or maybe not maybe you're scared of
+
+
+front-end and you want to look at the
+
+
+other side you want to look at the
+
+
+process The Continuous integration The
+
+
+Continuous deployment perhaps if you're
+
+
+into kubernetes or Nomad that's also a
+
+
+good question that's a valid question
+
+
+during a job interview
+
+
+um some people will ask about tests
+
+
+which are really good questions to be
+
+
+honest perhaps mutation testing which
+
+
+you guys didn't get to at the workshops
+
+
+I think they didn't actually commence
+
+
+yeah so these are all those questions
+
+
+but uh the other person usually get the
+
+
+good answers until you ask them
+
+
+can you tell me a little bit more about
+
+
+the database
+
+
+because you'll get also like oh it's
+
+
+postgres and uh which version I I don't
+
+
+remember I'll have to check I'll get
+
+
+back with you to you with this yeah
+
+
+most of the real shop talk that we do
+
+
+and hallway track
+
+
+interviews at work are related to
+
+
+storing and manipulating data and that's
+
+
+precisely what a database does
+
+
+if you don't believe me let's take a
+
+
+look at typical rails application
+
+
+this is extremely simplified and wrong
+
+
+version of the diagram that shows you a
+
+
+rails application but it gets a point
+
+
+across because it can be divided into
+
+
+three sections the first one is the
+
+
+front end which is the part that usually
+
+
+then the user cares about because that's
+
+
+how you get customer support tickets
+
+
+something doesn't work and you're
+
+
+supposed to figure out what actually
+
+
+doesn't work but they look at the front
+
+
+end then there is the big part the big
+
+
+part is Big because we actually care
+
+
+about this we are Ruby devs we want to
+
+
+look at this part and this part only
+
+
+this part is the interesting part but
+
+
+there is a part that actually does most
+
+
+of the work which is a database and if
+
+
+you still don't believe me that this is
+
+
+the case let's take a look at something
+
+
+called test pyramid if you Google test
+
+
+pyramid this is this idealized version
+
+
+how you suppose the test you're supposed
+
+
+to have most of your Tesla's unit test
+
+
+you're supposed to have some integration
+
+
+test with off of things that are not
+
+
+supposed to be tested in isolation and a
+
+
+small layer of end-to-end test because
+
+
+these are expensive these are difficult
+
+
+to maintain and there are error problems
+
+
+if you Google the opposite of this this
+
+
+is ice cream cone which has uh only a
+
+
+few unit tests more integration tests
+
+
+and then you have a lot of end-to-end
+
+
+tests and if you really want the ice
+
+
+cream these are the manual test but for
+
+
+the typical rails app none of those
+
+
+really apply
+
+
+this is the idealized version
+
+
+and this is the rails version of things
+
+
+we actually can test only a few things
+
+
+in unit tests
+
+
+we sometimes have this layer of
+
+
+end-to-end test because people like the
+
+
+automate browser for some reason but
+
+
+majority of the tester integration tests
+
+
+the reason for them being integration
+
+
+test is you integrate with the database
+
+
+you're supposed to hit the database to
+
+
+actually check if the logic works right
+
+
+most rails application are pretty
+
+
+useless without the database
+
+
+because the applications are made as a
+
+
+point of interaction with the data
+
+
+storage with a database
+
+
+and we still treat those database like
+
+
+some storage box something that we're
+
+
+not supposed to really look at these are
+
+
+exotic these are weird
+
+
+these are the dragons on the map
+
+
+I'd like to talk to you about how to
+
+
+handle those mythical creatures
+
+
+first of all let's acknowledge databases
+
+
+are weird like really weird they are not
+
+
+object oriented they are not functional
+
+
+they're declarative which is a very very
+
+
+foreign paradigm
+
+
+well they are not aware of most of your
+
+
+abstractions including the user's data
+
+
+separation which means that well we are
+
+
+connect only as one user to the database
+
+
+and the database doesn't know who's
+
+
+logged in because it's only one user the
+
+
+rails know which user is it
+
+
+but they have one redeeming quality they
+
+
+are very very good at processing data
+
+
+and much faster than Ruby
+
+
+okay let's start with the smallest
+
+
+creature there is
+
+
+um sqlite by the way images generated by
+
+
+bin journey I asked to generate a
+
+
+database as an animal
+
+
+all right so sqlite typically used for
+
+
+sqlite is I've made this size during my
+
+
+free time as a project that I do after
+
+
+work
+
+
+and I really want to show it to the
+
+
+world
+
+
+but I don't feel like setting up a full
+
+
+database it's not my thing and if you
+
+
+look at the sqlite documentation there
+
+
+is this long text about how to use them
+
+
+on websites and yeah you can actually
+
+
+use them for simple white what
+
+
+if you actually multiply those numbers
+
+
+they're handling 20 million SQL queries
+
+
+in a day
+
+
+on a server that's in a VM seven years
+
+
+ago Hardware so not your latest thing
+
+
+the crappy Skylake of the time
+
+
+and they share this VM with 23 other
+
+
+applications
+
+
+this is Escalade website so turns out
+
+
+that the clock end of sqlite is actually
+
+
+Superman
+
+
+and yeah sqlite is extremely extremely
+
+
+fast
+
+
+and it's a public domain
+
+
+and it has very easy backups which those
+
+
+things are like marketing ideas but
+
+
+think about this way it can handle lots
+
+
+and lots of traffic but free to your
+
+
+hosting
+
+
+it can be embedded into a gem and you
+
+
+don't really care if it's well the
+
+
+license won't work because it's public
+
+
+domain
+
+
+and also if you think that the backups
+
+
+are important think about this way you
+
+
+create one set of fixtures on one set of
+
+
+tests or even just a schema and you copy
+
+
+this file five times and you have five
+
+
+databases working for your tests and you
+
+
+can run them in parallel which is
+
+
+extremely fun
+
+
+they have some downsides with those like
+
+
+um
+
+
+in typical implementation every single
+
+
+query will look Ruby so you're supposed
+
+
+to use processes instead of threads
+
+
+and because there is only one writer you
+
+
+might get some database unavailable so
+
+
+you're supposed to do retries when you
+
+
+insert data or update data
+
+
+and there is no full text search which
+
+
+is really handy for small websites
+
+
+because search is some a popular feature
+
+
+but there are ways around it
+
+
+yes so this very small database has lots
+
+
+of usages and you might want to consider
+
+
+it even for larger scale product it has
+
+
+lots of reads
+
+
+there is also of course the elephant in
+
+
+the room
+
+
+and this one is cool because it's it's
+
+
+probably the best open source project
+
+
+ever at least in my opinion it's
+
+
+extremely versatile you can replace all
+
+
+of your stack with just postgres yes all
+
+
+of it
+
+
+if you read this post by
+
+
+um Stefan Schmidt I think this is
+
+
+amazing cto's blog this was very popular
+
+
+some time ago this list the cases in
+
+
+which postgres can replace some other
+
+
+part of your stock it can be a graphql
+
+
+it can be a cache it can be a queue it
+
+
+can be mostly anything
+
+
+amazing article it was real popular in
+
+
+hacking is for some time
+
+
+and I extracted some of the examples
+
+
+because I think they are cool the one
+
+
+that really hit me was the unlock table
+
+
+this is basically cash
+
+
+unlocked means that it doesn't write
+
+
+write the headlock to the disk which
+
+
+means that if your database goes down or
+
+
+your tables are gone like cash but it's
+
+
+very very fast compared to the normal
+
+
+storage and it's still SQL rails
+
+
+actually supports this starting version
+
+
+6 I think you can create unlock tables
+
+
+straight from migrations
+
+
+really cool
+
+
+um but you think that yeah I already
+
+
+have read this what do I need this for
+
+
+this is cool as a proof of concept but
+
+
+it's pretty much useless don't do this
+
+
+it's a thing you append to our spec on
+
+
+on tests and if you use this all of the
+
+
+tables that rspec creates will be
+
+
+unlocked
+
+
+which means they are much faster I've
+
+
+tested in a couple test Suites from
+
+
+different clients and this managed to
+
+
+shave off like three and a half minutes
+
+
+of tests and on a bad test suit and
+
+
+about 20 seconds on the good without any
+
+
+of the changes it works really good if
+
+
+you have lots of Rights so factoric
+
+
+Cascades and stuff really cool but
+
+
+remember if you restart your database
+
+
+the tables are gone so you have to do
+
+
+migrations again good for CI maybe not
+
+
+so good in development
+
+
+but holy this is fast this is
+
+
+really cool it's the only other features
+
+
+that we can use like have actually
+
+
+anyone actually browse the features of
+
+
+postgres
+
+
+it's a really long document it was
+
+
+really fun like there are interesting
+
+
+things in it
+
+
+um
+
+
+I'll skip to the advanced features
+
+
+section because we like Advanced
+
+
+features and in my humble opinion the
+
+
+most fun begins over here in window
+
+
+functions
+
+
+have anyone ever used a window function
+
+
+unfortunately okay it's an interesting
+
+
+case
+
+
+window functions are basically parallel
+
+
+calculations so you get some results but
+
+
+you want to apply some calculation for
+
+
+every row
+
+
+there are context awareness of the aware
+
+
+of other rows and they can do lots of
+
+
+things they are mostly misunderstood
+
+
+people think of them as some exotic SQL
+
+
+that the data engineers and they have
+
+
+the data scientists will use in some
+
+
+other queries that you're supposed to do
+
+
+in reporting or business intelligence
+
+
+but actually they are freakishly
+
+
+powerful
+
+
+here are some examples I extracted from
+
+
+various different projects and yeah
+
+
+let's start with the first one which is
+
+
+uh calculating some average originally
+
+
+it was an employee's salary average but
+
+
+this one actually speaks better
+
+
+um to you um
+
+
+and SQL you basically do this over
+
+
+and give it some idea on how to apply
+
+
+the calculation for the particular row
+
+
+so in this case this will actually split
+
+
+this entire thing into salary per
+
+
+average salary of uh every Department
+
+
+because this is the partition
+
+
+and yeah this looks like SQL and it
+
+
+looks like SQL that you you're not used
+
+
+to so you don't really like it but you
+
+
+can write it in rails and it's perfectly
+
+
+reasonable you can even put it into some
+
+
+kind of dto or the kind of object and
+
+
+you will get a perfectly object-oriented
+
+
+code out of this without just this tiny
+
+
+tiny bit of SQL sprinkled over it and
+
+
+this is much faster than doing this
+
+
+calculation in rails with two queries
+
+
+and combining the data from the two
+
+
+okay second example cheapest product per
+
+
+category this is useful for e-commerce
+
+
+stuff like you want to upsell something
+
+
+something cheap someone but something
+
+
+expensive so now everything looks cheap
+
+
+so you sell them the thing in a
+
+
+particular category
+
+
+yeah so um
+
+
+this thing
+
+
+will assign a row number
+
+
+to every category and will order them by
+
+
+price and name the name is important
+
+
+because now the ordering is stable so
+
+
+you'll get the same products every
+
+
+single time
+
+
+and yeah you could do things like you
+
+
+can get all the cheapest item for
+
+
+categories and you want to combine them
+
+
+and you can do this in Ruby that's fun
+
+
+but you wouldn't have this much fun
+
+
+without pattern matching like functional
+
+
+programming and declarative programming
+
+
+super cool and yeah you can still do it
+
+
+in rails yeah it's possible to do this
+
+
+thing in rails and it's perfectly fine
+
+
+it works it's wonderful even the pattern
+
+
+matching thing works
+
+
+so the last item from the window
+
+
+functions I'd like to show you is one
+
+
+that is extremely Googled for everyone
+
+
+the stack Overflow answer has like
+
+
+thousands of those how to do the
+
+
+cumulative sum so something
+
+
+um one on this then one this plus the
+
+
+first the previous month in the previous
+
+
+month and you add something in a
+
+
+cumulative way
+
+
+and I actually managed to refactor this
+
+
+into two different things
+
+
+which is cool it has come composition
+
+
+inside of SQL it's not just one single
+
+
+big query you can understand the parts
+
+
+and what's even cooler is that oh by the
+
+
+way this sounds like an English right it
+
+
+is kind of confusing thing this many
+
+
+keywords in a row yeah I think this
+
+
+that's weird but still it's pretty cool
+
+
+you can still do this in rails including
+
+
+composition it works you can just do one
+
+
+query and then do from from that query
+
+
+and you can do the window function and
+
+
+it will actually do all rows between the
+
+
+beginning of time to current row apply
+
+
+this to to the sum
+
+
+really cool and this is also really fast
+
+
+all those queries are really really fast
+
+
+compared to duty doing this thing in
+
+
+Ruby
+
+
+and why let me explain
+
+
+is a feature that people are aware of
+
+
+but they don't know how to read it
+
+
+like raise your hand if you know what
+
+
+the first thing on the cost estimation
+
+
+actually means because you have always
+
+
+from this to this
+
+
+yeah some people know but it's very very
+
+
+um I would say weirdly explained in
+
+
+postgres documentation
+
+
+it contains a hidden feature postgres
+
+
+actually keeps a table of statistics and
+
+
+you can use it for various different
+
+
+things do you know if you use Gmail and
+
+
+you search for something and you get
+
+
+page one of about 300 something that
+
+
+about 300 something is actually feature
+
+
+of explain function which will try to
+
+
+estimate the number of rows for a query
+
+
+and there is an explain method in active
+
+
+record but it is kind of bad and
+
+
+somebody can write the pull request it
+
+
+will be really really cool to accept
+
+
+other options because there are options
+
+
+to explain it's not just like explain
+
+
+and that's it you don't have anything
+
+
+else there are lots of different options
+
+
+that you can enable to get some more
+
+
+data out of it
+
+
+let's try a non-trivial but easy query
+
+
+like just just one join there are two
+
+
+conditions one of them and join the
+
+
+other one is in where
+
+
+nothing too fancy and uh
+
+
+the one of the features that is
+
+
+available in explain are costs I've
+
+
+disabled them explicitly to get the
+
+
+simplest format possible
+
+
+and this is the explain for this query
+
+
+on a small table
+
+
+okay how to read this thing
+
+
+the things with arrows are strategies
+
+
+you can look up each strategy sequential
+
+
+scan is just each in our term so it's
+
+
+right over the entire thing
+
+
+hash is to build a hash and sequential
+
+
+scan so this Loop can have a filter
+
+
+which will actually remove some elements
+
+
+out of it
+
+
+and if you have a nested item that means
+
+
+that this strategy is required for this
+
+
+one so sequential scan is required for
+
+
+this hash to be built
+
+
+so you have a list well another list a
+
+
+tree of strategies to apply
+
+
+okay sounds simple
+
+
+let's turn on the default now we have
+
+
+some more data
+
+
+and in this particular part you have
+
+
+this estimation I actually wrote written
+
+
+a gem that extract this so we can just
+
+
+do estimate count instead of count and
+
+
+you get an estimate I know there are
+
+
+some other gems that do this but they
+
+
+require migrations and mine doesn't plus
+
+
+is mine Shameless plug
+
+
+okay but let's go to to to the original
+
+
+topic which is explain how to read this
+
+
+thing
+
+
+okay
+
+
+so the first one which is really tricky
+
+
+for some people is the cost to get the
+
+
+first row because you have to remember
+
+
+that those strategies actually streaming
+
+
+data and they try to parallelize as much
+
+
+as possible
+
+
+so this is the cost to get the first row
+
+
+out of this strategy this is the cost of
+
+
+getting all rows from the strategy this
+
+
+is the number of rows that we estimate
+
+
+to find and this is the size in bytes of
+
+
+a particular row
+
+
+really cool if you do limit one you will
+
+
+only okay get this cost because the
+
+
+basically we only care about the first
+
+
+item if you don't do limit you'll get
+
+
+discussed because we need all items
+
+
+all right sounds simple
+
+
+and you have to remember that the costs
+
+
+are well sometimes the query have to
+
+
+wait for something because you basically
+
+
+need to strategy downwards to be
+
+
+completed before you can do something so
+
+
+in this case this hash gets written
+
+
+instantly from the sequential scan all
+
+
+the sequential scans can start
+
+
+immediately so the zero is the cost for
+
+
+the first row because you're basically
+
+
+iterating and you already got the first
+
+
+row the first time you iterate
+
+
+but this hash join has to wait on this
+
+
+hash that we built to actually do
+
+
+something
+
+
+so the strategies can block other
+
+
+strategies
+
+
+time to first row is important to know
+
+
+what is actually waiting for something
+
+
+to be done to start executing this
+
+
+strategy
+
+
+sounds difficult but to be honest it
+
+
+isn't and you can always validate if
+
+
+this is actually the case by adding
+
+
+analyze to explain
+
+
+analyzer would actually run the query
+
+
+so you get the real time of how long
+
+
+something took and if you want to do the
+
+
+explain analyze on insert or update or
+
+
+delete rather than transaction and roll
+
+
+back that's the thing that they don't
+
+
+mention in docs for some reason I don't
+
+
+know why people like inserting tons of
+
+
+rows because they don't understand that
+
+
+they can roll back after explaining
+
+
+something
+
+
+all right so you get some extra data
+
+
+there is a second parenthesis under this
+
+
+so in the second parenthesis
+
+
+there is an actual time to first row
+
+
+which is in milliseconds time for all
+
+
+rows number of rows and Loops means that
+
+
+some strategies execute more than once
+
+
+so you know how many times they they
+
+
+executed
+
+
+okay
+
+
+sounds simple
+
+
+you also get the planning time which is
+
+
+how long postgres took to figure this
+
+
+out the planning time are reused so the
+
+
+second time will run and it'll be lower
+
+
+um yeah you can you can actually tell
+
+
+that this is basically
+
+
+um the real time for those costs it's
+
+
+pretty accurate but the actual time it
+
+
+takes there is some actual time they
+
+
+will take to to get the first row
+
+
+because you have to read it from the
+
+
+disk and you have to apply this filter
+
+
+so the cost isn't actually matching the
+
+
+actual time that closely
+
+
+okay
+
+
+but these features are probably you have
+
+
+used at least I know that people use
+
+
+explain analyze the one that will be
+
+
+default soon is buffers
+
+
+and buffers are important that's why
+
+
+they will be default I think in postgres
+
+
+16 or 17 they're still debating that
+
+
+um
+
+
+buffers will tell you how much data
+
+
+was read from the disk and how much was
+
+
+actually in Ram already
+
+
+so you can see how much of a disk access
+
+
+you need to have just something to be
+
+
+used and you get the memory usage for
+
+
+those and you eat you have the this um
+
+
+um just a second
+
+
+I think I lost one's like
+
+
+yeah I think I lost one slide not not to
+
+
+worry um if you rerun this you'll see
+
+
+that the buffers change and you'll get
+
+
+uh more hits uh there are the hits in
+
+
+the in the buffer than reads for the
+
+
+second time and also the execution time
+
+
+will be lower because there is already
+
+
+some data in the buffers
+
+
+how can you optimize it even further
+
+
+well use an index
+
+
+and indexing is like I don't know this
+
+
+is like magic to some people that will
+
+
+try to do every single index or they try
+
+
+to figure out some magical way of of
+
+
+trying which index will be good there
+
+
+are many many theories but to be honest
+
+
+there are some rules that you can
+
+
+actually apply like query can have only
+
+
+one index it can be used for either
+
+
+sorting or filtering or both but you
+
+
+can't use two different indices one for
+
+
+filtering one for sorting so we want to
+
+
+take a look at order by and where
+
+
+and the database design is which one to
+
+
+use based on which one seems to be uh
+
+
+the most beneficial
+
+
+um
+
+
+there is an app by Andrew Kane called PG
+
+
+hero that has a very nice algorithm for
+
+
+finding missing indices
+
+
+there are different types that you might
+
+
+want to try based on cardinality or type
+
+
+of data
+
+
+and it's very good to monitor the usage
+
+
+of indexes which you can find in
+
+
+postgres manual how to do
+
+
+after you run vacuum analyze you'll be
+
+
+able to see which indexes are induced
+
+
+and if you're interested about how to
+
+
+find those indexes this is the basic
+
+
+algorithm that they use
+
+
+it's I would say
+
+
+very
+
+
+um complete in most of the cases like
+
+
+there aren't many cases in typical the
+
+
+postgres data based on Rails apps that
+
+
+this wouldn't find the right index to do
+
+
+there might be some examples but I
+
+
+wouldn't count them on them if you're
+
+
+not to them yourself because this was
+
+
+actually about dated five years ago so
+
+
+pull requests are very welcome
+
+
+there are some dark outs when it comes
+
+
+to indexes like things that are
+
+
+non-obvious
+
+
+if your users are from all around the
+
+
+world try all the combinations of
+
+
+geodata on indices
+
+
+because it seems like sometimes only the
+
+
+latitude is important sometimes the only
+
+
+longitude is important sometimes the
+
+
+order is important of those because the
+
+
+users are sometimes sliced into
+
+
+continents or sometimes slides into
+
+
+countries it depends on what actually
+
+
+works so try all of them and see which
+
+
+one will actually get picked
+
+
+um you can try partial indexes which are
+
+
+really nice because you can limit the
+
+
+amount of data in index which will make
+
+
+it much faster
+
+
+the where part should mimic part of your
+
+
+query so if they match the postgres
+
+
+might pick this particular partial index
+
+
+instead of the full one
+
+
+and of course
+
+
+there is a hidden feature that I haven't
+
+
+seen in production it for some reason
+
+
+like it's it's it's not that hidden but
+
+
+I still think that people are missing it
+
+
+you can include columns in your index
+
+
+that are not being used for filtering or
+
+
+soldering there are just uh so you don't
+
+
+have to go to the database so if you
+
+
+actually use the index and the columns
+
+
+which are not really important but still
+
+
+are being fetched then you can do an
+
+
+index only query like you don't get hit
+
+
+the database at all
+
+
+and postgres is also fun when it comes
+
+
+to extensions
+
+
+this is the part why it's so versatile
+
+
+the most popular ones are probably
+
+
+postgis if you have like lots of
+
+
+geographical data used postgres at some
+
+
+point time scale for time series also
+
+
+very popular
+
+
+um
+
+
+but the one that's underutilized this
+
+
+site is it is I never know how to spell
+
+
+and but to pronounce it and I I have to
+
+
+look it up and I should probably do it
+
+
+before this talk
+
+
+they added tons of different features
+
+
+because it's not only one thing they
+
+
+actually merge several different
+
+
+extensions into one
+
+
+the most important I think are columnar
+
+
+storage distributed tables and parallel
+
+
+querying
+
+
+raise your hand if you know what's a
+
+
+columnar storage
+
+
+some people do when database store the
+
+
+data on the disk it's stored in rows so
+
+
+you can actually fetch the entire row
+
+
+each time but you can also do it the
+
+
+opposite way which is for the store
+
+
+columns so if you query have like lots
+
+
+and lots of data
+
+
+but only in a few columns the columnar
+
+
+one is much much faster typical for
+
+
+analytical use business intelligence and
+
+
+stuff
+
+
+but also because every single one of
+
+
+those columns is the same type
+
+
+you can compress them and store them in
+
+
+chunks which means you'll have like 10
+
+
+times less the storage
+
+
+really really cool for lots of reads and
+
+
+mostly multiple rows and or aggregates
+
+
+inside this there is some downside
+
+
+because site is on columnar storage
+
+
+can't really update the data it's append
+
+
+only but still very useful for
+
+
+analytical
+
+
+components of your app
+
+
+and yeah the building compression is
+
+
+really cool like you have 40 terabytes
+
+
+table and now it's four so it fits on an
+
+
+nvme expensive one but still nvme which
+
+
+means it's faster
+
+
+yeah it's very easy to use you just add
+
+
+using column learn that's it there is no
+
+
+other magic to it and you can mix and
+
+
+match in a single query you can use some
+
+
+tables called columnars some tables row
+
+
+based and it will still work really cool
+
+
+um
+
+
+it's smaller faster for operations mix
+
+
+match and the use case that I really
+
+
+like
+
+
+I remember yesterday we had to talk
+
+
+about Cold Storage you do cold storage
+
+
+with columnar database but the last
+
+
+partition the newest data is in the row
+
+
+database
+
+
+so yeah this use case is really cool
+
+
+like the data that is all that's
+
+
+compressed is fast to retrieve in bulk
+
+
+but the new one is easy to find
+
+
+okay and then distributed tables with
+
+
+multiple elephants
+
+
+um
+
+
+a few similar servers are usually
+
+
+cheaper than the big one especially in
+
+
+Cloud
+
+
+the cloud doesn't really scale uh
+
+
+vertically it likes to scale
+
+
+horizontally
+
+
+so you can distribute your load to
+
+
+multiple tables
+
+
+you can paste them on sorry user
+
+
+location
+
+
+and you can put the frequently used
+
+
+together data together even if you copy
+
+
+it several times the different different
+
+
+servers
+
+
+you pick the distribution column like
+
+
+for example if you have a white label
+
+
+app or some SAS you take the customer ID
+
+
+you have this column into every single
+
+
+table so they get distributed by it
+
+
+and you use it in the you don't use it
+
+
+in the tables that are shared which will
+
+
+get copied to every single server so the
+
+
+data is together
+
+
+um you mark the shared table as
+
+
+reference tables so postgres actually
+
+
+has some idea on what you're trying to
+
+
+do
+
+
+and that's it there's only one function
+
+
+to invoke which is a table name and
+
+
+which column you want and for the shared
+
+
+one is uh I don't have the shared one
+
+
+but I have the collocate one which is
+
+
+will be try to fit this data together
+
+
+with the other one so it knows that the
+
+
+store ID in this call is this table is
+
+
+the same as the store ID in the other
+
+
+table
+
+
+these are the features that you can
+
+
+actually use right now with just this
+
+
+simple installing extension and and
+
+
+running single SQL there's like nothing
+
+
+nothing difficult to do here
+
+
+but if you really want we can talk about
+
+
+some future curriculum for Fantastic
+
+
+Beasts
+
+
+which are the other databases the one
+
+
+that are more exotic which requires you
+
+
+to Ping your devops and get some some
+
+
+approval
+
+
+cockroachdb is the fun one
+
+
+it basically does what the scientist
+
+
+does
+
+
+but automatically you want to have this
+
+
+sharding availability you have to want
+
+
+the multiple servers you don't want to
+
+
+do it yourself like inside this and
+
+
+you're really worried that one of your
+
+
+data centers will go down which is
+
+
+something that might happen in the
+
+
+modern world
+
+
+yeah so it has Auto shorting outdated
+
+
+distributions with hotspot detection
+
+
+which means it will actually try to
+
+
+redistribute data if it feels that it
+
+
+needs to and it can be geographically
+
+
+aware so we would knows that the users
+
+
+in America probably want to get the data
+
+
+from an American server and using Europe
+
+
+want to get it from European server it
+
+
+will do that
+
+
+the second exotic database that you
+
+
+probably well this one you actually used
+
+
+what
+
+
+what
+
+
+really
+
+
+it's like the default choice for PHP
+
+
+there's it's it's
+
+
+ugly and Oracle bought it like one rich
+
+
+ called Larry Ellison bought this
+
+
+thing
+
+
+weird
+
+
+but MySQL has been growing a lot of time
+
+
+and well it's different now really it is
+
+
+it is a lot of different thing
+
+
+it's super fast
+
+
+even compared to postgres this is really
+
+
+really fast it can do in-memory tables
+
+
+which postgres can't do even if you do
+
+
+unlock tables they will still be written
+
+
+sometimes sometimes to disk and this
+
+
+will be entirely in memory perfect for
+
+
+tests
+
+
+and also
+
+
+well it used to be a joke it's a serious
+
+
+alternative like base camp uses it
+
+
+probably right now or if hey maybe I
+
+
+don't know which one of them but one of
+
+
+them are using using MySQL
+
+
+it has um if I ask you about what's the
+
+
+difference between MySQL and postgres
+
+
+most people will tell you well one is
+
+
+the one that you choose because it's the
+
+
+right one and the other one's the first
+
+
+one which you choose when somebody else
+
+
+actually picked it and you can't really
+
+
+change it but the reason why it's so
+
+
+fast is it handles transactions
+
+
+differently it makes a different
+
+
+assumption on how to insert the data
+
+
+okay let's go to an example this is
+
+
+postgres and uh this is a very
+
+
+controversial topic right now because it
+
+
+used to be like this that if you have
+
+
+Thai script you're happy but on the
+
+
+other case you're also happy but because
+
+
+the AJ changed it you're now unhappy so
+
+
+postgres will do it it will add the
+
+
+second row
+
+
+and Mark this one a stale so the older
+
+
+queries will actually get this one but
+
+
+the new one will operate on this one
+
+
+and you have two rows you have to clean
+
+
+them up in vacuum or something vacuum
+
+
+will clean up this thing but until it
+
+
+until it does this is actually taking
+
+
+space and time
+
+
+MySQL Works differently because it will
+
+
+just update the spring and table and
+
+
+they create a second table in which you
+
+
+have the rollback as a segment which
+
+
+means every single transaction that will
+
+
+try to use the old data will get the new
+
+
+data but it will apply the rollback
+
+
+and because most of the transactions
+
+
+actually commit pretty quickly and most
+
+
+of the transactions don't really need
+
+
+this assumption that you might get the
+
+
+style data
+
+
+and most of them will resolve correctly
+
+
+they won't be rolled back this version
+
+
+is just faster
+
+
+it also has all the nice ideas of poster
+
+
+as there is a Json operators window
+
+
+functions full text search it all just
+
+
+works now so it's right now a valid
+
+
+choice for a database for your project
+
+
+then there is more exotic fish is the
+
+
+fish I don't know to be honest it's
+
+
+something
+
+
+this one came from Russia
+
+
+and it was used for Yandex
+
+
+they have a lot of marketing data this
+
+
+is columnar database
+
+
+the use case is my data team takes a
+
+
+coffee break every time they run
+
+
+something but if I'd give them access to
+
+
+some cloud-based solution they will just
+
+
+run the budget to the ground and oh my
+
+
+God this thing has pre-calculated
+
+
+Aggregates and everything is like super
+
+
+fast the time in Russian is uh forgiving
+
+
+Point am I Russian clickhouse yeah
+
+
+term is it
+
+
+somebody will correct me I'm quite sure
+
+
+um which means clickhouse doesn't press
+
+
+breaks these things is not definitely
+
+
+not the slowest part of your system it
+
+
+doesn't slow down the other parts the
+
+
+other parts are the ones that are slow
+
+
+it has multitude of different table
+
+
+types which will do pre-calculated
+
+
+Aggregates or automatically sum the rows
+
+
+I will try to do some exotic kind of
+
+
+updates in place really really cool also
+
+
+really long documentation cloudflare
+
+
+uses this to do like six million inserts
+
+
+a second or something like that which is
+
+
+crazy the ingestion rate on this is
+
+
+amazing I highly recommend you read this
+
+
+article they migrated from postgres to
+
+
+this
+
+
+yeah
+
+
+but this is an exotic database and we
+
+
+can get even more exotic databases
+
+
+but unfortunately we're kind of running
+
+
+out of time
+
+
+and nosql is still a topic document
+
+
+database or a topic graph database or a
+
+
+topic
+
+
+so perhaps a part two is in order next
+
+
+year
+
+
+if you really like it but in the
+
+
+meantime feel free to explore in your
+
+
+own the Fantastic world of databases
+
+
+thank you
+
+
+[Applause]
+
+
+are there any questions
+
+
+thank you for presentation yeah let's
+
+
+see it was really good to hear it and I
+
+
+have the question because you didn't
+
+
+explain how to perceive the the cost
+
+
+value
+
+
+um it's 100 is high value or how to
+
+
+evaluate it because I try to read it in
+
+
+documentation but it's not so
+
+
+um I don't know it's like story points
+
+
+for me
+
+
+it is it is exactly story points you can
+
+
+actually check out the postgres
+
+
+configuration and see which operation
+
+
+has assigned which cost but it's
+
+
+predetermined and you can modify them if
+
+
+you really want if you think that oh I
+
+
+think the sequentials scan actually is
+
+
+more expensive for me because I have
+
+
+very crappy hard drive then you assign
+
+
+it a higher value and the plan will
+
+
+change but by default there are some
+
+
+well there are some defaults that are
+
+
+taken from various use cases but there
+
+
+are exactly just story points and it
+
+
+just tries to sum the story points for a
+
+
+particular part of the query so you're
+
+
+right
+
+
+with the unlocked tables you said um
+
+
+they are effectively
+
+
+wiped out when the database is restarted
+
+
+is it is it can also work when the
+
+
+connection is reset or is it I don't
+
+
+think it's connection is reset but I I
+
+
+definitely know that if I restart the
+
+
+docker they will be gone I know if the
+
+
+database will crash in any way they will
+
+
+be gone
+
+
+I haven't tested how far it goes but for
+
+
+continuous integration usage like you
+
+
+want to have the database written from
+
+
+scratch and you want to run all the
+
+
+tests and then you don't really care
+
+
+what happens after it this is really
+
+
+good but you have to append that if this
+
+
+is run on CI on local this is actually
+
+
+problematic because you download some
+
+
+changes run some migrations and you're
+
+
+sometimes in this weird state that have
+
+
+I restarted Docker have I restarted my
+
+
+computer was it restarted automatically
+
+
+my tables are gone I'm supposed to run
+
+
+the entire migration set again oh my God
+
+
+I don't want to do this yeah cool
+
+
+okay thank you Chris thank you very much
+
+
+foreign

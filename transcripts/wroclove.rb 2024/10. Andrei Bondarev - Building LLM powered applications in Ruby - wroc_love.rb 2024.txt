@@ -1,0 +1,3373 @@
+[Applause]
+
+
+thank you thank you um thank you for
+
+
+being here um I saw some of you uh at
+
+
+the bar last night it looked like a lot
+
+
+of fun um I'm curious how many of you
+
+
+just came here straight from the
+
+
+bar but I appreciate that so my name is
+
+
+Andre
+
+
+BFF um I traveled here from South
+
+
+Florida um I'm very grateful to to be
+
+
+here thank you for having me thank you
+
+
+to the organizers this has been a
+
+
+phenomenal conference and um I I I
+
+
+really enjoy the city I love it all
+
+
+right so today we'll talk about building
+
+
+llm powered applications in
+
+
+Ruby um so I started out my uh career
+
+
+building uh rails applications 13 years
+
+
+ago for the Department of uh US
+
+
+Department of Health and Human Services
+
+
+building public facing applications for
+
+
+millions of consumers then I moved on to
+
+
+uh continue building rails applications
+
+
+at USA Today does anyone remember spre
+
+
+um Sean scoffield uh who was the
+
+
+original uh author uh hired me and I
+
+
+worked with one of the most uh amazing
+
+
+rails teams at the time
+
+
+um worked at a couple other rails
+
+
+places um so we're we're going to talk
+
+
+about generative AI so what is
+
+
+generative AI so it is a type of
+
+
+artificial intelligence that generates
+
+
+text audio video Etc and for the
+
+
+purposes of this presentation we'll just
+
+
+focus on
+
+
+text so large language models are deep
+
+
+artificial uh learning um
+
+
+deep learning artificial neuron
+
+
+networks um with a general purpose uh
+
+
+language understanding and generation
+
+
+and they exploded in popularity after
+
+
+the uh 2017 Google paper uh attention is
+
+
+all you need and the underlying
+
+
+architecture uh is called Transformers
+
+
+um we're not going to dive into
+
+
+it so the generative AI impact is that
+
+
+all of a sudden were able to deploy
+
+
+commercially commercial prod production
+
+
+grade systems in just a couple days so
+
+
+previously when you had to uh spend
+
+
+about a month collecting data um about 3
+
+
+months uh training data and about 3
+
+
+months deploying and then optimizing
+
+
+those models to run on your Hardware
+
+
+well now you can use
+
+
+apis um and you can get something into
+
+
+uh POC state or production State um
+
+
+within a couple
+
+
+days so llms add Excel add a bunch of
+
+
+different tasks um I think some some of
+
+
+the tasks are really good at our for
+
+
+example struct structuring data so
+
+
+taking unstructured data and converting
+
+
+it to a structured format taking
+
+
+paragraphs of text and returning Json or
+
+
+yam something that developers can
+
+
+consume um they're pretty great at
+
+
+summarizing text as well you could send
+
+
+it a short narrative and get a summary
+
+
+back uh classifying data so bucketing
+
+
+data dep depending on uh a certain kind
+
+
+of enum translating languages generating
+
+
+content answering questions chat bot
+
+
+style um so I I'd like to present you a
+
+
+vision
+
+
+where um I think this is going and I I
+
+
+don't think anyone truly knows where
+
+
+this is going so I don't want you to get
+
+
+kind of tied up in the implementation
+
+
+details I want you to consider this
+
+
+holistically so I think that um
+
+
+generative AI is going to become a part
+
+
+of every single Tech stack the way the
+
+
+databases the cache encryption cues
+
+
+Lambda functions storage and the
+
+
+protocols are so every Tech stack is
+
+
+going to have this running process that
+
+
+it's going to rely on for certain
+
+
+things so um
+
+
+the2 investment firm presents this
+
+
+Vision where it's a crucial part of the
+
+
+um application
+
+
+architecture and the developers are
+
+
+building applications on top of these AI
+
+
+systems so here's example
+
+
+so um in every single project of ours
+
+
+we've got if else statements and you
+
+
+have to enumerate all the different
+
+
+options it's a finite amount of
+
+
+options um and depending on any given
+
+
+input you either arrive at output one or
+
+
+output two so with AI we have some
+
+
+flexibility to consider more uh
+
+
+ambiguity or more vagueness for the um
+
+
+any given input that comes in so for
+
+
+example given any input and an amount of
+
+
+a number of different outcomes or
+
+
+methods the AI will pick the best
+
+
+suitable candidate so even even for
+
+
+input that it's never seen
+
+
+before um so for
+
+
+example uh if it's if it's an AI agent
+
+
+uh you could have it write a file
+
+
+approve a document um text my
+
+
+partner so this has always been the
+
+
+promise of
+
+
+rails um is that for business owners uh
+
+
+your rails teams should mostly focus on
+
+
+writing business logic um we don't want
+
+
+developers figuring out engineering
+
+
+problems uh for the sake of for the sake
+
+
+of uh figuring out engineering
+
+
+problems so developers focus on writing
+
+
+business logic and not Reinventing
+
+
+engineering Solutions so the old old
+
+
+world um before AI is has always been
+
+
+business Logics in fat models or service
+
+
+objects and it's kind of sprinkled all
+
+
+over the project um and with and the new
+
+
+world uh is um I'm going to propose that
+
+
+some of the business logic is going to
+
+
+go into
+
+
+prompts so um in this example where
+
+
+um um this is a simulated e-commerce
+
+
+store um and we have the AI agent in the
+
+
+middle um orchestrating the business
+
+
+logic and sending mess mesages um
+
+
+between the different systems that that
+
+
+e-commerce um store might connect with
+
+
+so for example any just about any
+
+
+Commerce store uh connects to a payment
+
+
+Gateway via an API connects to an
+
+
+inventory management system VN
+
+
+API accounting systems shipping
+
+
+service so I'm
+
+
+propos that you would be able to write
+
+
+out your uh standard operating
+
+
+procedures for your business um put it
+
+
+in the prompt and then uh just like in
+
+
+the kind of in the diagram you would
+
+
+have ai orchestrate those um um
+
+
+orchestrate the execution for handling
+
+
+orders uh processing returns um handling
+
+
+the customer loyalty program
+
+
+Etc so this takes us to AI agents um and
+
+
+AI agents are autonomous or
+
+
+semi-autonomous general purpose LM
+
+
+powered programs um they can use tools
+
+
+which are basically apis and
+
+
+Integrations uh via function
+
+
+calling um and they work best with
+
+
+powerful llms and um the openingi gp4 is
+
+
+kind of the the leader right now
+
+
+although it changes every
+
+
+week and they can be used to automate
+
+
+workfl Flows In Business
+
+
+processes so agents
+
+
+are um anyone that's ever try to build
+
+
+them they're pretty unreliable and this
+
+
+is the way I I I think about this
+
+
+is they become more
+
+
+reliable uh the um the upper triangle
+
+
+triangle as the number of tasks or
+
+
+responsibilities that these agents are
+
+
+respons for shrinks or
+
+
+decreases um so you kind of narrow down
+
+
+the set set of responsibilities that AI
+
+
+agents um uh execute or or the decision
+
+
+tree that the agent has to go
+
+
+down so um if you look at this chart uh
+
+
+on the x-axis we have um f a focused
+
+
+agent so maybe a single task or uh dual
+
+
+task agent on the uh left hand side on
+
+
+the x-axis and and a general purpose
+
+
+agent uh towards the right side uh on
+
+
+the
+
+
+x-axis and
+
+
+basically I think um we can this is at
+
+
+least POC ready um so the upper left uh
+
+
+quadrant and the and the bottom um right
+
+
+and and um if if you get a general
+
+
+purpose reliable agent well that's
+
+
+AGI
+
+
+so the adoption has
+
+
+been still pretty slow um and this is
+
+
+number this is due to a number of
+
+
+different
+
+
+reasons um it's a fast changing field so
+
+
+if you decide to invest into this Tech
+
+
+technology right now you're chasing a
+
+
+moving Target because everything changes
+
+
+every
+
+
+week um there's a lot of ambiguity
+
+
+around the IP ownership or or uh
+
+
+copyright ownership so who owns the
+
+
+derivative of work that the AI has
+
+
+generated uh whether it's text or
+
+
+imagery um because these models are um I
+
+
+believe trained on some copyrighted data
+
+
+even though they don't tell us so
+
+
+there's a lack of tooling for developers
+
+
+to build
+
+
+applications um and also it's it's risky
+
+
+so in some instances
+
+
+where um large projects are rolled out
+
+
+um like the Air Canada um chatbot that
+
+
+told the customer wrong information and
+
+
+and and then the customer ended up suing
+
+
+the company for money
+
+
+um or also below there's an example
+
+
+of
+
+
+um a user convincing the General Motors
+
+
+chatbot to sell them a car for
+
+
+$1 um
+
+
+and you either give away a uh $40,000
+
+
+car or you suffer reputational damage so
+
+
+of of course the first option was safer
+
+
+I I hate calling this prompt engineering
+
+
+this is this is prompt Alchemy this is
+
+
+not an engineering
+
+
+discipline um given how random it is um
+
+
+you change a couple of words and you get
+
+
+a completely different
+
+
+output um look at look
+
+
+look at
+
+
+this look at this research paper um I
+
+
+mean you're you're telling the model to
+
+
+uh take a deep breath
+
+
+and think of this problem uh carefully
+
+
+and it improves the results it doesn't
+
+
+make sense um and when you try to ask
+
+
+people why does this happen no one knows
+
+
+and they just say well it's in the
+
+
+training data but how does this happen
+
+
+no one
+
+
+knows there's jailbreaking techniques so
+
+
+basically getting um a model to do or
+
+
+say unintended
+
+
+things um for example this paper came
+
+
+came out of uh
+
+
+anthropic um
+
+
+um they they coined this term uh many
+
+
+shot jailbreaking so if you go to open
+
+
+AI right now and ask it how to make a
+
+
+bomb um I don't want to do that because
+
+
+I don't want to get uh someone show up
+
+
+at my door the next
+
+
+day um but you can trick it into telling
+
+
+you how to do that by listing a bunch of
+
+
+examples as if it did tell you how to do
+
+
+a these malicious things and then it'll
+
+
+gladly tell you how to make a bomb
+
+
+so of course there's a lot of
+
+
+deficiencies that we've looked
+
+
+at um there's
+
+
+hallucinations um um because the models
+
+
+are trained in on a uh in a snapshot in
+
+
+time the data gets outdated pretty
+
+
+quickly so for example GPT 4 is trained
+
+
+uh on data up through April
+
+
+2023 um and in some instances you wanted
+
+
+to utilize the relevant knowledge your
+
+
+proprietary knowledge and it has um no
+
+
+means of knowing that right out of
+
+
+box so
+
+
+enter uh what's become popular uh this
+
+
+methodology called retrieval augmented
+
+
+generation or short for
+
+
+rag it's very
+
+
+simple it's when you
+
+
+take um relevant knowledge uh your
+
+
+proprietary knowledge you inject it into
+
+
+the prompt along with the user's
+
+
+original question and then you have the
+
+
+model use that
+
+
+knowledge to generate a relevant
+
+
+accurate answer to the user's question
+
+
+so for example a popular use case is
+
+
+building QA systems on top of your
+
+
+proprietary corporate data so if I want
+
+
+to find out how long the paternity leave
+
+
+is at my
+
+
+company the gp4 is not going to know
+
+
+that it's um it's buried down in the HR
+
+
+documents so this is
+
+
+rag so to break this down um to go a
+
+
+little bit deeper double click on that
+
+
+um it works by first generating Vector
+
+
+embeddings from the user's question then
+
+
+you typically store your proprietary
+
+
+data in a vector
+
+
+database so you would execute a
+
+
+similarity
+
+
+search you would find the relevant
+
+
+documents and then you would construct
+
+
+the rag prompt and then that's what your
+
+
+um llm model would use
+
+
+so let's let's dive into some of those
+
+
+things so what are vector embeddings so
+
+
+Vector embeddings are a machine learning
+
+
+technique to Cluster data by its
+
+
+semantic
+
+
+meaning um so llms encode meaning behind
+
+
+words or
+
+
+texts um and place it somewhere in the
+
+
+embedding space or vector
+
+
+space um and Vector space is a
+
+
+uh multi-dimensional space so for
+
+
+example the open AI uh Ada uh model is
+
+
+uh
+
+
+1536 Dimensions large so for example we
+
+
+could take this
+
+
+string the Ruby programming language is
+
+
+30 years old and has stood the test of
+
+
+time is not true and we run it through
+
+
+an embedding
+
+
+model and it spits out and it spits out
+
+
+a vector uh of length uh
+
+
+1536 so because a human mind can only
+
+
+visualize 2D or 3D
+
+
+spaces uh we're unable to show what a uh
+
+
+1500 dimensional uh space looks like but
+
+
+if it was reduced down to a 3D space and
+
+
+you can see that our Blue
+
+
+Dot is
+
+
+clustered by the meaning along these um
+
+
+other
+
+
+points so this also called
+
+
+a can you guys hear me
+
+
+okay and when we're doing semantics
+
+
+search also known as um Vector search is
+
+
+we're calculating the distance from your
+
+
+query to the different points found in
+
+
+the vector database found in the latent
+
+
+space and there's different ways of
+
+
+doing that um you can calculate the
+
+
+Manhattan ukian uh or cosine similarity
+
+
+distance
+
+
+and then now that you've
+
+
+obtained relevant documents you merge it
+
+
+as the context into into your prompt
+
+
+typically the instructions at the top
+
+
+you would
+
+
+um
+
+
+Drive some sort of llm behavior so you
+
+
+could tell it to reply concise be
+
+
+concise and straight to a
+
+
+point and then it would complete the
+
+
+rest of the answer
+
+
+so that's
+
+
+rag this is what naive rag
+
+
+is so again the query comes in you run
+
+
+it through the embedding
+
+
+model um you run similarity search
+
+
+against your vector
+
+
+store where your proprietary corporate
+
+
+documents have been indexed
+
+
+into and you take those documents you
+
+
+merge them into the
+
+
+context package it up as a prompt give
+
+
+it to the llm and uh derive the
+
+
+answer so evaluations are very diff are
+
+
+are very
+
+
+difficult um typically people rely on
+
+
+human feedback so if you've used um Chad
+
+
+GPT you know that every answer comes
+
+
+with a up vote and down vote and this is
+
+
+what they use to fine-tune the model and
+
+
+and figure out how well the their models
+
+
+are
+
+
+performing if you're building a system
+
+
+you can then use gb4
+
+
+to uh assess or critique itself so you
+
+
+could say this is how my model performed
+
+
+this is how my model answered this
+
+
+question you could send it back to the
+
+
+gbt 4 and say
+
+
+is this a satisfactory answer how would
+
+
+you rate
+
+
+it um one of the few quantitative ways
+
+
+to do this and as Engineers we all want
+
+
+uh a we want to take a scientific
+
+
+approach um and one of the one of a few
+
+
+ways is this uh technique called ragas
+
+
+uh and it stands for rag
+
+
+assessment um which you measure three
+
+
+different metrics which are which is
+
+
+faithfulness
+
+
+so um making sure that the retrieved
+
+
+context uh can act as a justification
+
+
+for the generated
+
+
+answer uh context
+
+
+relevance um so making sure that the
+
+
+context is focused with little or no uh
+
+
+little to no irrelevant information and
+
+
+then answer relevance um making sure
+
+
+that the answer addresses the actual
+
+
+question um and you run those three
+
+
+different metrics uh you combine them
+
+
+and you get a um a a ragas uh
+
+
+score so there's other Advanced
+
+
+strategies
+
+
+where this is just one of them other
+
+
+Advanced rag strategies where you can
+
+
+use two different indexes IND
+
+
+dices um one that just contains
+
+
+summaries so for example you generate a
+
+
+summary off of um every single corporate
+
+
+doc of yours and then the other index
+
+
+that
+
+
+contains um
+
+
+actual
+
+
+um chunk data and then you first run
+
+
+similarity search against the summaries
+
+
+um get the pointers to the more detailed
+
+
+index yank the data out into a context
+
+
+package it up into a prompt send it off
+
+
+get your answer
+
+
+back
+
+
+so everyone talks about Job Bots all
+
+
+these
+
+
+Enterprises um that have fallen face
+
+
+into into mud into puddle like Air
+
+
+Canada GM
+
+
+um ver building chat Bots because that's
+
+
+it's it's
+
+
+sexy but I actually think that when
+
+
+you're interacting with a human you open
+
+
+up your prompt for prompt injection
+
+
+prompt hacking and there's just an
+
+
+infinite amount of different scenarios
+
+
+so I actually think that the near term
+
+
+is running these models behind the
+
+
+scenes and and
+
+
+controlling uh your prompts so I'm not
+
+
+sure that we're going to go at least in
+
+
+the in the near term towards these open
+
+
+chat experiences where you're a customer
+
+
+sales associate and you're chatting with
+
+
+this AI bot and you say reach out to
+
+
+this client DRFT this email create a
+
+
+presentation
+
+
+deck actually think you're going to have
+
+
+some sort of a control Panner panel
+
+
+right we're closing down the set of
+
+
+tasks the set of responsibilities that
+
+
+the AI agent to is responsible for to
+
+
+make these systems more
+
+
+reliable so I think you're going to have
+
+
+a control panel with quick links kind of
+
+
+most common business processes that are
+
+
+just a little bit more intelligent than
+
+
+what the current systems are behind the
+
+
+scenes so enter Lang chain
+
+
+RB um I'm going to be humbled to say
+
+
+that it is the most popular Ruby
+
+
+solution to build um llm uh powered
+
+
+applications the use cases are uh
+
+
+General um interfacing with uh
+
+
+llms um you can build agents you can
+
+
+build uh rag
+
+
+systems and our approach is being vendor
+
+
+agnostic everything changes so quickly
+
+
+we don't know who the leading providers
+
+
+are whether it's going to be open
+
+
+AI uh or Google or a smaller French
+
+
+startup called
+
+
+MCH um so we're ready to kind of support
+
+
+all of them um and we're going to try to
+
+
+stick with best practice
+
+
+IES uh and stay on top of the almost
+
+
+daily emergent
+
+
+research um and of course in the
+
+
+greatest Ruby on Rails
+
+
+fashion um batteries
+
+
+included so the linkchain RB approach
+
+
+is's a common interface for llms so you
+
+
+could just pick your
+
+
+provider um and and the methods adhere
+
+
+to the same
+
+
+signature same with Vector databases
+
+
+picker
+
+
+poison um you can add data by just
+
+
+calling add text and then run similarity
+
+
+search and then if you do ask that
+
+
+executes a naive uh
+
+
+rag so we're going to do some
+
+
+coding um I'm going to walk you
+
+
+through uh I'm going to walk you through
+
+
+a short kind of e-commerce AI assistant
+
+
+that I've built um I'll try to kind of
+
+
+explain how it's built and then we'll
+
+
+run it and see what kind of results we
+
+
+get so um if you'd like to look at the
+
+
+repo um just scan this QR code um it's
+
+
+not necessary um all right
+
+
+is this uh is this big
+
+
+enough can you guys hear me
+
+
+okay okay so let's look at some code um
+
+
+see just trying to close all uh files
+
+
+for
+
+
+now okay
+
+
+so what we did here is we pulled the
+
+
+linkchain RB gem in um we pulled a
+
+
+mainstream gem that validates that an
+
+
+address is a valid
+
+
+address um we pulled in the underlying
+
+
+uh Ruby open AI
+
+
+gem um I was debugging so of course I
+
+
+need pry um we have sqlite
+
+
+SQL uhv EnV and and the mail
+
+
+gem um and in
+
+
+our setup DB
+
+
+file we create a simple
+
+
+uh SQL database SQL light database so we
+
+
+have a products table we have an orders
+
+
+table we have an order items table and
+
+
+the customer table um and we create
+
+
+some uh dumy skes with price and
+
+
+quantity um and this AI assistant is
+
+
+going to run this kind of tiny
+
+
+simulated um Ecom Commerce store um and
+
+
+orchestrate the the business logic
+
+
+between the different
+
+
+services and we're calling the store
+
+
+nerds and threads uh that
+
+
+um makes graphic nerdy t-shirts for uh
+
+
+software Engineers that like working
+
+
+from
+
+
+home so that's the
+
+
+background and oh
+
+
+okay that's that's a lot of
+
+
+uh it's a lot of keys that I'm going to
+
+
+have to change shortly
+
+
+after um all we need is the open AI key
+
+
+and the database name and we're calling
+
+
+it nerds and
+
+
+threads um so we've got very simple
+
+
+models to represent those tables so
+
+
+customer has many
+
+
+orders an order belongs to a customer
+
+
+and has many order
+
+
+items an order
+
+
+item belongs to
+
+
+order and belongs to a
+
+
+product and a product has many order
+
+
+items um so we're going to going to
+
+
+represent our
+
+
+services as
+
+
+tools and a tool is a collection of
+
+
+functions um so for example we can take
+
+
+a look at
+
+
+our um customer management
+
+
+tool it inherits from linkchain
+
+
+toolbase uh um and points
+
+
+to a customer management
+
+
+Json um that I'll I'll show in a
+
+
+second and it has just two methods
+
+
+creating a customer so we create a uh
+
+
+customer by passing the name and the
+
+
+email and create it in the database and
+
+
+send this um Json
+
+
+response find
+
+
+customer um which we find a customer by
+
+
+email and send the hash
+
+
+back and what the Json does is it
+
+
+describes these
+
+
+functions in the open API
+
+
+spec right so Swagger open
+
+
+API um and we will be sending this data
+
+
+we will be sending these signatures or
+
+
+tool
+
+
+signatures to
+
+
+the
+
+
+llm um and that basically explains it
+
+
+what these methods are for and how to
+
+
+use them so in this example you could
+
+
+see that the create customer would give
+
+
+it a description that it's a part of the
+
+
+customer management service and it
+
+
+creates a new customer with a given name
+
+
+and then we specify the name and the
+
+
+email parameters that are
+
+
+required and same thing for for fine
+
+
+customer so this is a
+
+
+tool um and what linkchain RB is doing
+
+
+here is it's kind of orchestrating that
+
+
+connection right where you can pass a
+
+
+tool and it and behind the scenes it
+
+
+uses this Json to uh match it with the
+
+
+methods in the class and and uh
+
+
+orchestrate this function
+
+
+calling so we have another service
+
+
+called email
+
+
+service that uses the Ruby mail
+
+
+gem um and it it it just it takes the
+
+
+customer ID and the order ID and it just
+
+
+sends an email with some order details
+
+
+thank you for shopping at nerds and
+
+
+threads we have a Inventory management
+
+
+tool that you can use to update
+
+
+inventory with new
+
+
+quantity or find a product by skew and
+
+
+get a
+
+
+hashack same thing in this Json here it
+
+
+describes the
+
+
+interface order management
+
+
+tool that you can use to create an order
+
+
+Mark the order Mark the order as
+
+
+refunded or find in the
+
+
+database a payment
+
+
+Gateway that has charge customer refund
+
+
+customer and issue store credit
+
+
+methods same thing open API spec of
+
+
+these three different
+
+
+methods
+
+
+explaining to the large language model
+
+
+what they are and what they can be used
+
+
+for
+
+
+um and the shipping service that
+
+
+validates the
+
+
+address this is kind of nice to have um
+
+
+creates a shipping label and creates a
+
+
+return
+
+
+label so let's um give it a run and and
+
+
+and see how um well it uh
+
+
+performs uh so I have saved some of
+
+
+these instructions in the read me um
+
+
+because I'm not going to watch you
+
+
+painfully type out every single
+
+
+thing so I'll just make sure that that
+
+
+database doesn't exist is is the
+
+
+terminal big enough for everyone to see
+
+
+okay so um I'm going to run the setup DB
+
+
+to create our
+
+
+database and I'm going to run our main.
+
+
+RB
+
+
+file and let's just check the product
+
+
+um the database is there the the models
+
+
+work so now what we're going to do is
+
+
+we're going to instantiate the llm
+
+
+client so we're going to say Lang chain
+
+
+lb ai.
+
+
+new
+
+
+key and default options we're going to
+
+
+use
+
+
+the chat
+
+
+completion
+
+
+Model gbt
+
+
+turn let me just confirm that I typed
+
+
+the right
+
+
+thing chat completion model
+
+
+name
+
+
+oh okay so the llm client is
+
+
+there
+
+
+so if we just want to send
+
+
+it a simple
+
+
+message we can and response back with
+
+
+hello how can I help you today um we can
+
+
+also embed data
+
+
+sorry not not not the uh yeah let's skip
+
+
+this for
+
+
+now um so in the instructions here I
+
+
+wrote out what our
+
+
+store how our store uh is going to
+
+
+operate so we're going to say that
+
+
+you're and we're going to tell the llm
+
+
+that it is an AI that runs an e-commerce
+
+
+store called nerds and threads that
+
+
+sells comfy nerdy t-shirts for software
+
+
+engineers at work from home you have
+
+
+access to a shipping service inventory
+
+
+service order management payment Gateway
+
+
+email service and customer management
+
+
+systems and it is responsible for
+
+
+processing
+
+
+orders follow these exact procedures
+
+
+below and we give it steps to execute
+
+
+the order step by step so create the
+
+
+customer account if it doesn't exist
+
+
+check inventory for
+
+
+items calculate the total
+
+
+amount charge the customer create the
+
+
+order create a shipping label and send
+
+
+an email notification to customers to
+
+
+the
+
+
+customer so I will insert these
+
+
+directions into
+
+
+um a
+
+
+terminal and let's instantiate our
+
+
+assistant blank chain assistant which is
+
+
+going to use those
+
+
+instructions it's going to use the
+
+
+instance of the llm that we've
+
+
+instantiated and it's going to use
+
+
+these six different
+
+
+tools and the thread is
+
+
+is a thread just keeps track of the
+
+
+different
+
+
+messages I'm going to clear the screen
+
+
+I'm going to paste this in so we have
+
+
+the
+
+
+assistant so let's execute the first
+
+
+order which is myself just purchased
+
+
+five
+
+
+t-shirts with
+
+
+this and my address
+
+
+is this address in New York not a real
+
+
+address and not my
+
+
+address I'm going to clear the screen
+
+
+and paste the
+
+
+sy so sending a call to linkchain open
+
+
+AI looking up customer record sending a
+
+
+call to linkchain creating customer
+
+
+record validating address charging
+
+
+customer updating and
+
+
+so we will take a
+
+
+look okay so let's let's see what
+
+
+happened
+
+
+so I'm I'm going to skip all these
+
+
+different calls to the
+
+
+llm but
+
+
+we looked up a customer
+
+
+record it didn't
+
+
+exist we created
+
+
+it we looked up the skew to get the
+
+
+price for this
+
+
+item we then called the shipping service
+
+
+to validate the
+
+
+address and then we charge the customer
+
+
+for this
+
+
+amount and I'll show you that it's five
+
+
+t-shirts at that price amounts to this
+
+
+amount we then updated
+
+
+inventory
+
+
+with um updated quantity
+
+
+we created the order
+
+
+record we created a shipping
+
+
+label which calls the behind the scenes
+
+
+it calls the the when you create a
+
+
+shipping label it calls the validating
+
+
+uh address method
+
+
+again and then we sent an email
+
+
+notification
+
+
+um and if we look
+
+
+at this is these are all the messages
+
+
+that were kind of
+
+
+exchanged
+
+
+um I I understand it's not super rable
+
+
+but this is the original prompt system
+
+
+prompt that we wrote out as the as the
+
+
+instructions to our um AI
+
+
+assistant we then sent the message
+
+
+saying that um I had purchased five
+
+
+t-shirts and then the this assistant is
+
+
+is a message that came back from from
+
+
+the llm and it it it calls these me
+
+
+methods so it tells us that I want you
+
+
+to call find
+
+
+customer with this
+
+
+email and then we match it with that
+
+
+tool or that
+
+
+API we serialize
+
+
+these arguments and call that method in
+
+
+that tool with those arguments and send
+
+
+back the result so our tool actually
+
+
+returned customer not
+
+
+found then the assistant said
+
+
+okay create the
+
+
+customer this is the name this is the
+
+
+email we said okay we just did here's
+
+
+the customer ID
+
+
+the assistant then
+
+
+said okay find this product with this
+
+
+q and then also call validate address
+
+
+this is known as um uh parallel
+
+
+functions we said okay here's the here's
+
+
+the
+
+
+skew the total we have in the inventory
+
+
+is 10 here's the price
+
+
+so if you
+
+
+take 5 by 24 it's
+
+
+24.95
+
+
+the so this is the uh this is this this
+
+
+tool validated the address and sent uh
+
+
+true as yes this address is
+
+
+valid and this tool call ID is is is is
+
+
+a pointer to the corresponding tool
+
+
+calls so that's how VM is able to tell
+
+
+that whatever we send it that output
+
+
+corresponds to a specific function
+
+
+call um the assistant then said okay
+
+
+charge a customer for a total amount of
+
+
+$14.95 here's the customer
+
+
+ID we said okay we charged
+
+
+for that
+
+
+amount random U ID for a transaction
+
+
+ID the assistant then said update the
+
+
+inventory and the new quantity since we
+
+
+just sold five t-shirts is five so
+
+
+update this queue with quantity of
+
+
+five create the
+
+
+order with these order it items so we
+
+
+just sold five items of this
+
+
+SK
+
+
+ah so I think this was supposed to be a
+
+
+hash
+
+
+um okay so the cre
+
+
+order so the order management create
+
+
+order call return success true with his
+
+
+order
+
+
+ID and the update
+
+
+inventory Returns the product hash which
+
+
+contains the quantity but I I forgot to
+
+
+call do has on
+
+
+it the assistant then said create a
+
+
+shipping
+
+
+label with this address and this
+
+
+customer ID and there's there's an enom
+
+
+where it it it can choose from uh
+
+
+shipping
+
+
+provider we said okay true here's the
+
+
+tracking number random U
+
+
+ID and then we the assistant calls calls
+
+
+send
+
+
+email and then this email gets
+
+
+drafted and then taking all of that the
+
+
+assistant then just says my order has
+
+
+been successfully processed here's a
+
+
+summary customer ID order ID total
+
+
+charged shipping provider and you got an
+
+
+email thank you for choosing nerds and
+
+
+threads so I'm going
+
+
+to clear this
+
+
+thread and the reason why I'm doing that
+
+
+is
+
+
+because I want to I want to delete all
+
+
+this uh
+
+
+uh chat
+
+
+history so otherwise this chat history
+
+
+will be sent back to
+
+
+vlm and recall as as I as I said in
+
+
+order to make these things
+
+
+reliable you have to close down the set
+
+
+of
+
+
+responsibilities not give them a very
+
+
+massive prompt because it'll it'll get
+
+
+overwhelmed and it'll get confused so
+
+
+these are the limitations and and what
+
+
+we're trying to do is we're trying to
+
+
+find that sweet spot where it can
+
+
+actually be
+
+
+usable
+
+
+um and again the this original message
+
+
+that I
+
+
+sent I don't think it should be an open
+
+
+chat interface where some someone runs
+
+
+this e-commerce store and they just they
+
+
+they they chat with the sist system
+
+
+there's
+
+
+just too many
+
+
+permutations too many possibilities for
+
+
+for it go to to go
+
+
+wrong imagine that this this this this
+
+
+gets sent by a different system in in in
+
+
+this format right and and we can
+
+
+illustrate that this
+
+
+works 9% n9ine nine times out of
+
+
+10 so
+
+
+I'm going to clear this
+
+
+thread and I'm going to reset the
+
+
+instructions because that gets set as
+
+
+the system message so if we look at the
+
+
+thread
+
+
+messages
+
+
+with no extra letter s then it it just
+
+
+contains that same same same prompt um
+
+
+again operating procedures for for our
+
+
+simulated e
+
+
+store so then my friend stepen comes
+
+
+in and he's
+
+
+purchasing um this Q in this
+
+
+queue I don't believe this is Steven's
+
+
+uh real Berlin address
+
+
+and I'll talk through it in a
+
+
+second end it with uh sending an an
+
+
+email
+
+
+okay let's take a look at
+
+
+this looking up customer record for
+
+
+Steven looking up the product
+
+
+skew looking
+
+
+up the different product
+
+
+skew create the customer record for this
+
+
+email this new
+
+
+email validate this Berlin
+
+
+address update the
+
+
+inventory so the original quantity was
+
+
+five um so Stephen purchased two of
+
+
+these SKS so it updates the inventory
+
+
+with the new
+
+
+quantity and this this CU of the
+
+
+original quantity was three and Stephen
+
+
+purchased one of these skes um so the
+
+
+new quantities two
+
+
+units charge
+
+
+them and this was calculated uh
+
+
+correctly I
+
+
+believe create the
+
+
+order create the shipping
+
+
+label send an
+
+
+email so let's I'm going to clear the
+
+
+thread again and we're going to try
+
+
+slightly different instructions
+
+
+so we're going to try these return order
+
+
+instructions so let's take a look at
+
+
+them the first part is the same you're
+
+
+operating nerds and threads you have
+
+
+access to these
+
+
+Services
+
+
+Etc follow these exact procedures below
+
+
+for returning an
+
+
+order
+
+
+so look up the order calculate the total
+
+
+amount refund the payment Mark the order
+
+
+as
+
+
+refunded I'm going to insert this these
+
+
+instructions
+
+
+and I'm going to set
+
+
+them let's just
+
+
+verify that they
+
+
+were they're in there
+
+
+and Stephen changed his
+
+
+mind and he's returning his
+
+
+order looking up the
+
+
+order looking up the skew looking up the
+
+
+other
+
+
+skew
+
+
+refunding the payment
+
+
+Gateway and refunding the the order
+
+
+which just marks the order as um as
+
+
+refunded and this is all actually saved
+
+
+in the
+
+
+database powered by SQL
+
+
+light and last
+
+
+thing let's clear with thread
+
+
+again reset the
+
+
+instructions and
+
+
+we got a new inventory shipment let's
+
+
+update some
+
+
+skes so inventory
+
+
+update
+
+
+updating this CU updating this queue
+
+
+updating this
+
+
+queue and then in at the end it just
+
+
+tells us the the inventory has been
+
+
+successfully updated
+
+
+um you might ask why didn't
+
+
+we just put these return
+
+
+steps into
+
+
+here and again this is this is what I've
+
+
+kept referring to
+
+
+is we the these systems are are still
+
+
+pretty dumb and we don't want to
+
+
+overwhelm them and we're trying to
+
+
+figure out that sweet spot where it
+
+
+could still be productive and reliable
+
+
+right if you remember my x-axis y AIS we
+
+
+want to
+
+
+be in reliable but
+
+
+focused um quadrant right so focused
+
+
+interactions so perhaps you have two
+
+
+agents one that is just laser focused on
+
+
+completing orders and one that's just
+
+
+laser focused on returning orders and
+
+
+that's all they do but they're not
+
+
+telling you what the meaning of life is
+
+
+and dealing with all of
+
+
+it uh and and and and consuming the
+
+
+massive operate business operating
+
+
+procedures manual
+
+
+so I I would love
+
+
+to check us out and poke Calles in in it
+
+
+and give me some feedback if you want if
+
+
+you
+
+
+can okay so why
+
+
+Ruby well um I love the language
+
+
+I've been doing this for a very long
+
+
+time I love how pragmatic our community
+
+
+is
+
+
+um we focus on business
+
+
+problems and delivering business
+
+
+value and not over
+
+
+engineering um we have strong oop
+
+
+principles I think I think of um such
+
+
+great books like uh practice Orient
+
+
+practice uh object-oriented programming
+
+
+uh in Ruby by Sandy
+
+
+Mets um a lot of python people come from
+
+
+research and
+
+
+Academia um if if you've looked at some
+
+
+of those projects I'm not saying
+
+
+everyone does it but I don't see good
+
+
+patterns I see methods that are uh
+
+
+hundreds lines long and not tested and I
+
+
+think we have good mental
+
+
+models um that um could give us some new
+
+
+ways of thinking about these agents and
+
+
+and
+
+
+llms
+
+
+um and um I I I tweeted this thing
+
+
+earlier in the
+
+
+year um everyone says we're so we're so
+
+
+far away from python they have all these
+
+
+amazing libraries and I said um well you
+
+
+can if rewriting some of them if if if
+
+
+you're um yearning for a utility in
+
+
+Python and it doesn't exist in Ruby just
+
+
+get Chad
+
+
+gp2 rewrite it um
+
+
+so uh a ruby developer is sad the
+
+
+library a python Library doesn't exist
+
+
+in Ruby they paste the code file by file
+
+
+uh into Chad GPT ask it to rewrite it
+
+
+and um with a couple tweaks you can you
+
+
+can run it and and Ruby developer is
+
+
+happy now I've done it a couple times it
+
+
+it's it
+
+
+works not
+
+
+bad okay
+
+
+so some of the things I've learned from
+
+
+uh running this uh open modest uh open
+
+
+source project is is you got to be
+
+
+responsive so when people ask you
+
+
+questions uh or issue pull requests or
+
+
+open issues um you got to be responsive
+
+
+because you you you have them for a
+
+
+finite attention
+
+
+span um you got to be friendly you got
+
+
+to be welcoming uh and you got to be
+
+
+helpful you got to jump on these
+
+
+opportunities to to help people and go
+
+
+out of your way to deliver
+
+
+value um thank you for all of these
+
+
+different
+
+
+humans that have contributed to to the
+
+
+project
+
+
+um
+
+
+and here's our
+
+
+Discord um where we talk about uh the
+
+
+project and kind of what we're seeing in
+
+
+the um AI llm gen AI
+
+
+space and the last thing that um I want
+
+
+to leave you with is we do not have it
+
+
+all figured out yet uh but we're
+
+
+optimistic thank you
+
+
+[Applause]
+
+
+all right any
+
+
+question thanks for the great talk uh in
+
+
+your example you've built a system that
+
+
+for that sends the instructions to llm
+
+
+for each incoming request and I wonder
+
+
+because potentially you could have asked
+
+
+llm once to generate rubby code that per
+
+
+performs those instructions and I wonder
+
+
+what tradeoffs are
+
+
+here yeah so if you didn't connect the
+
+
+dots or maybe I wasn't uh super
+
+
+clear this this is what we tried to do
+
+
+right so we had in nerds and threads
+
+
+e-commerce AI assistant orchestrating
+
+
+messages um and there was nothing the
+
+
+code that that had this business logic
+
+
+how this e-commerce store should
+
+
+operate
+
+
+um
+
+
+so you know I'm I'm actually very
+
+
+interested
+
+
+in this type of
+
+
+angle to to solving the problem I think
+
+
+a lot of companies are pursuing um
+
+
+generating the code and then and then
+
+
+saving the
+
+
+code I'm actually curious what would it
+
+
+be like without that so I'm actually
+
+
+curious what it would be like
+
+
+to generate the
+
+
+execution right and I will ask why do
+
+
+you even need to save the
+
+
+code so what we're doing as as as rails
+
+
+developers is stringing apis together
+
+
+right API
+
+
+to the
+
+
+database mail service this service that
+
+
+service
+
+
+um and like I like I've stated
+
+
+in in in this slide right
+
+
+um we're we're focusing on on on uh
+
+
+building business logic so that was my
+
+
+attempt to to illustrate this concept
+
+
+that that
+
+
+can we write out business logic in in
+
+
+prompts and then can the execution be
+
+
+inferred and inference is is what the
+
+
+llm is doing as it's predicting next
+
+
+tokens that's called
+
+
+inference thank
+
+
+you all right guys uh sorry Stephen we
+
+
+have to move the uh discussions and
+
+
+questions to the hall uh as we are over
+
+
+time that's what I heard in there was a
+
+
+whisper uh let's thank Andrew bondarev
+
+
+your Ruby AI guy for explaining
+
+
+this thank you very much
+
+
+[Applause]

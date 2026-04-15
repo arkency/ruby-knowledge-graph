@@ -1,0 +1,1753 @@
+right this is actually my fourth time
+
+
+I'm on broad sloth and this is the first
+
+
+time I'm on this side of the room and I
+
+
+gotta tell you this room looks much
+
+
+bigger from here I had to kind of rename
+
+
+my talk because it used to be called
+
+
+transcoding in Ruby a story and people
+
+
+are asking me if I'm going to do the
+
+
+actual transcoding in Ruby no I'm not
+
+
+crazy I am going to use ffmpeg and I
+
+
+actually had to google the
+
+
+pronounciation of that because I kept
+
+
+saying it wrong for the past few years
+
+
+[Music]
+
+
+yeah you can actually follow the slides
+
+
+live on your phone or laptop you can
+
+
+either scan the QR code there is an URL
+
+
+and in a few minutes the link will also
+
+
+be on Twitter if you use your phone to
+
+
+check the slides please put it on full
+
+
+screen and keep in mind that it has to
+
+
+be in landscape otherwise everything
+
+
+will look broken and you will claim that
+
+
+it's my fault right so I will be
+
+
+avoiding talking about any business side
+
+
+of the project so please don't ask me
+
+
+about it the reason is that I really
+
+
+didn't ask for permission to talk about
+
+
+this project and I'm not really sure
+
+
+what the legal status right now is I
+
+
+will be also a bit vague about the time
+
+
+frame just so you cannot so easily
+
+
+google it and the entire presentation is
+
+
+actually based on the conversation logs
+
+
+that I had and not on the actual code
+
+
+because I no longer have access to that
+
+
+code so keep in mind that the code
+
+
+examples may or may may not be broken or
+
+
+maybe not up to date so there was once a
+
+
+project the project was a media platform
+
+
+users could upload both video and the
+
+
+audio and it had an html5 video player
+
+
+so we had to process and transcribe the
+
+
+videos we also had some extra processing
+
+
+because of the secret business sauce
+
+
+that I cannot talk about so for the
+
+
+proof-of-concept version we decided to
+
+
+run in on a dedicated server instead of
+
+
+in the cloud at the time the solution to
+
+
+do file uploads was carrier wave so we
+
+
+obviously went with carrier wave and
+
+
+since we were rails developers we just
+
+
+decided
+
+
+slap some of the show of gems so we used
+
+
+caraway video for processing and carrier
+
+
+wave backgrounder for doing it in the
+
+
+background because as somebody here
+
+
+already mentioned we cannot really
+
+
+transcode videos while they are
+
+
+uploading you can already kinda guess
+
+
+from the previous presentations how the
+
+
+code actually looked like it looked more
+
+
+or less like I think I'm gonna use this
+
+
+instead the Internet is not that
+
+
+reliable oh it doesn't work sorry
+
+
+yeah so the code look kind of like this
+
+
+I'm gonna switch the slides on my laptop
+
+
+because this is a replacement phone and
+
+
+it just died
+
+
+great seriously I really needed that
+
+
+right now so the lesson number one is
+
+
+that hindsight 20/20 it's always easy to
+
+
+look at something you did years ago and
+
+
+be like oh my god how could you let this
+
+
+happen that should be obvious that it's
+
+
+gonna the code is gonna be spaghetti and
+
+
+everything but usually like the
+
+
+knowledge and the experience at the time
+
+
+when you are building something and you
+
+
+only learn it after a while so don't
+
+
+judge other people or yourself too
+
+
+harshly
+
+
+right so we so how it was built
+
+
+we had our class video which is
+
+
+obviously an active record right and
+
+
+since it's used carry arrived at mounted
+
+
+on a plotter which was then using the
+
+
+carrier wave backgrounder to spawn a
+
+
+background process and because we are
+
+
+rays developers we have some custom call
+
+
+backs right and they were setting some
+
+
+states before the processing then we did
+
+
+the actual processing using the carrier
+
+
+wave video which uses ffmpeg and then we
+
+
+had some other extra callbacks to set
+
+
+the state afterwards so the lesson here
+
+
+is call back all the things no please
+
+
+don't do it
+
+
+you should always try to avoid callbacks
+
+
+whenever possible I think this is
+
+
+obvious to people who are coming to this
+
+
+conference often you already know that
+
+
+but callbacks make your cut really hard
+
+
+to reason about and it's harder to
+
+
+isolate it slowly turns everything into
+
+
+a kind of codependent mess sorry Susie I
+
+
+spend so much time preparing for this
+
+
+and I have technical problems all the
+
+
+time all right so so since we kind of
+
+
+had transcode two different versions
+
+
+like mp4 and WebM you obviously used
+
+
+carrier versions and after a while we
+
+
+also decided that probably we should
+
+
+like change the resolution of the video
+
+
+create some quality versions and
+
+
+everything so a quality picker would be
+
+
+nice so seriously so we sprinkle a bit
+
+
+of custom DSL on top of that but that
+
+
+custom DSL actually only had the
+
+
+ugliness and complexity of the code so
+
+
+it got a bit unwieldy after a while some
+
+
+of the lessons he is here is you should
+
+
+probably avoid using carrier versions or
+
+
+at least don't use them for anything
+
+
+even remotely more complex they're
+
+
+probably good for like resizing a
+
+
+thumbnail or something but anything
+
+
+bigger than that that it's not gonna end
+
+
+up great I don't know what this current
+
+
+status is because the project was done a
+
+
+few years ago but when we did it the
+
+
+there was also a bug in courier wave
+
+
+that I'd never really managed to fix
+
+
+which made it impossible to reprocess
+
+
+only one version of the file so every
+
+
+time the transcoding broke and trust me
+
+
+it breaks often we had to reprocess
+
+
+everything which took forever we also
+
+
+had the problem because when you're
+
+
+building when you're changing the
+
+
+resolutions of the video when you're
+
+
+creating the quality versions and you
+
+
+have the initial original file then it
+
+
+usually makes sense to transcode from to
+
+
+merge the codecs when you are doing this
+
+
+for example to change the resolution
+
+
+from one mp4 to other mp4 if you are
+
+
+always transcoding from this one base
+
+
+file it's gonna take forever and carrier
+
+
+wave doesn't really support doing that
+
+
+it doesn't support creating versions
+
+
+based on versions so it was kind of
+
+
+choking on what we were doing it was
+
+
+super slow so we decided to rewrite the
+
+
+whole thing so we decided to use one
+
+
+database model per one file so we still
+
+
+had our video which was kind of a
+
+
+placeholder for everything and it had
+
+
+multiple versions and those versions had
+
+
+different kinds were the new kind was
+
+
+the original file we probably could have
+
+
+named it differently it doesn't matter
+
+
+and we also needed that special extra
+
+
+processed sauce business sauce so we had
+
+
+another set of version that also had a
+
+
+special flag because the quality
+
+
+versions were the same but it's just
+
+
+depending on the situation we were
+
+
+either pushing one of the other version
+
+
+of that and we still use carrier wave
+
+
+video for that but remember this part
+
+
+right
+
+
+how carrier wave works it you mount on
+
+
+uploader it spawns some background
+
+
+process and everything so the problem is
+
+
+that once we move to many models we
+
+
+still have we still needed processing
+
+
+status at the very beginning then each
+
+
+version actually had to mount the
+
+
+uploader spawn the worker then process
+
+
+the video then set the state on itself
+
+
+so we had multiple versions of that and
+
+
+you can already guess where this is
+
+
+going and then after each of those
+
+
+processing we had to check if the other
+
+
+processes were done so we could set the
+
+
+statuses ready and it caused a lot of
+
+
+problems it caught us out of racing
+
+
+conditions because sometimes they
+
+
+finished almost at the same time so a
+
+
+very common issue was that we ended up
+
+
+in a permanent processing stage where it
+
+
+was finished but the flag wasn't set
+
+
+properly
+
+
+and this is not exactly what we are
+
+
+aiming for home so we are also getting
+
+
+out of the MVP face around that time and
+
+
+we knew that using dedicated servers not
+
+
+going to scale very well we had a six
+
+
+terabyte hard drive there which was in
+
+
+the right so in case one of them crashed
+
+
+we didn't look
+
+
+the files but keeping it on a dedicated
+
+
+server was super annoying because we
+
+
+were running out of space we had to do
+
+
+backups manually it it didn't scale very
+
+
+well in terms of processing speed so we
+
+
+decided to actually rewrite the whole
+
+
+thing from scratch and it also helped us
+
+
+solve some of the long-standing issues
+
+
+like being able to just reprocess that
+
+
+one broken version or restart the
+
+
+processing if it failed and be able to
+
+
+just reprocess the broken stuff or have
+
+
+a better visibility and monitoring into
+
+
+what was happening without adding even
+
+
+more callbacks so we still have our
+
+
+original video which is then uploaded it
+
+
+is stored locally on the same server
+
+
+that still has that six terabyte it
+
+
+dents pal it then spawned a processing
+
+
+worker which was checking for the
+
+
+existing versions and was checking if
+
+
+their their statuses are correct it
+
+
+created any missing ones then started
+
+
+processing based on priority because
+
+
+when you are processing video for the
+
+
+use and you want the user to have access
+
+
+to it as soon as possible this is how
+
+
+YouTube does it they first transcode the
+
+
+lowest quality version because it's
+
+
+fastest and only then later they process
+
+
+the everything else in the background
+
+
+and the processing still use stream 'ya
+
+
+ffmpeg to pass custom arguments to have
+
+
+a fan bank based on the format based on
+
+
+the any extra things that we needed and
+
+
+it was also possible to do the
+
+
+processing based on the other versions
+
+
+so we could first process the and
+
+
+transcode the mp4 and then we could
+
+
+create our special version out of them
+
+
+which is much faster than working with
+
+
+the original file and at the end it
+
+
+uploaded everything to s3 we were using
+
+
+sidekick so the uploads were unique were
+
+
+running on a different queue so we could
+
+
+limit the processing queue so it didn't
+
+
+over saturate the CPU and then we could
+
+
+have a different cue for the uploads we
+
+
+could saturate the network so the lesson
+
+
+number four is that the simplest certian
+
+
+can often be the
+
+
+best solutions we would avoid that a lot
+
+
+of pain if we didn't try to do
+
+
+everything the rails way with the coal
+
+
+bags and everything if we didn't just
+
+
+slap all the gems if we just wrote a
+
+
+simple processing worker that just did
+
+
+everything from the top to bottom well
+
+
+you live alone and I got some questions
+
+
+before so I'm already gonna answer them
+
+
+why didn't you use for example AWS
+
+
+lambda the problem with AWS lambda is
+
+
+that it has a 50 minute maximum
+
+
+execution time which is probably enough
+
+
+for a lot of cases but in case of
+
+
+transcoding and processing videos some
+
+
+of the videos incoming that we had were
+
+
+over 2 hours long so 15 minutes is it's
+
+
+not gonna cut it
+
+
+why didn't we use Zen coder or Amazon
+
+
+elastic transcoder why we do that why
+
+
+did we spend so much time building that
+
+
+the reason is that all of those things
+
+
+are super expensive they are great if
+
+
+you are processing maybe one two videos
+
+
+a week or something like that but we are
+
+
+trying to build a proper media platform
+
+
+right and this would ruin us in terms of
+
+
+costs and we didn't use docker
+
+
+everything was running just in the or
+
+
+any containers and I think it was just
+
+
+running under bare servers because it
+
+
+wasn't really that popular at the time
+
+
+and it wasn't really even supported in
+
+
+production I think so well we transcoded
+
+
+a lot of stuff the incoming formats were
+
+
+in different codecs but we mostly
+
+
+transcoded them to mp4 s-- the reason is
+
+
+that at some point you had to always
+
+
+have two versions a video you needed to
+
+
+have mp4 and WebM but then the browser
+
+
+support started to catch up and at some
+
+
+point the only people who couldn't watch
+
+
+mp4 were just Linux users that were
+
+
+hell-bent on not having any non free
+
+
+codecs and they weren't exactly our
+
+
+business target you know so we've
+
+
+decided to just focus on the mp4s
+
+
+because it was just twice as fast
+
+
+because we only needed one one version
+
+
+of multiple versions but of only one
+
+
+format so let's talk about mp4 s--
+
+
+mp4 mpeg-4 part 14
+
+
+is a format that is based on the
+
+
+previous format extent it extends the
+
+
+ESO based media format which is on the
+
+
+other hand based on the QuickTime from
+
+
+Apple it's a container format it's not
+
+
+really a it this is not the video or
+
+
+audio codec it contains the information
+
+
+and the codecs inside it it's made of
+
+
+three elements you have the F type which
+
+
+is the file identification brand names
+
+
+brand notification you have the n dot
+
+
+which is the media data and streams and
+
+
+you have the most important part which
+
+
+is the metadata and this is and the
+
+
+metadata has all the information where
+
+
+everything is what it is and how to find
+
+
+it for the player to know how to play
+
+
+the video yeah so that I'm going to give
+
+
+you some tips on transcoding videos and
+
+
+in case you ever need to build something
+
+
+on your own and the tip number one is
+
+
+that you should always try to copy
+
+
+streams as much as possible for example
+
+
+if you are transcoding different sizes
+
+
+of video but you keep the same audio
+
+
+track it makes more sense to just copy
+
+
+the stream of the audio and match the
+
+
+codecs as much as possible because it's
+
+
+just faster it kind of seems obvious on
+
+
+the hand side but it took us a while to
+
+
+get to that point you have I mentioned
+
+
+the metadata it's made of something
+
+
+called atoms and atoms are more or less
+
+
+fall into two categories one of them is
+
+
+the fixed parameters of the file and the
+
+
+other are the specific pointers for each
+
+
+chunks of data for frames of data and
+
+
+audio I will not talk too much about
+
+
+this because it's just mostly trivia at
+
+
+this point you really won't need it when
+
+
+you are doing yourself but just to show
+
+
+you that this is the kind of information
+
+
+that you have in that metadata so the
+
+
+important thing here is to remember that
+
+
+all of this is needed to even start
+
+
+streaming the video and start playing it
+
+
+so tip number two is that you should
+
+
+always think of optimizing for streaming
+
+
+at the same ffmpeg has some arguments
+
+
+that make the video better at streaming
+
+
+the two most important are these two
+
+
+they
+
+
+make the when you're doing the
+
+
+processing of the video it usually if
+
+
+goes in one pass
+
+
+you know it's trying it processes the
+
+
+video and audio and then at the very end
+
+
+of the file it drops the metadata
+
+
+because it has all the information about
+
+
+the video that it created and those
+
+
+flags actually make the ffmpeg go and do
+
+
+a second pass and move all the metadata
+
+
+to the beginning of the file which is
+
+
+necessary for the streaming because this
+
+
+way you don't need the entire file to
+
+
+start playing I believe that at some
+
+
+point the player started trying to be a
+
+
+bit smarter about it so they are
+
+
+actually trying to seek for the metadata
+
+
+at the end of the file so they don't
+
+
+really have to download download the
+
+
+entire thing but it takes more time it
+
+
+makes the video slower to start and also
+
+
+if you download partial video you still
+
+
+won't be able to play it so this is
+
+
+pretty important you should always check
+
+
+the documentation and wiki from ffmpeg
+
+
+about it tip number three is bring your
+
+
+own arguments we use stream your ffmpeg
+
+
+and it has like it's all custom DSL for
+
+
+transcoding and everything and you I
+
+
+think you even saw some of that on one
+
+
+of the slides yesterday but we quickly
+
+
+learned that it's better to just ignore
+
+
+this DSO and just pass our own custom
+
+
+arguments because they gave us better
+
+
+control and we got a better idea of
+
+
+what's actually happening and it was
+
+
+easier to optimize everything so you may
+
+
+ask why even bother with this library
+
+
+the answer is pretty simple because it
+
+
+has a pretty nice process progress
+
+
+tracking so you don't really need to
+
+
+write your own code to analyze the
+
+
+ffmpeg output and figure out at how much
+
+
+exactly is still processing and at which
+
+
+percentage of the file it is right now
+
+
+tip number four is there are no
+
+
+universal solutions because one of the
+
+
+interesting things we've learned is that
+
+
+you can actually transcribe the videos
+
+
+either by downloading the file on the
+
+
+server then running the ffmpeg and then
+
+
+uploading it again or you can actually
+
+
+give the ffmpeg the URL of the file and
+
+
+it's going to transcode it on the fly
+
+
+just download
+
+
+as much as it needs and it the second
+
+
+thing sounds great right it's gonna be
+
+
+faster obviously but it actually heavily
+
+
+depends on the input video we've learned
+
+
+that some of the videos some of the
+
+
+inputs some of the codecs are actually
+
+
+very very bad at this and the difference
+
+
+in speed between just downloading and
+
+
+then processing and downloading from fly
+
+
+was like 50 times 50 not 15 so we we get
+
+
+a lot of nasty calls from clients saying
+
+
+my video is still processing since
+
+
+yesterday and we figure out that's the
+
+
+reason so we had to fix that actually we
+
+
+never really found out which combination
+
+
+of codecs and data worked with which one
+
+
+because it will require just a lot more
+
+
+data processing to figure this out and
+
+
+also when you download the video and
+
+
+then process it it's actually a bit
+
+
+better in terms of you don't have to
+
+
+worry about the network interruptions
+
+
+during the processing if the network
+
+
+enter if there is a network interruption
+
+
+during the downloading then you can
+
+
+always resume right but the transcoding
+
+
+you cannot really resume from someplace
+
+
+that it crashed on you need to always do
+
+
+it from the start and trust me there are
+
+
+network issues on AWS and honest three
+
+
+and we did have this problem tip number
+
+
+five is to use the presets obviously are
+
+
+not going to be an expert in everything
+
+
+so you can offload some of the hard work
+
+
+to the smarter people as a fan pack
+
+
+comes with presets too for most common
+
+
+configuration options there like from
+
+
+ultra-fast ultra slow and the ultra fast
+
+
+transpose the video fastest but the
+
+
+resulting size is going to be much much
+
+
+bigger and I think also the quality may
+
+
+be a bit worse so you should use the
+
+
+fast presets for those low resolutions
+
+
+videos that I mentioned before because
+
+
+you want to push the video as soon as
+
+
+possible to the user I also learned that
+
+
+there is a technique that we didn't know
+
+
+back then I only learned of it like a
+
+
+week ago and I was doing extra research
+
+
+for this talk I've learned that some
+
+
+people are actually splitting the an
+
+
+input file into smaller chunks and there
+
+
+are transcoding them in parallel which
+
+
+makes everything even faster I would
+
+
+probably love to try this approach but
+
+
+like I don't work on this project
+
+
+anymore so it's kind of hard tip number
+
+
+six use profiles h.264 has profiles
+
+
+which are like sets of codec features
+
+
+but not every device would support all
+
+
+of them so you should always go with the
+
+
+highest one you can afford it's gonna
+
+
+make the video smaller it's gonna make
+
+
+it look better but it's not gonna work
+
+
+on every device this is the table from
+
+
+the ffmpeg quickie
+
+
+it shows the iOS compatibility for
+
+
+various baselines unfortunately I don't
+
+
+have this kind of table for other
+
+
+platforms but we can already guess that
+
+
+if you want it to work everywhere you
+
+
+should go for the baseline 3.0
+
+
+unfortunately we are not all YouTube so
+
+
+we cannot just use the different
+
+
+profiles and then serve them depending
+
+
+on the device I really wish we could it
+
+
+would be really it would take a lot of
+
+
+time and it would be really cost full
+
+
+this is actually a super anonymous issue
+
+
+which is why it's my favorite one you
+
+
+should always convert to way UV 420
+
+
+there are different pixel formats in the
+
+
+video different ways you can save the
+
+
+pixel information and you should always
+
+
+go with this one because this is the one
+
+
+that all the browser's support some of
+
+
+them if you give them a different kind
+
+
+of pixel format they will play it but
+
+
+some of them won't and they will not
+
+
+tell you why we had this problem I
+
+
+believe with Safari or Firefox one of
+
+
+the clients was uploading a lot of
+
+
+videos made with a hand camera and the
+
+
+initial video was a video from Apple
+
+
+QuickTime and it uses the way UV for
+
+
+20/20 and it played nicely in chrome it
+
+
+plays nicely I believe in Firefox or
+
+
+Safari I don't remember which one of
+
+
+those was the other one either Firefox
+
+
+or Safari just didn't play it at all the
+
+
+black screen we have no idea what the
+
+
+hell was going on it took us a while to
+
+
+figure it out which brings me to my
+
+
+another point try to collect as much
+
+
+metadata as you can about the videos
+
+
+that you are that you are processing and
+
+
+it means that you should grab everything
+
+
+you can both from the input video and
+
+
+from all the outputs that you are
+
+
+creating because we did that
+
+
+we were able to check all the files that
+
+
+were reported that are broken on leader
+
+
+Safari or Firefox and then we kind of do
+
+
+the cross analysis and we figure out oh
+
+
+yeah this is different this is different
+
+
+than everything else we have in the
+
+
+system this is how we actually managed
+
+
+to find it
+
+
+tip number nine something kinda obvious
+
+
+you should or should trust that the
+
+
+result from the ffmpeg is going to be
+
+
+correct and the file is gonna work but
+
+
+you should always verify it because the
+
+
+file can be cut during the transcoding
+
+
+and still technically claim that it's
+
+
+valid even though it's incomplete but
+
+
+you should be careful trust but verify
+
+
+sometimes manually because as a fan pack
+
+
+and FF prop can sometimes lie to you it
+
+
+turns out that in some in some formats
+
+
+you can have the information about the
+
+
+duration can be missing and ffmpeg try
+
+
+and FF profile to be more precise tries
+
+
+to do its best job to give you that
+
+
+information so it guesses it doesn't
+
+
+approximation based of the bitrate of
+
+
+the video and the size of the video but
+
+
+unfortunately it can be off for few up
+
+
+to several seconds depending on the size
+
+
+of the video so when we kind of figure
+
+
+out first problem with the videos
+
+
+sometimes cutting we implemented a
+
+
+validation that checked that the output
+
+
+file is the same duration that the input
+
+
+file and you can guess that it started
+
+
+giving us a lot of false positives
+
+
+because of that I'm not sure if it was a
+
+
+problem with MP force but I'm pretty
+
+
+sure that it was a problem with MP trees
+
+
+and that's it thank you
+
+
+[Applause]
+
+
+it was very nice presentation thanks a
+
+
+lot of details I would like to ask how
+
+
+do you protect against vulnerabilities
+
+
+in ffmpeg
+
+
+well what we did that proof-of-concept
+
+
+version we didn't really care about that
+
+
+much because all the videos were coming
+
+
+from the customers of our client if I
+
+
+were to do it right now I would probably
+
+
+just isolate the whole thing and will
+
+
+not give it access to anything else but
+
+
+we didn't really think of that that much
+
+
+when we were building this like I
+
+
+mentioned it was a few years back so we
+
+
+weren't really that good at the time it
+
+
+wasn't and also it wasn't really obvious
+
+
+that ffmpeg has full nobilities that can
+
+
+crush your server back then it started
+
+
+popping up later no more questions okay
+
+
+thanks
+
+
+[Applause]
+
+
+you

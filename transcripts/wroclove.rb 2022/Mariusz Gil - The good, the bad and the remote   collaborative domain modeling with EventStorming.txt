@@ -1,0 +1,3550 @@
+hello everybody uh thank you for having
+
+
+me at this conference at uh before we
+
+
+start I would like to say a few things
+
+
+because uh from my perspective it's a
+
+
+huge honor to be here for two reasons at
+
+
+least for two reasons one I
+
+
+am not the Ruby guy sorry for that uh
+
+
+I'm usually
+
+
+uh writing a PHP code so I expect some
+
+
+book right now
+
+
+okay I can handle it
+
+
+and the second the second reason is that
+
+
+uh this Institute of computer science is
+
+
+my alma leather I graduated here many
+
+
+many years ago
+
+
+I had an opportunity to to teach some
+
+
+students here how to use those
+
+
+techniques uh to model the software so
+
+
+which one for me
+
+
+so uh this talk will be about the good
+
+
+and the bad and the remote part of the
+
+
+collaborative domain modeling with
+
+
+different storming yes in the title of
+
+
+this talk there is an even storming but
+
+
+this talk is not about the even storming
+
+
+itself there's a bunch of presentations
+
+
+uh describing what the even storming is
+
+
+how you can use it how we can combine it
+
+
+with different approaches like domain
+
+
+driven design just to create a software
+
+
+that matters the software which is uh
+
+
+easy to evolve and handle maintain in
+
+
+the long term but I would like to focus
+
+
+about the surrounding and of course if
+
+
+you don't know what the even Stormer is
+
+
+we'll create a small definition
+
+
+as I I was introduced by Andre
+
+
+margeville
+
+
+I'm a software architect for I don't
+
+
+know 22 23 years something like that
+
+
+um xcto trainer consultant last couple
+
+
+of years I'm usually using those
+
+
+technical domain driven design even
+
+
+storming to refactor
+
+
+old Legacy because there is a business
+
+
+reasons to evolve the software so I'm
+
+
+using those techniques
+
+
+on my daily basis I'm also hosting a
+
+
+podcast which is called a battle design
+
+
+and I'm very very curious who is
+
+
+familiar with this podcast
+
+
+oh thank you very much
+
+
+rest of you has a homework
+
+
+because this podcast is about software
+
+
+architecture unfortunately it's in
+
+
+Polish but there are a few episodes in
+
+
+English so if you would like to go up so
+
+
+the good part and the spoiler there are
+
+
+some ways how it can work and how we can
+
+
+use those techniques like even storming
+
+
+which was designed to run off-site uh in
+
+
+the digital world I would like to talk a
+
+
+little bit about the bedside and
+
+
+unfortunately there is still some
+
+
+problems there are still some problems
+
+
+uh in the in this digital world and then
+
+
+finally the remote part which is the
+
+
+spoiler it's a good and the bad side uh
+
+
+for the same time
+
+
+so the even storming the technique which
+
+
+was mentioned in the top title
+
+
+the epistomic
+
+
+um the short introduction I can provide
+
+
+you is the way how we can discuss the
+
+
+software the problem
+
+
+by analyzing the events which happen
+
+
+inside this problem so instead of
+
+
+instead of creating at the beginning use
+
+
+cases how you would like to use the
+
+
+system
+
+
+um creating maybe database at the
+
+
+beginning of the project instead of that
+
+
+you can start
+
+
+to talk about something which happened
+
+
+inside this problem you can start to
+
+
+identify some business domain events
+
+
+for example describing very very
+
+
+important changes in your domain you can
+
+
+organize them one by one over the time
+
+
+and then you can start to have a
+
+
+meaningful conversations around those
+
+
+events
+
+
+because this event in the even storming
+
+
+technique is just the beginning because
+
+
+if you can identify in your problem in
+
+
+your application in your business
+
+
+scenario
+
+
+something interesting which happened for
+
+
+example the order was created maybe the
+
+
+customer canceled the payments on things
+
+
+like that
+
+
+there is a bunch of options you can
+
+
+explore
+
+
+for example you can ask yourself your
+
+
+colleagues your domain expert the person
+
+
+with the knowledge why I've got this
+
+
+even even in my system what was the
+
+
+trigger you can name it you can point it
+
+
+you can point your finger over the
+
+
+timeline and say here there was an
+
+
+action
+
+
+which triggered this event
+
+
+so if you've got an event you can ask
+
+
+now what is the trigger if you've got a
+
+
+trigger you can ask yourself your
+
+
+colleagues one more time your domain
+
+
+experts
+
+
+that maybe we can see some other
+
+
+consequences some other events
+
+
+and starting from the single orange
+
+
+sticky note you can explore the first
+
+
+scenario and after all you see all the
+
+
+actions all the changes all the
+
+
+processes
+
+
+are existing in your software in your
+
+
+problem space
+
+
+so when you see it from the developer
+
+
+point of view
+
+
+you may some you may extract some very
+
+
+important things we need to implement
+
+
+for example if you will be able to
+
+
+notice that
+
+
+some parts of your events which are the
+
+
+consequence of this particular action we
+
+
+are talking about should happened in the
+
+
+scenario in the pattern All or Nothing
+
+
+so there is no way that you can postpone
+
+
+one of them for example you see free
+
+
+events and you can you cannot postpone
+
+
+any of them because if you postpone it
+
+
+in the software you put it on the Queue
+
+
+you perform some asynchronic operations
+
+
+and this event will be handled let's say
+
+
+five seconds later
+
+
+there is a bunch of business problems
+
+
+and you cannot do that
+
+
+if you see that this and this and this
+
+
+event should happen under this and this
+
+
+and this condition and these conditions
+
+
+are related to the trigger you already
+
+
+pointed
+
+
+you may start to think that maybe in my
+
+
+software it should happen inside for
+
+
+example a single object
+
+
+and then combining this even storming
+
+
+approach
+
+
+with other texting flux dominator in
+
+
+design things like that
+
+
+um may lead you to the conclusions that
+
+
+in my software there are some places
+
+
+where I should care for example for data
+
+
+consistency data integrity and then
+
+
+maybe you will be able to see some
+
+
+aggregates
+
+
+and maybe your domain expert may say
+
+
+something like that that this event this
+
+
+event this event when those events
+
+
+happen and you perform this particular
+
+
+action
+
+
+I expect this and this and this and not
+
+
+my expert May Point some other events
+
+
+from the from the workshop and then you
+
+
+can extract an acceptance criteria you
+
+
+can use it for example given one then
+
+
+approach and then you can automate it
+
+
+as a test
+
+
+so as you see starting from very very
+
+
+single
+
+
+um important change in your domain may
+
+
+lead you to very interesting conclusion
+
+
+from the developer point of view because
+
+
+starting from this you can even design
+
+
+the whole system
+
+
+so this is why I care about the even
+
+
+storming so much because for many other
+
+
+techniques I tested in last years many
+
+
+years
+
+
+this is a best approach which leads you
+
+
+which allows me to achieve probably the
+
+
+best result in the shortest amount of
+
+
+the time of course not the even storming
+
+
+itself but even storming combined with
+
+
+other approach like
+
+
+mentioned already domain driven design
+
+
+so before 2020
+
+
+the typical even storming session looked
+
+
+like that this is a recession the
+
+
+production photo
+
+
+I mean the photo from the production
+
+
+session session taken are probably at
+
+
+Warsaw in Poland so that whole room
+
+
+large a lot of parts is debunked a lot
+
+
+of space a lot of materials a lot of
+
+
+domain experts a lot of people who would
+
+
+like to gather this knowledge because we
+
+
+need to deliver a software right and
+
+
+then
+
+
+we have conversations
+
+
+sometimes you see that in the room there
+
+
+are 30 people sometimes too this also
+
+
+production photo from production session
+
+
+or sometimes you can see even the Andre
+
+
+on the session
+
+
+um it was I think in Russia right
+
+
+a couple years ago
+
+
+the main reason uh why I would like to
+
+
+have domain experts developers everyone
+
+
+involved in the project in the same room
+
+
+because of this moment
+
+
+um because sometimes the domain expert
+
+
+or the developer may say looking on the
+
+
+same event that
+
+
+it's not exactly that it shouldn't be
+
+
+this way it should be done this way and
+
+
+this way in this way I don't agree with
+
+
+you so uh using this
+
+
+um very very easy approach and not so
+
+
+complicated technique
+
+
+we can speed up a lot of development
+
+
+before even a single line of code will
+
+
+be written
+
+
+so for example if Andrea talk about the
+
+
+domains not even storming combined with
+
+
+the Strategic domain driven design is
+
+
+one of the way how you can create a
+
+
+boundaries in your software for example
+
+
+for different applications for different
+
+
+modules for different microservices and
+
+
+those boundaries will allows you to
+
+
+evolve the software in the long term
+
+
+but
+
+
+in 2020
+
+
+another domain even happened so
+
+
+something important happened
+
+
+and one event across the boundary and
+
+
+the whole world exploded
+
+
+so
+
+
+I don't know is what is your experience
+
+
+but I had a opportunity to work with
+
+
+different teams and in in almost every
+
+
+single team
+
+
+were before on every single Mythic you
+
+
+saw
+
+
+a smiling faces after the March 2020
+
+
+all you saw on the meetings was like
+
+
+that
+
+
+looks familiar
+
+
+yeah
+
+
+moreover
+
+
+I used to
+
+
+um rely on communication skills during
+
+
+this kind of Workshop because the best
+
+
+way how we can communicate is just have
+
+
+a conversation but every single
+
+
+conversation every single meeting even
+
+
+today
+
+
+starts from this weird question
+
+
+do you hear me
+
+
+and uh
+
+
+in this environment under this
+
+
+circumstances
+
+
+I decided to run probably in I don't
+
+
+know my 2020. a workshop because in
+
+
+March
+
+
+on the in Poland the first lockdown was
+
+
+introduced I stopped
+
+
+working with this approach because I
+
+
+have no possibility to to work with him
+
+
+face to face
+
+
+because every single Workshop before the
+
+
+pandemic
+
+
+was in offline
+
+
+so I started
+
+
+I run the workshop
+
+
+and I was surprised because it was very
+
+
+very efficient everyone was involved
+
+
+and uh
+
+
+of course I'm joking because the first
+
+
+meeting was a completely disaster
+
+
+everyone was on mute no one would like
+
+
+to participate in the workshop the goal
+
+
+for this Workshop wasn't achieve
+
+
+and of course there was a problem with
+
+
+the financing
+
+
+so the big big [ __ ] up so I realized
+
+
+that in one moment when this lockdown
+
+
+was introduced
+
+
+I lost my very very important tool in my
+
+
+software architect toolbox
+
+
+unlimited unbounded and unrestricted
+
+
+Communications
+
+
+so during this Workshop I realized that
+
+
+the interactions the possibility are to
+
+
+chat with the domain expert to learn
+
+
+about the events to share my thinking
+
+
+about these events is completely gone
+
+
+I have no possibility to interact
+
+
+the body language another tool I heavily
+
+
+rely on because sometimes during the
+
+
+workshop imagine that you've got the
+
+
+situation that there is a development
+
+
+team the management team the CEO of the
+
+
+company
+
+
+got multiple scenarios
+
+
+as a facilitator you should take care of
+
+
+for example
+
+
+maybe you would like to note about the
+
+
+problems because the Sea of the company
+
+
+is in the room
+
+
+so you don't speak but your body will
+
+
+speak for you so as a facilitator I was
+
+
+looking for the body language
+
+
+but when it comes to you know Zoom
+
+
+meetings
+
+
+and Google hangouts or any other tools
+
+
+there is nobody language
+
+
+what I see is blurry face
+
+
+even if you turn on your camera so body
+
+
+language go
+
+
+the group switching during the
+
+
+offline even storming when you've got
+
+
+for example 10 meters of modeling space
+
+
+you've got three four five domain
+
+
+experts you can vote by your legs do you
+
+
+agree with them do are you interested in
+
+
+if not you can switch the group
+
+
+everything is smooth no one even noticed
+
+
+that you modified
+
+
+your your group and you would like to
+
+
+participate in different approach
+
+
+when it comes to online meetings
+
+
+you probably were assigned to a
+
+
+particular group and you cannot modify
+
+
+it so group switching gone and after all
+
+
+all the engagement
+
+
+which also I heavily rely on completely
+
+
+gone
+
+
+so this is why I was was disaster
+
+
+so Alberta bundling is the inventor of
+
+
+the even storming a few years ago
+
+
+throughout this this book introduction
+
+
+to the even storming
+
+
+and after this Workshop one thing hit me
+
+
+that for the second time very very
+
+
+strongly because in this book there was
+
+
+or there is a chapter dedicated chapter
+
+
+about the remote it was storming how to
+
+
+perform this in digital world
+
+
+the problem is that
+
+
+this chapter
+
+
+is intentionally left blank
+
+
+I'm not surprised
+
+
+unfortunately all my experience
+
+
+as a developer or the architect as a
+
+
+person who used this approach to design
+
+
+a software immediately gone
+
+
+but
+
+
+as engine said we started to work in
+
+
+some groups just to learn how we can use
+
+
+this technique again
+
+
+under the current situation because it
+
+
+seems that the pandemic the the remote
+
+
+world will be with us for a little bit
+
+
+longer than expected
+
+
+so I started to think how I can use this
+
+
+situation for me
+
+
+I don't know if we are familiar with
+
+
+Hunter Kaiser he said many interesting
+
+
+things but one is that the problems
+
+
+for you should be just opportunities to
+
+
+work close
+
+
+but what does it mean so from the
+
+
+perspective of the development
+
+
+um we can create
+
+
+some problems just to learn something so
+
+
+let me introduce for example
+
+
+um this if you are for example a user of
+
+
+object rational mapper and Deals fall
+
+
+soft to rely on it
+
+
+forget about RM start to use even
+
+
+sourcing not in the production
+
+
+in your for example but project for one
+
+
+day
+
+
+you can choose
+
+
+if you are using object oriented design
+
+
+and you are heavily rely on the state
+
+
+go functional forget about the state
+
+
+if you are using the if statement in the
+
+
+code
+
+
+try to use something different and try
+
+
+to avoid using this particular statement
+
+
+for a moment and you will
+
+
+probably learn a lot because you will
+
+
+see that creation
+
+
+limitation allows you to see a
+
+
+completely different solutions maybe
+
+
+even
+
+
+which are invisible before
+
+
+uh
+
+
+so no pain no gain
+
+
+so you can start learning this way and
+
+
+during the march 2020
+
+
+everyone in the in the internet probably
+
+
+start to learn this particular chart is
+
+
+chart representing the trend for the
+
+
+phrase online whiteboard
+
+
+so probably you know exactly
+
+
+what is the date before
+
+
+this particular
+
+
+chart represent a term mirror whiteboard
+
+
+so
+
+
+I started to use those applications
+
+
+on the production and I will realize
+
+
+that one more time I lost another my
+
+
+important tool
+
+
+which is unlimited expression because if
+
+
+you are running a workshop
+
+
+in in in the world you've got some
+
+
+Sharpies you've got some papers you've
+
+
+got some stickies that's it this is all
+
+
+you need to create a model of your
+
+
+software believe it or not on the sticky
+
+
+you can create the model how you would
+
+
+like to have this software later in the
+
+
+implementation phase
+
+
+if the model
+
+
+is not working
+
+
+the code will not work as well
+
+
+if the code is working if the project is
+
+
+working on the stickies there is a
+
+
+chance that you can create an
+
+
+implementation for those and everything
+
+
+is sticky from this for example
+
+
+evenstomic Workshop can be translated
+
+
+for something which can be implemented
+
+
+for example the event the events
+
+
+represent an important change so you can
+
+
+emit the event in your application
+
+
+but still they event represent important
+
+
+change
+
+
+my object was changed I changed a
+
+
+property so I see in the model the event
+
+
+but the implementation
+
+
+I see a line which changed this
+
+
+particular object the comment the
+
+
+comment is trigger for a change yeah it
+
+
+can be a commodity command handle
+
+
+pattern why not but why not think about
+
+
+the comment like a method invocation
+
+
+so if you will be able after this
+
+
+Workshop
+
+
+establish a connection between
+
+
+the model and your programming Style
+
+
+this is just a visual representation of
+
+
+your code
+
+
+and of course it's not the main goal of
+
+
+the storm because the main goal is to
+
+
+understand the problem
+
+
+but yeah you've got a multiple options
+
+
+so this is why I believe this this
+
+
+technique is worth to explore
+
+
+so usually on this kind of Workshop I
+
+
+create a lot of for example
+
+
+visualizations
+
+
+because as Eric Evans said sometimes all
+
+
+you need to do is create a metaphor
+
+
+metaphor of your system so one of the
+
+
+large-scale structure described in the
+
+
+form of DDD book
+
+
+is about the metaphors sometimes all you
+
+
+need is visualize things
+
+
+but if you're using a tool like mirror
+
+
+like moral like click up maybe you have
+
+
+some limitations so your creativity your
+
+
+expression is completely limited and you
+
+
+cannot achieve your goals for this
+
+
+particular session
+
+
+fortunately
+
+
+all those tools
+
+
+started to learn
+
+
+as people said so almost every single
+
+
+session in the pandemic when we started
+
+
+they running with the mirror or any
+
+
+other tool
+
+
+there was a message okay so we've got a
+
+
+new feature this one this one this one
+
+
+and suddenly those tools which were I
+
+
+believe completely
+
+
+um unusable before the pandemia started
+
+
+to be a game changer for this kind of
+
+
+workshops
+
+
+so the first advice from this talk I
+
+
+would like to to share you is know your
+
+
+tools
+
+
+and I can bet
+
+
+with every single one of you that even
+
+
+if you are talking about your
+
+
+programming editor you are not using I
+
+
+don't know 30 percent of features this
+
+
+tool you allow to perform
+
+
+so maybe even I should correct myself
+
+
+because we shouldn't know our tools
+
+
+we should Master the tool
+
+
+maybe the tools so the question is why
+
+
+because
+
+
+your tool set
+
+
+of your tool you are using
+
+
+should be the size of your microservice
+
+
+you can Implement in your system the
+
+
+question is why
+
+
+the answer is because it should be as
+
+
+small as possible as Batman smaller and
+
+
+the question is why and the answer is
+
+
+because during this kind of Workshop
+
+
+when you are have a conflict your
+
+
+opportunity to work with maybe non-very
+
+
+technical people you should for any cost
+
+
+avoid overwhelming them
+
+
+so if you introduce a bunch of different
+
+
+tools
+
+
+solving dedicated problems but there are
+
+
+many of them
+
+
+it will be very very hard
+
+
+to achieve the goal for this particular
+
+
+modeling session
+
+
+so
+
+
+my go-to set of the tools currently is
+
+
+the mirror plus Zam
+
+
+if you can eliminate one of them but
+
+
+still you can have a possibility to work
+
+
+it's even better
+
+
+so the the mirror allows me to express
+
+
+everything because this tool
+
+
+um
+
+
+it's not putting any limitations
+
+
+what you can design
+
+
+but many other tools which are dedicated
+
+
+to even storming modeling trying to put
+
+
+some conventions and they are trying to
+
+
+limit you if you would like to for
+
+
+example visualize something like
+
+
+relationships like maybe some other
+
+
+pictures that should
+
+
+help participants to understand what's
+
+
+going on because sometimes the one
+
+
+picture one single picture can deliver
+
+
+more insights than any other you know
+
+
+description or event
+
+
+it will be broken
+
+
+so if you are master your tool if you've
+
+
+got this you know in your fingertips you
+
+
+know all the shortcuts and things like
+
+
+that you can be very very efficient and
+
+
+the best
+
+
+you probably don't want to put yourself
+
+
+in the situation when you are trying
+
+
+during this kind of Workshop
+
+
+Express the problem visualize the the
+
+
+visualize the things you are talking
+
+
+about
+
+
+spending 10 minutes
+
+
+when everyone in the room for example 25
+
+
+persons are waiting for you because this
+
+
+is the weight of the time
+
+
+and of course this kind of tools if we
+
+
+can move the modeling to the
+
+
+to the online world
+
+
+and against to the offline situation
+
+
+allow us to speed up to see a different
+
+
+possibilities sometimes all you need to
+
+
+do during this kind of Workshop is to
+
+
+split the modeling group to see that the
+
+
+same thing can be treated and
+
+
+implemented and modeled completely
+
+
+differently if you've got only one idea
+
+
+how to implement something
+
+
+you shouldn't implement it
+
+
+always it's worth to see another
+
+
+approach maybe one maybe two maybe three
+
+
+and then you've got an option
+
+
+and imagine that setuping scenarios
+
+
+that's set upping the the stage the the
+
+
+place when you when different different
+
+
+groups can model the same thing
+
+
+it usually takes at least 10 minutes and
+
+
+then you've got a game
+
+
+so and of course one thing which is
+
+
+extremely important
+
+
+um and uh and you can get some benefits
+
+
+from that is that you are no longer
+
+
+limited to the persons in the particular
+
+
+situation in the room I mean
+
+
+digital even storming allows you to
+
+
+invite any persons you would like to
+
+
+have from the world of course there is a
+
+
+problem with the time zones and then
+
+
+things like that but
+
+
+it's way better to have someone in the
+
+
+room on the call
+
+
+than having a flight
+
+
+to different country which is a cost
+
+
+on efficient ends like that
+
+
+so having a different perspectives which
+
+
+weren't in the room before is something
+
+
+which will be very very
+
+
+um
+
+
+difficult to drop in the future
+
+
+when we decide to go
+
+
+from online to offline
+
+
+so but even if you
+
+
+are able to master the tool even if you
+
+
+are able to invite the people from the
+
+
+you know different countries and you
+
+
+know how exactly it performed this
+
+
+particular session
+
+
+a different scenario may happen for
+
+
+example
+
+
+um imagine that you've got 20 different
+
+
+25 different persons from different
+
+
+organizations on the call and suddenly
+
+
+your network is going to stop the work
+
+
+or your audio
+
+
+is going to stop to work
+
+
+but by the way this example is taken
+
+
+from my experience from this week I was
+
+
+talking to the to the team on the call I
+
+
+was pretty sure that everyone in the
+
+
+room muted the microphone because there
+
+
+was some noisy background
+
+
+I after a few minutes I realized that
+
+
+there was a problem with my computer
+
+
+because I didn't hear them
+
+
+under the hood my computer runs some
+
+
+updates
+
+
+which completely ruined my permissions
+
+
+on the laptop and I need to restart
+
+
+everything so imagine
+
+
+how difficult it was when you've got for
+
+
+example in the room the Sea of the
+
+
+company
+
+
+and you cannot handle this kind of
+
+
+situation
+
+
+and finally the power supply will be cut
+
+
+off so all these scenarios are taken
+
+
+from my personal experience
+
+
+unfortunately
+
+
+from this mouth
+
+
+so everything will fail so be prepared
+
+
+this is why current scenario
+
+
+for this kind of Workshop
+
+
+even
+
+
+if you are prepared so always have a
+
+
+backup plan backup plan for the internet
+
+
+connection backup plan for the
+
+
+microphone backup plan for everything
+
+
+because
+
+
+like in reward everything May Fail
+
+
+so
+
+
+sometimes you can make even this kind of
+
+
+scenario that
+
+
+one day before the workshop
+
+
+you will get a question
+
+
+from the attendees
+
+
+that or the the statement that we cannot
+
+
+store the data outside UI
+
+
+and if you
+
+
+rely heavily on a single tool like a
+
+
+mirror
+
+
+it's maybe a very problematic because
+
+
+suddenly the cloud
+
+
+seems to be a problem because of the
+
+
+data location
+
+
+so if you face this kind of situation
+
+
+probably your experience or your
+
+
+existing experience with this tool your
+
+
+confidence goal one more time
+
+
+so if you would like to run this
+
+
+Workshop or any other Workshop in a
+
+
+little bit larger scale so please be
+
+
+preferred be prepared for everything so
+
+
+expect unexpected
+
+
+is the very very interesting option
+
+
+so
+
+
+but Digital World allows us to perform a
+
+
+one thing I believe way better than
+
+
+before
+
+
+because usually when it comes to the
+
+
+session organization there is a lot of
+
+
+problems a lot of
+
+
+um hotel booking a lot of traveling
+
+
+things like that organizations to allows
+
+
+few people be in the same room
+
+
+in particular for example place
+
+
+and then you've got one two three days
+
+
+to solve the problem because you've got
+
+
+an access to domain expert to people
+
+
+with knowledge for very very limited
+
+
+amount of time
+
+
+so it can be very very exhausted so
+
+
+instead of that if you've got an access
+
+
+to the person even outside the globe
+
+
+so way better option would be to work
+
+
+with the cycles so every single cycle
+
+
+can be splitted into the plan into the
+
+
+work rethink an iterate space because
+
+
+for example if you would like to achieve
+
+
+something
+
+
+every single session every single
+
+
+Workshop should be very very well
+
+
+prepared so the goal the outcome should
+
+
+be visible for you as a fast data
+
+
+because then you know what kind of
+
+
+actions what kind of Explorations you
+
+
+would like to perform
+
+
+so the work
+
+
+the plant the work the riffing and the
+
+
+reiterate and where is the better
+
+
+approach so in the real world
+
+
+when you've got the access to the domain
+
+
+experts for example for two three days
+
+
+you've got only one or two points moment
+
+
+in the time when you can correct
+
+
+your Workshop usually after a day after
+
+
+the day you can think what's happened if
+
+
+you are on course maybe yes maybe no and
+
+
+you can adjust your direction
+
+
+if you can expand this workshop for a
+
+
+little bit longer maybe you can put some
+
+
+extra days between the sessions maybe
+
+
+you can reduce number of hours you are
+
+
+on the call for example instead of eight
+
+
+hours you can work four hours
+
+
+there's a way better chance to
+
+
+adjust the course because after
+
+
+every single iteration you've got the
+
+
+point when you can decide is it okay for
+
+
+us or not or what we would like to
+
+
+change
+
+
+so but the structure of the session in
+
+
+remote would be a little bit different
+
+
+because usually
+
+
+uh when it comes to the offline even
+
+
+storming you've got everyone in the room
+
+
+so there is a lot of communication
+
+
+everyone is talking with everyone
+
+
+but in remote when you are using for
+
+
+example Zoom or any other software and
+
+
+you are using subgroups
+
+
+you broke a lot of communication
+
+
+channels
+
+
+so
+
+
+everything will split when you're
+
+
+splitting the attendees you're splitting
+
+
+the knowledge
+
+
+so every single split
+
+
+should become the merge after all
+
+
+because maybe one group realize there is
+
+
+an issue with the software and then we
+
+
+need to talk about
+
+
+so you're working usually
+
+
+with this structure the split the merge
+
+
+the speed the merge
+
+
+sometimes even with the bigger number of
+
+
+the groups
+
+
+so what does that mean for you as a
+
+
+person
+
+
+who lead this Workshop
+
+
+because every single time you need to be
+
+
+fully focused on expectations for every
+
+
+single group even if you are talking
+
+
+with single group you should be ready to
+
+
+react what happened in other groups if
+
+
+you see before the workshop that number
+
+
+of the groups you are trying to
+
+
+um
+
+
+engage
+
+
+to to to extract this domain knowledge
+
+
+is higher maybe your plan should be
+
+
+adjusted so reacting on the workshop is
+
+
+probably the worst thing you can do
+
+
+react before the workshop so plan and
+
+
+plan and plan
+
+
+so establishing the channels
+
+
+establishing the spaces for every single
+
+
+group
+
+
+to to work together
+
+
+for example on the mirror another tools
+
+
+is crucial
+
+
+oh but however
+
+
+even if you are talking you know also
+
+
+with this high level perspective how
+
+
+this Workshop can be performed there is
+
+
+still a space for one thing
+
+
+for creativity
+
+
+so this picture was taken on the
+
+
+production Workshop
+
+
+this picture was taken on the online
+
+
+Workshop all the production
+
+
+I didn't miss maybe it looks very very
+
+
+silly like some icons some smiles and
+
+
+things like that but when it comes to
+
+
+discussion about a very very complicated
+
+
+problems and there are some you know
+
+
+problems in the communication
+
+
+adding some fun is a secret source which
+
+
+makes a conversation a little bit easier
+
+
+because
+
+
+suddenly it's way easier to
+
+
+conversate even with the CEO of the
+
+
+company
+
+
+so as you see the good part is that yeah
+
+
+there are some ways how we can work in
+
+
+this current situation
+
+
+and unfortunately fortunately there are
+
+
+some opportunities we can we can use for
+
+
+example we've got some access to the
+
+
+people which are completely inaccessible
+
+
+for us before
+
+
+the bad part is yes there's uh we need
+
+
+to still work mostly remotely for many
+
+
+person persons yes this is a problem but
+
+
+other side is that some parts of this
+
+
+Workshop especially when it comes to the
+
+
+large-scale worship when you've got
+
+
+let's say 30 person in the room
+
+
+uh probably at the beginning it was will
+
+
+still don't work because of
+
+
+communications channels
+
+
+so the remote from my perspective is
+
+
+still the good and the bad
+
+
+I can extract some good part for me so
+
+
+from my perspective can online replace
+
+
+the offline in some scenarios yes in
+
+
+some scenarios when it comes to the for
+
+
+example a very very detailed
+
+
+modeling sessions when you are talking
+
+
+about the concrete solution you are not
+
+
+exploring the online event can beat the
+
+
+offline and I would like prefer the
+
+
+online Workshop instead of offline so
+
+
+for you I don't know everyone have
+
+
+probably
+
+
+a unique perspective
+
+
+so thank you very much Amanda happy
+
+
+remote sessions
+
+
+[Applause]
+
+
+um did you experiment with such uh
+
+
+sessions which are
+
+
+because of the time zone issues or
+
+
+because they were so complicated that
+
+
+they were kind of asynchronous that some
+
+
+people didn't overlap with each other
+
+
+the question was motivated probably no I
+
+
+have no experience with the asynchronic
+
+
+even storming because from my
+
+
+perspective adding a single event to the
+
+
+board usually can introduce another
+
+
+another questions another opinions so at
+
+
+least from my perspective it will
+
+
+extend the term the period for the fall
+
+
+for the whole event very very and it's
+
+
+probably not good for my past
+
+
+foreign
+
+
+so usually developers want to write code
+
+
+and they don't really need like planning
+
+
+uh participating in you know sessions
+
+
+workshops stuff like that so how do you
+
+
+convince your teammates to participate
+
+
+and be vocal and proactive
+
+
+a good question
+
+
+um from my point of view if you will be
+
+
+able to see that the model of the
+
+
+discussion I I mean the the notes the
+
+
+stickies uh which were created and
+
+
+discussed can be converted into the
+
+
+software
+
+
+it's a game changer
+
+
+uh but it's very very hard to see at the
+
+
+beginning
+
+
+so for example uh the case from this
+
+
+week we started to analyze one scenario
+
+
+from the application in into the client
+
+
+world so we started from the events we
+
+
+started to to ask the domain experts
+
+
+about the triggers so we've got some
+
+
+events we've got some comments
+
+
+and then we started to explore the
+
+
+conditions uh why those triggers why
+
+
+those comments cannot be executed so we
+
+
+discovered I'm trying to avoid a term
+
+
+rule because right now is very very uh
+
+
+interesting topic on the Twitter about
+
+
+this naming in the even storming so
+
+
+let's call it conditions and then we we
+
+
+are able to combine them together I mean
+
+
+I see the whole process I see the whole
+
+
+rules I see that all the consequences we
+
+
+need to handle in the application by the
+
+
+consequences I mean saves into the
+
+
+database
+
+
+because this is a meaningful change for
+
+
+me as a developer it's so important I
+
+
+need to store it
+
+
+so we started to explore uh by
+
+
+discussion with domain experts
+
+
+under some conditions
+
+
+can we or we can't postpone some events
+
+
+so we discover
+
+
+some islands of the events which should
+
+
+happen together
+
+
+because if you postpone it if you split
+
+
+them there are some issues very very
+
+
+painful for the business
+
+
+so we started to think okay so if this
+
+
+is a process and we see exactly how the
+
+
+process looks like
+
+
+so how we can to translate into that
+
+
+code
+
+
+so we started to extract some
+
+
+informations some nouns which are
+
+
+visible in this in this in this process
+
+
+so we started to see that we are
+
+
+touching some data we see the rules how
+
+
+we touching those data and finally we
+
+
+will be able to model an object which
+
+
+contains those data which fire which
+
+
+emit those events and which is able to
+
+
+handle those commands we are seeing the
+
+
+model
+
+
+and the last part was the naming we see
+
+
+something how it looks like how it
+
+
+behaves so okay let's make another step
+
+
+let's name it
+
+
+and what is
+
+
+really really interesting
+
+
+the the last step was if we add
+
+
+a keyword class or private or public
+
+
+we've got a model of the software we've
+
+
+got the object so if you see or if you
+
+
+can see that you can extract your design
+
+
+for example I I express an object
+
+
+scenario but you can express an API or
+
+
+boundaries of your of your bounded
+
+
+context and you can translate the
+
+
+outcomes of this discussion into the
+
+
+software
+
+
+yeah you don't need to convince them
+
+
+if the a little bit earlier you might
+
+
+extract some acceptance criteria with
+
+
+this given when then approach for
+
+
+example
+
+
+and uh from the thing up into view now
+
+
+you see okay I've got a test to the
+
+
+extracted object so you can convert it
+
+
+you can merge it and after all it's very
+
+
+very
+
+
+hard to question this model I mean that
+
+
+after all all you need to do is to you
+
+
+know convert those stickies into the
+
+
+code
+
+
+and I know that maybe it sounds very
+
+
+very weird what I'm talking about but
+
+
+there are some presentations on the
+
+
+YouTube maybe there I will link it on
+
+
+the on the Twitter then you can see the
+
+
+whole process
+
+
+if you see the one passage over this
+
+
+this process from idea to the code you
+
+
+know as I mentioned you don't need to
+
+
+convince anybody
+
+
+thank you very much for your
+
+
+presentation
+
+
+um for sharing your
+
+
+experience and perspective I really feel
+
+
+inspired and I have two questions uh
+
+
+first about this merge maybe I need to
+
+
+move a bit about this merch face you
+
+
+mentioned
+
+
+from my experience from remote I
+
+
+uh frequently field that when people
+
+
+meet together they kind of
+
+
+in totally different worlds and it's
+
+
+hard to like find where do they actually
+
+
+should start to uh find what is common
+
+
+what is different and I wonder how do
+
+
+you moderate it to really achieve this
+
+
+merge
+
+
+usually the merge I mean before the
+
+
+match there was a subgroup discussions
+
+
+every single group was using a very very
+
+
+strict terminology as a baseline maybe
+
+
+it was extended because uh why not if
+
+
+it's help to to express the discussion
+
+
+term
+
+
+on the the merch
+
+
+um I usually perform that I'm trying to
+
+
+interpret the result of the group work
+
+
+so if I don't interpret correctly okay
+
+
+so there is a chance that I can be
+
+
+corrected and everyone in the room can
+
+
+be connected and corrected as well so
+
+
+this is my Approach uh maybe sometimes I
+
+
+would like to ask some you know the type
+
+
+questions just to precise things
+
+
+but uh I would like to also avoid the
+
+
+situation that this merge scenario will
+
+
+take for example one hour because you
+
+
+know we've got some limited time usually
+
+
+a few hours per day so the split the
+
+
+work the split the work usually I'm
+
+
+using some time boxes just to have you
+
+
+know everything on track
+
+
+and of course I don't know how many
+
+
+iterations will be needed to to achieve
+
+
+the goal but maybe maybe we can do it a
+
+
+little bit earlier maybe we need some
+
+
+extra iterations about this this works
+
+
+for me
+
+
+thanks and if I may I have one more
+
+
+question
+
+
+even storming is awesome when you
+
+
+actually can gather people who are
+
+
+needed there but as you mentioned
+
+
+sometimes they're
+
+
+issues with with time zones that's one
+
+
+reason but you also have people who are
+
+
+so busy that you cannot really get them
+
+
+on the calendar with the rest of the
+
+
+group and I wonder
+
+
+how do you approach them do you have
+
+
+some
+
+
+tested approach that works for you uh
+
+
+usually I've got two approaches for
+
+
+persons who cannot participate for the
+
+
+full line one is that using this um
+
+
+discussion about the events sometimes
+
+
+there are some you know questions which
+
+
+are very very hard to answer because the
+
+
+knowledge is missing this particular
+
+
+person you're talking about is outside
+
+
+the room so but we can annotate this
+
+
+problem and after the session but before
+
+
+the next iteration we can gather the
+
+
+answer so this is one first approach uh
+
+
+note that the questions got the
+
+
+knowledge between the session and
+
+
+present the result at the beginning on
+
+
+the next session uh and the the second
+
+
+approach is way simpler when you plan
+
+
+the the workshop and we know who should
+
+
+be
+
+
+um in the room why and things like that
+
+
+uh sometimes there is a set of the
+
+
+people which are on call
+
+
+just like that and then um this kind of
+
+
+person probably will be on call and then
+
+
+if you've got a problem okay let's this
+
+
+person can join us for example for a few
+
+
+minutes answer the particular question
+
+
+and to leave the the room because it's
+
+
+very very busy so those Solutions work
+
+
+for me very very well
+
+
+thank you very much
+
+
+hello Mario hello a really nice
+
+
+presentation but I have a question to
+
+
+you in regarding not maybe even storming
+
+
+but in general Workshop uh in a problem
+
+
+in a positive scenario for example you
+
+
+have a whole team a lot of the people
+
+
+that it's needed to do a workshops full
+
+
+Engagement full faith in success it
+
+
+doesn't matter it's I don't know for
+
+
+hours online or free there is offline
+
+
+and from my experience I see a lot of
+
+
+situations when the whole team was wow
+
+
+we will do it we will change it yeah it
+
+
+will change it if we are able to change
+
+
+it everything will be solved it's great
+
+
+but the workshops
+
+
+ended
+
+
+and nothing's happened but not right
+
+
+really nothing's happened but people
+
+
+like changing the mood the mode from the
+
+
+workshops like a holy night like we have
+
+
+a fading success to
+
+
+um
+
+
+it will take a year now I don't want to
+
+
+touch this part of
+
+
+and do you have any advice to not like
+
+
+be an attendant or prepare workshops or
+
+
+wherever in an organization structure
+
+
+but to keep a faith in sort of success
+
+
+to
+
+
+um
+
+
+make from the theoretical discussion
+
+
+like the sticky notes into a real goals
+
+
+Real Results
+
+
+I can provide you an example of from
+
+
+Wednesday this week because exactly this
+
+
+problem was mentioned after the workshop
+
+
+how what is the next step and the voice
+
+
+in the room was because we have a
+
+
+roadmap
+
+
+we've got some tickets to do and then
+
+
+maybe we'll be able to perform something
+
+
+for example next year
+
+
+I believe there are to answer at least
+
+
+one the question is why even we organize
+
+
+this Workshop
+
+
+maybe it wasn't a best idea because
+
+
+right now the mood and the things to
+
+
+mentioned but the second approach will
+
+
+be if the workshop on the workshop we
+
+
+created some outcomes we've got some
+
+
+idea what can be done in this in this
+
+
+project uh usually was which was the
+
+
+best is to create a person of the plan
+
+
+and assign to the plant the person that
+
+
+okay I need you as a change um
+
+
+agents change sorry for that and now
+
+
+it's your responsibility to push it
+
+
+so if the responsibility will be on the
+
+
+group
+
+
+nothing will happen usually if the
+
+
+responsibility is on the person a single
+
+
+person and this person has a privilege
+
+
+in the organization to push yeah
+
+
+the outcome will be introduced to the
+
+
+software however of course there are
+
+
+scenario that you need some budget for
+
+
+that you need some you know time for
+
+
+development and so on and so on so you
+
+
+need to speak to the person which is
+
+
+responsible in the organization for
+
+
+granting the permission to do that
+
+
+um in terms which is which are really
+
+
+easy to understand in this person for
+
+
+example if you would like to introduce
+
+
+the outcome and the benefits for the
+
+
+organizations
+
+
+um to the non-technical person using the
+
+
+terminology that
+
+
+if we do this and this and this the
+
+
+quality metric the alcohol metric will
+
+
+be so good
+
+
+nothing will happen now you should um
+
+
+identify
+
+
+the reason or the business reason or the
+
+
+business argument which will be easy to
+
+
+understand for the second party like for
+
+
+example we if we do this outcome from
+
+
+this motion if we will implement it for
+
+
+example we will speed up the development
+
+
+or we'll be able to deliver a missing
+
+
+features for example in this period of
+
+
+the time so the person who will be you
+
+
+know interested in pushing in the
+
+
+marketing in the organization
+
+
+but the question is the the first
+
+
+question should be in the year why we
+
+
+even organize the session yeah because
+
+
+if there was for example internal
+
+
+session from the development team how we
+
+
+can improve the world and there is no
+
+
+budget for improving the world
+
+
+nothing happened something should be
+
+
+done before this Workshop
+
+
+as I mentioned in terms of the plan
+
+
+but we can discuss it the problem is
+
+
+very very large yeah and complex so we
+
+
+can we can discuss it during the break
+
+
+if you would like to okay so thank you
+
+
+very much one more time
+
+
+have a nice conference

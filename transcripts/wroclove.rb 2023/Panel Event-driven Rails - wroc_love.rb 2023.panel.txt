@@ -1,0 +1,4264 @@
+um so this is an event-driven rails
+
+
+discussion panel
+
+
+and it's kind of like something between
+
+
+a discussion panel and maybe a little
+
+
+bit of a confrontation we like to
+
+
+confront confront ideas at this
+
+
+conference uh but just to give you maybe
+
+
+a little bit of a context uh Scott and
+
+
+Nathan they're behind Eventide a tool
+
+
+for kind of like a worse version of race
+
+
+events or let's say
+
+
+and me and Pavel uh are of course behind
+
+
+the receiving store so this is like one
+
+
+kind of division between us but actually
+
+
+uh how many of you are using event
+
+
+sourcing in let's say in your systems
+
+
+even sourcing let's even sourcing yeah
+
+
+okay so not so many people so actually
+
+
+it's all of us here we're in the same
+
+
+team of even sourcing people because
+
+
+we're all using even sourcing and you
+
+
+are kind of the opposition to us so we
+
+
+are happy to confront also with you
+
+
+against you so we'll probably talk a
+
+
+little bit about our tools about
+
+
+paradigms we have some vocabulary
+
+
+differences so we may want to cover this
+
+
+a little bit maybe not too much we will
+
+
+ask questions to each other but also we
+
+
+are totally open to questions from the
+
+
+audience if you have some very difficult
+
+
+questions to Scott feel free to ask them
+
+
+um yeah so I think we can start uh maybe
+
+
+you can start introducing each other
+
+
+just very shortly and and we can kick it
+
+
+off and then we will get to some
+
+
+questions
+
+
+and we I think we can sit we should
+
+
+switch with Pavel so it doesn't look
+
+
+like a like a
+
+
+pump
+
+
+okay so Scott can you introduce your
+
+
+shortly what you do and just okay sure
+
+
+my name is my name is Scott belware I'm
+
+
+the co-founder of uh the Eventide
+
+
+project
+
+
+and uh message DB
+
+
+um both of these are tools used in uh
+
+
+evented systems development
+
+
+um
+
+
+message DB is a tool for postgres it's
+
+
+what Eventide uses and and Eventide is a
+
+
+toolkit built in Ruby my background is
+
+
+software testing software design user
+
+
+experience
+
+
+architecture management
+
+
+babysitting
+
+
+all kinds of stuff I work with Nathan on
+
+
+that tool we work together on a project
+
+
+uh
+
+
+uh in uh for a law firm in Silicon
+
+
+Valley that's involved with venture
+
+
+capital
+
+
+okay
+
+
+so my name is Pavel patana I've been
+
+
+working on Race event store as a
+
+
+maintainer and as a person who does
+
+
+regular releases of that software for
+
+
+over five years
+
+
+my whole career is based around Legacy
+
+
+software this is what I mostly do I
+
+
+usually work on code bases that have
+
+
+accumulated some history
+
+
+so that's a very interesting position to
+
+
+introduce Ray's event store into
+
+
+um
+
+
+Nathan Wadd of course I gave the
+
+
+presentation about test bench earlier
+
+
+today but yeah in addition to uh and to
+
+
+that I'm sort of Scott's partner in
+
+
+crime on the Eventide work we do
+
+
+okay and time
+
+
+at Arkansas
+
+
+we help existing projects with you know
+
+
+difficulties let's say so race even
+
+
+store was one big thing we built
+
+
+together to help existing race projects
+
+
+and also some of you yesterday with the
+
+
+workshop there is this code Base called
+
+
+to e-commerce this is like a quite a big
+
+
+application built with relative install
+
+
+but also with domain during design
+
+
+secure us and even sourcing so that's
+
+
+those are the practices that we also use
+
+
+um so yeah that's that's what we do at
+
+
+Arkansas and that's that's our that's my
+
+
+background too
+
+
+and because I know that this is already
+
+
+our first difference between us and we
+
+
+will start with this uh we embraced
+
+
+domain-driven design in our
+
+
+um projects uh we see the techniques
+
+
+behind it quite useful maybe not all of
+
+
+them exactly but in general it's okay
+
+
+very often domain driven design works
+
+
+very well with even sourcing and secure
+
+
+us and I know you were quite vocal to be
+
+
+against domain driven design while you
+
+
+share even sourcing ideas and even
+
+
+driven architecture and so on so we are
+
+
+super similar in many approaches but I
+
+
+would like to maybe start with this why
+
+
+not domain driven design
+
+
+I think that it's a cliche
+
+
+and it's one of those things that is
+
+
+a bunch of really elaborate patterns
+
+
+that are so
+
+
+all-consuming that when a developer goes
+
+
+into that they can only do that and they
+
+
+start thinking only that way
+
+
+so I got into domain driven design in
+
+
+2002.
+
+
+I'm one of the first you know if you
+
+
+think about like the whole population
+
+
+developers I'm one of the first
+
+
+developers who gave conference talks on
+
+
+domain driven design
+
+
+um I get it
+
+
+I've been a zealot but I I don't
+
+
+I don't stay a zealot in anything
+
+
+for a long time I do I I embrace zeal
+
+
+as a learning tool
+
+
+um and then sort of move on so it's not
+
+
+that I'm
+
+
+it's not I'm opposed to domain driven
+
+
+design I'm opposed to what it has been
+
+
+subjugated into and like many things in
+
+
+Tech
+
+
+I think it's just been turned into
+
+
+something that gives a few celebrity
+
+
+Geeks celebrity and to or in order to do
+
+
+that in order to keep a captive audience
+
+
+this is true in rails as well in order
+
+
+to keep a captive audience a celebrity
+
+
+geek will make a tool that is so
+
+
+mentally taxing
+
+
+that
+
+
+the audience can't escape
+
+
+because they've got to be constantly
+
+
+fighting it
+
+
+this is
+
+
+react
+
+
+Tailwind
+
+
+devops
+
+
+rails on and on and on and on where you
+
+
+find celebrities
+
+
+you will find
+
+
+subjugation
+
+
+I'm opposed to that domains of InDesign
+
+
+didn't used to be that way
+
+
+but it has become that way and so these
+
+
+elaborate patterns that have that have
+
+
+emerged from the uh DDD es cqrs uh
+
+
+Community are I I mean they're they work
+
+
+but they're completely unnecessary
+
+
+so for me it's Once a community once the
+
+
+people go that way once the it's hard to
+
+
+take a geek and give that geek celebrity
+
+
+Geeks can't manage celebrity
+
+
+and so anything where geek and celebrity
+
+
+comes together usually turns to crap
+
+
+um DDD is one of those things rails is
+
+
+enough like name it anything that
+
+
+anything that we're involved with it's
+
+
+okay but it's like it's got well it's
+
+
+not what it and I'm not saying like I
+
+
+miss what it was it's the essence of it
+
+
+that's good the essence of DDD the
+
+
+design principles the fundamentals
+
+
+that's good all the other stuff that got
+
+
+added to it all the patterns from DDD
+
+
+seqrs
+
+
+that not only not only are they
+
+
+problematic and overly complex but you
+
+
+know Nathan and I did a talk in 2018 at
+
+
+explore DDD conf
+
+
+um specifically pointing out the
+
+
+mistakes
+
+
+in many of the Tactical patterns to use
+
+
+the the term of the of one of the
+
+
+authors
+
+
+um
+
+
+and there's just mistakes like it's just
+
+
+not worth it like if if a fundamental
+
+
+set of patterns has measurable mistakes
+
+
+they need to be disqualified with
+
+
+prejudice and with alacrity
+
+
+so
+
+
+um
+
+
+I think it's just a way
+
+
+and we're all subject to this I think
+
+
+it's just a way to sound smart
+
+
+all of the things that are in domain
+
+
+driven design that went into the Eric
+
+
+Evans book
+
+
+they all existed before domain driven
+
+
+design so our my choice of vocabulary
+
+
+is to not use some specialized
+
+
+vocabulary of some uh some subculture
+
+
+uh or you know some subculture with its
+
+
+own dialect my choice is to use the the
+
+
+higher level
+
+
+vocabulary terminology that applies to
+
+
+all of software not just one subset of
+
+
+it and the reason for that is
+
+
+you'll solve many more problems with a
+
+
+broader with a more generalized
+
+
+Universal set of terminology rather than
+
+
+coming up with brand new terminology but
+
+
+there's no doubt that Concepts in
+
+
+domain-driven design at the time that
+
+
+they came to my life
+
+
+now 20 years ago
+
+
+um were transformational for me from
+
+
+being like a new senior developer to a
+
+
+senior senior developer there's no doubt
+
+
+about it I just
+
+
+try to avoid it I don't want to con I
+
+
+don't want to
+
+
+I don't want to feed energy into that um
+
+
+hype machine because I think it's at
+
+
+this point in the game more harmful
+
+
+developers to developers to get stuck in
+
+
+in that in in a scene in a subculture
+
+
+[Music]
+
+
+that's it okay okay so your alternative
+
+
+to that is using different vocabulary
+
+
+and not General no using using the
+
+
+vocabulary that existed before domain
+
+
+driven design that covers much more
+
+
+ground already like the like there was
+
+
+software development before Eric Evans
+
+
+wrote a book
+
+
+um the word aggregate
+
+
+we used to use the word partition
+
+
+why did we why like what good is it to
+
+
+use new terminology like I'm not using
+
+
+what I'm saying is don't just adopt new
+
+
+terminology and erase all the knowledge
+
+
+that came before it that's what domain
+
+
+driven design to me is there's like is
+
+
+there is there chalk
+
+
+like here's the amount of here's the
+
+
+amount of software design knowledge in
+
+
+the universe
+
+
+and here's domain driven design
+
+
+I want this
+
+
+if I use this vocabulary I'm cutting
+
+
+myself off from this so I will never
+
+
+choose a more constrained set of
+
+
+terminology vocabulary so it's not just
+
+
+to be different or just to be a rebel or
+
+
+whatever it's that there's more
+
+
+knowledge out there and it's necessary
+
+
+and if you choose
+
+
+if you spoke a language
+
+
+if you spoke a language with a vastly
+
+
+contracted or compressed vocabulary a
+
+
+human language
+
+
+your poetry your music and your writing
+
+
+would probably suffer for it okay so
+
+
+just to be sure if that thing was called
+
+
+Partition it would be all for it
+
+
+further vocabulary yes and that's that's
+
+
+the terminology that I use because it it
+
+
+also says what you're doing to partition
+
+
+let's take a rails app to partition a
+
+
+model to partition a data model
+
+
+the words like already tells you where
+
+
+you're going how do you what do you how
+
+
+do you aggregate a data model like
+
+
+there's there's no more that terminology
+
+
+doesn't lead to more knowledge and more
+
+
+inquiry I definitely agree that Gregory
+
+
+term itself is very confusing I don't
+
+
+oppose the essence of it because the
+
+
+essence about invariance
+
+
+and what it has to know what it doesn't
+
+
+have to know is fine for me
+
+
+I think that the vocabulary like you
+
+
+mentioned it's sometimes constraining
+
+
+because someone introduces new
+
+
+vocabulary for the time that already
+
+
+existed
+
+
+it has this function of grabbing
+
+
+attention on focusing the communication
+
+
+about the new term that describes
+
+
+something
+
+
+that we've known before by a different
+
+
+term
+
+
+but I just wanted to know if you're
+
+
+opposing to the vocabulary and the hype
+
+
+but you mentioned that the essence of it
+
+
+and how you understood it years ago was
+
+
+basically fine oh yeah for sure yeah
+
+
+yeah and and the word aggregate actually
+
+
+you know that's just oh
+
+
+um when when uml was being introduced in
+
+
+1997
+
+
+um you'd go you know if you were on the
+
+
+message boards at that time you'd hear
+
+
+about white diamond aggregation Black
+
+
+Diamond composition like they were like
+
+
+aggregate is a word just from oo so it
+
+
+just became something else and it's not
+
+
+really from Eric Evans it became
+
+
+something else when it got into the
+
+
+hands of ddds cqrs who kind of like we
+
+
+were talking this morning about how like
+
+
+rails got the word fixture and took it
+
+
+change the meaning and now you know
+
+
+here's a room full of people who if I
+
+
+said you know what is a test fixture
+
+
+they're probably going to come back and
+
+
+say it's something that creates test
+
+
+data
+
+
+that's an example of what happens when
+
+
+we take a well-known term and make it
+
+
+mean less and create a social movement
+
+
+around it a clique
+
+
+so
+
+
+yeah it's
+
+
+that's the part so anything that to me
+
+
+that does that I oppose it because it's
+
+
+it's opposed to learning and education
+
+
+in order to elevate a small group of of
+
+
+um celebrities
+
+
+um I'm not sure like I like this drawing
+
+
+that you made so let me show my
+
+
+interpretation it's very detailed it's
+
+
+also to scale I think is it that tomato
+
+
+if I change it a little bit is that here
+
+
+are the people that understand your
+
+
+vocabulary that you use and sure that
+
+
+people understand domain during
+
+
+vocabulary because even if it's wrong
+
+
+it's very popular and I know that well
+
+
+it's popular
+
+
+for the language and for the vocabulary
+
+
+always I agree with this but I think
+
+
+this battle is kind of already lost
+
+
+I here's an interesting thing I think
+
+
+that perspective actually it rep like um
+
+
+exemplifies what I'm talking about in
+
+
+the domain-driven design community that
+
+
+vocabulary is very popular but that
+
+
+domain that Community is so insular it's
+
+
+so inside itself and so isolated
+
+
+um that we can say with all due respect
+
+
+that it's popular and it's I don't think
+
+
+you know I don't know about you know
+
+
+well actually these these these folks
+
+
+might be more clued in than than the
+
+
+average but the average software
+
+
+developer doesn't know anything doesn't
+
+
+know that vocabulary yeah the same
+
+
+discussion we can have not only about
+
+
+DDD but actually this morning example is
+
+
+really perfect with the fixture uh
+
+
+concept so rails stole many many
+
+
+Concepts fixtures that's one problem
+
+
+like active records model like what kind
+
+
+of model is this yeah
+
+
+exactly so rails redefined completely
+
+
+many terms and now this is the same
+
+
+discussion as with DDD probably uh is
+
+
+there any way to fight against it like
+
+
+or we just accept it maybe it's like two
+
+
+philosophical question in general but I
+
+
+think like it's super hard to just
+
+
+suddenly say hey rails is not MVC
+
+
+well I mean that there's that's actually
+
+
+a reasonable argument to make though
+
+
+yeah it's a different point but
+
+
+um yeah it's it can be done so the
+
+
+question is
+
+
+like
+
+
+is it worth the effort for me it's worth
+
+
+the effort because it's a it's a moral
+
+
+issue and it's an ethical issue it's a
+
+
+matter of professional ethics I don't
+
+
+want to feed
+
+
+any I don't want to feed that troll of
+
+
+of uh of fad and of clique and of
+
+
+celebrity uh celebrity uh geek uh Clique
+
+
+leader because all that is doing is
+
+
+giving power to people who who are very
+
+
+bad at having power
+
+
+okay so my Approach would be to actually
+
+
+have a dictionary to translate from the
+
+
+one vocabulary to another
+
+
+because I think at that scale
+
+
+it is it's not the battle worth taking
+
+
+it's a battle for the for the hearts and
+
+
+minds of human society I think it's
+
+
+worth taking well because we need to do
+
+
+that not only in software but in
+
+
+everything that we do yeah I just want
+
+
+to say I admire it uh what you do
+
+
+[Music]
+
+
+it's a very challenging project in
+
+
+general yeah yeah life is but but I I'm
+
+
+sorry sorry anything I don't think we
+
+
+need a dictionary because
+
+
+these terms are the preeminent terms the
+
+
+terms that we tend to use pre-date to
+
+
+pre-exist and are preeminent to these
+
+
+new special things that are coming it's
+
+
+DDD that needs a dictionary and has a
+
+
+dictionary but I but but I understand
+
+
+what you're saying if nobody understands
+
+
+you still need to do something different
+
+
+it will be something different in the
+
+
+future in maybe different scope of the
+
+
+programming it depends who's who's you
+
+
+know there will always be celebrities
+
+
+trying to exploit a larger group of
+
+
+followers that's why you're having a
+
+
+dictionary would allow you to Simply
+
+
+jump from the terms that you already
+
+
+know to the new world because you have
+
+
+that mapping that's one way to solve it
+
+
+but I also admire your fight
+
+
+maybe chat GPT can solve our problems
+
+
+and just
+
+
+could you explain this to me as a DDD
+
+
+person
+
+
+I will say uh just
+
+
+in my experience I've definitely run
+
+
+into some Junior and mid-level
+
+
+developers who have been
+
+
+highly anxious
+
+
+and and concerning themselves with am I
+
+
+doing DDD correctly and to me that's the
+
+
+uh that's the moment where I realized no
+
+
+there really is a difference it's not
+
+
+just a matter of two different
+
+
+terminologies
+
+
+when somebody's when somebody's
+
+
+uh wanting to do DDD correctly versus
+
+
+just design I mean it's in the term
+
+
+domain driven design if there is a force
+
+
+exerting any pressure on your design
+
+
+that is not your domain you've got a
+
+
+problem uh and to con to concern oneself
+
+
+with whether I'm doing DDD correctly and
+
+
+I've seen this many times that that's
+
+
+that's where the the movement is not
+
+
+just a different set of vocabulary it's
+
+
+it's uh it becomes an end unto itself
+
+
+it's a ritual yeah whereas if you take
+
+
+it away what's what's the goal just to
+
+
+do design well and that's always been
+
+
+the goal
+
+
+well okay
+
+
+um if
+
+
+it's a general problem
+
+
+am I doing right this way correctly am I
+
+
+doing a good kind of logic
+
+
+logic am I using those design patterns
+
+
+as well Etc and this is not just a
+
+
+problem with TV no but before yeah but
+
+
+yeah when we're on ddd's territory we
+
+
+fight that if we fight the DDD battle
+
+
+when we're in the rails territory we
+
+
+fight the DDD the the the the rails yeah
+
+
+we're always fighting the D to know but
+
+
+real say you know fight fight fight
+
+
+fight for what's good you know
+
+
+I wonder like if there was an experiment
+
+
+but we will never probably make it if me
+
+
+and Pavo per for one week on the same
+
+
+requirements and then you and Nathan
+
+
+paired together my hypothesis is that
+
+
+the code will be almost similar or most
+
+
+identical maybe some tactical
+
+
+differences
+
+
+even though we would use what I couldn't
+
+
+say that I couldn't I couldn't say
+
+
+whether or not that would be true
+
+
+because I've never worked with you
+
+
+um I've read some of Arkansas's code and
+
+
+thank you for Arkansas's code without it
+
+
+our
+
+
+uh event store implementation would have
+
+
+never come into existence in 2014 or
+
+
+2015 or whatever it was
+
+
+um but I don't I don't really know
+
+
+that's true because what matters is
+
+
+software design fundamental deep level
+
+
+finely detailed software development
+
+
+software design principles
+
+
+and I don't know I couldn't say what
+
+
+kind of
+
+
+you know
+
+
+Acumen any in any programmer has about
+
+
+those things and until I work what I
+
+
+mean is probably the structure will be
+
+
+similar like I don't know if it were
+
+
+built we were building you know
+
+
+e-commerce kind of project I think you
+
+
+would also have some kind of pricing we
+
+
+would call it domain you would call it
+
+
+maybe component you would have inventory
+
+
+component we would have inventory domain
+
+
+uh maybe inside there will be some
+
+
+probably we would use Aggregates you
+
+
+would use entities we would use we would
+
+
+emit events from the Aggregates you
+
+
+would ask the entity and retrieve the
+
+
+state from The Entity to emit events
+
+
+probably that's what that's my
+
+
+understanding maybe yeah maybe
+
+
+so I think in general a little bit
+
+
+differences between some tiny layers but
+
+
+like I know what you mean by you know we
+
+
+would admit a a emit events from the
+
+
+aggregate because I I know those I know
+
+
+those patterns the DDD style of doing
+
+
+um event sourcing
+
+
+um
+
+
+another term I don't like to use but
+
+
+that one is that one's done I can't
+
+
+change that one I won't fight that one
+
+
+but um yeah I would never have an
+
+
+aggregate emit events I think that's a
+
+
+mistake
+
+
+I think the aggregate aggregate is not a
+
+
+software pattern like it wasn't supposed
+
+
+to be a code pattern
+
+
+somebody made it a code pattern because
+
+
+it makes it easy for beginners
+
+
+to start typing on their keyboards to do
+
+
+that stuff but you know this is the
+
+
+nature of the talk that we did that you
+
+
+can find on uh find on on YouTube the
+
+
+what is it the aggregate the
+
+
+something or other just yeah anyway if
+
+
+anybody's interested I'm familiar with
+
+
+the recommendation night and did the
+
+
+talk here actually about about this
+
+
+aggregate route
+
+
+arguments that you have against it so
+
+
+yeah you know so yeah so there it is
+
+
+like I wouldn't I wouldn't do that
+
+
+because as a as a
+
+
+it's like what Nathan said
+
+
+if a developer is focused on
+
+
+implementing that pattern it's basically
+
+
+following a ritual and they're
+
+
+distracted from the fundamental laws of
+
+
+physics of the universe that's a problem
+
+
+because that software it could be a
+
+
+great Implement of implementation of a
+
+
+DDD pattern ddds cqs pattern
+
+
+um and the developer could be really
+
+
+satisfied with it and the design could
+
+
+still be an absolute screw-up
+
+
+I would interrupt now with the questions
+
+
+from the audience
+
+
+if I could separately move the topic
+
+
+from the DDD I'm not ready for that yet
+
+
+to like the events which the world which
+
+
+uh wasn't said yet I think uh is that
+
+
+yeah just like to start the discussion
+
+
+what would you say like would be the
+
+
+immediate benefit of like having the
+
+
+event-driven architecture or something
+
+
+like that because like the definitions
+
+
+variant different people and like
+
+
+understand that differently than what it
+
+
+would be like to convince someone in few
+
+
+minutes if they have like basic grasp
+
+
+that this is about
+
+
+components communicating through events
+
+
+well first of all I don't like the word
+
+
+event so I would no I'm just kidding I
+
+
+wouldn't
+
+
+just kidding translation this code is
+
+
+driven architecture it's productivity if
+
+
+you like productivity if you don't if
+
+
+you like not having frustration in your
+
+
+life
+
+
+um then a signals and Telemetry approach
+
+
+there I changed it from events I didn't
+
+
+mean to but that's what it is you know
+
+
+the problem is people get all wrapped up
+
+
+and what's an event and how do I do
+
+
+events right it's like it's basically
+
+
+about having autonomous pieces of
+
+
+software that
+
+
+um that broadcast
+
+
+um
+
+
+the status of their work
+
+
+and then other pieces of software can uh
+
+
+Choose Or to react to those broadcasts
+
+
+of signals or disregard that which as
+
+
+opposed to what you do in in uh active
+
+
+record so the technical terminology here
+
+
+is tightly coupled versus Loosely
+
+
+coupled but you can I can say tightly
+
+
+coupled I can say coupling and cohesion
+
+
+all day and everybody will fall asleep
+
+
+because most
+
+
+like you either know what it is and and
+
+
+basically it's changed your life or you
+
+
+don't know what is and you think it's
+
+
+just you feel it's just random syllables
+
+
+but if you understand really understand
+
+
+coupling and cohesion to the point that
+
+
+that's everything you do everything you
+
+
+do is about controlling that to the
+
+
+subatomic level your productivity will
+
+
+Skyrocket
+
+
+so we work on a team
+
+
+nobody believes nobody believes it like
+
+
+in what we do but we work on a team uh
+
+
+for a product called neuron it's for uh
+
+
+it's for a venture capital law firm uh
+
+
+there's a handful of developers that do
+
+
+the work of probably a team five times
+
+
+the size of that we don't have mono
+
+
+repos we have close to
+
+
+400 repos now for 15 Developers
+
+
+how do you do that we we change the we
+
+
+changed the dials so all the things that
+
+
+are are typically things that slow down
+
+
+teams software teams we change those so
+
+
+we're not slowed down by all the things
+
+
+that every other team has slowed down by
+
+
+so we can take on 400 repos we can take
+
+
+on vastly different approaches to doing
+
+
+software development that have nothing
+
+
+to do with the common patterns or
+
+
+cliches that I would say that are in
+
+
+there so
+
+
+um
+
+
+if you like
+
+
+having no frustration if you like making
+
+
+progress and you want to work somewhere
+
+
+between two times and 10 times faster
+
+
+than you have before
+
+
+start paying attention to the laws of
+
+
+structural physics
+
+
+and how they apply to software design
+
+
+because it's these aren't laws of
+
+
+software
+
+
+they're just the laws of the universe
+
+
+and if we disregard the laws of the
+
+
+universe software is the only thing that
+
+
+humans can do where if you disregard the
+
+
+laws of physics
+
+
+the computer is going to be perfectly
+
+
+fine with it
+
+
+if you disregard the laws of physics and
+
+
+you're let's say on Nathan's balcony
+
+
+um leaning over too far you're going to
+
+
+pay for but you can make any number of
+
+
+mistakes in software and the Machine is
+
+
+still going to run it what will be
+
+
+problematic is that you won't make
+
+
+progress your team will start at one
+
+
+level of velocity or Pace and you're
+
+
+going to lose
+
+
+productivity you're going to lose your
+
+
+pace what we do all of our methodologies
+
+
+are about saying we're going to start at
+
+
+a pace and we're going to maintain that
+
+
+pace forever and never slow down
+
+
+that's that's the thing that matters
+
+
+even though the volume of code that
+
+
+we're dealing with is increasing all the
+
+
+time
+
+
+because that volume of code is
+
+
+increasing all the time so is our
+
+
+productivity so that we can maintain our
+
+
+velocity
+
+
+um
+
+
+that's why events and it's not event or
+
+
+evented or event sourcing I think event
+
+
+sourcing is irrelevant honestly it's
+
+
+just a side effect event sourcing is a
+
+
+side effect of doing Pub sub Pub sub is
+
+
+what matters event sourcing is just a
+
+
+smart way to do to do Pub sub
+
+
+um where you're dealing with a A
+
+
+different kind of messaging technology
+
+
+and big I always say it's because you
+
+
+have Pub sub does anybody else want to
+
+
+talk because you have Pub sub you can
+
+
+have event sourcing
+
+
+because you have Pub sub you have events
+
+
+are saying I don't think that events are
+
+
+saying this we're talking about like
+
+
+here's where we go I don't think event
+
+
+sourcing should exist in a rails app I'm
+
+
+not sure I could agree
+
+
+heavy knowing that we have a different
+
+
+vocabulary so I can't tell if you're
+
+
+meaning the same thing by using the term
+
+
+even sourcing
+
+
+but can that kind of uh says that it's
+
+
+very hard to like maybe not convince but
+
+
+explain someone why it is beneficial
+
+
+because it's it kind of you're saying
+
+
+that if you would work with even driven
+
+
+architecture let's say for some time
+
+
+then you would immediately see this and
+
+
+feel these benefits but until you didn't
+
+
+then you it's kind of hard to imagine
+
+
+why they are unless you are like you
+
+
+said constantly thinking about coupling
+
+
+at cohesion then I get you but I I think
+
+
+you can know it intellectually without
+
+
+even having
+
+
+experience with it because again it just
+
+
+respects the laws of of the universe so
+
+
+if you the hardest thing in software and
+
+
+this is why test driven development is
+
+
+so important and I'll change the
+
+
+terminology to to consume first design
+
+
+or or consume first proofing or proofing
+
+
+the reason why test driven development
+
+
+is so important is because when you do
+
+
+test driven development your software is
+
+
+friendly to being tested other word for
+
+
+that is transparent that's a fundamental
+
+
+that's a fundamental principle in in
+
+
+engineering if you don't have
+
+
+transparency in your mechanism you've
+
+
+got no way of knowing that when you
+
+
+change it it will it will work or not
+
+
+and that's the and as that accumulates
+
+
+it gets harder and harder and harder
+
+
+that's why software teams lose their
+
+
+lose their productivity the only reason
+
+
+software teams lose their productivity
+
+
+is that they get more code over time and
+
+
+when they try to change that code they
+
+
+don't know whether their changes work or
+
+
+not work and it gets harder and harder
+
+
+and longer and longer to prove things
+
+
+test driven design is about making sure
+
+
+that that difficulty doesn't go up and
+
+
+that it stays level that's why our
+
+
+productivity stays level and it's all
+
+
+about it's all about transparency and
+
+
+design Telemetry is just another way of
+
+
+doing that
+
+
+so events are just Telemetry coming out
+
+
+of your business logic
+
+
+if you don't have like if you have an
+
+
+active record callback what was the
+
+
+example we gave for testing like if you
+
+
+try to test an active record callback
+
+
+and like
+
+
+um oh it was it was like a deposit right
+
+
+or a withdrawal was it like an order so
+
+
+you do a withdrawal and it's an actual
+
+
+record book callback so you in one in
+
+
+one transaction you do withdrawal and
+
+
+then
+
+
+um you you notify the the uh the fraud
+
+
+detection Department to check on this
+
+
+and then you like notify like the
+
+
+Loyalty program uh software and then you
+
+
+update some other software and then you
+
+
+update some other software and you
+
+
+update some other software the test for
+
+
+that is going to be absurd
+
+
+because it's one unit of testing
+
+
+so you take all of those different
+
+
+actions and you remove them from each
+
+
+other
+
+
+and all of them can be tested as if none
+
+
+of the other actions even exist
+
+
+that's why we do
+
+
+um
+
+
+event of an architecture or event driven
+
+
+development that's why we do Pub sub
+
+
+um that's and we have we have event
+
+
+sourcing just because
+
+
+we have events but the point is the only
+
+
+point to this why I do this it wasn't
+
+
+like getting years and years and years
+
+
+of experience it was just
+
+
+common sense if you take a whole bunch
+
+
+of procedural program code
+
+
+and you remove every every unit of that
+
+
+code and separate them into autonomous
+
+
+pieces of software your productivity is
+
+
+going to is going to multiply
+
+
+by some function of how many how many of
+
+
+those individual pieces of the procedure
+
+
+exist in that procedure that's
+
+
+fundamental you can know that you can
+
+
+know that just by you you can prove that
+
+
+with math it doesn't even require
+
+
+experience to do it
+
+
+okay
+
+
+I would answer it very similarly but
+
+
+maybe instead of following the the law
+
+
+of physics
+
+
+my argument is usually the law of uh the
+
+
+word of business because I believe in
+
+
+our software we try to reflect business
+
+
+uh which is just a sub part of the
+
+
+physics let's say
+
+
+um and we should follow their vocabulary
+
+
+we should follow their structure which
+
+
+is not always maybe perfect but
+
+
+sometimes we need to teach them how to
+
+
+structure the business because it's
+
+
+sometimes actually code tells the truth
+
+
+instead of the business telling the
+
+
+truth sometimes the business hasn't
+
+
+thought in detail about what they're
+
+
+doing until until we come along and have
+
+
+to do we have to think in detail yeah
+
+
+also like we call certain events domain
+
+
+events because they're coming from a
+
+
+specific domain and they're very like
+
+
+domain specific
+
+
+there might be integration events or
+
+
+some technical events which are all very
+
+
+useful at certain levels let's say and I
+
+
+really like this fact that we can group
+
+
+those events belonging to specific
+
+
+domain because now okay I'm that's
+
+
+that's where I'm come back to this
+
+
+domain word okay this is this is pricing
+
+
+domain this is marketing domain this is
+
+
+sales domain let's group it together
+
+
+because it belongs together the same
+
+
+people in the real business when humans
+
+
+do that it's the same people you do the
+
+
+same things those are specific roles
+
+
+um uh what what Scott explained as if
+
+
+the mix in active record and using
+
+
+callbacks and you know you have to test
+
+
+everything I agree with this totally
+
+
+that you you prefer to decouple it uh
+
+
+callbacks are usually to me assigned
+
+
+that there is actually a process uh from
+
+
+domain driven design well there's a
+
+
+process also in the business meaning we
+
+
+try because in reality we have this
+
+
+magic one-liner called after create so
+
+
+we use it because it's just one line of
+
+
+code but actually it's a big concept
+
+
+behind it and we just throw a bunch of
+
+
+after creates together thinking that
+
+
+okay I have this one small class called
+
+
+whatever and then just four lines of
+
+
+after create I'm done but actually what
+
+
+you did was try to hit hide some
+
+
+complexity in four lines of code yeah
+
+
+and the the way to the the way
+
+
+the way to find out the way to
+
+
+understand whether your system is is
+
+
+great or garbage
+
+
+not garbage maybe that's a little strong
+
+
+trash
+
+
+um the way the way the way to know
+
+
+whether or not you're you're going to
+
+
+have you have the productivity that you
+
+
+should have
+
+
+or you're missing that productivity
+
+
+because maybe you just haven't thought
+
+
+of that yet
+
+
+is to examine the setup code in your
+
+
+tests
+
+
+the setup code in your test will tell
+
+
+you whether you have a high quality
+
+
+system or a low quality system the whole
+
+
+point of tdd is not the lines that say
+
+
+expect that or should equal or anything
+
+
+those are just checks
+
+
+the point of tdd is the setup code
+
+
+the more things you have to set up
+
+
+the lower quality your system is the
+
+
+whole point and the problem is when when
+
+
+developers get a hold of a tool they go
+
+
+all nuts for the tool like it turns on a
+
+
+part of our mind that like it's like
+
+
+what Nathan was saying this morning it's
+
+
+that part of us that likes playing with
+
+
+toys
+
+
+so if you're a developer who likes toys
+
+
+you're highly susceptible to being being
+
+
+distracted by all the wrong things
+
+
+because things like Tailwind can be
+
+
+really fun to play with but from a
+
+
+fundamental design principles
+
+
+perspective couldn't be more wrong
+
+
+s has a ton ton of things like this fat
+
+
+model skinny controller was a very
+
+
+interesting idea and we and our the the
+
+
+the playful part of our minds latched
+
+
+onto that but fat model skinny
+
+
+controller can be proven by simple math
+
+
+to be absolutely wrong but we did it
+
+
+well the community did it for years so
+
+
+that thing that is in test tools that's
+
+
+the toy
+
+
+and we like the test tools and we like
+
+
+playing with and experiencing those
+
+
+tools but that's play that's not
+
+
+engineering engineering doesn't derive
+
+
+pleasure from play
+
+
+engineering isn't fun it's satisfying
+
+
+it's rewarding but if you're getting fun
+
+
+from your job
+
+
+great but be really careful it means
+
+
+that there's a part of your mind that's
+
+
+just been shut off and it's the part of
+
+
+your mind that needs to be critically
+
+
+thinking and when you look at test code
+
+
+like I see like you know work with
+
+
+developers all the time we're very happy
+
+
+about their tests and what what's
+
+
+happening is they're very happy
+
+
+they've been made Happy
+
+
+the reasons they've been made Happy are
+
+
+the wrong reasons because if if you look
+
+
+at the setup code in the average code
+
+
+base you'll basically see all the
+
+
+symptoms that you need to see to
+
+
+understand that there's that there's
+
+
+fundamental design problems the problem
+
+
+is that as long as we sit with our tests
+
+
+and I agree with this argumentation uh
+
+
+is uh you can see set up for I don't
+
+
+know inventory when we're actually what
+
+
+you want to test is pricing
+
+
+um
+
+
+yeah but as developers we don't really
+
+
+see this as a problem and my um
+
+
+my thinking usually goes this way that
+
+
+we should show our tests to the business
+
+
+people and suddenly they will detect
+
+
+that what the are you doing here we
+
+
+are talking we are meant to talk about
+
+
+pricing while you're showing me some
+
+
+lines of code of inventory like what's
+
+
+wrong with your system in general
+
+
+because in the business uh they would
+
+
+actually care a lot about separating
+
+
+certain divisions not not all of them
+
+
+but okay certain divisions like
+
+
+different people work in inventory don't
+
+
+want them to be included in uh let's
+
+
+Okay pricing let's say it's completely
+
+
+different concepts it just they
+
+
+shouldn't even be bothered about this
+
+
+and and to this point without events
+
+
+and I think here probably were on the
+
+
+same page without events as the
+
+
+decoupling mechanism we are not able to
+
+
+separate those Concepts yeah
+
+
+the the only thing and this actually
+
+
+isn't pushback I agree with what you
+
+
+said but
+
+
+to to elaborate on that example of why
+
+
+am i setting up inventory data when I'm
+
+
+trying to test pricing
+
+
+the way that this can kind of transpire
+
+
+or play out in reality in rails apps is
+
+
+often really subtle uh but you'll have
+
+
+one product model for a product model to
+
+
+be valid it needs to have inventory data
+
+
+and pricing data and as a result in your
+
+
+in your test setup you're having to the
+
+
+these these different uh pieces of data
+
+
+have to be synthesized but if you're
+
+
+using something like Factory uh Factory
+
+
+bot it's it's already been hidden
+
+
+the minute developers add the validation
+
+
+requirements for inventory data they're
+
+
+gonna to make the test pass they're
+
+
+going to go to the factory bot
+
+
+definition for the product and they're
+
+
+going to add inventory data so it can be
+
+
+very uh there's a there's a whole lot of
+
+
+stuff in rails a whole lot of patterns
+
+
+and tools that are specifically designed
+
+
+to conceal all of that coupling that
+
+
+that we're that we're talking about
+
+
+eliminating through events so I just
+
+
+wanted to add that yeah almost every
+
+
+release tutorial you will see is
+
+
+actually broken at the design level
+
+
+because once they show a list of
+
+
+products with the name and the price
+
+
+together and validate them kind of
+
+
+together it's already wrong it's already
+
+
+drawing design
+
+
+and I don't want to blame anyone but I
+
+
+suppose 90 of the projects that are on
+
+
+this venue is wrong
+
+
+because it's basically like I suppose
+
+
+all of us have projects where you have
+
+
+active record where you have like those
+
+
+many Concepts mixed together so and the
+
+
+design is just wrong I thought we were
+
+
+gonna tell each other we're wrong I
+
+
+didn't realize we were going to tell the
+
+
+audience they were wrong I'm good with
+
+
+that I'm good with that I like where
+
+
+this has added you're all wrong
+
+
+and you need to hire Arkansas
+
+
+for as long as possible and as soon as
+
+
+possible
+
+
+okay point taken
+
+
+and if you're in North America you can
+
+
+hire brightworks but we have a treaty
+
+
+it's up the Atlantic and we're not
+
+
+allowed in each other yeah when a client
+
+
+comes to us and says rewards vocabulary
+
+
+we send them to we send it
+
+
+yeah what can we talk about more about
+
+
+specific tools like how you want to
+
+
+mention even tight how it works like
+
+
+okay because I think there's one area
+
+
+where I think we maybe there was a
+
+
+misunderstanding between us maybe it's
+
+
+actually very different because the way
+
+
+you're using the word microservice I
+
+
+think is different than the everyone in
+
+
+else in the world thank God so let's go
+
+
+thank God we don't have to use the term
+
+
+microservices anymore autonomous what's
+
+
+that autonomous yeah exactly wow that
+
+
+that's yeah that's that's about because
+
+
+it used to be the case that when you
+
+
+showed Eventide uh maybe it was just
+
+
+accident but okay that was the
+
+
+impression that was built that you were
+
+
+kind of relying on separating your
+
+
+components by Network let's call it this
+
+
+maybe I'm not sure I think many examples
+
+
+were showing this at least building this
+
+
+impression that you were quite far in
+
+
+this okay we are going microservices in
+
+
+the broad meaning in the popular meaning
+
+
+and when the release event store
+
+
+approach is basically relying on the
+
+
+realist monolithic approach one database
+
+
+okay
+
+
+yeah you actually do use one data oh
+
+
+yeah sure yes we use multiple schemas in
+
+
+the database but I mean having multiple
+
+
+databases is often a performance so you
+
+
+use the micro services in the popular
+
+
+meaning but you use one database under
+
+
+the
+
+
+um I use microservices in the original
+
+
+meaning which
+
+
+um having been there at the start of
+
+
+microservices and before that it used to
+
+
+be called service-sonite architecture
+
+
+but there was problems with service
+
+
+Orient architecture Microsoft and IBM
+
+
+and Oracle got involved and they turned
+
+
+it into a great big pile of tools
+
+
+so microservices the only reason that
+
+
+the term micro is in microservices I
+
+
+remember all these articles like how
+
+
+small is a microservice like that's not
+
+
+what that means the micro and
+
+
+microservices just means that IBM
+
+
+Microsoft and Oracle are not involved
+
+
+like it literally is like Biz talk is
+
+
+not involved the micro is a a smaller
+
+
+footprint of Enterprise tools and then
+
+
+it's like then web developers got into
+
+
+it and it was basically web developers
+
+
+said Well microservices Services
+
+
+it's probably HTTP right I mean what
+
+
+else could it be there's nothing else in
+
+
+the universe
+
+
+that's the problem of not knowing a lot
+
+
+about software that's a problem of using
+
+
+tools that consume all your spare time
+
+
+so that you can't learn other things
+
+
+um
+
+
+web developers heard microservices and
+
+
+recreated a failure Mode called
+
+
+web web services like we'd already
+
+
+proved that web services were a bad idea
+
+
+and then a new generation of developers
+
+
+thought they invented something great
+
+
+and basically what you develop what
+
+
+you've discovered was a rotting corpse
+
+
+that we didn't bury deep enough in the
+
+
+ground to avoid you fine you mean corba
+
+
+was a bad idea what's that korba was a
+
+
+better idea and deposit well yeah I know
+
+
+exactly I'm old yeah yeah yeah no right
+
+
+yeah yeah but court corba was basically
+
+
+like
+
+
+and it's funny where a soap and web
+
+
+services reinvented corba so
+
+
+yeah it's just this failure mode again
+
+
+and again microservices the the the it's
+
+
+not the right way to do microservices
+
+
+the right way to do software is the way
+
+
+that lets you go a lot faster than you
+
+
+go now and that means Loosely coupled
+
+
+it means
+
+
+lack of entanglement between Parts it
+
+
+means that it's organic like if you go
+
+
+for a surgery on your and hopefully you
+
+
+don't but if you go for surgery on
+
+
+something in your body like a kidney
+
+
+we can do that because the kidney is
+
+
+separate from hopefully from the lungs
+
+
+but if it's a if it's a cockroach
+
+
+or a worm it's really hard to see the
+
+
+distinction between the kidney and the
+
+
+and the and the lungs it's just oh uh
+
+
+well maybe if some maybe somebody's like
+
+
+a worm scientist is going to correct me
+
+
+but it's just a pile of goo like you
+
+
+can't do a heart transplant on a worm
+
+
+because there's no heart there that's
+
+
+that's entanglement that's why it's so
+
+
+hard for everybody to manage their
+
+
+monolith that's why monolith was never a
+
+
+good idea ever
+
+
+um and monoliths can't be turned into
+
+
+into service architectures because
+
+
+they're already just this pile of goo in
+
+
+order to separate things they already
+
+
+have to be separate you have to start
+
+
+separate just to translate for the
+
+
+audience When you mention monolith you
+
+
+mean no bond No Boundaries No Boundaries
+
+
+right yeah right so here we understand
+
+
+monolitas no network
+
+
+between components
+
+
+I see what you're how you yeah I see her
+
+
+using network now yeah for sure
+
+
+um God uh what was the we were talking
+
+
+about entanglement I was talking about
+
+
+entanglements about worms and how it
+
+
+represents worms
+
+
+SOA right so microservices
+
+
+um yeah I don't like yeah we don't wanna
+
+
+I'm glad that that microservices is a
+
+
+word we don't have to use anymore
+
+
+because it got so twisted and so
+
+
+misrepresented that it was that period
+
+
+between like when Eventide was well that
+
+
+period between like 2013 and 2020 2023
+
+
+where microservices like was really
+
+
+popular and now everybody's like oh
+
+
+microservices that was a mistake it's
+
+
+like well what web developers thought
+
+
+microservices was was a mistake it's
+
+
+been a mistake since the 1980s
+
+
+um and now we can just go back to saying
+
+
+autonomous components okay and so when
+
+
+we're going to change like we're you're
+
+
+going to see like all the microservices
+
+
+mentions in in our documentation
+
+
+materials be removed because thanks okay
+
+
+finally that's a failure I still mean
+
+
+the actual meaning of this and the
+
+
+reload uh
+
+
+we kind of agreed that pricing inventory
+
+
+are different concepts they kind of
+
+
+should be separated but now okay uh
+
+
+would you in your implementation there
+
+
+is no scalabit scalability requirements
+
+
+to manage your performance issues would
+
+
+you hide those components behind HTTP or
+
+
+create almost never okay okay because
+
+
+that was my impression for a long time
+
+
+so thanks for clarifying this yeah I
+
+
+mean it's it's not needed
+
+
+okay um once so we have you know we have
+
+
+hdp by the by the way like we don't
+
+
+avoid rails there's no like you're in
+
+
+Ruby we like Ruby we want to work in
+
+
+Ruby we built Eventide and Ruby Ruby's
+
+
+the right language for for what we do
+
+
+um
+
+
+but if you're in Ruby and you're and
+
+
+you're building anything with HTTP and
+
+
+you're not using rails then you're
+
+
+probably building a lot of custom stuff
+
+
+uh that don't that you don't have to
+
+
+build so yeah all of our apps run run on
+
+
+Rails we just don't have a monolith
+
+
+um and as soon as possible we get out
+
+
+like the H rails for us is a web server
+
+
+the web request comes in we deal with it
+
+
+and we get out of rails as quickly as
+
+
+possible by recording a message by
+
+
+recording an instruction on a message
+
+
+queue or recording a uh the result of
+
+
+processing an instruction on a message
+
+
+queue but we get out of rails as quickly
+
+
+as possible
+
+
+um that's that's literally not a
+
+
+performance thing it's basically a human
+
+
+thing we don't want a lot of code in
+
+
+rails because a lot of code and rails
+
+
+tends to go really bad and tends to
+
+
+become the anchor that slows down or
+
+
+buries or drowns a team so it's still
+
+
+like it's still like incredibly
+
+
+important like we're not anti-rails
+
+
+we're just anti-dum
+
+
+Community I have great hope for the
+
+
+rails Community I just think you know we
+
+
+need to start listening to people who
+
+
+understand software design and not
+
+
+people who are cute
+
+
+sorry Nathan
+
+
+no offense to the Q people I'm good with
+
+
+nobody listening to me
+
+
+okay I think it's time to wrap up time
+
+
+is oh the next talk is coming uh would
+
+
+you like to have some final words anyone
+
+
+that's good
+
+
+I don't think anybody needs to hear from
+
+
+me
+
+
+I think I have to add a dictionary to
+
+
+translate from Scott's vocabulary and to
+
+
+adopt autonomous for bounded contacts
+
+
+inside the monolith to
+
+
+to show that we probably mean the same
+
+
+but use different vocabulary and maybe
+
+
+on the code level we would agree at some
+
+
+point yeah there's there's a whole other
+
+
+conversation there about how how to
+
+
+organize a system and we organize our
+
+
+system around behaviors and around
+
+
+processes rather than rather than orm
+
+
+and end data and data data we just treat
+
+
+data as a side effect so we don't
+
+
+actually have to worry about all the
+
+
+stuff from domain driven that
+
+
+domain-driven design is concerned about
+
+
+by the way domain driven design is
+
+
+almost always concerned with orm
+
+
+no completely not that's interesting
+
+
+maybe it was like that 20 years ago are
+
+
+you doing active record
+
+
+with DDD only for read models which is
+
+
+totally somewhere else so no damn it I
+
+
+thought I had you in a trap but I I
+
+
+doubt I think that's my impression that
+
+
+the world also kind of um for you guys I
+
+
+get it because you're sorry because you
+
+
+are like already in in the in the event
+
+
+uh in the event world but I think in
+
+
+general when people are working with DDD
+
+
+they're they're they're they're they're
+
+
+struggling with problems that are are
+
+
+orm problems yeah I shared all against
+
+
+the orms for business logic
+
+
+it's a problem yeah so all that
+
+
+partitioning and that boundary stuff
+
+
+that's all about relational databases
+
+
+and associations and it's unfortunate
+
+
+because let's say in real sport there
+
+
+are some other movements let's say for
+
+
+example there's a big initiative called
+
+
+ROM which is kind of something like
+
+
+active record but let's say better but I
+
+
+think it just shares the same problems
+
+
+in general because it still tries to be
+
+
+an orm to implement business logic
+
+
+within our um yeah the problem with orms
+
+
+is they're very prone to being like that
+
+
+worm with no with no separation no
+
+
+boundaries between the organs everything
+
+
+is entangled
+
+
+um there's there's no difference between
+
+
+one organ and another organ I'm sad that
+
+
+we agree on so much actually
+
+
+yeah I was gonna say well we've only
+
+
+been talking for an hour like if we get
+
+
+if we if we go on I'm sure we can we can
+
+
+disagree like I think we disagree I
+
+
+think I disagree on a lot well you're
+
+
+still wrong with the aggregate but okay
+
+
+but uh like I think if we looked in
+
+
+detail about the way we Design Systems
+
+
+and designing it around
+
+
+processes
+
+
+actually I can't say that I don't know
+
+
+how you Design Systems I've just made a
+
+
+I'll admit I've made a huge presumption
+
+
+that isn't uh isn't validated by
+
+
+anything other than my own prejudice
+
+
+so
+
+
+I'm sorry if that's wrong and if I'm
+
+
+right
+
+
+I'm right I mean yeah I think we both
+
+
+are busy with our own projects so it's
+
+
+probably we don't look at each other
+
+
+enough to understand where you're going
+
+
+where we are going so that's normal yeah
+
+
+it's like we could have a whole Summit
+
+
+just on Eventing and uh that would be a
+
+
+good thing to do
+
+
+I still think the real battle is the
+
+
+rails way versus a real versus versus
+
+
+the design way yeah
+
+
+[Music]
+
+
+the rails way is basically a bunch of
+
+
+shortcuts that disregard
+
+
+the fundamental laws of structural
+
+
+design
+
+
+on the proposition that if you do that
+
+
+your work will be really fast and what
+
+
+you get is your work is fast for two
+
+
+weeks to three months and then it's hell
+
+
+and it's ten times slower than it ever
+
+
+should have been and your life should
+
+
+have been a lot better so if you if you
+
+
+what's the old expression if something
+
+
+seems too good to be true it probably is
+
+
+that's blog in 10 minutes that's rails
+
+
+watch out further look at the code you
+
+
+didn't have to write it's like the what
+
+
+really matters is look at the mistakes
+
+
+you're making that you didn't that you
+
+
+don't know that if you don't know what a
+
+
+mistake is in software design you're
+
+
+gonna you're gonna experience a lot of
+
+
+pain learn what mistakes are in software
+
+
+design and take them very seriously and
+
+
+understand that they're that they have
+
+
+that they happen at an atomic level not
+
+
+a visible level
+
+
+you'll learn to create to put on a more
+
+
+powerful lens cancer starts with a cell
+
+
+but you can't see it with your eyes
+
+
+you're not gonna be able to see software
+
+
+design mistakes with your with with your
+
+
+naked eye early in the existence of that
+
+
+of that uh uh a mistake you have to look
+
+
+at secondary effects
+
+
+um to understand that you've got
+
+
+mistakes and the problem is we're doing
+
+
+really really crude things looking to
+
+
+see something the size of a cell
+
+
+something the size of a molecule with
+
+
+our naked eye and not seeing it deciding
+
+
+that there is no problems
+
+
+right we're trying to finish right yeah
+
+
+uh okay maybe just as a summary from my
+
+
+side I'm I'm happy that I met someone
+
+
+more radical than me
+
+
+uh I I agree with quite a lot of what
+
+
+you're saying I think with my approach
+
+
+to release applications and to the rails
+
+
+world is to accept the reality that it
+
+
+is like it is
+
+
+um I'm trying to fight my battle as well
+
+
+uh however with the rails even store
+
+
+approach and the tool we kind of
+
+
+accepted that there are many
+
+
+applications out there which are crowd
+
+
+which are rail its way which are wrong
+
+
+and to what your focus is not to make a
+
+
+perfect design in the end it's it would
+
+
+be great we just are focused on small
+
+
+steps which are getting to better design
+
+
+and I mean you you you have a Noble
+
+
+business
+
+
+um we don't ever work on existing
+
+
+applications unless we're there to only
+
+
+do that yeah we only work on New on new
+
+
+systems I haven't worked on a legacy
+
+
+System since a long time even when I
+
+
+went to work on Legacy systems I
+
+
+convinced the company to replace them so
+
+
+I I don't do I I just don't do that we
+
+
+work on clean code from the start all
+
+
+the time and it's necessary for the
+
+
+kinds of work we do
+
+
+um
+
+
+that's a very big that's a very big
+
+
+factor not competing yeah yeah right no
+
+
+exactly like that's that's a big that's
+
+
+a big factor for Eventide like when you
+
+
+try to cram P cram Eventide into Legacy
+
+
+application I would say that's like as
+
+
+much as that harms me for saying don't
+
+
+adopt our tools that's a very you're
+
+
+you're that's you're that's you're
+
+
+playing with fire that's a date like
+
+
+know what you're doing before you do
+
+
+that because that could be really
+
+
+harmful to your company or your project
+
+
+so
+
+
+yeah okay my summary would be don't
+
+
+design your system like it's one cell
+
+
+organism and have make sure that they
+
+
+have visible organs within it
+
+
+[Music]
+
+
+I got nothing okay
+
+
+thank you guys it was interesting to
+
+
+discuss and thanks for the answer thank
+
+
+you
+
+
+[Applause]

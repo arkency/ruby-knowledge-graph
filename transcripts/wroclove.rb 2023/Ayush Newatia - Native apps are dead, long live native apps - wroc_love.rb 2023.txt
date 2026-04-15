@@ -1,0 +1,2563 @@
+hey
+
+
+um
+
+
+[Applause]
+
+
+um thanks yeah um as mentioned I'm
+
+
+talking about uh turbo native today so
+
+
+let's just quickly cover what's going to
+
+
+be uh on the agenda
+
+
+so the first thing is we'll um talk
+
+
+about what what a hybrid app actually is
+
+
+just to make sure we're all on the same
+
+
+page about hybrid technology then uh
+
+
+we'll discuss how they got such a bad
+
+
+rap because uh I don't know for some
+
+
+reason the the tech industry does seem
+
+
+to hate hybrid apps so uh we will talk
+
+
+about how this may have happened
+
+
+um and see why it may not be true
+
+
+um we'll talk about what turbo native is
+
+
+um it's back go Back to Basics and just
+
+
+talk about what it is and a method of
+
+
+getting hybrid apps right because they
+
+
+have such a bad rap in the industry for
+
+
+a reason so there is a very easy wrong
+
+
+way of doing it so we'll talk about how
+
+
+we can get them right
+
+
+um before diving in uh the obligatory
+
+
+about me slide my name is ayush as I
+
+
+said and I'm I live in London and that's
+
+
+my little avatar on all my social
+
+
+profiles um not quite that rock and roll
+
+
+in in reality but I'm a lot to
+
+
+exaggerate on the internet so I went
+
+
+with the
+
+
+yeah no that's I can't do that in real
+
+
+life uh I used to be a mobile developer
+
+
+for five years and then in 2020 I
+
+
+switched to
+
+
+um Ruby and rails and now um I'm a
+
+
+freelancer and I specialize in mainly
+
+
+building websites with Ruby and rails as
+
+
+well
+
+
+um that's my freelance business
+
+
+apart from my job I have many fingers in
+
+
+in many different pies so one of the
+
+
+things I do is I I co-host a podcast
+
+
+with a friend of mine called Jared it's
+
+
+called Justice spec it's a podcast about
+
+
+the the projects the people and the
+
+
+protocols that make the open standard of
+
+
+the internet possible yeah I think
+
+
+something like that you would think I
+
+
+know the tagline for my own podcast but
+
+
+here we are
+
+
+um I'm on the core team of Bridgetown
+
+
+which which is a a progressive site
+
+
+generator we call it it started Life as
+
+
+a fork of Jekyll but it's kind of Taken
+
+
+on its own life now so if you have any
+
+
+Jacqueline you're a bit fed up with it
+
+
+I'd highly recommend checking out
+
+
+Bridgetown
+
+
+and uh finally also run a little uh
+
+
+small Indie web app called scattergun
+
+
+which is like a privacy focused uh
+
+
+mailing list platform all that's kind of
+
+
+on pause at the moment but uh yeah and
+
+
+I've also written a book which some of
+
+
+you I might have uh attacked you with
+
+
+the flyer about this book uh actually
+
+
+realized on the way to the party last
+
+
+night that I opened pre-orders on this
+
+
+book one year ago yesterday so it's a
+
+
+bit of a milestone weekend for me which
+
+
+is quite cool but yeah I think it's the
+
+
+most comprehensive resource on Rails and
+
+
+Hotwire out there so if you're
+
+
+interested in those topics uh please do
+
+
+check it out uh anyway enough about me
+
+
+um let's talk about what a hybrid app is
+
+
+so a hybrid app is one that combines web
+
+
+Technologies like HTML CSS and
+
+
+JavaScript along with Native apis so the
+
+
+degree to which these Two Worlds Collide
+
+
+it um it just depends on what tools you
+
+
+use so like a couple of mainstream tools
+
+
+for hybrid apps are Cordova which used
+
+
+to be called phonegap and and react
+
+
+native these are like what most people
+
+
+would dissociate with hybrid apps and uh
+
+
+we'll talk about these a bit more um uh
+
+
+in a bit but now let's take a rather
+
+
+sizable detour uh into the Chinese Hills
+
+
+and
+
+
+um where a long time ago there used to
+
+
+be a monastery where a distinguished
+
+
+Taoist Guru used to live with his
+
+
+disciples and every evening the monks
+
+
+would Gather in the in the Great Hall to
+
+
+listen to their leaders teachings and to
+
+
+meditate but there was a problem
+
+
+um a cat had adopted that Monastery as
+
+
+its home
+
+
+and um every evening it would follow the
+
+
+monks into this Great Hall where it
+
+
+would mule it was scratch it was just
+
+
+generally be annoying during the the
+
+
+silent meditation
+
+
+um eventually the teacher got so fed up
+
+
+of this that he instructed the monks to
+
+
+um put put a collar on the cat and
+
+
+tether it to the far side of the
+
+
+monastery so that way it wouldn't
+
+
+disturb their meditation and for a while
+
+
+this worked well every evening the the
+
+
+teacher the monks the the cat would just
+
+
+go about their nightly routine without
+
+
+any issue until one day that the learner
+
+
+teacher died
+
+
+but the monks they continued to tie up
+
+
+the Cat every evening uh until one day
+
+
+the cat died so what the monks did was
+
+
+they went down to the nearest Village
+
+
+and they bought a replacement cat and
+
+
+they tied that up every evening instead
+
+
+um two centuries later
+
+
+religious Scholars write learned essays
+
+
+on the importance of tying up a cat
+
+
+priority evening meditation
+
+
+this is um this is an ancient Buddhist
+
+
+tale called the tale of the tethered cat
+
+
+and it serves to explain uh principles
+
+
+that have outlived the conditions that
+
+
+created them now Tech loves a tethered
+
+
+cat like uh this is this is my personal
+
+
+favorite does this sound well uh
+
+
+Christian kind of stole my Thunder by
+
+
+basically making this a centerpiece of
+
+
+his talk yesterday so I think uh I think
+
+
+you can all agree with me this is
+
+
+complete bollocks
+
+
+um but yes I think um this stuff gets so
+
+
+ingrained in the industry and I think um
+
+
+the notion that hybrid apps are bad I
+
+
+think is another tethered cat
+
+
+um so like I've heard so many things
+
+
+over the years like hybrid apps are slow
+
+
+uh hybrid apps they don't look native
+
+
+they're even insecure and it's just like
+
+
+how did this become so ingrained in the
+
+
+industry
+
+
+um and I have one Theory well I think
+
+
+the foundation was laid by this
+
+
+um Mark Zuckerberg in 2012 said the
+
+
+biggest mistake we've made as a company
+
+
+is betting on HTML5 over native and of
+
+
+course if Lord Zuckerberg says it it
+
+
+must be true right
+
+
+uh I mean Facebook I think rewriting
+
+
+that the HTML app in you know using
+
+
+fully native Tech and then shouting
+
+
+about it I think it laid the foundation
+
+
+for for this myth
+
+
+um so I think that's one thing and then
+
+
+the other thing is is the tools that I
+
+
+mentioned earlier uh Cordova and um
+
+
+react native now
+
+
+both these tools rely on one philosophy
+
+
+which is you have one shared code base
+
+
+between your two platforms now that
+
+
+doesn't work that has never worked that
+
+
+will never work does anyone remember
+
+
+Java apps like
+
+
+yeah exactly someone remembered
+
+
+um one of the last time you encountered
+
+
+a truly delightful electron app it just
+
+
+you you can't share one code based
+
+
+between two platforms it doesn't work on
+
+
+top of that Cordova also kind of it
+
+
+builds your entire apps UI in HTML CSS
+
+
+and JavaScript now IOS and Android have
+
+
+um pre-deferring platform standards so
+
+
+you can't really have one standard UI
+
+
+between the two of them the
+
+
+um the users just won't get a familiar
+
+
+experience and it just won't feel like
+
+
+like an app it'll just feel like a
+
+
+website in a box and that's just a bit
+
+
+of a crap user experience
+
+
+um so that's kind of like why I don't
+
+
+think Cordova is a good idea react
+
+
+native I think the less I say about it
+
+
+is probably best otherwise the stocks
+
+
+just gonna turn into a rant so instead
+
+
+I'm just going to show you what the the
+
+
+former lead developer of react native
+
+
+used to have in his Twitter bio it says
+
+
+partly to claim for react native sorry I
+
+
+mean that just is more than than I ever
+
+
+could so anyway let's just uh move on
+
+
+and um think we let's agree that these
+
+
+tools are not that great and I think
+
+
+between these tools and um and Mark
+
+
+Zuckerberg's quote back in 2012 I think
+
+
+we we established a textbook tethered
+
+
+cat
+
+
+um but before we look at why these
+
+
+presumptions may not be uh quite valid
+
+
+in 2023 let's take another detour this
+
+
+time uh we'll go into the English
+
+
+Countryside
+
+
+and they there was a man who had a long
+
+
+way to walk to work and
+
+
+um every day you would have to go a long
+
+
+way out of his way because there was a
+
+
+hedge that blocked the Bose direct route
+
+
+so every day in the morning you would
+
+
+walk a mile further than you had to and
+
+
+then again in the evening and you have
+
+
+to walk like an extra hour every day and
+
+
+every day you would think that oh if
+
+
+only that hedge was in there I could
+
+
+save myself an hour walking every day uh
+
+
+eventually he'd had enough and he made a
+
+
+hole in the Hedge so he could walk the
+
+
+most direct route
+
+
+and that was the day that the bull that
+
+
+lived on the other side of the Hedge
+
+
+killed him
+
+
+um Howard Texas Longhorn bull found its
+
+
+way in the English Countryside I'll
+
+
+leave up to your imagination but it's
+
+
+it's fiction let's just roll with it
+
+
+um so this tale was established by a
+
+
+British philosopher and writer called GK
+
+
+Chesterton and it's called chesterton's
+
+
+fence and he used it to explain that we
+
+
+shouldn't remove a rule before fully
+
+
+understanding why it was first put into
+
+
+place and all the effects that its
+
+
+presence has I think this is a great
+
+
+Counterpoint to the tailor the tethered
+
+
+cat where we shouldn't just willy-nilly
+
+
+throw through rules away just because we
+
+
+uh we don't think they apply anymore
+
+
+let's try to understand why these rules
+
+
+were established so let's try to
+
+
+understand the circumstances around
+
+
+which this rule that hybrid apps are bad
+
+
+was established so Mark Zuckerberg's
+
+
+quote was from 2012 which is um 11 years
+
+
+ago the world of mobile JavaScript
+
+
+performance was very different back then
+
+
+like I I went through my drawers and I
+
+
+found an old iPhone 6 and I run a
+
+
+speedometer test on it and that's the
+
+
+score I got 24.8 and that's still two
+
+
+years newer than when Mark Zuckerberg
+
+
+was slandering hybrid Tech and then I
+
+
+ran the same test on my current phone
+
+
+which is an iPhone 13 mini and this was
+
+
+the score that it got now that is just
+
+
+unreal like what a ridiculous jump in
+
+
+performance in just 11 years
+
+
+um okay granted we're looking at a 600
+
+
+top of the line phone here but
+
+
+um I after I got these results I just
+
+
+assigned messaging friends and family
+
+
+who have Android phones and said can you
+
+
+run this test and tell me what you got
+
+
+and anecdotally you'd still get scores
+
+
+about between 60 to 100 on speedometer
+
+
+um okay this is not scientific data
+
+
+obviously because I've just met with
+
+
+some friends and family but I think
+
+
+you're still looking at like a 3X
+
+
+Improvement on 2014 in in Mobile
+
+
+JavaScript performance which
+
+
+um which is still absolutely staggering
+
+
+so I think I think the uh the world now
+
+
+is quite different from uh back when
+
+
+hybrid ads developed their bad rap so I
+
+
+think it's what
+
+
+um reconsidering this approach and
+
+
+trying it again and seeing whether it
+
+
+works
+
+
+so when should we go hybrid because
+
+
+obviously it's a cliche but they're not
+
+
+a silver bullet they're not right for
+
+
+every scenario I think they work best
+
+
+when you have a um when the Beating
+
+
+Heart of your app is a server rendered
+
+
+web app that speaks HTML Cs and
+
+
+JavaScript preferably if you're using
+
+
+like a full stack framework like rails
+
+
+laravel or Django uh that's when I think
+
+
+a hybrid app makes the most sense
+
+
+um if you're building something like
+
+
+like an Uber which needs like quite deep
+
+
+native integration
+
+
+um
+
+
+may not even need a web app then that's
+
+
+probably where hybrid is the wrong route
+
+
+that's when you want to go fully native
+
+
+so it really just depends on um on on
+
+
+the use case
+
+
+um well why should we go hybrid
+
+
+the biggest Advantage is you get to
+
+
+reuse all your views from the web app so
+
+
+HTML CSS JavaScript from your web app
+
+
+you can just reuse all of them because
+
+
+if you're building fully native apps
+
+
+then
+
+
+um
+
+
+you have to rebuild every single screen
+
+
+three times now for small teams that
+
+
+just really hard for individuals it's
+
+
+impossible so it's a huge competitive
+
+
+Advantage if you could
+
+
+reuse your views across all three
+
+
+platforms
+
+
+um because it's High videos have one
+
+
+foot firmly in native land so you can
+
+
+still use your native apis like push
+
+
+notifications Maps contacts all that
+
+
+everything that makes an app and app you
+
+
+can still use all of that so
+
+
+that's really cool because you kind of
+
+
+get Best of Both Worlds up to a point
+
+
+um and I think one of the biggest
+
+
+advantages you can push updates remotely
+
+
+uh from the web app
+
+
+um
+
+
+obviously there's a limit to what you
+
+
+can do but you'd be surprised after you
+
+
+kind of hit a level of stability with
+
+
+your native code
+
+
+um you can push pretty significant stuff
+
+
+by just making a server deploy and
+
+
+um yeah this for now is perfectly legal
+
+
+under App Store regulations who knows
+
+
+whether they'll change their mind in the
+
+
+future but it's still a pretty big
+
+
+Advantage so let's dig into how we go
+
+
+about all of this now let's talk about a
+
+
+better approach to build hybrid apps
+
+
+well the main thing is you want separate
+
+
+code bases for IOS and Android like I
+
+
+said earlier you don't want to share a
+
+
+code base it just doesn't work so create
+
+
+a native app backbone using fully native
+
+
+text you would use xcode you would use
+
+
+Android studio and Swift and kotlin just
+
+
+to build like a native backbone and
+
+
+within that you render web content so
+
+
+this is what it looks like so you have
+
+
+your navigation bar and the tab bar all
+
+
+like similar components depending on
+
+
+what your ux is which are fully native
+
+
+but the actual con content of the screen
+
+
+is just a webview which renders HTML
+
+
+content so that way your app kind of
+
+
+becomes like a custom web browser in a
+
+
+way and the real Advantage is all the
+
+
+stuff that you can expect uh what a
+
+
+platform like what an app on a given
+
+
+platform should look like you just get
+
+
+for free like on iOS you can expect
+
+
+screens to transition in a in a certain
+
+
+way you expect to be able to swipe from
+
+
+left to right to go back a step all that
+
+
+stuff just works because the navigation
+
+
+and the backbone is um is all fully
+
+
+native so you get all that for free so
+
+
+yeah the app looks like an app and not
+
+
+like a website in a box and this is
+
+
+where Turbo native kind of comes into
+
+
+the picture that's where it can help
+
+
+um
+
+
+so what is Turbo native well it's part
+
+
+of the Hotwire Suite of tools which is a
+
+
+set of Open Source front-end tools uh by
+
+
+37 signals and uh the third one third of
+
+
+The Suite is Turbo which is a JavaScript
+
+
+library and it's extended by Turbo
+
+
+native
+
+
+the second part is stimulus which is a
+
+
+purely JavaScript library which is uh it
+
+
+gives you a way to kind of attach pieces
+
+
+of JavaScript logic encapsulated in the
+
+
+form of controllers to any HTML elements
+
+
+and the third part is strata which
+
+
+hasn't been released yet it's going to
+
+
+be released at rails world at the
+
+
+beginning of October so there's not a
+
+
+lot known about what exactly it is but
+
+
+it's something to do with hybrid apps it
+
+
+kind of enhances uh turbo native in some
+
+
+way we'll find out more in October
+
+
+so let's look closely at uh turbo native
+
+
+it's a native Library file it's an
+
+
+Android so it doesn't share a code base
+
+
+or anything it's not JavaScript it's
+
+
+written in Swift and iOS and kotlin on
+
+
+Android so conceptually the library is
+
+
+very similar across both platforms like
+
+
+if you read the code base a lot of like
+
+
+the jargon will instantly make sense but
+
+
+because it's implemented using platform
+
+
+specific design patterns using Swift and
+
+
+kotlin the implementation is actually
+
+
+quite different and I think that kind of
+
+
+goes back to my earlier point that you
+
+
+shouldn't share a code base between the
+
+
+two platforms so this I think it kind of
+
+
+uh goes with with that particular
+
+
+philosophy and it extends turbo
+
+
+specifically turbo drive on the web if
+
+
+you've used rails you're probably
+
+
+familiar with turbo or at least it's
+
+
+predecessor table links but but if
+
+
+you're not let's just talk about what it
+
+
+is because it's kind of critical to how
+
+
+turbo native works so turbo drive on the
+
+
+web it's a JavaScript library it will
+
+
+intercept a link click so when you click
+
+
+on a link it'll intercept that in
+
+
+JavaScript and then it will make it'll
+
+
+make a fetch request to the destination
+
+
+and then it'll just swap the body
+
+
+element out uh with with the response
+
+
+and it'll also update the URL with the
+
+
+push date API so this gives you quite a
+
+
+lot of performance benefits because uh
+
+
+you know you know kind of downloading
+
+
+all the JavaScript and Cs and all that
+
+
+stuff again you just swapping the body
+
+
+element out and it also kind of makes
+
+
+your app feel a bit more single page uh
+
+
+even though it's a multi-page app so
+
+
+that's uh Turbo Turbo or Turbo Drive
+
+
+specifically on the web
+
+
+um the hottest turbo native augmented
+
+
+this flow well
+
+
+when your app loads a web page for the
+
+
+first time turbo native will install
+
+
+itself as an adapter on turbo web
+
+
+um how does it do that well both IOS and
+
+
+Android have native apis that let you
+
+
+communicate with JavaScript in a webview
+
+
+so it's a two-way pathway with a webview
+
+
+so turbo uses that to install itself as
+
+
+an adapter and it allows turbo native to
+
+
+place itself right in the middle of
+
+
+Turbo's request cycle so now in in a
+
+
+turbo native app when you click a link
+
+
+instead of making just a fetch request
+
+
+it calls a native method in this native
+
+
+method you can make a decision you can
+
+
+either proceed with the default
+
+
+navigation or you can present a fully
+
+
+native screen
+
+
+this is a really cool approach because
+
+
+you you're never all in on on either
+
+
+Camp web or native
+
+
+um you can kind of make a piecemeal
+
+
+approach of it let's say you have an app
+
+
+where there's one single screen where
+
+
+the user spends ninety percent of their
+
+
+time uh you can build out that one
+
+
+screen fully natively so that the user
+
+
+gets the best possible experience for
+
+
+that screen and for the rest of it which
+
+
+is not that heavily used you can still
+
+
+use your web views so it gives you a
+
+
+really fine-grained approach on how
+
+
+Native you want to go and that's really
+
+
+powerful
+
+
+so let's zoom into what is this default
+
+
+navigation uh in in Turbo native well
+
+
+when you click a link the first thing
+
+
+that will happen is you create a new
+
+
+instance of a web View
+
+
+um oh sorry a new instance of a native
+
+
+screen and in that native screen you
+
+
+inject the webview and then finally you
+
+
+use turbo to navigate the webview to the
+
+
+destination and then just present that
+
+
+to the user so the user just sees one
+
+
+seamless transition to the new screen
+
+
+they don't even notice what all this
+
+
+magic is going on in the background
+
+
+um and also you kind of reuse the same
+
+
+instance of the web view across the
+
+
+entire app uh and it's just navigated
+
+
+using turbo so you still get all the
+
+
+performance benefits that the turbo
+
+
+gives you
+
+
+um so let's let's take a look at this uh
+
+
+in in action because uh proofs in the
+
+
+pudding
+
+
+um
+
+
+I that yeah it's a test data but that
+
+
+that looks pretty pretty native to me
+
+
+and that's literally all that's just web
+
+
+content
+
+
+um so yeah that's quite cool now
+
+
+the eagle-eyed amongst you may have
+
+
+noticed this fully native login button
+
+
+um in the top right corner now this is a
+
+
+hybrid app how we rendered a fully
+
+
+native component in a hybrid app well I
+
+
+remember I mentioned earlier that both
+
+
+IOS and Android have native apis that
+
+
+let you communicate with JavaScript and
+
+
+that's how turbo installs itself as an
+
+
+adapter or we can use the same pathway
+
+
+as well nothing stopping us from doing
+
+
+that so we can build a web to Native
+
+
+bridge to send messages from our web app
+
+
+to the native code saying do this thing
+
+
+for me so that's really cool so what you
+
+
+can do is like in in JavaScript you can
+
+
+post messages to your native app and
+
+
+then if you do something like that then
+
+
+this Swift method gets called with that
+
+
+message
+
+
+so now you have some information that
+
+
+your web app has sent in fully native
+
+
+code you can do with that whatever you
+
+
+want
+
+
+um these are the equivalent methods in
+
+
+Android so it's very similar on both
+
+
+platforms and then if you want to go the
+
+
+other way
+
+
+uh you can you can evaluate JavaScript
+
+
+from native code in a webview so all you
+
+
+got to do is just call evaluate
+
+
+JavaScript and give it a script and
+
+
+it'll just evaluate it in the webview
+
+
+and that's how you do it on Android
+
+
+um so it's really powerful when you have
+
+
+this two-way Bridge uh to kind of take
+
+
+the level of fidelity of your app a
+
+
+little bit higher and give it a little
+
+
+bit more and of a native feel
+
+
+so how do we implement this this login
+
+
+button in our hybrid World well the
+
+
+first thing you need to do is we need to
+
+
+render a proxy web element uh that kind
+
+
+of uh acts as a communication bridge for
+
+
+it so we just render
+
+
+um just a simple link uh we attach a
+
+
+stimulus controller to it called uh
+
+
+Bridge element I'll show you what that
+
+
+is in a sec and we just assign some more
+
+
+data attributes that kind of tell will
+
+
+tell the native app what to do with it
+
+
+like in this case it just tells what
+
+
+kind of component it should render it as
+
+
+in the native World
+
+
+um this is what the stimulus controller
+
+
+would look like so the connect method is
+
+
+called when the controller first
+
+
+attaches itself to the Dom so the first
+
+
+thing we do obviously is we make it
+
+
+invisible because we don't want this
+
+
+visible in in the website it's just a
+
+
+proxy element
+
+
+and then we render it so the bridge
+
+
+element class is is just a simple Java
+
+
+class to encapsulate the data attributes
+
+
+that I showed on the previous slide so
+
+
+it's just some syntactic sugar to kind
+
+
+of encapsulate that and it also
+
+
+um it'll use a meta a meta value on the
+
+
+document to determine which platform is
+
+
+running on because the platform the the
+
+
+message it has to construct is sent to
+
+
+the app depends on the platform so just
+
+
+all our Logics kind of encapsulated uh
+
+
+in Bridge element and then we also have
+
+
+this concept of a web Bridge which is
+
+
+just a construct that uses the adapter
+
+
+pattern to call the correct native API
+
+
+because the API they look slightly
+
+
+different on IOS and Android to send
+
+
+messages so it just uses the adapter
+
+
+pattern to call the right one and then
+
+
+we just serialize Bridge element to Json
+
+
+and we post it to the native app where
+
+
+we can do with it whatever we want so in
+
+
+this case we would receive that message
+
+
+and then we would write some native code
+
+
+that renders this login button and then
+
+
+to handle the the click of the login
+
+
+button well we just use some JavaScript
+
+
+to locate that proxy element in in the
+
+
+Dom and click it and that's it it's just
+
+
+the native button just acts as a like
+
+
+just a a trigger for this and yeah you
+
+
+can do the same thing on Android as well
+
+
+so let's see what that looks like
+
+
+foreign
+
+
+native button performing a web action
+
+
+the fact that it's presented mortally
+
+
+that's just a configuration option in
+
+
+Turbo native there's nothing fancy going
+
+
+on out there it's just a simple config
+
+
+you can do that with any link so yeah
+
+
+fully native button
+
+
+um triggering a link which I think is
+
+
+really cool
+
+
+so let's just recap the the bridge so it
+
+
+allows you to pass messages back and
+
+
+forth from JavaScript to the web
+
+
+um
+
+
+and you can build fully native
+
+
+components that trigger web actions uh
+
+
+and you're not really restricted to just
+
+
+native components either because it's
+
+
+just a message passing Bridge you can do
+
+
+whatever you want like uh you can sky's
+
+
+the limit really it's just uh depends on
+
+
+what your app's use case might be
+
+
+um you can render all sorts of
+
+
+components menus buttons tabs around
+
+
+your web content so you just take the
+
+
+Fidelity that little bit higher and make
+
+
+your app look more app-like
+
+
+and this is what strata is meant to help
+
+
+with so it's meant to provide some kind
+
+
+of abstraction layer or a
+
+
+standardization something around this
+
+
+web to Native Bridge world uh what it is
+
+
+what we'll find out at rails World in a
+
+
+few weeks time
+
+
+um
+
+
+cool so to uh wrap up let's address the
+
+
+big burning question
+
+
+is the experience as good as a fully
+
+
+native app
+
+
+no sorry it just isn't I'm not gonna
+
+
+beat around the bush it's just not but
+
+
+it's good enough
+
+
+um I think after a point of time you
+
+
+just get diminishing returns you can
+
+
+spend millions of dollars or whatever on
+
+
+on teams to build your app fully
+
+
+natively on both IOS and Android but is
+
+
+it really worth it uh I I don't know I
+
+
+think for The Right Use case I think
+
+
+hybrid packs one hell of a punch
+
+
+um I can't stress this enough the
+
+
+consumer doesn't care you can write your
+
+
+app in webtech Swift kotlin
+
+
+assembly for all the user cares it
+
+
+doesn't matter all they want to do is
+
+
+accomplish the task that they opened
+
+
+your app to do they don't care what
+
+
+you've written it in so as long as your
+
+
+app works well
+
+
+um the the underlying technology is not
+
+
+important now we can prove this by
+
+
+looking at two very obvious examples in
+
+
+here and base camp which are like the
+
+
+the flag bearers if you will for for
+
+
+Turbo native uh they both have very high
+
+
+uh app store ratings but I think a
+
+
+slightly more unexpected example is the
+
+
+BBC sport app now yeah that's hybrid as
+
+
+well it it doesn't use turbo native as
+
+
+far as I know but it uses the exact same
+
+
+approach of rendering web content within
+
+
+native navigation if you don't believe
+
+
+me go to any BBC spot URL and put dot
+
+
+app at the end of it and you will see
+
+
+the version that is served to the app
+
+
+and it's got over 400 000 ratings and it
+
+
+has an app store rating of 4.7 as a
+
+
+hybrid app I don't think there's any
+
+
+more validation needed for this
+
+
+technology and if we compare this to to
+
+
+highly popular fully native app well
+
+
+um well the point I'm just trying to
+
+
+make is um it's possible to build a
+
+
+fully native app that's substandard it's
+
+
+also possible to build a hybrid app
+
+
+that's delightful
+
+
+thank you
+
+
+[Applause]
+
+
+any questions
+
+
+I have a question am I correct by saying
+
+
+that if you use like this native
+
+
+solution you would need to create
+
+
+at least at least a
+
+
+some part of code base especially for
+
+
+iOS and second part of code base for
+
+
+Android
+
+
+yes you would need to write at least
+
+
+some native code you would have to have
+
+
+an iOS and an Android repository
+
+
+um yeah you would have to and I think
+
+
+it's worth the investment because
+
+
+once you get to a certain point you can
+
+
+pretty much just stop development on the
+
+
+native platforms and the web can just
+
+
+drive everything but yeah you have to
+
+
+get that one point while laying this
+
+
+Foundation of your app fully natively
+
+
+do you have any use cases of where using
+
+
+hybrid is not a good idea from your
+
+
+experience that you you know we found
+
+
+that it wasn't a good route to go
+
+
+not from personal experience just uh
+
+
+just because
+
+
+I spend most of my like my time when I
+
+
+was building where our mobile apps
+
+
+professionally I was doing it fully
+
+
+natively and now I specialize in rails
+
+
+so I haven't built a whole lot of hybrid
+
+
+apps myself but it's usually when
+
+
+um you're not using uh a web app that
+
+
+speaks HTML JavaScript and CSS as like
+
+
+the core of your product if if that's
+
+
+not the case then then hybrid's not
+
+
+gonna work because the biggest Advantage
+
+
+is you get to reuse your HTML views so
+
+
+if you don't have that then hybrid
+
+
+doesn't make a lot of sense
+
+
+anyone else
+
+
+um do you have any experience testing
+
+
+these apps creating automated tests for
+
+
+this kind of apps no
+
+
+thanks
+
+
+okay thank you very much sorry sorry
+
+
+uh do you have some kind of scaffold
+
+
+application or generator we use
+
+
+generators in rails so that I can create
+
+
+a
+
+
+uh scaffold and like do
+
+
+a couple of steps like the less the
+
+
+better in order to like deploy this
+
+
+application and have it usable on my
+
+
+phone
+
+
+um so I haven't got anything like that
+
+
+there's nothing baked into rails uh
+
+
+there's nothing free out there that I'm
+
+
+aware of but uh there is aware of
+
+
+jumpstart Pro by Chris Oliver
+
+
+uh it's like a app kit for rails and
+
+
+jumpstart pro has an IOS and Android uh
+
+
+starting kit as well which uses turbo
+
+
+native so there's that an account and in
+
+
+my book I kind of teach you how to build
+
+
+a foundation as well so this there's
+
+
+nothing free that I'm aware of but those
+
+
+are the two resources you can find uh if
+
+
+you're Keen
+
+
+um what what is the picture with the
+
+
+licenses for those native libraries for
+
+
+turbinative are they open source
+
+
+licenses are they like um GPL or
+
+
+whatever
+
+
+um was popular I mean can I use it for
+
+
+free yeah yeah it's MIT uh open source
+
+
+MIT license everything the 37 signals
+
+
+releases is MIT licensed
+
+
+oops
+
+
+yeah first of all thank you for for the
+
+
+presentation uh I wanted to ask you
+
+
+about experience of hybrid comparing to
+
+
+react native like 10 years ago I
+
+
+developed a couple of applications in
+
+
+the hybrid the experience as you told it
+
+
+felt not super great and then eventually
+
+
+a couple of years ago I moved to react
+
+
+native which is the advantages that you
+
+
+think I would get if I move back to
+
+
+hybrid
+
+
+it's hard to say exactly because I've
+
+
+spent a grand total of 30 minutes in my
+
+
+life looking at react native and decided
+
+
+that this was hell and I didn't want
+
+
+anything to do with it
+
+
+um but the the philosophy is quite
+
+
+different with react native because if I
+
+
+understand it correctly it's like you
+
+
+write JavaScript code but it renders
+
+
+everything is fully native so it's just
+
+
+a very different kind of philosophy from
+
+
+Turbo native and hybrid it's like
+
+
+it's it's not really one or the other
+
+
+it's more use case thing which one's
+
+
+right I think
+
+
+the biggest advantage that you would
+
+
+have
+
+
+to drop react native and go to like
+
+
+hybrid approach is the same as for
+
+
+dropping like a fully native app and
+
+
+going to a hybrid approach it just
+
+
+um allows you to reuse views from from
+
+
+your web app and saves effort that way
+
+
+but it still gives you access to like
+
+
+the native code and
+
+
+um also I think because you're not
+
+
+trying to abstract away native stuff
+
+
+like react native tries to do uh the
+
+
+resources out there will be like when
+
+
+you try to ask for help from stock
+
+
+overflow whatever
+
+
+you'll find it a lot more useful because
+
+
+it'll give you Swift Code you can just
+
+
+use
+
+
+um otherwise if you like but if you're
+
+
+using react native and you try to do
+
+
+something natively and it gives you some
+
+
+Swift career like uh but how do I do
+
+
+this in react native and because you cut
+
+
+it Swift and react native as far as I
+
+
+know don't really play quite nicely with
+
+
+each other so the way I see it with
+
+
+hybrid you're just fighting the platform
+
+
+a little less you're gonna
+
+
+augmenting the platform with this new
+
+
+technology rather than trying to
+
+
+abstract it away and fight with it
+
+
+okay that's last question
+
+
+um maybe it's not a question but like a
+
+
+follow-up on the react native because
+
+
+we've been successfully running native
+
+
+uh Rec native knob for one year and we
+
+
+are basically Amazed by this technology
+
+
+and basically this with code that you
+
+
+are mentioning is just a matter of
+
+
+adding an adapter so it's like plug-in
+
+
+plug out you can have iOS Android
+
+
+developers doing the negative stuff and
+
+
+basically using an adapter
+
+
+the only thing why we don't go with like
+
+
+fully hybrid modes is that we prefer not
+
+
+to reuse code between the app the web
+
+
+app and the native apps we want them to
+
+
+to be different and yeah so fair enough
+
+
+if it works for you then it works for
+
+
+you good
+
+
+um I have nothing against people using
+
+
+the tools they like if it accomplishes
+
+
+the job at hand just for me personally
+
+
+react Nate is not for me but if it works
+
+
+for you I'm not gonna tell you you're
+
+
+doing it wrong because if it works it
+
+
+works
+
+
+okay thank you very much
+
+
+[Applause]
+
+
+foreign

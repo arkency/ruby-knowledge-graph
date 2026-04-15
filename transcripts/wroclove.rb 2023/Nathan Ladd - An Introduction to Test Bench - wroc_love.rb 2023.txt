@@ -1,0 +1,3808 @@
+thank you
+
+
+are we up here there we go
+
+
+all right it's uh it's good to be back
+
+
+in Roswell again uh I think last time I
+
+
+was here it was 2018.
+
+
+it was March
+
+
+and March in Poland uh can still be
+
+
+frigid it was incredibly cold remind me
+
+
+of growing up in Alaska
+
+
+um I'm not joking
+
+
+uh so the first thing I'd like to get
+
+
+out of the way this is this isn't a
+
+
+sales pitch I am the author of test
+
+
+bench and yeah of course I believe it's
+
+
+worth checking out and I will be
+
+
+introducing it to you but it's a very
+
+
+simple tool and so I don't think its
+
+
+value is particularly Apparent at first
+
+
+glance uh so the code the sort of code
+
+
+snippet that's trivial enough to give
+
+
+you the gist of it it it's not going to
+
+
+look much different from other
+
+
+Frameworks so I'm gonna actually
+
+
+interleave both its history and my
+
+
+history uh developing test bench
+
+
+in this presentation so if I wanted to
+
+
+kind of title the story of the the story
+
+
+of test bench I I might start with How I
+
+
+Learned uh tdd the hard way
+
+
+but
+
+
+hard doesn't really even begin to
+
+
+describe it
+
+
+um
+
+
+a better way to phrase it would be how I
+
+
+learned tdd in the most excruciating
+
+
+agonizing painful way uh imaginable
+
+
+so some of you have known me for a few
+
+
+years might have an idea of where this
+
+
+is headed
+
+
+um so testbench and tdd are inextricable
+
+
+what makes test bench unique is that it
+
+
+was produced by the process of test
+
+
+driven development because remember when
+
+
+when uh X unit Frameworks um
+
+
+emerged actually before I ever even
+
+
+learned how to code so I'm not sure
+
+
+anybody would remember that but uh you
+
+
+know tools for test automation kind of
+
+
+predate tdd so
+
+
+when I say
+
+
+uh what makes testbench unique
+
+
+is that it was produced by tdd or I used
+
+
+tdd create it I mean I mean something
+
+
+novel here
+
+
+uh it doesn't mean that I wrote test
+
+
+first although I did it also doesn't
+
+
+mean I did Red Green refactor although
+
+
+that happened too it's it's about uh
+
+
+validating every step of the way through
+
+
+the lens of our uh of the test
+
+
+automation
+
+
+uh so a little bit about me I'll go into
+
+
+a few gory details about myself here uh
+
+
+because it's part of communicating a
+
+
+central point here I am one of those 90s
+
+
+kids who grew up with a computer and
+
+
+basic if anybody recalls this time we'd
+
+
+get magazines with uh little video games
+
+
+that the source code was printed out in
+
+
+the back and I I learned a program by
+
+
+transcribing line for line the the code
+
+
+in the magazine into into qbasic
+
+
+and uh that's kind of how I learned uh I
+
+
+also started teaching myself guitar uh
+
+
+just as a side note I was pretty good uh
+
+
+for a uh like a self-taught amateur but
+
+
+I really couldn't keep time in fact if I
+
+
+had gotten a teacher they would have uh
+
+
+put me on a metronome and just had me
+
+
+practice over and over to a clock
+
+
+because I always rushed and that's a
+
+
+very very consistent theme uh it's a
+
+
+significant limitation of mine that I
+
+
+have to constantly uh overcome a
+
+
+temptation to rush even right now I just
+
+
+feel like just blistering through this
+
+
+presentation uh
+
+
+but yeah I have to take a beat
+
+
+um
+
+
+motivating myself for school was tough I
+
+
+you know if it wasn't fun if it wasn't
+
+
+fun I wasn't really going to do it
+
+
+um and I was really more into video
+
+
+games and fantasy novels
+
+
+I wanted to be a hard worker but it
+
+
+really just didn't it it just really
+
+
+didn't happen for me
+
+
+um
+
+
+and I dropped out of University actually
+
+
+um but I I did find a job in programming
+
+
+um soon after dropping out and
+
+
+I was I was really actually good at what
+
+
+that job what I thought that job was and
+
+
+this is not
+
+
+um
+
+
+this is not really an endorsement of my
+
+
+abilities actually uh in fact I would
+
+
+say I stumbled into a very favorable
+
+
+working condition only only by luck uh
+
+
+working as a programmer really
+
+
+suited my strengths and it largely
+
+
+ignored my weaknesses and limitations I
+
+
+was good at getting code to work
+
+
+uh and that's all I really needed to be
+
+
+able to find gainful employment
+
+
+so
+
+
+I was I had a lot of early success and
+
+
+and unfortunately that led to a pretty
+
+
+uh pretty big ego and uh overconfidence
+
+
+that I really understood anything and
+
+
+everything I was talking about as as it
+
+
+pertains to programming I started out
+
+
+developing low-level device drivers for
+
+
+Linux and see I didn't learn web
+
+
+development until much later five years
+
+
+into my career maybe 2008 2009
+
+
+uh and I had no idea that I was
+
+
+consistently rushing my implementations
+
+
+just like my guitar playing and the way
+
+
+I approach school work and everything
+
+
+uh and and not only my work was rushed
+
+
+but also my understanding of fundamental
+
+
+software Concepts was makeshift at best
+
+
+uh and in fact by the time uh Scott over
+
+
+there and I started working together in
+
+
+2015 if you'd ask me what tdd was I
+
+
+would have told you yeah I know what
+
+
+that is uh I was well versed in it it
+
+
+was a popular topic everyone knows tdd
+
+
+uh you you know you write your tests
+
+
+and then you make the test pass and then
+
+
+afterwards you rewrite rephrase restate
+
+
+re-wrangle the code until it's better
+
+
+um that's the gist of it right
+
+
+um and and the problem is that's not
+
+
+really what tdd is it's not really what
+
+
+it's about
+
+
+uh that's just a routine procedure
+
+
+that's the mechanics of what tdd looks
+
+
+like but it's not the object it doesn't
+
+
+State the objective
+
+
+um and so I'll go into this more but
+
+
+suffice it to say I simply just did not
+
+
+know the underlying premise of tdd or
+
+
+software design uh
+
+
+really
+
+
+uh not nearly as much as I thought I did
+
+
+at least
+
+
+so
+
+
+Scott and I started working together in
+
+
+in 2015 and uh
+
+
+I think working with Scott is is a
+
+
+wonderful experience I gotta say
+
+
+especially if you're unknowingly uh
+
+
+harboring deep profound
+
+
+misunderstandings about fundamental
+
+
+software principles and techniques he
+
+
+really makes that uh particularly
+
+
+enjoyable
+
+
+so
+
+
+um
+
+
+we were we were working on a project
+
+
+together and we had kind of a back story
+
+
+in a little bit of back and forth
+
+
+together in trying to land on our test
+
+
+framework at the time I was a devoted
+
+
+mini test user I really didn't get the
+
+
+excitement for our spec I learned I
+
+
+learned with testing and mini tests and
+
+
+uh the should
+
+
+um
+
+
+oh this should send tax everything
+
+
+seemed a little bit elaborate I didn't I
+
+
+I maybe it's my background in in
+
+
+low-level uh development but I I tended
+
+
+to prefer simpler tools
+
+
+um
+
+
+at the time our spec had transitioned
+
+
+from the should assertion syntax over to
+
+
+expect and that was that was a pretty
+
+
+jarring transition and I had proposed to
+
+
+Scott I said hey you should we should
+
+
+consider many tests uh which has
+
+
+something similar to the should syntax
+
+
+um
+
+
+and it's it must equal uh instead of
+
+
+should equal but for all other intents
+
+
+and purposes it's the same
+
+
+uh I didn't personally really value the
+
+
+context specification very much I didn't
+
+
+really understand bdd it just seemed
+
+
+like a lot of uh highfalutin language uh
+
+
+that that uh I I didn't I didn't
+
+
+experience much value from it
+
+
+so that whole describe some context or
+
+
+some concept do that sort of thing it
+
+
+was lost on me
+
+
+um
+
+
+we
+
+
+uh experienced some dissatisfaction with
+
+
+minitests though
+
+
+um Scott had pointed out at the time you
+
+
+know must equal and should equal these
+
+
+aren't semantically equivalent and
+
+
+should as an important part of the bdd
+
+
+vocabulary
+
+
+and so I said okay
+
+
+whatever you say Scott
+
+
+there is no uh refute raises
+
+
+um I don't know if I have time to really
+
+
+get into the subtle point of why that's
+
+
+important but
+
+
+um another another
+
+
+consideration here again with the bdd uh
+
+
+the output is just green dots and the
+
+
+the problem with with green dots when
+
+
+you're trying to use a test automation
+
+
+tool as if for for context specification
+
+
+is you don't end up reading any of the
+
+
+text that you write because you don't
+
+
+end up reading any of the text that you
+
+
+write it ends up really not mattering
+
+
+and that's probably why a lot of people
+
+
+like me never really understood uh or
+
+
+never really got the value of bdd
+
+
+because we're so used to just seeing
+
+
+dots
+
+
+when you do set up spec output
+
+
+unfortunately with mini tests you have
+
+
+to invoke a method titled I suck and my
+
+
+tests are order dependent
+
+
+otherwise you get a completely random
+
+
+Order each and every time which is I I
+
+
+guess I get the joke but it is a little
+
+
+bit flippant right
+
+
+so anyway uh Scott and I were having a
+
+
+cup of coffee at a local uh coffee shop
+
+
+in Austin we're talking about these test
+
+
+Frameworks and we we thought gosh
+
+
+wouldn't it just be nice if your test
+
+
+files were just Scripts
+
+
+that's it
+
+
+ultimately automated tests are just
+
+
+procedures
+
+
+why don't we just write procedural code
+
+
+that's what scripts are really good for
+
+
+we just want to be able to run them with
+
+
+Ruby
+
+
+we don't need assert equal or assert an
+
+
+Epsilon or a certain Json we don't need
+
+
+any of this those elaborate assertions
+
+
+because for us uh the way we operate we
+
+
+pretty much have log output for each and
+
+
+every value that goes through any of our
+
+
+objects so we could already see the data
+
+
+that we needed to see we really didn't
+
+
+need
+
+
+anything that was particularly elaborate
+
+
+um
+
+
+something like this the ability to
+
+
+establish our contexts and write a
+
+
+little bit of prose and then have test
+
+
+test tests with assert a refute in each
+
+
+block
+
+
+and because there's nothing really
+
+
+complicated about this
+
+
+this was actually a pretty simple a
+
+
+pretty simple thing to script up
+
+
+so this is actually what this is
+
+
+actually what test bench looks like it's
+
+
+very simple
+
+
+and this is what the output looks like
+
+
+it's
+
+
+uh the the uh
+
+
+the context and tests that you put in
+
+
+your test show up in your output
+
+
+so I sketched an initial bootstrap
+
+
+implementation
+
+
+that is the wrong animation speed
+
+
+and
+
+
+all it is is assert refute context and
+
+
+tests by the way the mistaken animation
+
+
+speed is just going to repeat itself for
+
+
+the rest of the bullet points in this
+
+
+slide so
+
+
+where they there you go
+
+
+um
+
+
+so our DSL just had these six methods in
+
+
+the initial implementation uh although
+
+
+we we didn't have a cert raises or
+
+
+repeat raises until a little bit later
+
+
+uh and we released this uh I think yeah
+
+
+March March 31st 2016 is when our first
+
+
+kind of usable release was was
+
+
+uploaded to rubygems
+
+
+and this is really when we started we
+
+
+transitioned all of our projects at work
+
+
+over uh we were on the same project
+
+
+together we transitioned everything over
+
+
+to test bench from from many tests back
+
+
+and we started using it exclusively and
+
+
+so even though it's a very very frugal
+
+
+uh framework with very few features we
+
+
+were actually getting by just fine with
+
+
+this in fact our our user experience uh
+
+
+with testbench was basically even in
+
+
+this limited early form was basically
+
+
+equivalent to what we had with um with
+
+
+both mini test and our spec the way we
+
+
+used it
+
+
+foreign
+
+
+so a few years later in late 2018 I
+
+
+decided to
+
+
+undertake a rewrite of test bench that
+
+
+ultimately culminated in its its
+
+
+official V1 release uh and I decided to
+
+
+use tdd to help
+
+
+uh do what tdd is for which I'd come to
+
+
+realize was about improving the quality
+
+
+of your designs and your implementation
+
+
+so the problem is uh I was working with
+
+
+Scott and it was quite an experience uh
+
+
+my
+
+
+my implementations at work they were
+
+
+consistently just not not good enough
+
+
+and I would we would just kind of go
+
+
+back and forth and and there was just
+
+
+glaring mistakes that were showing up
+
+
+over and over uh and
+
+
+I I was largely missing them uh until
+
+
+they were pointed out
+
+
+um and and pretty much the common cause
+
+
+was rushing and in reality it was that
+
+
+first 20 percent of the effort that I
+
+
+found really enjoyable the and so I was
+
+
+just kind of declaring the work done
+
+
+when I had simply got it working
+
+
+um I wasn't really doing the refactor
+
+
+step in red green refactor what I was
+
+
+actually doing was rearranging code in
+
+
+my editor thinking that was refactoring
+
+
+because I was good at that and that was
+
+
+fun
+
+
+um what is not fun is meticulously and
+
+
+relentlessly uh spotting mistakes and
+
+
+correcting them
+
+
+uh and a very common theme for me was
+
+
+running entirely afoul of design
+
+
+principles
+
+
+and I was so sick of just just these
+
+
+brutal code reviews uh that uh I wanted
+
+
+to learn how to get implementations
+
+
+right the first time
+
+
+uh
+
+
+but to do that I was going to need to
+
+
+stop making so many mistakes
+
+
+and you know this is something that that
+
+
+Scott and I talk about a lot what is a
+
+
+mistake a mistake isn't merely a
+
+
+Defector a malfunction in the world of
+
+
+knowledge work anything that obstructs
+
+
+our human understanding
+
+
+is a mistake and so the Target that
+
+
+we're reaching for always that we're
+
+
+continuously striving for is
+
+
+implementations that have no
+
+
+obstructions to understanding
+
+
+so I kind of
+
+
+some ground rules for myself I said I'm
+
+
+going to spend my spare time uh in in a
+
+
+what ended up being a fairly Herculean
+
+
+effort to re-implement test bench but
+
+
+but comporting to a process that was
+
+
+going to get me better results and
+
+
+hopefully get me practice working at a
+
+
+at a higher level of implementation
+
+
+quality
+
+
+so my motivation was uh I wanted to
+
+
+eliminate all those design mistakes that
+
+
+was that were caused by the rushing that
+
+
+I was doing
+
+
+um
+
+
+the the stipulations were I was actually
+
+
+putting I decided to put youthful
+
+
+objects into play on my own project the
+
+
+the previous incarnation of test bench
+
+
+uh was just done uh the way that I had
+
+
+used to been accustomed to writing code
+
+
+before Scott and I even uh started
+
+
+working together
+
+
+another stipulation was I was going to
+
+
+obey design principles without
+
+
+compromise this time I wasn't going to
+
+
+try to rationalize why you know I could
+
+
+I could sort of skirt or take shortcuts
+
+
+and if I ever encountered a mistake or I
+
+
+discovered a mistake along the way I was
+
+
+going to correct it immediately
+
+
+um and not just and not just correct the
+
+
+mistake but when you're when you're
+
+
+working with an implementation that's
+
+
+got many different sort of a
+
+
+constellation of objects if you have a
+
+
+mistake deep in the bowels of your
+
+
+implementation a lot of times there's
+
+
+generally speaking a Rippling effect of
+
+
+those mistakes out to uh the the
+
+
+adjacent uh objects and so I would also
+
+
+agree to correct any and all fallout
+
+
+caused by the the whatever original
+
+
+mistake was was made
+
+
+and if I reached any point where
+
+
+I no longer felt in control of the
+
+
+implementation
+
+
+then I would start over completely
+
+
+um
+
+
+but
+
+
+in order to prevent total loss I would I
+
+
+would set up checkpoints known good
+
+
+positions where at least uh part of the
+
+
+implementation I knew was good and well
+
+
+understood
+
+
+and I would trust the process
+
+
+so what I'm describing is actually
+
+
+highly obsessive compulsive Behavior
+
+
+I really don't recommend doing any of
+
+
+this I'm hoping that that maybe y'all
+
+
+can take away uh
+
+
+if if you could take away anything if if
+
+
+we trust design principles and we trust
+
+
+a fairly meticulous process if we if we
+
+
+approach our work with discipline uh
+
+
+then then we we don't have to we don't
+
+
+have to um
+
+
+go through what I went through
+
+
+and if we constantly challenge do I
+
+
+really understand this thing as well as
+
+
+I think I do
+
+
+that'll also help avoid kind of my big
+
+
+pitfall
+
+
+so
+
+
+uh
+
+
+I was spinning my wheels
+
+
+so initially I was just I didn't have
+
+
+any checkpoints yet so I was just wiping
+
+
+the Project Clean over and over and over
+
+
+which was extremely just dispiriting uh
+
+
+so I started using git to create these
+
+
+checkpoints where uh I I reworked the
+
+
+way I was doing the git history so that
+
+
+uh the earliest commits in my Branch
+
+
+were the most the inner core
+
+
+classes that were used by by Downstream
+
+
+classes
+
+
+um
+
+
+and that allowed me to leverage
+
+
+interactive rebasing so I could go back
+
+
+if I if I found a mistake in one of one
+
+
+of the the uh
+
+
+one of the most inner sort of core
+
+
+classes I could interactive rebase by
+
+
+going all the by backtracking to where
+
+
+that that inner thing is the only commit
+
+
+in the project make the correction and
+
+
+then walk through every subsequent
+
+
+commit each each one containing a new
+
+
+piece a new class that I introduced uh
+
+
+and and run the tests at each point and
+
+
+make sure okay I've got I've got
+
+
+um
+
+
+uh I've got a known good State it's a
+
+
+little bit like uh lead climbing
+
+
+and actually this process caused useful
+
+
+objects to make a lot more sense uh
+
+
+because
+
+
+I began to really see the value of
+
+
+encapsulation uh it the economics around
+
+
+encapsulation were completely changed by
+
+
+the way that I was approaching the work
+
+
+because I needed to know I was done with
+
+
+a class before I moved on to the next
+
+
+and uh ultimately that's when useful
+
+
+objects really clicked I understood that
+
+
+I was completing an implementation of a
+
+
+class
+
+
+by providing everything a downstream
+
+
+user of that class is going to need
+
+
+so
+
+
+I was in way over my head uh
+
+
+at one point I'm not this is not
+
+
+something I'm proud of I had set aside
+
+
+work on tets bench altogether to develop
+
+
+a completely different framework for
+
+
+controlling terminal output styling uh
+
+
+my my journals from this time period are
+
+
+an absolute mess and
+
+
+this test bench rewrite which was now
+
+
+deviating into terminal output styling
+
+
+had become the second and third
+
+
+full-time job for me
+
+
+and uh you know unfortunately I'm not
+
+
+proud to say it there was also uh
+
+
+substance abuse going on at the time
+
+
+all of which culminated uh in in a
+
+
+fairly uh just
+
+
+bizarre turn of events for me uh and
+
+
+just for anyone who the the next the
+
+
+next slide is going to have uh something
+
+
+of a rather gruesome picture so if
+
+
+anybody is uh not wanting to see that
+
+
+sort of thing I completely understand
+
+
+but you'll want to you want to look away
+
+
+for a minute but this was me uh I I fell
+
+
+off a balcony
+
+
+um four stories in just a complete
+
+
+nervous breakdown uh
+
+
+so at this time
+
+
+the the test bench rewrite is still
+
+
+incomplete and I had to stop and recover
+
+
+from uh
+
+
+seven broken ribs a broken sternum
+
+
+broken clavicle broken femur broken face
+
+
+broken nose
+
+
+Broken Skull I had a I had a lefort 3
+
+
+fracture which is uh if you that's
+
+
+astonishing
+
+
+um
+
+
+and at the time actually this is a shout
+
+
+out to Ethan Garofalo who presented that
+
+
+year at gross because this happened at
+
+
+Roswell 2019 around the same time as
+
+
+Rosa 2019. uh Scott coordinated with
+
+
+Ethan uh and yalmato just an absolutely
+
+
+wonderful uh video for me that um yeah
+
+
+it was incredibly incredibly motivating
+
+
+um and I really appreciate that
+
+
+and work continued
+
+
+um
+
+
+after after I reached a point where uh I
+
+
+was I was discharged from the hospital
+
+
+uh I Revisited uh
+
+
+it got back into gear with test bench
+
+
+with a fresh pair of eyes and an
+
+
+entirely new face
+
+
+I'm not kidding
+
+
+and what I actually noticed was the
+
+
+implementation quality was pretty good
+
+
+like I look back at code that I was
+
+
+working on six months ago and you know
+
+
+it was all right it was
+
+
+um it was the first time it ever looked
+
+
+there's an old adage if you if you look
+
+
+at the code that you wrote six months
+
+
+ago and you still like it there's a
+
+
+problem because you haven't learned
+
+
+there's a compliment to that which is a
+
+
+corollary to that which is uh if you
+
+
+reach a point later on where you
+
+
+actually look back at code you wrote six
+
+
+months ago and you say you know that was
+
+
+all right
+
+
+uh that's all that's also something that
+
+
+that um signifies progress
+
+
+so I had a month uh a left of
+
+
+implementation work I I was actually
+
+
+almost done before uh before the
+
+
+accident
+
+
+um it also needed to be documented thank
+
+
+you Scott
+
+
+he did all the documentation
+
+
+um
+
+
+and I noticed something pretty
+
+
+remarkable about the implementation
+
+
+uh test bench was actually able to test
+
+
+itself
+
+
+which
+
+
+made intuitive sense why in order to be
+
+
+able to subject test bench to testing
+
+
+its DSL needed to be able to operate in
+
+
+isolation from the test framework itself
+
+
+and the implication of this is this is
+
+
+the this is the code snippet from
+
+
+earlier the implication of of being
+
+
+self-testable
+
+
+is that you can include the test bench
+
+
+DSL in any class
+
+
+and everything
+
+
+kind of just works
+
+
+uh
+
+
+so
+
+
+I'll give you an example here
+
+
+this is a data structure comparison so
+
+
+you can think of this like active model
+
+
+or vertis or
+
+
+dry data this is ours uh it's from it's
+
+
+from our tooling and Eventide uh but
+
+
+here we have two instances of a data
+
+
+structure example one and example two
+
+
+and they've got all the same data
+
+
+and I'm using a new DSL method fixture
+
+
+to compare the two
+
+
+so I'm going to show the output here
+
+
+there's a QR code if you all want to
+
+
+check out this project I think it's a
+
+
+pretty reasonable example of what what
+
+
+can be done with fixtures
+
+
+um
+
+
+but what we'll see here
+
+
+is
+
+
+output
+
+
+uh
+
+
+the output here
+
+
+is
+
+
+it's it's it's showing you this is a
+
+
+complete this is the full detail form
+
+
+in this case there's a failure
+
+
+and
+
+
+what
+
+
+what this fixture includes is its own in
+
+
+its own actuator it's called method
+
+
+it's got it establishes a context
+
+
+um
+
+
+attributes
+
+
+it iterates over each attribute
+
+
+after first comparing their classes and
+
+
+making sure that their classes are the
+
+
+same iterates over each attribute and
+
+
+and Compares each value from the first
+
+
+example and the second and make sure
+
+
+they're the same along the way it uses
+
+
+uh test benches context and details to
+
+
+print out the values if you if you run
+
+
+this while it passes
+
+
+you'll also see all the data and that's
+
+
+very important one of the one of the
+
+
+things that people kind of notice about
+
+
+testbench when they first start using it
+
+
+is wow it seems like
+
+
+it seems like there's no assert equal
+
+
+and that's a problem it doesn't prove to
+
+
+be a problem in practice because we very
+
+
+commonly always end up having comments
+
+
+and details now in our in our test
+
+
+output
+
+
+uh and and the real nice thing about
+
+
+that is uh when you when you put
+
+
+meaningful information in an assertion
+
+
+failure message it's going in an
+
+
+exception which means when you don't
+
+
+have a test failure you actually cannot
+
+
+inspect any of the values which is uh
+
+
+rather unfortunate so we tend to like
+
+
+this a lot better actually
+
+
+so there's kind of three sort of main
+
+
+takeaways here
+
+
+uh we we learned through this process
+
+
+that test code actually can be
+
+
+generalized and composed just like
+
+
+regular code and in fact
+
+
+um
+
+
+when when we dig into our our fixtures
+
+
+for Eventide we have fixture fixtures
+
+
+that depend on other fixtures that
+
+
+depend on other fixtures so we can we
+
+
+can uh for example we have a fixture for
+
+
+message handlers and if a message
+
+
+Handler writes an event and we want to
+
+
+perform an assertion where we compare
+
+
+the event that we wrote with some other
+
+
+control example
+
+
+the fixture from for message handlers
+
+
+can invoke a the the same schema quality
+
+
+fixture that I just showed in order to
+
+
+compare uh two events because events are
+
+
+data structures
+
+
+so the ability to kind of build up from
+
+
+test objects to test objects to higher
+
+
+level test objects excuse me is a really
+
+
+valuable thing that that uh test framers
+
+
+can facilitate when they when they allow
+
+
+for it
+
+
+and that also means something really
+
+
+cool which
+
+
+I think it kind of breaks a log Jam in
+
+
+the test automation world I think that
+
+
+there really hasn't been anything new to
+
+
+test Frameworks uh in in a long time
+
+
+after after bdd it's like at some point
+
+
+the pioneering stopped and I think now
+
+
+we're starting to we're starting to see
+
+
+especially in our projects that we're
+
+
+still working on together we're starting
+
+
+to see
+
+
+new fixtures kind of emerge uh and I
+
+
+think it's kind of made it's it's made
+
+
+for a new frontier
+
+
+or it's allowed for a new frontier which
+
+
+is exciting and I think ultimately I
+
+
+guess there's a there's a reality here
+
+
+where a lot of the software development
+
+
+world is kind of going one way they're
+
+
+doubling down on static types
+
+
+and trying to leverage increasingly
+
+
+sophisticated compilers to help
+
+
+there not only verify our code but help
+
+
+do a lot of a lot help provide a lot of
+
+
+the benefit that we get from tdd if if
+
+
+you listen to a lot of high-level
+
+
+functional programmers one thing that a
+
+
+common refrain is their static types
+
+
+allow them to see their design better
+
+
+and they can reason about their design
+
+
+through the lens of their uh their their
+
+
+types the problem that I have with this
+
+
+the reason why I'm still kind of bullish
+
+
+on on tdd and and dynamic typing is
+
+
+compilers are really limited to a very
+
+
+molecular view of your code they can
+
+
+they can analyze it but only it's its
+
+
+syntax
+
+
+and it's uh rudimentary types there's no
+
+
+ability to build on top of a compiler
+
+
+because uh it's it's kind of a closed
+
+
+system you you implement your types
+
+
+using the compiler and you build Types
+
+
+on top of other types but the compiler
+
+
+can never see anything other than what
+
+
+it's limited to seeing whereas our test
+
+
+objects are are increasingly
+
+
+built on top of higher and higher level
+
+
+test code which is incredibly invaluable
+
+
+um
+
+
+there's no technical reason why test
+
+
+Frameworks can't be subjected to tests
+
+
+and thus tdd
+
+
+and I think one things I learned along
+
+
+this process is uh I started to see I
+
+
+mean we knew from the outset that we
+
+
+really didn't need a cert equal but it
+
+
+it started to make sense why a lot of
+
+
+the decisions made by X unit don't hold
+
+
+up from design principles perspectives
+
+
+for instance uh there's a there's kind
+
+
+of a cohesion problem with a typical
+
+
+assertion collections
+
+
+for example when you when you uh are
+
+
+working with many tests you have an
+
+
+assertion method assert in epsilon which
+
+
+is only useful when you're wanting to
+
+
+prove that a floating Point number
+
+
+Falls within a certain range of between
+
+
+two numbers
+
+
+I've never used that in my life and yet
+
+
+it's on every single mini test test case
+
+
+because uh all the assertions get mixed
+
+
+in this is a cohesion problem like when
+
+
+you're when you're when you're Implement
+
+
+when your implementation depends on
+
+
+something that has a variety of
+
+
+different methods most of which you
+
+
+never use this actually this actually is
+
+
+the very kind of design problem that tdd
+
+
+shows us when we're looking at our tests
+
+
+with a scrutinizing eye uh examining the
+
+
+design
+
+
+and ultimately
+
+
+a very very critical takeaway here is
+
+
+it was just an accident that these these
+
+
+incredibly useful fixture objects came
+
+
+out of uh developing test bench it was
+
+
+it was a happy byproduct that wouldn't
+
+
+exist without without test driven
+
+
+development
+
+
+and that's just a reminder that
+
+
+the big lesson for me was uh tdd isn't
+
+
+just a technique that we can sort of
+
+
+install in our minds and start using and
+
+
+end up with with better code it's
+
+
+ultimately
+
+
+a process and a philosophy wrapped
+
+
+together into into
+
+
+um
+
+
+into a methodology for improving our
+
+
+implementation quality as much as as
+
+
+much as we want actually uh we we gain
+
+
+better implementations by validating
+
+
+each and every method or class that we
+
+
+Implement up front
+
+
+it allows us to sequence our work in an
+
+
+inside out fashion while knowing that
+
+
+what we're each each unit that we're
+
+
+building
+
+
+um makes sense and stands on its own
+
+
+so when you decide I'm going to back up
+
+
+for oops I'm going to back up when you
+
+
+decide uh
+
+
+when you decide to use tdd to employ tdd
+
+
+you're sort of agreeing to embark on a
+
+
+bit of a journey like you don't know
+
+
+exactly where you're headed when you're
+
+
+when you're uh you got an idea of where
+
+
+you're headed with tdd but you you never
+
+
+you can never account for what is
+
+
+actually going to shake out because the
+
+
+process
+
+
+is
+
+
+establishing a finer grain level of
+
+
+detail than you have at the outset
+
+
+uh and context specification is really
+
+
+important I think it's it's our spec
+
+
+brought it to the world and it's
+
+
+in as much as validating our designs
+
+
+through the lens of our tests the
+
+
+introduction of technical writing is
+
+
+part of that it added to the
+
+
+reinforcement aspects of of tdd that we
+
+
+spend so much time agonizing over the
+
+
+language that we put in our contexts
+
+
+but
+
+
+what that ends up doing is providing
+
+
+extra reinforcement or indicators that
+
+
+were on the wrong track if we can't
+
+
+articulate what we're doing with clear
+
+
+simple concise technical language then
+
+
+we actually don't know what we're doing
+
+
+at all
+
+
+and similarly
+
+
+when time when it's time to document our
+
+
+software as an aside having the
+
+
+technical writing in our in our tests
+
+
+gives us a leg up it gives us the
+
+
+language that we that we can use the
+
+
+vocabulary which is why in in our spec
+
+
+it's no coincidence that when our spec
+
+
+transitioned over to its Green Dots
+
+
+output by default soon after a best
+
+
+practice emerged where ins you know you
+
+
+describe your class and in the outermost
+
+
+describe block and then the the next
+
+
+thing you do inside those blocks is list
+
+
+method names
+
+
+uh on some level I think those two are
+
+
+related because once we stopped really
+
+
+paying attention to our output our
+
+
+specification uh we weren't doing
+
+
+context specification anymore
+
+
+and so I think that's something that's
+
+
+been sort of lost over the years
+
+
+foreign
+
+
+I guess the final takeaway here is
+
+
+even after many years of development and
+
+
+everything went through there's still a
+
+
+lot of room for improvement
+
+
+and that's okay uh
+
+
+one of the big lessons that I've taken
+
+
+away from this is
+
+
+the adage that software's never done is
+
+
+true but I always took it to mean
+
+
+the software is still awaiting some
+
+
+future elaboration it's actually the the
+
+
+way I look at it now is actually more
+
+
+uh the process of perfecting software
+
+
+never ends
+
+
+and I'm kind of reminded of my soccer
+
+
+coach in high school he had a really
+
+
+really great
+
+
+um
+
+
+turn of phrase that he used a lot the
+
+
+practice makes he said he said practice
+
+
+doesn't make perfect that's a common
+
+
+expression in English you know practice
+
+
+makes perfect it does not practice makes
+
+
+permanent
+
+
+only perfect practice could make uh
+
+
+could make you perfect at something and
+
+
+of course perfect practice is also a
+
+
+platonic ideal not necessarily
+
+
+attainable
+
+
+uh but
+
+
+what I took away from from developing
+
+
+test bench and the way I did it
+
+
+is uh
+
+
+even though I went really slow like test
+
+
+benches 5000 lines of code and it
+
+
+probably took me five years to write uh
+
+
+from an industrial perspective nobody
+
+
+could ever justify paying a programmer
+
+
+to work at that incredibly glacial Pace
+
+
+but
+
+
+what I can what I can do on my first try
+
+
+when I'm approaching a new problem now
+
+
+is has been enhanced because I've
+
+
+practiced at a different level and I
+
+
+think that's probably the lesson uh I
+
+
+would say I would credit Scott as as the
+
+
+one for teaching me that's the that's
+
+
+the most important lesson is everything
+
+
+that you do you're getting better at
+
+
+uh if you don't choose
+
+
+to do your best you're getting better at
+
+
+less than your best and that's
+
+
+ultimately
+
+
+um
+
+
+uh the biggest opportunity for
+
+
+improvement that we have is is
+
+
+practicing at a higher level slowing
+
+
+down and and improving
+
+
+every line of code looking at every
+
+
+looking at everything we do uh as as
+
+
+an opportunity for improvement
+
+
+that's it
+
+
+[Applause]
+
+
+yeah any questions
+
+
+you kept uh mentioning fixtures or there
+
+
+was a few terminal pieces of terminology
+
+
+in there I think that
+
+
+deserve some clarification
+
+
+because if you say fixture from the test
+
+
+bench perspective
+
+
+and I'm a rails developer I will not
+
+
+have the right conclusion or the same
+
+
+conclusion so maybe clarify what uh what
+
+
+we mean by that yeah and clearly I
+
+
+skipped the presenter note that I wrote
+
+
+for myself to cover precisely that
+
+
+um
+
+
+so earlier in the in the presentation I
+
+
+I demonstrated that you could take the
+
+
+test bench DSL and sort of
+
+
+put it in to shove it into a class for
+
+
+lack of better term
+
+
+and that worked because that worked we
+
+
+had this new
+
+
+um
+
+
+we had this new way of
+
+
+implementing test objects a new
+
+
+capability actually not a way we
+
+
+couldn't do it before
+
+
+we sort of agonized over the name of
+
+
+what the module we didn't at first it
+
+
+actually was test bench colon colon DSL
+
+
+but that was clearly Incorrect and
+
+
+imprecise so we sort of agonized over a
+
+
+long period of time like what do we call
+
+
+this thing
+
+
+and unfortunately I glossed over this in
+
+
+the presentation because I I made a
+
+
+mistake with the animation but we
+
+
+eventually
+
+
+we we eventually arrived at the term
+
+
+fixture in spite of its coincidence
+
+
+um
+
+
+with with rails fixtures so back in like
+
+
+1989 we found a uh there was like a Kent
+
+
+Beck was uh had had done a write-up
+
+
+about uh X unit in small talk
+
+
+and he introduced as far as I could tell
+
+
+that's where the concept of a fixture
+
+
+was introduced and
+
+
+Accord you know according to his writing
+
+
+way back in 1989 a fixture was was
+
+
+essentially uh
+
+
+a a device
+
+
+for testing something
+
+
+so it was behavioral not data
+
+
+uh
+
+
+when
+
+
+dhh wrote rails
+
+
+there was a need I'm trying to be
+
+
+charitable here
+
+
+there is a there there was a need to be
+
+
+able to
+
+
+stick a bunch of data in yaml files and
+
+
+load it into your database that was a
+
+
+need that that he had and I I I I I've
+
+
+I'm sure that there is some lineage back
+
+
+to uh the original meaning of fixtures
+
+
+that kind of made its way over time into
+
+
+becoming what active record fixtures
+
+
+were uh
+
+
+but
+
+
+unfortunately uh unfortunately there's
+
+
+ambiguity that we're introducing with
+
+
+test bench that couldn't be avoided we
+
+
+I've always told people if you can find
+
+
+a better term than test bench fixture
+
+
+I'm I'm all ears uh one way to think
+
+
+about a fixture is like a light fixture
+
+
+when you when you install a light bulb
+
+
+into a into a light bulb fixture that
+
+
+that fixture Powers the light bulb and
+
+
+holds it in place and similarly a test
+
+
+object is kind of like a fixture in that
+
+
+sense that you that it can test other
+
+
+objects
+
+
+it can it can exercise them so that's
+
+
+that's the story The the story behind
+
+
+test bench fixture thank you for the
+
+
+call out Scott
+
+
+uh when writing tests I often find
+
+
+myself uh wanting to
+
+
+assert on
+
+
+not the
+
+
+uh literal output but some property of
+
+
+the output for example uh I want to My
+
+
+Method returns a collection and I want
+
+
+to say that this collection contains an
+
+
+object that
+
+
+fulfills a certain property for example
+
+
+I want to assert that the array contains
+
+
+a hash that has a key fo like
+
+
+very specific case and I don't want to
+
+
+assert on the whole output because I
+
+
+want to make my my tests uh specific and
+
+
+for this case
+
+
+I find the R spec style matters very
+
+
+useful because they are composable and I
+
+
+wanted to ask how do we approach such
+
+
+tests with with like um
+
+
+this very
+
+
+uh very small API of testbench yeah
+
+
+that's a great question
+
+
+I'll give you an example in the in a
+
+
+current project we're working on we we
+
+
+integrate with third-party API so
+
+
+actually let me take a step back uh
+
+
+normally we would we would regard it as
+
+
+suspects when we have an object that
+
+
+emits uh like a large uh primitive a set
+
+
+of primitive data like a an array of
+
+
+hashes for example uh that would that
+
+
+would generally be regarded as suspect
+
+
+because uh the principle of tell don't
+
+
+ask uh suggests that we want to be we
+
+
+don't want to be getting back a bunch of
+
+
+data from an object unless it's a query
+
+
+object which is almost certainly the
+
+
+case when we're when we're making uh
+
+
+when we're performing assertions on data
+
+
+like that so in our in our in our uh in
+
+
+our current project right now we work
+
+
+with third-party apis that often have
+
+
+just incredibly bizarre and Byzantine
+
+
+massive data structures that we're
+
+
+coming over XML or Json and we've
+
+
+implemented fixtures for being able to
+
+
+do things like in know assert
+
+
+assert an element or assert assert that
+
+
+there are three elements in this array
+
+
+or assert or or
+
+
+uh I wanna I wanna enter I want to enter
+
+
+the last element and then perform
+
+
+assertions on it so ultimately uh this
+
+
+is a case of specialization we don't
+
+
+have anything there's nothing open
+
+
+source at the moment but the direction
+
+
+that test bench is heading is uh there
+
+
+there will be more and more fixtures
+
+
+that let you do things like uh you got a
+
+
+Json response with a whole bunch of data
+
+
+in it okay here's a fixture for
+
+
+verifying even individual attributes uh
+
+
+of that Json and actually
+
+
+xmls particularly uh helpful in this
+
+
+case because we we have a fixture that
+
+
+uses nokogiri and allows you to use CSS
+
+
+selectors to actually say I want to
+
+
+assert that there's an XML element
+
+
+you know that is a child of the first
+
+
+you know the the like in HTML I want I
+
+
+want the I want the second paragraph tag
+
+
+inside an ordered list inside the body
+
+
+tag so uh ultimately
+
+
+the the the the the reason we prefer
+
+
+fixtures is that we can build exactly
+
+
+the verification tool that we want and
+
+
+not rely on something that is very
+
+
+general purpose and flexible like what
+
+
+you get with our spec matchers but isn't
+
+
+ideally suited to whatever particular
+
+
+task you have
+
+
+whose question was it
+
+
+hi
+
+
+so that the I mean a short a short
+
+
+answer that'll could end up being a
+
+
+really long answer is that
+
+
+fixtures are in test bench it's fixtures
+
+
+in our spec it's matchers
+
+
+there's some unfortunate history with
+
+
+why all all the things in the Ruby World
+
+
+avoid the word fixture and that's as
+
+
+Nathan was alluding to
+
+
+rails
+
+
+people picked up a word out of the out
+
+
+of the software testing vocabulary
+
+
+fixture and used it incorrectly
+
+
+it's technically okay but it's really
+
+
+like
+
+
+a little off
+
+
+using what
+
+
+it's I think it's further than that it's
+
+
+like using the word mock when you mean
+
+
+Orange
+
+
+so
+
+
+fixture is a class you know how to write
+
+
+a class of course you know how to and
+
+
+you know how to write a test in our spec
+
+
+a fixture is just a class
+
+
+it's just a class that you include
+
+
+a module into
+
+
+and
+
+
+it doesn't comport to any
+
+
+really special API the way our spec
+
+
+matchers are so when we want to write we
+
+
+Nathan keeps saying test objects
+
+
+test abstractions fixtures
+
+
+you create a class you include a module
+
+
+you get all of test bench
+
+
+you get context you get tests you get
+
+
+assert you get refute you get the output
+
+
+methods you get indentation you get all
+
+
+that control but it's just a class by
+
+
+the way that's just a class that also
+
+
+includes test bench fixture that's a
+
+
+script like that would be in your test
+
+
+script your test file that RB file so
+
+
+there's no different way of doing
+
+
+this stuff in test bench the way there
+
+
+is with something like our spec and not
+
+
+just our respect but others it's a
+
+
+fundamentally different API and set of
+
+
+Technologies in our spec to just create
+
+
+a test object and it shouldn't be so
+
+
+vastly different and the reason why it
+
+
+has to be is because our spec is
+
+
+incredibly elaborate for no good reason
+
+
+all of your tests come down to one thing
+
+
+is something true or false
+
+
+so use the introduce explaining variable
+
+
+refactor
+
+
+refactoring and if that's not familiar
+
+
+for all you folks who use the word
+
+
+refactoring highly recommend reading the
+
+
+book
+
+
+um it makes your com it'll inform your
+
+
+conversations a lot a lot more
+
+
+um but there's a refactoring called
+
+
+introduce explaining variable which just
+
+
+basically means
+
+
+declare a variable and assign it some
+
+
+value but make that variable name really
+
+
+indicative really sensible really
+
+
+readable
+
+
+that's why we don't have assert equal or
+
+
+assert this or assert that or it's just
+
+
+we introduce an explaining variable
+
+
+and it's always a Boolean
+
+
+and we either refute or or assert on
+
+
+that bullying
+
+
+um and we don't get specialized output
+
+
+because there's a fundamental thing
+
+
+about specialized output from our spec
+
+
+most people don't read it until there's
+
+
+a problem
+
+
+and when there's a problem you're
+
+
+usually dropping right into the test to
+
+
+do binding.pry or to do puts and if
+
+
+you're doing that anyway then why do you
+
+
+need an elaborate framework to do output
+
+
+when you're about to go in and do
+
+
+debugging
+
+
+so we don't have all that tooling is for
+
+
+debugging
+
+
+but all it does is tell you that you
+
+
+need to debug something but you know
+
+
+that because a test failed so if you
+
+
+really dig into why all of this stuff
+
+
+exists and you start pulling away all
+
+
+the things that aren't strictly
+
+
+necessary which is everything we're
+
+
+supposed to do as software Developers
+
+
+you basically end up with a way to
+
+
+structure tests in a nested fashion and
+
+
+a way to assert
+
+
+and a way to refute
+
+
+and a couple more things like catching
+
+
+exceptions
+
+
+um
+
+
+and that's it and when I want to create
+
+
+a matcher I don't have to go worry about
+
+
+like oh what's the matcher API and how
+
+
+do I write a a should and where do I put
+
+
+the space it's our spec 2 where the
+
+
+space is before the b or it's an
+
+
+underscore like all that's gone like
+
+
+it's a cert and refute it's not
+
+
+elaborate so if you're looking for
+
+
+stimulation from elaborate things which
+
+
+isn't also an unfortunate programmer
+
+
+thing
+
+
+um this is not going to help you if
+
+
+you're looking for stimulation for for
+
+
+from an engineering perspective which is
+
+
+eliminate complications rather than
+
+
+invite complications
+
+
+then test match is amazing and again
+
+
+we don't even it's it's not matchers
+
+
+it's just write an object you know how
+
+
+to write an object you put methods on it
+
+
+you put a call method on it Bing Bang
+
+
+Boom it's super super easy so when
+
+
+Nathan showed that method with fixture
+
+
+on it that did the schema data structure
+
+
+right go back that one that last line
+
+
+fixture that's a that's also a test
+
+
+that's there's very little API to test
+
+
+bench fixture is one of them that
+
+
+equality thing right there
+
+
+that's a class
+
+
+that's the test object that's the
+
+
+fixture and the other things are the
+
+
+inputs so if you saw that implementation
+
+
+it's just class equality and it's got a
+
+
+call method and it takes two two
+
+
+variables and those variables are passed
+
+
+on and from there you do whatever the
+
+
+heck you want you don't have to
+
+
+implement the match your API to do
+
+
+should and expect and believe all blue
+
+
+it's just like write a code red code red
+
+
+code you want output testbench gives you
+
+
+some output stuff too
+
+
+um so we can go from incredibly complex
+
+
+highly specialized application specific
+
+
+fixtures
+
+
+um or even just very general fixtures
+
+
+like if I was going to do an assert
+
+
+equal
+
+
+and I wanted that it's just a fixture I
+
+
+just write that fixture it's just that
+
+
+it would be a tiny tiny little class
+
+
+that I'd invoke this way so yeah that's
+
+
+the long answer
+
+
+yeah it's it's it's worth um re
+
+
+reiterating for emphasis something he
+
+
+said uh
+
+
+something that he alluded to uh when you
+
+
+when you learn tests you can't learn
+
+
+test bench without learning uh how to
+
+
+write fixtures it's the same API and
+
+
+fixtures test objects they can be tested
+
+
+too so you can prove that a fixture
+
+
+passes when it should pass and you can
+
+
+also prove that a fixture fails when it
+
+
+should fail
+
+
+and so our test code can be made robust
+
+
+because it can be tested as well
+
+
+okay I think the time is over now so
+
+
+thank you Nathan yeah
+
+
+[Applause]

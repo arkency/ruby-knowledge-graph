@@ -1,0 +1,1234 @@
+hi everyone let me start from the short
+
+
+introduction describing the main point
+
+
+of my talk here is the spinner a common
+
+
+placeholder that means loading adding
+
+
+more spin adding more annoying spinners
+
+
+however spinners become such kind of
+
+
+standart in industry they still makes
+
+
+user feel upset so hello again my name
+
+
+is Dmitry I am back-end developer from
+
+
+the middle of Russia I am the family man
+
+
+with three kids doing some open-source
+
+
+activity illegally after the midnight
+
+
+when children got asleep I work for
+
+
+employer the social content automation
+
+
+service providing business with the
+
+
+content workflow scheduling and
+
+
+analytics and prefer started as the
+
+
+project of evil merchants and some of
+
+
+the passionate developer still works on
+
+
+it so I am going to start from
+
+
+describing the term optimistic UI and
+
+
+why does it matter
+
+
+imagine sorry imagine the classic way of
+
+
+form submission when user feel all the
+
+
+fields and click the submit button
+
+
+from this moment user interface looks
+
+
+for doing a Jack's request and sets user
+
+
+to be unable to continue working to
+
+
+continue to work next but statistics
+
+
+says that overall 98% of Ajax requests
+
+
+has exceeded what if we change the way
+
+
+of doing classic form submission to be
+
+
+more confident and hopeful we'll try to
+
+
+change user interface immediately and
+
+
+the trigger the submit button into
+
+
+success mode right after the click from
+
+
+the user point of view there is nothing
+
+
+more on it no waiting no staring for
+
+
+disabled button and not yet another and
+
+
+spinner this way of working is called
+
+
+optimistic UI it is based on the
+
+
+assumption that most of the requests
+
+
+will be processed by server with success
+
+
+so do you know the story of three
+
+
+optimistic of three user interface go to
+
+
+the part go to the pub the first one
+
+
+orders and drink or there's another one
+
+
+and so on in a couple of hours he leaves
+
+
+the pub tired and drunk the second one
+
+
+orders and drink pays for it upfront or
+
+
+there's another one and pays for it and
+
+
+so on in a couple of hours he leaves the
+
+
+pub drunk and tired the first one goes
+
+
+out of the pub immediately right before
+
+
+going in he is already drunk
+
+
+he knows how pups works and he is
+
+
+efficient enough not to lose time so the
+
+
+third one is called optimistic UI and
+
+
+why does optimistic UI matters time can
+
+
+be analysed from the different points of
+
+
+view objective and psychological
+
+
+measuring type with stopwatch we operate
+
+
+with objective time another aspect of
+
+
+analyzing the time is psychological
+
+
+perception the eternal feelings we have
+
+
+when spending time for some kind of
+
+
+activities I mentioned three type of
+
+
+activity and a dozen of objective time
+
+
+spending on it reading books makes us
+
+
+imagine satisfies curiosity and finally
+
+
+makes the reader feel happy riding a
+
+
+bicycle makes us get stronger promote
+
+
+psychological relaxation and finally
+
+
+make a cyclist feel happy but you
+
+
+waiting for user interface doesn't make
+
+
+anyone happy user you people used to pay
+
+
+money for positive emotion nobody would
+
+
+like to pay for being upset and I am
+
+
+sure that optimistic UI is the one of
+
+
+the leading point so for the project to
+
+
+be successful and earn money
+
+
+according to Google performance model
+
+
+that aims developers to ensure the
+
+
+quality of user experience user
+
+
+interface reaction delay more than 100
+
+
+milliseconds leads user to lose the
+
+
+focus does any seller want its customer
+
+
+to lose the focus right before the
+
+
+purchase I think no and the last one
+
+
+imagine Twitter to do its user interface
+
+
+in the old style pessimistic way showing
+
+
+the spinner when anybody wants to set
+
+
+alike how many tweets will you be able
+
+
+to like and also no anyway so let's stop
+
+
+user suffering by doing optimistic UI
+
+
+and ideas is easy until you get deep on
+
+
+it I am going to review some common
+
+
+problems faced to intend the optimistic
+
+
+UI when you do local development
+
+
+everything works great pocket ad packets
+
+
+are delivered without any loss and delay
+
+
+and everything works as expected but as
+
+
+soon as application goes to production
+
+
+it comes down to the real network and
+
+
+the way the real environment works could
+
+
+sometimes be surprising so ever could
+
+
+respond with an error packets could be
+
+
+lost or requests could be processed with
+
+
+inversed order so one of the main
+
+
+problem is to handle in network error
+
+
+when doing optimistic way we have all
+
+
+the changes already been applied to the
+
+
+user interface and then do the request
+
+
+in case of network availability we have
+
+
+something to deal with it
+
+
+this issue is mostly connected with the
+
+
+being offline most people think about
+
+
+being offline that is this something
+
+
+about being out of the civilization for
+
+
+a long period of time but in fact we get
+
+
+offline every day often during the day
+
+
+for a short period of time
+
+
+another huge issue is to handle server
+
+
+error when we have all changes applied
+
+
+to the user interface
+
+
+but for some reason server responds with
+
+
+an error in this case we have something
+
+
+to deal with it and the defi client
+
+
+about the error somehow and the last
+
+
+huge problem is merging conflicts when
+
+
+several users edit the data the same
+
+
+data at the same time those updates are
+
+
+contradictory so most of these problems
+
+
+are already solved somewhere and somehow
+
+
+in their own way but for now there is no
+
+
+complex systematic solution to solve all
+
+
+these problems for the modern web accept
+
+
+the present reload button and browser
+
+
+solutions solutions could be taken from
+
+
+the computer science they are almost
+
+
+well known but not fully implemented yet
+
+
+for the modern web one of the ideas is
+
+
+even sourcing when we change the
+
+
+classical way of persistent object state
+
+
+and turn out to save the sequence of
+
+
+state change in events since that the
+
+
+actual object state could be
+
+
+reconstructed by replaying all the
+
+
+events we will get deep dive into even
+
+
+source in tomorrow with the help of
+
+
+anton the widow another idea is to
+
+
+consider modern web application as the
+
+
+distributed system and its components
+
+
+such as servers and clients as the part
+
+
+of this distributed system talking to
+
+
+each other by synchronizing the messages
+
+
+servers and clients should also have
+
+
+some significant characteristic of the
+
+
+distributed system such as the lack of
+
+
+global clock and the concurrency support
+
+
+so based on to this ideas was
+
+
+created logics framework it was invented
+
+
+by Andres he Nick and its goal is to
+
+
+introduce new way of communication
+
+
+between server and client talking about
+
+
+frameworks we usually mean a set of
+
+
+ideas and concept and support
+
+
+instrumentation for build software in a
+
+
+specific way but frameworks are also
+
+
+about reducing complexity like Ruby on
+
+
+Rails simplifies the web application
+
+
+development react aims for the retained
+
+
+component rendering and Redux helps to
+
+
+manage with state so log axis as
+
+
+framework is not about is not about the
+
+
+code let's review some common ideas and
+
+
+concepts of it the first one regards as
+
+
+the complex solution suppose to use
+
+
+WebSockets WebSockets facilitates the
+
+
+real date the real time data transfer
+
+
+and allows server and client to pass the
+
+
+messages back and forth until the
+
+
+connection keeps open this also means
+
+
+that log acts supports life updates for
+
+
+building collaboration tools out of the
+
+
+box another idea is to specify open
+
+
+protocol for communicating between
+
+
+server and client it allows logics
+
+
+components to be really implemented with
+
+
+the help of other technologies not only
+
+
+not GS Lagarde says the framework
+
+
+provides instrumentation a standalone
+
+
+server and the client side JavaScript
+
+
+package server holds sorry server
+
+
+handles the WebSocket connection local
+
+
+events to the internal store and do all
+
+
+the synchronization and broadcasting
+
+
+between the clients from the other hand
+
+
+logics client wraps the redux with
+
+
+compatible API object and do all the
+
+
+synchronous all the data synchronization
+
+
+in background there is no need
+
+
+normal need to
+
+
+do request and handle response a GOx
+
+
+client will take care about the
+
+
+transport the main it's the the main
+
+
+goal is that huh gak's are ready to be
+
+
+used with the existing front-end
+
+
+infrastructure by similarity of the
+
+
+redox API so logics client also has a
+
+
+set of standard UI widget to indicate
+
+
+the state of network in standard way
+
+
+client tracks the WebSocket connection
+
+
+with periodical pings
+
+
+it accumulates depending events in case
+
+
+of network and availability and will try
+
+
+to resend it later when connection
+
+
+restores this also means that log acts
+
+
+support offline mode out-of-the-box log
+
+
+access care about order in the event
+
+
+time is heart and distributed system and
+
+
+the global Universal clock is entirely
+
+
+unsolvable tasks solution used by
+
+
+oligarchs is to calculate the time shift
+
+
+as the difference between server time
+
+
+and client time with correction for the
+
+
+packet round-trip time this shape this
+
+
+time shift is used by client to convert
+
+
+the local time values in to server time
+
+
+values before the synchronization so
+
+
+this solution isn't Universal has the
+
+
+transport error on it but in practice
+
+
+for doing user interface the error is
+
+
+not critical some time issues lead the
+
+
+time be the same on the one machine at
+
+
+the different time at the different
+
+
+moment of time
+
+
+that's why order and events with only
+
+
+timestamp doesn't fit huh gak's uses the
+
+
+timestamp and the increment in counter
+
+
+to take the events by doing proper
+
+
+events ordering AG acts helps to
+
+
+implement automatic conflict margin the
+
+
+simple way of doing this is to use last
+
+
+win strategy as shown on the slide when
+
+
+the previous changes do not apply even
+
+
+they will synchronize later handling
+
+
+server error is the critical part of
+
+
+doing optimistic UI for this purpose
+
+
+logics used the special undo event and
+
+
+in case of an error it sends and we went
+
+
+back to the client
+
+
+getting the undo event client removes
+
+
+the original event from reduc store and
+
+
+recalculates the front end state so all
+
+
+I am talking about is written with
+
+
+node.js but what about using is with
+
+
+Ruby and especially with the existing
+
+
+Ruby back-end and here is the solution
+
+
+here is the solution huh gak's
+
+
+has a special component which called
+
+
+proxy it forwards all the incoming
+
+
+events over the HTTP and allows any
+
+
+back-end to be plugged in to consume the
+
+
+events and perform business logic proxy
+
+
+also expose its own and point to let
+
+
+back-end to send to synchronize events
+
+
+back so this is some kind of two-way
+
+
+HTTP gate away
+
+
+so Lagarde's consider the backend has
+
+
+the regular client but working over HTTP
+
+
+and receiving all the events without any
+
+
+filtering we started to integrate log
+
+
+action to exist in rails application as
+
+
+and as the result created the ligarius
+
+
+ruby gem it is easy to configurable you
+
+
+just need to set log X proxy back URL
+
+
+and mount the road let's review some
+
+
+abstractions about this game action and
+
+
+meta
+
+
+are the rappers of the underlined Lux
+
+
+protocol items action represent the
+
+
+logics message has the type and
+
+
+additional parameters worked the same
+
+
+way as the rail section params meta is
+
+
+the help in technical metadata
+
+
+describing the action with the time
+
+
+identification and the destination scope
+
+
+what the ruby gem also supports our
+
+
+syndication
+
+
+by using credentials that have some kind
+
+
+of the round-trip getting back to back
+
+
+end where they could be validated by
+
+
+provided on the function as in rails we
+
+
+have convention over configuration
+
+
+principle to match the even type to
+
+
+correspond in action type action class
+
+
+and test as logic supports the channel
+
+
+for clients to be notified about
+
+
+specific type of events rubidium also
+
+
+supports them when client gets
+
+
+subscribed to any channel we have to
+
+
+initialize it with the actual state it
+
+
+is easy to do by reimplemented initial
+
+
+data method of the log channel class so
+
+
+what is initial state imagine we are
+
+
+implementing some kind of the chart with
+
+
+the life updates and initial state for
+
+
+any threat could be the set of the last
+
+
+messages for this threat and of course
+
+
+rubygem supports sending back to client
+
+
+in very easy way by using add method of
+
+
+the lagik singleton class how does it
+
+
+works we send HTTP request to Lorax
+
+
+proxy and trigger the event and logics
+
+
+proxy has to broadcast all the event to
+
+
+the
+
+
+destination scope of the clients and
+
+
+having the rails dependency we provide
+
+
+some helper method for implementing the
+
+
+last twin update strategy for the model
+
+
+it uses the special JSON field way it
+
+
+tracks the time of the last update
+
+
+fields and you can use it and of course
+
+
+we support sending undo events in case
+
+
+of server validation we can sent and do
+
+
+event provide the matter of the metadata
+
+
+of the original event by this metadata
+
+
+Lagarde server has has to know to which
+
+
+client it should synchronize the events
+
+
+so this is mostly all about theory
+
+
+concepts and the functionality let's
+
+
+have a rest and see some diva but
+
+
+without any online coding and everything
+
+
+works of life most significant example
+
+
+is the optimistic update of the project
+
+
+let me show you the movie when first
+
+
+user goes to the setting page and change
+
+
+the name of the project at the same time
+
+
+client triggers the event and
+
+
+synchronize it with the lagik server
+
+
+well rack server broadcast this event
+
+
+without a client and with the backend
+
+
+back and do all the persistent and the
+
+
+second client has the right update
+
+
+immediately this is the figure how
+
+
+describing how it works all the clients
+
+
+working with specific project has to
+
+
+subscribe to this projects channel when
+
+
+the first client trigger the event it
+
+
+gets in her nice with another client
+
+
+because he subscribed this project and
+
+
+with the backend as you can see the code
+
+
+is very easy
+
+
+another example is post discussion this
+
+
+is some kind of the chat with the life
+
+
+updates about the social post it works
+
+
+mostly the same way all the clients
+
+
+showing before showing the social post
+
+
+pop-up subscribe to the specific post
+
+
+channel and if the first client triggers
+
+
+the event other client gets notified
+
+
+about it and it also is synchronized to
+
+
+the database and the most interesting
+
+
+show showcase is the sending back to
+
+
+client from the server in amplify on the
+
+
+front end we use the actual currency
+
+
+rate to show the amount of the payment
+
+
+in the local currency but because
+
+
+amplifier is the single page application
+
+
+and user do not refresh the page and
+
+
+because the currency rate changes every
+
+
+day we have to initialize this
+
+
+centralized currency rate update from
+
+
+the back end it works in this way we
+
+
+have the periodically rake tasks that
+
+
+gets the actual currency rate from
+
+
+external service and trigger the special
+
+
+event and send it to log acts for the
+
+
+specific prices channel all the clients
+
+
+who i interested in forgetting updates
+
+
+about the currency rates are subscribed
+
+
+to prices channel so they are they will
+
+
+be automatically notified about all the
+
+
+changes so this is mostly all concluding
+
+
+everything said i want to mention that
+
+
+logics is the suitable framework for
+
+
+doing optimistic UI which have which has
+
+
+some features of the modern web
+
+
+application out-of-the-box like life
+
+
+updates and offline first and it is also
+
+
+easy to integrate it with existent
+
+
+then this free structure because of
+
+
+similarity of API and now it is ready to
+
+
+integrate it with Rails the state of
+
+
+flux
+
+
+Horrocks is now on the development
+
+
+process in employer project but how as
+
+
+soon as it will be ready we will publish
+
+
+it and if you are wondering about pure
+
+
+ruby implementation yes it is in plans
+
+
+but when log acts will reach the first
+
+
+stable version so I think I've done
+
+
+thank you very much for listening if you
+
+
+have any questions here is the contact
+
+
+of mine and the contact of Lorex project
+
+
+also check out the log actual source
+
+
+code see the employer technical articles
+
+
+on deaf - website and give them prefer
+
+
+chance to automate your social media
+
+
+content gene QE
+
+
+[Applause]

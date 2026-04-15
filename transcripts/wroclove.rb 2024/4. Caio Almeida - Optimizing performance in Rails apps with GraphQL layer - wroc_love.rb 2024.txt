@@ -1,0 +1,3526 @@
+[Applause]
+
+
+thanks
+
+
+everyone um well you may wonder why I
+
+
+came this
+
+
+far but um actually this time it's um I
+
+
+was very happy that's a bunch of other
+
+
+appointments in Europe aligned with the
+
+
+the conference here um I was in the
+
+
+agenda for the conference in 20120 and
+
+
+then it got cancelled because of the
+
+
+pandemic so I'm happy to be here finally
+
+
+four years after the original schedule
+
+
+so it's been a long wait um well I'm
+
+
+from Brazil I've been working with rail
+
+
+since
+
+
+2018
+
+
+so um yeah it's been a long time a lot
+
+
+of examples here that I'm going to use
+
+
+will be still based on that application
+
+
+where you have you know posts and users
+
+
+this is how we learned rails at that
+
+
+time following those how to build your
+
+
+blog in 20 minutes um and I've been
+
+
+working at midan since
+
+
+201 as a software engineer and I was
+
+
+responsible for migrating the main
+
+
+products of midan from PHP to rails
+
+
+which I'm um glad for um and the main
+
+
+product of midan is check so a lot of
+
+
+what I'm going to present here is based
+
+
+on things that we learned over time the
+
+
+this is a softare this is a full this
+
+
+was a full rewrite of a monolithic p p
+
+
+PHP application and M then as a
+
+
+nonprofit Basit in San Francisco and
+
+
+develops tools for collaborative effect
+
+
+checking um and uh we did this it's it
+
+
+follows on microservices architecture
+
+
+but um um the the main core service is a
+
+
+raos API is a headless API and when we
+
+
+did this rewrite back in uh 2016
+
+
+um graphql was a new thing right it was
+
+
+just it it was it's been just open sourc
+
+
+by Facebook at that time and um there
+
+
+was this decision to actually experiment
+
+
+it um but then over the years we also
+
+
+learned what are the problems that can
+
+
+come with that choice as any other
+
+
+choice that you make in a product right
+
+
+um so um the I'm I'm going to you some
+
+
+screenshots from the monitoring tools
+
+
+that we use and maybe even for uh for
+
+
+the codebase but in order to be easier
+
+
+to understand um a lot of the examples
+
+
+here be based on you know generic um
+
+
+database schemas so the focus of the
+
+
+stock is going to be on Rails and
+
+
+graphql okay but uh it's it doesn't need
+
+
+it to be necessarily okay um many of the
+
+
+concepts and architectures that I'm
+
+
+going to discuss here are applied for
+
+
+other Frameworks and for other technical
+
+
+Stacks so of course I'm going to focus
+
+
+on how this happens specifically in
+
+
+rails and how this can be solved
+
+
+specifically in rails but um it can be
+
+
+applied in other um in other Frameworks
+
+
+as well so just for me to know is there
+
+
+anyone here that currently runs any
+
+
+application production using
+
+
+graphql oh wow uh so bear with me and
+
+
+I'll be happy to also um he from new
+
+
+other strategies what worked for you and
+
+
+what um hasn't and you know so as I said
+
+
+this started back in 2016 graph Cal was
+
+
+great was a new thing um and then over
+
+
+the years it started to be adopted by
+
+
+big systems in the rails ecosystem right
+
+
+gitlab GitHub Facebook itself um so big
+
+
+product started to to use it which means
+
+
+which is great because then the the
+
+
+community started to build the tools to
+
+
+help with that so a lot of the tools
+
+
+that I'm going to share here are widely
+
+
+open and available um um and there are a
+
+
+few more disclaimers here that in
+
+
+general there is no silver bullets for
+
+
+anything so there isn't this tool or
+
+
+this thing that is going to work for
+
+
+everyone and in every context and in
+
+
+every um um application that you have so
+
+
+everything here needs to be taken into
+
+
+context work for that application with
+
+
+that level of concurrency with that and
+
+
+specific database schema and the data
+
+
+and the demand in the concurrency so
+
+
+everything needs to be taken into
+
+
+consideration and when deciding which
+
+
+tool and which solution to use and
+
+
+premature optim optimization is you know
+
+
+we Lear we we hear that especially when
+
+
+we start in computer science right that
+
+
+uh premature optimization is the root of
+
+
+all evil but this also needs to be taken
+
+
+very carefully um when you know what to
+
+
+antic anticipate for your project you
+
+
+can and try to make some decisions since
+
+
+day one and U in many cases we know this
+
+
+is not going to be possible and you're
+
+
+going to have a lot of surprises when
+
+
+things starts to run for real um in our
+
+
+case this application has been running
+
+
+for eight years now and we've been
+
+
+migrating from rail 4 to rails 5 to rail
+
+
+6 uh ra 7 so um and it's been a fun ride
+
+
+and we need to adapt over time because
+
+
+things change you accumulates technical
+
+
+dep so um uh those those uh things need
+
+
+to be taken into consideration um and
+
+
+also the problems and solution are going
+
+
+to be different and your needs are going
+
+
+to be different it depends in different
+
+
+factors for example the database that
+
+
+you use we just learned that you know if
+
+
+you're on site in production which now
+
+
+we know that we can and should um you
+
+
+you are going to have different uh
+
+
+problems that what is going that's are
+
+
+going to require different solutions so
+
+
+keep all of that in mind um each um
+
+
+situation is a different situation and
+
+
+may require um different solutions as
+
+
+well and as always every solution has a
+
+
+trade-off as well and sometimes you're
+
+
+injecting a new dependency into your
+
+
+code base it's going to require new
+
+
+learning curve for your team um it's
+
+
+going to make the codes um harder to to
+
+
+understand so all those factors need to
+
+
+be taken into account and here I'm also
+
+
+talking from the context not only of a
+
+
+product that used in production that's
+
+
+been running for a long time but that is
+
+
+also open source so make a big
+
+
+difference in terms of security in terms
+
+
+of um how to know how people are going
+
+
+to actually use your code and um working
+
+
+on a team of different developers so all
+
+
+those all those things need to be
+
+
+considered um but before we we start
+
+
+just do some very basic um introduction
+
+
+to graph for the ones of you of don't
+
+
+know um it's a query language so used to
+
+
+describe um data using a type system um
+
+
+and so it has bindings for different
+
+
+language so it's not a programming
+
+
+language itself it's a it's a it's a
+
+
+query language for the API and sometimes
+
+
+it's easier to understands graph graphql
+
+
+when we compare it to rest um so uh
+
+
+imagine that to have that um known um
+
+
+simple application where we have a media
+
+
+it can be a video and this is a
+
+
+simplified EX trct from our own check
+
+
+application um where and organizations
+
+
+fact checking organizations around the
+
+
+world are able to track and verify um
+
+
+media that that contains misinformation
+
+
+and circulates on the internet so you
+
+
+have a media a media can have different
+
+
+comments from fact Checkers and a
+
+
+comment is done by a user and uh and it
+
+
+can have different tags right um usually
+
+
+how you do the that in rest you're going
+
+
+to write different end points that are
+
+
+going to be reusable for your front end
+
+
+or for your API clients and that follows
+
+
+that non ra convention for resources and
+
+
+actions right so you retrieve an
+
+
+instance of your object and then from
+
+
+there you can retrieve tags you can
+
+
+retrieve comments you can retrieve other
+
+
+uh other
+
+
+information and what's one of the
+
+
+problems that we had with that as you
+
+
+need to have more specific access to
+
+
+data and when you have like two teams
+
+
+working on the same products like back
+
+
+end front end frontend Engineers are
+
+
+going to require hey I need an end point
+
+
+for this thing I need an API for this
+
+
+thing um it starts to it scan if you're
+
+
+not if you if you don't carefully
+
+
+architect and design your API it can
+
+
+easily get out of control with those end
+
+
+points that are more and more specific
+
+
+and we know that ideally this doesn't
+
+
+work in reality it does work there is
+
+
+pressure there is you know um timelines
+
+
+there's deadlines um so you can end up
+
+
+having too many end points and then you
+
+
+a front end that makes too many requests
+
+
+and in many cases requesting more data
+
+
+than it actually needs um this is where
+
+
+graphql comes with a different approach
+
+
+um and one of the main differences when
+
+
+you start on graphql coming from rest is
+
+
+that in terms of a um HTTP standpoint
+
+
+there's only one endpoint right there is
+
+
+no more get for different end points you
+
+
+have one single post graphql endpoint
+
+
+and um and it's post for a reason
+
+
+because then you can have you know big
+
+
+queries that are not going to explode
+
+
+the limits that you have for a get
+
+
+request and then the actual um specific
+
+
+parts of your request are going to be
+
+
+handled by the query the query that you
+
+
+send as a single query parameter for
+
+
+that single HTP in
+
+
+point um now um what gets to that some
+
+
+other cool things about graphql is that
+
+
+um it becomes kind of natural to
+
+
+represent the data that you need on a
+
+
+given interface using a query like that
+
+
+because you're going to ask only for the
+
+
+um data that you actually need in theory
+
+
+so disclaimer I'm just starting with the
+
+
+good part so we can hey this is great
+
+
+and then we can see the problems that
+
+
+can come from that um so if I I just
+
+
+want one media and I just want to show
+
+
+the title of that object I just ask for
+
+
+the title Feud I don't need to retrieve
+
+
+a full object from the back end with
+
+
+potentially expensive fields to be
+
+
+computed um so the front ends or any API
+
+
+client can only can ask only for the
+
+
+data that they actually need and the
+
+
+same for the um nested field fields and
+
+
+collections inside that so there is a
+
+
+pretty clear um uh uh um relationship
+
+
+here between the data you ask for and
+
+
+the data you actually display on an on
+
+
+an
+
+
+interface um and this is even this U
+
+
+even visual equivalence between um what
+
+
+the graphic query that you write and
+
+
+your own data model because again
+
+
+remember that's graphical used to
+
+
+describe your API in terms of the um of
+
+
+the relationships and the types and then
+
+
+you can see pretty easily here that
+
+
+using the nested structure you can see
+
+
+those relationships kind of mimicking
+
+
+here so this is great for re readability
+
+
+and that you understand the front in API
+
+
+um type description how your data model
+
+
+actually is exposed and this also
+
+
+becomes true for the response that you
+
+
+get back from the back end right um so
+
+
+your query is very similar to your
+
+
+response that you get in Jon format so
+
+
+um uh you as an API client or a
+
+
+frontends or whatever um you just
+
+
+receive back the fields that you asked
+
+
+for no um no no surprise
+
+
+here um and then when it com to rails
+
+
+how this actually happens so um types
+
+
+are just use a descriptive language so
+
+
+you can have um you you can use one of
+
+
+those basic types integer string Etc you
+
+
+can Define your own cust custom types
+
+
+I'm glad that the graph on the very
+
+
+beginning the graph gem used it to use
+
+
+some like definers and it was harder to
+
+
+write and reuse some of that code then
+
+
+in latest versions The Gem was upgraded
+
+
+and now we can Define types using
+
+
+classes which is way easier um and then
+
+
+you can Define arguments which is
+
+
+basically parameters to different fields
+
+
+and then you can have a different return
+
+
+value based on the arguments that a
+
+
+field receives um and you have
+
+
+connections as well which are the fields
+
+
+that are supposed to return collections
+
+
+of objects right usually an active
+
+
+record um relation because then you can
+
+
+apply pation and sorting on top of that
+
+
+um so it's pretty straightforward to
+
+
+declare graphical types and mutations in
+
+
+RS using this declarative language and
+
+
+so types are the data mutation are
+
+
+changes to your data so U comparing
+
+
+again to rest in a um in a normal cruds
+
+
+application M queries are responsible
+
+
+for the read Parts mutations are
+
+
+responsible for creates updates and
+
+
+delet and the structure is very similar
+
+
+you define an operation um what is the
+
+
+imput uh data for that change and then
+
+
+you define another graphql query with
+
+
+your return so again you have this
+
+
+opportunity to only ask from the back
+
+
+end the data that you need as a response
+
+
+for that
+
+
+operation um so that's all um pretty
+
+
+clear again so you have the mutation
+
+
+name the inputs parameters and the
+
+
+desired outputs then um the API uh
+
+
+client or the front end is not going to
+
+
+return anything in response that it
+
+
+didn't ask
+
+
+for uh so this is great right it's so
+
+
+flexible to for a front ends or for
+
+
+clients ask for the data it needs uh but
+
+
+it's way can be way too flexible and
+
+
+that's a big problem as well uh it can
+
+
+become more um more apparent when you
+
+
+have a project and a product that is
+
+
+opened you don't know who's going to use
+
+
+it don't know how this is going to be
+
+
+used or when you have a service that's
+
+
+uh you have your API exposed and users
+
+
+and clients can generate API Keys make
+
+
+API calls themselves so you don't have
+
+
+that much control um and even if you
+
+
+have your if if if all the application
+
+
+just use it internally right and you
+
+
+have a good conversations between the
+
+
+front end and the backend teams still
+
+
+there can be problems that can happen
+
+
+and because of that uh so back to one of
+
+
+those query examples uh Nest queries can
+
+
+become a real problem for example and uh
+
+
+when we look into a query like that we
+
+
+can see that the level here can start
+
+
+getting deeper and deeper and from one
+
+
+hand while you're are writing this it
+
+
+can look great that you're only asking
+
+
+for the data that you need and that you
+
+
+have this flexibility of in a single
+
+
+query you potentially ask for all the
+
+
+data that that you need um uh it can
+
+
+really become a performance botton neck
+
+
+because uh it's the the the language is
+
+
+really expressive and you can just um
+
+
+declare everything in one go
+
+
+uh but um it's also not only the number
+
+
+and the levels of nested information
+
+
+that can be requested here but it's also
+
+
+not clear what is the cost of each of
+
+
+those fields so um some of the things
+
+
+can get some of those things can get
+
+
+pretty problematic because then you're
+
+
+going to see in your monitoring tool on
+
+
+in your logs that's like hey I have this
+
+
+request here that is taken this amount
+
+
+of time and then someone from the front
+
+
+end or someone's going say no but I'm
+
+
+just asking for these things it's just
+
+
+you know 10 lines here it's it's only
+
+
+all I need um so it can be really
+
+
+problematic if there is no words and no
+
+
+controls around that um so let's see
+
+
+some strategy to that of that first
+
+
+introduction you know starting with some
+
+
+of the good things and now um into the
+
+
+problems that can uh Beed here um well
+
+
+you can't really fix what you can't test
+
+
+right so one of the and sometimes
+
+
+discovering that things didn't work well
+
+
+when you get to production can beat you
+
+
+late um so one of the things that we did
+
+
+is to actually write tests that can
+
+
+capture performance regressions that may
+
+
+be introduced in code um one way of
+
+
+doing that is that you can really um
+
+
+know how many queries a certain graphql
+
+
+query can take because this is something
+
+
+that's not super clear right you write a
+
+
+graphql query that has like three lines
+
+
+two levels deep but but just to look
+
+
+into that you can know exactly what's
+
+
+the activity that is going to cause in
+
+
+your database and uh and you can get
+
+
+surprised when you look into the logs on
+
+
+how much activity database activity can
+
+
+happen from a single query um so
+
+
+one way that we were able to track that
+
+
+in our project in in our codebase is to
+
+
+have some tests for the like performance
+
+
+tests written as in test um for some of
+
+
+the most expensive and important
+
+
+operations by using simple um test
+
+
+helpers um assert queries um and then we
+
+
+can just make sure that um regardless
+
+
+refactoring the new features that are
+
+
+implemented on top of that we're going
+
+
+to keep some limits on the level of
+
+
+database activity that happens there or
+
+
+if there was some performance
+
+
+Improvement that was implemented that is
+
+
+not going to cause a regression and we
+
+
+can uh know about that during CI so
+
+
+during PR review and not when it gets to
+
+
+production when it can be too late and
+
+
+under the hood there are different ways
+
+
+of doing that there's just a simplified
+
+
+version there are gems that do it as
+
+
+well but uh in that
+
+
+sense of here trying to get um deeper on
+
+
+how some things work U you basically uh
+
+
+need to um enable query cache because
+
+
+you know it doesn't make sense to track
+
+
+um queries that are actually cached
+
+
+there's they are not going to create an
+
+
+impact and and then you can uh track how
+
+
+many database queries happening happens
+
+
+during that block of codes keep track of
+
+
+them and then then at the end just
+
+
+compare how many database queries were
+
+
+executed and how many you were expected
+
+
+and um and of course here for operators
+
+
+we're just comparing if it's minus or
+
+
+equal to the max but you know it could
+
+
+be uh there are other ways that you
+
+
+could control that like expect an exact
+
+
+number of of queries or things like that
+
+
+so this is one way of tracking that
+
+
+while you still you are on the
+
+
+development phase um but of course this
+
+
+is a very limited
+
+
+and this is just to avoid um regressions
+
+
+in important parts of the code base very
+
+
+early in the process but
+
+
+um this is not going to catch most of
+
+
+the cases so but it's great because
+
+
+titles are passing so we should be good
+
+
+to deploy nice and uh once we deploy
+
+
+it's super important we need to monitor
+
+
+with the actual impact of those things
+
+
+so anytime we talk about performance and
+
+
+then of course there's not only for
+
+
+graphql but anything um you can't really
+
+
+measure and improve if you don't know
+
+
+exactly what are the botton X what are
+
+
+happening so I'm going to show some
+
+
+strategies here for monitoring and
+
+
+usually in a web application is just
+
+
+monitor um ATP request times can you
+
+
+actually read this I don't think so but
+
+
+this is a um regular cloudwatch log for
+
+
+raos ATP request you know um we can know
+
+
+what was the ATP request remember again
+
+
+that graphql is one single endpoint with
+
+
+a blob of a graphql query that is passed
+
+
+as a parameter to that endpoint so using
+
+
+regular tools for just tracking metrics
+
+
+on how long thep requests um took is not
+
+
+enough because here is just going to
+
+
+give you the total time right this whole
+
+
+ATP request took I don't know how many
+
+
+MCS um of course it's important for
+
+
+integrated that in our case we
+
+
+integrated those regular ATP Logs with
+
+
+some monitoring tools like up time so it
+
+
+can trigger in incidents if some request
+
+
+takes longer than the threshold and then
+
+
+that incident is going to trigger
+
+
+someone that isn't call P your duty he's
+
+
+going to chime in and try to understand
+
+
+what happen um but this is not very
+
+
+useful for you to actually debug where
+
+
+are the performance button X in your
+
+
+graphql application and we needed to get
+
+
+more detailed in information because
+
+
+again you can't predict how a graphical
+
+
+query is going to look like and with all
+
+
+that flexibility it can be really
+
+
+anything and there are infinite
+
+
+combinations for all those those queries
+
+
+right so we need to get more detailed
+
+
+information monitoring that is actually
+
+
+going to help us um debug and understand
+
+
+where are the performance Boton XS um so
+
+
+with this we know how long each
+
+
+graphical request can take but not how
+
+
+long the actual graphical query takes uh
+
+
+you know HP request there is a full um
+
+
+there is a full um pipeline of steps
+
+
+that are taken you may have
+
+
+authorization may have authentication
+
+
+may have a load balancer you may have a
+
+
+firal I don't know there are other
+
+
+layers that are included there um but
+
+
+the first level that we needed to get
+
+
+other than starting with the ztp request
+
+
+it should understand the query itself so
+
+
+there are different tools for that in
+
+
+our case uh we've been using honeycomb
+
+
+pretty successfully integrate which is
+
+
+uses open Telemetry under the hood and
+
+
+something that is interesting about
+
+
+using open Telemetry and um honeycom is
+
+
+that you now can have more detailed
+
+
+information in each of the steps and
+
+
+understand how different steps of your
+
+
+graph query execution
+
+
+took so U because graphical the first um
+
+
+query is going to be analyzed parsed
+
+
+validated and then finally executed so
+
+
+here you can understand how long each of
+
+
+those uh steps have taken and then how
+
+
+long the actual graph query execution
+
+
+has taken and then other levels um
+
+
+deeper um under that including each of
+
+
+the database queries that were executed
+
+
+as part of that so we start to have more
+
+
+detailed information on how much each of
+
+
+the graphql queries actually take so
+
+
+this is great if you just have an API
+
+
+that is connected to a single frontend
+
+
+application because graphic is not
+
+
+predictable but then you know exactly
+
+
+who is using your API so you understand
+
+
+more or less what are what are the
+
+
+queries that are coming from the front
+
+
+end and you should be able to track some
+
+
+of them here but when you have an API
+
+
+that is more flexible and widely open um
+
+
+there can be many combinations and just
+
+
+tracking that may not be enough um
+
+
+because we don't know exactly using that
+
+
+approach you can know but at this stage
+
+
+where I just wacking the steps um which
+
+
+fields are responsible for most of the
+
+
+time to Computing that query so having
+
+
+perfi monitoring um in graphql is super
+
+
+important because sometimes have a query
+
+
+that is asking for like 20 fields and
+
+
+there is one that is not liar and that
+
+
+is making most of that query take longer
+
+
+and you don't know if you're not
+
+
+properly monitoring it and you need to
+
+
+use that um debugging way of like
+
+
+deleted this field to computer how long
+
+
+it takes deleted the other field to
+
+
+computer how long it takes U which is
+
+
+how we started doing um so there are
+
+
+other tools that allow you to do that
+
+
+and we used Apollo graphql in the past
+
+
+um which is nice because it doesn't only
+
+
+give you a good it also gives you a good
+
+
+view of your schema a visual
+
+
+um a visual representation of your
+
+
+schema it can also serve as great as as
+
+
+documentation as a way to keep track of
+
+
+changes to the
+
+
+schema and it provides some monitoring
+
+
+tools that are pretty interesting
+
+
+because then you start to have more um
+
+
+metrics on how long each different
+
+
+Fields can take and not only the
+
+
+duration to compute each of those fields
+
+
+but also the sequence where they happen
+
+
+right so you can see things like that
+
+
+where maybe some fields that could be
+
+
+calculated in parallel they're being
+
+
+calculated sequentially so some Fields
+
+
+taking this amount of time there are
+
+
+other fields that are going to be
+
+
+computed right only after that so may so
+
+
+you can from here get some sight not
+
+
+only on fields whose computation can be
+
+
+faster but also on approach on how those
+
+
+fields are computed um as as a group as
+
+
+well and it also integrates with other
+
+
+tools in our case we have this pretty
+
+
+nice um is like integration who posts
+
+
+every day um what are the most used
+
+
+queries and how long the quer is taken
+
+
+lowest ones so we can keep track of that
+
+
+in the sumarized um View on a daily
+
+
+basis which is pretty cool and of course
+
+
+there are many other tools for that so
+
+
+what's important here is to show the
+
+
+different levels of performance tracking
+
+
+and using some tools as an example but
+
+
+there are many different tools that can
+
+
+do that as well including um gems in
+
+
+rails itself so you don't even need to
+
+
+use a separate tool for that there are
+
+
+ways of uh including the time in the
+
+
+graphical response itself so you can
+
+
+track it from your side so there are
+
+
+many different ways of doing that and
+
+
+the goal here was to mostly show what
+
+
+are the different um levels and and the
+
+
+different ways of measuring performance
+
+
+not only from the overall query but for
+
+
+each field and for each different level
+
+
+um but now that we are able to monitor
+
+
+those and we can identify some of the
+
+
+bonx how to actually improve um some of
+
+
+those problems uh the classic graphql
+
+
+problem is the n plus one queries
+
+
+problem right which is the fact that the
+
+
+number of database queries that are
+
+
+going to be executed are and
+
+
+proportional to the amount of data that
+
+
+you're loading so again to the classic
+
+
+um rails tutorials schema we have here a
+
+
+user a user has uh written many posts
+
+
+and the post belongs to a user and has
+
+
+many tags um and if we write a query to
+
+
+retrieve give the first posts and from
+
+
+each post we needed the outer name and
+
+
+normally this is what is going to happen
+
+
+um it's going to make one query to get
+
+
+the post and then get one one query for
+
+
+each of the users that we are loading so
+
+
+we requested five posts this means six
+
+
+queries being executed against our
+
+
+database um in rest Endo this is less of
+
+
+a problem because the request are
+
+
+predictable so you can so we know that
+
+
+every time the Zend Point returns posts
+
+
+with the user information we can just
+
+
+preload everything and use eer loading
+
+
+in your query to include everything but
+
+
+in graphql we can't really anticipate
+
+
+what the API client is going to ask for
+
+
+and in many cases it won't make sense to
+
+
+e loads everything all the time because
+
+
+it's goes against one of the principles
+
+
+of graphql which is avoid that you query
+
+
+for things that are not needed so uh we
+
+
+can't always preload that data in most
+
+
+cases you want to be able to because you
+
+
+don't have this level of of
+
+
+predictability on is going to be
+
+
+requested so um there are different ways
+
+
+of doing that so when we're talking
+
+
+about belongs to this is easier you can
+
+
+just use uh some kinds of batching um
+
+
+strategy here one is using the gra Graal
+
+
+batch jam which was implemented by SP uh
+
+
+Shopify and you have batch loader as
+
+
+well uh so what's important here is not
+
+
+really the tool but the approach which
+
+
+is true um you know that every time um
+
+
+an Alor is requested under the context
+
+
+of a post type um usually you're going
+
+
+to you know require a collection of
+
+
+posts and the auor you know that always
+
+
+an object you can use a record loader
+
+
+for that model and uh then all those
+
+
+queries that were executed one for each
+
+
+instance that was requested becomes one
+
+
+single query to loads um all of those
+
+
+instances from the database and then
+
+
+regardless if you're asking for five 10
+
+
+or 20 thises is not going to increase
+
+
+the number of database queries um
+
+
+running against your um
+
+
+database so this works pretty well for
+
+
+belongs to relationships because you
+
+
+know if you're under the the scope of a
+
+
+parent um that this object is going to
+
+
+be loaded in a collection but not really
+
+
+for has many
+
+
+relationships um so another tool that we
+
+
+can use in that case is the graphical
+
+
+pre preload gem so we know that for uh
+
+
+Tex field for for example back to that
+
+
+example where still have a blog post
+
+
+with viers and Texs um you can always
+
+
+preload the Texs and then regardless on
+
+
+how that data is going to be quered
+
+
+you're going to again preload that data
+
+
+um in the in the beginning of the scope
+
+
+of your query so you don't need to
+
+
+request it every
+
+
+time um so it's Works kind of nice when
+
+
+you
+
+
+have queries that are not very nested
+
+
+and that don't have too many levels and
+
+
+but when things start to get more
+
+
+complex it can start to gets even more
+
+
+complicated so one cool approach to that
+
+
+is again we know that graphical is
+
+
+unpredictable but sometimes it can be a
+
+
+bit more
+
+
+predictable um so what's if you're able
+
+
+to predict the data that's going to be
+
+
+requested and then you can uh preload
+
+
+some of the associations only the ones
+
+
+that you need for that query so this is
+
+
+a different approach uh which has
+
+
+a functionality that is provided by the
+
+
+Ruby graphql gy itself which is called
+
+
+look ahead um look ahead is a bit more
+
+
+complicated in practice so let's start
+
+
+by the higher level of um abstraction
+
+
+here which is that you can declare a
+
+
+field to receive a look ahead object as
+
+
+an extra and then you can pass that look
+
+
+ahead object to the method that Des
+
+
+describes the connection of objects that
+
+
+you are returning and then the look
+
+
+ahead's object is like a tree structure
+
+
+that represents all the information that
+
+
+is requested in that specific query so
+
+
+um here we know that um this query is
+
+
+requesting a u list of users and then
+
+
+the list of posts from that user we have
+
+
+IID did in title and for each user the
+
+
+ID and the name so for that query we can
+
+
+have in a strategy to load that specific
+
+
+data which can be more in a more
+
+
+optimized way than loading other users
+
+
+first and then loading for each user all
+
+
+the post from that user which would make
+
+
+us fall into the N plus1 quer problem
+
+
+again but in practice this is more um
+
+
+complicated because depending on how
+
+
+many different combinations you can have
+
+
+for all those different queries the way
+
+
+that you deal with the look ahead object
+
+
+can be pretty complicated as well so
+
+
+this brings me back to what was saying
+
+
+in the beginning about always evaluates
+
+
+the tradeoffs if you're really going to
+
+
+have a good performance gain with that
+
+
+change at the cost of making the codes
+
+
+more complex and more um difficult uh to
+
+
+read but for some very expensive Fields
+
+
+this can make a big difference because
+
+
+then you're you you are handling
+
+
+precisely the structure of data that has
+
+
+been requested for the that specific
+
+
+query so there are um this this gets
+
+
+very specific when it comes to
+
+
+implementation but there are different
+
+
+strategies out there but um for more
+
+
+nested and complex queries that's one
+
+
+way of handling um this kind of
+
+
+problem um but it would be great if we
+
+
+didn't even had to um worry about
+
+
+queries that are too complex
+
+
+right um again especially when you're
+
+
+dealing with uh an API and a codebase
+
+
+that is and that is open source and
+
+
+anyone can use the way they want and
+
+
+things can get very
+
+
+nested uh very deep very easily and you
+
+
+can even fall into some circular
+
+
+dependency problems here where the same
+
+
+data can be requested at different
+
+
+levels so here I get a list of users and
+
+
+then a list of posts and then again I
+
+
+get the author of that post post who has
+
+
+that user and then I got the post again
+
+
+so those are those are things that can
+
+
+actually happen when you don't have any
+
+
+control um um around that and there are
+
+
+some simpler ways of controlling some of
+
+
+that so um on the graphql gy itself you
+
+
+have a simple Max def option that you
+
+
+can set when you declare your um your
+
+
+graphql um schema so set here Max dep of
+
+
+four of course you need to adjust each
+
+
+case as a different case and this means
+
+
+that if you have a graphical query
+
+
+that's asking for uh nested data that is
+
+
+deeper than that it's going to throw an
+
+
+exception and so you can put some
+
+
+safeguards around that but even when you
+
+
+are not um even when you control the
+
+
+nested level of your queries you still
+
+
+can have problems with even with a
+
+
+single level if it's asking for too many
+
+
+fields or for too many fields that's are
+
+
+very costly to be computed so one
+
+
+General way of controlling some of that
+
+
+as well is to put some timeout control
+
+
+around the graph query execution and
+
+
+again this is something that can be
+
+
+added to your um graph C schema and then
+
+
+uh you can just control um the maximum
+
+
+time for a graphical query to be
+
+
+executed and then you can do anything
+
+
+when this uh situation um happens right
+
+
+you can log that and then keep better
+
+
+track of that in your monitoring tools
+
+
+if you have some kind of integration
+
+
+between your application and an
+
+
+application like Sentry to um to catch
+
+
+errors and things like that you can do a
+
+
+centry notify and then starts also
+
+
+generating metrics around this situation
+
+
+and then you're going to have enough
+
+
+information that's going to help you
+
+
+better um track um what actually is a
+
+
+timeout that makes sense for for on the
+
+
+case of your application and your
+
+
+API um and and then when we get so those
+
+
+are strategies to control um the query
+
+
+execution time for the whole query but
+
+
+then when it starts to look into things
+
+
+more at a field level there are
+
+
+different ways of improving each
+
+
+different fields some Fields may be very
+
+
+costly to be computed and of course
+
+
+caching is one of the things that come
+
+
+into mind when you get to that right so
+
+
+um one way of doing that using existing
+
+
+tools out there is the graph Ruby
+
+
+fragment cache gem which allows you to
+
+
+Cache um different fields at the graph Q
+
+
+API layer level so um by default the
+
+
+easiest way is to just declare here that
+
+
+you're going to have a cache fragment
+
+
+through and then this Fields is going to
+
+
+be cached until you um invalidate that
+
+
+that field but um you have a good level
+
+
+of customization and then you can Define
+
+
+the different keys for your um fra
+
+
+fragments right so if you use some
+
+
+information here that is a varable or
+
+
+that is a Tim stamp it's going to be inv
+
+
+validated automatically after this key
+
+
+is not valid
+
+
+anymore um but uh usually with anything
+
+
+that deals with caching you know there's
+
+
+also that um famous and quotes that
+
+
+there are two hard things in computer s
+
+
+which is nameing things and cach
+
+
+invalidation caching invalidation can
+
+
+get pretty um tricky so we can use
+
+
+different approaches to caching as well
+
+
+of course defining a key and using um
+
+
+Dynamic variables in those keys to
+
+
+invalidate it automatically when the
+
+
+value changes is a pretty common one but
+
+
+um in a big application it can get more
+
+
+complex if you lose control control of
+
+
+the different events that can trigger a
+
+
+cash a cash invalidation and it can be
+
+
+pretty easy to miss uh different
+
+
+operations that should invalidate the
+
+
+cach um this is where a different
+
+
+approach um could be to do something
+
+
+that is more event based so we built our
+
+
+own like Library around it where we call
+
+
+a cached field and then for each uh for
+
+
+each cach fields we have a start value
+
+
+and then we declare um
+
+
+a list of operations that can invalidate
+
+
+that cach so this is only for fields
+
+
+that are really expensive and that's
+
+
+need to be recomputed in real time and
+
+
+then what we do is that we declare a
+
+
+list of other models and what are the
+
+
+events related to those models that
+
+
+should trigger uh cash invalidation
+
+
+operation and then uh it's and then it's
+
+
+easier for us to have control over of of
+
+
+that in a large code base because um we
+
+
+don't need need to look in different
+
+
+places uh and to search the code for the
+
+
+different parts that should be
+
+
+invalidating that cach but instead you
+
+
+have everything in in one place and you
+
+
+know exactly which events are going to
+
+
+update that cach Fields so um under the
+
+
+hoods here is just a bunch of um Ruby
+
+
+meta programming being used to define
+
+
+some um some callbacks on the Fly for
+
+
+those models and um updates a cached
+
+
+value using Roy def full caching um
+
+
+storage for that so this is something
+
+
+that's in a large codebase helps us and
+
+
+keep track of um how cach values um can
+
+
+be updated and needed to be
+
+
+updated um and all those strategies were
+
+
+very focused on dealing with a single um
+
+
+graphic query sent to the
+
+
+application um thanks get different when
+
+
+the application is running in production
+
+
+and under concurrency um you can have
+
+
+different manyu queries being sent to
+
+
+your application at the same time and
+
+
+then this is another situation where
+
+
+scalability can get really tricky um and
+
+
+uh even for a a single API client with a
+
+
+single session this can happen which is
+
+
+actually something that many cases is
+
+
+nice to have because you save some of
+
+
+the HTTP overhead if you send b the
+
+
+queries from the API client or from the
+
+
+front to your back end this is something
+
+
+that is provided by an Apollos um client
+
+
+um query batching or even if you are if
+
+
+you have a react application that is
+
+
+using relay under the hoods which is our
+
+
+case and react relay you can tweak your
+
+
+network layer to send the queries in
+
+
+batch automatically it's basically keeps
+
+
+control of in which components and which
+
+
+level of your application those queries
+
+
+are coming from and if they are
+
+
+triggered around the same time they are
+
+
+combined um in a single um HTTP request
+
+
+that is sent to the back end and then of
+
+
+course on your backend side you need to
+
+
+support batchet queries but um this is a
+
+
+screenshot of um the network tools on
+
+
+Chrome that is running on re relay with
+
+
+batet query so it's basically an array
+
+
+of different graph Q requests each of
+
+
+them gets an ID so the client knows and
+
+
+how to keep track of the ones that and
+
+
+were successful the ones that failed and
+
+
+how to update the relay cach based on
+
+
+that and and then on the um on the back
+
+
+ends uh the back end should be able to
+
+
+process those budget queries as well so
+
+
+this is also something that is provided
+
+
+by defa the uh rubby graphical gam using
+
+
+something called multilex and then when
+
+
+you receive uh that list of um queries
+
+
+your schema is able which executes them
+
+
+concurrently um that's list of queries
+
+
+um of course one of the problems with
+
+
+that is that um the uh it's good that it
+
+
+saves time with the ATP overhead in some
+
+
+cases again this is one of the situation
+
+
+that may not work in many cases because
+
+
+um and you may have one of those queries
+
+
+in the batch that take way longer than
+
+
+the others and the back end is just
+
+
+going to respond when all of the queries
+
+
+were computed so again this is a
+
+
+situation where it's important to keep
+
+
+track of performance and to have good
+
+
+metrics around that and one case of uh
+
+
+one thing of this architecture that
+
+
+really helps with that is the fact that
+
+
+each query is um validated and analyzed
+
+
+independent so they have their own
+
+
+instrumentation so you are still able to
+
+
+report metrics on each query
+
+
+individually so you know if there might
+
+
+be some query that is taken most of the
+
+
+time of the other queries um um um in
+
+
+the batch um but when you have a good
+
+
+balance between the different queries
+
+
+that are executing and when you have
+
+
+some HTTP overhead um involved in those
+
+
+requests they can this can make a good a
+
+
+good difference as well but again only
+
+
+um it's important to keep monitoring
+
+
+that and to be sure that you are um that
+
+
+this this is the right solution for your
+
+
+use
+
+
+case um and all those strategies here we
+
+
+are basically focusing on and graphical
+
+
+queries and doing reads operations and
+
+
+when we get to mutations is um not
+
+
+something that's I'm going to go deeper
+
+
+in that presentation the focus was
+
+
+mostly on um on concurrence reads and
+
+
+computation of um data but uh when you
+
+
+get to mut there are different strategy
+
+
+that we use which then again is not
+
+
+specifically for and graphql
+
+
+applications but depending on the US
+
+
+cases delaying some things to background
+
+
+jobs especially if you're talking to
+
+
+other external services and doing some
+
+
+book operations if you have for example
+
+
+in our application you have we have
+
+
+select all and the tag or sends
+
+
+everything to trash um running um book
+
+
+queries to that in the database and then
+
+
+laying some of the other computation
+
+
+related to to that can really save a lot
+
+
+of time and give faster feedback uh to
+
+
+the
+
+
+user um but uh again those are just two
+
+
+general approaches that depending on on
+
+
+the case can be usful as well um in
+
+
+conclusion is what with great syst comes
+
+
+great responsibility not exactly but uh
+
+
+just to summarize some of those things
+
+
+um prioritize performance of
+
+
+optimization of course is very important
+
+
+should guarantee um scalability we you
+
+
+can't really um improve anything if
+
+
+you're not monitoring and keeping tracks
+
+
+uh and keeping track of metrics
+
+
+correctly at the different levels so you
+
+
+can really identify where the
+
+
+performance botton uh the performance
+
+
+botton X are not only to be sure that
+
+
+you're attacking the right problem but
+
+
+that you're are making those changes
+
+
+faster because we know how things that
+
+
+are is low for users they make a big
+
+
+difference on to adoption and uh then
+
+
+identify exactly in what level is uh the
+
+
+problem and also understand that op uh
+
+
+optimization is an ongoing process right
+
+
+it's not a onetime thing that you you
+
+
+know stop a f Sprint to do maybe
+
+
+depending on how much technical depth
+
+
+you have it to handle it's important to
+
+
+take one Sprint to only work on those
+
+
+things but it's something that needs to
+
+
+be done systematically
+
+
+systematically um keep track on where
+
+
+the bonx were introduced if it is higher
+
+
+demand which is good problem to have
+
+
+right for many of those situations here
+
+
+if you reach that situation in
+
+
+production this is can be a good problem
+
+
+to have this means that your product is
+
+
+getting traction and more and more usage
+
+
+uh but uh this the the the the later you
+
+
+save to do it the worse because
+
+
+performance just keeps adding up right
+
+
+so if I could focus on one thing here I
+
+
+would say that monitoring is one of the
+
+
+most important things to do and also
+
+
+when you are working on a team setting
+
+
+have the team have this performance mind
+
+
+when doing the work and have that part
+
+
+of the process is super important for
+
+
+the engineering team adoption of those
+
+
+uh tools and improvements as
+
+
+well uh I know that this is a lot to be
+
+
+um
+
+
+uh show here but it's the idea is most
+
+
+to show the different aspects of the
+
+
+work so you can um you can thank which
+
+
+of those makes sense and where to look
+
+
+for more details about each of them I
+
+
+hope that I got thanks right here if if
+
+
+not uh let me know thank
+
+
+[Applause]
+
+
+you okay oh we got a
+
+
+question so thank thank you for the Pres
+
+
+for the presentation sorry uh so did you
+
+
+compare the approach of uh
+
+
+denormalization of data with the
+
+
+approach of using the gems graphql batch
+
+
+and graphql prol for example like uh uh
+
+
+create a field uh of tags in uh the
+
+
+model of posts and uh uh I'm not like uh
+
+
+um I I'm not sure that it will work for
+
+
+all all the stuff but at the same time
+
+
+for some the most common queries I think
+
+
+that also can be one of the possible
+
+
+approaches thanks thank you um again I
+
+
+mean all the posts and user examples
+
+
+here are just to be easier for people to
+
+
+understand it's not really our our use
+
+
+case but but yeah graph K batch was the
+
+
+first things that we introduced to avoid
+
+
+the the the the query issues that we
+
+
+have I we haven't evaluated the other
+
+
+two we uh you mentioned it's actually
+
+
+made a difference in in in our case
+
+
+maybe it's important to also explain
+
+
+that in our case we have an API the data
+
+
+model that is pretty big also in part
+
+
+because it's a tool that has been
+
+
+evolving for eight years so features and
+
+
+Fields and information is just being
+
+
+added up so we don't have like one
+
+
+single field that was more requested or
+
+
+more cost than others so our approaches
+
+
+were generally to try to handle the the
+
+
+at the query level and more or less at
+
+
+those specific Fields
+
+
+levels hey thank you for the great
+
+
+presentation um as a preface I haven't
+
+
+used graph quo in production and uh I
+
+
+get the sense from like internet
+
+
+discourse that the question I'm about to
+
+
+ask you is a big one so I'm just
+
+
+interested in like highle General
+
+
+strategies but
+
+
+um I'm interested in like if you if your
+
+
+application that you've worked on has
+
+
+the need for like authorization logic
+
+
+and and when you're dealing with these
+
+
+highly flexible queries like what some
+
+
+of the general strategies are for like
+
+
+authorization like is it best to do it
+
+
+at the field level is are there layers
+
+
+that you need to get to coordinate
+
+
+together um yeah just generally curious
+
+
+on that yeah that's an interesting
+
+
+question thank thanks so um auth
+
+
+authentication usually happens at one
+
+
+single level on the controller before
+
+
+even get into execution so this is not
+
+
+very different than anything else but of
+
+
+course you just have one end point so
+
+
+the authentication is going to be the
+
+
+same for all of that and then
+
+
+authorization more into the resources
+
+
+that you have access to there are
+
+
+basically two ways of doing that the
+
+
+graphic ql rby gy is pretty flexible on
+
+
+how you can have authorization to the
+
+
+field level and integrates with normal
+
+
+rub gems for um authorization like can
+
+
+can can and things like that so you can
+
+
+control the resource it's the resource
+
+
+level so the type or the model and also
+
+
+each Fields level as well and then you
+
+
+can do both on the graphical layer
+
+
+itself or even at a lower level in our
+
+
+case we use kkin actually when we
+
+
+started the graph C even didn't even
+
+
+have that autorization control at the
+
+
+API layer so we did it one level behind
+
+
+that but it has the capacity of doing
+
+
+so and I forgot to mention that also
+
+
+there is a in some of the queries here
+
+
+show that there is a context object this
+
+
+is available in every query and field
+
+
+and usually this is where you have
+
+
+access to information around the
+
+
+currency user what's the scope access
+
+
+they have
+
+
+Etc hello hi um so you have explained
+
+
+all these issues that come with graphql
+
+
+and solutions uh for them have you ever
+
+
+considered going back to rest oh I make
+
+
+the scratch myself every
+
+
+day uh uh uh no not really but again
+
+
+this because each case is a different
+
+
+case in our case as it is in open source
+
+
+application it would be pretty hard and
+
+
+in the beginning we even have we had in
+
+
+house three different clients
+
+
+applications that consumed the same API
+
+
+so it would be pretty hard for us to
+
+
+have all that flexibility in rest so for
+
+
+our user case it still makes sense but I
+
+
+assume that there are many applications
+
+
+out there that people just decided to
+
+
+use graphql because it was the vector
+
+
+database of those times so like let's
+
+
+just use it um so but not in our case
+
+
+because for our user case we must have
+
+
+this flexibility and we provided the
+
+
+tool for many fact checking agencies
+
+
+around the world and they have their own
+
+
+systems they need to consume the AP they
+
+
+all have different needs for that so it
+
+
+would be pretty hard for us to give
+
+
+support to all those use cases if we
+
+
+didn't have this kinds of
+
+
+flexibility all right I see no more
+
+
+questions uh thank you very much for
+
+
+great presentation L ladies and
+
+
+gentlemen K
+
+
+almea thank you
+
+
+[Applause]

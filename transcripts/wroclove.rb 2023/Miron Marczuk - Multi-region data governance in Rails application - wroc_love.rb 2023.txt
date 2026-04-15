@@ -1,0 +1,3364 @@
+yeah thanks a lot for having me
+
+
+um yeah I'm really excited to be here
+
+
+and yeah actually I'm I'm from Poland
+
+
+um but this is my first time here in
+
+
+verotoff if you can believe it um it's a
+
+
+beautiful city and as it was mentioned
+
+
+it's my first ever
+
+
+um public Tech conference talk as well
+
+
+so a lot of things to be excited
+
+
+um a bit stressed but I hope you know
+
+
+I'll give you a good example to you know
+
+
+next year be in my position
+
+
+um Okay so
+
+
+today we'll be talking about a
+
+
+multi-region data governance in rails
+
+
+application that's the name of the talk
+
+
+that I submitted it
+
+
+um I lied I liked not with bad
+
+
+intentions but I think the topic that I
+
+
+chose it's quite wide
+
+
+um we'll get in a second what exactly
+
+
+multi-region is however
+
+
+um because this is such a wide topic I
+
+
+decided to focus on a very specific
+
+
+aspect of that multi-data multi-origin
+
+
+data governance and actually about
+
+
+moving from having a single
+
+
+just what small technical glitches for
+
+
+at the beginning
+
+
+doesn't work obviously
+
+
+okay yeah
+
+
+nope
+
+
+cool okay so we're going to speak about
+
+
+a specific um case about moving from
+
+
+having a single region multi-tenant
+
+
+application to a multi-region
+
+
+multi-tenant application
+
+
+um yes and I know a year ago there was a
+
+
+really good talk about the multi-tenant
+
+
+this year we're going a step further and
+
+
+we're going for multi-tenant to
+
+
+multi-region multi-tenant and so let's
+
+
+get started and today's story will be
+
+
+actually about a success about think
+
+
+that all the people that build
+
+
+applications actually dream about
+
+
+because
+
+
+um you yourself as entrepreneurs or
+
+
+developers you build applications to at
+
+
+the end maybe earn money create
+
+
+um business value to the clients and
+
+
+today's story The reason why we even
+
+
+talk about the multi-region is because
+
+
+of a story of success about the idea
+
+
+that picks up and then creates the
+
+
+problem that we're going to solve later
+
+
+so let's imagine an entrepreneur that
+
+
+kind of has an idea and for the sake of
+
+
+the example let's assume that that
+
+
+person
+
+
+um thought about a SAS application to
+
+
+host merchants and allow them to build
+
+
+shops so their clients can buy stuff
+
+
+through their system
+
+
+yes
+
+
+you know you they recognize the market
+
+
+you they saw the opportunity and that
+
+
+idea grew in in an entrepreneur's mind
+
+
+and in order to go from idea to actual
+
+
+um application you need to kind of grow
+
+
+that seed and build build the thing that
+
+
+you imagined and what's the best way to
+
+
+do it in the web framework environment
+
+
+rails new command yeah
+
+
+and yeah it's so cool
+
+
+okay and by the way I kind of this is my
+
+
+first talk so I can't imagine like
+
+
+people just stand up and standing up
+
+
+hmm
+
+
+awesome and okay so we're going from an
+
+
+idea to actual implementation and
+
+
+um well we have our neighbor who
+
+
+actually sells some stuff for the
+
+
+internet so maybe let's get them on the
+
+
+platform and he agrees and he picks up
+
+
+and creates a shop and there are people
+
+
+who actually go to that shop and start
+
+
+to buy things in our application there
+
+
+are users that start to use the shop on
+
+
+our platform and then the word spreads
+
+
+out there are new clients and there are
+
+
+more and more and more people and more
+
+
+clients in those shops who join the
+
+
+platform yay I think it picks up we have
+
+
+clients and then you kind of start to
+
+
+see hmm maybe there is more potential
+
+
+for my platform so let's move and attack
+
+
+other markets let's grow Global globally
+
+
+and that's what you do
+
+
+initially you were just based in let's
+
+
+say United Kingdom but you see a market
+
+
+at this in states in USA so what you do
+
+
+is to start bringing clients in another
+
+
+country in another region and you know
+
+
+the shops start to pick up and there are
+
+
+clients there as well but what happens
+
+
+is this um development is organic so you
+
+
+kind of you're still that entrepreneur
+
+
+who had this idea and you build that
+
+
+application and it's it was built in the
+
+
+place where you were close which was
+
+
+United Kingdom so kind of it's still not
+
+
+uh not really separated all your data is
+
+
+still where it was initially but you
+
+
+grew globally
+
+
+now
+
+
+you start to face a problem because
+
+
+there is a big client there are a lot of
+
+
+actually big clients who say okay yeah
+
+
+I'm going to join your platform however
+
+
+I have a requirement for you
+
+
+you need to store data in the region
+
+
+where I'm from I don't want to have my
+
+
+data across the ocean I don't want to
+
+
+have it I'm from USA I want to have my
+
+
+data here not on the service in England
+
+
+so you end up with a situation where
+
+
+kind of the initial setup with data
+
+
+being stored in UK is no longer valid
+
+
+and you actually want to have the need
+
+
+from the clients is
+
+
+um to have their data in the place where
+
+
+they're originally from this is a cause
+
+
+of your success this is because you grew
+
+
+you grew globally so now the question is
+
+
+how do you do that how do you move from
+
+
+having that single multi-tenant because
+
+
+we had multiple clients and two
+
+
+multi-region multi-tenant application
+
+
+and this is what we'll discover today
+
+
+during our talk and this is exactly the
+
+
+problem we a team in apply for faced and
+
+
+yeah we don't build shops actually and
+
+
+we are permitting SAS application for
+
+
+film and event
+
+
+um for film and event industry and my
+
+
+name is Miron I work in apply for
+
+
+through secret source and the reason why
+
+
+I mentioned two companies because
+
+
+sometimes it's difficult to find a good
+
+
+one job I was privileged to find two
+
+
+really really good jobs one with a
+
+
+fantastic product in the growing Market
+
+
+the second with an office in the place
+
+
+like this so in Gran Canaria so it's
+
+
+kind of not bad but don't worry
+
+
+I'm not going to leave the beautiful
+
+
+dark November of Poland it's
+
+
+in a month and getting back to the
+
+
+business
+
+
+so we are applied for and we build this
+
+
+permitting SAS platform
+
+
+um for for like I said for film and
+
+
+event Industries and our clients are
+
+
+authorities in UK
+
+
+um Canada States and in New Zealand
+
+
+authorities that allow people to have
+
+
+their events or
+
+
+um filming shoots
+
+
+um held in their city for example to
+
+
+block the streets in order to have a
+
+
+safe event
+
+
+and our end users the people who
+
+
+actually go into tenants are even film
+
+
+producers or event organizers and kind
+
+
+of the example that I started with the
+
+
+shops
+
+
+um it matches our case matches the SAS
+
+
+application that we have but instead of
+
+
+shops in our case and what we have are
+
+
+authorities so we um we yeah the tenant
+
+
+in our setup are authorities and this is
+
+
+um the only difference to the example
+
+
+that I started with
+
+
+and the problem that I that I mentioned
+
+
+it's exactly what we faced are you as
+
+
+clients decided that they no longer
+
+
+um can support the architecture in which
+
+
+their data is in UK and required us to
+
+
+move to the U.S to move their data into
+
+
+U.S and that brings us on a journey of a
+
+
+multi-region how do you do that how do
+
+
+you actually
+
+
+Implement that in a real system
+
+
+so what's the goal of this change kind
+
+
+of we are taking thinking about
+
+
+conceptually about moving data from one
+
+
+region to another what does it mean it
+
+
+means that the data which was of the
+
+
+clients which was stored previously in
+
+
+um one region in UK suddenly needs to
+
+
+end up in a different infrastructure on
+
+
+a different side of the ocean and let's
+
+
+talk kind of details now so we have our
+
+
+United Kingdom that's where we initially
+
+
+store the data of our clients that's
+
+
+where our initial clients are from and
+
+
+then we have this new infrastructure in
+
+
+the US that we want to introduce and
+
+
+separate the data and place it there
+
+
+and
+
+
+the setup is as you can see first of all
+
+
+it's multi-tenant because we have multi
+
+
+multiple clients
+
+
+um operating within an application
+
+
+clients with their own users and and
+
+
+then we add this additional layer of a
+
+
+multi-region so we instead of having one
+
+
+multi-tenant application we only have
+
+
+two and that's why try to and what
+
+
+that's what I mean when I use this
+
+
+expression of a multi-region
+
+
+multi-tenant
+
+
+and kind of you know going back to the
+
+
+fact that we had a talk yesterday about
+
+
+the multi-tenant
+
+
+yeah I think kind of next year
+
+
+and yeah maybe in 10 years yeah we'll
+
+
+end up in this so a lot of potential for
+
+
+future Ducks yeah
+
+
+good
+
+
+ah that was okay I'll work on it
+
+
+details so what exactly is data I
+
+
+mentioned the data we need to move one
+
+
+thing from uh one place to other what
+
+
+actually is data in our case
+
+
+um we're talking about database records
+
+
+and files that were uploaded by the
+
+
+users and stored in the region
+
+
+and to kind of give you a bit more
+
+
+context and I'm going to mention just
+
+
+quickly briefly the stack that we use so
+
+
+you have a picture of the infrastructure
+
+
+that we have to deal with
+
+
+um so we have our Ruby on Rails
+
+
+application in a container deployed to
+
+
+es ec2 ews service we're using AWS but
+
+
+it doesn't really matter what you use
+
+
+and then we have our
+
+
+data persistent layer that consists of
+
+
+database consists of file system and
+
+
+consists of redis so you can store data
+
+
+and these are kind of the pieces of
+
+
+infrastructure Plus on top DNS and load
+
+
+browser that allows you to connect your
+
+
+application to the outer world I
+
+
+mentioned this because we'll actually
+
+
+use it but not that detailed in the
+
+
+future it's not about infrastructure
+
+
+today
+
+
+um okay so when you think about that
+
+
+multi-region multi attendant setup what
+
+
+options do you have what type of
+
+
+architectures you can Implement and use
+
+
+to make it kind of satisfy the
+
+
+requirement from the users
+
+
+so one option is to keep having just one
+
+
+application but separate the data layer
+
+
+the data persistence layer so you end up
+
+
+with something like this
+
+
+um where the data is kind of clearly
+
+
+separated and however the complexity is
+
+
+that the application takes takes the
+
+
+challenge of actually
+
+
+going and um taking the right data for
+
+
+the region so a lot of complexity about
+
+
+this multi-region now lays in your
+
+
+application and you know there's a lot
+
+
+going on in applications there is a
+
+
+whole domain to be modeled and
+
+
+implemented so do you really want to
+
+
+implement another really
+
+
+challenging concept into your system and
+
+
+the other option is to actually separate
+
+
+applications completely that means from
+
+
+one go from one application from one
+
+
+data persistent layer to two different
+
+
+separate ones and then there is the
+
+
+option number three which is sort of a
+
+
+hybrid option
+
+
+where okay you separate the application
+
+
+you separate the data but then you have
+
+
+something in between that is shared
+
+
+between the two regions to kind of
+
+
+handle the data that is required by both
+
+
+applications and it depends on the case
+
+
+so I'm going to now tell you why we
+
+
+picked one of the options but for your
+
+
+applications when you'll be facing this
+
+
+challenge in the future you have to pick
+
+
+what kind of works best for you to help
+
+
+you with that I have a set of questions
+
+
+so the first one is can tenants move
+
+
+across the regions so
+
+
+can and how much data is shared between
+
+
+the region so how often do you need to
+
+
+synchronize the data between the regions
+
+
+and also
+
+
+the third thing is can users operate in
+
+
+tenant in different tenants across
+
+
+regions and the answers for us as we
+
+
+kind of found out is now tenants don't
+
+
+move across regions I mean it's
+
+
+difficult to change a country like
+
+
+between the oceans so kind of we're
+
+
+pretty safe in that regard
+
+
+secondly how much data is shared we
+
+
+found out that not much and there is a
+
+
+bit that needs to be put into two
+
+
+regions but we are okay with kind of
+
+
+going two different roads for that
+
+
+specific piece of data and thirdly
+
+
+um
+
+
+can users operate in different in
+
+
+different regions yes they can but it's
+
+
+not really supported it's not expected
+
+
+to apply for event across the ocean
+
+
+because most probably doing your work in
+
+
+the region that is closest to you and
+
+
+for that reason our big decision was
+
+
+just separate
+
+
+completely so that was the decision that
+
+
+we made and that's what we followed with
+
+
+so to kind of just understand we go
+
+
+again we go from
+
+
+um this one single application to that
+
+
+consists data from both regions and by
+
+
+the way the colors and I know it's not
+
+
+that clear unfortunately there's some
+
+
+problems but there is kind of two
+
+
+different flavors to the data please pay
+
+
+attention to that because I'm trying to
+
+
+Mark exactly where the data is
+
+
+with those colors so if something is of
+
+
+a color that means it's physically in
+
+
+that country in general
+
+
+um which can be beautifully see um where
+
+
+you can beautifully see here where those
+
+
+applications are physically stored in
+
+
+two different regions okay so then you
+
+
+start to think what I need to do
+
+
+what actual task I need to do to end up
+
+
+in this situation
+
+
+well you need to separate your
+
+
+infrastructure you need to separate your
+
+
+data you need to move the data to the
+
+
+correct region you need to adjust your
+
+
+rails application to support two
+
+
+different regions you need to get users
+
+
+to that correct region because they were
+
+
+using one application now they have two
+
+
+that's a lot that's a lot of work
+
+
+um and it kind of when you think about
+
+
+it seems daunting and when I was kind of
+
+
+thinking of the challenge of this I had
+
+
+this picture in my mind maybe some of
+
+
+you recognize this
+
+
+aspect
+
+
+um of yeah jumping I think it's called
+
+
+leap of faith something like this
+
+
+um
+
+
+and kind of if you implement this at
+
+
+once and just
+
+
+you know deploy and close your eyes and
+
+
+jump
+
+
+um well I think you know that little
+
+
+Haystack waiting underneath like it's
+
+
+it's quite small and it's pretty
+
+
+difficult to actually pull it off like
+
+
+Assassin did
+
+
+um so what I suggest is maybe you know
+
+
+stairs and let's just walk down step by
+
+
+step by step and this is what I really
+
+
+recommend and this is the first tip that
+
+
+I'm going to give you
+
+
+um to do um the change gradually to the
+
+
+steps until you're on the bottom until
+
+
+you deploy the change
+
+
+um and yeah and that will probably uh
+
+
+make a give you a better chance to
+
+
+actually finishing it
+
+
+um with success
+
+
+but
+
+
+it's based on the real example so
+
+
+actually I have the stages that we did
+
+
+to get to this
+
+
+um situation to actually separate the
+
+
+data and we separate it into two stages
+
+
+the one is redirecting users to the
+
+
+correct region and then actually
+
+
+separating the data
+
+
+so the first part
+
+
+is
+
+
+keeping the data not touching it at all
+
+
+in one region
+
+
+create a situation where we already have
+
+
+two up the two applications two
+
+
+different URLs so we're split in the
+
+
+application and but kind of not touching
+
+
+the database at all not touching the
+
+
+data persistent at all
+
+
+and then in the Second Step only then
+
+
+separate the data and move the
+
+
+application to the other region as you
+
+
+can see after the step one we still have
+
+
+applications in our original UK region
+
+
+and
+
+
+so how do you do that first step how do
+
+
+you redirect users the correct region
+
+
+conceptually what we implementing here
+
+
+is we're splitting up our application
+
+
+previously we had one application and
+
+
+now we go into two applications suddenly
+
+
+it's quite a big change for users
+
+
+actually
+
+
+um so yeah conceptually it looks like
+
+
+that and for the context so you are
+
+
+aware what we're dealing here with is um
+
+
+the infrastructure looks like this so we
+
+
+keep the data persistent as it was but
+
+
+what we do is we create additional
+
+
+containers and load balancers which will
+
+
+come handy in a second and and that's
+
+
+kind of the infrastructure after step
+
+
+one
+
+
+and so
+
+
+um
+
+
+what's really important here is that the
+
+
+business requirement is to make it
+
+
+seamless for the user to go from using
+
+
+one application going to a one single
+
+
+URL let's say app.apply4.com and
+
+
+suddenly be in the world where there are
+
+
+two different applications and they need
+
+
+to choose
+
+
+to which application they need to go and
+
+
+the business requirements to make it as
+
+
+seamless for the users as possible and
+
+
+some of you might think like who are
+
+
+using App one and up to not for example
+
+
+UK dot apply for.com or or North America
+
+
+apply for the com it's a very good
+
+
+question and again it depends on the
+
+
+situation that you're working on in our
+
+
+case although it's quite vague and
+
+
+doesn't provide you information where
+
+
+that region is based it allows you to
+
+
+move around the countries that are
+
+
+included in the region so it gives you
+
+
+more flexibility and it made sense for
+
+
+us to go for that specific naming but
+
+
+yeah it might not work for you
+
+
+um so in terms of
+
+
+business requirement that we are
+
+
+implementing we want to get users
+
+
+seamlessly from app.apply4 the region
+
+
+agnostic URL to a region-specific URL so
+
+
+thinking about in in kind of what is
+
+
+happening whenever you send a request to
+
+
+a region agnostic you want to have a
+
+
+redirect region specific
+
+
+and ideally that redirect is correct and
+
+
+kind of the data that you're trying to
+
+
+reach is there and
+
+
+so let's now kind of think what tools do
+
+
+we have to achieve that what can we do
+
+
+to make that process seamless
+
+
+and the answer is we have two things and
+
+
+we can utilize and we'll utilize
+
+
+um DNS and load balancer and from DNS
+
+
+we're going to use a very very specific
+
+
+feature of it which is
+
+
+um geolocation
+
+
+um yeah it's specific for Route 53 I'm
+
+
+not sure about other providers but I
+
+
+think there should be option there as
+
+
+well but essentially DNS can resolve
+
+
+your IP based on
+
+
+where the origin IP is from so when you
+
+
+send a request from UK the IP behind
+
+
+your the URL will be
+
+
+based on what you put in the rule and
+
+
+the second feature is from load balancer
+
+
+so you can make redirects based on path
+
+
+patterns so depending on what's included
+
+
+in the path you can
+
+
+make a decision where to redirect
+
+
+specific requests
+
+
+um in our case it was handy because we
+
+
+have country in the URLs sometimes it's
+
+
+kind of makes the URLs too long but in
+
+
+this case it was very useful because we
+
+
+had this information about the country
+
+
+and that means a region about the region
+
+
+in the URL
+
+
+and that's what we did we took the the
+
+
+find the DNS in a way that
+
+
+if the origin of the request is from
+
+
+North America go to load bouncer 2
+
+
+otherwise go to load balancer one it's
+
+
+not happening per request because DNS
+
+
+you know it's cached what the the result
+
+
+of the resolvement however
+
+
+um it works because it kind of points
+
+
+you to the right right load balancer so
+
+
+then when you are handled by a load
+
+
+balancer
+
+
+in a loan balancer by default you go to
+
+
+the URL from that region so if you're in
+
+
+load bouncer1 you go to app one you're
+
+
+redirect it to up one if you're in load
+
+
+balancer 2 you go to app2 easy
+
+
+but there are cases where you want to
+
+
+override that behavior and this is where
+
+
+you have information in the URL that for
+
+
+some reason you are not in the correct
+
+
+load balancer you should be in the other
+
+
+one and that's where we use the feature
+
+
+of a load bouncer that kind of picks the
+
+
+first rule that applies and we try to
+
+
+find those paths that include the
+
+
+country that is not in the right region
+
+
+and redirected to the other one and
+
+
+that's how we kind of allow users to
+
+
+seamlessly go to the right region note
+
+
+here the case I described applies for a
+
+
+301 HTTP response but actually we had
+
+
+problems with it because it was cached
+
+
+quite aggressively by Chrome
+
+
+um so actually we ended up with using
+
+
+302 it's not perfect from sap semantics
+
+
+but yeah it worked and kind of sharing
+
+
+this paint with you
+
+
+and just to clarify when the when we
+
+
+reach kind of the actual app one the
+
+
+region specific request no
+
+
+um nothing complicated happens here we
+
+
+have a simple a DNS record and we go
+
+
+um up one goes to Old bouncer one up to
+
+
+to load bouncer two and then we go
+
+
+straight to the application which
+
+
+handles all the requests for a region
+
+
+specific URL
+
+
+um and one last point for you to
+
+
+remember don't forget about seal so set
+
+
+what's called alternate links to point
+
+
+when you have those two applications
+
+
+that point to each other and there is a
+
+
+feature they need to and that kind of
+
+
+code that you need to add to your header
+
+
+to actually when you have two regions to
+
+
+point each other
+
+
+um so kind of both of them know about
+
+
+the existing of the other one and the
+
+
+end result of a stage one is that we end
+
+
+up with same data to Applications two
+
+
+different paths
+
+
+good we made our First Progress we
+
+
+actually like halfway down the stairs
+
+
+nothing broke users start to use up one
+
+
+up two seamlessly we control that they
+
+
+can always reach the data because you
+
+
+know it's we haven't split anything yet
+
+
+so now let's
+
+
+separate the data and this is where
+
+
+a real task and challenge is hitting
+
+
+hiding
+
+
+um so yeah conception we move from
+
+
+kind of having this one data persistence
+
+
+layer with different pieces of data
+
+
+belonging to different regions and we
+
+
+want to end up in completely separated
+
+
+applications and when I mean separated
+
+
+again for a context infrastructure wise
+
+
+we separate everything so we create a
+
+
+second copy of database BFS like file
+
+
+system storage red is they are
+
+
+completely independent they don't have
+
+
+they don't know anything about each
+
+
+other
+
+
+um
+
+
+so now we need to challenge the task of
+
+
+actually splitting our data how do we
+
+
+split our database
+
+
+this is a beautiful
+
+
+picture of a database with tables in it
+
+
+and
+
+
+a record in a table and just to kind of
+
+
+be sure that we know what this picture
+
+
+looks like so yeah we have our database
+
+
+and essentially the records belong to
+
+
+different regions they should end up in
+
+
+different places because that's what the
+
+
+requirement was from our
+
+
+from our clients so we want to
+
+
+separate it and put it in the two
+
+
+different databases
+
+
+and in order to even start that
+
+
+separation first thing to do you just
+
+
+need to categorize your tables so some
+
+
+tables have to be shared because the
+
+
+data in them is required by both system
+
+
+by both applications to operate
+
+
+it depends how often change so you need
+
+
+to think how to synchronize the data but
+
+
+this is kind of first thing you do you
+
+
+categorize the table to a shared ones or
+
+
+the tables that actually include data
+
+
+records from both regions
+
+
+and then when you select those tables
+
+
+that kind of have info data records from
+
+
+both regions
+
+
+then you need to take take it and
+
+
+separate a specific table so yeah to to
+
+
+put the data in the correct region and
+
+
+this is the process I love this name
+
+
+um that we called bucketing
+
+
+um you know in the process of
+
+
+development sometimes you come up with
+
+
+like really cool names that stick
+
+
+um and we came up now with this graphic
+
+
+which is also even cooler because
+
+
+conceptually that's what you do you put
+
+
+um records in the buckets in the buckets
+
+
+that you know will then will be moved um
+
+
+to their final destination and what you
+
+
+do is just kind of assign each record to
+
+
+the correct bucket until you have all of
+
+
+the records assigned
+
+
+and this is kind of conceptually kind of
+
+
+you think okay this record should go
+
+
+there so let's now talk about actual
+
+
+implementation
+
+
+what we did we added a column bucket to
+
+
+our tables to all of them and this is
+
+
+just a
+
+
+bully sorry integer simple integer
+
+
+column that is added and kind of
+
+
+represents
+
+
+to which bucket the record should be put
+
+
+in
+
+
+and here is the code that actually makes
+
+
+it implement it uses a feature I mean
+
+
+this is a rails code that defines an
+
+
+anim
+
+
+that has the bucket value so it's either
+
+
+not defined so we haven't bucketed yet
+
+
+region 1 Region 2 or shirt and we
+
+
+included for all our models so you kind
+
+
+of include in the Base Class you know
+
+
+it's not really great to do it on a
+
+
+regular basis but I think our use case
+
+
+is uh yeah
+
+
+um
+
+
+justifies that
+
+
+we're half an hour into the system the
+
+
+presentation and this is the first time
+
+
+I show Ruby code and the Ruby conference
+
+
+finally
+
+
+[Applause]
+
+
+let's go
+
+
+um
+
+
+okay so we have this column
+
+
+um in our tables so how do we actually
+
+
+assign that bucket value how do we put a
+
+
+record into a bucket and here a bit of
+
+
+kind of knowledge about your domain
+
+
+about your system comes really really
+
+
+handy we had our authorities kind of
+
+
+conceptually they belong to a country
+
+
+they are in
+
+
+they are in the country but they have a
+
+
+concrete implementation in the code they
+
+
+there is a model called Authority that
+
+
+has an attribute country that has a
+
+
+value for example UK or USA that kind of
+
+
+indicates where this Authority entry
+
+
+belongs to
+
+
+and starting from this you have you
+
+
+start to build the associations related
+
+
+to that Authority and it depends on your
+
+
+system in our case the application this
+
+
+is what people
+
+
+um you know the event organizers used to
+
+
+get a permit then you get server kind of
+
+
+entities connected application etc etc
+
+
+but I think the most important thing is
+
+
+you end up with this kind of tree like
+
+
+structure with a root of authority
+
+
+from which you kind of have all those
+
+
+entries
+
+
+um to start to pan out and then you need
+
+
+to decide
+
+
+for example on the leaf level to which
+
+
+region that specific record belong we
+
+
+see kind of clearly connection and so we
+
+
+know that we can kind of decide based on
+
+
+connections to the authority where to
+
+
+put it but how we actually reach that
+
+
+and there are two ways the first one is
+
+
+bottom up so you start from the leaf
+
+
+level you have this tree of associations
+
+
+and you go kind of one level up until
+
+
+you reach the authority so first you go
+
+
+up now it's not an authority you go up
+
+
+now it's not the authority finally you
+
+
+reach the authority and that gives you
+
+
+information to which region that record
+
+
+should be put in
+
+
+however there's a different approach the
+
+
+top-down approach where you start from
+
+
+Authority we know where to bucket
+
+
+Authority because it belongs to one
+
+
+country and then you go level
+
+
+one level below one level below and kind
+
+
+of we know already to which bucket plays
+
+
+them because we start from Authority
+
+
+and until you reach that leaf level and
+
+
+at that point we are also now to reach
+
+
+the region that leaf should be placed
+
+
+into and this is a tip from the practice
+
+
+the top-down approach worked a lot
+
+
+better in terms of how complicated it
+
+
+was to implement and how efficient it
+
+
+was to actually
+
+
+um yeah do the job so bucket records but
+
+
+it's although it's better like it
+
+
+doesn't mean it's nice or clean this is
+
+
+a view of our Authority associations
+
+
+with quite a lot of record with quite a
+
+
+lot of associations has many because we
+
+
+had to reach the basically all of the
+
+
+tables in our system there's a lot more
+
+
+I will need to remove that later but
+
+
+um yeah just to give you a view of how
+
+
+it looks like and then what you do is
+
+
+iterate through each Authority through
+
+
+each SOC through all of the association
+
+
+of that Authority and update
+
+
+records in that Association to the
+
+
+bucket value that you have from the
+
+
+authority yeah
+
+
+yeah simple right
+
+
+um
+
+
+yeah so this is how you can efficiently
+
+
+assign buckets to the authority and you
+
+
+end up with a beautifully separated
+
+
+table with a bucket filled for every
+
+
+record
+
+
+so you separated the data
+
+
+and now there's a really really cool
+
+
+feature that you can do is because you
+
+
+have assigned the records to your uh
+
+
+yeah to to Regions you can preview how a
+
+
+region will look like because you can
+
+
+just query all the data that will be
+
+
+later used in the specific region
+
+
+and you can use it by I think dreaded by
+
+
+many default scope method probably
+
+
+rightly so but again in this case it it
+
+
+just works like a charm because what you
+
+
+do is you default you define a default
+
+
+scope scope that takes all the records
+
+
+only from that specific region so
+
+
+as you can see there are usages for
+
+
+things that you know are not recommended
+
+
+generally and then when you test and
+
+
+everything is corrected how do you
+
+
+actually separate the database and worry
+
+
+not I have a advice on that as well what
+
+
+you can do is
+
+
+um instead of you know making a copy or
+
+
+deleting the correct records what we
+
+
+found is the best work is to take to
+
+
+create a copy like an empty copy of your
+
+
+table and put only the records They want
+
+
+there to be placed and then swap the
+
+
+names
+
+
+and in that way
+
+
+the authorities table which was on the
+
+
+left is now authorities old the correct
+
+
+region that you wanted to have on the
+
+
+right you delete it and you end up with
+
+
+a beautifully separated table and that's
+
+
+how you can achieve
+
+
+a quite efficient separation of of
+
+
+tables just for you to know be aware of
+
+
+constraints and how to increment values
+
+
+these are things that you need to look
+
+
+out for so be sure that it's covered in
+
+
+your application and and also a good
+
+
+advice if you do this and remember you
+
+
+can provide a buffer in one of the
+
+
+regions for example 10 of all of the
+
+
+records just to make sure that for some
+
+
+period of time there is no Clash of IDs
+
+
+in your database because you'll have two
+
+
+database into regions make give yourself
+
+
+a bit of time so the things go wrong so
+
+
+yeah that's advice that's another advice
+
+
+for you to remember and the end result
+
+
+of database operation we end up with uh
+
+
+nicely separated data and then
+
+
+file split up which is kind of the last
+
+
+piece of data that we need to separate
+
+
+we have files which are in some
+
+
+directory and they do belong to some
+
+
+region we can figure this out by
+
+
+the Association to which that file
+
+
+belongs similarly to what we did with
+
+
+the records
+
+
+and you basically want to recreate what
+
+
+you did with database in a sense that
+
+
+you have this bunch of files that belong
+
+
+to different regions and we want to
+
+
+extract them so and the file system in
+
+
+region one includes only data from that
+
+
+region in order to do that you can
+
+
+you have the file which is which belongs
+
+
+to a region because of its Association
+
+
+or kind of to which record it was
+
+
+uploaded but there is kind of no clue in
+
+
+that path to which region it belongs
+
+
+what you can do is
+
+
+add change the path for that file and
+
+
+add information about the region to the
+
+
+path where the file is stored so
+
+
+suddenly
+
+
+um
+
+
+you have a kind of a parent folder that
+
+
+tells you where to put
+
+
+um the files in that region although
+
+
+file like didn't really change only the
+
+
+path to it changed and that's the way
+
+
+you can quickly then move the whole
+
+
+folders and place the files where they
+
+
+belong to
+
+
+and for testing a copying of the files
+
+
+you can actually use empty copier files
+
+
+especially if you have millions of
+
+
+Records it's very useful to just create
+
+
+empty copy for each file that you have
+
+
+in your system and then you know run
+
+
+tests on on those files
+
+
+um in terms of of that move what you can
+
+
+do is
+
+
+um you have the old there that doesn't
+
+
+include any information about the region
+
+
+and you can then point change the files
+
+
+the new files to be placed in a region
+
+
+aware folder and then once it's kind of
+
+
+live and all the new files go to the new
+
+
+folder migrate all the files that you
+
+
+left behind that were put in the kind of
+
+
+region agnostic folder and
+
+
+in order to provide support for both
+
+
+cases where the file is in the new
+
+
+region in the alt region you can have
+
+
+this conditional where you check whether
+
+
+the new directory exists if yes then
+
+
+kind of that's where you should look for
+
+
+your files otherwise probably means that
+
+
+your file hasn't been moved yet go for
+
+
+the older but the default behaviors that
+
+
+you already Place files in the new
+
+
+directory and we found very useful
+
+
+especially to work with large file
+
+
+amount of files is to use data sync
+
+
+it's an AWS tool probably in other
+
+
+in other
+
+
+providers you'll find something like
+
+
+this as well and we end up with this
+
+
+beautifully separated file system and
+
+
+which ends up the face of the
+
+
+preparation and means that we are now
+
+
+ready to
+
+
+go live to finally deploy that to
+
+
+production and I have just a few
+
+
+suggestions for you to do it and to
+
+
+actually get the change in place
+
+
+so first of all inform your clients
+
+
+about what you're doing
+
+
+they will point you to places that maybe
+
+
+you were not aware of that you need to
+
+
+change to address in our case we need to
+
+
+for example adjust payment gateways that
+
+
+was URLs um so be in touch with your
+
+
+clients and then
+
+
+planning and preparing for the go live
+
+
+date first of all find the low usage
+
+
+time so it probably will be Saturday 5
+
+
+a.m
+
+
+as a yeah as an example so be prepared
+
+
+to wake up early when you go live
+
+
+and then schedule the maintenance window
+
+
+in advance so users know that you know
+
+
+something's cooking some things are
+
+
+going to happen and then very important
+
+
+Define the go live procedure
+
+
+on Saturday 5 a.m it will be very
+
+
+difficult to figure out what to do
+
+
+Define steps that you want that will
+
+
+follow almost
+
+
+without any thinking exact steps that
+
+
+you will follow on on the big day that
+
+
+means include the command that you need
+
+
+to run all the checks all the tests
+
+
+everything should be in that document
+
+
+and then assign people
+
+
+um to do that so everyone is aware
+
+
+what's the responsibility and they know
+
+
+what to what they need to do on the big
+
+
+day and then Define the contingency plan
+
+
+in case things go wrong so you really
+
+
+don't want to end up in a situation
+
+
+where you go into maintenance window you
+
+
+do a go big life moment and then
+
+
+something goes wrong and you end up with
+
+
+messing up with the system for a very
+
+
+long time make sure you know how to
+
+
+revert things to
+
+
+how they were before
+
+
+before you actually started the the go
+
+
+left procedure and yeah enjoy the
+
+
+process it's fun you've made it all the
+
+
+way down from the stairs so that last
+
+
+step yeah
+
+
+save it
+
+
+um
+
+
+and in this case I will also want to
+
+
+mention rehearse rehearse rehearse
+
+
+the more times you run it for example on
+
+
+your staging and the more time surround
+
+
+on your local machine and that means
+
+
+splitting the files the whole go live
+
+
+procedure the more familiar and more
+
+
+confident you will don't be afraid to
+
+
+make mistakes but do them before going
+
+
+live so that's my don't wait with the
+
+
+whole process to happen on the go live
+
+
+and then as a tool to actually do the go
+
+
+live
+
+
+use DNS records DNS is kind of a a
+
+
+connection between what you're doing in
+
+
+your application and yeah again the
+
+
+outer world so
+
+
+for example for the step one when you
+
+
+have connection to your region agnostic
+
+
+app URL that points to the previous app
+
+
+you deploy the new infrastructure you
+
+
+don't change anything at this stage yet
+
+
+so everything runs as it was you have
+
+
+this you know that will you will point
+
+
+the new URLs to the new infrastructure
+
+
+but you kind of don't do it
+
+
+intentionally and now you test you
+
+
+tested everything that you did
+
+
+um works fine that the containers that
+
+
+you deployed kind of behave correctly
+
+
+you for example connect
+
+
+write the nest rules on your local
+
+
+machine that point to a specific
+
+
+um your IP of app one and up two and
+
+
+only when you're sure that everything
+
+
+works fine and you can do use DNS as a
+
+
+trigger Point them and kind of from that
+
+
+moment on is live and if people will be
+
+
+able to access it and but if you kind of
+
+
+test everything well
+
+
+you can be sure that it's fine it's okay
+
+
+you hope so at least
+
+
+um and kind of it makes kind of the
+
+
+previous app Obsolete and makes you able
+
+
+to uh delete it but you can kind of make
+
+
+it as well as a contingency plan
+
+
+um
+
+
+yeah and one last advice for you if you
+
+
+are going with this whole process and
+
+
+you've done all this hard work to do
+
+
+please book your holidays for the moment
+
+
+that the go live moment is scheduled
+
+
+because that means you can pull the
+
+
+trigger in such beautiful conditions and
+
+
+the island next to Scott Scott well
+
+
+Stockholm and yeah on 5 a.m in a
+
+
+beautiful Sun so please when you go live
+
+
+make it in style
+
+
+and that will get you to the happy end
+
+
+with two applications with separated
+
+
+data and clients that actually want to
+
+
+still continue be on your platform and
+
+
+that's in terms of the content that's it
+
+
+I want to just say big kudos to home to
+
+
+my whole team because who kind of helped
+
+
+me help us to get to this stage kudos to
+
+
+Charlotte Leo Matt Max Raul and some and
+
+
+yep that'll be it thank you and you can
+
+
+find me on
+
+
+X Twitter X Twitter
+
+
+um yeah please make sure that you give
+
+
+me maybe some feedback because that's my
+
+
+first presentation so really really like
+
+
+and other than that enjoy the rest of
+
+
+the conference and it was a yeah it was
+
+
+a pleasure to to be here thank you
+
+
+[Applause]
+
+
+thank you
+
+
+okay thanks for the presentation and I
+
+
+got the first question to you uh because
+
+
+uh if I understand you correctly you
+
+
+promise to your customers the data of
+
+
+these customers will be stored only in
+
+
+the particular regions right
+
+
+but data is installed only in a database
+
+
+right we have monitoring tools logging
+
+
+Etc
+
+
+and so for example
+
+
+with datadoc if we are if you have uh
+
+
+monitoring there we can store this data
+
+
+in a different regions on that level but
+
+
+what in case of the business report I
+
+
+mean if you would like to aggregate the
+
+
+data from the
+
+
+you know like let's say five regions for
+
+
+example to present it to the business
+
+
+then you will aggregate them only in one
+
+
+region right so you will break this uh
+
+
+statement to your customers and also
+
+
+there was one example with the data
+
+
+extraction like the old tables and you
+
+
+moved it to the new one but still in the
+
+
+logs in that region you still have this
+
+
+data right so it's it's still there
+
+
+so my question is how do you deal with
+
+
+this yeah so in terms of of logging
+
+
+um and the business reports that these
+
+
+are the kind of the two First cases
+
+
+um yeah so so the first case the logging
+
+
+we also Implement in kind of region
+
+
+specific so the logging is stored in
+
+
+that particular region so in that sense
+
+
+any information does not leave the
+
+
+region so you need to add it to the
+
+
+pieces of infrastructure that you
+
+
+actually separate and put into the new
+
+
+regions in terms of the business
+
+
+analytics yes you do
+
+
+um have the situation where
+
+
+um you kind of you can get insight into
+
+
+just one region but not really into
+
+
+multiple and that aggregation
+
+
+um it's a challenge that we actually
+
+
+haven't faced and so if I have a answer
+
+
+yeah probably see you next year with
+
+
+that answer
+
+
+um and your last question
+
+
+um was about
+
+
+um the data extraction and the logs for
+
+
+example because in the logs you will
+
+
+still have the disk customers data right
+
+
+yes and start in the different Dragon
+
+
+yeah so we kind of have this
+
+
+um phase where kind of all the data is
+
+
+in the UK which is fine for now so we
+
+
+actually that face of extracting the
+
+
+tables will happen in that region and
+
+
+and we will end up with the US for
+
+
+example data in the UK region and only
+
+
+then put it into the us what we really
+
+
+don't want to happen and we kind of
+
+
+um we need to prevent that is the UK
+
+
+data reaching the US
+
+
+servers U.S database and that's what we
+
+
+don't really want to do so we only
+
+
+prepare USDA in the UK region and only
+
+
+then put in the new one that way we kind
+
+
+of keep the situation
+
+
+as it was before
+
+
+at worst
+
+
+thanks
+
+
+are there any other questions
+
+
+you have mentioned the this table
+
+
+renaming thing and I am wondering why
+
+
+this way like you created a new table
+
+
+you move the data you move them back
+
+
+like you you you you you create like a
+
+
+fresh fresh image of the old table and
+
+
+you moved like necessary data why just
+
+
+not
+
+
+um remove the unnecessary data
+
+
+and just avoid distributor naming
+
+
+Integrations and end and so on yes so um
+
+
+even with the the deletion you need to
+
+
+end up in a situation where you have
+
+
+kind of two different tables to delete
+
+
+kind of um the cross region data and
+
+
+however what we found out and this is
+
+
+kind of based on the experience and the
+
+
+test that we did is kind of in that way
+
+
+when you just kind of insert and copy
+
+
+the data that is correct it's way faster
+
+
+than
+
+
+um deleting the data and this is kind of
+
+
+based on the on the test that we did so
+
+
+um it's a tip kind of from the bottom of
+
+
+our hearts that this is the the best way
+
+
+proven in practice to actually make that
+
+
+switch
+
+
+thank you
+
+
+um sorry we need to cut it here so
+
+
+thanks again thanks a lot
+
+
+foreign

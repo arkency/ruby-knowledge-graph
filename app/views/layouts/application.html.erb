@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Planet" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Planet">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="robots" content="noindex, nofollow">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <nav class="top-nav">
+      <div class="nav-inner">
+        <%= link_to "Planet", root_path, class: "logo" %>
+        <div class="nav-links">
+          <%= link_to "Graph", nodes_path, class: ("active" if controller_name == "nodes") %>
+          <%= link_to "Ingestions", ingestions_path, class: ("active" if controller_name == "ingestions") %>
+          <%= link_to "Extractions", extractions_path, class: ("active" if controller_name == "extractions") %>
+          <%= link_to "Events", "/res" %>
+          <%= link_to "Jobs", "/jobs" %>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div id="flash">
+        <% if notice %>
+          <div class="flash flash-notice"><%= notice %></div>
+        <% end %>
+        <% if alert %>
+          <div class="flash flash-alert"><%= alert %></div>
+        <% end %>
+      </div>
+      <%= yield %>
+    </div>
+
+    <script>
+      document.addEventListener("click", function(e) {
+        var row = e.target.closest("tr[data-href]");
+        if (row && !e.target.closest("a, button, input, select, .reextract-form")) {
+          Turbo.visit(row.dataset.href);
+        }
+      });
+      document.addEventListener("keydown", function(e) {
+        if (e.key === "Enter" && e.target.matches("tr[data-href]")) {
+          Turbo.visit(e.target.dataset.href);
+        }
+      });
+    </script>
+  </body>
+</html>

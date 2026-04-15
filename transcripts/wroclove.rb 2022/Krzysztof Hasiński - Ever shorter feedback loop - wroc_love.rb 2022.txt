@@ -1,0 +1,3559 @@
+thank you very much oh this thing works
+
+
+nice
+
+
+um can I get some slides yeah yesterday
+
+
+I've got I'll push a little bit by uh
+
+
+Montreal guys to fill in the missing
+
+
+slot and uh right after that I found
+
+
+this
+
+
+um Post online on LinkedIn
+
+
+I won't disclose the name of the person
+
+
+who put it there but the nice part about
+
+
+this thing is that if you look really
+
+
+really close over here
+
+
+I'm sitting and making this presentation
+
+
+so this was literally made here
+
+
+all right my name is which is pretty
+
+
+much unpronounceable and unspellable to
+
+
+English speakers so I usually go by
+
+
+Chris
+
+
+and today I'm going to talk to you about
+
+
+feedback loops
+
+
+if you Google feedback loop you get a
+
+
+lot of different definitions but one of
+
+
+my favorite ones is that it's basically
+
+
+any system in which the output affects
+
+
+the input for the next iteration and
+
+
+every time we code the innermost part
+
+
+the most intimate part of coding is this
+
+
+particular feedback loop which is the
+
+
+code to run this High because it doesn't
+
+
+work
+
+
+yeah and the important part is the start
+
+
+and sign because that's the thing the
+
+
+department you are thinking this is the
+
+
+part when would you write the code in
+
+
+your mind and then put it in the
+
+
+computer
+
+
+so
+
+
+it is pretty short nowadays you can
+
+
+write the code and you can execute it
+
+
+almost instantly but it wasn't always
+
+
+like that
+
+
+let's go back but a little bit
+
+
+to the 1960s
+
+
+you can the guys know what that is
+
+
+yeah yeah I know you guys know because
+
+
+I'll talk to you already about it and
+
+
+answer is an assault to use the one of
+
+
+those but he probably recognized the
+
+
+thing
+
+
+yeah so this is a punch card and if you
+
+
+had access to one of those back then you
+
+
+were really really lucky but most of the
+
+
+time you weren't as lucky so you write
+
+
+code like this this lovely lady wrote
+
+
+the code for the Apollo Mission program
+
+
+and this is the actual code it's printed
+
+
+out she wrote it in the typewriter
+
+
+and
+
+
+because she was lucky she got to use a
+
+
+computer but not directly she handed out
+
+
+those pages to someone who typed them
+
+
+into the Punch Cards and that person
+
+
+took those Punch Cards and given them to
+
+
+a computer operator the computer
+
+
+operator was a person who was basically
+
+
+maintaining a computer resetting the
+
+
+state because the reason wasn't a button
+
+
+it was a series of switches and after
+
+
+that well they were running the code
+
+
+compiling it before and of course
+
+
+printing out the results because there
+
+
+were no screens and mailing and using
+
+
+traditional email to the original
+
+
+programmer so if you had this feedback
+
+
+loop on the on something like this
+
+
+you give it the your code to it or the
+
+
+person the other person rewrites it in
+
+
+the punch card after that the punch card
+
+
+gets completed in the computer and the
+
+
+computer spits out the results and two
+
+
+days later you will receive an email
+
+
+that well not email traditional mail
+
+
+that your code fails on the second line
+
+
+and you have to do it all over again
+
+
+pretty nice huh yeah so the feedback
+
+
+loop is a matter of days and if you're
+
+
+really lucky and you're writing
+
+
+something important it will be ours
+
+
+but the technology is better so during
+
+
+the 1970s we had a lot of new newfangled
+
+
+things and you could have one of those
+
+
+on your desk
+
+
+you guys know what it is it's not a
+
+
+computer
+
+
+it's a terminal and the nice part about
+
+
+this terminal this is a vt100 is that
+
+
+vt100 is still being present today in
+
+
+this particular MacBook it's over here
+
+
+and this was the reason why the program
+
+
+is called terminal it's still compatible
+
+
+you could still use one of those vd100
+
+
+to connect to this MacBook and use it
+
+
+it's fun
+
+
+but um the typical usage looks something
+
+
+like this and I want to
+
+
+point out that the important part isn't
+
+
+here it's over here this is a modem a
+
+
+traditional one and basically um
+
+
+microphone that connects to a speaker
+
+
+and a in the well traditional phone and
+
+
+the speaker that connects to a
+
+
+microphone and you have to be really
+
+
+quiet because any kind of sound might
+
+
+disturb it and drop your connection and
+
+
+you edit the code with this terminal
+
+
+line by line because you weren't able to
+
+
+afford to list all the program on the
+
+
+script at the same time that's way too
+
+
+much memory
+
+
+and at some point someone actually
+
+
+thought that well because the computers
+
+
+are getting cheaper
+
+
+developers are getting more expensive we
+
+
+should actually do something to make
+
+
+them more productive
+
+
+and there was an editor called EX
+
+
+has anybody used EX
+
+
+has anybody used VI
+
+
+yeah we have a couple packs using vi vi
+
+
+wasn't actually an editor back then it
+
+
+was a mode for ex and it stands for
+
+
+visual so we can see the code so we can
+
+
+get what you see is what you get you can
+
+
+see the code on the screen and you can
+
+
+edit it and the code changes instantly
+
+
+and this is amazing yeah so the feedback
+
+
+loop on something like this is well
+
+
+typically hours because you have to wait
+
+
+for all the people to come compile their
+
+
+code and run it but if you're really
+
+
+lucky on the bright day it will be
+
+
+minutes
+
+
+fast forward 1980s well straight in
+
+
+stranger things and stuff but also
+
+
+computer got cheap at least cheap ish
+
+
+you could get a computer and you can do
+
+
+this
+
+
+amazing huh it's local compile you can
+
+
+see as the code compiles real time and
+
+
+if it fails you get the result in your
+
+
+screen and you don't have to wait for
+
+
+all the people in the queue to run your
+
+
+code
+
+
+that's amazing you get a feedback loop
+
+
+in a matter of minutes well minutes
+
+
+um
+
+
+the most part important part that well
+
+
+we had minutes before but now these are
+
+
+our minutes we can have a computer you
+
+
+can have two computers if we're rich or
+
+
+we have a particular good employer yeah
+
+
+so that's the nice part
+
+
+and um
+
+
+the slowest part about this became sorry
+
+
+it clicked too too soon the slowest part
+
+
+about this kind of feedback isn't the
+
+
+computer anymore it's a developer
+
+
+because if you run the program you have
+
+
+to validate the output you have to take
+
+
+a look at what it's spit out and now if
+
+
+it works or not
+
+
+so there were those guys who created
+
+
+language called awk
+
+
+and one of them well give an interview
+
+
+which is really interesting the
+
+
+important part is they've created a
+
+
+throwaway language something that you
+
+
+don't really need to maintain anymore
+
+
+but they publish it not that people
+
+
+started using it as this thing go and
+
+
+there was one particular schmuck who
+
+
+wrote a cad the program in oak oak is a
+
+
+text parsing programs language so it's
+
+
+kind of difficult but the guy reported
+
+
+the bug
+
+
+three weeks of his life and he blamed
+
+
+the developers and he was really upset
+
+
+about this
+
+
+so that's when the original developers
+
+
+of Arc decided that yeah this takes time
+
+
+of valuable developers we need to do
+
+
+something about this and what they did
+
+
+in the 1980s
+
+
+they wrote short programs to test yeah
+
+
+test the stuff that they write every
+
+
+single feature knock got tested in 1980s
+
+
+this is way before junit before tdd and
+
+
+stuff but they did it anyway and this
+
+
+actually made the August the standard
+
+
+package of mostly any operating system I
+
+
+know that the max recently dropped it
+
+
+but it is in some some
+
+
+kind of saw the older versions on on Mac
+
+
+OS and then I think it's still in Ubuntu
+
+
+by default
+
+
+all right so feedback loop when you have
+
+
+test is minutes seconds if you have a
+
+
+really nice test well maybe sub second I
+
+
+know Angie show up his uh amazing even
+
+
+the sourcing program which was running
+
+
+testing like what 10 seconds everything
+
+
+quite a lot of that
+
+
+yeah that's lovely yeah and a lot of
+
+
+stuff happened between 1980s and the
+
+
+present day we got much better tools
+
+
+some of them were well in the concept
+
+
+very old like for example console but we
+
+
+could use this concept to show off the
+
+
+code and try different uh methods we
+
+
+could do things like looking at the
+
+
+state of the program where it's running
+
+
+we can modify it while it's running
+
+
+which is pretty amazing even though the
+
+
+concept is from 1960s the list was the
+
+
+first one was try well this developers
+
+
+were the first one to try to do
+
+
+something like this but the technology
+
+
+wasn't there and now it is so we can do
+
+
+stuff like exploratory programming
+
+
+and debugging you can explore our
+
+
+programs we can stop them we can check
+
+
+them we can modify the mid flight
+
+
+we can have things like guard testing
+
+
+which will run our test automatically
+
+
+and we don't really have to do anything
+
+
+so we can see nice pop-up results as
+
+
+they go and the front-end developers
+
+
+have things like live reload so that
+
+
+they can see the changes with the same
+
+
+state without actually putting any input
+
+
+from there so this is nice
+
+
+and we have all those nice things
+
+
+but not all of us
+
+
+so my question for you is when you are
+
+
+you might be stuck in 60s
+
+
+if
+
+
+you don't run your code yourself
+
+
+and you think this is crazy we'd always
+
+
+want to kill yourself yeah who else was
+
+
+running it yeah have you ever seen a
+
+
+pull request in which there is a syntax
+
+
+error
+
+
+have you ever seen a pull request which
+
+
+won't work and you know it instantly
+
+
+like you look at it and this doesn't
+
+
+make any sense whatsoever yeah this is a
+
+
+developer stuck in 1960s who is writing
+
+
+the code and letting somebody else run
+
+
+it for them like well there's a computer
+
+
+to operate a little bit check this for
+
+
+me and they're leaving the result
+
+
+if you don't run your code on your local
+
+
+machine and by local machine learning I
+
+
+might mean something that you actually
+
+
+own that the old sole developer of it's
+
+
+not shared when you're stuck in 1970s
+
+
+this is something that I've seen quite
+
+
+long
+
+
+um people pushing code
+
+
+to continuous integration and just wait
+
+
+for the result like they don't only run
+
+
+it locally because well what's the point
+
+
+there's a continuous integration they
+
+
+already have an environment I don't need
+
+
+to set them on my one machine I'm saving
+
+
+time right yeah but they're waiting in a
+
+
+queue for the people to run the code so
+
+
+you basically know better than developer
+
+
+who uses terminal to well run the code
+
+
+on a shared machine
+
+
+this is awful
+
+
+and if you don't have tests and you have
+
+
+to click stuff manually usually on
+
+
+staging because you're lazy and you
+
+
+don't have a local setup you might be
+
+
+stuck in 80s and even though you might
+
+
+mix and match you might be on some
+
+
+features like in the 60s summer 80s some
+
+
+70s
+
+
+it's all good well it would be better to
+
+
+be in present so feedback loop matters
+
+
+okay so how can we make sure that the
+
+
+feedback loop is as short as possible
+
+
+one other thing would be well to throw
+
+
+money at the problem this is the easiest
+
+
+part well computers are cheap developers
+
+
+are expensive get a better computer
+
+
+second thing would be to run stuff
+
+
+locally this is very simple in the
+
+
+concept very difficult in execution for
+
+
+some people
+
+
+and the third part is to get the results
+
+
+quicker which is easier said than done
+
+
+each one of those requires more work
+
+
+than the previous one
+
+
+but if you look at the feedback loop
+
+
+right now
+
+
+and you think about this part
+
+
+people think it's thinking no you are
+
+
+thinking what does it work
+
+
+so yeah average salary of developer this
+
+
+is a random number I didn't pull it off
+
+
+of any kind of Statistics or anything
+
+
+let's say average senior developer earns
+
+
+5 000 a month yeah
+
+
+do we agree
+
+
+those of you who aren't please ask for
+
+
+raises or something
+
+
+yeah so
+
+
+let's say you run well we're 20 days a
+
+
+month you have one day off because
+
+
+you're already at 21 days
+
+
+um you run let's say five full test runs
+
+
+per day and you can make them 10 minutes
+
+
+shorter by getting a new computer
+
+
+yeah so the computer I don't know I knew
+
+
+a Macbook would be like fifteen hundred
+
+
+dollars maybe 20. so it will pay itself
+
+
+with three to four months
+
+
+and also remember that continuous
+
+
+integration is also a computer it's not
+
+
+the magic it's not the cloud it's a
+
+
+computer that you rent
+
+
+so please track how many bills are stuck
+
+
+in the queue
+
+
+um how many PRS in the rebase that will
+
+
+also get redeployed to a Q and CI and
+
+
+how much more actually more expensive is
+
+
+a faster CI server it's usually not that
+
+
+expensive you can run your own nowadays
+
+
+you can think have things like um GitHub
+
+
+self-hosted Runner you plug in your own
+
+
+machine you install Docker and you're
+
+
+golden you don't have to do anything
+
+
+else you just set it up and it's you
+
+
+only pay for the machine itself the
+
+
+service is free so if you can make the
+
+
+build 10 minutes shorter it's 500 which
+
+
+will get you on really nice server
+
+
+okay
+
+
+um
+
+
+we have this thing out of the way this
+
+
+is the easiest solution just spending
+
+
+money
+
+
+that's probably software houses CEOs
+
+
+hate me right now because we're talking
+
+
+about spending money
+
+
+but um the second thing is to run stuff
+
+
+locally
+
+
+and to run stuff locally is basically
+
+
+allow for prototyping things this is the
+
+
+most important part of running stuff on
+
+
+your local machine
+
+
+and because I have to go everything
+
+
+every now and then to the slides because
+
+
+I wrote them yesterday sorry for
+
+
+interruptions
+
+
+um
+
+
+the first thing they usually see fail if
+
+
+I see a new project is they say oh we
+
+
+have this third-party service so we
+
+
+can't really run it locally it doesn't
+
+
+work because we need to integrate with
+
+
+stripe we need to integrate with this
+
+
+accounting service we need to integrate
+
+
+with something else
+
+
+yeah no please mock them it doesn't
+
+
+really make sense for you to to to not
+
+
+be able to run the code because you
+
+
+relying on third-party service
+
+
+someone mentioned out zero in the
+
+
+previous uh and the questions for the
+
+
+previous uh talk this is also something
+
+
+that well you might have a test instance
+
+
+but it's much better to have something
+
+
+local to test against
+
+
+the second thing is that
+
+
+you really can use a race console it's
+
+
+not something like
+
+
+that these only use for extra special
+
+
+cases if you want to know for example
+
+
+how many users on production go to race
+
+
+console and can't use this if you need
+
+
+to know if something is performance or
+
+
+you need to change the index for some
+
+
+some kind of table please add them on
+
+
+production it's not a special
+
+
+environment of course be careful what
+
+
+you're doing but still in most cases you
+
+
+can test stuff on production
+
+
+and get the results get the information
+
+
+that you need
+
+
+this is in direct um opposition to what
+
+
+I said before about running stuff
+
+
+locally but if you're developing in
+
+
+production wealthy development
+
+
+production this is not that bad it's not
+
+
+that difficult especially for
+
+
+performance problems because you can't
+
+
+replicate them on local when local is
+
+
+development
+
+
+and the third things is that you should
+
+
+push the code very often and push it to
+
+
+production don't keep it in PRS nobody
+
+
+look at PRS when they're developing
+
+
+their own feature but they will look
+
+
+against master so it's better to develop
+
+
+code that's unfinished and hide behind
+
+
+the feature flag that way you can
+
+
+actually try it out and see the result
+
+
+and you don't have to wait for for other
+
+
+people to to interact with it
+
+
+okay
+
+
+simplify your setup but then most
+
+
+importantly keep it simple because the
+
+
+all the place projects start with a
+
+
+simple setup except everyday DDD then
+
+
+you have a complicated setup but that's
+
+
+another thing
+
+
+but if you keep your setup simple then
+
+
+the new developers joining in
+
+
+won't have to do those weird staging
+
+
+dances and they can actually test stuff
+
+
+locally without without any kind of
+
+
+interruption
+
+
+um
+
+
+dockerized dependencies even if you
+
+
+don't dockerize the application because
+
+
+it sometimes makes more difficult to run
+
+
+stuff like binding price or by buy Bugs
+
+
+or stuff still if you have like exotic
+
+
+database let's say elasticsearch
+
+
+put it in Docker file
+
+
+um maybe Docker compose and use those as
+
+
+dependencies and also provide also
+
+
+provide the configuration for those by
+
+
+default if you don't have configuration
+
+
+by default some people won't use those
+
+
+those dependencies because well they
+
+
+don't really want to configure it
+
+
+and also the most important part reduce
+
+
+the number of steps for configuration if
+
+
+I'm joining a project and I see a readme
+
+
+that takes me an hour to read
+
+
+well I wasted an hour and the setup is
+
+
+still complex and it's a manual and it's
+
+
+something that I will fail to do because
+
+
+I can't follow instructions very well
+
+
+for so
+
+
+it would be nice to have bundle DB setup
+
+
+plus rail C to at least see the console
+
+
+and if you're using Docker then token
+
+
+compose is also fine please just don't
+
+
+make me read along read me because I
+
+
+will fail at this
+
+
+another thing is that you should look at
+
+
+the list of dependencies that you use
+
+
+each one of those gems might have a
+
+
+configuration that will require default
+
+
+that require maintenance at some point
+
+
+it will fail and if somebody switches
+
+
+from Intel to M1 Mac it will fail as
+
+
+well so well
+
+
+take a look at from time to time if you
+
+
+see if anything can be removed from that
+
+
+list
+
+
+and
+
+
+the next thing is that provide seeds for
+
+
+all the data if I'm setting up a project
+
+
+and I need to create an account that I
+
+
+will have a different password then I
+
+
+will never reset the database because I
+
+
+don't want to do it over and over again
+
+
+which means in the well long enough
+
+
+timeline I will stop running stuff
+
+
+locally because resetting database will
+
+
+be too troublesome
+
+
+and if you use Docker also take and take
+
+
+care of the images because they are also
+
+
+positive your code there is a reason why
+
+
+the docker logo is a whale
+
+
+because most of the things are heavy
+
+
+containers that it lifts
+
+
+so take a look at this code as well
+
+
+all right
+
+
+um
+
+
+we got the easy part of the way
+
+
+now it's difficult part
+
+
+I don't want to see the test suit that
+
+
+long runs longer than 15 minutes because
+
+
+if it does I will probably switch to
+
+
+tick tock Facebook or some other social
+
+
+media because I can't really focus that
+
+
+long without having anything to do just
+
+
+looking at the output
+
+
+so if I jump into a project that has a
+
+
+slow test what I usually do first is the
+
+
+easiest part so I just browse sleep and
+
+
+then look into the specs and identify
+
+
+all the places in the widget tests are
+
+
+waiting because this is basically wasted
+
+
+developers time don't think of it as a
+
+
+waste of computer time because well
+
+
+computers are patient you can wait but
+
+
+the developer is waiting for a CI well
+
+
+they aren't that patient and they have
+
+
+other things to do
+
+
+you can also grab for other things this
+
+
+is also really easy part that you could
+
+
+do with speeding up tests
+
+
+loops loops in tests if you have a loop
+
+
+and you have a test generated within the
+
+
+loop what will happen is that another
+
+
+person will see the loop and it's very
+
+
+easy to add another element so there is
+
+
+another test it doesn't really do much
+
+
+because it's just another element it's
+
+
+the same test but they will add it and
+
+
+they will add it over and over again
+
+
+they also do this with shared context
+
+
+and shared examples because it's very
+
+
+easy to add them and you have nice test
+
+
+coverage so people use them all the time
+
+
+even if they don't make sense if you
+
+
+have like 10 subclasses and they all do
+
+
+the same thing you're running the same
+
+
+test over and over again even though
+
+
+it's just well just inheritance there is
+
+
+nothing to do here
+
+
+um another thing will be file loading
+
+
+I've seen so many code bases that uh
+
+
+have some kind of image upload and have
+
+
+some kind of image manipulation and they
+
+
+have like huge 25 megabytes PNG file
+
+
+because they want to really really make
+
+
+sure that it works in all cases even
+
+
+though it's very large
+
+
+and yeah on your local computer this
+
+
+works fine because they have a faster
+
+
+disk but if you put it on CI well it's
+
+
+no longer CPU bound it's i o bound the
+
+
+loading of the file will take some time
+
+
+most people when they um
+
+
+and find those problems so the test is
+
+
+running slow
+
+
+at some point we'll browse concept like
+
+
+this
+
+
+and they will use this particular gem
+
+
+for some reason actually it's really
+
+
+really popular
+
+
+um it's not bad I have to say it's
+
+
+actually good what it does it's um
+
+
+trying to create an isolated environment
+
+
+for each process and they will run
+
+
+several of them same time
+
+
+and this will also collect the result
+
+
+and give you one nice output of a test
+
+
+and this also works really well if
+
+
+you'll run the local there is one minor
+
+
+problem with it
+
+
+here is um parallel test run this is
+
+
+actually from Circle not from parallel
+
+
+test but it has the same problem uh I
+
+
+don't know if you can see that because
+
+
+the resolution is a little bit crappy on
+
+
+this display but uh the tests were
+
+
+running for 17 minutes
+
+
+even though some of the workers finish
+
+
+in about six
+
+
+and there are some ways around it you
+
+
+can use the timings for the previous
+
+
+test runs to split them more evenly but
+
+
+if you have like one big test that has
+
+
+to run for 17 minutes yeah that's it
+
+
+you're basically have seven extra
+
+
+minutes or so test in this particular I
+
+
+guess it's 11 minutes so 11 minutes for
+
+
+every test run and this thing costs you
+
+
+500 per developer per month and I'm
+
+
+quite sure the CI is cheaper
+
+
+there are also some paid solutions for
+
+
+this kind of things this is a screen
+
+
+from the marketing materials for
+
+
+knapsack Pro which is actually a server
+
+
+client based solution it starts a server
+
+
+that distributes tests as you go so the
+
+
+workers just pick them up as they go and
+
+
+this makes more even build
+
+
+and there is a free solution which I
+
+
+really try to love but I actually love
+
+
+and hate at the same time because it
+
+
+works well in local but I never managed
+
+
+to get it run on CI if somebody has some
+
+
+idea on how to fix this thing because
+
+
+it's pretty much unmaintained right now
+
+
+please do so
+
+
+all right that's some gotchas
+
+
+um
+
+
+setup takes more time if you want to
+
+
+create the database for your test now
+
+
+you have to create 10 of them which
+
+
+takes time there's some ways around it
+
+
+like for example you can set it up once
+
+
+in Docker then clone the image several
+
+
+times this is nice but unfortunately
+
+
+it's still usually slower than setting
+
+
+up just one thread
+
+
+separation isn't always complete I've
+
+
+seen so many of those specs being flaky
+
+
+or unstable because of things like shut
+
+
+cache or shared filex file system there
+
+
+are so many ways to to affect the other
+
+
+threads you have to be aware of them you
+
+
+have to debug them
+
+
+and if you have one really big test no
+
+
+matter what you do it won't get
+
+
+subdivided so if something runs for 10
+
+
+minutes even though everything else is
+
+
+fast even knaps XO Pro will help you
+
+
+this will be slow
+
+
+other things you can take a look at is
+
+
+to make a linear setup for your tests
+
+
+individually so this time we will
+
+
+actually diving into some code finally
+
+
+yeah
+
+
+yeah so
+
+
+this is obviously a real test it looks
+
+
+very real right
+
+
+yeah so um what this thing does is uh
+
+
+it's a request test
+
+
+that we'll call some endpoint and we'll
+
+
+check some well results of what the
+
+
+important returns
+
+
+and the problem with this is that if
+
+
+this endpoint for example runs for 30
+
+
+seconds or so then you'll have to wait
+
+
+for 1.5 a minute the obvious solution
+
+
+will be do something like this
+
+
+but um yeah if you put those together
+
+
+what will happen if the the first
+
+
+assertion isn't right so the return code
+
+
+will be 200 but like 300 for example or
+
+
+something else the other two won't work
+
+
+and there are ways around it and
+
+
+seemingly nobody uses them you can make
+
+
+the test aggregate the failures in this
+
+
+case the the code will go on even though
+
+
+the first assertion will fail and you
+
+
+get the nice reports of which of those
+
+
+are failing
+
+
+so
+
+
+consider combining the slow running
+
+
+tests into one test and making them
+
+
+aggregate the issues
+
+
+even even deeper
+
+
+this is a tool made by evil martians you
+
+
+probably know them it's called test Prof
+
+
+but it's not mentioned in the in the
+
+
+header and so apparently they have some
+
+
+problems with that name
+
+
+this is a huge toolkit of solutions for
+
+
+different kind of slowness in your tests
+
+
+and the ones that are most popular are
+
+
+usually Factory Cascades and this is the
+
+
+case in which you have one entity that
+
+
+relies on the other and the rails on the
+
+
+other and that way Factor both pretty
+
+
+much builds the entire world which is
+
+
+well obviously slow it takes at least
+
+
+seven days
+
+
+so
+
+
+this is an example From the Block which
+
+
+I Shameless installed because I don't
+
+
+have time to write the code myself
+
+
+this um this is a way of running the
+
+
+um this tool that will tell you which
+
+
+factor is actually slow and which
+
+
+particular test so you can focus in
+
+
+those
+
+
+and they usually fail on relations
+
+
+because these are Cascades so the
+
+
+easiest way to just remove the relations
+
+
+at least make the version of the
+
+
+factories without the relations to
+
+
+particular items
+
+
+you can make them also optional
+
+
+there is no good way to do this and then
+
+
+Factory but you have to do something
+
+
+with callbacks yeah this sucks but it's
+
+
+still faster than well running the
+
+
+entire thing all the time
+
+
+and if you are really really
+
+
+sure that you need the entire object the
+
+
+real one you can use create default
+
+
+instead of create which will try to
+
+
+reuse the object that was already
+
+
+created
+
+
+and by the way evil Martians
+
+
+I don't know if you know them but they
+
+
+are stuck in the 60s because that's the
+
+
+code they published and there is typo
+
+
+here
+
+
+yeah they don't run this code they just
+
+
+post in the Blogger
+
+
+all right
+
+
+um
+
+
+DB or not DB
+
+
+this is a nice and this is a nice test
+
+
+that will create a pony
+
+
+but sometimes you don't really need to
+
+
+create the pony unless you don't really
+
+
+need it in your database it's much
+
+
+better just to build a pony and this
+
+
+won't hit the database at all but it
+
+
+still provides mostly the same
+
+
+information unless you're using
+
+
+callbacks
+
+
+so every time you create an object you
+
+
+can also consider going through this
+
+
+cycle
+
+
+build stop try build try create without
+
+
+associations and then create you can
+
+
+think about them
+
+
+and about this way
+
+
+um which means that if I'm building
+
+
+stabbed I'm testing basically something
+
+
+else but I need the dependency I need a
+
+
+stopped object that I won't really be
+
+
+using but it's required there so here it
+
+
+is
+
+
+if I'm testing this but there is no
+
+
+database interaction then this build
+
+
+if I really need to create some
+
+
+something in a database because I'm
+
+
+querying or inserting something database
+
+
+well just create it but try to not
+
+
+create anything else and if you're
+
+
+testing end to end or do something more
+
+
+complex like request testing yeah you
+
+
+sometimes have to create the thing
+
+
+and these are the basic basics of
+
+
+improving your test suit
+
+
+and the question is what's next on your
+
+
+feedback loop shortening list
+
+
+and I know it
+
+
+but I really want you to tell me your
+
+
+own horror stories
+
+
+so please raise your hand if you can't
+
+
+run the code locally or your test suit
+
+
+is taking more than 30 minutes
+
+
+okay any taken to tell why is the
+
+
+situation happening in your project
+
+
+and we have insane number of tests and
+
+
+I'm just uh not working all the time on
+
+
+this part of the project so I decided to
+
+
+not spend all my time or a few days to
+
+
+configure everything right so I if it's
+
+
+I think I program only three times I
+
+
+have three times there some tasks so I
+
+
+use CI in this case NCI runs it three
+
+
+times faster than than I can do this
+
+
+locally so it's it it suits me but I
+
+
+understand that if I have all the time
+
+
+work on this this part of project I
+
+
+definitely will not waiting but I
+
+
+haven't covered any bugs that were
+
+
+related to this particular process like
+
+
+something that you were sure that will
+
+
+work but the fail in CI uh
+
+
+yeah I I had two times okay so after I
+
+
+and exactly was that I I left some typo
+
+
+so my CI fails almost instant uh
+
+
+immediately uh but I have a cup of
+
+
+coffee when I'm waiting for star in Qui
+
+
+yeah do you have anything anybody else
+
+
+who wants to tell about their stuff
+
+
+not really but if you stumble upon this
+
+
+and you don't really want to admit
+
+
+because I know it might be shameful for
+
+
+some people too they don't really want
+
+
+to admit that there is something wrong
+
+
+with the project especially if it's a
+
+
+client project and you don't really want
+
+
+to well show yourself from the bad side
+
+
+please note down the time that it takes
+
+
+for you to undo the damage that was done
+
+
+by something that you can't run locally
+
+
+or find wasted for waiting for CI and
+
+
+then well just multiply the value by
+
+
+your salary
+
+
+and reach out to somebody who pays for
+
+
+it it's a really good way to have some
+
+
+time to improve your developer
+
+
+experience
+
+
+and with this I would like to jump to q
+
+
+a oh there has been so many
+
+
+I just wanted to make uh two quick
+
+
+remarks sure nothing questions uh there
+
+
+is this
+
+
+ruby gem called Crystal Ball this is a
+
+
+remark for anyone it's uh
+
+
+takes the code coverage for each test
+
+
+and if you modify a file it will come up
+
+
+with a list of tests to run so if your
+
+
+tests take 40 minutes then you can
+
+
+take the crystal ball and find out the
+
+
+tests that only run on the files you
+
+
+changed okay
+
+
+this is not full full see it as you can
+
+
+run it locally for a quick feedback it
+
+
+doesn't replace running the full suit
+
+
+but it helps shorten the feedback loop
+
+
+are you using it uh I used it in one
+
+
+project that was really painful all
+
+
+right and the ECI was only solution to
+
+
+run the test you can run them locally
+
+
+with Crystal bully you could and I
+
+
+wanted to share the second remark right
+
+
+uh I'm not sure how many people use
+
+
+still pay-per-clip but I maintain a
+
+
+project with pay-per-clip and you can
+
+
+quickly find how to stop a pay-per-clip
+
+
+to not convert files I have like
+
+
+products users all of them have required
+
+
+files for avatars for uh thumbnails and
+
+
+stuff like that so there's like Quick
+
+
+Stop you can just turn off the convert
+
+
+and you will always have the origin file
+
+
+and there is like more advanced stuff uh
+
+
+stuff that you can turn off the files at
+
+
+all and it took my test suit from three
+
+
+and a half minutes to under 30 sec
+
+
+that's amazing also thank you very much
+
+
+for your contributions to open source I
+
+
+really uh I really enjoy using uh all of
+
+
+the gems I know that they mentioned that
+
+
+you should lose fewer dependencies but I
+
+
+still I'm still grateful for that and uh
+
+
+yeah I wish that more people read the
+
+
+docs to to avoid an unnecessary
+
+
+processing
+
+
+um all right uh one question from here
+
+
+um could you get back to the part uh
+
+
+with uh it was in the foreign part with
+
+
+the GitHub that we could done something
+
+
+about that locally instead of uh forcing
+
+
+the ca2 to run it doesn't really matter
+
+
+right now let's let's just focus on the
+
+
+important thing uh yeah you can you can
+
+
+use GitHub actions for free exactly
+
+
+there's actually a way to only pay for
+
+
+the hardware there's
+
+
+um something called self-hosted Runner
+
+
+and this means that you install Docker
+
+
+and a small script from GitHub
+
+
+and it will act as a GitHub actions
+
+
+worker you don't pay for GitHub actions
+
+
+you only pay for the server so we can
+
+
+get a really beefy one probably cheap if
+
+
+you're using something like hatsuna or
+
+
+VH or something you can use something in
+
+
+cloud and you spot instances if you
+
+
+really want to so you can make much much
+
+
+more powerful CI without breaking a bank
+
+
+and definitely under those 500 dollars
+
+
+so I I think you I've only mentioned
+
+
+this part because it's not online on the
+
+
+slides
+
+
+all right thanks
+
+
+okay uh first of all uh I'm here
+
+
+uh I'm really glad that you decided to
+
+
+to begin to give this talk uh today
+
+
+because I think that this
+
+
+um type of content is often really
+
+
+um missing on that type of conferences
+
+
+and second of all I decided to share my
+
+
+story uh recently I've changed the
+
+
+company and I encountered some basic
+
+
+service crowd service with a test suit
+
+
+that runs for about 15 minutes another
+
+
+side that why does it take it so long
+
+
+and I actually used the test Prof tool
+
+
+and it's I I can assure you that this is
+
+
+actually pretty amazing and it turns out
+
+
+that the main cause of the problem was
+
+
+our spec configuration because as you
+
+
+all know our spec provides some
+
+
+hooks that you can configure your test
+
+
+and in configuration you can actually
+
+
+configure airspec to run some code
+
+
+before every example and someone decided
+
+
+to I I don't know who that was but
+
+
+someone decided to put a clearing rails
+
+
+all the rails cache before every example
+
+
+and clearing just that one line and some
+
+
+few more lines uh reduced the time to
+
+
+run all the the suits
+
+
+from 15 minutes to just 40 seconds yeah
+
+
+this is exactly the type of thing I
+
+
+really enjoy that you find the the
+
+
+easiest thing you can do to make the
+
+
+experience better for everyone because
+
+
+well developers are expensive and their
+
+
+focus is something that we are we're
+
+
+severely lacking especially if
+
+
+notifications uh well if if you don't if
+
+
+you don't try actively to improve the
+
+
+developer experience then YouTube wins
+
+
+over
+
+
+yeah yeah and to sum it up
+
+
+um I think that one of the main problems
+
+
+with speeding up test suit is convincing
+
+
+the business to do it because
+
+
+um speeding up your tests from 15
+
+
+minutes to to like five minutes from the
+
+
+business perspective is not so obvious
+
+
+so yeah but if you put it in this time
+
+
+they usually understand and that's why I
+
+
+encourage you to actually count those
+
+
+numbers and do some some even even write
+
+
+something simple for your CI to put
+
+
+those numbers somewhere how long did the
+
+
+bill take how long was waiting in the
+
+
+queue these are simple things that we do
+
+
+have lots of different statistics and
+
+
+graphanas and and elastics stack
+
+
+whatever whatever you use we have those
+
+
+places to lock those things but we never
+
+
+really do and they map to money really
+
+
+nicely which means that these are things
+
+
+that you can improve measurably to to
+
+
+your company bottom line yes yes once
+
+
+again thanks for this amazing talk
+
+
+thank you but
+
+
+one two three thank you that was really
+
+
+nice presentation I wanted to add just
+
+
+one more thing about what you have told
+
+
+about the gitlab GitHub Runners GitHub
+
+
+actions sorry could you show yourself
+
+
+because it's very difficult to find yeah
+
+
+sorry this line is difficult to find
+
+
+people about the GitHub actions I have
+
+
+mentioned hatzner so in one of my
+
+
+previous projects we have used uh we
+
+
+have used circles AI which cost about I
+
+
+think 50 dollars per one Runner and
+
+
+moving that to one of the services which
+
+
+allow to like use custom Hardware it was
+
+
+like 50 euros for one hatsner machine
+
+
+which had eight cores so it was able to
+
+
+like Run 10 Runners so that was like 10
+
+
+times faster for the same price
+
+
+basically yeah people often forget that
+
+
+you can get cheap servers and they are
+
+
+afraid of Maintenance costs for
+
+
+something that is bare metal but be
+
+
+aware that if you run something like
+
+
+this usually only install Docker and one
+
+
+custom script if it's CI for gitlab
+
+
+Runner GitHub Runner whatever else it's
+
+
+not much of a maintenance cost and it's
+
+
+really cheap to get a beefy server that
+
+
+went this way it was basically it was
+
+
+frying for a few few years and it was
+
+
+basically like OS updates pretty much
+
+
+like the only thing awesome
+
+
+hi
+
+
+hello
+
+
+does anybody use fixtures
+
+
+what about fixtures
+
+
+uh you mean the jam fixtures the the one
+
+
+that has a things in the yaml files or
+
+
+something like that VM files instead of
+
+
+factory
+
+
+to be honest I've seen them using a
+
+
+couple projects uh I haven't used them
+
+
+that much so I don't have experience
+
+
+my intuition tells me that they might be
+
+
+slower in some ways in terms of you have
+
+
+to read the file but it might be faster
+
+
+than the other because you don't have to
+
+
+actually build stuff um which is nested
+
+
+because there is no option for to do
+
+
+proper nesting at least from what I've
+
+
+seen
+
+
+so sorry I don't have an experience
+
+
+maybe somebody else has some but you can
+
+
+talk after that okay
+
+
+um thanks for an amazing presentation I
+
+
+wanted to ask
+
+
+since you spent quite some time thinking
+
+
+about it yeah I see do you think we
+
+
+could do a better job as a community to
+
+
+teach people how not to shoot themselves
+
+
+in their food right because when you go
+
+
+to a factory boat repo it's gonna tell
+
+
+you hey uh you can do associations but I
+
+
+don't believe there's any discussion uh
+
+
+what the consequence of this are right
+
+
+should we you know maybe improve maybe I
+
+
+should open a PR and and suggest hey we
+
+
+should we should tell people what
+
+
+happens when you do that what's your
+
+
+opinion yeah we should definitely do
+
+
+something about this uh rail started as
+
+
+something that gave you amazing
+
+
+developer experience uh you could build
+
+
+stuff in minutes but uh we somehow
+
+
+forgot this part at some point and the
+
+
+more project grows the more the less we
+
+
+care about the uh things like uh well
+
+
+being able to work effectively with the
+
+
+code base
+
+
+uh I've seen so many propositions to
+
+
+solve this issue in some way one on the
+
+
+other during this conference so I really
+
+
+enjoyed that
+
+
+but yeah things that are like on the
+
+
+level of libraries Factory bolt uh maybe
+
+
+um I don't know migrations migration is
+
+
+also difficult topic for June developers
+
+
+we don't really have good uh
+
+
+tutorials good kind of materials that we
+
+
+can show that you can developers and
+
+
+it's going good practices we are
+
+
+severely lacking in this case but well
+
+
+somebody has to do it and uh we'll be
+
+
+happy to see it but unfortunately time
+
+
+is limited and I can't really do
+
+
+anything well everything I can do
+
+
+something
+
+
+so yeah I agree but it's a problem that
+
+
+we have to solve as a community
+
+
+all right thanks for the great talk and
+
+
+uh thanks for your courage to just go
+
+
+and
+
+
+quickly prepare a presentation for an
+
+
+empty slot
+
+
+and I would like to adapt on that
+
+
+comment about the crystal ball I haven't
+
+
+heard about this one but I don't know if
+
+
+anyone have here have ever used this
+
+
+tool which is called guard it's it's not
+
+
+new I've I've used it with success it's
+
+
+like a tool that tracks which files you
+
+
+change and you can interact on when a
+
+
+fire is changed so it can even like
+
+
+speed up
+
+
+running just the tests you need when you
+
+
+modify a file
+
+
+of course it requires setup and maybe it
+
+
+doesn't run all the tests you need maybe
+
+
+you can integrate it with that crystal
+
+
+ball for example but
+
+
+my experience of that many times
+
+
+it ran the test quicker
+
+
+than I was able to open up a console to
+
+
+check what's the result and it was
+
+
+already there yeah it also has a nice
+
+
+feature I don't know if the current
+
+
+guard has it but I've seen some
+
+
+implementations that have a like a
+
+
+notification that shows like a pop-up
+
+
+notification in the top right corner of
+
+
+the screen they would just say it's all
+
+
+green or not and some of those are
+
+
+clickable so you can click and go to the
+
+
+failing test yeah this is a really nice
+
+
+way to shorten your feedback loop the
+
+
+only thing that I don't particularly
+
+
+enjoy is in my you lose context if
+
+
+you're switching too much with this kind
+
+
+of thing because the tests that are
+
+
+failing might be pretty much unrelated
+
+
+to what you're looking at but yeah this
+
+
+is a nice tool
+
+
+uh I would like to respond to the
+
+
+question regarding fixtures yeah sure
+
+
+um so from my experience fixtures are
+
+
+great but
+
+
+hard to maintain when the project grows
+
+
+but the game that you mentioned test
+
+
+Prof has a great addition to the factory
+
+
+bot that you can actually catch them and
+
+
+use as a fixture
+
+
+and I use them mainly for for things
+
+
+that are like common in a project like
+
+
+current user or company or whatever that
+
+
+you actually can create once for all
+
+
+your tests or most of them and for the
+
+
+rest of the things I will just Factory
+
+
+but yeah they also have a really nice
+
+
+feature in which you can automatically
+
+
+replace every single create by build
+
+
+and it will log out the tests that are
+
+
+failing and those tests you have to
+
+
+actually roll back to create but the
+
+
+other one can keep build which is really
+
+
+nice way to clear out a lot of tests
+
+
+other ones
+
+
+and hi thank you for your talk thanks uh
+
+
+you mentioned very nice option how to
+
+
+optimize your tests it's not to use
+
+
+database yeah to build objects and um
+
+
+but we also like this approach in our
+
+
+company and like to practice it but
+
+
+uh
+
+
+because it's a source company usually
+
+
+you're not starting projects from the
+
+
+scratch it often projects comes ready
+
+
+and when you want to optimize test but
+
+
+this project use a lot of callbacks as a
+
+
+do you know maybe some ways around uh
+
+
+in the same time following this idea but
+
+
+not to refactor the callbacks well
+
+
+you can't really skip refactoring the
+
+
+code the callbacks because they happen
+
+
+in random places but the easiest thing I
+
+
+I can think of when I'm jumping into
+
+
+well resolving those callbacks and I
+
+
+will just remove them and keep the
+
+
+method but they remove the Callback and
+
+
+see what fails this is the easiest way
+
+
+to find it and if I find what fails I
+
+
+usually find in the in the tests or in
+
+
+the well running the code the places
+
+
+that try to use the thing that was used
+
+
+by the Callback
+
+
+and you can trace it down to just put
+
+
+the Callback manual as a method
+
+
+invocation and this way it's not
+
+
+um something that happens in the
+
+
+background it's explicit it's still
+
+
+usually a bad code because you're
+
+
+basically trying to fix the model after
+
+
+you created it at some point
+
+
+it's not like the model was created
+
+
+properly initially but still
+
+
+um well there is no Silver Bullet and I
+
+
+think this is the easiest way I've found
+
+
+to do this so sorry no good answer thank
+
+
+you
+
+
+third remark and a little bit regarding
+
+
+what uh I love this guy uh I had one
+
+
+project that was really painful because
+
+
+we had my sequel there and we were stuck
+
+
+with it we couldn't upgrade or anything
+
+
+because we used uh Sphinx as a search
+
+
+engine which was tightly coupled and the
+
+
+running test was horrible until one day
+
+
+I thought why not put the whole data
+
+
+directory in Ram and when you're running
+
+
+MySQL in Docker that's really easy you
+
+
+just one add one line to Docker compose
+
+
+and the whole test suit
+
+
+lowered from like 10 minutes to one
+
+
+minute or one minute and a half uh even
+
+
+if you're not using MySQL but you're
+
+
+still compatible compatible with uh SQL
+
+
+Lite you can always ask SQL light to be
+
+
+also in Ram and that also is pretty fast
+
+
+these are some dark art tricks that you
+
+
+pick up in the trenches when you're
+
+
+trying to optimize stuff uh I really
+
+
+like this stuff
+
+
+um I think we don't have much time for
+
+
+more questions because the next speaker
+
+
+probably wants to prepare uh I'm leaving
+
+
+with one slide that I didn't manage to
+
+
+put in but it kind of sums up what we're
+
+
+doing in the last 60 years with software
+
+
+development
+
+
+so basically we're playing ping pong
+
+
+between putting stuff on the server and
+
+
+the front end repeatedly
+
+
+thank you very much
+
+
+thanks

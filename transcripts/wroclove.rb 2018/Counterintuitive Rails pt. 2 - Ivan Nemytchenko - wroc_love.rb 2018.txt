@@ -1,0 +1,2755 @@
+okay we've heard a lot about all this
+
+
+awesome and sourcing stuff now get back
+
+
+to earth get back on Rails so we start
+
+
+as I say promised we start with these
+
+
+pictures and eighty-two people leave
+
+
+their responses and I want to say thanks
+
+
+to all of them now we have this data and
+
+
+we have some stuff to think about and I
+
+
+think it's really interesting so 66% of
+
+
+the people are happy with rails and I'm
+
+
+a little bit surprised about it and it
+
+
+means either you're much much less
+
+
+critical to your code then I am or
+
+
+you're much you do know how to manage
+
+
+complexity much better than me then I
+
+
+don't know why you're not staying here
+
+
+and I'm standing here or like another
+
+
+not option is that it's it's broad Slav
+
+
+and like you'll already know how to do
+
+
+how to deal with rails and how to manage
+
+
+complexity in rails alright so yeah this
+
+
+is like obvious if you every year tell
+
+
+people what did is they you can expect
+
+
+that they know DDD at least familiar
+
+
+with it how people manage complexity so
+
+
+almost not almost eighty one eighty two
+
+
+percent people do additional layers and
+
+
+building blocks and only twenty percent
+
+
+do frameworks on top of rails Nick for
+
+
+short could improve his marketing here
+
+
+and what surprised me is that someone
+
+
+actually thinks that if he uses
+
+
+rales insurance then he manages
+
+
+complexity yeah and the the two lost
+
+
+answers they were they are actually fake
+
+
+I don't think you manage complexity by
+
+
+moving stuff around so I mean the
+
+
+numbers are real the the options are
+
+
+fake and then what kind of northern BC
+
+
+classes do you use almost all people who
+
+
+answers use services and well you see
+
+
+the picture so what surprised me is that
+
+
+a lot of people user posit or ease I
+
+
+would really love to see how how they
+
+
+look so if you I don't know I'll
+
+
+probably ask the people who answered
+
+
+like this to show me their code because
+
+
+I'm I'm really interested how your
+
+
+positives look like in rails
+
+
+applications and the the most like like
+
+
+love-hate relationship is device so only
+
+
+40 percent of the people think it's a
+
+
+good thing and 36 think it's it's an
+
+
+evil thing and the rest like it's so
+
+
+complicated all right we can now get
+
+
+back to the topics we wanted to discuss
+
+
+and I want to start with callbacks
+
+
+you know models and another graph so
+
+
+again how do people use callbacks half
+
+
+of the people do not use them and I'm
+
+
+gonna start with this small example
+
+
+which is a little bit weird but I just
+
+
+found it on internet yesterday and I
+
+
+found it would be a funny to show it so
+
+
+the intention here is actually good so
+
+
+the intention here is to have a default
+
+
+value for the gender but
+
+
+can I do with this coat is pretty
+
+
+strange so I create a new object I put a
+
+
+gender there then I ask if the object is
+
+
+valid and then then the gender is
+
+
+changed so what what kind of comment
+
+
+query separation is this what are we
+
+
+talking about so if we write code like
+
+
+this we will never be able to use models
+
+
+like if like if they would be our domain
+
+
+models because we do care about the we
+
+
+expect the we only expect object to be
+
+
+valid
+
+
+I mean ready to use after it's saved so
+
+
+there are two states of the object until
+
+
+it's saved and after it's saved so we we
+
+
+rely on this and explicitly use this in
+
+
+our code so that's a bad thing and that
+
+
+was a simple case in like you know how
+
+
+it looks like in in in big applications
+
+
+all right so what can we do here let's
+
+
+let's look at it one more time and we
+
+
+know how to were to put defaults in
+
+
+rails right so we have migrations and we
+
+
+can put defaults there but the trick is
+
+
+that it's not the best idea actually
+
+
+because default is your business logic
+
+
+and if you put it in two separate places
+
+
+into database and into the model then
+
+
+you like keep the same kind of
+
+
+information in two different places
+
+
+that's not a good thing so the change is
+
+
+trivial apparently you can use
+
+
+constructor in active record models like
+
+
+this and put defaults there like this
+
+
+and it simply works so this is how you
+
+
+can through a way at least part of your
+
+
+callbacks from your models
+
+
+all right another another example it was
+
+
+also found on the Internet
+
+
+so here we have a calico door jam and
+
+
+the code looks very simple and guess
+
+
+what happens when we ask if the room is
+
+
+valid request goes to external service
+
+
+so we wait while the service response
+
+
+and then the state of the object again
+
+
+changed and we just simply asked if the
+
+
+object valid and it is supposed to be
+
+
+out the main model what could go wrong
+
+
+so and the reason for this is simple is
+
+
+that the author of the jam in his readme
+
+
+like the first way how to use his jam he
+
+
+describes that you should put this stuff
+
+
+into model so I agree that this is
+
+
+really hard to resist and not to put
+
+
+this into model because like because the
+
+
+guy with five stars on github says that
+
+
+you should be doing this who am i and
+
+
+who is this guy with five thousand stars
+
+
+so yeah
+
+
+and the bad news you can't trust anyone
+
+
+on internet so even if they have five
+
+
+thousand star github even if they have a
+
+
+beautiful landing page about their gem
+
+
+it doesn't matter anything so you had to
+
+
+develop your own reasoning about stuff
+
+
+good news it is possible to learn how to
+
+
+make your own decision decisions and
+
+
+this is what we are trying to do here
+
+
+all right let's take a look what we
+
+
+could do here so we know that we have
+
+
+services layer to deal with external
+
+
+services and we simply call this
+
+
+geocoder explicitly we the address and
+
+
+we get the data out of this service
+
+
+and then we put it into our database so
+
+
+does this look good now what is wrong
+
+
+here so let me show you
+
+
+[Music]
+
+
+so services are about business logic we
+
+
+agreed on this right this second line in
+
+
+this service is it a business logic is
+
+
+it the part is this information a part
+
+
+of our domain yeah it's it's it's about
+
+
+persistence it's about how we put stuff
+
+
+into active record so we have active
+
+
+record and it's convenient to work with
+
+
+active record this is why we still use
+
+
+it but it's not our business logic so
+
+
+this is where another layer comes out
+
+
+and the name of this layer is mutaters
+
+
+so what what is this layer for so we're
+
+
+gonna be using this layer for the single
+
+
+purpose all the operations like creation
+
+
+editing and deletion we will put them
+
+
+there so we simply take this line of
+
+
+code and put it into into the class and
+
+
+into the method into the pup class map
+
+
+of the room we later class and call it
+
+
+from our service so now service contains
+
+
+only only business logic it goes to the
+
+
+external service and takes takes
+
+
+information from it and it puts it into
+
+
+the into the database and the rest is
+
+
+handled by this mutator that's the idea
+
+
+so because on this level of abstraction
+
+
+we are not interested in the details we
+
+
+just want it to be stored somehow and we
+
+
+want someone else to care about how to
+
+
+store it properly that's the idea so
+
+
+is it okay to use at least some of
+
+
+callbacks yes you can use coal box like
+
+
+this so if you want if you want to catch
+
+
+some counters or do some de
+
+
+normalization while creating something
+
+
+you can do something like this but there
+
+
+is a way to improve this the the next
+
+
+step to improve this is to add this line
+
+
+so it's okay to keep this for a while in
+
+
+the model but when it becomes more
+
+
+complex just move it to the mutator
+
+
+layer as well alright so previously I
+
+
+mean yesterday we had a service like
+
+
+this so in order to store to store
+
+
+something into database it had to do a
+
+
+lot of stuff so but again it's just it
+
+
+just an active record stuff and it can
+
+
+be simply moved to the mutator
+
+
+completely what I love about this schema
+
+
+is that it allows you to be lazy I mean
+
+
+let me show you so in this simple case
+
+
+we can do everything in the controller
+
+
+controller like we usually do we simply
+
+
+create an object if it's valid will you
+
+
+save it if it's not valid we render a
+
+
+form then in a more complex situations
+
+
+then we create a service and put our
+
+
+logic there or if the logic is only
+
+
+about how to put it properly into
+
+
+database we creating mutate mutator and
+
+
+call it from the controller or if it all
+
+
+goes what goes completely wild then we
+
+
+can create a service which can call
+
+
+different mutaters can call different
+
+
+external services or trigger job or
+
+
+something like this so here's an example
+
+
+of such a service and this is what I
+
+
+don't like about enemy is that in Kaname
+
+
+you have to create all the boilerplate
+
+
+code up front so you can't be lazy in
+
+
+Kaname
+
+
+all right the purpose of layers
+
+
+first of all models we treat them we try
+
+
+to treat them as domain models and they
+
+
+contain relations and business rules and
+
+
+and also important about models since
+
+
+it's the main model there are no such
+
+
+thing like ID so we because ID is a
+
+
+implementation detail and there
+
+
+shouldn't be like in services you
+
+
+shouldn't be passing eight IDs the only
+
+
+one place where you are allowed to pass
+
+
+IDs is when you trigger a job because
+
+
+you you don't want to push the whole
+
+
+model into the job mutaters the handle
+
+
+creation editing and deletion logic so
+
+
+that we are always operate with objects
+
+
+in cards in correct state those are
+
+
+supposed to be atomic operations
+
+
+services they handle business logic and
+
+
+interaction and external services and
+
+
+controllers as usual application logic
+
+
+like additional form fields sessions
+
+
+flash messages and radiates alright
+
+
+let's talk about form objects and here's
+
+
+the picture from survey most of the
+
+
+people use form object half of the
+
+
+people here they use them a bit and well
+
+
+you see the picture 2023 percent people
+
+
+use them a lot and where do we need them
+
+
+where we have some additional stuff
+
+
+which doesn't play nice with the default
+
+
+active record way so for example in this
+
+
+form we not only register a user we also
+
+
+want to create a company or here so this
+
+
+in this case we only want to save one
+
+
+date like
+
+
+when warranty is about to expire but the
+
+
+form looks more complex and we need to
+
+
+make sure that everything works fine so
+
+
+it's not obvious how to make it work in
+
+
+rails in rails way by default so there
+
+
+are different hacks and people are very
+
+
+creative when it comes about form
+
+
+objects so I have like this list of
+
+
+links on how on different gems and
+
+
+different approaches and how to build
+
+
+your own form objects so it really shows
+
+
+that there is no single style
+
+
+standard and well there is still like a
+
+
+typical way of doing formal form objects
+
+
+it was this example was shown on this
+
+
+page famous article like seven ways to
+
+
+do something with your active record
+
+
+models to decompose that active record
+
+
+models right and the bad thing is that
+
+
+this doesn't play well with nested
+
+
+attributes so and the author of this
+
+
+forgot the name the guy from code
+
+
+climate says that well you simply don't
+
+
+use it because it's a bad thing but it's
+
+
+so handy and it's a bit sometimes we
+
+
+need it and another thing that we
+
+
+construct the whole thing from scratch
+
+
+so again it feels like hanami the yeah
+
+
+this this is how we use it this is a
+
+
+good part
+
+
+so in controller it looks like a model
+
+
+we simply call it and save it and we are
+
+
+fine yeah and the same examples
+
+
+yesterday so we can have like if you
+
+
+have two different contexts and in a
+
+
+Malaysian context we want to make sure
+
+
+that the publication date is set then
+
+
+the railway solution
+
+
+conditional validations but it police
+
+
+our models with a lot of conditionals
+
+
+and some of them I formulated
+
+
+conditionals and in our models we
+
+
+shouldn't have formulate related
+
+
+conditionals so the fix is very trivial
+
+
+actually so I was shown a way how to
+
+
+create very simple form objects it looks
+
+
+like this so all we do we create a
+
+
+concern and we define to the alligators
+
+
+there and to make rails think that it
+
+
+works with the same model so in this
+
+
+example in this example we have article
+
+
+and now we create in moderation article
+
+
+form I created III i named it form
+
+
+because like for it's not a real form
+
+
+right it's more like a model so it's
+
+
+kind of fake form but we still want to
+
+
+name it something like form I was
+
+
+thinking about name shape but but but
+
+
+this I like more so we put additional
+
+
+stuff like validations or different
+
+
+attributes in this in this form and we
+
+
+simply call it as usual is in our
+
+
+controller and it simply works this is
+
+
+this was very surprising to me West when
+
+
+I seen this for the first time but it
+
+
+just works well you need to put a bit
+
+
+more stuff inside if you want to make it
+
+
+play nice like in all the cases with
+
+
+rails but still like you simply put this
+
+
+code snippet into into your rails
+
+
+application and you can do like this
+
+
+stuff and you can have forms almost for
+
+
+free all right so they have zero
+
+
+maintenance cost they bring you know new
+
+
+abstraction
+
+
+we were talking that we will try to use
+
+
+rails defaults as much as possible this
+
+
+is definitely within rails way and it
+
+
+plays plays nicely together with
+
+
+controllers here arcane this is another
+
+
+nice part so you remember we wanted to
+
+
+build the hierarchy thing and so we have
+
+
+this name moderation article form and
+
+
+and we had the same hierarchy in the
+
+
+controller's moderation article
+
+
+controller all right yeah and of course
+
+
+it's the dirty hug so but as we agreed
+
+
+if a dirty hug allows us to build good
+
+
+system then it's more than a key all
+
+
+right the next thing flux as a sign of
+
+
+implicit state this is the code I
+
+
+written so I was implementing the
+
+
+subscription page and you know that it
+
+
+can be tricky because when you need to
+
+
+care about subscriptions like you first
+
+
+take credit card data and then you want
+
+
+to read the month passes you want to
+
+
+take money from the card again and then
+
+
+something goes wrong with this card then
+
+
+you should probably cancel the
+
+
+subscription or person cancels his
+
+
+subscriptions before like before it it
+
+
+ends and we still need to give him the
+
+
+ability to use our our website so we
+
+
+need to handle a lot of different
+
+
+scenarios and show different information
+
+
+so I've written the code like this and
+
+
+at some point I stopped understand
+
+
+what's going on there so it stopped
+
+
+working I didn't know what what is wrong
+
+
+there so what is bad here is that
+
+
+I use random methods like like this like
+
+
+this like this and I try to figure out
+
+
+what's happening in what's happening
+
+
+here depending on these let's call them
+
+
+flags and there are gems to standardize
+
+
+this so gem like flag sheet so it allows
+
+
+you to define your flexing in your model
+
+
+and gives you a bunch of handy methods
+
+
+like this and it's supposed it is also
+
+
+supposed to be a good thing right
+
+
+so you have a standard and actually this
+
+
+example I found from the one polish guy
+
+
+blog post and he said that boolean flags
+
+
+are an inseparable element of most rails
+
+
+application they control various aspects
+
+
+of the model business logic to learn so
+
+
+and maybe some of the flags are okay
+
+
+here but the second one looks suspicious
+
+
+to me because this on-boarded flag
+
+
+what's wrong with it so it looks like
+
+
+this flag defines state and if we use
+
+
+flags to define states of our objects
+
+
+then we are gonna be in trouble let me
+
+
+demonstrate this so I took let's say we
+
+
+have four flags like this so if trial
+
+
+expired if something expired if can use
+
+
+subscription cancel if subscription
+
+
+expired those looks really strange to me
+
+
+but let's say like it's not that
+
+
+important so when I introduce Flags into
+
+
+my system well how many combinations do
+
+
+I get here so let's say those are those
+
+
+are binaries so we have this nice table
+
+
+of combinations and
+
+
+we have 16 combinations and when I bet
+
+
+when you introduce flags like this into
+
+
+you into your models you don't expect to
+
+
+have 16 combinations but you have so
+
+
+this is combined at Oriel complexity
+
+
+explosion and this is why you shouldn't
+
+
+be using flex for managing the state so
+
+
+not to manage in the state it's like
+
+
+well let's dive in it into Italy this
+
+
+laser so what we have here the the
+
+
+problem is that it's not that easy to
+
+
+identify those flags sometimes so here
+
+
+they they are hidden those those flags
+
+
+they can be dates they can be some
+
+
+periods they can be associations like my
+
+
+model has some association or doesn't
+
+
+happen I rely on this and it's also
+
+
+should be considered a flag somehow
+
+
+sometimes we have this status fields
+
+
+yeah so these are the examples of the
+
+
+hidden flags and the humanik humanity
+
+
+actually invented the solution for these
+
+
+kind of problems and the solution called
+
+
+state machines and the state machine
+
+
+defines system behavior in the in
+
+
+different states so what was implicit
+
+
+before state machine makes it explicit
+
+
+so and this is an example of state
+
+
+machine really simple one you see that
+
+
+the system can be in four different
+
+
+states and there are different ways to
+
+
+brain system and in two different
+
+
+conditions and another example of pretty
+
+
+simple state machines and yeah so the
+
+
+question is when do we need the state
+
+
+machine when system behavior depends on
+
+
+its state so and the trick is that
+
+
+almost everything in software
+
+
+engineering can be I think not almost
+
+
+but air
+
+
+can be described with state machine and
+
+
+like we we always program state state
+
+
+machines this is for example a state
+
+
+machine of of docker it is ago it it is
+
+
+a bit more complicated but still a state
+
+
+machine it's a bunch of states
+
+
+transitions and some rules connected to
+
+
+these transitions so how it looks like I
+
+
+bet you know how it looks like so this
+
+
+is an example how it could look in your
+
+
+model and this is how your view start to
+
+
+look like so you specify all the states
+
+
+and now you rely only on this state and
+
+
+you know that in how system should
+
+
+behave in every state so it becomes
+
+
+explicit and it's defined in your model
+
+
+alright explicitly define states and
+
+
+transitions
+
+
+it's prevents condition convenient Orion
+
+
+you can even have multiple state
+
+
+machines per model and sometimes you
+
+
+need it and this can be done with this
+
+
+gem and yeah this is how people answered
+
+
+on the question whether they use state
+
+
+machines so half the people don't use
+
+
+them alright the next thing if
+
+
+statements through the whole up this is
+
+
+the interesting topic and I found in an
+
+
+article fro it was written by a guy from
+
+
+top-tall and he showed this example so
+
+
+this was shown as a example of bad code
+
+
+which like the statement was was that we
+
+
+have too much logic in views and the
+
+
+solution looked like this so we take
+
+
+this current user and
+
+
+my creative method in the controller
+
+
+which does something like this so you
+
+
+get the idea so we create if there are
+
+
+no real current user we create a fake
+
+
+object fake open struct object so what
+
+
+we got we simplified the view but the
+
+
+problem is that we just move this non
+
+
+beautiful thing from one place to
+
+
+another and make it even even more ugly
+
+
+so the solution here is null objects
+
+
+surprisingly so what we can do we can
+
+
+simply create a plain Ruby object call
+
+
+it guest and define all the methods we
+
+
+have in real user object and make this
+
+
+kind of stops there so there is no ID it
+
+
+responds fails to question if it's at an
+
+
+admin it's not a moderator but it's
+
+
+guest and so on and so on and so on and
+
+
+there is his name and in the controller
+
+
+we try to find a real user first if we
+
+
+don't if we are unable to find it we
+
+
+create a guest object and then we have
+
+
+this beautiful thing in the view and
+
+
+that's it
+
+
+you get polymorphic behavior like almost
+
+
+for free and the trick is that it's not
+
+
+the only scenario where we have behavior
+
+
+like this where we tend to use if
+
+
+statements like there are all over our
+
+
+applications and it's not only about
+
+
+users but like another example where you
+
+
+should be considering creating another
+
+
+object for another type of user is when
+
+
+your one in your system a user with an
+
+
+age under 18 behaves differently than a
+
+
+regular user then it should be a
+
+
+separate model it wouldn't
+
+
+no object but it should be a separate
+
+
+model all right now objects explicitly
+
+
+define different types of entities in
+
+
+our system you get polymorphic behavior
+
+
+for free we get logic less controllers
+
+
+and views and the bonus here is this
+
+
+simple gem that was created during the
+
+
+workshop I intended so what it does it
+
+
+allows you to so you simply include it
+
+
+into your object and then you can do
+
+
+stuff like this so you if there is no so
+
+
+let me show you so many stuff here so
+
+
+for example of course the object
+
+
+response to all this stuff but the
+
+
+interesting part is that if we ask for
+
+
+an address for example it returns new if
+
+
+we ask for posts it returns an empty an
+
+
+empty array so for for all methods which
+
+
+are not defined it like gives you a stop
+
+
+it responsive fails new or m-theory
+
+
+depending on the name of this method so
+
+
+this is pretty handy and you should be
+
+
+using this and still like half of the
+
+
+people don't use this trick but you
+
+
+should be alright
+
+
+the next thing we postponed the talk
+
+
+about models but models are crucial and
+
+
+good models are beautiful and lean and
+
+
+make us happy and made bad models they
+
+
+make our life as a developer's miserable
+
+
+because like yeah because we don't think
+
+
+about our domain we think about other
+
+
+part other weird stuff so what are these
+
+
+models so these are like health centric
+
+
+model of the solar system and hello
+
+
+sundry
+
+
+and you should know this guy and this is
+
+
+nicholas copernicus and i know that
+
+
+there is an airport nearby named in his
+
+
+honor and he was advocating for hello
+
+
+centric model of our solar system and
+
+
+but there is another guy and this guy
+
+
+named Aristarchus of Samos and he lived
+
+
+even earlier and the trick is he had
+
+
+this idea of heliocentric model even
+
+
+earlier much much earlier and so I'm not
+
+
+sure if there is a an airport named in
+
+
+his honor as well but what it means for
+
+
+us is that even the whole world or in
+
+
+our situation the whole rails community
+
+
+keeps putting everything into models we
+
+
+don't have to repeat after them that's
+
+
+the idea and yeah so I know I hope it
+
+
+will be hard for you to keep doing
+
+
+things in the old way in the old active
+
+
+record this way and the good news is
+
+
+that you now know how to reason about
+
+
+this kind of stuff and yeah you're
+
+
+welcome welcome to the real world
+
+
+I should have been asked if you want
+
+
+this blue pill or red but I forgot sorry
+
+
+yeah so what stays in the models
+
+
+associations business rules state
+
+
+machines defaults and the question is
+
+
+what about scopes so if the model is big
+
+
+if the application is big then we might
+
+
+have like
+
+
+tens of these scopes or probably I don't
+
+
+know hundreds maybe I don't know never
+
+
+seen something like this but who knows
+
+
+and scopes are usually on the top of our
+
+
+model but they are not actually about
+
+
+our domain logic right those like kind
+
+
+of a shortcut to a way to get the data
+
+
+to get the data sets or like sets of our
+
+
+objects or something like this so this
+
+
+is actually looks like repositories and
+
+
+there is a simple way to get rid of the
+
+
+scopes in our models again we use dirty
+
+
+hack we create a concern and we put our
+
+
+scopes there and we simply include this
+
+
+into our model and both worlds are happy
+
+
+right now
+
+
+rails keeps thinking that scopes are
+
+
+inside and we should be happy as well we
+
+
+have a separate place for the for the
+
+
+definitions how to get data from from
+
+
+the database and we have clean models
+
+
+right now that's that's perfect I think
+
+
+all right an example of the model so the
+
+
+question is what stays in the model so
+
+
+associations state machines and a little
+
+
+bit of business rules so you can have
+
+
+more of them like and we see that stuff
+
+
+in null objects so you can have more
+
+
+methods like this but that's actually
+
+
+eat and let's take a look at this
+
+
+beautiful schema so I should have been
+
+
+draw something more something more like
+
+
+this like the circles right it will be
+
+
+more correct so this would be our models
+
+
+and
+
+
+so models and like repositories nearby
+
+
+then we have the mutaters part then we
+
+
+have our services and the controllers
+
+
+and somewhere like use and external
+
+
+world and all this kind of stuff
+
+
+and again the so this schema gives us
+
+
+pretty straight idea of who could do
+
+
+what and so for example models it so the
+
+
+question is is it ok if I call a service
+
+
+from a model is it ok now it's not
+
+
+because it's it's like is it ok if I
+
+
+call a service from mutator no it's not
+
+
+ok so this schema gives us a lot of
+
+
+answers and this is this is pretty clean
+
+
+actually I think all right I have a lot
+
+
+more slides about testing I'm not sure
+
+
+if we want to go in this topic actually
+
+
+because I could create like a separate
+
+
+talk about this and I feel not very like
+
+
+confident in this in this area actually
+
+
+and I think someone could do much better
+
+
+than me alright let's jump into it as
+
+
+well so the question is do we really
+
+
+need to cover our application as much as
+
+
+possible the trick here is that the
+
+
+situation with tests is very similar to
+
+
+the situation with the hosting up when
+
+
+it comes to the hosting uptime hosting
+
+
+services uptime
+
+
+and the same as it goes with the web
+
+
+performance web pages performance so we
+
+
+can easily achieve like a good enough
+
+
+results but the more reliability the
+
+
+more performance and the more coverage
+
+
+we want the bigger price we should pay
+
+
+and the question is like the question is
+
+
+usually what test should I write and I
+
+
+know that a lot of people they've been
+
+
+taught that unit tests is a good thing
+
+
+and they tend to do it a lot yeah but
+
+
+some people like then they have problems
+
+
+because when you cover everything like
+
+
+your models with unit tests then you
+
+
+have to maintain them and they're
+
+
+usually not that stable they're usually
+
+
+fragile and you have to support them and
+
+
+people think that well I had enough and
+
+
+they go to the opposite direction and
+
+
+they go into acceptance testing so now
+
+
+they doing the another thing so now they
+
+
+they writing another kinds of fragile
+
+
+tests you rely on the ID of the div
+
+
+block which is been loaded by some Ajax
+
+
+call and it's not very reliable so and
+
+
+we had a great conversation yesterday
+
+
+with Nathan and he and I really liked
+
+
+his model about how to reason about what
+
+
+tests right so the idea here is that you
+
+
+can go either in deep or or you can go
+
+
+wide with your tests so and you can put
+
+
+so you can think where are the models on
+
+
+this on this picture where are the
+
+
+acceptance tests where are the
+
+
+controller tests and so on and so on so
+
+
+with
+
+
+no tests we try to go deep like we try
+
+
+to cover our core logic with the test
+
+
+would accept intense and functional
+
+
+tests we try to go wide and this is what
+
+
+we want actually at the beginning of the
+
+
+application and this is what you have
+
+
+answered so most of people do unit tests
+
+
+and surprisingly big amount of people do
+
+
+acceptance test as well
+
+
+so what are the right questions when we
+
+
+are about to write tests the first of
+
+
+all are they're useful are they're easy
+
+
+to write they're easy to support how
+
+
+fragile they are and how often do you
+
+
+need to rewrite them
+
+
+yeah and controller tests here is the
+
+
+most low-hanging fruit you can get when
+
+
+you're about to test your application
+
+
+because all you want to do is to make
+
+
+sure that every endpoint of your
+
+
+application was touched so every action
+
+
+you you touch every action in your
+
+
+controller and in a simple case you just
+
+
+check if the response is successful if
+
+
+it's an update or creation or deletion
+
+
+you need to make sure that with correct
+
+
+parameters the correct stuff was made so
+
+
+these tests they are easy to write so
+
+
+they're they not that you don't need to
+
+
+change them that often so they have the
+
+
+maximum return on on investment I think
+
+
+and this is the first thing you should
+
+
+be doing in the new rails application
+
+
+then you have to think you might want to
+
+
+test services and militate errs because
+
+
+they are important this is where you go
+
+
+in deep this is where you cover the
+
+
+tests your core all right
+
+
+another thing this is another
+
+
+low-hanging fruit when it comes about
+
+
+tests and the rule number one always use
+
+
+named Rhodes because when you use
+
+
+strings sometimes we are too lazy to go
+
+
+into roots and check check out what is
+
+
+the name of the road and we use strings
+
+
+the problem here is that when we use
+
+
+string then if we made a mistake there
+
+
+then there is then rails will not give
+
+
+us an exception about it so that's the
+
+
+problem so we will not notice this in in
+
+
+our test we will not notice it in the
+
+
+development this is the problem the same
+
+
+story goes for rest of the strings in
+
+
+your application action so the advice is
+
+
+to use internationalization
+
+
+internationalization even for even if
+
+
+you have an application with a single
+
+
+language and there is a numerous gem for
+
+
+in um fields in your in your models and
+
+
+there is a handy trick I'm not sure why
+
+
+it's not in the rails yet so but I don't
+
+
+have a snippet here but idea is also
+
+
+simple so instead of doing this flash
+
+
+success equals something or flash notice
+
+
+or something like this what you can do
+
+
+is to create a simple helper methods you
+
+
+can call it F by analogy with H and what
+
+
+it does it takes current path path to
+
+
+the action in the current controller and
+
+
+goes into the internationalization file
+
+
+and it takes this parameter success of
+
+
+failure and it takes the corresponding
+
+
+message so in so this is how you can get
+
+
+rid of strings from your application and
+
+
+what it gives you is that when you run
+
+
+your functional tests then then your
+
+
+tests touch even more stuff so your
+
+
+controllers take
+
+
+services services coal models and in
+
+
+models you also touch this kind of stuff
+
+
+alright now we getting close to the most
+
+
+holy bearish themes and the themes were
+
+
+at least prepared so but I think we
+
+
+should like go to through this as well
+
+
+so at least you will have a reason to to
+
+
+have a conversation in your company
+
+
+about this
+
+
+so people by default use r-spec this is
+
+
+like this is an agreement we all agree
+
+
+to use our specs still I think it's over
+
+
+valuated and why do we love it we love
+
+
+it about the because of semantics we
+
+
+have this subject describe it's expected
+
+
+to nested context and all this kind of
+
+
+stuff the problem is that in the big
+
+
+application where the test suit is
+
+
+complex it's hard to structure the
+
+
+complex text you you don't know how to
+
+
+do this nested stuff properly you can
+
+
+even have like conversations about how
+
+
+to do it properly like you can spend
+
+
+days on this and yeah and the last part
+
+
+here is that these shared examples I
+
+
+don't think they work for anyone but
+
+
+they are there and the second thing we
+
+
+love about our spark r-spec is matures
+
+
+and we love doing things like like this
+
+
+we love a lot of Watchers around and I
+
+
+think this is how it feels when you
+
+
+finally found the perfect matter or
+
+
+implemented your own matter so this code
+
+
+feels like and I think we tend to value
+
+
+pragmatism over aesthetics more
+
+
+in this situation and compare this to
+
+
+this we were completely fine with the
+
+
+first option while we were writing like
+
+
+a regular code but in the test for for
+
+
+all suddenly we we need something like
+
+
+this so this is a bit strange and yeah
+
+
+the more the worst thing about r-spec
+
+
+and about libraries like this about
+
+
+device what active admin is that this
+
+
+subject the complexity the framework
+
+
+create is significant and you have to
+
+
+spend a lot of time learning how to deal
+
+
+with it but you can reuse this knowledge
+
+
+outside of egg of the ecosystem so you
+
+
+can like learn device in in depth or can
+
+
+use can learn our spec in dev but you
+
+
+still can't reuse this knowledge outside
+
+
+so alternatives minis test it does a job
+
+
+it's much faster
+
+
+it has low-level semantics but it's much
+
+
+familiar and it makes it's simpler than
+
+
+r-spec and another cheap solution for
+
+
+chip replacements for custom Watchers
+
+
+there is a gem called power assert and
+
+
+here's what it does so you simply use
+
+
+curly braces and you put the thing you
+
+
+want to test and when your test breaks
+
+
+then it gives you this nice kind of
+
+
+reports so you see what kind of stuff
+
+
+happens there and it's I think it's much
+
+
+more useful then then you expect it I
+
+
+don't know 40 and get 42 all right
+
+
+factories versus pictures the same same
+
+
+situation people use factories by
+
+
+default and with factories they are slow
+
+
+because they recreate the whole universe
+
+
+every time
+
+
+especially in the big application with a
+
+
+lot of associations you can do cross
+
+
+references so you need to walk around
+
+
+and fixtures I think they're under
+
+
+valuated because they are fast they
+
+
+support cross references in most
+
+
+situations you don't need a custom user
+
+
+or a custom object you are fine with a
+
+
+standard user you don't need to recreate
+
+
+a custom thing you don't need to support
+
+
+like a separate branch of creation
+
+
+process in the test you just pick the
+
+
+the stuff from if fixtures and work with
+
+
+this and the handy trick is that you can
+
+
+load them into your development database
+
+
+and work with them so if you do so you
+
+
+did that you do some exploratory testing
+
+
+and you found some interesting scenario
+
+
+and instead of keeping this database
+
+
+forever this development database you
+
+
+just go and and fix your fixtures
+
+
+I mean you add another fixture for this
+
+
+scenario and you again load your
+
+
+database you load these pictures into
+
+
+your development database and you can
+
+
+keep doing with this kind of stuff so
+
+
+that's a good thing there is a gem that
+
+
+allows you to to use factories like
+
+
+fixtures so it's the intention is to fix
+
+
+everything with another gem I don't
+
+
+remember the name but you can google it
+
+
+I guess and the last topic is mocks
+
+
+versus stops really short here with
+
+
+stops you replace external stuff like
+
+
+external services and with mocks you
+
+
+test your tests they become dependent on
+
+
+internal structure so instead of testing
+
+
+blackbox you start into tests white box
+
+
+and this is what you what you should
+
+
+avoid if possible because with mocks you
+
+
+can't replace
+
+
+the implementation you start to be
+
+
+dependent on the structure of the things
+
+
+on on the thing on the test all right so
+
+
+the final summary so how we how do we
+
+
+make our life harder
+
+
+we prefer easiness over simplicity often
+
+
+we prefer aesthetics over pragmatism
+
+
+we prefer popularity over thoughtful
+
+
+analyzes we prefer conventions over
+
+
+criticality so I hope that will stop
+
+
+delegating the process of
+
+
+decision-making to random uh not so
+
+
+random people and we'll learn how to do
+
+
+it ourselves and apparently the
+
+
+conclusion is the same as nothing said
+
+
+yesterday about
+
+
+event-based state stuff so ideally we
+
+
+shouldn't be allowed to work with rails
+
+
+until we understand how it works and how
+
+
+it should be worked working but reality
+
+
+is different again and you have to
+
+
+decide what to do with with this so I
+
+
+hope that my talk will trigger some
+
+
+conversations in your company and some
+
+
+experiments and if you don't have a
+
+
+questions again then I consider my job
+
+
+done well because it means that you're
+
+
+in the state where you have more answers
+
+
+the questions but if you have questions
+
+
+I'll be happy to answer them and I don't
+
+
+know how about you but I'm personally
+
+
+happy because I finally can finish my
+
+
+book and cross all this to do it in my
+
+
+head for years and if you're interested
+
+
+in this you know where to leave your
+
+
+email and also I had the idea that
+
+
+because like for me to get all of this
+
+
+to go through all of this it took two
+
+
+and a half days of not only of theory
+
+
+but also of practice and I think it is
+
+
+important to get a bit of practice to to
+
+
+get a feeling of it
+
+
+so I think for those who left the emails
+
+
+in this survey I will prepare small
+
+
+tasks so you could create a few like
+
+
+services layers like mutators and
+
+
+services and this kind of stuff so you
+
+
+will learn it and you will understand
+
+
+the concepts a little bit bit better so
+
+
+that's it for me
+
+
+and thank you
