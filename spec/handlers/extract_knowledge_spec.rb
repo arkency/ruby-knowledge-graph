@@ -73,13 +73,13 @@ RSpec.describe ExtractKnowledge, type: :job do
     allow(chat).to receive(:add_message).and_return(chat)
     allow(chat).to receive(:with_tool).and_return(chat)
     allow(chat).to receive(:with_schema).and_return(chat)
-    allow(chat).to receive(:with_thinking).and_return(chat)
+    allow(chat).to receive(:with_params).and_return(chat)
     allow(chat).to receive(:on_end_message).and_return(chat)
     allow(chat).to receive(:ask).and_return(llm_response)
   end
 
   it "calls RubyLLM with tool and schema" do
-    expect(RubyLLM).to receive(:chat).with(model: ExtractionPrompt::MODEL)
+    expect(RubyLLM).to receive(:chat).with(model: ExtractionPrompt::MODEL, provider: :anthropic, assume_model_exists: true)
     expect(chat).to receive(:with_tool).with(an_instance_of(Tools::SearchNodes))
     expect(chat).to receive(:with_schema).with(an_instance_of(Class))
     expect(chat).to receive(:ask).with(an_instance_of(RubyLLM::Content::Raw))
@@ -88,7 +88,7 @@ RSpec.describe ExtractKnowledge, type: :job do
   end
 
   it "uses model_id from event data when provided" do
-    expect(RubyLLM).to receive(:chat).with(model: "claude-opus-4-6")
+    expect(RubyLLM).to receive(:chat).with(model: "claude-opus-4-6", provider: :anthropic, assume_model_exists: true)
 
     described_class.perform_now(serialized_event(model_id: "claude-opus-4-6"))
   end

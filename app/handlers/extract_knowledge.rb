@@ -56,12 +56,12 @@ class ExtractKnowledge < ApplicationJob
     read_collector = ExtractionReadCollector.new
 
     chat = RubyLLM
-      .chat(model: model_id)
+      .chat(model: model_id, provider: :anthropic, assume_model_exists: true)
+      .with_params(max_tokens: 128_000, thinking: { type: "adaptive" })
       .with_tool(Tools::SearchNodes.new(read_collector: read_collector))
       .with_tool(Tools::GetNodeEdges.new(read_collector: read_collector))
       .with_tool(Tools::ListNodesByKind.new(read_collector: read_collector))
       .with_schema(schema)
-      .with_thinking(budget: 10000)
       .on_end_message do |msg|
         log_file&.puts(msg_to_json(msg))
         if msg.role == :assistant

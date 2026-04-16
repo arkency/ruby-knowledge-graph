@@ -1,8 +1,10 @@
 require "erb"
 
 module ExtractionPrompt
-  MODEL = Rails.env.production? ? "claude-opus-4-6" : "claude-haiku-4-5"
+  MODEL = Rails.env.production? ? "claude-opus-4-7" : "claude-haiku-4-5"
   TEMPLATE = ERB.new(Rails.root.join("app/lib/prompts/extraction.md.erb").read, trim_mode: "-")
+
+  EXTRA_MODELS = [ "claude-opus-4-7" ].freeze
 
   AVAILABLE_MODELS = begin
     models = RubyLLM.models
@@ -12,6 +14,7 @@ module ExtractionPrompt
       .map { |_, ms| ms.max_by(&:created_at) }
       .sort_by(&:name)
       .map(&:id)
+    EXTRA_MODELS.each { |m| models.unshift(m) unless models.include?(m) }
     models.unshift(models.delete(MODEL)) if models.include?(MODEL)
     models.freeze
   end

@@ -2,7 +2,7 @@ module ApplicationHelper
   def extraction_cost(extraction)
     return nil unless extraction.model_id
 
-    model = RubyLLM.models.find(extraction.model_id)
+    model = RubyLLM.models.find(extraction.model_id) rescue nil
     rates = model&.pricing&.text_tokens&.standard
     return nil unless rates
 
