@@ -38,3 +38,12 @@ log/extractions/
 /.claude
 
 /.idea/*
+
+.DS_Store
+
+# Kamal
+/config/deploy.yml
+/config/deploy.yml.example
+/config/postgres/
+/.kamal/
+/bin/kamal

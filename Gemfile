@@ -12,6 +12,8 @@ gem "solid_cache"
 gem "solid_queue"
 gem "mission_control-jobs"
 gem "bootsnap", require: false
+gem "kamal", require: false
+gem "thruster", require: false
 
 gem "rails_event_store"
 gem "ruby_llm"
