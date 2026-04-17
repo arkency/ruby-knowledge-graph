@@ -8,7 +8,7 @@ RSpec.describe Ontology do
   end
 
   it "includes all edge relations" do
-    expect(Ontology.relation_names).to include("authored", "presented_at", "attended", "sponsors", "about", "works_at", "works_on", "uses", "has_skill", "related_to")
+    expect(Ontology.relation_names).to include("authored", "presented_at", "attended", "about", "works_at", "works_on", "uses", "has_skill", "related_to")
   end
 
   it "exposes node_kinds as raw hashes" do

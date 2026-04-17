@@ -44,6 +44,11 @@ node_kinds:
     attrs:
       - name: answer_summary
         description: "brief summary of the speaker's answer"
+  - kind: takeaway
+    description: "an actionable insight, lesson, or recommendation extracted from a specific talk"
+    attrs:
+      - name: type
+        values: [recommendation, warning, insight, lesson-learned]
 
 edge_relations:
   - relation: authored
@@ -52,16 +57,14 @@ edge_relations:
     signature: "talk --presented_at--> event"
   - relation: attended
     signature: "person --attended--> event"
-    attrs:
-      - name: role
-        values: [participant, speaker, organizer]
-  - relation: sponsors
-    signature: "company --sponsors--> event"
+    values: [participant, speaker, organizer]
   - relation: about
-    signature: "talk | question --about--> concept | tool | project | resource | person"
-    hint: "what the talk or question covers"
+    signature: "talk | question | takeaway --about--> concept | tool | project | resource | person"
+    hint: "what the talk, question, or takeaway covers"
   - relation: asked_at
     signature: "question --asked_at--> talk"
+  - relation: from_talk
+    signature: "takeaway --from_talk--> talk"
   - relation: works_at
     signature: "person --works_at--> company"
     attrs:
