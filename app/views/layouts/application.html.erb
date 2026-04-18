@@ -28,12 +28,14 @@
     <nav class="top-nav">
       <div class="nav-inner">
         <%= link_to "Planet", root_path, class: "logo" %>
-        <div class="nav-links">
-          <%= link_to "Graph", nodes_path, class: ("active" if controller_name == "nodes") %>
-          <%= link_to "Ingestions", ingestions_path, class: ("active" if controller_name == "ingestions") %>
-          <%= link_to "Extractions", extractions_path, class: ("active" if controller_name == "extractions") %>
-          <%= link_to "Events", "/res" %>
-          <%= link_to "Jobs", "/jobs" %>
+        <div class="nav-links-wrap">
+          <div class="nav-links">
+            <%= link_to "Graph", nodes_path, class: ("active" if controller_name == "nodes") %>
+            <%= link_to "Ingestions", ingestions_path, class: ("active" if controller_name == "ingestions") %>
+            <%= link_to "Extractions", extractions_path, class: ("active" if controller_name == "extractions") %>
+            <%= link_to "Events", "/res" %>
+            <%= link_to "Jobs", "/jobs" %>
+          </div>
         </div>
       </div>
     </nav>

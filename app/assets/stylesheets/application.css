@@ -52,6 +52,16 @@ nav.top-nav .nav-inner {
   height: 56px;
 }
 
+nav.top-nav .nav-links-wrap {
+  flex: 1;
+  min-width: 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+nav.top-nav .nav-links-wrap::-webkit-scrollbar { display: none; }
+
 nav.top-nav .logo {
   font-weight: 700;
   font-size: 1.1rem;
@@ -63,6 +73,7 @@ nav.top-nav .logo {
 nav.top-nav .nav-links {
   display: flex;
   gap: 0.25rem;
+  white-space: nowrap;
 }
 
 nav.top-nav .nav-links a {
@@ -931,4 +942,116 @@ a:hover { color: var(--accent-hover); }
   overflow-y: auto;
   white-space: pre-wrap;
   word-break: break-word;
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .container {
+    padding: 1rem 0.85rem;
+  }
+
+  nav.top-nav {
+    padding: 0 0.85rem;
+  }
+
+  nav.top-nav .nav-inner {
+    gap: 0.75rem;
+  }
+
+  nav.top-nav .nav-links a {
+    padding: 0.4rem 0.5rem;
+  }
+
+  h1.page-title {
+    font-size: 1.4rem;
+  }
+
+  .page-header-row {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  /* Tables — horizontal scroll wrapper via wrapping element or overflow */
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  thead th, tbody td {
+    padding: 0.6rem 0.75rem;
+  }
+
+  /* Edge row: stack source / relation / target vertically */
+  .edge-row {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    justify-items: start;
+  }
+
+  .edge-source, .edge-target {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .edge-arrow {
+    padding: 0.15rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  /* Vertical arrow between source and target when stacking on mobile */
+  .edge-arrow::before {
+    content: "↓";
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1;
+  }
+
+  .edge-line, .edge-line-arrow {
+    display: none;
+  }
+
+  .edge-context, .edge-attrs {
+    text-align: left;
+    justify-content: flex-start;
+  }
+
+  /* Diff entry: stack field / before / arrow / after vertically */
+  .diff-entry {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+
+  .diff-arrow {
+    display: none;
+  }
+
+  /* Provenance: tighten dt min-width */
+  .provenance-item {
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .provenance-item dt {
+    min-width: 0;
+    font-size: 0.75rem;
+  }
+
+  /* Cards: reduce padding */
+  .card {
+    padding: 1rem;
+  }
+
+  /* Extraction row summary — allow wrapping */
+  .extraction-row > summary {
+    flex-wrap: wrap;
+  }
+
+  /* Reextract form inline on mobile */
+  .reextract-form {
+    flex-wrap: wrap;
+  }
 }
