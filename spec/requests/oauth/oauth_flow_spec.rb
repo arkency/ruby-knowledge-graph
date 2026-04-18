@@ -12,6 +12,7 @@ RSpec.describe "OAuth 2.1 flow", type: :request do
 
   describe "GET /.well-known/oauth-authorization-server" do
     it "returns OAuth metadata" do
+      pending "OAuth discovery disabled for public demo"
       get "/.well-known/oauth-authorization-server"
 
       expect(response).to have_http_status(:ok)
@@ -219,6 +220,7 @@ RSpec.describe "OAuth 2.1 flow", type: :request do
       end
 
       it "rejects plain password as Bearer token" do
+        pending "MCP auth temporarily disabled for public demo"
         post "/mcp",
           params: { jsonrpc: "2.0", method: "initialize", id: 1,
                     params: { protocolVersion: "2025-03-26", capabilities: {},
@@ -229,6 +231,7 @@ RSpec.describe "OAuth 2.1 flow", type: :request do
       end
 
       it "rejects expired OAuth token" do
+        pending "MCP auth temporarily disabled for public demo"
         verifier = ActiveSupport::MessageVerifier.new(Rails.application.secret_key_base, digest: "SHA256")
         expired_token = verifier.generate({ exp: 1.hour.ago.to_i }, purpose: "mcp_access_token")
 
@@ -242,6 +245,7 @@ RSpec.describe "OAuth 2.1 flow", type: :request do
       end
 
       it "rejects no token" do
+        pending "MCP auth temporarily disabled for public demo"
         post "/mcp",
           params: { jsonrpc: "2.0", method: "initialize", id: 1,
                     params: { protocolVersion: "2025-03-26", capabilities: {},

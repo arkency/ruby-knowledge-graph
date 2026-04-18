@@ -4,7 +4,8 @@ Rails.application.routes.draw do
 
   mount McpRackApp.new, at: "/mcp"
 
-  get ".well-known/oauth-authorization-server", to: "oauth#metadata"
+  # Disabled for public demo so MCP clients don't trigger OAuth flow.
+  # get ".well-known/oauth-authorization-server", to: "oauth#metadata"
   scope :oauth do
     post "register", to: "oauth#register"
     get "authorize", to: "oauth#authorize"
