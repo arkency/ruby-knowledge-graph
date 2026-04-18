@@ -1,4 +1,8 @@
 module ApplicationHelper
+  def extractions_locked?
+    ENV["EXTRACTIONS_LOCKED"].present?
+  end
+
   def extraction_cost(extraction)
     return nil unless extraction.model_id
 

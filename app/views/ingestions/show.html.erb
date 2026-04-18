@@ -33,8 +33,11 @@
   <% unless @ingestion.status.in?(%w[queued requeued extracting]) %>
     <div style="margin-top: 1.5rem;">
       <%= form_with url: extract_ingestion_path(@ingestion), method: :post, class: "reextract-form" do |f| %>
-        <%= f.select :model_id, ExtractionPrompt::AVAILABLE_MODELS, {}, class: "model-select" %>
-        <%= f.submit "Extract", class: "btn btn-sm" %>
+        <%= f.select :model_id, ExtractionPrompt::AVAILABLE_MODELS, {}, class: "model-select", disabled: extractions_locked? %>
+        <%= f.submit "Extract", class: "btn btn-sm", disabled: extractions_locked?, title: extractions_locked? ? "Manual extractions are temporarily disabled" : nil %>
+      <% end %>
+      <% if extractions_locked? %>
+        <div class="text-muted" style="font-size: 0.75rem; margin-top: 0.4rem;">Manual extractions are temporarily disabled.</div>
       <% end %>
     </div>
   <% end %>
