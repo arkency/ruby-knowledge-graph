@@ -1,7 +1,7 @@
 module Api
   class IngestionController < ApplicationController
     skip_forgery_protection
-    skip_before_action :basic_auth
+    # skip_before_action :basic_auth
 
     before_action :authenticate!
 

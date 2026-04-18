@@ -60,8 +60,9 @@ Rails.application.configure do
   # Only use :id for inspections in production.
   config.active_record.attributes_for_inspect = [ :id ]
 
-  # Disable Mission Control's built-in HTTP Basic Auth (handled by ApplicationController)
-  config.mission_control.jobs.http_basic_auth_enabled = false
+  # Protect /jobs with HTTP Basic Auth
+  config.mission_control.jobs.http_basic_auth_user = ENV.fetch("ADMIN_USERNAME", "admin")
+  config.mission_control.jobs.http_basic_auth_password = ENV["ADMIN_PASSWORD"]
 
   # Enable DNS rebinding protection and other `Host` header attacks.
   config.hosts = [ ENV.fetch("PLANET_HOST", "localhost") ]
