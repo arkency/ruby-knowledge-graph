@@ -1,0 +1,2272 @@
+Our
+
+
+next speaker is Nicolo and he's going to
+
+
+tell us about how he accidentally built
+
+
+a neural network. So please welcome
+
+
+Nicolo and the stage is yours.
+
+
+>> Thank you. Hey everyone, I'm Nicolo and
+
+
+today I will show you how I accidentally
+
+
+built a neural network or at least
+
+
+something that looks awfully like uh it.
+
+
+And by the end, we'll most likely know
+
+
+how a new is shaped and uh what it
+
+
+should do. But who am I to talk about
+
+
+this? Uh as said, I am Nicolo and I'm a
+
+
+senior developer at Nebulab, an Italian
+
+
+e-commerce company after spending like
+
+
+10 years of my life working in cinema
+
+
+post-production. Totally different
+
+
+story, but here I am. So, what do we do
+
+
+at Nebulab? We build uh custom
+
+
+e-commerce systems
+
+
+uh both on rails, solidus and also on
+
+
+Shopify. You may recognize some of the
+
+
+brands up there. The framework laptop
+
+
+manufacturer comeandies those are uh
+
+
+US-based brands but should be pretty
+
+
+famous. I don't know at least for me I
+
+
+work with them. So,
+
+
+so one thing that I want to show you
+
+
+today is the work that uh uh we've done
+
+
+for comedy and I want to understand how
+
+
+many of you uh drink coffee.
+
+
+Okay, I believe a lot of people. So at
+
+
+least if you
+
+
+I don't know want to bring something
+
+
+home from this talk maybe we you will
+
+
+know something more about coffee. So
+
+
+there's also that one. So what does
+
+
+comedia do? Uh they essentially partner
+
+
+with top roasters, top coffee uh top
+
+
+coffee roasters around the world to uh
+
+
+bring you one of the best coffees around
+
+
+and they don't stop at extracting the
+
+
+coffee. They will also uh flash freeze
+
+
+it under liquid nitrogen and they will
+
+
+ship it to your doorstep under dry ice.
+
+
+And I'm Italian, so uh I don't know. I
+
+
+come from the culture of espresso and
+
+
+like drinking this kind of coffee was a
+
+
+weird experience, but I don't know. It's
+
+
+very good. I very like it. So without
+
+
+further ado, let's uh dive in. Come has
+
+
+a problem, like a good problem, if you
+
+
+will, because they have a lots lots and
+
+
+lots of products to choose from. And
+
+
+they have many products, many
+
+
+characteristics, many aromas, many
+
+
+things to choose from. And what do you
+
+
+do when you have too much choice? You
+
+
+paralyze essentially.
+
+
+So what uh is a solution to this? Um as
+
+
+Ruby and Rails developers, we are very
+
+
+familiar with the solution they chose.
+
+
+they went omacaz. So they decided okay
+
+
+we can even let the customers let us
+
+
+choose for them. So if they don't know
+
+
+what to pick from our never ending or
+
+
+all-encompassing list of products we can
+
+
+choose for them.
+
+
+And this is the like the most beginner
+
+
+friendly product that they sell which is
+
+
+a box with mixed roast levels. So they
+
+
+can experience uh lighter coffees,
+
+
+darker coffees and balanced coffees in
+
+
+one box.
+
+
+So
+
+
+this product is like a fancy physical
+
+
+box but at the logical level at the
+
+
+e-commerce level this box is represented
+
+
+by these uh five products. So it's
+
+
+composed by a light roast, a dark roast
+
+
+and three medium roasts. And this is
+
+
+just a representation of the product
+
+
+that the customer will actually get at
+
+
+their doorstep. This is all virtual. So
+
+
+we have a problem of having these
+
+
+virtual products and how do we translate
+
+
+these virtual products into physical
+
+
+products. Essentially we need to decide
+
+
+what's the best possible choice for each
+
+
+of these uh little circles
+
+
+and the question mark up in the slide is
+
+
+the thing that we are going to talk
+
+
+about today. So how do we translate the
+
+
+virtual the electronic the electric
+
+
+world to the physical one? So how do we
+
+
+actually make a good choice a good
+
+
+informed choice to send a good product
+
+
+to the customer that they hopefully will
+
+
+like.
+
+
+So
+
+
+uh here we will go through a couple of
+
+
+different iterations of this question
+
+
+mark and maybe the talk title will give
+
+
+you like some sort of hint where we are
+
+
+going. But
+
+
+uh like the real problem is how do we
+
+
+make this question mark that we just saw
+
+
+like feel like a proper barista? So like
+
+
+someone that knows you, someone that uh
+
+
+can pick the correct coffee for you. Uh
+
+
+maybe they uh see you today, you are
+
+
+particularly down. They and this barista
+
+
+can pick you up with the right coffee
+
+
+for you. I mean hopefully we can get to
+
+
+that level, but we cannot read minds at
+
+
+the moment. So and I believe that we
+
+
+shouldn't. However, the first uh
+
+
+implementation of this system was very
+
+
+very simple. like every month someone in
+
+
+the operations team just maintained a
+
+
+huge list an ordered list uh of coffees
+
+
+essentially. So for October we had maybe
+
+
+this particular selection of coffees
+
+
+because uh it there is also seasonality
+
+
+to take into account what you extract uh
+
+
+the bean that the beans that you source
+
+
+in August are way different than the
+
+
+ones that you source in December. And I
+
+
+don't know, it's a complicated word that
+
+
+I don't have the authority to speak
+
+
+about. However, I understand it a little
+
+
+bit better right now.
+
+
+And every month an operator needed to
+
+
+essentially uh take a look at the supply
+
+
+chain, understand
+
+
+what was happening, then reorder the
+
+
+coffees because the the first
+
+
+implementation was just a matter of
+
+
+picking this huge list and going through
+
+
+it and seeing essentially what kind of
+
+
+coffees match the requirements at that
+
+
+moment. So in this slide we will see
+
+
+like the very very rough implementation
+
+
+of the algorithm which is just I don't
+
+
+know few lines of Ruby and it's just a
+
+
+matter of like going through the
+
+
+products asking for each of them does it
+
+
+satisfy the requirements. So uh we are
+
+
+taking a look at an empty slot because
+
+
+each slot needs to be filled to have a
+
+
+complete order. uh we need to take into
+
+
+account if the requirement of this lot
+
+
+matches the product. So the roast level,
+
+
+the caffeine level and other
+
+
+requirements. Then we ask is there
+
+
+enough inventory? Because of course
+
+
+inventory uh disappears in the real
+
+
+world as soon as people buys it.
+
+
+And then we just decide that the first
+
+
+thing that matches all of these. So just
+
+
+a bunch of if if if
+
+
+uh if uh everything is true, we just
+
+
+assign it. And when we have enough
+
+
+because we might have a massive list,
+
+
+when we have enough, we just break out
+
+
+of the loop. And it's not the most
+
+
+elegant thing, but it works.
+
+
+So at the start, we had this particular
+
+
+algorithm. Nothing really fancy. And we
+
+
+started to think, okay, how can we make
+
+
+this more personal? We wanted to get a
+
+
+little bit smarter essentially.
+
+
+And how do we do it? We start thinking,
+
+
+okay, maybe to enforce some variety. We
+
+
+want to enforce some kind of
+
+
+constraints. We thought about this term
+
+
+and we decided to go with this like this
+
+
+is not the real production code that was
+
+
+uh online, but this is the gist of it.
+
+
+So we started to think okay we start by
+
+
+trying we just try okay we enforce these
+
+
+two constraints we have the uh we want
+
+
+only a coffee for a roster in the box so
+
+
+people can can see a very colored box
+
+
+which is color is good uh more color is
+
+
+good and also the we don't want to have
+
+
+the same product twice in the in the box
+
+
+because it's not the best to have two of
+
+
+the things when you want to optimize for
+
+
+variety.
+
+
+However, not all it's not always
+
+
+possible to fulfill these kind of orders
+
+
+in this way because maybe a customer
+
+
+disliked a particular coffee that would
+
+
+have been chosen in that in that moment
+
+
+and you don't want to send a customer
+
+
+someone that they said explicitly I
+
+
+don't like it. I don't want it. That's
+
+
+bad. So we start like looping through
+
+
+all of these permutations
+
+
+and we just ask uh like can we find an
+
+
+order that satisfies both of these
+
+
+constraints? Uh if no let's go to the
+
+
+next one to the next one and then at the
+
+
+end we just try with both constraints
+
+
+relaxed. So basically we come back to
+
+
+the original version of the algorithm
+
+
+because the next step is just the
+
+
+previous uh code with just two ifs
+
+
+added. So we are adding more ifs to the
+
+
+statements
+
+
+and uh this started to be really painful
+
+
+essentially because uh the moment that
+
+
+you want to add more constraints you end
+
+
+up with an ever growing list of uh ifs.
+
+
+uh you are hard coding your uh uh ifs to
+
+
+the structure of the code like the
+
+
+constraints doesn't don't really leave
+
+
+in the in the code shouldn't really
+
+
+leave because the moment that you want
+
+
+to add more there is more coupling and
+
+
+it's just bad engineering also because
+
+
+the uh you are trying multiple times the
+
+
+same code. However, the implementation
+
+
+was simple enough to like understand it
+
+
+and also explain it to stakeholders
+
+
+because another part of this story is
+
+
+also
+
+
+uh like explaining this or making the
+
+
+whole decision explicit to stakeholders
+
+
+because we are consultants and part of
+
+
+the job is also uh communicating with
+
+
+stakeholders. You need to make them uh
+
+
+feel safe in the solutions that you
+
+
+propose to them and also you need to
+
+
+explain them how they work usually so
+
+
+they can feel empowered to at least have
+
+
+an opinion on them. Not always a good
+
+
+thing in my opinion but it helps in
+
+
+selling some solutions at the end.
+
+
+And the most important part is that in
+
+
+this version of the code, the boxes that
+
+
+we were uh sending out to customers were
+
+
+definitely better essentially.
+
+
+So we lost a great great deal of
+
+
+auditability because each resulting box
+
+
+wasn't really a clearcut of oh why did
+
+
+this coffee end up on in this box? It
+
+
+wasn't really that easy to trace back.
+
+
+we didn't have uh and I don't think we
+
+
+we will ever have a sourcing to
+
+
+understand this h
+
+
+and this like planted a little seed
+
+
+because uh like as as developers right
+
+
+now with the LLM thing we are uh like
+
+
+releasing a little bit of control to uh
+
+
+systems that we don't really uh care
+
+
+about of how they work in their inner
+
+
+workings.
+
+
+And the same thing happened here. So the
+
+
+product team just was happy that the
+
+
+results were way better than than
+
+
+before.
+
+
+And okay, this is exactly what I just
+
+
+said. So the harder upgrade here was to
+
+
+actually being able to uh trace back
+
+
+each decision to the code or why
+
+
+something was picked.
+
+
+And as you may understand,
+
+
+we decided to go with a rewrite of the
+
+
+system because
+
+
+uh this system wasn't really scalable
+
+
+because they noticed, okay, this is
+
+
+good, but how do we make it more good,
+
+
+more better, more we want more, more
+
+
+knobs, more parameters, we want to
+
+
+optimize everything. And so you start
+
+
+rewriting thing. And we started to think
+
+
+okay how do we do it? We understood that
+
+
+the uh first part of the code was just a
+
+
+a means to filter out products because
+
+
+we needed to understand okay is there
+
+
+enough inventory is uh is this product
+
+
+matching the requirements of the slot
+
+
+that we are trying to fill uh and stuff
+
+
+like that. So of course with the great
+
+
+creativity that comes with being backend
+
+
+developers we decided to call this part
+
+
+uh a filtering stage essentially. So we
+
+
+start with a huge list of products and
+
+
+for each slot that we are trying to fill
+
+
+uh we start by filtering them down with
+
+
+easy and small uh pieces of logic. So in
+
+
+this case, we are maybe feeling for a
+
+
+light roast and we start eliminating all
+
+
+of the things that aren't a light roast.
+
+
+Then we put another filter and we want
+
+
+only fully caffeinated coffees because
+
+
+apparently you can have decaf coffees or
+
+
+coffees with just half the amount of
+
+
+caffeine, a thing that I didn't know of.
+
+
+And then you then filter further down
+
+
+with products that are not disliked by
+
+
+the customer. and so on and so forth.
+
+
+You can plug any number of filters in
+
+
+this system.
+
+
+Then you end up maybe with three
+
+
+products, three, four, five, 10, I don't
+
+
+know. And you start maybe counting some
+
+
+other conditions. Maybe you want to say,
+
+
+okay, this product is of a roster that's
+
+
+not already in the box. Uh, this product
+
+
+is not in the box yet. So it gets maybe
+
+
+uh two votes. Uh one product is only of
+
+
+a different roster. So it gets only one
+
+
+vote. Then you may have an an arbitrary
+
+
+amount of conditions that you want to
+
+
+check and essentially you collect votes
+
+
+on each of the products and you just
+
+
+count
+
+
+uh which which is the winner. However,
+
+
+this strategy had a slight problem
+
+
+because
+
+
+uh maybe uh some vote didn't like
+
+
+counted more than others because maybe
+
+
+the product in the box like having the
+
+
+same product in the box is worse uh than
+
+
+having two coffees from the same roster
+
+
+in the same box
+
+
+because we want to optimize for variety
+
+
+in this case. And we were starting to
+
+
+think okay these conditions are not
+
+
+equal. We need to uh weight them. We
+
+
+need to start thinking about uh uh that
+
+
+not all votes are equal. So we start to
+
+
+think that
+
+
+uh these votes should have a weight and
+
+
+this weight should have then a
+
+
+coefficient that we start to multiply
+
+
+things with.
+
+
+And this monstrosity that I that I am
+
+
+about to show you is essentially the
+
+
+code that ended up sort of in
+
+
+production. still not the production
+
+
+code, but this is just a schematization
+
+
+of that. And we start with like an empty
+
+
+list of products that we want to fill.
+
+
+And for each of the requirements, we run
+
+
+this loop. For every product, like for
+
+
+every requirement, we start to think,
+
+
+okay, we have a huge pool of products.
+
+
+We filter it down with all of the
+
+
+filters that we define.
+
+
+Then for each of these uh filter
+
+
+products, so we have a smaller pool, we
+
+
+start to
+
+
+essentially score them. Uh we uh start
+
+
+to multiply their weight by a result of
+
+
+uh parameter multiplication. So we start
+
+
+to think okay uh this product is not in
+
+
+the box. So we multiply it by a
+
+
+arbitrary number or this product is
+
+
+already in the box so we don't multiply
+
+
+it. We multiply it by one and we go on
+
+
+uh like this like for all of the
+
+
+parameters that the product team
+
+
+decided.
+
+
+We start doing it uh with 20 parameters
+
+
+and we end up with a list of
+
+
+amplification.
+
+
+uh these amplifications store
+
+
+essentially what the uh product is
+
+
+amplified by. So we have a audit trail
+
+
+of all of the things that went into
+
+
+deciding the final score of the product
+
+
+that we wanted to recommend to the
+
+
+customer essentially with uh each result
+
+
+tied to each parameter. So we could
+
+
+actually see what was the result that
+
+
+drove that selection.
+
+
+And at the end we just picked the top
+
+
+one.
+
+
+And in case we of course didn't have a
+
+
+winner, it meant that our product pool
+
+
+was uh too small and that was a problem
+
+
+for someone else to fix, not us
+
+
+engineers. So that's great. Uh and in
+
+
+case we have a winner, we just store
+
+
+some metadata on that just to understand
+
+
+okay we selected this product but we had
+
+
+maybe some runner up some runners up and
+
+
+we had the top three competing products
+
+
+to the metadata. So we can actually
+
+
+understand okay if this wasn't chosen
+
+
+the next one would have been this one
+
+
+and this one. So we could ask okay is
+
+
+this does this make sense? Yes or no?
+
+
+That question was asked a lot of times.
+
+
+So let's dive in a little bit in a
+
+
+amplifier. What what what's an amplifier
+
+
+in this particular case? It's a plain
+
+
+old Ruby object as the rest of the
+
+
+things. And the code is pretty simple.
+
+
+It's just uh okay, is the roster in the
+
+
+box? Yes. Uh multiply by one. Otherwise
+
+
+a coefficient because uh all amplifiers
+
+
+are initialized with a coefficient. Like
+
+
+if I go back a little bit here, you can
+
+
+see that the amplifier is initialized by
+
+
+the coefficient and the product and what
+
+
+have you.
+
+
+And also other metadata that maybe some
+
+
+amplifiers needs to work. This is like
+
+
+the one of the simplest ones. It asks a
+
+
+single question. It makes a local
+
+
+computation in a very easy way and it
+
+
+just returns a number. Nothing more.
+
+
+But there is also maybe a more complex
+
+
+amplifier. It's not the most complicated
+
+
+one, but you make uh you can make even
+
+
+it depend on the number of products that
+
+
+are currently in the box. So if the
+
+
+product is already in the box, we just
+
+
+return one. And the more that it might
+
+
+happen that the same product could
+
+
+appear more times in the box, but it
+
+
+will just deboost the
+
+
+uh actual score by a lot because in this
+
+
+particular case, we decided to multiply
+
+
+the score by one over the number of
+
+
+times. So the more times, the more
+
+
+decay, the less score it got. Some boxes
+
+
+could get multiple products, but it
+
+
+would have been like the worst possible
+
+
+scenario in this particular case.
+
+
+And
+
+
+how did we handle it? Essentially, we
+
+
+decided a bunch of parameters. We
+
+
+tweaked them, deployed the system. We
+
+
+observed the results and we asked
+
+
+ourselves. Is this good? Yes or no?
+
+
+Then we repeated the loop. We added the
+
+
+new parameters. We removed parameters.
+
+
+We tweaked them. We changed the logic
+
+
+inside each of them multiple times. And
+
+
+every time we uh did this loop
+
+
+and we were deploying on Fridays usually
+
+
+because the subscription spikes was were
+
+
+on Sunday. So deploying on Friday is my
+
+
+friend. But what we were doing actually
+
+
+in this particular case we started
+
+
+asking ourselves
+
+
+is this training? I mean we are actually
+
+
+going it going backwards if you will
+
+
+because we were tweaking the
+
+
+coefficients manually to represent what
+
+
+and hoping that the results would be
+
+
+better at the end.
+
+
+This kind of felt really uh backwards.
+
+
+However, we started getting a feel of
+
+
+like uh what parameter uh was useless,
+
+
+what needed some boosting. Uh we tweaked
+
+
+the coefficients manually
+
+
+and maybe we were training the system. I
+
+
+don't know.
+
+
+Let's take a look at the uh schema of
+
+
+our system in this particular case. On
+
+
+the left we have the like most of the
+
+
+things that we input into our system.
+
+
+It's not the full list but I mean uh
+
+
+real estate on the slides is limited.
+
+
+So we feed into the system each time
+
+
+like the input product the virtual
+
+
+product that we that we want to assign
+
+
+for a product pool which might be uh
+
+
+large small depending on the moment.
+
+
+Then the customer history. So we may
+
+
+understand, okay, this customer had this
+
+
+coffee 3 months ago. Do we want to send
+
+
+it again? Maybe we just tweak the
+
+
+coefficients to make the system more
+
+
+reactive to that then the box state like
+
+
+what's currently in the box because uh I
+
+
+didn't uh tell you before but uh
+
+
+customers can have even like physical
+
+
+products in their orders. So they might
+
+
+buy a virtual product and a physical
+
+
+product. So we want to exclude that
+
+
+product or we want to boost the same
+
+
+product if it's bought. Again, it's all
+
+
+intertwined together. Then we have also
+
+
+the customer ratings. We want to assess
+
+
+if a customer really liked a product or
+
+
+disliked it. And this all plays into
+
+
+like the whole logic that we are going
+
+
+to use downstream. Then we filter these
+
+
+particular uh uh coffees like the
+
+
+product pool is filtered down. Then it's
+
+
+all scored and then at the end we have a
+
+
+winner with some metadata.
+
+
+However, this architecture
+
+
+is quite similar to a thing that uh
+
+
+exists already in machine learning. And
+
+
+by the way, disclaimer, I don't have a
+
+
+machine learning background. So uh any
+
+
+uh stupid thing that I might say is
+
+
+totally on me. So uh take this into
+
+
+account.
+
+
+Uh but if we rename what we are just
+
+
+seeing because
+
+
+we might just rename the inputs as an
+
+
+input layer
+
+
+and we might want to consider the
+
+
+filters our own first hidden layer where
+
+
+the inputs of the each of the uh
+
+
+elements of the input layer is fed into
+
+
+in each of them. Then
+
+
+we might want to pass these results into
+
+
+a second hidden layer. And again at the
+
+
+end we have just a output layer with one
+
+
+or two outputs.
+
+
+And if we look at one of the nodes in
+
+
+the hidden layers, we might understand
+
+
+that
+
+
+could look like like a neuron from the
+
+
+uh neural network essentially
+
+
+because
+
+
+it's not exactly the same. Some things
+
+
+are almost forced in this particular
+
+
+case. But we have everything in place
+
+
+just in another way because we had the
+
+
+coefficients that we decided ourselves
+
+
+instead of like calculated with proper
+
+
+error back propagation and gradient
+
+
+descent and what what have you for like
+
+
+understanding what's the optimal uh
+
+
+minimum and maximum to understand the
+
+
+correct uh coefficient. Then we had the
+
+
+activation function at the at the
+
+
+neuron. So which is replaced by our
+
+
+simple amplification method could be
+
+
+just a step function or a inverse
+
+
+function could be different for every
+
+
+neuron. It's not the same thing in a
+
+
+neural network where you usually have
+
+
+the same activation function in each
+
+
+neuron because our thing is kind of a
+
+
+snowflake that's really special. And
+
+
+then we have also uh arbitrary
+
+
+adjustments which is just the bias of
+
+
+every neuron.
+
+
+And
+
+
+so what did the question mark became?
+
+
+Was this doing inference?
+
+
+Were we doing actually inference by just
+
+
+by running our system?
+
+
+I don't know. I maybe yes, maybe not.
+
+
+However, I want to tell you that this is
+
+
+not how to build a neural network. I
+
+
+don't know if you've understood this,
+
+
+but I mean this is not how to build it
+
+
+because it's not. It's just a thing that
+
+
+looks awfully
+
+
+like it
+
+
+because a neural network is of course a
+
+
+weighted decision graph where the input
+
+
+flow from one layer to the next one gets
+
+
+changed and at the end we have a an
+
+
+output and this is done by
+
+
+uh some small local computations with
+
+
+the
+
+
+uh neurons
+
+
+and its shape It's just the same that we
+
+
+built in ROI.
+
+
+However, like this problem could have
+
+
+called for like proper machine learning.
+
+
+Uh we didn't have any machine learning
+
+
+formal uh training. So we didn't go for
+
+
+the uh right tool for the right problem.
+
+
+However, maybe this was a good choice
+
+
+because if we were to go for a proper
+
+
+machine learning solution, maybe we
+
+
+would have been bogged down into the
+
+
+real implementation, real training. And
+
+
+another thing was that machine learning
+
+
+is more a black box on the uh execution
+
+
+side. most likely we wouldn't been able
+
+
+to uh answer stakeholders questions such
+
+
+as okay why is this coffee being picked
+
+
+right now in this particular order with
+
+
+proper machine learning maybe the system
+
+
+would have decided to have I don't know
+
+
+50 parameters 100 parameters a billion
+
+
+parameters I don't know we just had
+
+
+maybe 48 and each of them had a name so
+
+
+we could still understand the system
+
+
+And this light would have been up uh
+
+
+like earlier. So that was uh a mistake.
+
+
+Sorry. But yeah, we didn't use any
+
+
+framework. We didn't use anything.
+
+
+But in this particular case, we were
+
+
+lucky because we built a system that
+
+
+solved the problem because that's what
+
+
+we do as developers. we are tasked with
+
+
+uh solving problems not like
+
+
+implementing particular solutions
+
+
+because we know that the canonical
+
+
+solution to that problem is like we need
+
+
+to do machine learning. I mean maybe
+
+
+yes, maybe not
+
+
+because sometimes you actually need to
+
+
+leverage proper machine learning and
+
+
+like there is a place to to do it and
+
+
+like in this particular case our problem
+
+
+was small enough that we could even
+
+
+reason about it and we could define what
+
+
+uh uh good looked like. So if we looked
+
+
+at a box, a resulting box, we said,
+
+
+"Okay, this looked good." Fine.
+
+
+And when you do proper machine learning,
+
+
+you need to like do it in the other way
+
+
+around. You need to ask the system to
+
+
+calculate a random thing and you decide
+
+
+is this good or not. In in our way, we
+
+
+did it uh the other way.
+
+
+And this whole story is also about the
+
+
+fact that
+
+
+you maybe you built a scoring system
+
+
+and maybe it had some sort of the same
+
+
+thing. Maybe you just built a neural
+
+
+network and undersold it as a
+
+
+bog standard service object and call it
+
+
+like that. I just did the opposite and
+
+
+built a tool around it. Thank you.
+
+
+>> Any questions?
+
+
+>> Yeah. So thank you for the presentation
+
+
+and uh my question will be do you have
+
+
+do you see any major concerns of giving
+
+
+the users the right to decide on uh the
+
+
+weights?
+
+
+Um
+
+
+I don't didn't see any in production. So
+
+
+I mean we are trying constantly to tweak
+
+
+them because we uh constantly
+
+
+uh
+
+
+observe the system, observe the result.
+
+
+If we see that uh uh we see an influx of
+
+
+customer support tickets such as oh uh
+
+
+my box is too bland. I want more
+
+
+exploration.
+
+
+uh why did I get this particular coffee
+
+
+that I disliked and these were just the
+
+
+main problems that he that we wanted to
+
+
+solve and it's a matter of uh iteration
+
+
+you kind of wing it wing it in the end
+
+
+so you try something if it sticks on the
+
+
+wall it works otherwise you change it I
+
+
+don't see any major concern
+
+
+>> okay thank you cuz My question was based
+
+
+on uh the experience I worked with
+
+
+applications where users defined all the
+
+
+weights for themselves and uh then based
+
+
+on this uh get the order of like
+
+
+propositions. So that was the reason for
+
+
+the question.
+
+
+>> No luckily we didn't experience that.
+
+
+>> Yeah. Thank you.
+
+
+>> Thank you.
+
+
+>> Um I have a question. Have you
+
+
+considered the optimization algorithm
+
+
+with a score function? actually because
+
+
+it sounds like a perfect idea for that
+
+
+kind of problem. In the end, you have a
+
+
+set of five elements that you need to
+
+
+pick from the available SKUs in stock.
+
+
+>> Um, you have some weights. You have um
+
+
+like for instance the like how much the
+
+
+user likes a certain coffee time when um
+
+
+it goes like
+
+
+out of the validation day as a product.
+
+
+You have things like the last time when
+
+
+the user drink that particular coffee.
+
+
+>> You have a things like margin obviously
+
+
+because your company needs to make
+
+
+money. Um you have obviously the color
+
+
+as a SKU property as well. You need to
+
+
+um consider you don't want all the same
+
+
+colors in the set. Um and in the end you
+
+
+have a like you know the score on the
+
+
+particular SKUs. You have a score on the
+
+
+set of elements of five elements and
+
+
+basically what you need to find out is
+
+
+the set that gives you the biggest score
+
+
+out of the available SKUs in stock.
+
+
+I think that's exactly what the system
+
+
+is doing. We just score them if you will
+
+
+and we just pick the top one for each
+
+
+particular slot. we can think about
+
+
+maybe many optimizations that I can
+
+
+think of such as okay if we have all
+
+
+equal uh slots maybe we can even
+
+
+optimize it and doing it in one loop
+
+
+instead of doing it in multiple loops
+
+
+but it's pretty much the scoring system
+
+
+it's
+
+
+Yeah, that's true.
+
+
+Fortunately, stakeholders didn't ask
+
+
+explicitly for machine learning and
+
+
+that's why we are already deprecating
+
+
+this system to like a proper machine
+
+
+learning thing
+
+
+with we are starting with more complex
+
+
+systems.
+
+
+Thank you for practical honest talk.
+
+
+I have a question about uh little tweaks
+
+
+you were making
+
+
+>> manually. How did you understand that
+
+
+these tweaks were were for the best or
+
+
+not only by customer action or you had
+
+
+some kind of benchmarking?
+
+
+Uh the benchmark in this particular case
+
+
+was the product team, the operations
+
+
+team that was just taking a look at the
+
+
+results and understanding like by vibing
+
+
+with the results like is this good? Like
+
+
+uh would I feel good in receiving this
+
+
+box given this input? Yes or no? That
+
+
+was the benchmark. So it's a matter of
+
+
+taste and decisions and that's it.
+
+
+>> I like this benchmark. Thank you.
+
+
+>> Thank you. It was actually my question
+
+
+yesterday.
+
+
+>> Okay.
+
+
+>> Okay. The last one.
+
+
+>> Thank you.
+
+
+>> Did you have to pull them all into
+
+
+memory to run the filters or or was like
+
+
+some of this happening in production
+
+
+like as some kind of like a SQL filter
+
+
+like I don't know how many. You said
+
+
+they had a lot of products.
+
+
+>> Uh no. But yeah, I mean all in memory
+
+
+because the fun part is that we are
+
+
+working with uh Shopify. So, we don't
+
+
+have a database to pull things from. I
+
+
+mean, we could have built like a sync
+
+
+layer to actually have all of our
+
+
+products into the database, but it was
+
+
+more of a hassle. And and I I mean sync
+
+
+systems uh introduce uh uh a new kind of
+
+
+uh failure modes and we didn't want to
+
+
+deal with them. So we just query it slow
+
+
+GraphQL endpoints
+
+
+and only memory.
+
+
+>> Right. Thank you for all the questions.
+
+
+Thank you for all the answers. Thank you
+
+
+Nicola.
+
+
+>> Thank you.

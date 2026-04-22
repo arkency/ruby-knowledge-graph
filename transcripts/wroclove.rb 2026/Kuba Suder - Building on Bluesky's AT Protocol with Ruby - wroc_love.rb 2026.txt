@@ -1,0 +1,3577 @@
+Our
+
+
+next speaker is Kuba and he'll tell us
+
+
+about building on AT protocol in Ruby.
+
+
+Please welcome Kuba.
+
+
+>> Hello.
+
+
+Uh so my name my name is Kuba Sud. I
+
+
+will be speaking today about um building
+
+
+things on the
+
+
+AT protocol and blue sky. Um
+
+
+the border between them is kind of
+
+
+blurry but um they're distinct things.
+
+
+Uh so a bit about myself. Uh I've been
+
+
+coding in Ruby since about 2007. Uh
+
+
+maybe some some of you remember the Rupi
+
+
+conference in 2007 and and later. Uh so
+
+
+I went there as a Python developer and
+
+
+came back as a Ruby developer.
+
+
+Uh
+
+
+uh
+
+
+and then I uh I was switching between u
+
+
+Mac and iOS development and Ruby back
+
+
+and forth uh over the years and recently
+
+
+I came back uh a bit more to Ruby again.
+
+
+Uh so this is my um main website with
+
+
+the blog and uh you can follow me on
+
+
+blue sky at at this handle. Uh so yeah
+
+
+like I said it's um it's like this blue
+
+
+sky is built on the ad protocol but
+
+
+there are other things you can build on
+
+
+that protocol that are not blue sky and
+
+
+um and also what people see as blue sky
+
+
+is uh not only what the blue sky the
+
+
+company built but also what the other
+
+
+community uh people like like me have
+
+
+built. So it's like layers like this.
+
+
+Um I'm going to spare you spare you like
+
+
+full history but um Blue Sky started as
+
+
+an idea at Twitter where they um they
+
+
+had an idea that they would like to um
+
+
+build some kind of distributed protocol
+
+
+that where you could build things like
+
+
+Twitter where Twitter would be only one
+
+
+of the participants.
+
+
+um and they uh so they invited uh
+
+
+external teams to pitch their uh their
+
+
+visions, their projects. This took a
+
+
+while and um Jay which ended up as CEO
+
+
+of Blue Sky was selected uh and she
+
+
+insisted that it would be um created as
+
+
+a separate company in the band of
+
+
+Twitter. Uh which in hindsight is the
+
+
+only reason why it still exists. uh and
+
+
+they agre agreed to to make it an
+
+
+independent company that was that only
+
+
+had a grant from Twitter. Um then in
+
+
+over uh 2022 they were designing the
+
+
+thing. In the meantime, you know, uh the
+
+
+whole Elon thing happened.
+
+
+uh people started uh looking for a way
+
+
+out of Twitter and in 2023 they launched
+
+
+um uh some first very early beta
+
+
+versions and uh made a sign up form and
+
+
+suddenly they had a million people of
+
+
+the on the waiting list.
+
+
+Uh and then over 20 23 they were giving
+
+
+out more and more invites
+
+
+the community was was building
+
+
+uh in 2024 in February they uh dropped
+
+
+the invites. It was about uh a bit over
+
+
+a million users then and they also
+
+
+opened the network for uh for external
+
+
+servers at this point. Um and then it
+
+
+was uh the next um big uh big bump in
+
+
+the numbers was uh uh there was uh
+
+
+Japanese people came in um February I
+
+
+think. Uh Brazil came in September when
+
+
+for about a month uh Twitter was blocked
+
+
+in Brazil and whole Brazil suddenly came
+
+
+to to blue sky and overloaded all of our
+
+
+services. Uh
+
+
+and then uh in November 2024 uh like
+
+
+couple of millions of people came after
+
+
+the election in the US. Um and the the
+
+
+last year was um there were a lot of
+
+
+things happening outside of blue sky
+
+
+growing uh new communities that have
+
+
+separate servers more and more
+
+
+developers joining building things. So a
+
+
+lot of a lot of things was happening and
+
+
+changing quickly last year and and this
+
+
+year. Uh so I'm going to go a bit about
+
+
+the architecture of the network. So the
+
+
+let's start with the PDS which is the
+
+
+personal data server. Um this is the
+
+
+server that holds uh user data. So the
+
+
+PDS has u some number of user accounts
+
+
+with uh user repositories.
+
+
+Um and the repository holds the given
+
+
+users data. Uh first a bit about uh
+
+
+identity how the users are identified.
+
+
+Uh so uh users have handles. Handles are
+
+
+uh just domains not username at domain
+
+
+just domain. Uh and any domain can be
+
+
+used as a handle. And if you have a some
+
+
+kind of recognizable domain like you're
+
+
+some big company organization,
+
+
+you should probably use this handle this
+
+
+this domain as your handle because it um
+
+
+it kind of serves as uh
+
+
+self-verification
+
+
+uh like if you are uh I don't know
+
+
+uh CNN.com
+
+
+uh then everyone knows that this is this
+
+
+is your account because only you have
+
+
+been able to verify it this way as as
+
+
+connected to your account. Uh and there
+
+
+are two ways to to verify handle as
+
+
+yours. One is the txt u entry in the DNS
+
+
+which looks like this for mine. Uh and
+
+
+the other way is to uh to put a file on
+
+
+the well-known path. Uh and they have to
+
+
+return this uh the this distributed
+
+
+identifier which is the real identifier
+
+
+that identifies each account.
+
+
+Um
+
+
+and um at so at first they there was a
+
+
+funny bug because they launched this
+
+
+this um the second way to verify through
+
+
+the HTTP but uh um of course people
+
+
+started thinking how to abuse it and
+
+
+someone managed to verify as Amazon ADWS
+
+
+uh and then they switched the they
+
+
+changed it to to to have so that it has
+
+
+to be well known because he he managed
+
+
+to like create a uh bucket on S3 which
+
+
+was named uh the in the right way and
+
+
+had the right file inside to get
+
+
+verified as Amazon.
+
+
+Uh and this um on this part uh yeah so
+
+
+um the the uh of the account maps to a
+
+
+file like this which is called the ID
+
+
+document which is a JSON file with um
+
+
+the ID the handles that are assigned
+
+
+there uh some kind of cryptography stuff
+
+
+and u there's the server assigned PDS
+
+
+which um which uh lets everyone look up
+
+
+where the the server of the given
+
+
+account is. So this is the uh did dock
+
+
+for my account. This is all this is all
+
+
+public of course. Um and um there are
+
+
+two types of this identifiers. Uh the
+
+
+main one that almost everyone uses is
+
+
+that PLC.
+
+
+uh it's it was actually PLC for
+
+
+placeholder at first and they they at
+
+
+some point they redcon it to to mean uh
+
+
+public ledger of credentials.
+
+
+Um it's a it's something that uh a lot
+
+
+of people bit rightly criticize that
+
+
+this is the single most centralized um
+
+
+element of the network because it's a
+
+
+it's a um central server that keeps all
+
+
+this mapping of of this to to uh to the
+
+
+identity data.
+
+
+Um
+
+
+but uh they're working on ways to to
+
+
+mitigate this. they uh they had an idea
+
+
+for a while to move this uh this PLC
+
+
+directory uh service to a separate
+
+
+organization that wouldn't be uh under
+
+
+uh their control. So they actually
+
+
+started um like uh this or last month
+
+
+there was a conference uh atmosphere
+
+
+conf where they announced that they
+
+
+formed uh uh the funded the organization
+
+
+in Switzerland that will be uh managing
+
+
+this PLC direct directory as as a
+
+
+separate entity.
+
+
+Um and the other way if you really
+
+
+insist on uh being like completely
+
+
+independent is the did web where you
+
+
+have uh edit web like this one uh with
+
+
+the some domain after the the colon and
+
+
+then the identity is just looked up on
+
+
+this domain on the well-known file. It's
+
+
+very rarely used because um first uh
+
+
+it's harder to set up and two the
+
+
+problem is that you have to keep this
+
+
+domain forever active. So if you lose
+
+
+this domain, you lose your account
+
+
+because you can't migrate uh the
+
+
+identity to different domain because
+
+
+like the something has to be permanent
+
+
+uh that is a permanent identifier that
+
+
+all the databases can identify you and
+
+
+can't change and the the is this
+
+
+identifier.
+
+
+So everything else the handle can change
+
+
+the PDS can change but but the the ID
+
+
+can't change.
+
+
+Um
+
+
+so um getting back to the architecture
+
+
+um inside the user report we have
+
+
+records which are the the like the main
+
+
+uni unit of data.
+
+
+Uh records are grouped in collections.
+
+
+Um so this is like posts, likes, uh
+
+
+follows and so on. Um there are also
+
+
+blobs uh which are just binary binary
+
+
+files like mostly media images, videos
+
+
+and um some cryptographic stuff the
+
+
+access tokens and so on.
+
+
+Um and the records are are identified by
+
+
+something like this the atri
+
+
+um so this is uh at slash uh did of the
+
+
+account collection which is uh the kind
+
+
+of reverse domain format. So for example
+
+
+uh all collections from blue sky are
+
+
+under app.b sky. Uh and then there's a
+
+
+record uh key which is pretty short some
+
+
+identifier that uniquely identifies this
+
+
+this specific record in the uh in the
+
+
+collection. Uh and all the links between
+
+
+records um from different people are are
+
+
+u done through through those URIs.
+
+
+Uh
+
+
+and so this is uh like this is what a
+
+
+record looks like. It's just JSON which
+
+
+has some some set of fields uh depending
+
+
+on the on the specific type. So here you
+
+
+have uh post which has uh which needs to
+
+
+have a time stamp um text might have
+
+
+some uh set of languages might have
+
+
+embeds with uh images or links um might
+
+
+have also facets which is like
+
+
+highlighting of hashtags, URLs and so
+
+
+on.
+
+
+Um
+
+
+and uh all records have um all
+
+
+collections have assigned something
+
+
+called lexicons
+
+
+which is uh basically JSON schema which
+
+
+which defines how the what should be
+
+
+inside the record. Uh so here for
+
+
+example you you have um the lexicon for
+
+
+the uh for the post which um defines
+
+
+that it needs to have text and create
+
+
+that that text might be up to 300 uni
+
+
+code characters long. the the second
+
+
+leng second second max length 3,000 is
+
+
+so so that you can't have you can't make
+
+
+to too complicated text with you know
+
+
+those signs going up and down
+
+
+u and then uh and then every and
+
+
+everything else. So it defines what what
+
+
+kind of fields you can have in a record
+
+
+uh what type they should have uh what
+
+
+like constraints like max length and so
+
+
+on and which are required and uh you can
+
+
+add uh additional fields to records
+
+
+which are not defined there. So uh for
+
+
+example some apps are stuffing some
+
+
+additional data into appbisk sky uh
+
+
+actor profile or app sky uh feed post
+
+
+which are not defined there and you just
+
+
+need to take care to not have like
+
+
+naming collisions between uh data added
+
+
+by different apps.
+
+
+Uh and you can browse all of these uh
+
+
+records uh in some tools like there's
+
+
+there's a few uh tools made by uh
+
+
+external developers
+
+
+for browsing uh reposs and and and
+
+
+accounts.
+
+
+So you have here you have this this most
+
+
+popular tool PDSLs
+
+
+uh where you have my server lab
+
+
+Martianbased net there's five accounts
+
+
+on on it um what the four fourth one is
+
+
+mine my main account and some other
+
+
+helper and and uh test accounts and when
+
+
+you click the
+
+
+uh the account uh you get the list of
+
+
+collections here they're grouped by uh
+
+
+like uh which app they belong to. Uh and
+
+
+then you have the list of records in
+
+
+this uh in this uh collection
+
+
+uh with with the R keys and and the
+
+
+record text on hover and you can browse
+
+
+anyone's uh records this way because all
+
+
+all of this data is public. So you can
+
+
+look up uh any uh anyone's account here.
+
+
+See what what um server they're on, who
+
+
+else is on that server and see what what
+
+
+kind of records they are making and so
+
+
+on.
+
+
+Um and uh another cool thing about the
+
+
+uh this system with with the PDSS is
+
+
+that you can move uh the uh your account
+
+
+between PDSS because you're not uh bound
+
+
+permanently to the PDS. It's just
+
+
+something that is assigned to your
+
+
+account uh right now. Uh so migration um
+
+
+means that you have to export this um
+
+
+uh this whole repo as uh it's it's
+
+
+exported as a so-called car file content
+
+
+address something
+
+
+um
+
+
+and then you upload this uh this whole
+
+
+repo. You can also export anyone else's
+
+
+repo because all all of this is public
+
+
+uh except the keys of course. Uh so you
+
+
+export this this uh car and import it to
+
+
+the to the other PDS and then you submit
+
+
+uh an update to the to this did dock uh
+
+
+which uh changes the PDS entry that that
+
+
+your account is now on this PTS tool.
+
+
+And again there are some uh tools made
+
+
+by external developers. So for example,
+
+
+here's a most popular tool PDS Mover
+
+
+made by this guy uh Bailey Town, not to
+
+
+be confused with the other Townent. Um
+
+
+and uh so this is a like a web tool
+
+
+where you just log in and um say where
+
+
+you want to be moved and confirm uh some
+
+
+some authentication codes and so on and
+
+
+and wait some time and you this is like
+
+
+usable for for nontechnical nontechnical
+
+
+people.
+
+
+Uh and there are a couple of of uh tools
+
+
+like this. So basically this is what
+
+
+happens you the service endpoint uh at
+
+
+first everyone was on server bkai.social
+
+
+and then they
+
+
+about November 23 they moved everyone to
+
+
+10 servers uh which were all blue sky
+
+
+servers but just to test like a uh test
+
+
+of the federation.
+
+
+So, so at this point there was there
+
+
+were 10 different servers and they were
+
+
+they named them all after mushrooms. Uh,
+
+
+so they're called mushroom PDSS. Mine
+
+
+was Amanita, which is the the red one
+
+
+with the with the white dots, the
+
+
+Muhamm.
+
+
+Uh, and then then I moved at a year
+
+
+later I moved to the to my own server.
+
+
+Uh, okay. So, back to the like bird's
+
+
+eye view.
+
+
+uh you might know this other uh
+
+
+distributed network which looks a bit
+
+
+like this. So the one thing to to
+
+
+remember is that this one is not like
+
+
+this. It's it's it's not like one to one
+
+
+u with with the other one because uh
+
+
+here the the nodes are like um there's
+
+
+one one type of node and they all
+
+
+communicate with each other and in ador
+
+
+is a bit uh a bit more complicated. So
+
+
+uh so there's um basically a few types
+
+
+of servers which have different roles
+
+
+and we have the uh we have the PDSS. The
+
+
+PDS is like the um
+
+
+the source of truth for for the data and
+
+
+for the account. Um and then we have
+
+
+relays which is uh relay basically
+
+
+combines um uh the PDS has um web socket
+
+
+which outputs all the all the changes on
+
+
+it and the relay combines the uh the
+
+
+input from the web sockets from all the
+
+
+PDSS it listens to and output is on one
+
+
+big pipe so someone who who needs uh all
+
+
+the data can listen to it.
+
+
+Uh, and then, um, there's the terribly
+
+
+named App View server.
+
+
+Uh, terribly named because, uh, like
+
+
+most people hear app and they think it's
+
+
+the client, but it's not the client,
+
+
+it's the server. Uh, because the it's
+
+
+named like this because it's like a
+
+
+materialized view of the network. Uh,
+
+
+but this only makes sense to people who
+
+
+know what materialized view is. Uh so we
+
+
+have the uh so we have the relays relays
+
+
+are feeding into servers like the app
+
+
+view and some other services.
+
+
+Uh and then then there's the client app.
+
+
+So the client app uh when you make posts
+
+
+uh or likes or something it saves them
+
+
+to the to the PDS
+
+
+uh which sends them to relay and and
+
+
+everyone else.
+
+
+And the so as you can see there's uh
+
+
+there are some of these things most of
+
+
+of them right now which are inside the
+
+
+uh blue sky company but there are also
+
+
+versions that are running uh outside
+
+
+uh and this is how the flow goes again.
+
+
+So this uh if you've seen uh the talk
+
+
+yesterday about event sourcing
+
+
+uh this is this is kind of the same
+
+
+thing but uh just on a different scale
+
+
+on the scale of the whole uh network.
+
+
+So again the the client app calls the uh
+
+
+PDS uh with calling methods like create
+
+
+record update record and so like when
+
+
+you press like on someone's post it will
+
+
+send create record like to your PDS.
+
+
+When you uh unlike the post it will send
+
+
+delete like uh to the PDS and so on. Um
+
+
+and the PDS passes all of these events
+
+
+uh on on its websocket. here it's
+
+
+encoded as core is it's a kind of binary
+
+
+representation the PDS by the way it's
+
+
+um it's uh at least the reference
+
+
+implementation it keeps the data in
+
+
+SQLite uh or more like many SQLite
+
+
+because it's every every account has its
+
+
+own SQLite and the the mushroom PDSS
+
+
+have up to few hundred,000 uh accounts
+
+
+or few hundred thousand SQLite files and
+
+
+and it it works well. Um and then the
+
+
+PDS passes this data as as the Cboard to
+
+
+to the relay which passes it through
+
+
+combines with combined with um data from
+
+
+the events from the other PDSS
+
+
+and it goes to the app view which stores
+
+
+it in some kind of normal uh database.
+
+
+Uh so at first it was posgress then they
+
+
+switched to this cellar DB uh to make it
+
+
+scale beyond couple of million users.
+
+
+Um
+
+
+and uh so the app view keeps this data
+
+
+organized in some in some way which is
+
+
+uh which makes sense. So it it uh it's
+
+
+it has easy access. So um so the the the
+
+
+ro role it has is to combine this data
+
+
+into some kind of um more understandable
+
+
+uh structure. So for example uh if you
+
+
+want to see how many likes a post has
+
+
+you need to have data from the whole
+
+
+network because uh each of those likes
+
+
+is on a different server like uh three
+
+
+different people like post and these are
+
+
+uh three like records which are in uh
+
+
+those people's accounts account repos
+
+
+and each repo might be on a different
+
+
+PDS. So you have to like monitor the
+
+
+whole network
+
+
+uh to see uh where are likes being made
+
+
+which are pointing to this uh to the URI
+
+
+of this post. So this is the the role of
+
+
+the app. It um
+
+
+it does things like uh uh like counting
+
+
+how many likes post has uh what how many
+
+
+followers someone has, what are the
+
+
+followers, uh collecting uh posts which
+
+
+are replying to something into threads
+
+
+that can be downloaded as as a single
+
+
+tree and so on.
+
+
+uh and then the client app again loads
+
+
+the data mostly from the app view in the
+
+
+form of some uh proc processed JSON.
+
+
+Um okay so this is the again the the
+
+
+architecture this is how it looks
+
+
+normally.
+
+
+Uh this is how it looked on Thursday
+
+
+when I was on the train to to tow.
+
+
+Uh so there was a massive ded uh and uh
+
+
+blue sky most of blue sky was down for
+
+
+most of the day. Uh like it was
+
+
+sometimes showing up and and going back.
+
+
+Uh so most people couldn't access
+
+
+anything throughout this day like 24
+
+
+hours. But if you knew how to get around
+
+
+it, some uh some people could have
+
+
+somewhat somewhat accessed it.
+
+
+So how it worked worked on Thursday. So
+
+
+um some PDS's some mushroom PDS's were
+
+
+uh having problems. The obvious views
+
+
+were uh mostly down. They have two
+
+
+obvious views in US west and US east and
+
+
+they were mostly down throughout this
+
+
+day. Relay was going up and down. Um so
+
+
+if you use a normal client app it tried
+
+
+to connect to this app view and and it
+
+
+didn't work. Uh but if you are on a
+
+
+separate PDS like I am, um
+
+
+you could switch to a different app
+
+
+view. And uh we didn't have an app an
+
+
+independent app view until very
+
+
+recently, but uh right now there's um
+
+
+there's a something called Black Sky,
+
+
+which is community of black people on
+
+
+Blue Sky. Uh at first they had uh some
+
+
+custom feeds and some moderation stuff
+
+
+and then they have uh had a black
+
+
+sky.app PDS and now they also have an
+
+
+app view and uh everyone can use this
+
+
+app view even if they're not under PDS.
+
+
+So uh during that day if you if you used
+
+
+uh their web app which had their app
+
+
+view connected as the source or um or if
+
+
+you just changed the configuration of
+
+
+the of your PDS to use this this black
+
+
+sky app view then you could somewhat
+
+
+access access the the network and post
+
+
+on it. Uh and there was also another
+
+
+thing there uh at the top there's a
+
+
+client app called the red dwarf which is
+
+
+a bit non-standard client in that it um
+
+
+bypasses the app view completely. it
+
+
+loads data from the PDSS and from some
+
+
+uh other independent services and it's
+
+
+um uh it doesn't work as well but it
+
+
+also like through this day we could uh
+
+
+we could post on these two things and
+
+
+like communicate what's going on and and
+
+
+have some some updates.
+
+
+So uh the the guy from the black sky
+
+
+said that uh they had uh twice the
+
+
+normal number of of users on the day. Uh
+
+
+so the the point of this is that um
+
+
+um like even if uh most of what Blue Sky
+
+
+runs uh goes down, we can still have
+
+
+this some parts of this network working
+
+
+to some degree.
+
+
+Uh okay. So um
+
+
+so what can you build on this on this
+
+
+network? Well, you can build anything
+
+
+basically. Like it's it's like if you're
+
+
+old enough you you might remember this
+
+
+website Zomoccom which said something
+
+
+like you everything is possible you can
+
+
+build anything on Zomoccom. So, so it's
+
+
+kind of like this and we have this this
+
+
+uh phrase which I think is not
+
+
+originally ours. Um, but we like to
+
+
+think it is uh we can just do things.
+
+
+Uh, which means that uh like you just
+
+
+come up with some idea and you can you
+
+
+can build it. It's uh like it's all
+
+
+permissionless. You don't have to have
+
+
+some sign up for some API keys and pay
+
+
+$100 or $1,000
+
+
+uh for access. You just come up with
+
+
+some idea and sit down and or or ask
+
+
+code and and and just build it and
+
+
+launch it to people. So I'm going to go
+
+
+through some uh some tools projects that
+
+
+I've built myself first. Uh so for
+
+
+example you can gather some network
+
+
+statistics uh global uh global
+
+
+statistics of the total number of uh
+
+
+posts or users posting to see how uh how
+
+
+it changes. So here's um here's my chart
+
+
+of um the weekly number of users posting
+
+
+on uh independent PDSS and this includes
+
+
+the so-called bridge which is a PDS that
+
+
+bridges post between the mastoon network
+
+
+and fediverse and the
+
+
+uh and the blue sky network. So the
+
+
+green ones here are the posts on u like
+
+
+the external blue sky pds which are not
+
+
+not bridgy.
+
+
+Um so we can see it's it was uh like the
+
+
+last maybe two three months it was
+
+
+rising a lot because uh something called
+
+
+Euros sky launched which is like u a pds
+
+
+running in Europe and they also plan to
+
+
+have um app view and relay and
+
+
+everything else. Uh so there's a team
+
+
+that that is trying to build the whole
+
+
+independent infra in uh of the network
+
+
+in Europe.
+
+
+Uh and so so they have like 7 to 10,000
+
+
+uh users on the speeds right now. Uh so
+
+
+how you do this kind of network
+
+
+statistics? So I have this uh gem uh
+
+
+called Skyfall which connects to the
+
+
+firehouse. Um it's it runs on event
+
+
+machine. Maybe I'm going to rewrite it
+
+
+in uring machine at some point. Uh
+
+
+and uh and you you assign a call back to
+
+
+run on the uh on every message that that
+
+
+is received. There's uh this is on the
+
+
+order of few hundred to thousand um
+
+
+messages per second. Right now
+
+
+um you filter if this is a commit
+
+
+message which means something some
+
+
+records changed because there can also
+
+
+be like identity message which is uh
+
+
+changed in handles and so on. Uh and the
+
+
+commit message has um some number of
+
+
+operations of records. So you filter
+
+
+that if the uh if the operation is
+
+
+create of a bisk fit post then we get
+
+
+the data of this record and we save it
+
+
+to our postgress database with the text
+
+
+and um time stamp and everything.
+
+
+Uh and then we have the posts in the
+
+
+database. So we do some kind of count
+
+
+count uh uh of the total number of posts
+
+
+between time stamp here and there for a
+
+
+week or a day uh and the number of
+
+
+distinct uh user DIDs and we'd save it
+
+
+to the to some kind of separate
+
+
+statistics table
+
+
+uh and from this table we we can um
+
+
+export this as JSON to to the chart. Uh
+
+
+here's a separate chart which this is
+
+
+not on my website but uh someone else
+
+
+also have has similar charts. Uh this is
+
+
+number of uh unique uh users daily which
+
+
+uh have uh made at least one like. So
+
+
+it's also uh some kind of like daily
+
+
+active users of the network.
+
+
+And this is this works the same way. So
+
+
+you you just need to listen for like
+
+
+records being created and not not post
+
+
+records
+
+
+or you can for example make uh handle
+
+
+statistics like this. I I had an idea
+
+
+that it would be nice to to see which
+
+
+which TLDDs are popular.
+
+
+uh how many people have custo custom
+
+
+handles configured in uh like EU or PL
+
+
+domains and then see who has showed up
+
+
+like see if there are some like
+
+
+politicians signing up in uh in in one
+
+
+of those domains and which are the the
+
+
+popular accounts there uh or like what
+
+
+are the most popular domains within I
+
+
+think interpol was the first one in this
+
+
+in this group
+
+
+Uh so how we do this? Um
+
+
+another of my gems did kit which um
+
+
+loads the the documents and the PLC
+
+
+directory has an export API which lets
+
+
+you
+
+
+uh lets you get 1,00 uh operations on
+
+
+the ids at a time. Uh so here it's
+
+
+running in a loop and just fetching uh
+
+
+the last uh 1,00
+
+
+uh operations every minute for example
+
+
+and the the operation includes uh the ID
+
+
+and what changed in it. So what what
+
+
+handle is now assigned and so on. So we
+
+
+um we track all of those changes to to
+
+
+the DIDs and save it to a handles table
+
+
+with the u assigned handle. It should be
+
+
+verified also like you should take this
+
+
+handle and uh check if it resolves
+
+
+through DNS or well known uh both ways
+
+
+but this is just simplified
+
+
+uh and we save the TLD as a separate
+
+
+field
+
+
+uh and then we have a table of uh
+
+
+handles
+
+
+u so then we can do again like uh count
+
+
+uh group by tldd uh order by count desk
+
+
+and we have this this um this table
+
+
+or we can uh do select where TLD is this
+
+
+one and and order by followers does and
+
+
+we have the most popular uh in a given
+
+
+uh in a given handle. Uh we don't have
+
+
+follower count in this database yet. Uh
+
+
+so to get followers you would need to
+
+
+either listen to uh follow records and
+
+
+save all of the follow records to the
+
+
+database but that's a lot of data. So
+
+
+alternatively you can just have a rake
+
+
+task which uh asks the app view which
+
+
+has all these numbers and uh have
+
+
+something like this that goes through
+
+
+all the hands we have um in batches of
+
+
+25. There's this u endpoint called get
+
+
+profiles which um can look up up to 25
+
+
+uh the ids uh and we ask app what are
+
+
+the follower counts uh of of those and
+
+
+and we update this in the database and
+
+
+then have this rake task run like once a
+
+
+week or something
+
+
+and then we have uh and um another table
+
+
+on this on this website is uh the
+
+
+biggest uh independent PDSS. So we can
+
+
+see here the bridgegy first and then
+
+
+there's Euro sky and black sky and some
+
+
+others.
+
+
+Uh so again this is from the same table
+
+
+just uh additionally save the uh PDS
+
+
+endpoint and then make a query that that
+
+
+counts and groups by PDS.
+
+
+Uh another thing um I'm doing is running
+
+
+some number of custom blue sky feeds. So
+
+
+um there's a Linux feed for example
+
+
+which I built as um uh kind of proof of
+
+
+concept uh but but a lot of people use
+
+
+it. So it matches
+
+
+uh matches all posts by some number of
+
+
+regaxs. Uh and then you go to this this
+
+
+feed and shows you some discuss
+
+
+discussions about Linux. Uh so the feeds
+
+
+work work like this. the client app. Uh
+
+
+when you open the feed, it um uh through
+
+
+the PDS it calls the app view uh and the
+
+
+app view calls uh the service which is
+
+
+uh usually run by some independent
+
+
+person. Um for the list of of posts in
+
+
+the given feed at the given position. Uh
+
+
+usually to those this you need to have
+
+
+like stream all posts from the relay and
+
+
+save them. uh some of them or something.
+
+
+Uh and then the feed runs some algorithm
+
+
+which is like um passes through some
+
+
+number of reg x or or does some kind of
+
+
+ranking of posts or something and
+
+
+returns the list of URIs of of the of
+
+
+the post to the app view which does the
+
+
+hydration of the post. So it turns the
+
+
+URIs to like proper post records and
+
+
+returns them to the client app. Uh so
+
+
+here's example of the uh of the Linux
+
+
+feed which just has some list of reg x
+
+
+uh matching some uh Linux distribution
+
+
+names and so on and has some excludes to
+
+
+filter out some uh unwanted stuff like
+
+
+some spam and so on because for example
+
+
+turns out that some people use the word
+
+
+red hat to mean uh like MAGA supporters.
+
+
+Uh so it so it was matching completely
+
+
+unexpected posts and post people were
+
+
+reporting this to me. Uh so this this
+
+
+feed has this method post post matches
+
+
+which checks if it's um if if it's not
+
+
+an account that is completely filtered
+
+
+out and if it matches uh any of the good
+
+
+records and doesn't match any of the bad
+
+
+records.
+
+
+Uh
+
+
+and then in this in this main loop in
+
+
+event machine we uh we create a post and
+
+
+then for each of the configured feeds it
+
+
+asks it is um here's a new post does it
+
+
+match your filters and if it does then
+
+
+it saves them um additional reference um
+
+
+to the post to the feed. Um and then
+
+
+there there's a method which uh which is
+
+
+called when the app view asks for the
+
+
+for the feed page uh which just looks up
+
+
+those assigned uh posts assigned to the
+
+
+feed.
+
+
+Um and I can have like in a terminal for
+
+
+for testing uh see the the latest
+
+
+matched posts and see why exactly they
+
+
+are matching which which part of the
+
+
+post is highlighted by by argu
+
+
+uh and I have a gem called blue factory
+
+
+which is the uh it's a Sinatra server
+
+
+which implements this uh bottom part
+
+
+which serves an endpoint um that returns
+
+
+is the the post URIs and you just need
+
+
+to configure it with um your ID and host
+
+
+name and and pass it the class which
+
+
+which uh implements that that get get
+
+
+post method.
+
+
+Uh another thing uh I have this uh
+
+
+statistics of uh third party uh relays.
+
+
+Um so how it works is is basically runs
+
+
+um some number of processes uh
+
+
+independently and each of them does does
+
+
+this skyfall event machine loop and just
+
+
+counts number of of events and number of
+
+
+unique users that have appeared there
+
+
+and this runs for an hour and then the
+
+
+processes are uh again joined together
+
+
+and uh return just the counts to to the
+
+
+master process and the master process
+
+
+sign saves this to the database
+
+
+and then I have um something like this
+
+
+which is uh like shows um which which of
+
+
+the third party relays cover how much of
+
+
+the network because I wanted to see if
+
+
+uh like if they're reliable over over
+
+
+many days if they can be if I can switch
+
+
+to one of those relays to be used as the
+
+
+main source uh to get more independent
+
+
+of of blue infrastructure.
+
+
+Uh or another thing, um I wanted to have
+
+
+this search of posts that have I have
+
+
+liked because like I like posts all the
+
+
+time and and there's a lot of knowledge
+
+
+hidden in in those likes. So I often uh
+
+
+are asked about something and I know
+
+
+that I saw it uh because someone from
+
+
+the developer team uh has posted some
+
+
+info uh and I so I probably liked it. So
+
+
+I can go to this to this website I made
+
+
+and look up by by keyword. Uh so how
+
+
+this works this this is a like record.
+
+
+So like record just has um subject which
+
+
+points to a URI of the post. Um and then
+
+
+when I want to import uh the likes of a
+
+
+given user, it just go this is uh
+
+
+another of my gems mini sky uh for
+
+
+connecting to the HTTP APIs. Uh so it
+
+
+calls the list records and points on the
+
+
+uh on the PTS and downloads all the
+
+
+likes. Uh and then for each like it uh
+
+
+gets out the uh subject URI to the post
+
+
+that points to finds uh whose post it is
+
+
+uh which P PDS is going to be on and
+
+
+connects again to that PDS or the or to
+
+
+the app view and and fetches the post
+
+
+content uh and saves all of those posts.
+
+
+uh and then I have uh a query which uh
+
+
+goes joins the likes of the given users
+
+
+with the the posts and filters them by
+
+
+some keyword and and I get this effect
+
+
+here. Uh
+
+
+now I'm going to go through some other
+
+
+projects from some other people. Uh so
+
+
+for example here is a uh website called
+
+
+fire sky which just streams the fire
+
+
+hose live to uh you can see the the
+
+
+messages scrolling or someone did the
+
+
+opposite thing which is they made a
+
+
+website which shows deleted posts like
+
+
+every time someone deletes a post they
+
+
+show it without the handle of the out
+
+
+and they it it censors the some links
+
+
+and handles shown in the post. But you
+
+
+can see like what kind of things people
+
+
+are posting and then choosing to delete
+
+
+afterwards.
+
+
+Uh or you can do something like this.
+
+
+This guy made this map of uh all users
+
+
+on on blue sky. So he just dumped I
+
+
+think the follow records into some graph
+
+
+database and uh made like this map of
+
+
+clusters of users based on who they are
+
+
+usually connected with. uh and it names
+
+
+clusters like with some uh some uh by
+
+
+either by by language or country or by
+
+
+uh some interest and so on. Uh or you
+
+
+can do something like this which is um
+
+
+uh an index of back links on on the
+
+
+whole network. So this is a service that
+
+
+uh saves uh every link uh in a record
+
+
+made to something else and you can ask
+
+
+it to say for example uh give me uh all
+
+
+the uh blue sky posts which in the embed
+
+
+field have uh URL pointing to my website
+
+
+and you get um you get this list u and
+
+
+several different um services and apps
+
+
+use this service as as source of data
+
+
+for some features because uh because you
+
+
+can this way using this service you can
+
+
+make some features which are not
+
+
+possible to do just using the blue sky
+
+
+app view and the best part is that this
+
+
+service likes on a Raspberry Pi in
+
+
+someone's home with with which has like
+
+
+googly eyes based on them like this
+
+
+and uh generally generally it's it's
+
+
+really cool that uh a lot of these
+
+
+services just run run on someone's home
+
+
+lab or something which goes down when
+
+
+when they lose power. Uh
+
+
+and so for example, here's this this
+
+
+feed uh called for you which is an
+
+
+algorithmic feed like Twitter's which is
+
+
+here it has 47,000 likes uh and I think
+
+
+even more more people used it. one of
+
+
+the most popular uh feeds and sometimes
+
+
+randomly this guy says, "Sorry, this
+
+
+feed will be down for a few minutes
+
+
+because I need to I I've updated Nvidia
+
+
+drivers to be able to play games and I
+
+
+need to reboot this computer that runs
+
+
+on because it runs the speed runs on his
+
+
+home computer that he plays games on."
+
+
+Uh
+
+
+or you can build a PDS and in some
+
+
+random language uh like Ruby. I think
+
+
+there is no uh no PDS and Ruby yet
+
+
+because I'm mostly the only person doing
+
+
+Ruby things in in this community, but
+
+
+there's almost like an unofficial
+
+
+competition. What the what's the
+
+
+weirdest thing you can you can uh write
+
+
+a PDS and so someone wrote a PDS in
+
+
+Pearl for example recently.
+
+
+Uh
+
+
+and so u so far I've mostly been talking
+
+
+about this uh this part that is the blue
+
+
+sky network uh the blue sky things blue
+
+
+sky post blue sky likes and so on um
+
+
+some run by blue sky company some run by
+
+
+other people like me uh but there's also
+
+
+this outer part the uh so-called
+
+
+atmosphere
+
+
+uh the the the network of of everything
+
+
+that runs on the protocol which some of
+
+
+these things are not uh like completely
+
+
+independent of the blue sky content. So
+
+
+for example there's there's a website
+
+
+called tangled uh which is like a GitHub
+
+
+alternative
+
+
+um two uh it's run by I think two Indian
+
+
+uh guys who are brothers who are uh
+
+
+living in Finland. One is living in
+
+
+Finland, second was somewhere else. So
+
+
+they they got some I think some VC
+
+
+funding lately. Um and like you can a
+
+
+lot of uh projects in the in this
+
+
+community are hosted on this on this uh
+
+
+this GitHub alternative.
+
+
+So it has its own lexicon like this
+
+
+uh which so the the repo is a record uh
+
+
+which says the what what the name is and
+
+
+and description and so on and the the
+
+
+actual git content is hosted on
+
+
+something called a not
+
+
+u the not one tangled such
+
+
+and uh like issues uh or PRs are also
+
+
+records and and uh are in the same
+
+
+repoint and and look something like
+
+
+this. There's an uh for example a kind
+
+
+of Instagram on on proto because a lot
+
+
+of a lot of things that that people are
+
+
+building are basically some name of some
+
+
+common service on at proto like
+
+
+Instagram but on ad proto straa but on
+
+
+proto and so on. Uh so there's this uh
+
+
+site called grain uh where where you
+
+
+upload photos and again there's a record
+
+
+and lexicon for gallery for photo in
+
+
+gallery and so on. Uh and so the thing
+
+
+is all of these records are like they
+
+
+all use the same system. They all go to
+
+
+the same PDS. You can store all of this
+
+
+um data from those other apps on your
+
+
+PDS. even if it's a blue sky hosted PS
+
+
+they like they don't mind hosting other
+
+
+apps data on on on the server they run
+
+
+um and so you can basically have one
+
+
+account for every like you login with
+
+
+the same handle uh same identity using
+
+
+um to all of these apps and all of this
+
+
+data goes uh in like a similar format uh
+
+
+this JSON format to to the same PDS
+
+
+server And you can uh process is it all
+
+
+in the same way. So like all the uh all
+
+
+the libraries tools that are made for
+
+
+processing uh blue sky posts uh can be
+
+
+very easily adapted to to process uh
+
+
+tangled repos issues grain photos and so
+
+
+on. You just you just change the name of
+
+
+the lexicon that you uh that you process
+
+
+and this enables a lot of interoperation
+
+
+between those apps. So um sometimes
+
+
+people are even surprised that someone
+
+
+managed to make a tool that
+
+
+interoperates with their app in some
+
+
+unexpected way that they haven't even
+
+
+designed because you basically
+
+
+interoperate on the level of data. This
+
+
+data is is uh saved in the PDS in a
+
+
+known format. There's a the lexicon is
+
+
+public. So anyone can look at those
+
+
+records, see what data they have in it,
+
+
+in what format and make some tool which
+
+
+u processes it in some other creative
+
+
+way.
+
+
+So for example there's this is the I
+
+
+think this the first uh third party app
+
+
+which used the different lexicon uh
+
+
+called white wind uh for blogging but
+
+
+it's uh it's un it's been unmaintained
+
+
+by by for a long time. Uh so here here's
+
+
+a blog post by um developer per from
+
+
+blue sky on this white wind um and it it
+
+
+looks like this. So it has a record with
+
+
+this white wind blog entry lexicon
+
+
+uh and like I said this this site is
+
+
+unmaintained but all of this data is in
+
+
+the PDSS in a known format. Some someone
+
+
+just uh made a different website which
+
+
+displays the same posts in a different
+
+
+design which is more more customizable.
+
+
+This is the exact same post from
+
+
+Whitewind uh rendered on some other
+
+
+website made by a diff different person
+
+
+without having to ask uh Whitewind uh
+
+
+for access or anything. They they just
+
+
+took those records which are in the PDS
+
+
+in uh in a known format and rendered it
+
+
+in in a different way.
+
+
+uh and some people are even uh
+
+
+cooperating on building together
+
+
+oxicons. So for example a number of
+
+
+different blogging platforms on ad proto
+
+
+um agreed on this standard called
+
+
+standard site which is like a shared
+
+
+definition for a blog post record and
+
+
+they they all follow this this lexicon
+
+
+format. Uh so there um so there's for
+
+
+example leaflet uh another uh blogging
+
+
+platform
+
+
+uh this is the blog post in the leaflet
+
+
+lexicon
+
+
+uh it has those fields required by
+
+
+standard site. Uh and then someone else
+
+
+again uh made um a search engine which
+
+
+uh searches through all of the lexi uh
+
+
+the blog platforms on that proto which
+
+
+use this uh standard site lexicon. So
+
+
+you can type uh some keyword and u and
+
+
+there's so it shows that you can search
+
+
+in leaflet pocket of print uh greenale
+
+
+white queen and so on and they because
+
+
+they all use this this format. So you
+
+
+can uh type uh ruby into search for
+
+
+example and you have uh some of my blog
+
+
+posts on leaflet someone else's blog
+
+
+post on pocket and so on. Uh so um my
+
+
+main point I guess is that I want to
+
+
+invite you to come uh build those things
+
+
+with with us. There's a really cool uh
+
+
+kind of crazy positively community of of
+
+
+uh people uh who are building together
+
+
+and uh helping each other and uh working
+
+
+together on things and and so on. And
+
+
+basically everyone knows everyone and
+
+
+there most people are friends with most
+
+
+people and so on. Uh and and people are
+
+
+just building random things that they
+
+
+come up with uh use each other's things
+
+
+in some creative ways and so on. So uh
+
+
+if you want to start um the main site is
+
+
+atproto.com recently redesigned there's
+
+
+atprotoatchers discord uh you can ask
+
+
+someone for an invite uh I have an at
+
+
+proto custom blue sky feed which uh
+
+
+grabs all all the like mo tries to catch
+
+
+most discussions about that proto on the
+
+
+platform. Uh I have this uh big blog
+
+
+post introduction to art proto which
+
+
+goes through all the like defines what
+
+
+is how lexicons work and records and pds
+
+
+and so on and uh over react.io IO is a
+
+
+blog blog by Dan Abramov from uh React
+
+
+who used to work on on the blue sky
+
+
+front end team for a while and he wrote
+
+
+a number of uh blog post which explain
+
+
+some uh some things about this network
+
+
+in a very very like user friendly way.
+
+
+Uh and uh this is my website with the
+
+
+with all the Ruby gems. Uh so there's
+
+
+Skyall for for streaming from the fire
+
+
+hose, mini sky for uh reading from the
+
+
+HTTP APIs, DK kit for uh working with DS
+
+
+and Blue Factory for making feeds.
+
+
+And if you want for some reason to work
+
+
+in other languages, uh I have this other
+
+
+website SDK Blueue which like collects
+
+
+just links to all the projects like
+
+
+libraries and others that that I know
+
+
+about. And there's
+
+
+so here's a list of what kind of
+
+
+languages people use roughly in the
+
+
+order of popularity.
+
+
+Uh and there's stuff like this like like
+
+
+it says uh tools for making bots. um
+
+
+labelers which is something I didn't
+
+
+mention before uh which is like
+
+
+moderation tools which can label people
+
+
+or posts with some like some negative or
+
+
+some positive label uh which also people
+
+
+use for like adding budgets to to to
+
+
+their own accounts. Uh there's a number
+
+
+of implementations of PDSS, relays, uh
+
+
+obvious uh some some tools which you can
+
+
+use to to build your other apps easier
+
+
+and so on. Uh a lot of stuff uh o is
+
+
+pretty hard in
+
+
+uh in ad proto because it's like really
+
+
+complicated. they added all the possible
+
+
+extensions to O and it's a bit of a
+
+
+struggle but there are a number of
+
+
+libraries in in many languages that help
+
+
+with this and there are libraries for
+
+
+some lower level things which I I didn't
+
+
+mention because uh I don't know much
+
+
+about some of those and they're not
+
+
+super necessary to get into unless you
+
+
+unless you want to.
+
+
+So uh this is all from me my uh my main
+
+
+website my blue sky website with the
+
+
+list of projects and you know like and
+
+
+subscribe on uh on blue sky and thank
+
+
+you
+
+
+thank you Kuba. Uh you filled the hour
+
+
+really well. So we have time for one
+
+
+quick question.
+
+
+Anyone?
+
+
+Is it quick?
+
+
+I'll check.
+
+
+>> Okay. Thanks for the talk. I noticed
+
+
+your feed uh Linux feed on the blue sky.
+
+
+I just like try to find it. Uh so if I
+
+
+want to have my own feed, what's the
+
+
+quickest way to to have it? Yeah, I know
+
+
+you mentioned your like Sinatra uh
+
+
+thing. So if you are really running it
+
+
+now, uh isn't it too resource in
+
+
+intensive for you? And yeah, it was the
+
+
+quickest way to make my feed.
+
+
+Uh so like uh easiest way for even
+
+
+nontechnical people is there are a
+
+
+couple of um tools which uh just make
+
+
+let you build feed in a visual way. So
+
+
+the one is sky feed made by some German
+
+
+developer uh long ago already. It's the
+
+
+UI is not great but it's like you can
+
+
+you just add some some boxes from like
+
+
+like library and and configure the flow
+
+
+that match all posts uh from uh all
+
+
+accounts or some account which with this
+
+
+keyword order by this and press publish
+
+
+and and uh I think like 80% of the feeds
+
+
+on blue sky are made by made hosted on
+
+
+this service Uh another is Grace uh
+
+
+which is some a bit big bigger company
+
+
+uh which has like u bigger goals and and
+
+
+uh is I think more uh more intuitive to
+
+
+use.
+
+
+Uh and if you want to just host a feed
+
+
+yourself um build it in code then like
+
+
+there are libraries in in many different
+
+
+languages. Uh if you want to use this
+
+
+library I made blue blue factory then um
+
+
+uh it basically accepts um uh an object
+
+
+which has a get posts method uh which
+
+
+gets called with the params and is
+
+
+expected to return some an array of of
+
+
+your URIs of posts and to have those
+
+
+URIs of posts in practice you need to
+
+
+have u some information about those
+
+
+posts uh stored in in your local post
+
+
+address. Um, so you have to stream
+
+
+either from the relay. Uh, this is more
+
+
+like network intensive. It's about I
+
+
+don't know 15 20 megabits per second
+
+
+average stream. Uh, or there is this
+
+
+alternate uh relay called jet jet stream
+
+
+which is uh basically the same stream
+
+
+but as JSON and it's like order of
+
+
+magnitude less traffic.
+
+
+So for feeds it's it's uh recommended to
+
+
+use this on this um on this table that I
+
+
+showed with the list of uh available
+
+
+relays. There are also jet streams.
+
+
+There's there's fire emoji or wind emoji
+
+
+uh depending on which one it is. Uh so
+
+
+there's also a number of jet streams
+
+
+available and you stream this like
+
+
+couple of megabits per second uh from
+
+
+the jet stream and you process the go
+
+
+through the post and you either have to
+
+
+store all the posts and then filter them
+
+
+afterwards or just save the posts that
+
+
+you've you have decided to include but
+
+
+then you can't like change the algorithm
+
+
+and recalculate. So uh I sometimes want
+
+
+to tweak the the keywords and then see
+
+
+what changes in the posts uh made
+
+
+earlier. So I want to keep all the
+
+
+previous posts too. And I keep about uh
+
+
+one month worth of posts in the database
+
+
+and that's about 200 gigabytes.
+
+
+But you you can also keep like just a
+
+
+few days worth of post because most most
+
+
+feeds operate on very recent data. So,
+
+
+so in practice, you only need like a few
+
+
+days worth of posts and you can just
+
+
+delete the older ones.
+
+
+I'll think what to do about this.
+
+
+We're looking for sponsors for next
+
+
+year.
+
+
+All right. Uh, thank you very much,
+
+
+Kuba. Thank you.
