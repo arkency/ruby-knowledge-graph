@@ -1,0 +1,2920 @@
+Our
+
+
+next guest is Ysef and he'll tell us why
+
+
+camel is not harder than you pass.
+
+
+Please welcome Yosef.
+
+
+>> Uh welcome. I also prepare alternative
+
+
+title to this talk which is camel versus
+
+
+pass and how to make better stakes. Uh
+
+
+this talk can save you up to 3 million
+
+
+uh dollars a year. There is just one
+
+
+small caveat. You should be already
+
+
+spending 4 million air uh right now
+
+
+because if not then the savings will be
+
+
+less. Uh I would also like to fasten
+
+
+your seat belts. Um uh this is because
+
+
+we will go 230 slides an hour. Uh this
+
+
+might be related to my speed on the
+
+
+autoban coming to virtually
+
+
+uh which is German highway for those
+
+
+that don't know. Um so yes hello I am
+
+
+Ysef um you might know me from writing
+
+
+the first ever book on camel uh called
+
+
+camel handbook
+
+
+and uh you might have also noticed that
+
+
+I recently took job at SER API.
+
+
+SER API is a company uh that provides
+
+
+any kind of search API you can think of.
+
+
+So from Google but also like Google
+
+
+flights, AI overviews to Amazon products
+
+
+and uh whatever search resource page you
+
+
+are interested in you can get as a JSON.
+
+
+So it's super easy to integrate in your
+
+
+application. We also have a free plan of
+
+
+250 searches per month. So it's easy to
+
+
+uh easy to try it. We are sponsor of
+
+
+this conference which I'm very happy to
+
+
+say. Um, and if I'm not at work, I'm
+
+
+actually a big Gordon Ramsey fan. Uh,
+
+
+people think sometimes that it's because
+
+
+I like to cook or I like elaborate
+
+
+dishes or I go like for Michelin star
+
+
+restaurants.
+
+
+Uh, this is not actually true. I just
+
+
+like him uh shouting at people. Uh
+
+
+because for some reason it brings a lot
+
+
+of calm to myself.
+
+
+This is really true. Um welcome to
+
+
+Sisia. Uh I'm actually from this region.
+
+
+It's a historical land. It was never
+
+
+like a kingdom. But uh I'm from the
+
+
+Czech part down below. Uh I actually
+
+
+included Prussian map. Why? Because we
+
+
+were historically also Prussia. So where
+
+
+I'm from like the few villages we still
+
+
+call ourselves Prussians and uh it's a
+
+
+bit funny because Prussia doesn't exist
+
+
+but actually yes it exist. Uh so people
+
+
+also think that I am Polish because of
+
+
+my name Chie and uh the name probably
+
+
+really comes from Poland uh but I'm
+
+
+officially check and German just uh just
+
+
+so you know and uh one short history
+
+
+lesson is check
+
+
+because actually apparently it was
+
+
+founded by Czech Duke and uh if You see
+
+
+the coast of arms from the medieval
+
+
+times, it has the check line on them.
+
+
+And even the new coast of lines still
+
+
+have the check line there. So it's rough
+
+
+check or Polish or Prussian. Yeah. So
+
+
+but history uh lesson over. You can join
+
+
+the uh v tomorrow I believe. Uh so let's
+
+
+talk uh camel versus pass. People go for
+
+
+pass because why? Because they want that
+
+
+big juicy button that they can press to
+
+
+deploy, right? And they think it's no
+
+
+work. It just works. It can never go uh
+
+
+wrong way. But is that the reality? you
+
+
+know because sometimes the provider
+
+
+might bail out on you or give you bad
+
+
+response times or uh give you some
+
+
+unavailability. So that all happens and
+
+
+it's not for me to criticize these
+
+
+companies. I I I love that they exist,
+
+
+you know. Uh and I mean really I'm not a
+
+
+come fundamentalist like some people
+
+
+also think. Uh but the reality is really
+
+
+a little bit more complex. Yeah. It's
+
+
+not always you have no problems with
+
+
+them. Uh so I find we can also try
+
+
+ourself. Same like with steaks. We worry
+
+
+to make steaks at home because we buy
+
+
+expensive meat and we don't want to ruin
+
+
+it, right? Uh
+
+
+but so why steak at restaurant is
+
+
+better? You know if you open restaurant
+
+
+restaurant article like this and uh you
+
+
+start reading you read and then you find
+
+
+out that actually they just put more
+
+
+butter you know and uh and you can do
+
+
+that as well you know. Uh so sometimes
+
+
+it's good if they prepare the steak for
+
+
+you, but also you can make it at home
+
+
+and make it your way. And uh it's not
+
+
+really that hard, right? You follow
+
+
+simple rules like room temperature, you
+
+
+season the steak, you preheat the pan,
+
+
+touch of oil, 4 minutes each side, and
+
+
+basically you are kind of done. Don't
+
+
+forget to let it rest and that's it. So
+
+
+I like both, right? It's not one or the
+
+
+other. And that said, we also don't have
+
+
+to follow every single advice and every
+
+
+single recommendation even when we are
+
+
+deploying with camel. So how to kind of
+
+
+you only live once your first camel
+
+
+deploy right and I know what you are
+
+
+thinking
+
+
+cloud. Um
+
+
+today everybody and their mom uses cloud
+
+
+code of course but uh it's important to
+
+
+realize that still maybe for some things
+
+
+like security we should be a little bit
+
+
+more careful. We should still uh take it
+
+
+more seriously because remember you are
+
+
+not Chuck Norris.
+
+
+Yeah. And uh speaking of Chuck Norris,
+
+
+uh not everybody knows this, but uh
+
+
+Czech Norris deployed with come out
+
+
+before DHH. Yeah. And uh and uh his
+
+
+servers also never had downtime. Uh this
+
+
+was because uptime monitors always
+
+
+waited for him to be back online. Yeah.
+
+
+So he was safe. But we are not. So uh
+
+
+camel oneonone just to understand camel
+
+
+a little bit right. So Kaml splits your
+
+
+applications kind of in half you have uh
+
+
+the
+
+
+uh the application itself and the
+
+
+accessories which could be whether uh
+
+
+headless browser or some database or
+
+
+some um some project that makes backups
+
+
+for the database and uh the server part
+
+
+have like kind of its life cycle. So
+
+
+that's the camel deploy that's whatever
+
+
+happens there with the blue green
+
+
+deploys and so on. But accessories have
+
+
+their own life cycle. So you just start
+
+
+them and they just run.
+
+
+Uh so the next thing to realize is that
+
+
+there is a thing called camel proxy.
+
+
+It's like a separate project but camel
+
+
+deploys it and uh camel proxy will know
+
+
+how to route uh how to route request on
+
+
+your servers. So especially if you are
+
+
+building this like one server pass for
+
+
+yourself you can have many projects
+
+
+there and uh common proxy will know
+
+
+which one to uh to go so it will
+
+
+register it will also like health check
+
+
+those containers and then uh send the
+
+
+right traffic. Um the next way is the
+
+
+blue green deployment which came uses
+
+
+which is really nice because it gives us
+
+
+gapless deploys.
+
+
+But uh one thing to be said about this
+
+
+is that you need way more RAM than you
+
+
+probably expect especially if you are
+
+
+using Rails with solid factor libraries.
+
+
+uh better go for more RAM than less
+
+
+because you will be running things in
+
+
+parallel at some moment in time. So uh
+
+
+this is actually a good thing for having
+
+
+one big VM when you want to run many
+
+
+projects because then you share the RAM
+
+
+and it's not such a big problem uh to
+
+
+overpay for that. Uh and one more thing
+
+
+I want to mention regarding the camel
+
+
+figure theory let's say uh is the
+
+
+differences between the directories and
+
+
+volumes because you need some space for
+
+
+some data
+
+
+and there's a
+
+
+it's a bit hard to understand like what
+
+
+camel calls directory what volume
+
+
+um directory is like actually directory
+
+
+but there is volume which can be kind of
+
+
+both so Uh for this talk I will use
+
+
+camel volumes which are docker named
+
+
+volumes. Yeah they're handled by docker.
+
+
+Uh the alternative to that is to just
+
+
+creating your regular directories on the
+
+
+Linux system. In both cases you kind of
+
+
+have to think about permissions and
+
+
+access. And uh one disappointing thing I
+
+
+will say about Docker is that you would
+
+
+think that this usage of native volumes
+
+
+will give you some advantage when
+
+
+backing up something or some or
+
+
+whatever. But actually no, it's even
+
+
+harder because you'll have to like spin
+
+
+up container to run some pickup software
+
+
+uh just for that. Uh so it's a it's a
+
+
+bit stupid but um but uh you can still
+
+
+use it. Uh it's created automatically.
+
+
+So that's the advantage here. So you
+
+
+don't have to like really do like mcad
+
+
+there to create directory. It will just
+
+
+create it whenever you mount for the
+
+
+first time. Yeah. Uh so for the example
+
+
+I want to talk about just the plain
+
+
+simple thing rails new just to make it a
+
+
+little bit more interesting we will add
+
+
+live stream uh which is a technology
+
+
+that can help us to back up our uh
+
+
+SQLite databases. I cannot go too deep
+
+
+here in this talk for live stream but uh
+
+
+it basically takes your um write ahead
+
+
+of files for SQLite
+
+
+and it combines them with snapshot. So
+
+
+it will make a snapshot and you have the
+
+
+wall files and together it's like a
+
+
+generation you will stream it somewhere
+
+
+like to S3 bucket and uh then later you
+
+
+can uh restore it.
+
+
+Oh sorry. So I made a demo that you can
+
+
+later open and run and deploy if you
+
+
+will be interested in running it. It's a
+
+
+small application that actually uses uh
+
+
+SER API for checking your keyword. So
+
+
+sometimes if you are building a product
+
+
+or a company on Google and you want to
+
+
+track like how you are doing in SER or
+
+
+your competitors. So this is a small app
+
+
+that uh does exactly that. So let's talk
+
+
+about requirements. what Kamal really
+
+
+needs from you or let's see from your
+
+
+application. You obviously need uh SSH
+
+
+um keys.
+
+
+Uh most of you probably already have
+
+
+some. Uh this is how you generate them.
+
+
+There will be par pair of private and
+
+
+public. So obviously the private one you
+
+
+have to keep private. Uh simple as that.
+
+
+Then you need Docker installed um on
+
+
+your machine. Kaml uses uh Docker also
+
+
+on the uh on the servers. So all the way
+
+
+Docker it's unavoidable.
+
+
+Then you need to write a docker file uh
+
+
+that will run your application on port
+
+
+80 have a health check that's important
+
+
+and just simply logs to std out. I don't
+
+
+want to go again too much to docker file
+
+
+because rails luckily ships one and it's
+
+
+good one. Recently there were actually
+
+
+some optimizations. So if you have some
+
+
+old version just go and get the new one
+
+
+from from rails you will have faster
+
+
+builds. So only a few things maybe to
+
+
+note. Uh so there is expose 80 that's
+
+
+the port you know and then you have the
+
+
+command for the server we are using bin
+
+
+trust that's truster. Uh that's also
+
+
+separate project that helps with caching
+
+
+assets. Unfortunately, that's one of the
+
+
+disadvantage of camel that it doesn't
+
+
+have native way for it uh for now. And
+
+
+then you have the entry point. So I'm
+
+
+always clicking the small one. Uh so the
+
+
+entry point uh is for the DB migration
+
+
+or if the DB is not there that will be
+
+
+created
+
+
+and few things we can run SMSSL and
+
+
+force SSL for uh having automatic
+
+
+redirects and uh running SSSL later I
+
+
+will show you the configuration on camel
+
+
+side it's very simple this is already I
+
+
+think in the rails new project there you
+
+
+just unccommen both
+
+
+or it will also work if you keep it
+
+
+unccommented but then you will not have
+
+
+the functionality obviously.
+
+
+Uh and similarly if you are using those
+
+
+SSL options or host authorization
+
+
+options you have to exclude your app uh
+
+
+health check uh endpoint because
+
+
+otherwise it will not work either. So
+
+
+let's create such a server for kamlo
+
+
+that we can use for many project like
+
+
+like a path in a way uh not dinos uh
+
+
+server. So I I chose digital ocean here
+
+
+because I use them a lot but you can use
+
+
+of course something else. The nice thing
+
+
+about them is the uh the do agent that
+
+
+you can install on the on the system
+
+
+which I will get to into in a second. So
+
+
+we just create a plat uh choose
+
+
+something big enough your region
+
+
+obviously
+
+
+uh I'm for the demo I'm on Ubuntu but of
+
+
+course you can rewrite for your favorite
+
+
+system uh and after the sizing there is
+
+
+this important thing that you can
+
+
+provide your cloud init script and it
+
+
+will bootstrap the system with some
+
+
+stuff you want. So this is how you can
+
+
+make your system more secure or whatever
+
+
+you want and it's simple simple way how
+
+
+to avoid something like unsible and
+
+
+writing many configuration stuff that
+
+
+are uh actually harder if you have
+
+
+something simple like what we are doing
+
+
+today right so for uh cloud init
+
+
+essentials that you might want to do uh
+
+
+is to install some uh packages but
+
+
+before that you should upgrade the
+
+
+system. So here's the uh upgrade
+
+
+command. Once it's uh updated, we can
+
+
+install various things. We can already
+
+
+install Docker here if we want. Uh camel
+
+
+can also install Docker. So you don't
+
+
+necessarily have to do it. Uh just don't
+
+
+install it from snipe because then you
+
+
+will have a bad time. Uh you can install
+
+
+some utilities like C C URL. Uh and then
+
+
+uh I usually install packages like
+
+
+unattended upgrades and fail to ban that
+
+
+are very very useful.
+
+
+Uh so for other upgrades you can also
+
+
+like configure them right and then they
+
+
+can just run. Of course depending on the
+
+
+configuration
+
+
+uh when you are updating something
+
+
+that's already in memory you need the
+
+
+restart advice. Uh you don't have the
+
+
+latest changes. Uh for fail to ban this
+
+
+is this is so beautiful because you
+
+
+really just start it and it already
+
+
+works. It will already protect uh your
+
+
+uh access to SSH ports. There is
+
+
+configuration. You can configure it the
+
+
+way you like but already the basics will
+
+
+simply work which I found really nice
+
+
+and uh then we can also uh do something
+
+
+with the firewall.
+
+
+So now this is the firewall on the
+
+
+system on that VM right not the cloud
+
+
+firewall. So by default you should
+
+
+probably like uh for forbid everything
+
+
+that uh you don't want which is like
+
+
+anything and then you selectively allow
+
+
+what you want. So ports 80 443 that's
+
+
+for HTTP HTTPS of course port 22 is the
+
+
+SSH
+
+
+uh if you set it up differently you can
+
+
+have some different defaults here and
+
+
+then you have this uh private uh address
+
+
+name space I will get to it in a second
+
+
+in the cloud firewall but the idea here
+
+
+is that we are still using the firewall
+
+
+also in the VM uh and then also we use
+
+
+it uh we use it in the in the cloud
+
+
+and then there are some extras that you
+
+
+know uh depending on you you might use
+
+
+or or not uh depends what you like. Uh
+
+
+one nice thing about them is that
+
+
+sometimes even though you don't do them
+
+
+they do themselves. So for example a lot
+
+
+of people switch to crony for uh time
+
+
+syncing on the server uh which is good
+
+
+thing but for example here you can see 1
+
+
+to25
+
+
+uh already done it for you and it's
+
+
+default and you didn't have to do
+
+
+anything right so sometimes also good to
+
+
+review whatever it's in your script
+
+
+maybe it's not necessary anymore and you
+
+
+can uh just simplify then swap space I
+
+
+like to add it is the space is just uh
+
+
+allocated uh disk space for the
+
+
+situation when um your Linux system will
+
+
+run out of RAM. So they will move some
+
+
+uh some things to swap. It has advantage
+
+
+it has also disadvantage. So the
+
+
+advantage is that sometimes uh you will
+
+
+survive with some extra load or
+
+
+something because it will be saved. But
+
+
+also uh the disadvantage is that you
+
+
+will not immediately see something
+
+
+crashing which can be also useful.
+
+
+Uh then it's a bit longer but it's for
+
+
+using nonroot user. So I personally do
+
+
+that. Some people think that they
+
+
+already do other things so they don't
+
+
+need it. So I put it to extras. The idea
+
+
+about this is that uh the cloud provider
+
+
+will already uh provide the
+
+
+uh the SSH uh public key right and
+
+
+everything will be ready for you. So we
+
+
+are creating new user and actually
+
+
+moving that file that SSH key uh to the
+
+
+location for the user and we also make
+
+
+sure that the user can use sudo for uh
+
+
+everything that the root would have to
+
+
+do and we are adding it to the docker
+
+
+group so that also all the docker
+
+
+commands works automatically as you
+
+
+would expect.
+
+
+Uh finally you can also disable root
+
+
+access if you uh if you don't use root.
+
+
+So you should disable the password
+
+
+authentication for sure and then also uh
+
+
+remove the permit root login in case you
+
+
+are using a different user. U and
+
+
+finally yeah a lot of people use tcale
+
+
+which is amazing service and it's free
+
+
+uh to start. T scale uh is a
+
+
+peer-to-peer meshvpn
+
+
+and basically it will create secure
+
+
+connection like from your laptop to your
+
+
+server or between your servers. So then
+
+
+you can also start kind of disabling the
+
+
+SSH uh uh as well because you will
+
+
+simply use uh tile scale if you want to
+
+
+add it. It's kind of simple in the
+
+
+simplest case we have today. So you just
+
+
+install it and tape app with some host
+
+
+name then you can also then you would
+
+
+use host name from here in your camel
+
+
+configuration right uh but if you want
+
+
+just start with exposed SSH it's not the
+
+
+worst thing ever you know I have some
+
+
+old servers I I still run it like that
+
+
+like and uh mostly this is fine you know
+
+
+uh
+
+
+but that said uh Please do not hack me.
+
+
+Okay.
+
+
+Uh so then we can finish the
+
+
+initialization here. So we have to give
+
+
+some name. Do not use your domain name
+
+
+here because that will be also used like
+
+
+in ET etc host file and you will have
+
+
+bad time. So don't use it. And uh coming
+
+
+to that cloud firewalls I was uh talking
+
+
+about. So this is kind of like uh an
+
+
+image how the application would look
+
+
+like. So what we need we need to allow
+
+
+HTTP and HTTPS from the outside because
+
+
+that would be our users. Then for the
+
+
+SSH uh we will use port uh 22
+
+
+and if we are using tile scale we can
+
+
+change it to the UDP port from tile
+
+
+scale and for the services that happens
+
+
+all inside our VPC then we can use this
+
+
+shortcut let's say uh for 10 0000 uh 16
+
+
+which is the address space for the
+
+
+private network. You can be more
+
+
+specific of course or maybe if you are
+
+
+in AWS or somewhere you will be creating
+
+
+security groups and whatn not but this
+
+
+is like the simple simple thing how you
+
+
+can start uh how you can do something
+
+
+and as I said it's important to
+
+
+uh do security in depth. So even though
+
+
+all these things kind of overlap and you
+
+
+know you think okay I already use tile
+
+
+scale so I don't use have to use
+
+
+anything else uh I like to do more if I
+
+
+can because things in security also
+
+
+always overlap and be in more layers
+
+
+let's say so let's go quickly through
+
+
+the configuration again it's already
+
+
+there similarly with rails just come in
+
+
+it and you have it there we name the
+
+
+service uh we use the image name we will
+
+
+use the local uh docker registry that
+
+
+come now can run which is really nice we
+
+
+don't have to care too much we put the
+
+
+IP address you know and for jobs if we
+
+
+have uh it's the same server so we can
+
+
+do the same uh one thing we can do here
+
+
+though we can add options and limit for
+
+
+example how much CPU and memory should
+
+
+be used this is super useful when we
+
+
+will run many applications in one server
+
+
+because we don't want one to influence
+
+
+the others too much and overtake them.
+
+
+Uh then the proxy stuff. So that's the
+
+
+outlam.
+
+
+We just put the host name that we
+
+
+prepared. We of course need a DNS entry
+
+
+as well.
+
+
+And uh the registry that already was
+
+
+generated because this is the new
+
+
+default. It will just actually spin up a
+
+
+local registry. So you don't have to pay
+
+
+for Docker Hub anymore. Uh very easy. Uh
+
+
+then the secrets are actually split
+
+
+between two. So you have clear
+
+
+environment kind of and then you have
+
+
+the actual secrets.
+
+
+uh so namely like rails master key or
+
+
+for example for this application would
+
+
+be SER API API key and we have to list
+
+
+them here and then we have to also list
+
+
+them in
+
+
+uh secrets
+
+
+and uh camel also give us aliases which
+
+
+is a nice way how to run camel something
+
+
+that we want that we like uh it could be
+
+
+something custom so the first ones are
+
+
+from rails uh so you already can run
+
+
+camel console you know camel logs that's
+
+
+very nice I usually add these two so I
+
+
+would add like camel apps that can ask
+
+
+camel proxy okay what are all the
+
+
+applications on my on my server managed
+
+
+by that proxy and I also add camel ends
+
+
+which uh will run the end program uh and
+
+
+gives me the ends because otherwise they
+
+
+are just saved like on some file so I
+
+
+found that uh useful
+
+
+then uh there's this volume so that
+
+
+would be the named Docker volume as I
+
+
+said asset path uh if you specify then
+
+
+um camel can actually bridge assets. So
+
+
+when you have the gap plus deploy they
+
+
+both live briefly together you know so
+
+
+both old and new application can
+
+
+reference them and uh then the
+
+
+architecture of the builder just uh
+
+
+depends on your uh system there are two
+
+
+options simple like that and if we are
+
+
+using that different user then we would
+
+
+put it here so for example I call this
+
+
+pass admin just call it something
+
+
+special because I see people like using
+
+
+different name than root boot but then
+
+
+they use deployer all the time or
+
+
+something like that right
+
+
+um and for light stream that's the bonus
+
+
+here uh that will be the accessory so it
+
+
+will have its own life cycle
+
+
+again we just specify the host the image
+
+
+and uh we will have a configuration file
+
+
+so we'll come also to to use it and um
+
+
+the default command here will be the
+
+
+replicate so it will take the
+
+
+configuration and and replicate with it
+
+
+and I added the options user 1000. This
+
+
+is because also if you were paying
+
+
+attention in the docker file from rails
+
+
+was also rails user with like 1,00 in is
+
+
+the first unprivileged user. So it's
+
+
+always 1,00 and this way they can share
+
+
+uh the permissions in the volume. So I
+
+
+found it easier in a way to do like
+
+
+that. Uh then the actual config for the
+
+
+live stream is basically just access to
+
+
+your uh S3 like bucket. Uh so you can
+
+
+use S3, you can use uh some other
+
+
+provider and uh yeah just be precise in
+
+
+your endpoint and and uh and the
+
+
+secrets. Nothing too difficult there. So
+
+
+for the object storage here I have R2
+
+
+that's what I'm using lately but you can
+
+
+of course use anything else. there's
+
+
+this access details down uh down below
+
+
+and uh yeah for the secrets we will just
+
+
+compile them all in uh uh nth if you
+
+
+want that's what I do when I have
+
+
+something very simple I don't want to
+
+
+use secret managers which you can but uh
+
+
+you just use and then in the camel
+
+
+secrets you will just name them it's a
+
+
+bit like yeah you have to put the secret
+
+
+on three different places this way but
+
+
+at the same time uh it's also clear
+
+
+which secrets are actually used or not
+
+
+and then you run kaml setup and kaml
+
+
+does everything you know it will uh
+
+
+prepare the server spin up accessories
+
+
+and then run your app and that's that's
+
+
+really it but if something went wrong uh
+
+
+then maybe uh first of all what could go
+
+
+wrong of obviously the cloud in it
+
+
+script so you can go and see the output
+
+
+and you will there uh there was some
+
+
+something wrong. Uh and then of course
+
+
+locally you can also run other audits
+
+
+like camel audit that's for camel stuff
+
+
+uh specifically and then you have this
+
+
+fail to ban log for example for whoever
+
+
+try to uh get to your server you know
+
+
+with the outlook
+
+
+uh and and others for the monitoring to
+
+
+continue of course we won't again there
+
+
+are many services and so on passive the
+
+
+advantage that usually it's given to you
+
+
+And that's why I uh like to use digital
+
+
+ocean for example
+
+
+uh because digital ocean with the do
+
+
+agent already gives you that kind of as
+
+
+well for the VM. So you have all the
+
+
+data like CPU memory uh network and you
+
+
+can even make alerts. So it can send you
+
+
+email or even slug notification when for
+
+
+example you are uh on your limit let's
+
+
+say 70% of CPU or something. So that's
+
+
+very nice and then with the new versions
+
+
+of the app you know you add some commit
+
+
+you just run deploy and done
+
+
+of course sometimes you might need
+
+
+restores so in case of light stream what
+
+
+could we do with camel how it would look
+
+
+like so uh we could of course list the
+
+
+snapshots right like whatever we have a
+
+
+available we can switch app to
+
+
+maintenance that's one of the newer
+
+
+feature of kamal
+
+
+Uh then we can stop light stream. We
+
+
+could pretend like the files are gone.
+
+
+Yeah. Uh we stop the app and then we
+
+
+simply restore to that location from
+
+
+light stream. Uh light stream will not
+
+
+restore if the files are there. That's
+
+
+why uh this rm command uh just before it
+
+
+and then we start lightream. it will
+
+
+continue and we can boot the application
+
+
+again and set camel apply and it will
+
+
+route the request again. If we have uh
+
+
+new server
+
+
+well
+
+
+in that case uh there are probably few
+
+
+things you can do but in this demo I was
+
+
+not bundling light stream together with
+
+
+rails in the in the docker file. Uh so
+
+
+do it like kind of outside of it. uh I
+
+
+would have to break from the from the
+
+
+usual commands and first I would
+
+
+actually bootstrap the server myself uh
+
+
+would accessory myself
+
+
+uh then fix the permission because I
+
+
+changed the way it's done and now I
+
+
+still need that uh user 1000 there uh
+
+
+restore and then I can run all setup
+
+
+just fine if you have a new app
+
+
+completely then well all the server
+
+
+stuff is already there it's already done
+
+
+we will reuse them so we will just like
+
+
+use new camel in it you know use the
+
+
+same uh same SSH user uh same IP address
+
+
+we just like rename the application so
+
+
+that means renaming the service pretty
+
+
+much we can be running as many
+
+
+applications as we want so really rinse
+
+
+and repeat uh just a short table yeah uh
+
+
+so the configuration comel is a custom
+
+
+file but actually Many pass companies
+
+
+also have custom files right they are
+
+
+not always clicky so it really depends
+
+
+it's hard to compare it in in some dep
+
+
+for monitoring as I said geometric if
+
+
+it's not enough you have to go to some
+
+
+third party uh similarly with logs I
+
+
+think with the agents today giving them
+
+
+just some row uh raw output from uh
+
+
+commonal logs could work if not just uh
+
+
+get some get some service and for
+
+
+backups we can use many. So for example
+
+
+we can be doing snapshot of the wall VM
+
+
+right we just click it and they will
+
+
+every day gives us uh this easy backup
+
+
+of everything which is kind of nice
+
+
+because um maybe that's the easiest way
+
+
+how to how to recover. So um is camel
+
+
+for everything? Um
+
+
+not really. uh I would say kaml is for
+
+
+when you are developing the application
+
+
+and you want to also deploy it for that
+
+
+is very good but it's not pass in the
+
+
+sense of running third party
+
+
+applications that were already developed
+
+
+that's uh what once will apparently be
+
+
+now uh we don't know that much yet but
+
+
+uh once unlike kifi which is another
+
+
+option
+
+
+uh have also some kind of let's say
+
+
+requirements for the application So it's
+
+
+not easy to run anything you want with
+
+
+want now. Uh but we'll see for the
+
+
+future. And yeah, if cameo is for
+
+
+everything, maybe like olive oil for
+
+
+everything, you know, in the in the
+
+
+kitchen. I'm kind of cook like this.
+
+
+Like I just use olive oil and u and I
+
+
+don't care. Uh but uh the topic of the
+
+
+topic of the topics of course are
+
+
+stakes. So olive oil for steaks, right?
+
+
+That's the question. How many of you use
+
+
+olive oil for steaks?
+
+
+Okay, it's like half maybe less than
+
+
+half. Uh so we can actually ask uh AI uh
+
+
+overview in Google. So in ser API we can
+
+
+also do it interactively like this and
+
+
+then get the JSON. Of course, it's too
+
+
+small for you to see, but the point from
+
+
+the answer is about high smoke point.
+
+
+And it's true that olive oil is not
+
+
+technically the best when it comes to
+
+
+high smoke point. And you should use
+
+
+avocado oil, but but and this is
+
+
+important.
+
+
+What does Gordon say, right? What does
+
+
+Gordon thinks about this? And because I
+
+
+watch him a lot, I've seen so many
+
+
+videos in every video it's the same
+
+
+olive oil in. So
+
+
+if olive oil is good enough for Gordon,
+
+
+it's good enough for me.
+
+
+But choose whichever you like, camel or
+
+
+pass, you know, camel is good enough for
+
+
+me, but there are many ways to roam. And
+
+
+uh remember, you are not choris. Yeah.
+
+
+Uh so thank you.
+
+
+>> Any questions?
+
+
+>> Hi. Um very good presentation. Thank
+
+
+you. Um I have a question. camel um with
+
+
+Postgress. So um I think you selected
+
+
+SQL light because it's the easiest one.
+
+
+Um but with Postgress if we can dream of
+
+
+the automatic backups uh the restoration
+
+
+of the database maybe even replicas
+
+
+something like that the configuration
+
+
+within a camel how doable is it? And
+
+
+maybe second question
+
+
+um camel with logs like we know the once
+
+
+initiative of DHH and the guys we have
+
+
+already a solution for purchasing ones
+
+
+for application raise applications for
+
+
+backs it's called teabags uh which is
+
+
+very good do you recommend something for
+
+
+logs that we don't need to send them to
+
+
+the third parties we can store them um
+
+
+and maybe before monitoring like you
+
+
+mentioned the host machine and the CPU
+
+
+memory and all of that stuff. Is there
+
+
+any recommendation you have for today?
+
+
+>> So uh
+
+
+let me start with the second one that I
+
+
+have in the in my head. Uh so uh you
+
+
+know you can use self-hosted graphana
+
+
+and prometheuse the that's what 37
+
+
+signals uses. So
+
+
+>> I prefer my pass. No, sorry, I'm
+
+
+>> Yeah. Yeah. Yeah. Yeah. That that's
+
+
+obviously an option. Uh but then you are
+
+
+then you cannot like simplify to
+
+
+something what I was talking about,
+
+
+right? Then you are already doing DevOps
+
+
+for for sure and it's probably not part
+
+
+of Kamal because they are using
+
+
+different tools to deploy it. But I
+
+
+actually made a course about kamal where
+
+
+I am showing how to deploy this stack
+
+
+with
+
+
+>> yeah with you and it's difficult I mean
+
+
+this is a double
+
+
+>> yeah yeah yeah it's it's it's it's not
+
+
+easy uh in a way that yeah kaml will not
+
+
+really help you but as an accessory you
+
+
+can run anything it's just camel doesn't
+
+
+know this is database this is logs it
+
+
+doesn't really know anything like that I
+
+
+was thinking few times to build
+
+
+something on top of camel. I didn't get
+
+
+around to it. Uh
+
+
+but maybe it would be worth to have
+
+
+something that could uh that could kind
+
+
+of unify this. Um yeah, so I would
+
+
+recommend if the camel is not enough
+
+
+actually the easiest is to get some
+
+
+service you know we were just discussing
+
+
+before this talk with some people uh
+
+
+about maybe better stack or companies
+
+
+like that. Um and for Postgress, I
+
+
+actually use Postgress almost
+
+
+exclusively. I chose SQLite actually
+
+
+because it's like kind of on trend and
+
+
+there's more projects happening on that
+
+
+and I think a lot of people will want to
+
+
+simplify and if they don't need the big
+
+
+database they will use uh SQLite.
+
+
+it also convenient for this talk because
+
+
+uh of course in some parts you have this
+
+
+emperor storage and SQLite is actually
+
+
+even worse like it's maybe difficult you
+
+
+don't know how to how to use it um
+
+
+whereas uh here it actually makes sense
+
+
+because you have all the space you want
+
+
+and it's super super simple so for
+
+
+postgress you can run similarly like
+
+
+live stream like some some project like
+
+
+PG uh I don't know how exactly is called
+
+
+the the the
+
+
+container. Um, but there are project
+
+
+that will run as docker connect to your
+
+
+DB and just make you a backup. That's
+
+
+that's what I do. But it's I I would say
+
+
+it's like kind of this small scale when
+
+
+you still don't have like replicas and
+
+
+stuff. But the answer is the same like
+
+
+Kamill can do it because Kaml will
+
+
+simply just treat it as something it
+
+
+doesn't even know about.
+
+
+But uh the hard part is that you need to
+
+
+know very well how to do this posgress
+
+
+with replicas like in your current
+
+
+environment and then just translate it
+
+
+to camel. Unfortunately, Kaml will not
+
+
+help you there. But it's possible
+
+
+everything possible.
+
+
+>> I think I saw this on your slides. If
+
+
+you just have like pet projects, they're
+
+
+not production. You have one user and
+
+
+it's you.
+
+
+>> Yeah.
+
+
+>> Would you deploy like all of them to the
+
+
+same digital ocean droplet? Like is that
+
+
+I thought I might have seen that in the
+
+
+slides and I wasn't sure. Do you have to
+
+
+do like a different deploy and a
+
+
+different
+
+
+uh a different droplet for like each?
+
+
+>> No, no. The the point is actually that
+
+
+if you have small projects like that,
+
+
+you would put them on one VM. So
+
+
+whatever we done today, you just do once
+
+
+and it's it's it's done, you know,
+
+
+>> and then I just run the server on
+
+
+different ports. Then you're saying
+
+
+Kamal like maps the domain name to
+
+
+>> Yeah. Come proxy will route to the right
+
+
+uh stuff. So there's no problem like
+
+
+every every project needs to have its
+
+
+camel configuration but that camel
+
+
+configuration will still point to the
+
+
+same IP address to the same server.
+
+
+>> Nice. Thank you.
+
+
+>> Yeah,
+
+
+>> just following up on that um if you
+
+
+could speak a little to the capabilities
+
+
+of Kamal proxy or if you have insight
+
+
+into the direction. um we often have the
+
+
+requirement of kind of the opposite of
+
+
+you know being able to uh do multi-reion
+
+
+deployments and so you know commal proxy
+
+
+was floated as a potential like load
+
+
+balancing solution that could handle
+
+
+that where does it stand today?
+
+
+>> Yeah I I wish they shared more with me
+
+
+but they they they don't. Uh Dun told me
+
+
+that something is coming but he didn't
+
+
+explain what is that something. So maybe
+
+
+at Rails word they will have something
+
+
+new that definitely there is some new
+
+
+stuff for camo that is planned. That's
+
+
+what I know. Yeah. So hopefully some
+
+
+capabilities in that direction will be
+
+
+there but I I I don't know.
+
+
+>> Thank you.
+
+
+>> Thank you.
+
+
+>> Hi. Um I have a pair of doubts. Uh first
+
+
+um if I want I have camel configured now
+
+
+and I want to create like a development
+
+
+machine with another IP. Um there is a
+
+
+way to tell to Kamal only deploy to this
+
+
+IP. Do I have to tag there is a
+
+
+possibility to tag the IPs of your
+
+
+server or something like this?
+
+
+>> So in camel you have uh deploy targets.
+
+
+So it will be like kind of copy of the
+
+
+configuration but it can be only the
+
+
+changes that will be overriding you know
+
+
+so you can have staging you can have
+
+
+development you can have for PRs and uh
+
+
+then if you I think it's like uh dash d
+
+
+uh as a destination for give it the name
+
+
+then it will use and apply that config
+
+
+as well
+
+
+>> okay um another thing that I tried but I
+
+
+saw like it was a lot of monkey patching
+
+
+was in an instant that I have come and
+
+
+an R app running try to run another
+
+
+service and then um like modify the
+
+
+camel proxy so he can listen in a port
+
+
+and redirect to another but have you
+
+
+tried something like that
+
+
+>> I'm I'm not sure I for
+
+
+>> I try to to deploy a non-rail
+
+
+application in a bps that I already have
+
+
+a race application with camel
+
+
+>> yeah it doesn't have to be rails like
+
+
+it's it's the same I don't know if if
+
+
+the question is more about the camel
+
+
+proxy capability sometimes
+
+
+>> camel proxy already knows or can do
+
+
+something that is not exposed to kaml
+
+
+for the interface. So sometimes when you
+
+
+are at that situation you can also lo
+
+
+and comel proxy and and similarly how I
+
+
+was using the commands for list of the
+
+
+projects you can run something else to
+
+
+tell proxy directly what you want this
+
+
+way. Okay, perfect. Thank you.
+
+
+>> Thank you. Uh, thank you. I have a
+
+
+question. How do you deliver docker
+
+
+images to the to the server?
+
+
+Uh you mean in this case when you have
+
+
+uh if I if I configure my server with
+
+
+kamal how what is the mechanism do I set
+
+
+up a image registry? Yeah. So,
+
+
+originally you would have to set up uh
+
+
+Docker image something like Docker Hub.
+
+
+I still use that mostly for the most
+
+
+part. Um
+
+
+so, uh you would first get the image
+
+
+built and shipped to the registry and
+
+
+then the servers are instructed to get
+
+
+the app but obviously they get the image
+
+
+from the registry. Uh
+
+
+>> what registry Camali uses? Uh it's
+
+
+actually like image like
+
+
+docker/registry or something like that.
+
+
+I would have to look but it's like just
+
+
+like yeah docker registing image
+
+
+basically
+
+
+>> and how
+
+
+>> if you can find it and if it's local
+
+
+then it will yeah then it will uh just
+
+
+download this image locally and then
+
+
+because the server still uses the same
+
+
+way so there will be a tunnel uh that
+
+
+will be created and it will grab it from
+
+
+your computer instead of
+
+
+>> and how do you authenticate CI in this
+
+
+registry do you set up a just set up a
+
+
+So because we were doing it locally, we
+
+
+didn't need to do that because it was
+
+
+just a
+
+
+>> but for pushing for example I want to I
+
+
+build an image on CI and want to push it
+
+
+to to the server. I need to push it to
+
+
+the server. How
+
+
+>> well if if you use external registry
+
+
+like docker hub yes there is uh uh like
+
+
+kamal will have will need a password to
+
+
+that registry to authenticate you and
+
+
+then it's pushed there but the servers
+
+
+uh will take it directly it's like it's
+
+
+not going from your laptop but if it's
+
+
+local like here then actually it will be
+
+
+like the servers will grab it from from
+
+
+your
+
+
+for the also for
+
+
+>> yeah it's called like camel registry
+
+
+password you you you would usually see
+
+
+in the config that's for like the
+
+
+external registry but uh I could omit it
+
+
+here because I didn't use it
+
+
+>> thank you
+
+
+>> thank you
+
+
+>> okay
+
+
+thank you very much
+
+
+>> thank Go.

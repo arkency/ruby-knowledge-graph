@@ -1,0 +1,2401 @@
+Okay. Are you ready?
+
+
+>> No.
+
+
+>> No. Uh, sorry. You have to be.
+
+
+Let's go.
+
+
+>> Um, hello. Hello. Uh, the title was
+
+
+inspired by one of my mentors when I was
+
+
+a green small developer. That was one of
+
+
+the first advices I got and I still
+
+
+think it was a valid advice still. Uh I
+
+
+still think that people underestimate
+
+
+uh documentation and don't they don't
+
+
+spend enough time reading it. Um it's
+
+
+also a good way to learn new things.
+
+
+Just read the documentation. It's
+
+
+boring. I know. I know it's boring but
+
+
+read it please. If developers lazy
+
+
+developers wrote it, it's there's
+
+
+probably something interesting there.
+
+
+Um, a lot of people think that uh a good
+
+
+shortcut reads Stack Overflow. It's
+
+
+almost dead, so nobody reads it. But
+
+
+they people still use AI. Um
+
+
+um unfortunately I have a bad news for
+
+
+you. LLM has a knowledge cut off. It's
+
+
+not aware of all the latest features in
+
+
+the libraries. Um so in a lot of cases
+
+
+to compensate for that they start
+
+
+guessing to minimize the token usage or
+
+
+they will start scraping the internet or
+
+
+trying to find a source which is not
+
+
+token efficient could cost you money and
+
+
+could uh take time. Um what comes to
+
+
+humans? Well usually when humans read
+
+
+documentation it starts off with opening
+
+
+a browser which I don't like. Um, there
+
+
+are good software for that. There's a
+
+
+when if you're using Mac, there's a Dash
+
+
+amazing app. Uh, but it's still gooey.
+
+
+It's yucky. I don't like it. Um, I think
+
+
+the terminals are um built for
+
+
+developers and developers use it a lot
+
+
+and I don't want to live terminal. I
+
+
+want to use it as much as possible. Um
+
+
+it's it's just way more productive and
+
+
+easier to script things with terminal.
+
+
+Um
+
+
+after I think there is a gap uh and I've
+
+
+been kind of looking how to fill this
+
+
+gap for a couple of years and I started
+
+
+this project called push toi and it's
+
+
+finally coming all together. Um it kind
+
+
+of works all in terminal. There is a
+
+
+two-way interface directly interface. Uh
+
+
+I wanted to run on all the platforms.
+
+
+Now it runs on Linux on Mac OS. Um
+
+
+it's project aware so it knows what kind
+
+
+of dependencies you have and it will
+
+
+show documentation only for dependencies
+
+
+that you actually use and actual
+
+
+versions that you use. And I'm also
+
+
+working on a LLM interface which is kind
+
+
+of I'm testing locally and have very
+
+
+surprising good results. Um so please
+
+
+please try it out. Uh if you like it
+
+
+it's great. If you don't like it, please
+
+
+write to me why you don't like it. I'm
+
+
+working on this very actively. I'm
+
+
+getting subsidized to do this work and
+
+
+I'll be very happy to fix all the
+
+
+problems.
+
+
+Thank you.
+
+
+All right. Thank you for being here. Uh
+
+
+I'm Pri and I work at Arency and today I
+
+
+would like to share with you the project
+
+
+that I have been working uh on for last
+
+
+uh two or three weeks. Uh and I did it
+
+
+for our internal purposes at ARCI. So it
+
+
+is a kind of our internal Wikipedia
+
+
+uh uh
+
+
+and the outcomes are uh were pretty
+
+
+impressive. So I convinced uh my boss
+
+
+Andre to make it open source and I
+
+
+managed to finish that uh change uh that
+
+
+were needed yesterday and to prove that
+
+
+it is uh already generic I prepared the
+
+
+knowledge graph of rotob conference. You
+
+
+can scan the cure code and enter.
+
+
+Uh so to do it I uh just downloaded all
+
+
+the transcripts from last six editions
+
+
+of the Rosaf RB and I fed my uh
+
+
+application with uh those transcripts.
+
+
+So every ingestion entry in this view is
+
+
+a single transcript. You can see the
+
+
+details. It's nothing fancy just a row
+
+
+text downloaded from the YouTube. Uh as
+
+
+you can see uh there were two extraction
+
+
+attempts. So the first one failed and
+
+
+the second one succeeded. So we can look
+
+
+at the second one. Uh it's uh extraction
+
+
+of uh Shimon stock from last year. Uh
+
+
+as you can see there are some stats
+
+
+here. How many tokens were used? Uh how
+
+
+much time did it take? uh how how many
+
+
+calls uh LLM did to our uh app and in
+
+
+how many run trips. Uh unfortunately
+
+
+there is no cost in this case because I
+
+
+was using uh the bleeding edge cloth
+
+
+oppus uh for uh for comma 7 which is not
+
+
+uh fully supported by rublm now. Uh so
+
+
+the pricing is missing
+
+
+uh but you can see that uh outcome
+
+
+uh are pretty impressive. So uh it
+
+
+extracted 28 uh new nodes and 49 new
+
+
+edges from that transcript to our
+
+
+knowledge graph. And here here are the
+
+
+details.
+
+
+So this is it is a full audit log
+
+
+and this is how the mine page looks
+
+
+like. So you can browse through uh
+
+
+different note kinds. Uh they they are
+
+
+like categories and you can uh go
+
+
+through the uh whole knowledge graph.
+
+
+It's uh pretty simple and intuitive.
+
+
+Uh
+
+
+for each edge you you can see all the
+
+
+relations. Uh
+
+
+and uh bonus number one it is all even
+
+
+sourced so you can uh rebuild the whole
+
+
+uh knowledge graph from the events.
+
+
+Bonus number two uh it is it has already
+
+
+MCP server built in. So you can uh
+
+
+connect uh to the knowledge graph from
+
+
+your favorite LLM and ask normal
+
+
+questions
+
+
+like I did and I asked what was the most
+
+
+trending subject at uh last year at the
+
+
+conference and it responded it was
+
+
+SQLite based on the knowledge from the
+
+
+uh graph.
+
+
+So the only thing you need to uh do with
+
+
+that codebase to work with your domain
+
+
+is to set up ontology. Ontology is a set
+
+
+of uh note kinds and uh relations
+
+
+between them that are typical for your
+
+
+domain
+
+
+but code is chip show me the prompt. So
+
+
+here is the prompt I use. H it start
+
+
+with you are an organizational knowledge
+
+
+analyst and then we pass uh our ontology
+
+
+to the LLM so that uh he knows uh what
+
+
+output is expected and what he can ask
+
+
+for uh it is crucial uh that he can ask
+
+
+for our entities uh in terms of entity
+
+
+resolution. So if Anj uh were at two
+
+
+conferences and was mentioned several
+
+
+times, he is still a single entity in
+
+
+our knowledge graph.
+
+
+Uh which is which you can check I I have
+
+
+already
+
+
+uh and the entity resolution uh works
+
+
+because of the Ruby LLM tools that I
+
+
+implemented. There are three of them. Uh
+
+
+list nodes by kind which is kind of a
+
+
+index query.
+
+
+Here is the repository.
+
+
+Thank you very much.
+
+
+Okay, let's go quick. So let's talk
+
+
+about for the open source. So I already
+
+
+gave the talk. It's another conference
+
+
+called open source connect global. So
+
+
+but um let's go for next and then this
+
+
+is digest
+
+
+do you want to create an open source
+
+
+project
+
+
+okay so because it was open source but
+
+
+here but not sure what to build I think
+
+
+it's many people talking about what how
+
+
+to contribute but it's not not many
+
+
+people talking about what so let's find
+
+
+a meaning problem to solve do you know
+
+
+this matrix
+
+
+it's called I matrix it's about for
+
+
+categorizes for your task but
+
+
+essentially is here you can use it here
+
+
+I would say it's a important but not
+
+
+urgent problem it's good one because
+
+
+it's often not implemented but it's
+
+
+worse and also generic enough not
+
+
+specific your domains or companies and
+
+
+also if you see the another solutions
+
+
+the existing solution is not the best
+
+
+then you can see that this is a good
+
+
+reason to build it by yourself
+
+
+I have a good example like this I gave a
+
+
+talk this one two years back in the
+
+
+Euro. So generating anonymized database
+
+
+with masking is my open source and then
+
+
+this is here in short word to preventing
+
+
+a database incident. So here it's
+
+
+important because it's can lead several
+
+
+damage for the database incent but it's
+
+
+not often to happen and there's also
+
+
+another way to solve let's say llinters
+
+
+but it was good generic enough because
+
+
+it's you can see that still be here like
+
+
+it's rank top 60% of the daily download
+
+
+lanking as to as of today and also when
+
+
+I see there so there's non open source
+
+
+project are following the unique
+
+
+philosophy or in good quality when I see
+
+
+there it's many of like procedure
+
+
+approaches if you're interested it the
+
+
+record is available for this this
+
+
+particular open source. But another
+
+
+example this is my friend h was great
+
+
+programmer and here's my ex colleague as
+
+
+well he was crazy in that good sense
+
+
+because every month or every two months
+
+
+he made a new open source when he find a
+
+
+problem in the real life let's see when
+
+
+he see the know the SQL tuning and he
+
+
+find okay we don't know where to fire
+
+
+the SQL so he made a gem now it's it's
+
+
+have this function we don't need anymore
+
+
+or that he has a problem for the
+
+
+sensitive information for the encryion
+
+
+was with a KMS then Yam found something
+
+
+for the open source and also here batch
+
+
+process like he found it's pretty
+
+
+complex graph of the batch control and
+
+
+he made a open source it etc etc so he
+
+
+has more like 200 publicly not all of
+
+
+them from him I think but he's
+
+
+accumulated more than 2,000 stars it's
+
+
+amazing so he was really good programmer
+
+
+and the another strategy find your own
+
+
+problem what does means
+
+
+Follow your passion.
+
+
+You know who, right?
+
+
+He made this. You know why?
+
+
+He love programming languages. He wanted
+
+
+to have his own programming language. So
+
+
+he was kind of hobby project.
+
+
+You know him, right?
+
+
+It was great talk yesterday, 20 years
+
+
+for JB. And I asked him, why did you
+
+
+make it?
+
+
+because he was Java guy I think still
+
+
+but because he said I fall in love with
+
+
+Luby that's why he made it another
+
+
+example you know him
+
+
+yeah he made a very very famous open
+
+
+source project and you know another one
+
+
+yes already too and you know why he make
+
+
+it
+
+
+just for fun
+
+
+he was for a personal project to
+
+
+understand what is the hardware work.
+
+
+This is the whole purpose of Linux you
+
+
+made it. So let's say follow the
+
+
+passion.
+
+
+So let's find a good problem and fun. I
+
+
+hope you have something interested to
+
+
+hear. So and then any feedbacks are
+
+
+welcome. By the way I'm having the fun
+
+
+project with Crystal. So if you have any
+
+
+experience with me so then please talk
+
+
+to me. Yeah. Thank you so much.
+
+
+So hello everybody. My name is Alina
+
+
+Discova. I'm still a developer and still
+
+
+a Ruby developer. Uh and what I want to
+
+
+say is that I'm not a vibe coder. I kind
+
+
+myself so but I use AI on my everyday
+
+
+basics and that's why I want to tell you
+
+
+about it. kind of telling about my own
+
+
+problems but we will see it. So uh from
+
+
+my perspective how every my request to
+
+
+AI cursor cloud or anybody like that
+
+
+looks like I prepare an input uh give it
+
+
+to the model gives me some kind of
+
+
+output and then I need to evaluate so I
+
+
+need to define if this output is really
+
+
+uh okay useful and matches uh all the
+
+
+expectations or it's bad and we need to
+
+
+iterate and I write him hey please fix
+
+
+this or that and so on. So it's it's a
+
+
+very long loop and what is important
+
+
+here important here is that the model
+
+
+it's a black box and it's not developer
+
+
+it's not even a Ruby developer it just a
+
+
+black box which we can control and I
+
+
+actually think that we need to think
+
+
+about it when we are asking any kind of
+
+
+um input or any kind of tasks from uh
+
+
+these uh models. So what we actually can
+
+
+control we can control on our input and
+
+
+on our evaluation process. So for
+
+
+example when I work I like to give more
+
+
+acceptance criteria more my own
+
+
+expectations my own filters and
+
+
+requirements for the outcome. So it will
+
+
+be closer to what I want to it to be and
+
+
+for me it's easier to evaluate small
+
+
+parts of code not not just a huge
+
+
+thousands uh because you know so what I
+
+
+also suggest I suggested to split in
+
+
+smaller parts where you can actually say
+
+
+that this input is really okay and you
+
+
+did everything you could to put it into
+
+
+the model. Uh so let's just take an
+
+
+example. For example, we have a ticket
+
+
+to write a new controller road and it
+
+
+can be one loop. Yeah, we can just say
+
+
+make this ticket for me and I'm good.
+
+
+But we can go other way. We can uh
+
+
+investigate all the cases and for
+
+
+example get the cases when it must be
+
+
+not found when it unacceptable and so
+
+
+on. We can uh run the first loop to get
+
+
+all these cases. Uh the second one we
+
+
+can make it in TDD. So we can ask the to
+
+
+make an integrational test for us for
+
+
+this new road which we even don't have
+
+
+but still it will be easier for me to
+
+
+review this test because I know how they
+
+
+should like and the third my request
+
+
+will be about implementation this uh
+
+
+road and I will be able to evaluate as a
+
+
+code reviewer and by running the tests
+
+
+with which I already know what they
+
+
+have. So even if we take a deeper look
+
+
+to this, the first one is kind of agent
+
+
+kind of uh system analyst uh the second
+
+
+one is tester uh automation tester and
+
+
+the third one is a deaf but it's easier
+
+
+for me to develop such way because I get
+
+
+a better result with less iterations.
+
+
+So actually that's all from my side.
+
+
+Hi. Yeah. So, uh my name is Tomas and I
+
+
+wanted to uh give like a short uh
+
+
+rundown of a couple of uh hard lessons
+
+
+that we've learned uh maintaining a
+
+
+let's say moderately sized race
+
+
+application maintained and built by a
+
+
+team of 15 engineers who were well
+
+
+unfortunately supercharged by you know
+
+
+modern tooling. We all know how it's
+
+
+called. I'm going to try to not use the
+
+
+acronym uh although I am from uh company
+
+
+called everaii and we are one of the
+
+
+sponsors of the conference. uh this is
+
+
+the last time I'm using using this word
+
+
+so you know please uh um anyway I think
+
+
+we should rethink modularity and how we
+
+
+do it in ruby on race and I think this
+
+
+is exactly a topic for this specific
+
+
+conference because like since it's first
+
+
+edition as I remember verso conference
+
+
+about different ways of doing modularity
+
+
+than the ones that are like you know
+
+
+default and built-in rays different than
+
+
+active record and action pack and
+
+
+everything there was there was always
+
+
+exploration of different ways to
+
+
+modularize code and to build different
+
+
+abstractions you know from aspect
+
+
+related programming, hexagonal
+
+
+architecture and so on and so like if
+
+
+you're old like me and you've been here
+
+
+a couple of times you probably remember
+
+
+if you don't uh don't worry anyway why
+
+
+modularity is important for us well
+
+
+because uh humans do not evolve we
+
+
+haven't evolved in years and we are like
+
+
+very our brains are are pretty simple
+
+
+our brains are optimized to uh you know
+
+
+find banana find stick and uh you know
+
+
+use one or the other um we can depending
+
+
+on which paper you read we can hold four
+
+
+to seven items of knowledge in our
+
+
+minds. Let's call it a cache when we are
+
+
+work thinking about something. Uh which
+
+
+means that any complexity in whatever we
+
+
+are analyzing and you know this is our
+
+
+job. Um any complexity basically throws
+
+
+us off and requires complex and complex
+
+
+techniques to to manage it. So u you
+
+
+know and basically if you look at it u
+
+
+modularity has been more or less like
+
+
+one of the bigger driving forces behind
+
+
+programming languages and techniques
+
+
+like you know from macro assemblers uh
+
+
+where basically there were macros so
+
+
+pieces of code that were like kind of
+
+
+like expanded and pasted and given place
+
+
+uh sub routines libraries structured
+
+
+programming uh uh it took programming
+
+
+like decades to finally get the extra
+
+
+paper that go to statements are
+
+
+considered harmful. So we should
+
+
+actually structure our code and kind of
+
+
+like use go-tos but in a different way
+
+
+than explicit go-tos and yeah then know
+
+
+then modules and abstract data types. Uh
+
+
+finally object-oriented programming
+
+
+there's always functional programming in
+
+
+the background which also has a
+
+
+different concept of modularization
+
+
+called functions. Uh also
+
+
+object-oriented programming works best
+
+
+if you exactly use it as functional
+
+
+programming. So you know as pure as
+
+
+possible with as little side effects as
+
+
+possible components design patterns
+
+
+package managers microservices h uh and
+
+
+also modern modern uh module systems
+
+
+modules uses packages like here the word
+
+
+module is not not a Ruby module it's a
+
+
+way of of a specific uh piece of of code
+
+
+that you can consider separate. This
+
+
+definition is very fuzzy and you're
+
+
+going to see why in a second. They all
+
+
+had one thing in common. They came from
+
+
+a simple very simple economy that was
+
+
+true until well let's say two years ago.
+
+
+Code understanding by human is expensive
+
+
+because of the cognitive load because of
+
+
+4 to seven items. We cannot find our
+
+
+ways around very complicated spaghetti.
+
+
+We cannot follow the state changes just
+
+
+by reading. If we cannot follow the
+
+
+state changes just by reading the code,
+
+
+we need to fire up a debugger. If you
+
+
+fire up a debugger, I don't know how
+
+
+about you, but when I fire up a
+
+
+debugger, I know that I'm going to wake
+
+
+up at least an hour later uh from the
+
+
+session. Like there's no way to fire up
+
+
+a debugger and be done in 5 minutes.
+
+
+Debugger means basically that okay uh I
+
+
+don't have an understanding of what's
+
+
+going on. All my assumptions were wrong.
+
+
+I need to be a monkey and like start
+
+
+poking with a stick line by line
+
+
+specific code base. So code
+
+
+understanding was is was expensive. Code
+
+
+writing is was expensive and those
+
+
+modularity techniques all came from this
+
+
+motivation. Those are no longer true.
+
+
+Code code understanding which is
+
+
+basically uh pattern recognition is now
+
+
+cheap. uh and code generation which is
+
+
+pattern reproduction
+
+
+uh is also cheap but it doesn't mean
+
+
+that everything is still great because
+
+
+like you know because this way we can
+
+
+generate loads and loads of spaghetti
+
+
+code that interacts with our you know
+
+
+state or anything in a in a very weird
+
+
+and different and hard to trace ways and
+
+
+the systems will fail will fail in new
+
+
+ways that we never anticipated because
+
+
+nobody ever thought about it about how
+
+
+one side effect is going to clash
+
+
+another side effect. What's still
+
+
+expensive is code reviewing by human is
+
+
+still expensive assuming the human
+
+
+actually reviews the code and not just
+
+
+looks around if there aren't any again
+
+
+generated code review comments. Shipping
+
+
+code is expensive uh deployment and
+
+
+stuff. Uh one minute am I am I one okay
+
+
+so shipping code is expensive uh because
+
+
+of the time it usually takes like also
+
+
+through staging environment and also of
+
+
+production environment deploying new
+
+
+code rest starts and so on and so on.
+
+
+But what's most expensive is downtime.
+
+
+Like if you have like a running
+
+
+business, every minute of your
+
+
+application being down because of some
+
+
+stupid error uh is a very specific
+
+
+amount of money depending on your
+
+
+organization that the organization is no
+
+
+longer making. And also broken trust of
+
+
+your users who might not return or who
+
+
+might look for alternative if it if it
+
+
+repeats and then reverting which is
+
+
+basically again reviewing shipping.
+
+
+Yes. After doing the event sourcing
+
+
+talk, I mentioned this. What's
+
+
+happening? Uh, yeah. So, there's a
+
+
+little app that I wrote to build those
+
+
+diagrams and I was just testing for this
+
+
+lightning talk and I found a bug. So, it
+
+
+might fail now. But basically
+
+
+you can do you know diagram those little
+
+
+flows like command A goes to event B
+
+
+that goes to read model
+
+
+of things and so on and so forth. Um
+
+
+and then you know you can build it's
+
+
+it's it's like mermaid like textbased
+
+
+syntax syntax for building these things
+
+
+and you can do pretty complicated
+
+
+things. Uh and then you can also there's
+
+
+syntax to for the test uh scenarios that
+
+
+I that I showed earlier. Um
+
+
+what's happening? Yeah. So that's
+
+
+actually not what I wanted to talk
+
+
+about. So uh that's the app. You can try
+
+
+it if you want. Uh but this app also has
+
+
+an API
+
+
+and that API has a an open API spec. Uh
+
+
+so the way I built that an a rest API
+
+
+with an open API spec is this other
+
+
+project. It's a Ruby gem that I wrote.
+
+
+It's called step and basically it's a
+
+
+declarative way to to build a API
+
+
+self-documenting API endpoints. So it's
+
+
+basically a onetoone map to the open API
+
+
+spec except that you can actually run it
+
+
+as a rack app. So you define a service
+
+
+with some metadata URLs and so on.
+
+
+Inside the service you can define
+
+
+endpoints and endpoints may have schemas
+
+
+like a query schema for what the
+
+
+parameters in the URL or a payload
+
+
+schema for you know post and uh post
+
+
+request and update and that kind of
+
+
+thing. And the way it's designed is
+
+
+basically one big pipeline of steps
+
+
+using railway oriented pipelines. So you
+
+
+you can just compose steps one after the
+
+
+other. You can actually have sub
+
+
+pipelines for more complex things. Um
+
+
+when you define a schema it that's just
+
+
+another step in the pipeline. So you can
+
+
+choose to for example define a schema
+
+
+that will validate the payload before
+
+
+and or after some other step for
+
+
+authentication for example. And then it
+
+
+supports um
+
+
+some of the authentication uh schemes
+
+
+def uh supported by the open API um
+
+
+uh specification. It does content
+
+
+negotiation. So you uh you can do things
+
+
+like send a JSON request and get HTML
+
+
+back or send HTML and get um JSON back,
+
+
+do file uploads, that kind of thing.
+
+
+Uh, and then you mount it in um, rack
+
+
+and you get a an API and then you you
+
+
+you tell it to generate the openi spec
+
+
+and you add a bit of uh, you can use the
+
+
+swagger tool which will generate this
+
+
+for you based on the on the JSON API.
+
+
+Uh, and this works. you can actually use
+
+
+this and because the um query uh sorry
+
+
+authentication schemas are part of the
+
+
+of the specification in my Ruby API then
+
+
+all of this works. You can pass a token
+
+
+and it will work. And finally um it has
+
+
+another bit of code to basically take
+
+
+your ser uh rest service definition and
+
+
+decorate it as an MCP uh endpoint. So
+
+
+with this single line you can turn your
+
+
+self-documenting REST API into an into
+
+
+an MT uh MCP endpoint and then you can
+
+
+mount it just like another um rack
+
+
+application
+
+
+uh in your config. U file and that's it
+
+
+with one one single definition. You have
+
+
+a REST API, you have the documentation
+
+
+of the API and optionally an MCP server
+
+
+for that um API and and all it's doing
+
+
+is taking those the different endpoints
+
+
+in your API and turning turning them
+
+
+into MCP uh tools. So then you you go to
+
+
+to cloud or whatever and you ask it to
+
+
+use
+
+
+the API from you know conversationally.
+
+
+So for example
+
+
+this is the mo one of the models that
+
+
+for the demo apps that I was showing in
+
+
+the morning. I was just basically
+
+
+chatting with my domain model from
+
+
+claude which is very nice. And then
+
+
+actually you can ask clot to read the
+
+
+model and implement it which is sort of
+
+
+cool. Yeah that's it. That's the talk.
+
+
+Okay. Um so this is a talk about a v
+
+
+various um CSV parsing options. Why?
+
+
+Because I think everybody at some point
+
+
+needed to parse CSVs and there are some
+
+
+gems that make it faster but maybe there
+
+
+are some other less conventional
+
+
+solutions that not everybody's aware of.
+
+
+Um, but there's also a meta talk and the
+
+
+meta talk is that I built this in an
+
+
+hour uh using only codec cli and my
+
+
+point is it's easier than ever to create
+
+
+a presentation like that. Um, so what
+
+
+are the different options? This is more
+
+
+or less okay. Hopefully everybody can
+
+
+read it. Um, what are the different
+
+
+options? Well, the standard Ruby CSV,
+
+
+smarter CSV is the most popular gem. I
+
+
+think there's polars and there's duct
+
+
+DB. Um I will measure how quick they are
+
+
+and I will measure how memory hungry
+
+
+they are. Um I'm benchmarking on a few
+
+
+tasks. One of them is like reg x parsing
+
+
+for valid date of birth and then there's
+
+
+like summing up of um amounts and then
+
+
+there's like scanning for some values
+
+
+less important. Uh this is getting
+
+
+weirder and weirder. This is
+
+
+interesting.
+
+
+Oh wow. Okay. Wow. Now it's like a
+
+
+scrolling presentation. Okay. Um, so at
+
+
+least it's entertaining. So, um, so you
+
+
+can see what it is. Uh, it will all be
+
+
+available as well on the GitHub repo.
+
+
+Uh, so that should be good.
+
+
+Uh, okay. Why am I not
+
+
+okay? Um, so
+
+
+um, it's all running in Docker. That's
+
+
+basically the most important thing. Um
+
+
+there's lines of code and actually the
+
+
+basic Ruby implementation is the
+
+
+largest. Uh I will give you very quick
+
+
+snippets of what it looks like. This is
+
+
+the basic Ruby. No, this is the this is
+
+
+the basic Ruby. This is the smarter CSV.
+
+
+Um and this
+
+
+is broken again. Okay. Um so
+
+
+this is this is the Polar
+
+
+implementation. And so this is looking a
+
+
+little bit more exotic. And this is the
+
+
+uh this is the Polar implementation with
+
+
+low memory. Um where does it say low
+
+
+memory? Well, it's just a flag, right?
+
+
+And it's you're trading the performance
+
+
+a little bit um for
+
+
+uh you're trading the performance a
+
+
+little bit for lower memory footprint.
+
+
+Uh let me see if I can Okay.
+
+
+Wow. Um so
+
+
+what is the result? Maybe let's get
+
+
+there. Um I will go the to uh 1 million
+
+
+rows. Uh you're
+
+
+I know this is kind of funny. Um so um
+
+
+the main point is Smarter CSV only gives
+
+
+you a 3x speed up. The Polaris Ruby
+
+
+implementation gives you a 22x speed up.
+
+
+Um and Duck DB, if you want to use that
+
+
+as well, that gives you a 15x speed up.
+
+
+And uh let me try to navigate. Okay, I
+
+
+guess um what is uh also interesting is
+
+
+the memory. If I can find the memory
+
+
+slide here. Okay, so the post load
+
+
+memory on a um the CSV file itself is 30
+
+
+megs. Um and uh and you can see that the
+
+
+peak memory uh and the post load memory
+
+
+basically my uh the post load memory is
+
+
+on the Ruby is like 400 megs. It's like
+
+
+why do you need 400 megs for a simple 30
+
+
+meg CSV smarter CSV it's like 300 with
+
+
+polars it's like 100 megs. Um and with
+
+
+duct DB it's only 90. So like that's
+
+
+pretty impressive. Um yeah and if you
+
+
+actually want to read this talk not in a
+
+
+weird broken uh format I don't know
+
+
+what's going on. You can uh visit the
+
+
+repo. It has all the slides. It has all
+
+
+the code. It has all the benchmarks and
+
+
+I invite everybody to go there actually
+
+
+look for it and find a better and faster
+
+
+Ruby CSV parsing implementation. Bottom
+
+
+line, Polar Ruby the fastest. I actually
+
+
+used it in production with a lot of luck
+
+
+parsing like 300 megabytes CSVs kind of
+
+
+within request. So I didn't even need to
+
+
+do any caching or pre-calculation like
+
+
+in real time 300 meg CSVs. So this is
+
+
+pretty impressive. I don't know how many
+
+
+of you have heard of polars uh and used
+
+
+it in Ruby. I'm seeing like two hands.
+
+
+So that's why I think there's maybe some
+
+
+value in this talk despite all the chaos
+
+
+and maybe some entertainment. Thank you.
+
+
+Hi everyone.
+
+
+>> Trying to be more fun.
+
+
+>> I I I've already failed. Uh more fun is
+
+
+tomorrow and I I'll talk tomorrow. But
+
+
+um I have a story of three lightning
+
+
+talks for you today. Uh when the call
+
+
+went out, I knew the perfect lightning
+
+
+talk. I had written it. I had delivered
+
+
+it before. It was going to be amazing.
+
+
+Uh let's take a little sidetrack. We've
+
+
+also talked a lot about Docker today.
+
+
+And about a year ago, I was uninstalling
+
+
+Docker Desktop. And I ran this command
+
+
+as part of the how to uninstall
+
+
+everything that the uninstaller doesn't.
+
+
+Does anyone see the problem with this
+
+
+command?
+
+
+>> Yes, that's right. The space there means
+
+
+no quotes, which means it ran rm minus
+
+
+rf on library caches docker and it ran
+
+
+it on desktop. And that wouldn't be a
+
+
+problem if I weren't in my home
+
+
+directory when I ran it. So it blew away
+
+
+everything. I hadn't run time machine. I
+
+
+hadn't backed it up. It's all gone.
+
+
+There was just so much loss that day.
+
+
+That was the lightning talk I wanted to
+
+
+give. Okay, so with that gone, let's
+
+
+talk about something else. Uh, another
+
+
+passion of mine is testing. And I just
+
+
+wanted to talk through a really
+
+
+interesting edge case for testing. Uh,
+
+
+sometimes in your sometimes you might
+
+
+find yourself with a method that has
+
+
+something like this. uh where
+
+
+here let's just uh
+
+
+okay sorry uh with something like this
+
+
+where maybe you have like in production
+
+
+like you're only going to allow emails
+
+
+from a particular domain but maybe
+
+
+you're like you know what in development
+
+
+I don't want to stick to that I want to
+
+
+write something smaller uh this is just
+
+
+kind of a madeup example
+
+
+the trick with this is though you can't
+
+
+test the development part because when
+
+
+you run your tests you're running in
+
+
+rails end test so any special Rails end
+
+
+of test or uh conditional you have in in
+
+
+a method and wherever you can't test
+
+
+that, right? So, you're like, "Ah, I
+
+
+won't test it. I'll just test the part
+
+
+that I can test." Well, I'm here to tell
+
+
+you that you can. In both RSpec and
+
+
+Miniest,
+
+
+I came up with a few little helpers
+
+
+and they just look like this. So this is
+
+
+mini test and basically what it does it
+
+
+uses a gem called stub any instant stub
+
+
+any instance
+
+
+and you basically tell it uh yeah when
+
+
+I'm stubbing environment development is
+
+
+true and test is false and production is
+
+
+already false and then the same thing if
+
+
+I want to stub production I tell it stub
+
+
+production is true and test is false and
+
+
+so what that means is one I can test I
+
+
+can test the helper itself so within a
+
+
+stub environment development block I can
+
+
+assert predicate that this is
+
+
+development without that block it would
+
+
+be like no that's false you're in rails
+
+
+and test and similarly test and
+
+
+production both say false and we can
+
+
+also test sub environment production and
+
+
+so then what that means is when you're
+
+
+actually testing uh your model you can
+
+
+do things like a manager in the
+
+
+development environment can have an
+
+
+example or can have an email address of
+
+
+managerample.com
+
+
+but in the production environment they
+
+
+cannot and so uh similar pattern then
+
+
+for RSpec
+
+
+the helper looks a little different. So
+
+
+this is using RSpec mocks with temporary
+
+
+scope and it allows these to different
+
+
+uh to return different values. And so
+
+
+same thing if we have like uh a file
+
+
+that raises an error like this one is
+
+
+supposed to raise um if you run it in
+
+
+test or this one this method raises
+
+
+unless you're in development and so you
+
+
+can test that um if you run let's say
+
+
+these methods
+
+
+you see we have here an around and
+
+
+around example. So if we stub
+
+
+development
+
+
+then we expect it to be true and we
+
+
+expect some to raise errors and some not
+
+
+to raise errors. Uh, one note on RSpec.
+
+
+In many tests, it's really fast, but in
+
+
+RSpec, I found that this helper slows
+
+
+down the tests that are actually using
+
+
+that block. Um, I think it's because the
+
+
+optimizations around the test
+
+
+environment don't happen when you're
+
+
+stubbing it. But anyway, uh, that's
+
+
+pretty much it. If you ever wanted to
+
+
+test Rails and something else, now you
+
+
+can. THANKS,

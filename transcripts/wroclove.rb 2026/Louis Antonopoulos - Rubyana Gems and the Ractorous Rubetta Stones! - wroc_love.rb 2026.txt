@@ -1,0 +1,3253 @@
+Okay, so we are starting our next talk.
+
+
+Um, and the title is a little bit
+
+
+mysterious. It's about I hope I'm not
+
+
+going to mess it up. Rubiana James and
+
+
+Jesus, I messed it up. Rarus Reta
+
+
+Stones. So, and it's going to be done by
+
+
+Louis. So, please welcome him.
+
+
+A cold, dark cave.
+
+
+The faintest sound of hammers and
+
+
+chisels plinking away in the distance.
+
+
+A beam of light flashes into the cave as
+
+
+the first chisel breaks through and the
+
+
+darkness scurries away for the first
+
+
+time in centuries.
+
+
+But then the light from the outside is
+
+
+met with a strange new light from the
+
+
+inside.
+
+
+Five stones, patterns dancing on their
+
+
+surface, begin to glow. The runes
+
+
+shifting and moving constantly. A sixth
+
+
+stone rests beneath them. A single
+
+
+instruction etched into it. This one
+
+
+unmoving.
+
+
+Bring me five keys from one cycle of the
+
+
+minute glass.
+
+
+And so I welcome you to Indiana Jones
+
+
+and the Raptors of the Lost Arc.
+
+
+Thank you. Thank you. Except there are
+
+
+things called lawyers and these entities
+
+
+talk about intellectual property and
+
+
+lawsuits and millions of dollars in
+
+
+damages. So,
+
+
+welcome to Rubiana Gems and the Raptorus
+
+
+Reetta Stones.
+
+
+My name is Louisis Antonopoulos. I'm a
+
+
+professor of archaeology at THBOT. As
+
+
+you can see, uh I'm also the recently
+
+
+named co-host of our AI and focus series
+
+
+uh live stream which airs every Friday
+
+
+at noon. So, either after a long night
+
+
+at the pub, if you're here, come watch
+
+
+it. but it's also uh saved on YouTube.
+
+
+Uh a bit about ThoughtBot. We are a
+
+
+design development and product agency.
+
+
+You likely know us from our gems. The
+
+
+most popular of which are uh factorybot
+
+
+and factorybot rails. I also wanted to
+
+
+call it though a few new gems we've been
+
+
+working on and I think I was so excited
+
+
+to hear different people talking about
+
+
+uh LLMs and specifically Ruby LLM. So
+
+
+the two gems, sorry, give me one second.
+
+
+Actually, this is a good moment. Uh, I
+
+
+found when I talk I get a little excited
+
+
+and my mouth gets really dry and then I
+
+
+have to drink water and that is like so
+
+
+boring for you. It's a little bit
+
+
+anxietyinducing for me. People on the
+
+
+stream don't want to watch it. So, uh,
+
+
+earlier you were an orchestra of music
+
+
+and today I'd like you to be I invite
+
+
+you to be an orchestra of voices. Uh, as
+
+
+you can tell my my talk is about
+
+
+languages. Um, and so I would like to
+
+
+hear your languages. So when I drink,
+
+
+please in your native language call out
+
+
+something like chug chug chug.
+
+
+Anything at all. Are we ready? Because
+
+
+this is going to happen several times
+
+
+during the talk. Ready? Okay, here we
+
+
+go.
+
+
+>> Thank you. That is so much better than
+
+
+just me drinking quietly on camera.
+
+
+Okay, so our two new gems, Top Secret
+
+
+and uh Michelle, uh Top Secret and uh
+
+
+Top Secret LLM.
+
+
+What they do is they anonymize the text
+
+
+that you're sending to APIs or LLMs, but
+
+
+they do it in a structured way. So the
+
+
+LLM essentially gets like a JSON of
+
+
+sorry and I should put the uh
+
+
+put the URLs here. So the LLM or the API
+
+
+gets a JSON with like private
+
+
+information essentially uh constantized
+
+
+and it deals with that and then it sends
+
+
+a response and then you can parse the
+
+
+JSON in return. So, if you're concerned
+
+
+about setting things like so, as we
+
+
+talked about uh in the earlier
+
+
+presentation, like if you're putting in
+
+
+in a form, here's my credit card number.
+
+
+I'd like to place an order, here's where
+
+
+I live, and you don't want to send all
+
+
+that to an LLM where it keeps it, you
+
+
+can use something like Top Secret to
+
+
+anonymize that data in a way that you
+
+
+can still accept the LLM's response back
+
+
+and deal with it in a structured way.
+
+
+And then uh the other gym I just wanted
+
+
+to bring up was Michelle which uh it is
+
+
+a
+
+
+get this right it is especially tailored
+
+
+for healthcare applications that need
+
+
+self-scheduling uh capability for users
+
+
+and I think this came from the
+
+
+close-knit project which several of you
+
+
+in the audience have worked on uh and
+
+
+the challenge of trying for a user to
+
+
+self-ch with a doctor. So just a couple
+
+
+things um looking at the numbers on Ruby
+
+
+gems yesterday we are nearing 1.6 six
+
+
+billion downloads. And so I've been
+
+
+pushing a new corporate slogan,
+
+
+ThoughtBot. 50 bucks says we're in your
+
+
+gem file.
+
+
+So help us get to that. And remember,
+
+
+every time you install a THBOT gem, a
+
+
+dog gets a toy and a kitten gets a new
+
+
+ball of yarn. So please do your part.
+
+
+Okay,
+
+
+back to the talk.
+
+
+We're going to be talking about Ractors.
+
+
+And as we learned on day one,
+
+
+ractors are
+
+
+really close to J Ruby performance. I
+
+
+mean, it's like right there. But now
+
+
+Charles was talking about what you
+
+
+millions of things happening. But what
+
+
+what if we talked about trillions of
+
+
+things happening? That's right. Ractors,
+
+
+J Ruby, they're practically the same. So
+
+
+feel free to use this in production.
+
+
+Don't don't use this in production.
+
+
+All right, let's talk about the
+
+
+challenge. Here are the five stones
+
+
+represented in a series of shifting
+
+
+runes. At the end of the talk, we're
+
+
+going to break these ciphers in 60
+
+
+seconds. So that's what we're building
+
+
+up to.
+
+
+But let's go back to the beginning
+
+
+when they discovered the reetta stones
+
+
+in a cave beneath a park very close to
+
+
+where we are now. You might even have
+
+
+passed it as you were walking in. Maybe
+
+
+you saw some doorways with some locked
+
+
+gates.
+
+
+When they discovered the stones, I was
+
+
+sitting in my office at the university
+
+
+of ancient codes. I was writing an
+
+
+article, this is true, uh about how a
+
+
+large using a large language model to
+
+
+break codes was a hopeless cause. I had
+
+
+asked one LLM to create an encrypted
+
+
+message and then a separate LLM, a
+
+
+separate instance to write code to break
+
+
+it and it just failed miserably.
+
+
+And so I wrote, "That's why this would
+
+
+never make a good conference talk." But
+
+
+then my phone rang.
+
+
+It was the project lead calling from the
+
+
+Reetta Stone site dig a dig site. And as
+
+
+I learned more and more about these
+
+
+stones that had been discovered, uh, I
+
+
+found four things. So these five stones
+
+
+have been decaying steadily since their
+
+
+discovery.
+
+
+They're covered in different glowing
+
+
+runes that are constantly shifting,
+
+
+rotating their cipher twice a second.
+
+
+If we use a freeze ray, which is real,
+
+
+we all have this on a stone, it slows
+
+
+the rotation down to once every 5
+
+
+seconds, but it damages the stones more.
+
+
+So, we can't use it a lot. And finally,
+
+
+if we can provide five keys from a one
+
+
+minute cycle to the keystone, something
+
+
+will happen.
+
+
+So with this new information, I created
+
+
+a new AI assistant, Rubiana Gems, who
+
+
+publicly goes by the name Anthropic
+
+
+Claude.
+
+
+And I asked Rubiana, can we do it? And
+
+
+Rubiana responded, "Absolutely.
+
+
+Bring in the Raptors."
+
+
+That's how it happened in my head. The
+
+
+real response, more like this. I'm here
+
+
+to help you dig deep into the mysteries
+
+
+of the rubetta stones. Ready to unearth
+
+
+some ancient secrets using the power of
+
+
+ruby and raptors? This discovery is
+
+
+going to be absolutely groundbreaking.
+
+
+What treasure shall we excavate first?
+
+
+Like, thank you, Rubiana. That'll do.
+
+
+Let's get to the code writing and maybe
+
+
+less of the talk talking.
+
+
+So, we have our challenge. We're going
+
+
+to decrypt five rotating cy uh five
+
+
+rotating ciphers in 60 seconds with
+
+
+ractors.
+
+
+So that of course begs the question,
+
+
+what exactly is a raptor?
+
+
+Does does anyone actually in the
+
+
+audience know this?
+
+
+Uh can please escort these people from
+
+
+the room urgently.
+
+
+Get them out. I know less than you. So
+
+
+this is this is not good. Just just keep
+
+
+it to yourselves. Okay. A quick summary.
+
+
+A ractor is a ruby actor. And so then
+
+
+that begs the question, what is an
+
+
+actor?
+
+
+Well, the actor model is a computation
+
+
+model with an actor as its building
+
+
+block. In response to receiving a
+
+
+message, an actor can make local
+
+
+decisions, create more actors,
+
+
+create more messages.
+
+
+And so actors can modify their own
+
+
+state, but they can only affect others
+
+
+through messaging, removing the need for
+
+
+locks and synchronization.
+
+
+So the Ractor model
+
+
+which you can read about here. And here
+
+
+I'll reference the lightning talk from
+
+
+yesterday. Read the effing manual. And I
+
+
+promise you I read every word of the
+
+
+URL.
+
+
+So the Ractor model which you can read
+
+
+about in these two pages is Ruby's actor
+
+
+model abstraction. It provides parallel
+
+
+execution without thread safety concerns
+
+
+and object sharing is limited. Unlike
+
+
+threads, ractors cannot access the
+
+
+objects in other actors.
+
+
+So before we get to code breaking, let's
+
+
+try to understand them a little bit
+
+
+technically and we're going to go
+
+
+through about like five or six like
+
+
+small code examples so you can
+
+
+understand how to use them. Um and then
+
+
+we'll get to code breaking.
+
+
+Okay. So
+
+
+first of all thing to note actor must be
+
+
+called in a block. If you just say
+
+
+excavator equals ractor new, it throws
+
+
+an exception. Cool. We'll create it in a
+
+
+block. Can be empty.
+
+
+But when you run this, you get two
+
+
+different outputs. One from Ruby 34, one
+
+
+from 40, a message that was updated uh
+
+
+just back in December. Ractor is
+
+
+experimental and the behavior may change
+
+
+in future versions of Ruby. Also, there
+
+
+are many implementation issues. uh in
+
+
+the commit on December 11th, I found
+
+
+this message was changed, but there were
+
+
+no other code changes. So, I think it
+
+
+was kind of a marketing thing. It's like
+
+
+ah there not really that many
+
+
+implementation issues. I think it's
+
+
+fine. It's just a little bit
+
+
+experimental. Anyway, if you don't want
+
+
+to see either of these warnings every
+
+
+time you use a raptor,
+
+
+all you have to do is this warning
+
+
+experimental is false. And now it's
+
+
+quiet. Thank goodness.
+
+
+Cool. So, now we run excavator.new
+
+
+and there is no warning.
+
+
+All right,
+
+
+the common ractor pattern.
+
+
+These are the methods we're talking
+
+
+about. Send, receive, then we do some
+
+
+work, then we return a value, and call
+
+
+take. We're going to look at a couple
+
+
+variants of this, but this pattern here,
+
+
+send, receive, take, we're going to go
+
+
+over about four or five times with
+
+
+comments so you can see it. So, let's
+
+
+look at a single ractor. The example
+
+
+here or the sorry the analogy here would
+
+
+be a single archaeologist in the desert
+
+
+digging for runes.
+
+
+So we create a new ractor and on line
+
+
+two we say site equals ractor.receive
+
+
+and that method blocks until send. So
+
+
+this thing is running. It's just sitting
+
+
+there on that receive line. After it
+
+
+gets unblocked then it's going to do
+
+
+some work. In this case it's going to
+
+
+scan for the aroon count how many of
+
+
+them are there and whatever that last
+
+
+line is like all Ruby that's its return
+
+
+value. Cool.
+
+
+So we then call excavator.end and we
+
+
+send it anything we want some parameters
+
+
+and that unblocks the receive. So it
+
+
+goes from line two to line three. It
+
+
+does the work and returns it. But that
+
+
+line then or the next line here on line
+
+
+seven uh artifacts found as excavator
+
+
+take that blocks until the reactor
+
+
+returns. So you don't have to worry
+
+
+about from the time on line five when
+
+
+you say send if it finishes the work
+
+
+before you ask for it uh or if it's
+
+
+still working like that take isn't going
+
+
+to get it early or late. It's going to
+
+
+get the value that comes back from the
+
+
+ractor. And now let's practice again.
+
+
+Are we ready?
+
+
+Perfect. And we get our output. We
+
+
+excavated two runes from the dig site.
+
+
+All right. That's one archaeologist.
+
+
+Uh let's look now at multiple
+
+
+archaeologists. So our our example here
+
+
+are three archaeologists. They go out on
+
+
+a bus. They go to different dig sites.
+
+
+The bus waits for them. They get back on
+
+
+the bus before we come back and find out
+
+
+what runes did they discover.
+
+
+Same pattern. So we're going to create
+
+
+three ractors in a loop on line one.
+
+
+We're going to explicitly specify a
+
+
+parameter for our ractor. On line two.
+
+
+And you'll notice that I'm heavily
+
+
+shadowing the site number. It's a little
+
+
+bit for visual understanding but also
+
+
+just to note if you say ractor new site
+
+
+number do and you don't say do site
+
+
+number you said just do site and inside
+
+
+that ractor you tried to call site
+
+
+number you tried to access it it would
+
+
+throw an error so we have to take the
+
+
+data that's coming from the outside and
+
+
+essentially regive it to the ractor on
+
+
+the inside. Um, so again on line three,
+
+
+we call receive that blocks until send.
+
+
+Then we're going to sleep on line four
+
+
+to mimic some amount of excavation time.
+
+
+Uh, we're going to look at the the
+
+
+length of the dig site. And here we're
+
+
+going to return some JSON with some data
+
+
+back, a site number, the number of
+
+
+artifacts we found, and how long it
+
+
+took.
+
+
+So on line nine, we have some data that
+
+
+we're going to pass into it. And so for
+
+
+each excavator, we're going to send it
+
+
+one of those three pieces uh one of
+
+
+those three pieces of runes.
+
+
+Again, that send unblocks the receive.
+
+
+The raptor does its work, returns JSON,
+
+
+which we take on line 13. And a
+
+
+important note here, now this blocks
+
+
+until all the raptors return. So this is
+
+
+the bus waiting at the site for all the
+
+
+archaeologists to get back on board.
+
+
+And then finally we'll uh you know we'll
+
+
+show our output. So what this looks like
+
+
+when you run it is we get our start time
+
+
+and then in order we found 13 characters
+
+
+in 3 seconds. Site one that
+
+
+archaeologist took uh 10 seconds and the
+
+
+third one took 5 seconds but until we
+
+
+printed our output. So that first line
+
+
+there that doesn't even appear for 10
+
+
+seconds because it's waiting for all of
+
+
+them and then we get all our data at the
+
+
+end. So that's not always helpful.
+
+
+Let's look at a slightly different
+
+
+method called select. And in this
+
+
+example, so I'm going to just go back
+
+
+one. In this example, this would be like
+
+
+um we're going to see
+
+
+right um in this one, the archaeologists
+
+
+are all working nearby. So they're just
+
+
+going to a site and digging and as soon
+
+
+as they find something, they call out
+
+
+and they say, "I got it. I got it." And
+
+
+so we can get their return value early
+
+
+from excavator number two while
+
+
+excavator 5, let's say, is still digging
+
+
+for runes. So
+
+
+we create our three excavators. The
+
+
+setup is pretty much the same. We dig
+
+
+for a random amount of time and we
+
+
+sleep. And then line five blocks until
+
+
+send. And it's also the return. So here
+
+
+I've sort of combined the um
+
+
+ractor.receive with the actual return
+
+
+value. You can do that. You could also
+
+
+separate on two lines. I probably would,
+
+
+but for the sake of the slide, I tried
+
+
+to squish it a little.
+
+
+On line eight, we have the dig sites
+
+
+that we're going to pass to our ractors.
+
+
+And then for each one, we're sending
+
+
+them one of those pieces. Again, that
+
+
+call to send unblocks the receive and it
+
+
+does the work and returns our value.
+
+
+But now on line 13, we're going to call
+
+
+raptor.lect on our excavators. And so
+
+
+the result of that is we're going to get
+
+
+those responses as they come back. So
+
+
+when we look at the output, we can see
+
+
+site one responded with its work in 3
+
+
+seconds. Site zero responded in four and
+
+
+site two responded in five. So this is a
+
+
+helpful way to get information as it
+
+
+happens.
+
+
+Just a couple more of these and then
+
+
+we'll get to the fun part. Um
+
+
+a streaming ractor. So in our first
+
+
+example, the ractor did some work and
+
+
+exited. But what if we have a ractor
+
+
+that we just want to keep around? We
+
+
+just want to keep it's going to keep
+
+
+doing work. So this is what I called the
+
+
+streaming reactor.
+
+
+We create our reactor, a single ractor.
+
+
+We call receive which blocks until send.
+
+
+We do our sleep and then on line five,
+
+
+we call ractor.yield with some value.
+
+
+And so what that says is return a value,
+
+
+but don't wait. So this one is just
+
+
+counting the number of runes uh that you
+
+
+see on line three. So when it's done
+
+
+counting them, then it's going to return
+
+
+on line seven, excavation complete.
+
+
+We call it the same way. We send it a
+
+
+piece of work. In this case, a single
+
+
+piece of work.
+
+
+And then we're going to loop over it. So
+
+
+we're going to call excavator.take.
+
+
+And note, so this is line 12. This
+
+
+blocks until a ractor yields a value or
+
+
+exits. So, we don't have to wait for all
+
+
+of them to finish like we did with the
+
+
+bus example. We're going to get them as
+
+
+they happen. And so, this is our output.
+
+
+We can see that each one takes a
+
+
+slightly different amount of time. And
+
+
+as it goes through the work, we're
+
+
+getting our output. It found an
+
+
+artifact. It found an artifact, etc.
+
+
+until it's all done.
+
+
+Next, we're going to do conditional
+
+
+factors. What if we had actor and we
+
+
+wanted to do different work?
+
+
+So in this one, it's the same setup as
+
+
+we saw earlier, but now on line four, we
+
+
+just have a case statement. And so here,
+
+
+we're doing different work based on some
+
+
+condition. In the example, it's a site
+
+
+number, maybe it's some part of your
+
+
+data that you're looking at. But then we
+
+
+could say go do different work. So we
+
+
+don't have to say like, I don't know, if
+
+
+we were parsing user emails and then we
+
+
+were like validating emails and then
+
+
+doing some other thing, we don't have to
+
+
+create three ractors. We can just have
+
+
+one ractor that sits there and like does
+
+
+stuff for us.
+
+
+So on each activator, I'm sorry, on each
+
+
+excavator, we call excavator.end and we
+
+
+ascend at work
+
+
+and then we're going to call map and
+
+
+call take and that's going to block
+
+
+until the ractor returns.
+
+
+And so it's basically going to fire it
+
+
+off and we're just going to get it back.
+
+
+So one ractor did three different kinds
+
+
+of work. One counted characters, one
+
+
+searched for runes, one searched for uh
+
+
+unique runes. Okay, last example. This
+
+
+is a cool one. A tiny Ruby. I totally
+
+
+failed on how to explain this. It was
+
+
+boggling my mind, so I rewrote it. It's
+
+
+a pipeline.
+
+
+Okay, so we create a raptor. This is an
+
+
+excavator. So it takes from the runes.
+
+
+It uh sleeps for a couple seconds and
+
+
+then it digs up a random rune and covers
+
+
+it in dirt because that's what happens
+
+
+when you dig up runes.
+
+
+Note it is calling yield here. So it's
+
+
+not doing anything. It's waiting for
+
+
+someone to take.
+
+
+So now we have a cleaner. The cleaner
+
+
+takes as a parameter an excavator and it
+
+
+yields to the excavator
+
+
+and it takes and then gubs on it. So
+
+
+basically it's going to take whatever
+
+
+comes in. It's going to clean off the
+
+
+dirt and then it's going to say, "Hey
+
+
+excavator, I have something for you."
+
+
+But again, it can't work yet because
+
+
+it's yielding on line six.
+
+
+So now we have a cataloger. And a
+
+
+cataloger just says, "Hey, I found a
+
+
+rune at this time."
+
+
+This also has a yield. So it's also not
+
+
+going to run until something happens.
+
+
+And this is where the magic is.
+
+
+We have a puts on line 11. And then five
+
+
+times on line 12, we puts cataloger
+
+
+take. So when we call cataloger take,
+
+
+line nine frees up. And that ractor
+
+
+says, cool, I'm ready to show the log of
+
+
+when this was found. But it's like, oh
+
+
+wait, I need the cleaner to clean it
+
+
+first. So that unblocks the cleaner on
+
+
+line five. The cleaner says, "Cool. I
+
+
+can proceed now. Wait, I'm blocked, too.
+
+
+I need to give this to the excavator."
+
+
+Passes it to the excavator. Now, the
+
+
+excavator is unblocked. The excavator
+
+
+says, "Here's a random room in dirt."
+
+
+Then the cleaner continues, cleans off
+
+
+the dirt, then passes that, or
+
+
+essentially the cataloger then pulls
+
+
+that and says, "Ah, we have found a
+
+
+clean rune." And so when we look at it,
+
+
+it takes a varying amount of time and
+
+
+it's doing this work over and over
+
+
+again. So, I don't know exactly how you
+
+
+might use this in a real world app, but
+
+
+I wanted to give you an example of sort
+
+
+of like what it feels like to work with
+
+
+ractors because it's a little bit weird,
+
+
+right? Send, receive, take, yield,
+
+
+select, so many things, but hopefully if
+
+
+you decide to explore them more, we'll
+
+
+know.
+
+
+Okay, one last thing. The most common
+
+
+ractor error is you do something like
+
+
+this which seems like a reasonable thing
+
+
+to do but this will immediately error
+
+
+because you cannot access non-sharable
+
+
+objects in this case in a simple hash by
+
+
+the non- main reactor and so it's like
+
+
+blah can't use it. So you could pass it
+
+
+in like we did in some others or
+
+
+you could just freeze it. This lets the
+
+
+reactors know that it's not going to
+
+
+change out from under you and it
+
+
+guarantees that no one's going to try
+
+
+and use it. So this is totally fine. We
+
+
+freeze our hash. We can use it inside a
+
+
+ractor. No problem.
+
+
+The other way with another piece of
+
+
+documentation whose URL I read fully uh
+
+
+we can call the make sharable method.
+
+
+And so this has some parameters you can
+
+
+do like I don't know deepreezing and not
+
+
+deep freezing things happen. If you're
+
+
+interested go read about it it's
+
+
+fascinating I'm sure. In any case, if
+
+
+you're just playing around with ractors
+
+
+and you're like, "How do I get this
+
+
+thing working?" Either freeze it or call
+
+
+make sharable.
+
+
+Okay, we know a lot about ractors.
+
+
+Now, we need to talk about cryptography.
+
+
+Okay,
+
+
+the cryptography we're about to break.
+
+
+Mhm. That was very sad. Please, more
+
+
+next time. Okay, we're going to use a
+
+
+simple substitution cipher. This is the
+
+
+easiest cipher in the world to break.
+
+
+Just like one letter is mapped to
+
+
+another one. So, if we had the word
+
+
+conference, it might become that word
+
+
+because we map every C to a Q, every O
+
+
+to an L, etc. If we change that mapping,
+
+
+if we map C to A or uh O to some other
+
+
+letter, it's going to look like a
+
+
+totally different word. And so this is
+
+
+like one of the earliest ciphers that I
+
+
+think civilizations use to like encrypt
+
+
+messages. Very easy for modern uh
+
+
+computers to break. But as a benefit, it
+
+
+can be broken quickly. So as I was like
+
+
+thinking about I don't think I want to
+
+
+run a two-hour process to see if it
+
+
+works in a half hour conference talk. So
+
+
+we're using substitution ciphers. In our
+
+
+case, ADZ are going to map to a
+
+
+different rune. So, we have an alphabet
+
+
+of runes, and we're just going to map an
+
+
+English letter to one of these runes at
+
+
+random. That's our cipher.
+
+
+This mapping is what's constantly
+
+
+rotating in the slide that you saw
+
+
+before.
+
+
+So, how do we break it? I'm sure there
+
+
+are libraries that do this. I didn't
+
+
+want to do that. And I wanted the
+
+
+experience of working with Ruby Gems,
+
+
+working with Claude to explore like,
+
+
+hey, could you actually write decryption
+
+
+code if you didn't know much about
+
+
+decryption? It was really fun. We got
+
+
+there. It was a really long journey. So
+
+
+many times it would say like, "No, no,
+
+
+this this will work." And I would run it
+
+
+and it would just be gibberish. I'm
+
+
+like, "That did not work." There was a
+
+
+lot of work here.
+
+
+Finally, I got to a system that worked,
+
+
+a generalized solution for breaking
+
+
+substitution ciphers. And this is what
+
+
+it does.
+
+
+First of all, we use the count of each
+
+
+rune to map the most common cipher
+
+
+letters to the most common letters in
+
+
+English. So this phrase in shlu is like
+
+
+one of the many there's like a few
+
+
+different variations like most common
+
+
+lang most common letters used in English
+
+
+sentences. So
+
+
+if that first rune appears the most
+
+
+maybe that's an E. And if the next most
+
+
+frequent rune well maybe that's a T. And
+
+
+so you basically apply that first one
+
+
+and you probably are going to get out
+
+
+garbage because it's not going to match
+
+
+exactly. But maybe you hit a couple
+
+
+letters along the way. So what do you do
+
+
+with that? You're like, "Well, I kind of
+
+
+guessed right." You can't just keep
+
+
+guessing arbitrarily. It'll you'll never
+
+
+find it.
+
+
+What you can use is a tool I found
+
+
+called quadram quadram scoring. And a
+
+
+quadgram is just a list of of four
+
+
+letters. It's like I don't know
+
+
+it's many many thousands of lines long.
+
+
+389,000.
+
+
+What it is is an objective measure of
+
+
+how English is this phrase without
+
+
+knowing English. And how it works is
+
+
+like this.
+
+
+389,000 lines of this. And you have
+
+
+patterns like t at the very top. 13
+
+
+million, we'll just call them points.
+
+
+Going down a little bit, uh, IN and
+
+
+SINC, that's like 1.3 million is the
+
+
+score that it gets. GSCI and DSS, that's
+
+
+like 7,000 points. And at the bottom,
+
+
+AEY and AACX, which is the last entry,
+
+
+one point. So what happens is you take
+
+
+your phrase, you've thrown a random
+
+
+decryption at it, and you get something
+
+
+back. And so then you score each
+
+
+four-letter chunk against this list. And
+
+
+if you score really high, if you find
+
+
+tio n, you are really close to a
+
+
+solution because that pattern appears a
+
+
+lot in the English language. And a ae y
+
+
+appears nearly never. So you're like,
+
+
+"This wasn't that wasn't the code. Keep
+
+
+going."
+
+
+Again, that's only the one cycle. So
+
+
+what we next do is, so we scored it. We
+
+
+have a value. And now maybe we swap two
+
+
+letters. Maybe we swap the first rune
+
+
+for E and the second rune, etc. And then
+
+
+we have to decide, do we keep the swap?
+
+
+So, in general, if the swapped letters
+
+
+lead to a higher quadgram score, it
+
+
+means you probably made some progress.
+
+
+You're closer to English than than you
+
+
+were before. But sometimes you can go
+
+
+down a bad path. You can actually make
+
+
+something that scores higher but isn't
+
+
+the right key. So to not get locked down
+
+
+this like false path that will never
+
+
+lead you to the actual decryption,
+
+
+periodically you swap and you try a
+
+
+worse score to see if maybe that leads
+
+
+to a better final outcome. And then you
+
+
+keep swapping and keep swapping and keep
+
+
+swapping.
+
+
+And then the last part of this um is
+
+
+what I call the chill. And so we
+
+
+decrease the temperature over time so
+
+
+that a regression where we had like a
+
+
+worse score and we're like yeah let's
+
+
+try that worse score. the more time goes
+
+
+by, let's not accept those bad swaps as
+
+
+frequently. Like early on while we're
+
+
+investigating, let's let's explore a lot
+
+
+of things. And as we get closer to the
+
+
+end, we're running out of time. We don't
+
+
+want to try bad paths now. We just want
+
+
+to see like will this path lead us to a
+
+
+decryption.
+
+
+And so we have a better chance to
+
+
+converge on the actual solution.
+
+
+And then we just keep going. We keep
+
+
+swapping and scoring until the score
+
+
+threshold is reached. uh or time runs
+
+
+out. So, I got that working and I was
+
+
+able to feed it a random encryption
+
+
+cipher and it would take some amount of
+
+
+time and it would break it. I'm like,
+
+
+cool. Now, I'm going to do it with
+
+
+ractors
+
+
+and I really thought I reached the end
+
+
+of the line.
+
+
+Yeah, cuz the Raptors were slower
+
+
+and I'm like, "Oh crap, that's going to
+
+
+make a terrible conference talk. How can
+
+
+I talk about rafters if they can't even
+
+
+outperform a single thread? So, I tried
+
+
+a lot of different things. Um, I looked
+
+
+at like the performance of them starting
+
+
+up. I looked at like how I was
+
+
+allocating them. All kinds of crazy
+
+
+things. And what I finally got to though
+
+
+were a few different breakthroughs. One,
+
+
+and this is akin to uh this is akin to
+
+
+the example that we looked at where uh
+
+
+the ractor had a case statement and it
+
+
+was doing different things inside
+
+
+itself, right? One was counting runes,
+
+
+one was counting unique runes. So let's
+
+
+have each ractor use a different
+
+
+starting point. Maybe one uses the
+
+
+English frequency key where E is the
+
+
+most popular. Maybe one
+
+
+kind of randomizes that a little bit.
+
+
+Another one just picks a random
+
+
+frequency of letters altogether as its
+
+
+starting point. Uh a reverse frequency.
+
+
+You like there's so many different ways
+
+
+you can do this. and basically say since
+
+
+we have uh I don't know x number of
+
+
+cores working on this let's have each
+
+
+one do different work because we don't
+
+
+have a lot of time so we want to kind of
+
+
+like blanket the landscape and cover
+
+
+every possibility so that we're not all
+
+
+putting our weight in like if E is not
+
+
+going to be the the starting point what
+
+
+if we didn't even start there so this
+
+
+started to um this started to give
+
+
+results and the ractors started catching
+
+
+up to not ractors
+
+
+and then second part was having each
+
+
+ractor use an increasingly aggressive
+
+
+cooling strategy. So where I was saying
+
+
+before like hey maybe we explore these
+
+
+alternate paths where we accept uh a
+
+
+worse score. So we let the first group
+
+
+of actors do that and then the last
+
+
+group of reactors we're like no pretty
+
+
+much just stick to it. If it's a bad
+
+
+swap don't do it. And that way we again
+
+
+sort of maximize our chances of one of
+
+
+them finding the true path through.
+
+
+This might be the last drink. See,
+
+
+thank you. Thank you.
+
+
+All right, we've come now to the final
+
+
+moment. The moment that has been waiting
+
+
+for us in the darkness, in the cave,
+
+
+waiting for us to break the cipher. Now,
+
+
+here's the thing. A substitution cipher,
+
+
+we actually know what it says. Like, you
+
+
+could freeze frame this, decrypt it, and
+
+
+find out what it is.
+
+
+So what these messages actually are are
+
+
+messages from uh an interview with Matts
+
+
+who is a famous archaeologist.
+
+
+And this was from an interview. I wanted
+
+
+to see these messages. I found them
+
+
+inspirational over and over as I was
+
+
+breaking uh as I was breaking the
+
+
+cipher. So you can scan through it. It's
+
+
+all from uh from one interview. Um and I
+
+
+just thought this would be like a really
+
+
+nice thing to break. So cool. We know
+
+
+what the messages are, but our challenge
+
+
+is not to decrypt them. It is to find
+
+
+five keys in 60 seconds so that we don't
+
+
+have an infinite amount of time. So when
+
+
+I run the demo, we're going to try four
+
+
+ways to break it. We're going to try it
+
+
+with a single thread.
+
+
+We're going to try it single thread with
+
+
+our freeze ray that slows down that
+
+
+rotating cipher.
+
+
+We're going to try it with ractors.
+
+
+We're going to try it with Raptors with
+
+
+a freeze ray.
+
+
+I gave him the laptop for 30 seconds.
+
+
+Got into the presentation. I can't
+
+
+believe it. We're not doing that last
+
+
+one. We're not doing it. Charles, if
+
+
+you're watching out there.
+
+
+All right, let's do this. Let's do our
+
+
+demo.
+
+
+Can everyone see that? Okay.
+
+
+Uh actually
+
+
+let me
+
+
+is rendering weirdly at the moment.
+
+
+There we Okay, cool. So I want to spin
+
+
+this around. Thank you for that tip. So
+
+
+here are ciphers. They're rotating twice
+
+
+a second. And so if I say go,
+
+
+it's going to try breaking them. And
+
+
+actually, I think I'm sorry. I do have
+
+
+to go back down a little bit. This is
+
+
+going to get weird. Uh, actually, it's
+
+
+it's fine. It's fine. Um, it's not
+
+
+getting anywhere. You can see on the
+
+
+right, like for the current message,
+
+
+maybe it's getting up to 20 or 30%.
+
+
+Maybe a little bit more. Never going to
+
+
+find it in time.
+
+
+So, let's try with a freeze on. Let's
+
+
+give let's give the process five seconds
+
+
+for each one to break through.
+
+
+And so here in the middle, I've
+
+
+introduced a new element here that shows
+
+
+how long until the next cipher rotates.
+
+
+We have our 5 seconds. And again, what
+
+
+percent decrypted is the current block.
+
+
+Um, and it's it's trying. I think it
+
+
+will get it will get higher. It might
+
+
+get to like 60 or 70% of a message. Um,
+
+
+but again, it just doesn't have enough
+
+
+time to try all those different
+
+
+permutations before its time runs out.
+
+
+And just to be clear, this is a live
+
+
+demo. This is not recorded or anything.
+
+
+Uh, the overall thing failed three
+
+
+times. No, sorry. Twice at tiny Ruby
+
+
+before we got it through. So, this is
+
+
+this is real.
+
+
+All right, let's give up on not Ractors.
+
+
+Let's try now. We'll turn Ractors on.
+
+
+We'll leave the freeze array off.
+
+
+And so, it's getting some higher
+
+
+numbers. I'm seeing periodic
+
+
+60 or 70% which is pretty remarkable
+
+
+that it's trying to go through all
+
+
+those. It's going through all the
+
+
+permutations, testing quadgrams, scoring
+
+
+it, trying different paths over and over
+
+
+again. and each tractor doing different
+
+
+things. Still not enough time. So,
+
+
+it's damaging to the stones, but we're
+
+
+going to have to use the freeze ray.
+
+
+We're going to turn on the raptors
+
+
+and we're going to go. And so, like I
+
+
+said, might fail a couple times.
+
+
+Sometimes it solves it really early.
+
+
+This is the exciting part. It's actually
+
+
+the only time in a demo when I've like
+
+
+wanted it to fail. That builds a little
+
+
+drama, but let's see what happens. Let's
+
+
+go, Ractors.
+
+
+All right, we're on the first message
+
+
+already through. We got 55 seconds. That
+
+
+is a great start. It has cracked the
+
+
+second cipher as well. We're on the
+
+
+third stone now. 97.4. Oh no, it lost
+
+
+it. Those are the frustrating when you
+
+
+see those really high numbers or like a
+
+
+998 and then it runs out of time and it
+
+
+cycles it. Uh it is you're like come on,
+
+
+come on. It's like one one letter. Uh
+
+
+and it it just keeps going through it.
+
+
+And it was interesting because I
+
+
+actually tried um I tried with this to
+
+
+be like look I have a 97% message. Can I
+
+
+send it to an LLM, have it evaluate it
+
+
+locally and come back and say it's
+
+
+probably this letter you want to swap.
+
+
+Couldn't do it. It just I'll tell you
+
+
+about that later. Talk to me. Um we're
+
+
+at 18 seconds. Two messages left. Let's
+
+
+see what happens. Let's see what
+
+
+happens. All right, we've got it. 13 12
+
+
+11 WE DID IT. YES.
+
+
+All right.
+
+
+Fantastic.
+
+
+And now we can take our keys and we can
+
+
+give them to the keystone.
+
+
+Another message. Let's hit that one with
+
+
+a freeze blast.
+
+
+All right.
+
+
+What's it going to have?
+
+
+Did I hit you? Not yet. Is it going to
+
+
+be money, power,
+
+
+release date for Skyrim 2?
+
+
+Who knows? All right, let's see. We're
+
+
+at the keystone. The final step.
+
+
+All right, it's working through it.
+
+
+Taking extra care here because we don't
+
+
+want to we don't want to get a false
+
+
+message from the keystone. So, we're
+
+
+going to we're going to slow this down a
+
+
+little bit. I think I'm only using fewer
+
+
+ractors for this one. Starting to
+
+
+starting to come clear. Oh. Oh no. Oh
+
+
+no.
+
+
+Oh no.
+
+
+It was a warning.
+
+
+Ractor API is experimental and may
+
+
+change in f future versions of Ruby
+
+
+that was a journey. All right,
+
+
+I want to leave you with three thoughts.
+
+
+First of all, Ractors are experimental
+
+
+still marked as such in Ruby 4, although
+
+
+we saw the reduced warning message. So
+
+
+there's hope. Uh there's also I saw a
+
+
+message that uh they're hopeful that in
+
+
+Ruby 41 it will no longer be
+
+
+experimental. So this would be great
+
+
+news for people who have ractors. Uh the
+
+
+second thing I want to leave you with is
+
+
+learning about codereing while working
+
+
+with an LLM was very fun and fulfilling
+
+
+and really a multi-month journey of
+
+
+getting that demo to work and learning
+
+
+about cryptography on the way. And the
+
+
+last thing I wanted to share is that I
+
+
+feel so lucky that I get to work with a
+
+
+language as beautiful as Ruby and with
+
+
+rubists as lovely as you. Thank you so
+
+
+much.
+
+
+I must say it was a really good plot
+
+
+twist with this key that we discovered.
+
+
+Okay. Uh any questions?
+
+
+really wants me to do my cardio.
+
+
+>> Uh thank you for the talk. Um in J Ruby,
+
+
+uh when I I can
+
+
+>> I'm sorry, please leave.
+
+
+I can build desktop guey apps and have a
+
+
+thread spin in the background and for
+
+
+example compute the mandalroad fractal
+
+
+or do some uh report calculations or
+
+
+stuff like that and then in the
+
+
+foreground without getting blocked I can
+
+
+display progress in the guey.
+
+
+>> Sure.
+
+
+>> I tried that with ractor and it didn't
+
+
+work because it blocks and I have to
+
+
+wait for it before it's done. Are there
+
+
+any ractors that are fire and forget?
+
+
+So, I'm not sure about the full answer.
+
+
+And again, this actually highlights one
+
+
+of the dangers of vibe coding, which is
+
+
+that if you don't fully understand what
+
+
+it's doing, you're kind of at a you're
+
+
+kind of at a loss. And it multiplies
+
+
+that lack of ignorance. So, I didn't
+
+
+know about cryptography. So, while I
+
+
+could look for like code quality and
+
+
+things, it was hard to understand how
+
+
+things were happening. And also, I was
+
+
+new on my Ractor journey. So,
+
+
+understanding the Ractors themselves
+
+
+also kind of a weak point. I just knew
+
+
+that like they've been interesting to me
+
+
+for so long. So to directly answer your
+
+
+question, I have no idea. Uh the way I
+
+
+think I got it to work was that they
+
+
+were using messages to pass back to like
+
+
+the main reactor that was saying, "Cool,
+
+
+this reactor um this reactor has found
+
+
+something. Everybody else shut down like
+
+
+don't keep working. We're about to start
+
+
+working on the next one." So I did have
+
+
+like a main reactor that was listening
+
+
+to messages. And that's how we get the
+
+
+progress that we saw um where it was
+
+
+getting all the messages and deciding
+
+
+among them what was the largest message
+
+
+I've I'm sorry the largest percentage
+
+
+decryption I've received so far. Um and
+
+
+so that's how like that part of the UI
+
+
+was going where it was showing the
+
+
+progress of each one. Um and then for
+
+
+the letters like it was just I think
+
+
+picking one of them and showing like
+
+
+what it's what it's trying what the
+
+
+English translation of the runes was.
+
+
+So, I'm not exactly sure for your case,
+
+
+but I think through messaging uh is
+
+
+maybe the answer.
+
+
+>> Uh okay, I'll look into it because
+
+
+according to the code you showed us, it
+
+
+seemed like the answer is no.
+
+
+>> And and to me that defeats the point of
+
+
+ractors. Like I wouldn't want to use
+
+
+them in a desktop gooey app if they
+
+
+cannot accomplish what I need. But I'll
+
+
+I'll keep following the Ractor's feature
+
+
+in Ruby. Thank you.
+
+
+>> Absolutely.
+
+
+>> Okay. Any other questions? Remember, we
+
+
+are inclusive. So it can be about J
+
+
+Ruby.
+
+
+>> I'll get back to you.
+
+
+>> Thank you
+
+
+>> for your talk.
+
+
+>> Um is there are there any practical
+
+
+limits to the number of RAT have running
+
+
+at the same time?
+
+
+>> You say practical limits to the number
+
+
+of ractors? Yes, I actually found so I
+
+
+think this is a 10 core machine. I
+
+
+actually found I couldn't run 10 for
+
+
+whatever reason like the performance was
+
+
+worse. So I think I settled on seven as
+
+
+running it. So I think it's system
+
+
+dependent. Um
+
+
+not sure what would happen if you tried
+
+
+to run more than the number of cores,
+
+
+but I think it wouldn't do a thing. Uh
+
+
+so I think there are some limits.
+
+
+>> Uh thanks for the talk. Um it's kind of
+
+
+not really related, but I really need to
+
+
+know how you change the font size in the
+
+
+terminal.
+
+
+Is that possible? like
+
+
+>> Yeah, absolutely. You mean the part
+
+
+where the bottom part was large?
+
+
+>> Yes. So, um since I gave the talk at
+
+
+Tiny Ruby, one of the um one of the
+
+
+pieces of feedback I got was that it was
+
+
+really hard to read the timer because in
+
+
+the same text as the other just plain
+
+
+text um and so I I worked on the talk
+
+
+for months in the last seven days. Um
+
+
+and literally last night, I'm sorry I
+
+
+could not be with you uh at the
+
+
+afterparty. Uh yes, I found out a way to
+
+
+make that large because it was very hard
+
+
+to see. And so uh at the risk of Let's
+
+
+see, let's cancel that. Let's see if I
+
+
+can bring
+
+
+You know what? Actually, this is
+
+
+probably a better question for later.
+
+
+>> Come talk to me. There is a way. I have
+
+
+an answer. It wasn't very hard. I can
+
+
+show you the diff.
+
+
+>> I need to see it. Thanks.
+
+
+Watch out for the invoice. Um, thank you
+
+
+very much, Louis. No, no, thank you. One
+
+
+more.
+
+
+>> One more. One more.
+
+
+>> Sorry. Wait.
+
+
+>> Right here. All good.
+
+
+>> Thanks, Louis. Great talk. Um, so we
+
+
+know Ractors are experimental in Ruby.
+
+
+It's been
+
+
+reiterated. Um, but is the
+
+
+implementation modeled on something in
+
+
+another language or what's the
+
+
+inspiration? No.
+
+
+I certainly don't have the answer to
+
+
+that but I I think I think the the team
+
+
+that was working on it my understanding
+
+
+um it's just they wanted to try to bring
+
+
+parallelism to Ruby and this was like
+
+
+one way to do it. So I mean modeled on
+
+
+the actor model um I don't know if like
+
+
+a specific language was like let's use
+
+
+that language like approach.
+
+
+There you go. Can we try that again? Ask
+
+
+me the question.
+
+
+We can cut this, right?
+
+
+>> It comes from Erlang. I have it on solid
+
+
+authority.
+
+
+>> You can get it done. Um, okay. Thank you
+
+
+very much, Louis.
+
+
+>> Thank you all.

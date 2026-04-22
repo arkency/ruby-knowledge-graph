@@ -1,0 +1,1948 @@
+Our
+
+
+next guest is Adam and he'll tell us
+
+
+about building agentic workflows in
+
+
+Ruby. Please welcome Adam.
+
+
+>> Hello everyone.
+
+
+I'm really happy to see so many faces
+
+
+today morning. Uh do you have good fun
+
+
+yesterday evening?
+
+
+>> Cool. Glad to hear that. So we are
+
+
+living in the AI age.
+
+
+Every day we are hearing new stuff from
+
+
+that space, new news, new patterns, new
+
+
+potential models that can solve our
+
+
+problems. Right?
+
+
+So we are living inside some cycles.
+
+
+The
+
+
+announcement
+
+
+oh
+
+
+unexpected error
+
+
+happens.
+
+
+So uh Entropic recently uh announced the
+
+
+new mighty model uh methods that might
+
+
+be new uh
+
+
+breakthrough in that space. Google
+
+
+announced the quantum compression that
+
+
+can change the way how we are running
+
+
+models in local uh environment and many
+
+
+LLM
+
+
+startups uh not startups but uh labs
+
+
+uh living inside the release cycle where
+
+
+release the new models new capabilities
+
+
+every uh circle
+
+
+beside that we are living in the other
+
+
+state when LM's leaders appears in some
+
+
+moment make some interview and provide
+
+
+some perspective
+
+
+and in that perspective everything is
+
+
+simple right but in the reality
+
+
+is quite different and those leaders
+
+
+organizations
+
+
+can have some rough time even anthropic
+
+
+has recently the problem with the
+
+
+exposure of the close source of cloth
+
+
+code right
+
+
+and where
+
+
+are the typical RP CRM
+
+
+uh application that organization are
+
+
+using daily in their operation time
+
+
+where where how they can in use this
+
+
+tools in their operation and if you read
+
+
+some kind of feedback
+
+
+uh the most of the
+
+
+uh pro uh most of the elements that and
+
+
+tries finalized after some trial because
+
+
+there is no impact on the business right
+
+
+so
+
+
+welcome on my talk about building
+
+
+agentic workflows uh where I will try to
+
+
+provide some pattern
+
+
+uh how you can in easy way apply in some
+
+
+specific case of course uh agentic
+
+
+workflow that may have impact on on the
+
+
+business. I narrow the scope to the B2B
+
+
+relation because inside the B2B you have
+
+
+this some kind of relation between
+
+
+parties. So they are making some
+
+
+communication they have communication
+
+
+layers where can they interact.
+
+
+So welcome. I'm Adam McCoy. I'm
+
+
+independent consultant working mostly as
+
+
+a tech lead product developer building
+
+
+B2B solutions.
+
+
+I'm still using Ruby after 17 years but
+
+
+also touched different tech ST tax and
+
+
+as a speaker I'm co-organizer local Ruby
+
+
+meetups in three city my local arena and
+
+
+this is my first talk on the such a big
+
+
+state stage. So thanks uh prolaf cur to
+
+
+encourage me to take this uh challenge.
+
+
+So
+
+
+today I would like to uh talk about the
+
+
+role of the input
+
+
+why the forms can be bottleneck in the
+
+
+application and in what what case and
+
+
+how we can use Ruby to build such a
+
+
+augmented solution for our forms. in the
+
+
+specific case and I will try to provide
+
+
+some let's say hints how looks like
+
+
+situation after releasing such a stuff
+
+
+on the production. So are you ready?
+
+
+>> All right. So let's talk about the input
+
+
+role.
+
+
+Oh
+
+
+I love it. It's not expected
+
+
+to be honest.
+
+
+Oh,
+
+
+success
+
+
+yes. Okay. So, I really try to put such
+
+
+a complexity on the screen. So, I ask my
+
+
+agent to generate as complex form as
+
+
+can. So, you can feel this pain, this
+
+
+daily pain of the users.
+
+
+And we are love building such a forms,
+
+
+right? A very framework has the utility
+
+
+to help us to build that because it's a
+
+
+complex task right forms is basic
+
+
+trigger to make the interaction the
+
+
+application right it's pretty common
+
+
+everybody take a look at this but there
+
+
+is some let's say tradeoff here
+
+
+oh yeah we have final success
+
+
+so
+
+
+the forms give us a deterministic input
+
+
+however There is some let's say cost of
+
+
+this for
+
+
+uh non-technical users the validation
+
+
+for workflow can be uh really pain
+
+
+everyone has such a story that you fill
+
+
+the form and you lose the state banks
+
+
+react
+
+
+and inside the front end ecosystem you
+
+
+may have multiple solution for making
+
+
+the forms and they are still trying to
+
+
+solve this issue every here. So there
+
+
+are during the life cycle of the product
+
+
+there are undocumented paths you know
+
+
+the product is changing requirements are
+
+
+changing so the teams are changing so
+
+
+this knowledge maybe it's not documented
+
+
+so we may have that paths moreover
+
+
+developers pretty don't know about how
+
+
+looks like the real life of the end user
+
+
+they are some kind of separation Right?
+
+
+And people tend to make some shortcuts.
+
+
+So we are making some optional things
+
+
+but in the end you may find that those
+
+
+optional op options in the form may not
+
+
+be optional and business want to have it
+
+
+but guess what if people has have
+
+
+opportunity to don't feel the things
+
+
+they will don't fill it.
+
+
+So,
+
+
+LMS provides the easy way to
+
+
+to analyze the human requirements in the
+
+
+human language, right? So, we have very
+
+
+convenient tool to make this kind of
+
+
+activity.
+
+
+But we are not only limited to the
+
+
+analyzing the text, right? we have
+
+
+option to look on the different type
+
+
+formats like video, audio, PDF files.
+
+
+Moreover,
+
+
+this uh for that activities you don't
+
+
+need to train the model. You just make
+
+
+the HTTP call to the provider which is
+
+
+very convenient way and we are able to
+
+
+do that right this nothing new and not
+
+
+rocket science for us.
+
+
+So
+
+
+let me introduce the augmented
+
+
+workflow for the forms. When complex
+
+
+form is used only by translating
+
+
+requirements that for example account
+
+
+manager received requirements from the
+
+
+clients via email and this it's
+
+
+translated
+
+
+to the form state. Right? So what we can
+
+
+do we can create two forms right. So in
+
+
+the asset two-step process the first
+
+
+step we just put the
+
+
+requirements as a text from the email
+
+
+and start analyzing phase. And after
+
+
+that we came to the state that we may
+
+
+have this the form that we have
+
+
+previously but maybe after our audit we
+
+
+may found that we don't need some things
+
+
+so it can be simplified right but we are
+
+
+displaying the suggestion right that
+
+
+might not be applied
+
+
+uh in the moment of uh when the
+
+
+suggestion appears or can be applied
+
+
+depends on the case right because you
+
+
+may have uh some compliance rules that
+
+
+need to be manually attached. So in this
+
+
+case we are providing something that we
+
+
+have as developers as a mechanism right
+
+
+we making the nontechnical people option
+
+
+to make a code review right and if you
+
+
+are working in such a regulation market
+
+
+you have to have such a option to make a
+
+
+control final control right so
+
+
+how we can do this inside the Ruby using
+
+
+the Ruby tools. Right? So in this uh
+
+
+part I will try to take a look uh how we
+
+
+can design this using the monolith
+
+
+approach how it looks like this inside
+
+
+micros service may look like because
+
+
+depends on the case and I want to also
+
+
+touch the point about
+
+
+what happens when you have uh uh
+
+
+situation with uh a lot of IO uh bound
+
+
+operations during the analysis price
+
+
+phase. So let's dive in. Before we do
+
+
+something, let's get the first metrics
+
+
+because this is the something that um
+
+
+provide us info if that's the specific
+
+
+item has sense to build. So most of most
+
+
+common thing that you can pick is just a
+
+
+time of the operation, right? how long
+
+
+the specific process take
+
+
+then get the baseline. Uh so may record
+
+
+such activities
+
+
+uh during uh some time and after you
+
+
+list something compare and then you will
+
+
+see the
+
+
+final results. If you burn the time to
+
+
+build that solution, burn the tokens to
+
+
+build that solution and tokens for the
+
+
+operations and what's more important
+
+
+thing use some kind of uh observability
+
+
+tools to verify what's going on inside
+
+
+this process and open telemetry is great
+
+
+tool for that. I will try to present you
+
+
+something.
+
+
+So from my experience there are two
+
+
+paths. You have typical monolith
+
+
+application where you have some kind of
+
+
+uh background engine can be sidekick or
+
+
+solid Q. You're using rails for LM uh
+
+
+integration. You may choose the rubm gem
+
+
+and you are using probably the turbo
+
+
+streams as for real time. And this is
+
+
+one component to deploy. On the other
+
+
+side, if you are organization, if you
+
+
+are working in the organization that is
+
+
+splitted on the teams that has different
+
+
+responsibilities,
+
+
+you may probably be in the situation
+
+
+that you working inside the micros
+
+
+service world. It's let's say
+
+
+depends on the organization, right? And
+
+
+then you have probably situation that
+
+
+the
+
+
+um
+
+
+the responsibilities about the LLM
+
+
+communication might be inside one common
+
+
+service but you don't have governments
+
+
+to make the uh changes because it's
+
+
+maintained by the different team and on
+
+
+that level to communicate between
+
+
+parties you probably will need some kind
+
+
+of message broker.
+
+
+where you send the events and of course
+
+
+you have this independent scaling as a
+
+
+benefit of the microservices. So
+
+
+if you want to make this inside the
+
+
+monolith, it says something that we
+
+
+pretty much know. You send the post uh
+
+
+the the form, you may persist the state.
+
+
+you introduce some kind of intermediate
+
+
+state that you put the data that was
+
+
+sent to make this inside the memory
+
+
+because it's some if something went
+
+
+wrong you can always restart right the
+
+
+process then since this is long since
+
+
+operational requires waiting for the
+
+
+tokens you probably need want to
+
+
+departure this to the background job
+
+
+right and then the whole process uh is
+
+
+taking inside the background job. And
+
+
+this is most important part because this
+
+
+is not only receiving the tokens but you
+
+
+want to get this build this suggestion
+
+
+right and during that process you don't
+
+
+you are not only building the suggestion
+
+
+but you can use this extra window to do
+
+
+something else to prepare the state for
+
+
+the other screens for the users. So you
+
+
+cons you may consolidate the different
+
+
+features in that moment.
+
+
+So
+
+
+as I mentioned
+
+
+introducing the state that keeps all
+
+
+integration during that phase the
+
+
+analysis phase
+
+
+it can be very useful for debugging what
+
+
+went wrong during that process.
+
+
+Moreover,
+
+
+uh open telemetry helps to investigate
+
+
+if you have found yourself that you have
+
+
+many IO operation this especially inside
+
+
+the m micros service world and uh uh the
+
+
+most important part from my experience
+
+
+is that this consolidation window for
+
+
+different service may have the biggest
+
+
+impact. on the whole feature because we
+
+
+are not only speeding up the one
+
+
+uh view but we may prepare state for the
+
+
+users on the next phase of the product.
+
+
+So in the result
+
+
+we have snowball effect right that touch
+
+
+uh uh touch base uh on the different
+
+
+things inside the system.
+
+
+So for the monolith you probably want to
+
+
+pick the Ruby LM as a uh integration
+
+
+with the LM providers. It prov it's a
+
+
+rails native support. It can very easily
+
+
+integrate with the rails active record
+
+
+case pro basic chat functionality
+
+
+and uh you can uh define the agents. It
+
+
+provides the abstraction to define the
+
+
+agents and the tools for the agents.
+
+
+Let's dive in to the sample. So you can
+
+
+always ask your agent to build that but
+
+
+I tried to put some kind of example
+
+
+here. So on the left you can provide
+
+
+uh using the rubm API that tool that
+
+
+extend capabilities of the agent. Uh
+
+
+also Rublm provides the way how you can
+
+
+build the agent and compose them.
+
+
+uh uh compose such a spec encaps
+
+
+encapsulate the specific domain
+
+
+of uh purpose the specific uh as the the
+
+
+agent with extra tools. So this is
+
+
+something that for the monolith it's h
+
+
+ready to go but if you don't want to use
+
+
+this you can always use rublm as just
+
+
+client to lm provider because it's it's
+
+
+it has very nice API for that
+
+
+but in this
+
+
+uh in this setup that we have mostly we
+
+
+running the jobs as on the threat based
+
+
+system and LM's goals is a heavy IO bond
+
+
+operation
+
+
+and this has some limitation as you
+
+
+probably know heard from the different
+
+
+talks on this conference there is a
+
+
+different option to do that and it's a
+
+
+different abstraction that Ruby have
+
+
+built in inside the this toolkit so the
+
+
+fibers verse gives very nice opportunity
+
+
+to
+
+
+uh have higher frontput here. So I put
+
+
+some kind of statistics from the great
+
+
+uh blog post from uh creator of rubm
+
+
+recommend that it's uh contains a very
+
+
+convenient overview differences between
+
+
+fibers and threats.
+
+
+So
+
+
+uh fibers and with support of asen gem
+
+
+can give us more performant way to run
+
+
+the lms inside the ras application. Uh
+
+
+the async community have the specific uh
+
+
+additional adapter for race uh active
+
+
+job. So if we change adapter in our job
+
+
+to async then we for heavy IO bond
+
+
+operation
+
+
+uh we can use uh fiber uh advantages and
+
+
+scale up uh operation on LLMs
+
+
+regarding microser architecture. So
+
+
+things are more complicated depends on
+
+
+the
+
+
+uh architecture decision in the
+
+
+organization but what mostly I'm doing
+
+
+is that we have some service probably
+
+
+that utilize the alarms uh calls and uh
+
+
+we just send the event that
+
+
+requires the analyze phase and the event
+
+
+in the return to our consumer
+
+
+that we start the anal analysis phase
+
+
+inside that. So
+
+
+things are uh here depends on the what
+
+
+architecture you have but inside the
+
+
+micros world uh it requires some
+
+
+additional complexity like message
+
+
+broker depends what you want to use.
+
+
+The last thing that we want to highlight
+
+
+during my talk is how how you want to
+
+
+deal with heavy IO bond workloads.
+
+
+So often during the analysis
+
+
+the results of LLM
+
+
+you may find that if you add one thing
+
+
+and it works there is always people tend
+
+
+to add something more here and you uh
+
+
+you are in the situation when you have
+
+
+many IO operation that may last some
+
+
+time and it it has negative impact on
+
+
+the whole user experience here. So maybe
+
+
+there is some solution for that inside
+
+
+Ruby toolbox. So async gem provides very
+
+
+nice API that you may have concurrent IO
+
+
+operation and it this gem provides very
+
+
+nice barrier abstraction that schedules
+
+
+the as the IO tasks
+
+
+and by default without new parent new
+
+
+it's uh schedules the task until the
+
+
+system is not overloaded. So this simple
+
+
+abstraction has very powerful internals
+
+
+that the task uh will be scheduled till
+
+
+uh system is not uh overloaded in 80%
+
+
+and after that there is uh unbound the
+
+
+the unbound uh task will be cancelled by
+
+
+bar. So this very simple API covers very
+
+
+edge cases for you. And here uh I just
+
+
+disabled this management because also
+
+
+async provides option to manually
+
+
+managing the concurrency using 4. So you
+
+
+can define how many slots do you want to
+
+
+use. This is very handy on the micros
+
+
+service world where you want to make
+
+
+some throttling link when you're asking
+
+
+some services to not call at once
+
+
+multiple and uh multiple requests and
+
+
+make some local DOS.
+
+
+So you may found
+
+
+uh that this solution solve that problem
+
+
+and we may have much faster IO operation
+
+
+and this is one of my favorite feature
+
+
+from asynch.
+
+
+So during this conference I think it's
+
+
+many talks that provides highlights that
+
+
+in the community we are starting
+
+
+distinguish the heavy CPU operation and
+
+
+heavy IO operation even during this week
+
+
+the new Puma version has a new threat
+
+
+pool which is fiber pool. So we are we
+
+
+can see that the community is starting
+
+
+uh expanding the
+
+
+uh to use the new patterns to handling
+
+
+the differently concurrent IO operation
+
+
+and spew. But there is a question do we
+
+
+need this form at all? Right?
+
+
+we can use direct communication with
+
+
+email for example.
+
+
+Because now in the race we have the
+
+
+action uh
+
+
+we have component that can receive the
+
+
+emails directly right. So we can send
+
+
+emails directly to the race application
+
+
+and run this process without
+
+
+manual uh operation from the user right.
+
+
+So we not only decreasing the time
+
+
+uh when the whole form is created
+
+
+because we want to probably send the
+
+
+suggestion
+
+
+with uh via email to the account manager
+
+
+and
+
+
+uh and here we reduce the time when they
+
+
+the message is coming to the
+
+
+organization. Right? So this is not only
+
+
+uh reducing the time in the app but
+
+
+outside the app but in this case we are
+
+
+open to receive notification from
+
+
+different sources right the web hooks
+
+
+and other pipelines. So this is what
+
+
+actually open claw and other agents
+
+
+doing right now right they have
+
+
+integration to many systems right so
+
+
+maybe we are coming to the situation
+
+
+that's our system will be have adapters
+
+
+to the majority streams and just send us
+
+
+the things that we need to just approve
+
+
+to move on
+
+
+so let's talk about the product
+
+
+production case study I made something
+
+
+like similar in last uh half an year and
+
+
+the result was remarkable. So we have
+
+
+such a situation that uh we have not
+
+
+complete data sets. We have a very
+
+
+complex form operation that
+
+
+takes some time to fill in. And uh there
+
+
+was other problem that there was there
+
+
+was created some supported features for
+
+
+that process but was they weren't used
+
+
+by the user because user has some habits
+
+
+and there is very hard to change the
+
+
+user habits. So when we apply this
+
+
+workflow reduce dramatically the change
+
+
+the time of uh operation but we also
+
+
+increase adoption of those tools because
+
+
+we prepared the state for them. So we
+
+
+moved burden from them and the positive
+
+
+effect was also the human relation
+
+
+because the user was very grateful for
+
+
+change their lives in the daily
+
+
+operation. So the key take place from my
+
+
+side.
+
+
+So this augmented form that you int
+
+
+introduce the new step where you provide
+
+
+opportunity to paste the requirements in
+
+
+the human text and then analyze. It
+
+
+opens the new window that you can
+
+
+consolidate the different services
+
+
+and of course may reduce the time of the
+
+
+operation.
+
+
+Moreover,
+
+
+before you do that, define your KPI
+
+
+track if this makes sense and uh Ruby is
+
+
+ready for that kind of uh solution,
+
+
+right? Because async is providing new
+
+
+way how we can handle the heavy IO
+
+
+workflows. So, thank you for your time.
+
+
+Thank you. Any questions?
+
+
+>> Hi. Um just a question about the the
+
+
+thing with the IO performance.
+
+
+>> Yeah. in actual use. Um like what is uh
+
+
+did you did you were you able to to
+
+
+measure the difference when between
+
+
+using fibers using async?
+
+
+>> Yeah.
+
+
+>> And the traditional solution.
+
+
+>> Yeah. So uh at the beginning I made just
+
+
+a sequential calls right. So we have a
+
+
+case when the whole workflow took for
+
+
+example above 50 seconds right when we
+
+
+used async we cut down this to the
+
+
+around 15 20 seconds right so there was
+
+
+huge difference on that and I have
+
+
+feeling that command give me more what I
+
+
+can load more right because you it's
+
+
+easy right we have very easy abstraction
+
+
+that gave you a lot of uh uh
+
+
+capabilities to do
+
+
+complex workflow in easy way
+
+
+and this uh this kind of uh thing it's
+
+
+very easy to to to to extend.
+
+
+Yeah, thanks for the presentation and uh
+
+
+my question is why did you decided to go
+
+
+with the mostly
+
+
+AI related approach instead of just uh
+
+
+probably optimizing the UI because uh as
+
+
+we saw in one of the previous uh uh
+
+
+lectures. So there was a uh lection
+
+
+about the events and uh there was a cool
+
+
+UI which has drawn uh with uh these uh
+
+
+complicated forms separated in the steps
+
+
+and uh each uh page contains only
+
+
+instead of like containing 20 fields it
+
+
+contains only two three fields probably
+
+
+five of them and uh that just makes the
+
+
+AI much much easier. So why did you
+
+
+decided to move on with uh the AI
+
+
+related approach?
+
+
+>> Thanks.
+
+
+>> Uh I can only provide let's say my
+
+
+opinion but uh from my side the best UI
+
+
+is no UI.
+
+
+Hey, um I'm wondering why you are using
+
+
+like um you know um AI on a back end
+
+
+because right nowadays you can use uh in
+
+
+a browser so you could really uh embed
+
+
+some information that would could be
+
+
+really
+
+
+>> um used for AI on web uh even like um
+
+
+Chrome probably will have a embedded in
+
+
+the future. Right now you can use a web
+
+
+lm really it's a little bit hard because
+
+
+it's a couple megs to really download
+
+
+but it can really do everything what you
+
+
+have on the back end just fill like uh
+
+
+the gap with knowledge and that would
+
+
+fill the form automatically really and
+
+
+yeah like uh most of those things which
+
+
+you have an back end you could prefill
+
+
+even without AI. Okay. So I give you
+
+
+short answer where the security
+
+
+department probably will ban this
+
+
+solution.
+
+
+>> Will it?
+
+
+>> Yeah.
+
+
+>> Okay.
+
+
+>> If you are working in the regulated
+
+
+market probably. Yes.
+
+
+>> Okay. There's one more question. Oh,
+
+
+need to figure out how to reach you.
+
+
+Thank you. So I have two questions. Yes,
+
+
+forms usually um give the user you know
+
+
+the structure they know what are the
+
+
+options they can pick from um with AI um
+
+
+how do you you know challenge that?
+
+
+>> Yeah that's great questions. Thanks. So
+
+
+this happens during this analyze phase.
+
+
+So this is like a local ETL pipeline
+
+
+that you have some data and then you
+
+
+make some transformation that you
+
+
+propagate via websockets
+
+
+>> knowledgeable.
+
+
+>> No.
+
+
+>> Uh in in your case um the users know
+
+
+their options.
+
+
+>> No
+
+
+>> no
+
+
+>> sorry the form always provides the way
+
+
+that you can fill in manually. So they
+
+
+have the options.
+
+
+>> Exactly. That's why I like the form not
+
+
+the paper for instance.
+
+
+>> Yes. Yeah. Yeah. So and actually before
+
+
+the meeting I checked X today and there
+
+
+was a message about that entropic just
+
+
+cancel subscription
+
+
+the whole company. So beware and make a
+
+
+backup solution always right because you
+
+
+can always be cut off.
+
+
+Okay. So the second question is like
+
+
+while the user is filling in the form
+
+
+the complex forms.
+
+
+>> Yeah.
+
+
+>> Um sometimes it's just a a nested nested
+
+
+method to get to some you know if I
+
+
+select this then my selection is already
+
+
+>> scoped with the previous selection and
+
+
+so on so forth. Um the question is like
+
+
+how do you walk the user on this path of
+
+
+filling in the form with AI? So he is
+
+
+knowledgeable whether the AI is
+
+
+understanding him right.
+
+
+>> Yeah this is also a good question.
+
+
+uh I don't have let's say good preview
+
+
+of the slides here so I haven't remember
+
+
+all things but probably haven't
+
+
+mentioned that you make the audit of the
+
+
+form and maybe this nested thing you
+
+
+don't need this you you simplify the
+
+
+path for the user right or maybe you
+
+
+remove this nested
+
+
+option right and make it a flat
+
+
+>> or or maybe you can offer the user the
+
+
+preview of the actual understanding of
+
+
+the LLM like we have in our terminals
+
+
+and so on so forth
+
+
+>> or there's also alternative to that
+
+
+approach to kind of cross check with the
+
+
+data that you trust. So whatever AI is
+
+
+understanding you cross check with some
+
+
+data like for instance the actual
+
+
+physical locations to find out the
+
+
+address that the user is giving and the
+
+
+AI is understanding is actually the
+
+
+existing address or or or things like
+
+
+that.
+
+
+>> Yeah.
+
+
+>> Yeah. Thank you very much. Yeah. So my
+
+
+final let's say take away is that try
+
+
+async in your workflows. Take use the
+
+
+autom telemetry to to view what happens
+
+
+in your application and you may find
+
+
+that this abstraction may bring you
+
+
+additional benefits. Thank you.
+
+
+>> All right. Thank you very much Adam.

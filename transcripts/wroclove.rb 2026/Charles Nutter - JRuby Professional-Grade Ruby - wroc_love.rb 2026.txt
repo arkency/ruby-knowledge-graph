@@ -1,0 +1,2812 @@
+I would like to invite our first speaker
+
+
+Charles which is going to tell us about
+
+
+J Ruby which he's working on for 20
+
+
+years already and at the moment he's
+
+
+still funding it. So big applause to
+
+
+Charles. Welcome.
+
+
+All right. Thank you. Thank you.
+
+
+Excellent. I'm very excited to be here
+
+
+for the first time uh at the conference
+
+
+and in the city. Uh, unfortunately I'm
+
+
+only here for about 40 hours this trip
+
+
+because I have to head to Ruby Kai right
+
+
+after this. But I'll be at the party
+
+
+tonight to answer questions. I got lots
+
+
+of stickers for J Ruby for my company
+
+
+Headas Enterprises which is now funding
+
+
+J Ruby development and uh let's get
+
+
+started and get all my equipment here.
+
+
+Okay, so professional grade Ruby. We'll
+
+
+find out what I mean by that here. Uh
+
+
+bit of information about me. Uh so I
+
+
+have been a full-time JVR developer now
+
+
+for 20 years since 2006. Uh we were
+
+
+hired by Sun Micros Systemystems. It was
+
+
+kind of at the very beginning of the
+
+
+Rails explosion. Everyone was really
+
+
+excited. We were working on J Ruby just
+
+
+trying to get it to run basic stuff. And
+
+
+one day about about now 20 years ago we
+
+
+managed to actually load up Rails and
+
+
+route our first request. And it was
+
+
+super exciting running rails from this
+
+
+weird Ruby platform that nobody had ever
+
+
+used before that uh on top of the JVM.
+
+
+And so we got hired in by Sun Micros
+
+
+Systemystems and it's been a wild ride
+
+
+since then. So uh in in that time we had
+
+
+about 19 18 years or so of big companies
+
+
+that continued to sponsor us. Uh in 2024
+
+
+that finally came to an end. We were
+
+
+very happy for all the support that we
+
+
+got over the years. But uh now I am
+
+
+working to continue J Ruby development
+
+
+by supporting folks like you that want
+
+
+these features that want all of what I'm
+
+
+showing here. So if you're interested in
+
+
+this definitely get in contact with me.
+
+
+Okay. So J Ruby uh I have been working
+
+
+on and speaking about J Ruby for 20
+
+
+years. And the first question I always
+
+
+still get is what is J Ruby? I'm
+
+
+obviously not doing something right.
+
+
+I've done hundreds of talks all over the
+
+
+world, but there's still people who
+
+
+don't know. Let me see. How many people
+
+
+in here have ever built something with J
+
+
+Ruby?
+
+
+Oh, that's always always surprising to
+
+
+me. That's great. So, put those hands
+
+
+back up for one second. Everybody that
+
+
+doesn't have a hand up, these are folks,
+
+
+you probably know one of them that can
+
+
+tell you how their experience has gone
+
+
+and why they chose J Ruby. But let's get
+
+
+into it now and I'll explain it to
+
+
+everyone here. So what is J Ruby? Well,
+
+
+simply put, it's Ruby, but instead of
+
+
+the C Ruby, the standard Ruby runtime,
+
+
+it runs on top of the Java virtual
+
+
+machine. Uh we focus very heavily on
+
+
+being a Ruby implementation first. We
+
+
+want the workflow to be the same. We
+
+
+want the tools to be the same. You're
+
+
+going to run all the same command lines.
+
+
+uh almost everything that's pure Ruby.
+
+
+All the stuff that you run for brailles
+
+
+development should work the same on J
+
+
+Ruby as it does with the regular Ruby
+
+
+implementation. But we also have lots of
+
+
+benefits from being on top of the JVM.
+
+
+That's what I want to talk about the
+
+
+most here today. We expect that Ruby
+
+
+code should just work but maybe work a
+
+
+little bit better for certain sort of
+
+
+things.
+
+
+Okay, J Ruby users worldwide. Uh we have
+
+
+a thousands of applications out there.
+
+
+There was a half dozen to a dozen folks
+
+
+in here that have built something with J
+
+
+Ruby at some point. Uh production users
+
+
+since 2007. There were a lot of early
+
+
+adopters and we love to see that. They
+
+
+were probably a little early to the
+
+
+game, but it it was cool to have them as
+
+
+early adopters for us. Uh I will
+
+
+showcase a few of these users. Uh some
+
+
+of these are customers, some of them are
+
+
+just cool use cases that I know about.
+
+
+uh but they will show a little bit of
+
+
+why they use J Ruby and why they
+
+
+couldn't use Ruby otherwise in whatever
+
+
+project they're doing. Uh down at the
+
+
+bottom here there's another smaller QR
+
+
+code. If you are a J Ruby user currently
+
+
+we have a users.md file in our
+
+
+repository and we just like to keep
+
+
+track of who's doing what so new users
+
+
+can pop by and say that's an interesting
+
+
+use case. Maybe that's what I need J
+
+
+Ruby for.
+
+
+So to me, J Ruby, it's a way of opening
+
+
+up lots of new opportunities to the Ruby
+
+
+community. And I think these days with
+
+
+the competition of other languages, with
+
+
+all the AI stuff, we need opportunities.
+
+
+We need to be able to use Ruby in more
+
+
+places. So what's the problems with
+
+
+trying to get Ruby out there into these
+
+
+big organizations? Well, for some of
+
+
+them, the idea that there's this other
+
+
+language runtime, this other platform
+
+
+with these weird C extensions, it's just
+
+
+too much of a leap. They won't even
+
+
+consider it. They want something
+
+
+standard, something that they're used
+
+
+to, something that is tried and trusted.
+
+
+They're not going to put a new runtime
+
+
+into their stack right now. Uh, so
+
+
+sometimes there's a lot there's
+
+
+libraries that are missing from the Ruby
+
+
+ecosystem. uh you can use J Ruby and
+
+
+pull in anything that exists on the JVM
+
+
+and call it like it's regular Ruby code.
+
+
+Uh there's a lot of users that I'll talk
+
+
+about here that demand true parallelism.
+
+
+They're handling hundreds or thousands
+
+
+of concurrent requests processing many
+
+
+data files in parallel. Very difficult
+
+
+to do. You got to jump through a lot of
+
+
+hoops with regular Ruby. On J Ruby, it
+
+
+just works. So I like to say J Ruby is
+
+
+enterprise ready. It's big business
+
+
+ready. It's anybody who's afraid of
+
+
+doing Ruby. It's ready for them and
+
+
+makes it much easier to get it into
+
+
+those organizations.
+
+
+So, first off, this first problem,
+
+
+enterprise doesn't want to install Ruby.
+
+
+Well, the easy answer is J Ruby.
+
+
+Anywhere that you can install Java,
+
+
+which is pretty much anywhere, anywhere
+
+
+you can run a JVM, you can pull J Ruby
+
+
+in and start writing Ruby and Rails
+
+
+applications. And that includes
+
+
+deploying on Java application servers.
+
+
+that includes sending a single file to
+
+
+someone that they've run Java-Jar and it
+
+
+it's up and going. Very easy to get Ruby
+
+
+into these organizations. So here I have
+
+
+uh a JDK on my system. I think 26, the
+
+
+most recent one just released uh last
+
+
+month. So I have Java on my system.
+
+
+That's all that's needed. That's really
+
+
+the only thing you install there. We're
+
+
+going to use Ruby install to pull J Ruby
+
+
+down. It just fetches the tarball,
+
+
+unpacks it. There's nothing to build, no
+
+
+build tools required other than having
+
+
+the JDK on your system. And here we are
+
+
+in IRB just like we would with regular
+
+
+Ruby. We can check our Ruby version. The
+
+
+current version of J Ruby supports Ruby
+
+
+3.4.5 right now. We have a 4.0 version
+
+
+coming out hopefully next week. Uh J
+
+
+Ruby version you can see here is 1005.
+
+
+We can now start actually calling into
+
+
+JVM classes. So here's the Java lang
+
+
+runtime class. We'll get an instance of
+
+
+that. We've got our runtime class. We
+
+
+can call runtime available processors.
+
+
+And notice this is using an underscore
+
+
+here. We turn the Java case into Ruby
+
+
+case so it flows nice with the rest of
+
+
+your code. But you can use either.
+
+
+Runtime available processor says there's
+
+
+10. That's on this system with six
+
+
+efficiency cores and four performance
+
+
+cores. And we can check free memory. And
+
+
+then we've got our free memory on the
+
+
+system. But we're just using any library
+
+
+that's on the JVM as if it was a Ruby
+
+
+class. And once you've imported it,
+
+
+pulled it in, you might never even
+
+
+realize it's Java.
+
+
+So compatibility. A brief note here. I
+
+
+did mention we've got Ruby 3.4
+
+
+compatibility in the currently available
+
+
+releases. Uh some high number of 90 98%
+
+
+or 99% of the core Ruby specs pass.
+
+
+stuff that's missing is stuff that just
+
+
+can't be done on the JVM like forking
+
+
+and weird process management stuff.
+
+
+Pretty much nothing you're going to run
+
+
+into most of the time.
+
+
+Uh J Ruby 10.1, which will be out next
+
+
+week, fingers crossed, uh will support
+
+
+Ruby 4.0. There's not a whole lot of new
+
+
+features in Ruby 4.0, so it wasn't a
+
+
+huge leap, but there's a bunch of other
+
+
+cool optimizations coming along with
+
+
+that version as well.
+
+
+So deploying J Ruby, you can do the
+
+
+standard Ruby thing if you want to just
+
+
+run with a server like Puma. Puma works
+
+
+great on J Ruby. You basically just go
+
+
+into the configuration, change the
+
+
+number of workers to the number of
+
+
+threads, and you've got a fully parallel
+
+
+single process that will run your entire
+
+
+site, usually with less memory than the
+
+
+all the workers you would normally have
+
+
+to spin up. Uh we can also package J
+
+
+Ruby applications up as either an
+
+
+executable JAR file, a Java archive uh
+
+
+which you run with the Java command or
+
+
+as a WAR file, a web application archive
+
+
+that you can deploy on any Java
+
+
+application server. These are the
+
+
+probably the most popular ways that big
+
+
+customers use J Ruby because they've
+
+
+already got Java infrastructure. They
+
+
+just want to use Ruby and deploy it
+
+
+alongside all the other stuff they've
+
+
+got. J Ruby Rack is kind of the magic
+
+
+library that ties these things together
+
+
+that bridges from the Java serlet API to
+
+
+any rack based application. So we have
+
+
+people run rails, we have people run
+
+
+Sinatra, Hanami, whatever. Deploy it the
+
+
+same way on a Java server and you're
+
+
+ready to go. Uh there's also a number of
+
+
+users who just use J Ruby as a scripting
+
+
+language for a larger Java application.
+
+
+And that's another easy way to get Ruby
+
+
+into the system and start building stuff
+
+
+with it.
+
+
+First user I want to mention here,
+
+
+Quantum Inventions. It's a company out
+
+
+of Singapore. Uh they use J Ruby exactly
+
+
+like I just mentioned. They ship little
+
+
+JAR file tools to their customers. All
+
+
+they have to do is run a simple command
+
+
+line and start it up or put it in a
+
+
+service somewhere. They ship web
+
+
+application archives, WAR files that get
+
+
+deployed in on premises in the customer
+
+
+cloud. And because we have a way to
+
+
+ahead of time compile this code, you can
+
+
+actually obfuscate the whole
+
+
+application. And there's people who
+
+
+package and sell commercial software
+
+
+without worrying that the software, the
+
+
+source code is going to be stolen. It's
+
+
+all in one executable archive. You sell
+
+
+it, they deploy it on their systems, and
+
+
+they're ready to go.
+
+
+So, second problem to tackle the C
+
+
+extension problem. Uh, I've run into
+
+
+this a lot of times. There's companies
+
+
+that really are they're never going to
+
+
+have a set of C build tools on any
+
+
+server approaching production or even in
+
+
+their user acceptance. Trying to get
+
+
+them to have tools available to build C
+
+
+extensions and to deal with all of these
+
+
+other libraries that are getting pulled
+
+
+in. It just doesn't happen. Well, with J
+
+
+Ruby, there's no build tools necessary.
+
+
+All of the extensions that we ship are
+
+
+pre-ompiled regular Java bte code. They
+
+
+all optimize and inline just like any
+
+
+other piece of code on the VM. and
+
+
+nobody has to worry about these these
+
+
+security issues of having C and build
+
+
+tools on the target systems.
+
+
+Okay, so it's a JVM language. We fit
+
+
+right into the JVM just like any other
+
+
+language just like Java or Scala or
+
+
+Closure. uh extensions are written in
+
+
+Java all not insecure C code
+
+
+and uh because we all live within the
+
+
+same JVM as the same language we all
+
+
+work we get the benefit of the JVM
+
+
+garbage collector the GC's on the JVM
+
+
+are never going to be your problem
+
+
+they're never going to cause the pauses
+
+
+that you might see in the C Ruby world
+
+
+and people deploy J Ruby applications
+
+
+that have hundreds
+
+
+thousands of gigabytes terabytes of data
+
+
+in a single process and the GC doesn't
+
+
+care. It works just fine. You can have
+
+
+huge applications on J Ruby that would
+
+
+be almost impossible with the regular
+
+
+Ruby implementation.
+
+
+So a little walkthrough of the J Ruby
+
+
+architecture here, how we fit into the
+
+
+JVM. So we have our Ruby code come in on
+
+
+the left. We parse and compile that into
+
+
+our own intermediate representation, our
+
+
+own bite code basically. And then we
+
+
+have an interpreter for the bite code
+
+
+and we interpret that code for some
+
+
+amount of time uh until we real until we
+
+
+decide that it's important enough or hot
+
+
+enough to do the next step. That next
+
+
+step we turn that Ruby bite code into
+
+
+JVM bte code. Then the JVM just
+
+
+basically takes it from there. It runs
+
+
+this code, profiles it, optimizes it,
+
+
+and eventually turns your Ruby code into
+
+
+optimized native code. So this I think I
+
+
+got the first version of the JIT
+
+
+compiler done in 2008 and that was by
+
+
+far the first native JIT for Ruby in the
+
+
+world. Still working great and optimizes
+
+
+really well. So a couple examples here.
+
+
+Uh one of the big optimizations that
+
+
+came in Ruby 4.0 was improving the
+
+
+performance of constructing new objects.
+
+
+So object new, my class new whatever. Uh
+
+
+the problem in C Ruby is that anytime
+
+
+there's a piece of C code that it has to
+
+
+call the Ruby code and the JIT for it
+
+
+YJIT cannot optimize across that C
+
+
+boundary. That's a hard boundary for
+
+
+optimization. And so most of the things
+
+
+that we want from performance don't get
+
+
+optimized into the system. What they did
+
+
+is they added a new instruction that if
+
+
+it's a standard object construction then
+
+
+the JIT knows about it. It can optimize
+
+
+it a little bit better. they know that
+
+
+they C extensions are a problem for
+
+
+performance. Uh but J Ruby of course
+
+
+it's all Java. It's all on the JVM. So
+
+
+whether we call to Java or we call to
+
+
+Ruby code, it's going to inline and
+
+
+optimize just great. Let's take a look
+
+
+at a simple example here. Just
+
+
+constructing object new as fast as we
+
+
+can. How many can we do? Uh here are the
+
+
+numbers for Ruby 3.4 with YJIT. This is
+
+
+before that optimization came in. uh
+
+
+about 10.3 million objects per second.
+
+
+So this is kind of the max throughput of
+
+
+your system. Simplest possible object,
+
+
+how many you can do per second with that
+
+
+opt new optimization. Uh around 30%
+
+
+improvement. So definitely a big help
+
+
+when just trying to crank through
+
+
+objects and Ruby is an object- heavy
+
+
+platform for sure. Lots of objects being
+
+
+created, lots of garbage to clean up.
+
+
+But then we look at J Ruby on any
+
+
+standard JVM and it kind of changes the
+
+
+whole scale of this thing.
+
+
+The JVM is so efficient at optimizing
+
+
+object allocation, making it not become
+
+
+a GC problem if these are short-lived
+
+
+objects. We're orders of magnitude more
+
+
+performance on this sort of thing. And
+
+
+this cascades to arrays, hashes,
+
+
+everything that you're doing in a Ruby
+
+
+application. the JVM is going to be able
+
+
+to keep up with much higher throughput,
+
+
+much more allocation than the standard
+
+
+runtime can.
+
+
+Something a little bit less synthetic.
+
+
+This is a little there's a script that
+
+
+does generates a very simple mandelro
+
+
+bit map. Uh and here again, J Ruby just
+
+
+by the nature of being on the JVM and
+
+
+having that native JIT, the performance
+
+
+is better than twice what it is in C
+
+
+Ruby even with their native JIT. The
+
+
+JVM's got a lot more years in it, a lot
+
+
+more performance. Uh, and we generally
+
+
+can beat C Ruby on any benchmark.
+
+
+Uh, interesting to note, there are
+
+
+actually other JIT compilers for the
+
+
+JVM. One of them is the Growljit. You
+
+
+might have heard of Growl VM. Uh, if you
+
+
+plug this benchmark into the Growl VM,
+
+
+it gets even faster. Growl actually can
+
+
+eliminate a whole bunch of temporary
+
+
+objects and now we're twice as fast as J
+
+
+Ruby on a standard JDK just by switching
+
+
+configurations switching what JVM you
+
+
+use your performance can actually go up.
+
+
+So user focus here Poshmark uh is a big
+
+
+e-commerce site uh for both new and used
+
+
+products. They use J Ruby because of
+
+
+this high performance because they have
+
+
+things like flash sales. They have huge
+
+
+amounts of traffic coming through and
+
+
+they need throughput to be solid,
+
+
+latency to be as low as possible and
+
+
+it's the only way they can handle these
+
+
+thousands, tens of thousands of
+
+
+concurrent users and get the performance
+
+
+that they need.
+
+
+All right, so the libraries sometimes we
+
+
+want to use a new feature or there's a
+
+
+library in the Ruby world that just
+
+
+doesn't implement things well. Uh that's
+
+
+generally not a problem on J Ruby. if if
+
+
+there's something you want to do,
+
+
+there's probably five or six Java
+
+
+libraries out there that do it, and
+
+
+maybe like two of them are really good.
+
+
+So, you can pull any of these libraries
+
+
+into J Ruby and have all of that
+
+
+functionality available.
+
+
+Uh, hundreds of thousands of libraries
+
+
+out in Maven Central and then there's
+
+
+other repositories as well. Probably the
+
+
+biggest collection of utilities and
+
+
+libraries out there for almost any
+
+
+language platform. Uh very easy to pull
+
+
+these libraries into Ruby code. Let's go
+
+
+right to a little example here. Uh
+
+
+there's a QR code. This is to a blog
+
+
+post I wrote recently showing how to use
+
+
+a library called JFreechart. It's been
+
+
+around almost as long as J Ruby. Uh but
+
+
+it's a very solid library for generating
+
+
+charts and graphs in various formats. Uh
+
+
+first of all what we have in J Ruby is
+
+
+something called jar file which is sort
+
+
+of like a gem file for bundler but you
+
+
+specify the namespace and coordinates
+
+
+and version of what libraries you want
+
+
+to use. Here I'm pulling in some
+
+
+libraries from JFreechart.
+
+
+Uh you run the lock jars tool that we
+
+
+ship with J Ruby which is basically like
+
+
+bundle install. It'll pull those
+
+
+libraries down put them in a standard
+
+
+location on your system and now you have
+
+
+those available. No build tools, no C
+
+
+build required. It's just on your
+
+
+system.
+
+
+Here we're going to import a few of the
+
+
+classes from those libraries. So we're
+
+
+pulling in the uh standard category data
+
+
+set 3D and a keyed values basically a
+
+
+store for the values we're going to put
+
+
+into this chart. We pull in JSON and
+
+
+then this is just the standard JSON
+
+
+library with the standard file read. We
+
+
+read our JSON data in. We parse it and
+
+
+then we build up this this standard
+
+
+category 3D data set that we're going to
+
+
+populate for our uh 3D graph.
+
+
+Do a little bit of tweaking here. Add
+
+
+some titles to it. Add some headers and
+
+
+so on. Uh adjust the colors, change
+
+
+where we've got the legend for this
+
+
+whole thing. Then we can generate a PNG
+
+
+from this. And with practically no
+
+
+configuration, no customization, we've
+
+
+got this for free. Not the prettiest
+
+
+chart in the world. There's work that we
+
+
+can do to clean this up, but that was
+
+
+all maybe 10 lines of code. No C
+
+
+libraries to pull in. No le libraries
+
+
+required to be installed on the system,
+
+
+and you've got a full charting library.
+
+
+There's also backends for this with the
+
+
+exact same code. You can dump out SVG.
+
+
+You can dump out uh PDFs as well. Uh and
+
+
+there's a couple other formats, but it's
+
+
+all the same code and it works fine in J
+
+
+Ruby.
+
+
+Some of you might have done the Glimmer
+
+
+workshop here, the Glimmer web workshop.
+
+
+Uh Glimmer, there he is. Glimmer also
+
+
+supports building desktop guey
+
+
+applications. Uh and the J Ruby plus SWT
+
+
+option is a really easy way to build
+
+
+portable graphical interface
+
+
+applications. Again, package it up as a
+
+
+JAR file, send it to a customer, they
+
+
+run it, they've got a full graphical
+
+
+console on their system without
+
+
+installing anything else. It's really
+
+
+amazing.
+
+
+Uh we also have in the past supported uh
+
+
+a set of Android APIs called Rub. These
+
+
+are a little bit rotted at this point,
+
+
+but we're willing to work with somebody
+
+
+to update them. This is a demo
+
+
+application, Rubato IRB. Basically gives
+
+
+you a little IRB console and a very
+
+
+simple editor within an application on
+
+
+your Android phone. You can try out Ruby
+
+
+stuff. You can type in code and run it.
+
+
+uh just needs a little bit of updating
+
+
+and we can get this back out there. So
+
+
+if you're interested in building Ruby
+
+
+applications for Android, just let us
+
+
+know.
+
+
+So the user focus I want to have here is
+
+
+Cami. Uh they are a tool for education
+
+
+used around the world. Millions of
+
+
+students and teachers. Uh basically
+
+
+teachers post homework. The kids go in
+
+
+and they can do their edits. They can
+
+
+fill in the work work worksheets send it
+
+
+back to the teacher. Teacher grades it.
+
+
+teacher marks it up and so on. But this
+
+
+application, it's a standard Rails app
+
+
+in the front end, but all of the heavy
+
+
+lifting is done by a backend J Ruby
+
+
+service. It uses PDF libraries on the
+
+
+JVM, which are fast and standards
+
+
+compliant. They process millions and
+
+
+millions of PDFs through this thing a
+
+
+day, and it works great. They could not
+
+
+be handling this load if they didn't
+
+
+have JB available.
+
+
+So big data and high concurrency. This
+
+
+is where we start to scale up and have
+
+
+problems with some of the the systems we
+
+
+use with regular Ruby. JVM is really
+
+
+just designed for this. Um, and I would
+
+
+even say if you have a tiny app and C
+
+
+Ruby works well for you, stick with it.
+
+
+But when you need us, the J Ruby
+
+
+platform, the JVM is here to help take
+
+
+it up to that next level. So I mentioned
+
+
+the garbage collectors, worldclass GCs,
+
+
+the best garbage collectors in the
+
+
+world. Uh many of these configured can
+
+
+be configured to be literally pauseless.
+
+
+You trade a little bit of throughput for
+
+
+zero pause times in your application.
+
+
+Not something that the standard Ruby can
+
+
+even get close to doing. Uh GC is
+
+
+probably never going to be your problem.
+
+
+I've run huge amounts of data through J
+
+
+Ruby running with hundreds of threads
+
+
+creating a tremendous amount of garbage.
+
+
+GC never even bats an eye at it.
+
+
+Uh we get some nice tools for monitoring
+
+
+this stuff too. This is called visual
+
+
+VM. It's a standard open- source tool
+
+
+for the JVM. Uh what you're seeing here
+
+
+on the left is some basic stats. How
+
+
+many threads are running, how much
+
+
+overall heap size there is. On the right
+
+
+is actually a live view of the garbage
+
+
+collector. So you can monitor your
+
+
+application locally or in production
+
+
+over secure socket and see whether the
+
+
+heap is growing, whether we've got that
+
+
+nice saw to that keeps collecting or
+
+
+whether things are leaking over time.
+
+
+And then from there you can pull off
+
+
+things like heap dumps. You can look for
+
+
+memory memory uh problems. Uh and really
+
+
+an amazing set of tools. And this is
+
+
+just the beginning.
+
+
+So on the concurrency side, this is
+
+
+something that there's been a lot of
+
+
+work recently in the Ruby world trying
+
+
+to do concurrent uh concurrent execution
+
+
+of code, concurrent running of Ruby
+
+
+stuff. uh prior to the introduction of
+
+
+the Ractor API pretty much impossible to
+
+
+get concurrency in a single Ruby
+
+
+process. You need to spin up workers and
+
+
+you need to coordinate between them
+
+
+somehow. Uh with J Ruby, it's trivial to
+
+
+do this. You can use multiple threads.
+
+
+You can use shared data in the same
+
+
+process and fully parallelize fully get
+
+
+the use of all of the cores on your
+
+
+system. So I made a little demo example
+
+
+here. Uh this is basically just trying
+
+
+to process JSON as fast as possible. So
+
+
+we've got say hundreds of JSON files. In
+
+
+this case, we're reparsing one giant one
+
+
+megabyte JSON file that came from
+
+
+somewhere. But you can imagine if we've
+
+
+got these coming in from all sorts of
+
+
+requests, we need to be able to handle
+
+
+these in parallel and move quickly with
+
+
+them. Here is a version that uses
+
+
+threads. So instead of doing a hundred
+
+
+parses in one thread, we're going to do
+
+
+10 on each and split that work up
+
+
+between the threads. And it's really
+
+
+that easy to get the use of all the
+
+
+cores in my system. Spin up 10 threads,
+
+
+have them each do a piece of the work,
+
+
+and you get full use of the system. This
+
+
+is roughly the equivalent for C Ruby
+
+
+right now. You use a ractor to do this.
+
+
+Um there's a lot of details missing here
+
+
+like you would need to make that data
+
+
+rack safe when you pass it back to the
+
+
+rest of the system. you can't interact
+
+
+with anything that's mutate mutable from
+
+
+the main system. Uh, a lot of hoops that
+
+
+you have to jump through, but you can
+
+
+get parallelization a little bit better
+
+
+with ractors now. So, I'm excited to see
+
+
+this coming along and it means people
+
+
+are going to be doing a lot more
+
+
+interesting thread safe code, too. So,
+
+
+let's compare these.
+
+
+So, we've got C Ruby with threads on the
+
+
+left. Basically, not really getting any
+
+
+extra usage out of the 10 cores that I
+
+
+have in my system. uh it's kind of
+
+
+spread out across those cores, but each
+
+
+one's only using a tiny bit of what the
+
+
+CPU can do. So in this case, it was
+
+
+about a 1.6 times improvement. Uh that's
+
+
+probably because the actual JSON parsing
+
+
+can sort of get parallelized. Ractors
+
+
+are definitely helping here. So here
+
+
+with my with the the four performance
+
+
+cores, 10 efficiency cores, I get about
+
+
+a 3.7 times improvement by using 10
+
+
+ractors. So this is certainly a big
+
+
+improvement over what we had in standard
+
+
+Ruby in the past. But then of course J
+
+
+Ruby, we're maxing out all of the cores.
+
+
+Uh those six efficiency cores translate
+
+
+to about another two uh two performance
+
+
+cores, get about six times performance
+
+
+on my system, but I could throw 50
+
+
+cores. I could throw a hundred cores at
+
+
+this, max them all out, uh and the
+
+
+Ractors would still be just kind of
+
+
+ticking up a little bit. very easy to
+
+
+get fully parallel code running anything
+
+
+on J Ruby.
+
+
+So, how many people have used Log Stash
+
+
+before? Log Stash actually is uh has
+
+
+been a J Ruby app for pretty much its
+
+
+entire lifespan. This is a centralized
+
+
+log aggregation tool that you deploy on
+
+
+one server and all of the logs from all
+
+
+of your applications get dumped into
+
+
+this and managed and distributed. Uh
+
+
+clearly lots of parallel applica
+
+
+parallel use there. lots of requests
+
+
+coming in from all over your enterprise.
+
+
+Blog Stash could not be what it is today
+
+
+without J Ruby and being able to handle
+
+
+this stuff massively parallel across the
+
+
+whole system.
+
+
+Uh, another one that takes big advantage
+
+
+of this substitute alert is an
+
+
+application used in the United States
+
+
+for distributing substitute teacher
+
+
+requests. Uh, teachers out sick, anybody
+
+
+that's available that day can get a
+
+
+notification saying we've got a
+
+
+substitute slot open. So that's sending
+
+
+out hundreds or thousands of requests
+
+
+all at the same time, responding to
+
+
+their yes or no whether they can take
+
+
+that job. All scales really well and
+
+
+they've been a great customer for us and
+
+
+we work very closely with them to keep
+
+
+improving J Ruby and making sure it
+
+
+works for their application.
+
+
+Uh this is a fun quote I got recently
+
+
+from someone a new user that just
+
+
+started using J Ruby about two months
+
+
+ago. Uh J Ruby is excellent. I don't
+
+
+even code for MRI anymore and I don't
+
+
+miss it. They're getting better
+
+
+performance, better scaling, and the
+
+
+entire set of features on top of this
+
+
+platform.
+
+
+So, let's talk a little bit about J Ruby
+
+
+Futures here. Uh 10.1 and beyond. I
+
+
+mentioned that we've got 10.1 coming
+
+
+out. We're very excited about this.
+
+
+There's a bunch of new optimizations.
+
+
+We've managed to shrink the size of
+
+
+objects. We've managed to improve the
+
+
+number of places where it inlines and
+
+
+optimizes code well for us. Uh we're
+
+
+also taking more advantage of a whole
+
+
+bunch of new JVM features. There's
+
+
+features that can pre-optimize your
+
+
+code. So once you go into production,
+
+
+it's already warm. It's already running
+
+
+fast. There's a a feature called liiput
+
+
+that shrinks objects even more in
+
+
+memory. J Ruby's objects are actually
+
+
+down about half the size of the objects
+
+
+in C Ruby in memory. And I was amazed. I
+
+
+ran a test yesterday where I basically
+
+
+just create 10 million objects and hold
+
+
+them in memory. And for the first time,
+
+
+the JVM running J Ruby had a smaller
+
+
+process size than C Ruby. I was blown
+
+
+away.
+
+
+Uh so yes, upgrade your JVM and you get
+
+
+these features for free, but we're
+
+
+continuing to integrate them and make it
+
+
+automatic that you get the best out of
+
+
+whatever level of JDK you're on. So a
+
+
+final problem. Maybe this sounds cool.
+
+
+Maybe you want to start playing with
+
+
+this. Maybe you don't know how to get
+
+
+started with J Ruby. Well, obviously my
+
+
+company can help with this. I've been
+
+
+working on J Ruby for 20 years. I can
+
+
+handle anything that you want to throw
+
+
+at it. So please, if you're interested,
+
+
+get in contact with us. We can help you
+
+
+do some trials for your applications,
+
+
+help you do new application work. Uh
+
+
+yeah, new development, migration of
+
+
+existing apps to J Ruby. If you're
+
+
+already running J Ruby and you don't
+
+
+know how to upgrade it, we can help with
+
+
+that, too. This is how J Ruby
+
+
+development is funded today. Uh I get I
+
+
+I got a little bit of GitHub sponsors
+
+
+and that like buys a couple beers for me
+
+
+a month, but this is where it actually
+
+
+the rubber hits the road. So, if this is
+
+
+interesting to you and you think it
+
+
+might help your company, please get in
+
+
+touch. Other than that, I am here for
+
+
+free questions and you can ask me
+
+
+whatever you like. I've got a bunch of J
+
+
+Ruby stickers and HDIA stickers down
+
+
+here for anybody who wants them during
+
+
+the break. Uh I think we have time for
+
+
+some questions. Is that correct?
+
+
+Excellent. So, let's get to that right
+
+
+over here.
+
+
+>> I have how to switch it on.
+
+
+>> One, two, three.
+
+
+The first ones.
+
+
+>> Yeah.
+
+
+>> One, two, three. Okay. Hey, hello. Thank
+
+
+you for speech. It was very interesting.
+
+
+Uh, really short question. What is bad
+
+
+about J J J J J J J J J J J J J J J J J
+
+
+J J J J J J J J J J J J J J J J J J J J
+
+
+J J J J R R Ruby.
+
+
+>> If I if I had a 45minut talk, I would
+
+
+have put that one in. Um, so the the
+
+
+other a the other question that I get
+
+
+after I tell people what J Ruby is, the
+
+
+qu the next question is, well, why isn't
+
+
+everyone using this? And I'm like, well,
+
+
+yeah, it does all of this stuff. Why
+
+
+doesn't everyone use it? Uh, there are
+
+
+two or three things that people run
+
+
+into. Number one, and this is improving
+
+
+every day and is much better now,
+
+
+startup time. Uh, the JVM is not known
+
+
+for getting up and going fast. So let's
+
+
+say 5 10 years ago uh J Ruby running a
+
+
+rake task where C Ruby would take 500
+
+
+milliseconds to a second J would be like
+
+
+four or five seconds to do it. It's just
+
+
+enough to throw off your flow and people
+
+
+get really annoyed especially if you're
+
+
+doing lots of rake tasks lots of Rails
+
+
+commands uh you know iterative
+
+
+development on a command line it gets in
+
+
+the way. That's much better now. J Ruby
+
+
+is probably going to be in the one to
+
+
+1.5 seconds for a big rake task or
+
+
+something that loads a lot of Ruby gems.
+
+
+Our baseline startup is well under a
+
+
+second, probably down to 400
+
+
+milliseconds. So that's kind of going
+
+
+away, but that's one of the first
+
+
+things. Uh the other one that people run
+
+
+into, we do not support all of those C
+
+
+extensions that are out there. In most
+
+
+cases that are big important libraries
+
+
+like Anokuggeiri, like JSON, like Psych,
+
+
+for YAML, we have our own J Ruby version
+
+
+that will install automatically when you
+
+
+get the gem. But we still find lots of
+
+
+little C extensions all over the world
+
+
+that need a J Ruby version. Uh sometimes
+
+
+we can point you to a JVM library that
+
+
+does the same thing and then it's just a
+
+
+matter of changing your API calls a
+
+
+little bit. Uh other times we'll work
+
+
+with those authors to get a J Ruby
+
+
+version that works. But that's probably
+
+
+the next thing that most people trip on.
+
+
+Other than that, it's once you get it up
+
+
+and going, if you can take your
+
+
+application and bundle it, it's probably
+
+
+just going to work. Like almost all of
+
+
+it should just work. It's getting past
+
+
+the the the concerns about startup time.
+
+
+And we have various ways to mitigate it
+
+
+and any libraries that are missing
+
+
+support for J Ruby.
+
+
+>> Sure. Any other questions?
+
+
+>> Hi, thank you for your talk. Um I might
+
+
+catch you later for more elaborate
+
+
+answer but just uh in Lyman terms um
+
+
+what's the difference between J Ruby
+
+
+especially on growvm and truffle Ruby?
+
+
+>> Okay difference between J Ruby and
+
+
+truffle Ruby. Uh truffle Ruby is another
+
+
+implementation. It's not it's not really
+
+
+a JVM version of Ruby. it kind of only
+
+
+runs on growl VM and it depends very
+
+
+heavily on growl VM to have any sort of
+
+
+performance at all. Uh they have taken a
+
+
+very different approach. They are trying
+
+
+to support C extensions. They are trying
+
+
+to be absolute blazing fast performance
+
+
+on small things on on fast little
+
+
+benchmarks. uh we have focused more on
+
+
+being a whole ecosystem, a whole
+
+
+platform pulling in JVM libraries,
+
+
+making it easy to deploy. Uh we've just
+
+
+kind of had different goals. Uh as far
+
+
+as I know, J Ruby still has way more
+
+
+deployments out there. We are probably
+
+
+the most popular really like the only
+
+
+alternative Ruby with huge scales and
+
+
+large applications that have been
+
+
+deployed out there. Um, truffle Ruby
+
+
+also some of the stuff I talked about
+
+
+with us being smaller and more compact
+
+
+in memory. Generally, truffle Ruby is
+
+
+going to use a lot more memory because
+
+
+of the way they optimize, because of the
+
+
+way the systems designed. And the
+
+
+startup time also tends to be a big
+
+
+problem for them. They haven't really
+
+
+solved that issue.
+
+
+>> Any other questions?
+
+
+>> Thank you. Can you reliably run a Rails
+
+
+application on J Ruby?
+
+
+>> Yes, you can. And there's actually a
+
+
+bunch of users out there. Hundreds,
+
+
+thousands, I don't know. We only hear
+
+
+from them when we break something. So
+
+
+like like I probably didn't even know
+
+
+about any of these applications in the
+
+
+room. Uh Rails for sure is is a big use
+
+
+case for us. You can take a Rails
+
+
+application. Rails itself has done a lot
+
+
+of work over the years to be thread
+
+
+safe. Uh the one catch right now, we
+
+
+still don't quite have database adapters
+
+
+for 8 8.0 and 8.1 out, but that's almost
+
+
+ready and almost done. I actually did
+
+
+the MCP workshop and I followed along
+
+
+the whole thing just using a little bit
+
+
+older version of Rails, generated the
+
+
+scaffolds, hooked up the MCP stuff, and
+
+
+it all worked just exactly like it would
+
+
+in C Ruby modulo a few little
+
+
+configuration changes. So yeah,
+
+
+definitely Rails works well. Um, if you
+
+
+want to want to see some super high
+
+
+performance, there are people who have
+
+
+taken little Sinatra applications with
+
+
+like the SQL database library handling
+
+
+like 10,000 concurrent requests,
+
+
+hundreds of thousands of stuff per
+
+
+second, huge amounts of scale on that.
+
+
+So, all the way from little service
+
+
+level applications up to full Rails apps
+
+
+works great.
+
+
+We got time for one more question.
+
+
+Can you before Sunday help me change my
+
+
+Ractor talk to use J Ruby?
+
+
+>> So you're speaking Sunday.
+
+
+>> Yeah.
+
+
+>> Okay. That's not the question. The real
+
+
+question is so with Rails and like
+
+
+deploying to a platform
+
+
+like a Heroku or a Railway or something
+
+
+like that, what is that like? Is is that
+
+
+any more significant in terms of getting
+
+
+it up and running on that kind of a
+
+
+platform?
+
+
+>> I don't know about all of them. I know
+
+
+Heroku, every time we do a release, they
+
+
+put out the J Ruby build pack that works
+
+
+fine just like it does with regular Ruby
+
+
+and it's all there and works well. Um,
+
+
+any of these cloud services that have
+
+
+support for deploying Java applications,
+
+
+obviously they can deploy J Ruby apps
+
+
+very easily. uh really because the
+
+
+command line and the whole workflow for
+
+
+J Ruby development is pretty much the
+
+
+same. Any of these can easily support
+
+
+it. Uh it's just a matter of probably
+
+
+providing a configuration file that does
+
+
+Ruby install J Ruby instead of Ruby
+
+
+install 4.0 or whatever. There's really
+
+
+not that much difference.
+
+
+>> And then you said the adapters for 808.1
+
+
+aren't there yet, but soon.
+
+
+>> Yeah. So there are a couple folks that
+
+
+really needed them. They've told me that
+
+
+they are just running from gems they
+
+
+built off master and they're working
+
+
+fine. I think the main reason we haven't
+
+
+released is because we have a high bar
+
+
+for passing all of the active record
+
+
+tests or as many of them as we can and
+
+
+we're not quite where we wanted to be
+
+
+for a release yet.
+
+
+>> Thank you.
+
+
+>> Sure. And I think that's it. We've got a
+
+
+little break before the next talk. Thank
+
+
+you very much. Come get some stickers.
+
+
+You

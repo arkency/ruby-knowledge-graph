@@ -1,0 +1,1704 @@
+And uh now I would like to welcome
+
+
+Emiliano who's going to tell us when
+
+
+rest is not enough. Welcome.
+
+
+>> Thank you very much.
+
+
+>> Hello everyone. Thank you to be here
+
+
+today and thank you very much to the
+
+
+organizers that are incredible for this
+
+
+incredible and warm conference. Uh a few
+
+
+words about me. I'm a an independent
+
+
+consultant based in in Mona, Italy.
+
+
+Also, I'm the maintainer of the Ruby
+
+
+asterisk jam that is just um a gem for
+
+
+interacting with asterisk PBX using a
+
+
+Ruby. Uh the fun story is that I started
+
+
+this gem like 15 years ago. Then I
+
+
+stopped it using it because I I didn't
+
+
+need it anymore. Then last year, as you
+
+
+may know, um, Psychic made this gem
+
+
+fellowship fund and I applied and I won.
+
+
+It's amazing because uh also Marot I I I
+
+
+guess you know who is uh won as so it's
+
+
+really really incredible for me and uh
+
+
+also I'm one of the organizers of the
+
+
+Rubicon conference after Ruby day that
+
+
+stopped in 2024. Me and a bunch of
+
+
+friends decided to start another
+
+
+conference in Italy. It's going to be in
+
+
+three weeks. There are still tickets so
+
+
+please if you want let me know and I
+
+
+hope to see you in Remini if the weather
+
+
+is nice going to be amazing if it rains
+
+
+I don't know anyway
+
+
+so let's go to the topic why we are
+
+
+using or rest or why our first thought
+
+
+goes to rest well first of all because
+
+
+let's face it it's a de facto standard
+
+
+everyone knows it everyone uses it in a
+
+
+way it's similar to serving HTML
+
+
+because it's just the same. We are just
+
+
+serving JSON or XML or any any other
+
+
+format you may like. So it's simple,
+
+
+it's efficient and it's actually really
+
+
+accessible also for beginners and is the
+
+
+standard in in Rails as you may know.
+
+
+Now, why we shouldn't use rest? Well, if
+
+
+you have followed the uh DHH keynote at
+
+
+last race world, he said we basically
+
+
+are crowd monkeys. And I kind of
+
+
+disagree because yeah, at the end of the
+
+
+day, this is what we do. We manipulate
+
+
+data. Uh but are we sure that this is
+
+
+just crud? I think that also with the AI
+
+
+revolution, we are building modern apps
+
+
+with really advanced features and for
+
+
+that we need the right technology and
+
+
+advanced technology, not just standard
+
+
+rest.
+
+
+Also,
+
+
+the fact is we find ourselves in a
+
+
+hammer and nail situation. We have a
+
+
+really good tool, but it just doesn't
+
+
+fit for any situation.
+
+
+The truth is we need alternatives. REST
+
+
+is just one of the tools we can use.
+
+
+Let's see a bunch of them.
+
+
+First of all, the the first I'm going to
+
+
+mention is gRPC. Um if you were at UKO
+
+
+last last year in Vienna Dcastello, uh
+
+
+you have seen my my talk about gRPC on
+
+
+on Rails. Um now I'm not going to uh
+
+
+describe that much uh this uh this
+
+
+protocol because it would be too much a
+
+
+matter of 30 minutes just for gRPC. Uh
+
+
+let's just mention it was released by
+
+
+Google in 2015
+
+
+in um as open source on GitHub. It's
+
+
+based on two main pillars. The first one
+
+
+is HTTP2 that is just the second version
+
+
+uh the second iteration let's say the of
+
+
+HTTP uh based on the data streaming fast
+
+
+data streaming data compression and so
+
+
+on and protobuff protobuff is basically
+
+
+a mechanism for data serialization for
+
+
+serialization and d serialization of
+
+
+data so gpc uh is made for high
+
+
+performance strong typing guarantees
+
+
+data streaming and security by design.
+
+
+What are the main differences between
+
+
+gRPC and rest you may ask? Well, first
+
+
+of all, I would say that gRPC is much
+
+
+much faster uh than REST thanks to the
+
+
+streaming uh capability of HTTP2
+
+
+and to the serialization mechanism.
+
+
+on the other side is much more difficult
+
+
+to integrate because as we we are going
+
+
+to see in the next slides it's uh the
+
+
+client of the server basically need to
+
+
+agree on a contract that is the protoile
+
+
+and whenever this contract this protoile
+
+
+change it should change both on the
+
+
+server and on the client side. So it's
+
+
+really much difficult if you need to add
+
+
+a function or add an attribute on the
+
+
+server side you have to change in all
+
+
+clients for the communication to to be
+
+
+successful and it's harder to debug
+
+
+because of the serialization. you cannot
+
+
+see what it's really happening between
+
+
+the two sides of the communication and
+
+
+that could be uh make things harder for
+
+
+um for debugging.
+
+
+Now let's say let's see how to integrate
+
+
+gRPC for example on rails all the
+
+
+examples are rails based but of course
+
+
+you can use Sinatra hanami or the
+
+
+framework you you prefer uh you
+
+
+basically start with a initializer that
+
+
+it's creating a thread opening a port on
+
+
+um the the default one is 50,51
+
+
+um and this is in initializer creates a
+
+
+just creates a thread and starts it with
+
+
+with the gRPC um library.
+
+
+Hopefully you you're going to see it
+
+
+hopefully. Uh this is a protoile and the
+
+
+protoile consists of a service like
+
+
+that. Oh, sorry. This is this example is
+
+
+just a simple e-commerce really really
+
+
+stupid and and consists of a service
+
+
+called order service that is made of um
+
+
+a function defined as RPC in gpc
+
+
+accepting a create order request and
+
+
+returning a create order response and
+
+
+the create order request is made of a
+
+
+customer ID a product ID and a shipping
+
+
+address. You can see the data types here
+
+
+and the um position over here that are
+
+
+are really important in JPC and
+
+
+returning a response an order ID a total
+
+
+in cents and the currency
+
+
+starting from this file uh through a set
+
+
+of tools that are um available
+
+
+made available by by Google for every
+
+
+language. You can get a class like that
+
+
+that is always generated every time you
+
+
+you you run it starting from the the
+
+
+protoile
+
+
+that just guarantees serialization and
+
+
+the serialization. Then the logic
+
+
+is taken by this class that is
+
+
+subclassing
+
+
+the e-commerce order service that we
+
+
+have just seen. That is quite simple.
+
+
+We retrieve the customer, retrieve the
+
+
+product, create the order and return the
+
+
+object. Quite easy. So let's see how it
+
+
+works. Left side is the server starting.
+
+
+Okay. Uh answering on 5051. Then on the
+
+
+right side we see uh um a client called
+
+
+gRP curl. That is just curl for gRPC.
+
+
+Let's see how it works.
+
+
+It accepts the protoile that I mentioned
+
+
+the sort of contract.
+
+
+It accepts uh the parameters as a JSON.
+
+
+I I've specified product ID one
+
+
+uh customer ID one of course always uh
+
+
+pre-created and the address the address
+
+
+and the service that we are calling and
+
+
+as you see we get order ID total cents a
+
+
+currency fast but yeah this is a simple
+
+
+uh simple case so it's not but I assure
+
+
+you that I've used it in production in
+
+
+heavily um performant production
+
+
+environments and it's it's amazing. It's
+
+
+really really performant. Now let's see
+
+
+what it happens when the product is is
+
+
+wrong or is not existent. So left side
+
+
+server right side I changing the the
+
+
+product ID and what we get is couldn't
+
+
+find product quite easy.
+
+
+Now let's talk about GraphQL.
+
+
+May many many of you for sure have used
+
+
+it. It was released by Facebook in 2015.
+
+
+It's uh defined as a declarative data
+
+
+fetching and modification and its main
+
+
+um main characteristic is to be single
+
+
+endpoint instead of rest that tends to
+
+
+prefer multi-endpoint.
+
+
+It's basically rest just with a payload
+
+
+that defines what objects I want to get
+
+
+or I want to manipulate.
+
+
+And uh this solves two main problems
+
+
+that was that were uh experienced by
+
+
+Facebook at the time. Overfetching and
+
+
+underfetching. What is overfetching?
+
+
+Overfetching means I just need one
+
+
+single object and two attributes and I
+
+
+get like maybe one object but 50
+
+
+attributes and this is a waste a waste
+
+
+of resources a waste of network and so
+
+
+on. on the same time under fetching.
+
+
+What it means means I mean if I need
+
+
+three objects and I need to make three
+
+
+calls to three different endpoints in
+
+
+that case I can call I can make a single
+
+
+call specifying the three objects I need
+
+
+with the attributes and just what I need
+
+
+and I get it and it's really really
+
+
+convenient. In this case, we have uh the
+
+
+GraphQL jam that allows me allows me to
+
+
+specify a mutation because on GraphQL
+
+
+jargon, a mutation is when I uh change
+
+
+something on the server and well the
+
+
+code is basically just the same. I
+
+
+retrieve the customer, I retrieve the
+
+
+product and I create the order.
+
+
+Now let's see how it works. I'm starting
+
+
+the server
+
+
+on the right side as you see
+
+
+I'm pasting the command that is just
+
+
+curl so it's rest it's rest but with a
+
+
+very very different uh and specific
+
+
+payload and what I get is just the same
+
+
+data we create order order ID total
+
+
+sense currency as we have seen it before
+
+
+now what we get when the product ID is
+
+
+wrong.
+
+
+As you may imagine,
+
+
+we we're going to get an error. But in
+
+
+this case, I'm not showing it. But I had
+
+
+to make some modifications to do the
+
+
+code because otherwise I would have got
+
+
+a 404 page and that wasn't really pretty
+
+
+to show.
+
+
+Now let's see MQTT. I don't know how
+
+
+many of you have used it. MQTT uh has
+
+
+been uh developed
+
+
+mainly for IoT devices.
+
+
+Um it has a broker subscriber
+
+
+architecture
+
+
+uh meaning that every client subscribe
+
+
+to a a broker. It's a pub sub uh
+
+
+mechanism uh as we have seen uh uh
+
+
+before. Um
+
+
+what's also interesting is the quality
+
+
+of service concept. uh basically uh
+
+
+every message every broker supports
+
+
+three different level of quality of
+
+
+service. it's zero that is I send I
+
+
+publish a message and I don't care how
+
+
+many times it is delivered one quality
+
+
+of service one is I post and at least
+
+
+one time it is it is going to be
+
+
+received and quality of service two is I
+
+
+post once and is received just one time
+
+
+for every client that that is listening
+
+
+now comparing to rest. What is
+
+
+interesting and we're going to see how
+
+
+it's the higher performance of of MQTT
+
+
+and another very interesting feature in
+
+
+my opinion is the possibility to make
+
+
+birectional communication. Why?
+
+
+If you uh imagine um a situation where
+
+
+an an app client on a on a phone and a
+
+
+server making REST calls to the server,
+
+
+the data the data process can go the
+
+
+other way around. A server cannot send
+
+
+that data uh to to the phone for obvious
+
+
+uh network reason. With MQTT you can
+
+
+actually
+
+
+of course the downside is that you need
+
+
+to have a broker so it's a more complex
+
+
+architecture and needs maintenance
+
+
+uptime and so on.
+
+
+For rails we have a jam called MQTT.
+
+
+In this case, I just created um um an
+
+
+initializer
+
+
+initializing MQTT client because on
+
+
+Rails you create a client connecting to
+
+
+the broker.
+
+
+You are then we are subscribing to a
+
+
+orders topic because in MQTT you have
+
+
+the topic concept
+
+
+and then
+
+
+when we are subscribed whenever we
+
+
+receive a message on that topic we
+
+
+retrieve the customer retrieve the
+
+
+product create the order and so on.
+
+
+Uh, of course I had to modify my little
+
+
+stupid application to add an MQTT
+
+
+broker. Um, I'm using Mosquito that is
+
+
+the most common than open source
+
+
+um standard
+
+
+and let's see how it goes. This time we
+
+
+are starting the server but we are also
+
+
+starting the broker. And on the right
+
+
+side I'm using mosquito pub that is the
+
+
+client version of mosquito that works
+
+
+just the same. I calling local host on
+
+
+the MQTT port.
+
+
+This T is the topic orders that we've
+
+
+seen before and the payload.
+
+
+Nice. Really fast. But if you noticed,
+
+
+I didn't got any response.
+
+
+Why? Because in this case, the the
+
+
+client that is publicating a message
+
+
+publicates to the broker and just stops
+
+
+and just returns. This is the reason why
+
+
+it's fast because we are not waiting for
+
+
+anything.
+
+
+This could lead to some downsides when
+
+
+the product doesn't exist because
+
+
+I change the product.
+
+
+I I send a request on the server. I see
+
+
+okay but I cannot find the product but
+
+
+the client doesn't know. Well, maybe the
+
+
+client could know
+
+
+uh with a always this topic uh mechanism
+
+
+if I subscribe to a order failed for
+
+
+example topic and the server publish a
+
+
+message on that on that topic but as you
+
+
+understand okay this this will be
+
+
+perfect birectional communication but
+
+
+it's harder to achieve
+
+
+Now, I know you weren't expecting an an
+
+
+a reference to LLM.
+
+
+It's incredible, right? Um, and also if
+
+
+you attended the incredible workshop
+
+
+yesterday of uh made by Pavl was
+
+
+incredible. I hope I not saying any
+
+
+
+
+Uh anyhow,
+
+
+MCP as a protocol stands for model
+
+
+context proto was released uh by
+
+
+entropic in 2024.
+
+
+Looks like ages ago is not it's just one
+
+
+and a one year and a half. Uh it is
+
+
+based in JSON RPC
+
+
+and uh what what we can we say of course
+
+
+many of you if not all of you have used
+
+
+it. It has been designed for LLMs.
+
+
+That means that uh in respect of rest
+
+
+this we can say it's LLM ready. Why we
+
+
+can say that? Of course an LLM let's say
+
+
+cloud code winds surf whatever
+
+
+of course they can use rest but for them
+
+
+is much more token consuming with LLM
+
+
+with with MCP this is just made for them
+
+
+and this this is the reason why we can
+
+
+say it's token efficient of course on
+
+
+the downside are the lower performances
+
+
+and we can say we can see on the on the
+
+
+following we want slides
+
+
+in this case I'm using fast MCP that
+
+
+it's not really maintained anymore but
+
+
+never mind it's just for showing in this
+
+
+is initializer we are creating the the
+
+
+server specifying a few uh a few
+
+
+attributes a few functions
+
+
+then creating a tool
+
+
+taking as inputs uh the customer ID, the
+
+
+product ID and the address as before and
+
+
+just uh with the same process we have
+
+
+seen three times
+
+
+uh in uh the example that will follow
+
+
+I've been using code so I specified uh I
+
+
+I created this small configuration file
+
+
+where I I I explain to code where is the
+
+
+MCP
+
+
+So let's try
+
+
+left side the server on the right side
+
+
+I'm opening code. This time instead of
+
+
+pasting a very really complicated
+
+
+command I'm just writing create an order
+
+
+uh for product ID customer and shipping
+
+
+address.
+
+
+Uh I've called this uh application
+
+
+zopify
+
+
+but um actually as you see I've not said
+
+
+create an order on slopify. I just said
+
+
+create an order but as you see on this
+
+
+on the left it's working is receiving
+
+
+the request. Of course, it's stewing and
+
+
+so on. But hey, after 30 seconds, I got
+
+
+the same thing that I achieved before.
+
+
+But this time,
+
+
+uh, Claude is adding a little bit of
+
+
+magic powder.
+
+
+It says order created successfully
+
+
+with ordered ID with the total already
+
+
+in not cents anymore but I have the the
+
+
+right currency and so on and shipping
+
+
+too. Great.
+
+
+Now the real magic is what happens when
+
+
+the product is wrong.
+
+
+So I start running the server writing
+
+
+the same
+
+
+and let's see what happens. It will take
+
+
+a while. So you could but it's
+
+
+interesting for me because it shows you
+
+
+how performances differs a lot from uh
+
+
+protocol to protocol. But okay,
+
+
+we have my wonderful stack trace. But
+
+
+what's interesting for me is that Clo
+
+
+analyzed it say and offered me a
+
+
+solution. He said, "Okay, it doesn't
+
+
+exist.
+
+
+Could you double check the product ID
+
+
+without me saying anything but active
+
+
+record product not found?" So this is
+
+
+really, really, really interesting for
+
+
+me.
+
+
+Summing up, I will say you should use
+
+
+gRPC
+
+
+when you need to uh make a communication
+
+
+between different systems in as the same
+
+
+architecture and you need really really
+
+
+high performances.
+
+
+GraphQL I would say you should use it
+
+
+whenever uh you need to make different
+
+
+queries and in one situation you need a
+
+
+a certain set of attributes and objects
+
+
+so you need flexibility and this is
+
+
+where graphql win
+
+
+MQTT whenever whenever is IoT it's MQTT
+
+
+that for sure but also if you are in a
+
+
+in a setting in an environment when you
+
+
+may
+
+
+use also a birectional communication
+
+
+and lastly well NCP whenever you have
+
+
+LLM that's for sure. Thank you very
+
+
+much.
+
+
+>> Are there any questions?
+
+
+>> Hello. Thank you for the talk. You're
+
+
+>> welcome.
+
+
+>> Um, I have a couple of friends at Google
+
+
+who told me that gRPC is not used at
+
+
+Google anymore.
+
+
+>> And
+
+
+>> I have one that says the opposite, but
+
+
+it's it depends.
+
+
+>> But, uh, from my personal experience, I
+
+
+I did experience some problems with gRPC
+
+
+as well, but we found protocol called
+
+
+TWP, which is kind of an impro
+
+
+improvement on gRPC and uses the
+
+
+protobuff. And I really had a lot of
+
+
+good uh things to say about it. So I
+
+
+>> what's it called?
+
+
+>> Twerp.
+
+
+>> So I think it was Twitch who developed
+
+
+this. They had a lot of problems with
+
+
+JPC. I highly recommend you to check it
+
+
+out.
+
+
+>> No. Okay. Sure. Thank you very much.
+
+
+Well, uh my my contact at Google has
+
+
+said they use it a lot and I I believe
+
+
+him but I I I guess they're so big that
+
+
+Yeah. Everyone has his own experience.
+
+
+In my experience, uh I've been using
+
+
+gRPC in a very very uh performant needed
+
+
+application. Uh it's a basically it's a
+
+
+fleet tracking application
+
+
+uh for snow plows. So whenever it starts
+
+
+snowing in Italy, uh from a moment you
+
+
+don't have you're not tracking anything
+
+
+and suddenly it's like 10,000 vehicles
+
+
+going out and I really saw unfortunately
+
+
+I don't have the the graph with me that
+
+
+in the UKO um talk slides but it's
+
+
+impressive u I I'm but of course as I
+
+
+said it's much more difficult to
+
+
+integrate is for sure.
+
+
+>> I'm not that fast.
+
+
+>> Sorry.
+
+
+>> Uh MQTT uh has birectional
+
+
+communication. Uh that reminds me a bit
+
+
+of websockets. I know they're not
+
+
+exactly directly related, but how do you
+
+
+compare the two?
+
+
+>> Yeah, actually thank you for the
+
+
+question. Websocket is something that
+
+
+was in my mind. I I was wondering should
+
+
+I add it or not?
+
+
+uh I don't think they are the same
+
+
+because in my experience
+
+
+how I used uh I'm using uh websocket is
+
+
+more when you have a communication
+
+
+between client a cl a browser for
+
+
+example and the server this is how I use
+
+
+it mqtt is much for the IoT as you've
+
+
+seen I publishing and returning and I
+
+
+don't care at
+
+
+I don't care at all about the actually
+
+
+there is a broker in the middle. So the
+
+
+broker is not the broker that is
+
+
+answering.
+
+
+You know what I mean? Instead the
+
+
+websocket I'm publishing to the
+
+
+websocket web socket the the server
+
+
+through the websocket could answer or
+
+
+not but it can answer on the MQTT. It's
+
+
+impossible. Why? because there is a a
+
+
+man in the middle uh that is receiving
+
+
+and sending the messages.
+
+
+So for me that's just two different use
+
+
+of uh for for for communication.
+
+
+>> So if I understood right MQTT is between
+
+
+servers whereas uh websockets is between
+
+
+a client and a server. MQTT no I
+
+
+wouldn't you can use MQTT to make
+
+
+communication between many servers it's
+
+
+just a different communication but yeah
+
+
+I I get what you mean yeah you can say
+
+
+that
+
+
+>> thank you
+
+
+>> you're welcome
+
+
+>> okay I think there was one more question
+
+
+but I lost you oh Ryan of
+
+
+Sorry, this isn't really a question.
+
+
+It's another non-qu question. Um,
+
+
+>> okay.
+
+
+>> Sorry, I'm not answering
+
+
+>> in in my talk yesterday. One thing that
+
+
+I I I don't think I actually mentioned
+
+
+at the time is um with the shared
+
+
+dictionary stuff because that is at done
+
+
+at HTTP level, you can apply that to
+
+
+APIs as well as like returning other
+
+
+textbased resources. So in terms of
+
+
+using like REST and GraphQL um and MCP
+
+
+as well, I presume at some point, but
+
+
+it'll need implementing on the client.
+
+
+You can use a shared dictionary for
+
+
+that. So you could look at like all of
+
+
+your JSON keys that are across all of
+
+
+your APIs. of course that shouldn't have
+
+
+any personally identifiable information
+
+
+in it. Um so you could bring all of
+
+
+those into a dictionary. Same thing for
+
+
+any kind of enum values because again
+
+
+that's a specific set of things. You
+
+
+could put those in the dictionary and
+
+
+then you can then compress every request
+
+
+and response with that. Um so
+
+
+effectively you can kind of almost get
+
+
+down to that protobuff level kind of
+
+
+file size. You still have to do all of
+
+
+the kind of serializing and
+
+
+deserializing. So there's still more
+
+
+overhead there. But
+
+
+>> it's coming close to JPC.
+
+
+>> Yeah. In in terms of the actual network
+
+
+piece, you're getting pretty close to
+
+
+Protobuff. So just
+
+
+>> the fact that gRPC needs this protoile
+
+
+that is messing things up.
+
+
+>> Yeah. Yeah. It works around that. Yeah.
+
+
+If you don't know what your API is kind
+
+
+of going to look like or you want to
+
+
+evolve it quickly.
+
+
+>> You get kind of the best of both.
+
+
+>> If you don't know what is coming, uh you
+
+
+cannot derialize properly and this is
+
+
+when thing things go.
+
+
+>> Yeah.
+
+
+All right, thank you.
+
+
+No more questions. Thank you very much,
+
+
+Emiliano.
+
+
+>> Thank you.

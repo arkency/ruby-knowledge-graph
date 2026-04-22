@@ -1,0 +1,1882 @@
+The first presentation is going to be
+
+
+from Marcus. Marcus likes to give
+
+
+presentations. He likes to joke, but he
+
+
+doesn't do that often. So, let's give a
+
+
+big applause to cheer him up a little
+
+
+bit.
+
+
+>> Hello.
+
+
+>> So,
+
+
+>> but before we start, just want to say
+
+
+one thing because it's a little bit
+
+
+special situation because we have a
+
+
+speaker and assistant. So, please also
+
+
+give a big applause to Katie.
+
+
+Okay. So, is there audio? Yeah. Okay.
+
+
+Good.
+
+
+No, because it's weird for me. Okay. So,
+
+
+um we are starting late. Um that's fine
+
+
+for me. Um I'm past my peak
+
+
+caffeination, so there might be side
+
+
+effects. So, I'm not perfectly
+
+
+calibrated right now. Um so, yes, I'm
+
+
+Marcus. Um I've done Ruby for a long
+
+
+time. I started my career with Ruby. I
+
+
+sort of to my own self-defin outgrew
+
+
+Ruby a bit. Um I was actually here the
+
+
+last time when I professionally spoke
+
+
+professionally spoke it was 7 years ago
+
+
+also here at the same venue the same
+
+
+stage. I'm just curious if there's
+
+
+anyone in the audience who might have
+
+
+been there. Wow. Okay. I feel at home.
+
+
+Thank you. And um also I did a mutant
+
+
+workshop earlier and there I I saw some
+
+
+faces who also were the mutant workshop.
+
+
+So if you could give me more warm
+
+
+feelings in telling me if you were at
+
+
+the mutant workshop. Yeah. Perfect. So
+
+
+anxiety soft. Okay. So um I built this
+
+
+mutant thing. This is not a mutant talk.
+
+
+Um this is a talk I've given multiple
+
+
+times despite saying I'm not a
+
+
+professional speaker because I typically
+
+
+give it on napkins. Um it's like I'm
+
+
+sitting together with some people who
+
+
+might enlist my services and we talk and
+
+
+talk and talk and I start to scribble
+
+
+things and uh make up. ad hoc mental
+
+
+models, ad hoc analogies to convince
+
+
+people to do things like I want them to
+
+
+do. And over the years, I've refined
+
+
+some of these and this is a a level of
+
+
+refinement I've never actually presented
+
+
+to anyone. So, you're all basically
+
+
+guinea pigs. Um, yep. Okay, so let's
+
+
+move on a bit. Um, these slides are not
+
+
+from a UI engineer. I am a backend dude.
+
+
+Um, I typically do not even work
+
+
+formally in back end anymore. I do more
+
+
+technical leadership stuff. do the first
+
+
+of a kind and then help lots of people
+
+
+to replicate the patterns I make. But my
+
+
+my typical title in these bigger
+
+
+organizations as a VP of engineering or
+
+
+principal engineer. Um so I but I'm I
+
+
+still do unusually high amounts of
+
+
+hands-on stuff. So and this is a story
+
+
+about that. And this is how I looked
+
+
+seven years ago. And at that point we
+
+
+even had Wi-Fi. There's a Wi-Fi password
+
+
+uh on the at least a sliver of the Wi-Fi
+
+
+password still visiting. Um yeah so uh
+
+
+when I say I've been busy what happened
+
+
+is that um I moved to a different
+
+
+country I took on different kinds of
+
+
+clients and that had an interesting
+
+
+upward trajectory at least economically
+
+
+so I more or less left all open source
+
+
+efforts behind um in the end it turned
+
+
+out that what I still had in the open
+
+
+source was too useful to let it die but
+
+
+I needed to convince myself to still
+
+
+spend time with it that this is mutant
+
+
+thing so mutant was um converted to a
+
+
+commercial tool so I have a little bit
+
+
+of incentive to keep it
+
+
+Yep. And um this is basically the slide
+
+
+I should have put up for the last 20
+
+
+seconds. So that's um um what happened
+
+
+to me is that um in the end I said I I
+
+
+had to discover that for the kinds of
+
+
+software I wanted to write Ruby wasn't
+
+
+the the main thing to go with and the
+
+
+learnings I had actually also apply back
+
+
+to Ruby. So that's the reason I'm giving
+
+
+this talk. Um this talk is not a very
+
+
+technical talk but it helped me a lot in
+
+
+technical decision-making. So let's see
+
+
+where this goes.
+
+
+Um, yep. So, I've seen lots of
+
+
+interesting things. Um, again, I'm too
+
+
+late to u put up that slide, so I'm
+
+
+going to skip it because the interesting
+
+
+thing is that learning. Um, when I say
+
+
+discipline doesn't scale, it doesn't
+
+
+mean that discipline doesn't matter. It
+
+
+just it means that if you have an
+
+
+organization of any size and you have a
+
+
+pro, you have designed processes around.
+
+
+Okay. So, we know everybody in this room
+
+
+knows we have to do things in a certain
+
+
+way. we have to restart a certain
+
+
+cluster in a certain way but it's just
+
+
+all in our heads or we have to do a
+
+
+database migration in a certain way or
+
+
+we have to roll out spees in a certain
+
+
+way or we have to remember that we have
+
+
+to update also the mobile app membership
+
+
+schema change this is this is what I say
+
+
+with discipline it's really great that
+
+
+we notice it at a time but the
+
+
+discipline scaling
+
+
+at at any scale um at any at any or if
+
+
+you have three people even three people
+
+
+will screw up if you have 5,000 people
+
+
+5,000 people will screw up at a grander
+
+
+scale. So um the only thing that
+
+
+actually helps at scale is is automation
+
+
+but this is not a new message. So we all
+
+
+have heard it a lot but what helped me a
+
+
+lot is convincing people to spend the
+
+
+right kind of automation with a specific
+
+
+mental model and this mental model is
+
+
+what I'm trying to um trying to convey
+
+
+here. So, um that's the last static
+
+
+slide and now we are starting with uh
+
+
+what I typically scribble on and
+
+
+napkins. So, I'm so proud of three
+
+
+vertical lines. Um yeah, now it's time
+
+
+for my assistant because um we are going
+
+
+to demonstrate throwing stuff at a
+
+
+dartboard and seeing what sticks. You
+
+
+could also say we are throwing [ __ ]
+
+
+against the wall and see what sticks,
+
+
+but um I was told that this audience
+
+
+might be fine with that statement. So,
+
+
+my assistant needs to throw a dart now.
+
+
+So, we threw one and it fell in the red
+
+
+area. And I'm going to explain all of
+
+
+these areas, but let's throw a few more.
+
+
+Another red one. We had a green one.
+
+
+Okay, let's throw more. I need some gray
+
+
+ones. I need some Perfect. Yes. Now,
+
+
+let's let's give it a little bit more
+
+
+spamming, Katie. Perfect. So, what what
+
+
+does this actually mean? So, this is the
+
+
+mental model of a contribution
+
+
+threshold. Um, the very left the very
+
+
+left vertical bar. K, can you stop?
+
+
+Thank you. I do not want to read the
+
+
+distribution right now.
+
+
+Okay. Um, so these things also have
+
+
+labels and I'm going to go relatively
+
+
+above on these. So my mental model over
+
+
+the years has formed that there are
+
+
+three different thresholds in every
+
+
+software system. There is the ecosystem
+
+
+threshold. The ecosystem threshold is
+
+
+defined by what your base language comes
+
+
+with batteries included. So for if you
+
+
+go with a very sophisticated type system
+
+
+like Heskell and you use it, you have a
+
+
+very high ecosystem threshold because it
+
+
+will literally not compile. If you go
+
+
+for C, you have like okay, so it could
+
+
+the GCC did produce a binary. If you go
+
+
+for assembly like yeah your assembler
+
+
+could uh read it. So this is the
+
+
+ecosystem threshold and um this is the
+
+
+baseline. So everything over time
+
+
+degenerates to the ecosystem threshold
+
+
+unless you put in work. Then there's the
+
+
+automation threshold. The automation
+
+
+threshold is all the tools you put on
+
+
+top. This includes tests. So if you put
+
+
+in a lint, if you put in let's go Ruby
+
+
+specific, you make uh you go with TDD,
+
+
+you go with um or you go with DDD, but
+
+
+this everything what you what you what
+
+
+you spend on building on your process to
+
+
+go to to an automated quality gate which
+
+
+typically then ends with the CI. this CI
+
+
+can be almost non-existent and still
+
+
+today I get called into Ruby proc into
+
+
+Ruby or Python or whatever kind of
+
+
+codebase and I still find that many of
+
+
+these processes are only gated by a
+
+
+minimal increase over the ecosystem
+
+
+threshold. So you have absolutely
+
+
+minimum automated quality gates. And
+
+
+then there is a contribution threshold.
+
+
+And this is my mental model about every
+
+
+contribution you throw at the wall
+
+
+passes all of these passes one of these
+
+
+thresholds or even none of these
+
+
+thresholds. So if we go for this very
+
+
+light gray dot left to the ecosystem
+
+
+thing that's something you tried to
+
+
+contribute but it didn't and for Ruby
+
+
+you had a syntax error or it didn't boot
+
+
+or something very very basic. Um then
+
+
+you have the the green ones which
+
+
+actually fall above the contribution
+
+
+threshold. And the contribution
+
+
+threshold basically signifies if I merge
+
+
+this do I help the company I wrote this
+
+
+piece of code for and one of my core
+
+
+tenants is that there's always a gap
+
+
+between the automation and contribution
+
+
+threshold and this is where discipline
+
+
+goes. So everybody here in the room
+
+
+should have had the experience where you
+
+
+have something green on CI you press a
+
+
+merge button and [ __ ] happens in
+
+
+production and this is then the red area
+
+
+and this this red area is the most
+
+
+dangerous area I've identified in
+
+
+software engineering for my mental model
+
+
+and it's way more visible if you oversee
+
+
+thousands of devs but if you are in a
+
+
+very small organization with three
+
+
+developers it's you you can say ah um
+
+
+doesn't apply to us we are always have
+
+
+the discipline but you maybe not have
+
+
+You maybe haven't thrown enough dots to
+
+
+see the distribution. And now I need
+
+
+more dots, Katie.
+
+
+No, let's let's put in way more dots.
+
+
+Let's put in You can hold the trigger
+
+
+down if you want to.
+
+
+Yeah. So, as you see, this is a very
+
+
+special distribution because this is a
+
+
+gulch normal distribution and I tweaked
+
+
+it a bit to fit the slide and stuff. So,
+
+
+this is not don't hold me hostage to the
+
+
+mathematics here. Um, and in the end,
+
+
+the the main goal for us is that we only
+
+
+ever want to put this green dots into
+
+
+production, but also we want to minimize
+
+
+the time we spend with the red dots. And
+
+
+we want to maximize the time where we
+
+
+put in a cycle. So we notice, okay, so a
+
+
+spec fails, some llinter fails, CI
+
+
+fails. That's easy. We can just we can
+
+
+just throw the dots again. And I'm going
+
+
+to into why this matters for LLMs even
+
+
+more in a few moments. So let's go and
+
+
+actually accept the fact that this is
+
+
+this is the contribution distribution
+
+
+and now the there is an interesting
+
+
+problem with all developers and I'm the
+
+
+perfect example for overconfidence that
+
+
+what that I think my contributions are
+
+
+always there. So and this is typically
+
+
+not the case because I also have very
+
+
+bad moments and um this is then when I
+
+
+had not enough sleep, had a fight with
+
+
+my wife, whatever. And if I integrate
+
+
+all of these over time, it basically
+
+
+looks back to this. So um the fallacy to
+
+
+say like my team is special um or our
+
+
+team is special. I've seen this in all
+
+
+sizes. So I've seen this in like in the
+
+
+end if you do this for long enough you
+
+
+always end up back with that curve. And
+
+
+yep. So that's now the problem with the
+
+
+LLMs. And you can press P if you want to
+
+
+Katy.
+
+
+LM get us way more throws of the doubts.
+
+
+And my mental model at that point has
+
+
+been to
+
+
+work very very hard to move these
+
+
+thresholds and I hope this thing moves.
+
+
+No, it doesn't.
+
+
+It actually moves. So if you if you can
+
+
+if you can invest more into the
+
+
+automation threshold and lower the
+
+
+amount of discipline you have to spend
+
+
+then you can actually increase the
+
+
+chance that the automatically rejected
+
+
+dots. You just sprint the dice again.
+
+
+You say the element is wrong. You put
+
+
+your or you say you're human there is a
+
+
+CI failure. Please fix it. And
+
+
+which then maximizes the chance that you
+
+
+actually end up in the green area. And
+
+
+now let's go to the Ruby specific part.
+
+
+In Ruby, we have a problem.
+
+
+This is the reality of Ruby as I have
+
+
+experienced it at large scale. The
+
+
+ecosystem threshold is very very low. We
+
+
+when you when you the only thing Ruby
+
+
+battery included like is it parses and
+
+
+eventually it boots. That's the only
+
+
+thing which comes battery included. So
+
+
+any kind of tooling and this is also why
+
+
+the Ruby ecosystem has developed more
+
+
+tooling. So Ruby ecosystem has
+
+
+spearheaded TDD and so on and any but
+
+
+the tooling is significantly more
+
+
+important. This gap which I said the
+
+
+machine enforced gap is so much more
+
+
+important in Ruby than in all other
+
+
+language I have experienced over the
+
+
+last seven years
+
+
+and more or less this already concludes
+
+
+my talk. Um
+
+
+thank you. Um, yep. So, this is in more
+
+
+words and but since we lost so much
+
+
+time, I'm going to take this very short.
+
+
+I would really love to hear what the
+
+
+room has to say. It's very silent. This
+
+
+is good or bad sign. Um, and um there
+
+
+are lots of ways to improve the the the
+
+
+tooling threshold in Ruby. So, we we all
+
+
+we all have heard about tools like
+
+
+mutant, we have to heard Zorbbit, we
+
+
+have heard RBS. There are so many ways
+
+
+we can do this. But this is all extra.
+
+
+This is not this is not batteries
+
+
+included. We have to work really hard to
+
+
+increase the automation threshold
+
+
+because the LLMs will simply throw more
+
+
+dots and they have absolutely no idea
+
+
+where they landed. It's all stoastics.
+
+
+That's the message. Okay. And I'm
+
+
+curious if I could get some questions on
+
+
+this mental model.
+
+
+It's interesting. If nobody asks
+
+
+questions, I assume that everybody knows
+
+
+it better than me and I will ask
+
+
+questions to people. But
+
+
+>> can you go back to the last slide?
+
+
+>> The which one? Just one back.
+
+
+>> One back.
+
+
+>> This one.
+
+
+>> Uh there's the Keep going.
+
+
+>> The overconfidence one or the
+
+
+>> No, no, no. The one about the LM ask you
+
+
+to spend 10 times more.
+
+
+>> The LMS ask you to spend 10 times more.
+
+
+Yes. Because if that one that one you
+
+
+you see more about the slides than me.
+
+
+So
+
+
+>> no, the one before that.
+
+
+>> The one before that.
+
+
+>> Yep. Ask your can you talk about this
+
+
+one?
+
+
+>> Yes. Exactly. So if you throw more
+
+
+darts, you have more darts falling into
+
+
+the red area um by by simply by
+
+
+statistics. So um we can throw many many
+
+
+more darts at the wall right now and we
+
+
+have we will have more commits that
+
+
+actually pass CI now and we we are
+
+
+literally as we are now being asked like
+
+
+why can't we merge this by our
+
+
+stakeholders and um the idea is that we
+
+
+have to work very hard to reject more of
+
+
+these and moving the automation
+
+
+threshold higher closer to the green
+
+
+area. We will never be able to eliminate
+
+
+that. If he any if we are able to
+
+
+eliminate my my understanding at least
+
+
+of the current space is if we can't
+
+
+eliminate the red area then we are at
+
+
+AGI and everybody's out of a job. That's
+
+
+my current understanding.
+
+
+>> Go ahead.
+
+
+So my question is what do you define by
+
+
+[ __ ] on production? because it might be
+
+
+a a bug which is the most important
+
+
+problem for us for devs
+
+
+>> but it's not necessary
+
+
+>> anything that reduces that doesn't
+
+
+contribute to the value of the software
+
+
+stack. So if you ship a small bug that
+
+
+might be okay because you temporarily
+
+
+reduce the amount of contact uh you can
+
+
+of it contact form but if you screw up a
+
+
+text lot system that could have lasting
+
+
+confidence uh lasting long-lasting
+
+
+anything. So I do not want to just say
+
+
+buck. Buck is such an overloaded term. I
+
+
+typically try to try to say like um if
+
+
+you ship the wrong database schema now
+
+
+and this is covered in five years that
+
+
+is a very long-lasting damage effect.
+
+
+>> Correct. That but my feeling is that
+
+
+these are the easy bugs so to speak
+
+
+because this am the AI can actually test
+
+
+it find it out and so on so forth. I
+
+
+think
+
+
+>> we can't eliminate the red area where we
+
+
+actually have to verify that we do not
+
+
+create long-lasting damage.
+
+
+>> You can't. But you use the argument of
+
+
+scaling like uh if you have three guys,
+
+
+the problem is of this size. If you have
+
+
+500 guys,
+
+
+>> I think it's the same problem. It's just
+
+
+that the three guys experience it
+
+
+differently because they do not have
+
+
+enough.
+
+
+>> I agree with you and I agree that these
+
+
+bugs will be on production. And the
+
+
+problem is that I think there are even
+
+
+more so to speak bags or let's say
+
+
+misfunctions of the products generated
+
+
+by AI which is like the functionality
+
+
+that no one asked for and the products
+
+
+become
+
+
+>> I think it's it's not more or less it's
+
+
+just that in some we put we throw more
+
+
+dots now so more goes out and we have
+
+
+limited time to work on this red area to
+
+
+reject things and for that reason more
+
+
+bugs are hitting it's not because the LI
+
+
+is specifically bad it's just as as any
+
+
+regular developer. But because there's
+
+
+such a high volume now that we uh and we
+
+
+haven't narrowed this gap between the
+
+
+contri between the automation threshold
+
+
+and the contribution threshold, that's
+
+
+the reason more bugs go out.
+
+
+>> Yeah, I I'm with you totally. I think
+
+
+there are like two problems we will
+
+
+have. One is the technical problems with
+
+
+this so-called bugs, the damages of the
+
+
+databases and so on so forth. But with
+
+
+this 10x we have also the problems of
+
+
+the missing products quality because of
+
+
+you know the things which are shipped
+
+
+which are not a very good value for the
+
+
+for the users.
+
+
+>> Exactly. Because uh this was a this was
+
+
+from the perspective of the developer
+
+
+the product people have the same they do
+
+
+not refine their product anymore as they
+
+
+used to be. It looks good enough.
+
+
+>> Yeah. Yeah. So I think the challenge is
+
+
+actually to bring the product people
+
+
+closer to the devs. Um
+
+
+>> I do not I I strictly talk here from
+
+
+developer perspective. Yeah, understood.
+
+
+Thank you.
+
+
+>> Please go ahead.
+
+
+>> The language itself then goes into the
+
+
+ecosystem threshold. So the better ba
+
+
+the better the base language is, the
+
+
+less you have to work on the automation.
+
+
+So you still have to work on the
+
+
+automation all the time, but bridging
+
+
+from no type system and it boots or it
+
+
+parses to a good quality contribution
+
+
+threshold is much much harder work than
+
+
+coming from something like with a with a
+
+
+strong type system. I'm not saying it's
+
+
+futile. I'm just saying please be aware
+
+
+about it.
+
+
+>> Um there is the standard library is very
+
+
+very important. The defaults in the
+
+
+ecosystem matter a lot. So the um
+
+
+statistically everything regresses to
+
+
+the default at at scale. So if you have
+
+
+a ecosystem that cares on ecosystem that
+
+
+doesn't care. So in Ruby I've got I most
+
+
+of the time in large scale based systems
+
+
+I have to fight have to fight random
+
+
+monkey patches from third party
+
+
+libraries leaking into the core. So and
+
+
+this is a property of the language that
+
+
+enables that kind of behavior which is
+
+
+then even more lowers the ecosystem
+
+
+enforce threshold because in more sane
+
+
+languages sorry to say so to Ruby group
+
+
+you can't do that kinds of global
+
+
+damage. So Ruby has rolled back a lot.
+
+
+So before um if a certain third party
+
+
+library 30 minutes in production require
+
+
+requires mass n and then redefineses the
+
+
+division operator that kind of stuff is
+
+
+solved but it's still possible and if
+
+
+it's still possible low likeliness times
+
+
+time equals guarantee to my experience.
+
+
+So um
+
+
+that's the kind of hard learnings I had.
+
+
+So if you have a thousand Ruby servers
+
+
+and uh 20 deploys a day, there's almost
+
+
+a guarantee that these things will go
+
+
+into weird stages and then you fight
+
+
+against the ecosystem more. It's the
+
+
+ecosystem threshold more. You you want
+
+
+to work on the automation, but you're
+
+
+you're being held back by the ecosystem.
+
+
+So there are things we can do in Ruby.
+
+
+We can freeze the core classes and I
+
+
+always do this in my Ruby projects. I
+
+
+force uh all my production systems to be
+
+
+fully booted and I patch out evil. I
+
+
+patch out method missing. I patch out
+
+
+lots of stuff to harden this thing, but
+
+
+I shouldn't have to do this or I would
+
+
+love to just have a big Ruby VM method I
+
+
+can where I can nail it down. It was
+
+
+discussed multiple times on the issue
+
+
+tracker. Um, point here is I do not want
+
+
+to discourage using Ruby. It produces
+
+
+economic value, but I want people to be
+
+
+aware that there's a much bigger gap to
+
+
+bridge and this gap is becoming more
+
+
+important. Not because the LM are so
+
+
+good, but the LM to my experience are
+
+
+just an amplifier of existing patterns
+
+
+and we have limited time to review the
+
+
+red area. So more stuff goes out. So we
+
+
+need to reduce the size of the red area
+
+
+so we can catch up catch up.
+
+
+>> Exactly.
+
+
+>> Yes.
+
+
+>> Um mutation testing to actually reduce
+
+
+the wiggle room. Sorry to say so. As a I
+
+
+I
+
+
+um types you can go uh through the pain
+
+
+of adding Zorbit or RBS to a bigger
+
+
+codebase and it helps at scale else
+
+
+Shopify wouldn't have done this. Um I've
+
+
+also seen it being retrofitted in
+
+
+production and with good effects. Um
+
+
+there is property test there's not
+
+
+really a good library I know about in
+
+
+Ruby. This is an open field. So if
+
+
+anybody wants to write a property
+
+
+testing framework and make it popular in
+
+
+Ruby, I would be very happy. Um property
+
+
+testing basically goes against
+
+
+invariance. So you define invariant like
+
+
+if I reverse a list it's always the same
+
+
+length and then you uh then this
+
+
+property gets seen by a tool and it
+
+
+generates lots of random lists and then
+
+
+maybe generates thousand random lists
+
+
+and checks this property against that
+
+
+and you can make very very advanced
+
+
+properties like um the sum of all the
+
+
+line items uh can never be smaller than
+
+
+the um than the value of one of the line
+
+
+items. all of these kinds of property
+
+
+and that it would in the property
+
+
+testing tools then try to find input
+
+
+counter examples where you violate that
+
+
+it's also a stoastic process but it's
+
+
+it's a phenomenal phenomenal way to test
+
+
+business logic your basic
+
+
+>> no no it's always randomly generated so
+
+
+you can then decide like today I run my
+
+
+CI for two hours and find counter
+
+
+examples each time you find a counter
+
+
+example you basically have a bug and
+
+
+this kind of tools is very very uh often
+
+
+used in Huskell so in Huskell and
+
+
+finance it was absolutely a god's end to
+
+
+use it.
+
+
+>> I would I only think in ratios. So the
+
+
+ratios between red and green dots is the
+
+
+important things like the absolute
+
+
+thing. If you have a small team, you
+
+
+have less dots. If you have a big big
+
+
+team, you have more dots. It's all about
+
+
+the ratio. How much? So the thing is
+
+
+like if the if the green dots uh have a
+
+
+very small area then you have more time
+
+
+to actually work on the product. So it's
+
+
+in my opinion the ratio not the absolute
+
+
+value. Please go ahead.
+
+
+Uh right now so I if I had my if I had
+
+
+no economic constraints right now I
+
+
+would always work in HL but HLL is a
+
+
+very hard cell. So if I do if I talk to
+
+
+a random VC and want to do something or
+
+
+people recruit me, hey Marcus, we have a
+
+
+green field, let's do it. I stopped
+
+
+arguing for Heskell because if I argue
+
+
+for Hesll, I have to spend 80% of my
+
+
+time arguing for HKL and spend 20% of
+
+
+the time working. So right now it's
+
+
+always Rust because it's an easy cell
+
+
+and it's an 80% HL to my experience. So,
+
+
+>> so in your experience, what is the point
+
+
+on your uh like graph uh where you
+
+
+should stop investing time and money
+
+
+into the automations and start investing
+
+
+time into the cultural stuff.
+
+
+>> So, I think that culture doesn't scale.
+
+
+So, this is culture is just a form is
+
+
+just an encoding of discipline. So um
+
+
+lots of companies are absolutely
+
+
+obsessed about their culture and
+
+
+absolutely misinformed about their
+
+
+culture. Culture is a culture is in my
+
+
+opinion a second order effect. So you
+
+
+can celebrate your culture when it's
+
+
+good but if it's bad it's most of the
+
+
+time more critical to fix the
+
+
+deterministic part which is the
+
+
+automation threshold and the culture
+
+
+comes next. So in just saying, "Oh, we
+
+
+are going to review better. Oh, we are
+
+
+going to have a better postmodern
+
+
+process and then we write action items
+
+
+nobody ever gets to." Um, that works
+
+
+really well in a slide deck about our
+
+
+culture, but it doesn't really move the
+
+
+needle. That's my personal experience.
+
+
+So I'm obviously have lots of people
+
+
+disagreeing with me on that.
+
+
+>> Right. Um, so we are out of time. Thank
+
+
+you very much, Marcus.
+
+
+with

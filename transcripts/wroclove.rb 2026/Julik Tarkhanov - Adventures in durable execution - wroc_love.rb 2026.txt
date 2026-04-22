@@ -1,0 +1,3796 @@
+Our
+
+
+last talk of this year's edition is
+
+
+adventures adventures in durable
+
+
+execution and Ulik is going to take us
+
+
+through this adventure. So please
+
+
+welcome him.
+
+
+Hello wonderful people. Uh so great to
+
+
+be here. Wonderful city. Also didn't
+
+
+manage to see much of it yet. I just
+
+
+landed yesterday night. Um what I would
+
+
+like to talk to you about is u durable
+
+
+execution that is motion in time. Uh
+
+
+this is going to come later. This is
+
+
+what I'm about to show you and this is
+
+
+called the Geneva drive. It's one of the
+
+
+mechanical step motion mechanisms used
+
+
+in watchmaking. Uh strangely enough also
+
+
+in cinema. But uh first who am I? So
+
+
+chesh my Polish is very limited. I'm
+
+
+sorry. Uh I'm Ulick. I previously was
+
+
+with W transfer for a pretty long time,
+
+
+then with Cheddar Payments, with a
+
+
+couple of other joints as well. Uh these
+
+
+are some of the libraries of mine that
+
+
+you might have used at some point. This
+
+
+is my blog that you might have read, and
+
+
+that's me on the the social network
+
+
+formerly known as Twitter. Anyway, what
+
+
+uh is it about? Um we want to transfer
+
+
+money, which as we all know is something
+
+
+that we want to do pretty frequently.
+
+
+And normally we would have some kind of
+
+
+money transfer which would be an
+
+
+application which would be an active
+
+
+record and it would have a perform and
+
+
+we would do a revolute client or another
+
+
+payment client and then we do the
+
+
+transfer and then we update the state
+
+
+and all is good. Uh but it doesn't
+
+
+always work as we know. So if it doesn't
+
+
+work then we're going to have to update
+
+
+the state to something else. Um and then
+
+
+it will succeed hopefully. And also we
+
+
+might need to try and run this uh
+
+
+several times. And the first time uh it
+
+
+should uh retry if it doesn't succeed
+
+
+and also it shouldn't transfer this
+
+
+amount of money twice obviously. But
+
+
+then also it doesn't necessarily happen
+
+
+instantly which means that we're going
+
+
+to have a background job which is going
+
+
+to do the money transfer and then if our
+
+
+money transfer doesn't work out then
+
+
+we're going to need to respspool that
+
+
+background job so that we try later with
+
+
+a certain delay. we need to control the
+
+
+delay and then there are exceptions that
+
+
+we need to take care of in which case we
+
+
+also may or may not want to retry. Oh,
+
+
+and by the way also if we succeed we
+
+
+also want to see send an email uh if
+
+
+this works out but then again if sending
+
+
+the email fails we don't want to redo
+
+
+the money transfer again
+
+
+and there are also all of these things
+
+
+which we haven't covered which we also
+
+
+need. Now uh the thing that we are
+
+
+looking at here is actually a workflow.
+
+
+What is a workflow? Let's try to give it
+
+
+some definition so that we know what
+
+
+we're what we're talking about. So a
+
+
+workflow is an a number of steps which
+
+
+depend on each other's completion or
+
+
+failure. You can have a sequence of
+
+
+steps or you can have like a fan out or
+
+
+a fork and join. Like for example, you
+
+
+want to do three things and the four
+
+
+things should wait on them and only
+
+
+happen if all the three succeeded. um
+
+
+the steps can branch or you can have
+
+
+just a sequence uh and the state of the
+
+
+workflow is persisted between you taking
+
+
+those steps. So for example you have
+
+
+called revolute you have called it
+
+
+successfully you know that it happened
+
+
+all of the subsequent steps happen based
+
+
+on that state change and it should be
+
+
+stable and persistent. Now uh in this
+
+
+brave day of cloud supremacy uh if we
+
+
+want a workflow then we go look for what
+
+
+can we use as a workflow and then
+
+
+obviously immediately we find something
+
+
+that the black pyramid man is trying to
+
+
+sell us and then if we look a little
+
+
+more we find that the orange cloud man
+
+
+is also trying to sell us another
+
+
+solution of theirs. Obviously everything
+
+
+is highly JavaScript, highly magical,
+
+
+runs on their worker platforms,
+
+
+firecracker VMs, fancy stuff. And if we
+
+
+want to go all the way, then we
+
+
+obviously find systems like temporal and
+
+
+restate which also promise us the stable
+
+
+workflows. The issue with what the black
+
+
+pyramid man and the orange clown men are
+
+
+trying to sell you is that they are
+
+
+trying to sell you this.
+
+
+And the issue with this is that it's a
+
+
+deception. What is the deception? The
+
+
+deception here is that the definition of
+
+
+your workflow and what your workflow is
+
+
+supposed to be doing are mixed together.
+
+
+Uh so um the issue with the use workflow
+
+
+and both the orange cloud solution and
+
+
+the black pyramid head solution
+
+
+uh is this uh normally uh you wouldn't
+
+
+want to write everything in JavaScript
+
+
+although both use workflow and um things
+
+
+like uh absurd from Armen uh and the
+
+
+cloudflare workflows um kind of move you
+
+
+towards that. Now the imperative code is
+
+
+trying to package a DAG. We're going to
+
+
+get to the DAGs in a minute. The
+
+
+persistence between steps is very spicy.
+
+
+What what do I mean by spicy is that in
+
+
+it happens in a very opaque manner. It
+
+
+really depends on the sophistication of
+
+
+the engineers that massaged the
+
+
+firecracker VMs at both uh the Black
+
+
+Pyramid company and at the Orange Cloud
+
+
+Company.
+
+
+uh and also uh writing your DAG as a
+
+
+function is misleading because a DAG is
+
+
+declarative and what your steps do is
+
+
+imperative.
+
+
+Now a true durable function like imagine
+
+
+hypothetically that this was possible,
+
+
+right? That we could just write this
+
+
+code and it would be durable. It would
+
+
+be able to persist itself between steps.
+
+
+It would be able to resume from
+
+
+anywhere. Now what would that require?
+
+
+This is what it would require. It would
+
+
+require a small talk VM. It would
+
+
+require a way for you to suspend the uh
+
+
+um the call stack, the the frame
+
+
+pointer, all of your uh resource
+
+
+references such as database connections,
+
+
+uh open file handles, open network
+
+
+sockets, uh API clients, uh temporarily
+
+
+valid tokens need to be uh serializable,
+
+
+marshable, and revivable, right? And
+
+
+most importantly uh all the transient
+
+
+state needs need needs to be
+
+
+serializable. Now none of the runtimes
+
+
+that people use including the super
+
+
+sophisticated firecracker VMs um give us
+
+
+that right. So those uh long imperative
+
+
+workflow descriptions that they're
+
+
+trying to sell us. They are a pretense.
+
+
+They are a cover. They are trying to do
+
+
+as if you can do this but actually you
+
+
+can't. So they do all sorts of smart
+
+
+things under the hood. For example, uh
+
+
+Cloudflare Cloudflare workers, they
+
+
+override performance now if I remember
+
+
+correctly in a very specific uh way.
+
+
+They override uh date and time functions
+
+
+etc etc. Uh and the way to get out of
+
+
+this mindset is to stop pretending
+
+
+actually and to start looking at
+
+
+workflows as if they were graphs of
+
+
+things to do rather than a piece of
+
+
+imperative code.
+
+
+Um now DAGs directed a cyclical graphs
+
+
+they are nothing new there is a lot of
+
+
+software which uses them as a
+
+
+foundational primitive you don't
+
+
+necessarily always see it but in some
+
+
+applications you actually do
+
+
+um and
+
+
+um for example
+
+
+you have a program called Houdini and in
+
+
+Houdini your scene is actually a
+
+
+directed the cyclic graph so the things
+
+
+that produce the uh the primitives they
+
+
+are at the very top in here and then you
+
+
+apply various modifiers to those
+
+
+primitives. You can blend and combine
+
+
+those outputs together using nodes in
+
+
+this graph which have like several
+
+
+inputs like three inputs, four inputs,
+
+
+five inputs etc. And then at the very
+
+
+bottom you end up with your final
+
+
+result. And so before you have computed
+
+
+or rendered or produced the output in
+
+
+the nodes um at the top, you cannot
+
+
+proceed to do
+
+
+uh the work with the nodes uh lower
+
+
+down. And the funny thing is that our uh
+
+
+money transfer is not much different. Uh
+
+
+just another example, this is in Nuke
+
+
+which is a compositing application from
+
+
+uh the foundry uh formerly done by
+
+
+digital domain. I used to work in film
+
+
+so I used to stare at this stuff for
+
+
+hours and and days and nights or
+
+
+whatever. And here you have the same uh
+
+
+thing. You load some images at the top.
+
+
+So all of these uh yellowish nodes at
+
+
+the top, this is where you load your
+
+
+source images and they produce some
+
+
+output. Then you apply various
+
+
+operations to them and and at the very
+
+
+very very bottom you end up with this uh
+
+
+yellow rectangle which is your final
+
+
+output. So this is also a DAG. Now if
+
+
+you work with uh servers and apps and
+
+
+whatever uh you may be surprised to find
+
+
+out that your terraform state is a de uh
+
+
+this terraform uh snippet it actually
+
+
+describes two nodes of which one is your
+
+
+AWS S3 bucket and the other one is the
+
+
+logging configuration for that bucket.
+
+
+Now you cannot meaningfully create or
+
+
+configure your logging for an AWSS3
+
+
+bucket before you have the bucket.
+
+
+Right? That's the chicken and egg
+
+
+problem. Therefore, what is happening is
+
+
+that Terraform reads this HCL snippet,
+
+
+right? it deduces that the AWSS3 bucket
+
+
+logging resource depends on the AWSS3
+
+
+bucket resource and then when it
+
+
+executes your DAG, it's actually first
+
+
+going to create the bucket and then it's
+
+
+going to create uh the logging setup.
+
+
+And so if you look at your Terraform
+
+
+setup file, if you ever had to do any
+
+
+Terraform state surgery, uh I uh don't
+
+
+envy you. We stand united. uh you would
+
+
+see that it's actually it's actually a
+
+
+deck frozen with the execution results
+
+
+meaning that it will have the exact ARN
+
+
+and the name of the bucket that it
+
+
+generated and the ARN of the login
+
+
+configuration and whatnot
+
+
+and funnily enough even your Excel
+
+
+spreadsheet is a DAG because if you
+
+
+reference uh certain cells from another
+
+
+cell you know what those cells that you
+
+
+reference in a formula in a in an Excel
+
+
+formula they become dependencies of that
+
+
+cell where it's used in the formula
+
+
+Therefore, there is actually this noodly
+
+
+graph representation behind your Excel
+
+
+spreadsheet. But let's not get carried
+
+
+away. Now, where is the pretense in
+
+
+here? Now, if you look at the one of the
+
+
+examples that has um uh that that
+
+
+temporal provides, they recently
+
+
+released official Ruby bindings for
+
+
+Temporal. This is one of their examples.
+
+
+And you look at it and you're like,
+
+
+okay, so we do five times we execute an
+
+
+activity. They call nodes activities,
+
+
+right? And then it has a start to close
+
+
+timeout and then we sleep. Right? Now
+
+
+what is actually happening here? If we
+
+
+try to visualize the DAG from this right
+
+
+this is what's happening. So they do
+
+
+send an email then they somehow sleep
+
+
+for 30 days. Um this how it how exactly
+
+
+it gets done is is left as an exercise
+
+
+to the reader. Uh and then there is the
+
+
+five dot times. Right? Now what is five
+
+
+dot times?
+
+
+uh you actually do the same flow um five
+
+
+times in a row and you effectively fork
+
+
+and join with those five flows. meaning
+
+
+that you spin up five of these sequences
+
+
+of things that you do and then you wait
+
+
+on all of them to complete and then once
+
+
+they're done your workflow has quote
+
+
+unquote completed right so you have five
+
+
+of send email activity execute followed
+
+
+by sleep for 30 days in that smart
+
+
+manner of sleeping in a system like that
+
+
+right this is however the question
+
+
+because you have imperative code right
+
+
+and it says five times do and And then
+
+
+after five times do there is some magic
+
+
+and then when you look at it you're like
+
+
+okay so will the system actually block
+
+
+after you call this temporal IO
+
+
+workflows sleep or will it actually just
+
+
+create another thing in which will run
+
+
+concurrently to this uh block for each
+
+
+of the five times that you do it or how
+
+
+will it work um it doesn't tell you
+
+
+right and that is one of the deceptions
+
+
+uh is that you are trying to represent
+
+
+something that you are describing
+
+
+uh using imperative code. uh somewhat
+
+
+the same issue you you will have with
+
+
+acetic job which is a wonderful system
+
+
+by Steven Markim um uh which is for
+
+
+implementing workflows inside of active
+
+
+job in the same transactional and
+
+
+durable way again here you have step one
+
+
+step two and step three uh which is
+
+
+actually a DAG without joining so it's a
+
+
+DAG with just one flow top to bottom
+
+
+right and again the same issue here is
+
+
+that to um imagine we have performed
+
+
+step one and then we freeze and then we
+
+
+are about to do step two. Every time you
+
+
+do so you have to rerun this bit of
+
+
+imperative code which is going to try to
+
+
+reconstruct the state that you need to
+
+
+to get started on your step two.
+
+
+Um so this is also a bit deceptive
+
+
+because while perform inside of active
+
+
+job is uh an imperative method and you
+
+
+know that it runs on every active job
+
+
+execution
+
+
+uh here it's actually declarative code
+
+
+packaged inside of your perform uh if
+
+
+you create something inside of this
+
+
+perform method should it be repeatable
+
+
+should it be either potent you don't
+
+
+know exactly and active job continuation
+
+
+which you now get with rails 8.1 I guess
+
+
+uh from 37 signals It has exactly the
+
+
+same problem uh in that the definition
+
+
+of your graph is embedded inside of your
+
+
+perform.
+
+
+And the problem that uh should be um
+
+
+front and center here is that if you
+
+
+have a system which works based on the
+
+
+uh DAGs, you want to have your DAG and
+
+
+the things that you do from the nodes of
+
+
+the DAG separate. uh Terraform is a very
+
+
+good example of this because your DAG is
+
+
+your uh HCL or strictly speaking your
+
+
+Terraform state but the Terraform state
+
+
+is more like something that gets uh
+
+
+regenerated when you run your DAG right
+
+
+and then you have the um so-called
+
+
+provider modules in Terraform which give
+
+
+you uh bits of imperative executable
+
+
+code writen and go for example the AWS
+
+
+um provider for Terraform form. It uh
+
+
+specifies how to
+
+
+um for example how to create uh an S3
+
+
+bucket. You do a a um you do an API
+
+
+request to an AWS endpoint with such and
+
+
+such parameters and then it returns you
+
+
+a resource and here's how you extract
+
+
+the ids from that resource etc. And
+
+
+Terraforms keeps these two things far
+
+
+apart from from each other. Uh in Nuke
+
+
+that's about the same thing
+
+
+surprisingly. Uh Nuke uses tickle as the
+
+
+language for the documents your uh
+
+
+compositing setups where you combine
+
+
+your images together. It's a a kind of a
+
+
+sub weird subset of tickle
+
+
+uh which specifies your DAG and which
+
+
+specifies okay so first we'll load a
+
+
+file then this file connects into a
+
+
+feeds into a blur then the blur feeds
+
+
+into a color correction and then the
+
+
+color correction feeds into a rendering
+
+
+output to this path. uh but the nodes
+
+
+that you execute in uke they are native
+
+
+binary code they get comp compiled into
+
+
+uh C++ dibs or dosos right
+
+
+now uh mixing in mixing the your DAG and
+
+
+the things that the nodes do is very
+
+
+confusing uh unless we remind ourselves
+
+
+that in Rails we are used to metaromming
+
+
+we are used to the fact that we have
+
+
+things which happen at definition time
+
+
+or at code loading time so to speak
+
+
+versus things which happen at when the
+
+
+code executes.
+
+
+Uh we just don't have to do it in
+
+
+JavaScript.
+
+
+So
+
+
+uh how do we delineate this context?
+
+
+Let's imagine that we had a setup like
+
+
+this. uh we have some kind of class of
+
+
+workflow that we can specify and then we
+
+
+have our step definitions and note they
+
+
+are not inside of a perform they are in
+
+
+a class context right and then we see
+
+
+that everything inside the block of a
+
+
+step that's the node right that's the
+
+
+imperative code which executes every
+
+
+time you try to take that step and
+
+
+that's what should be item potent and
+
+
+you know that it always runs or fails as
+
+
+a unit and what's outside in the uh in
+
+
+the class definition context that is our
+
+
+DAG right now uh why uh active job is
+
+
+not a good fit for this there that what
+
+
+I shown you that the fact that you run
+
+
+perform over and over that's not the
+
+
+only reason there is also
+
+
+uh um an identity problem the identity
+
+
+problem is as follows you do get a kind
+
+
+of ID when you create an active job
+
+
+imagine you call I don't know deliver um
+
+
+um uh some some whatever email deliver
+
+
+you get uh uh an action mail or mail
+
+
+delivery job. This job gets assigned an
+
+
+active job ID. But uh with most um uh
+
+
+with most Q adapters for uh active job,
+
+
+you will find it difficult to query for
+
+
+that ID. More moreover uh there's an
+
+
+issue that your uh job having the same
+
+
+active job ID can actually replicate
+
+
+because with some adapters when you have
+
+
+to retry when you get an exception you
+
+
+are going to get the same job with the
+
+
+same active job ID uh in queueed into
+
+
+your que but the Q is going to make it a
+
+
+different execution instance and the way
+
+
+different Q adapters manage this differs
+
+
+a great deal but the problem is that you
+
+
+cannot effectively query for an active
+
+
+job. You do get a handle to an active
+
+
+job in some manner, right? You do get an
+
+
+active job ID which is going to be a UU
+
+
+ID and then you dive into the source of
+
+
+your active job adapter and then you try
+
+
+to figure out can I query for this at
+
+
+all. Um and with um with some uh active
+
+
+job adapters you cannot query at all.
+
+
+For example, if you use SQS, which is
+
+
+the AWS simple Q service, you cannot do
+
+
+queries over it. You can only pop a
+
+
+message
+
+
+uh or push a message and you can act.
+
+
+That's all. Right? So, no querying. Now,
+
+
+uh that's not all because uh everything
+
+
+that happens inside of an active job
+
+
+that's actually a bag of attributes
+
+
+which I believe is called active job
+
+
+params, right? And uh if you use active
+
+
+job continuation, your step name and how
+
+
+far along you are in the step that's
+
+
+going to be stored in that bag of
+
+
+attributes. Now you may be using a good
+
+
+queuing system like solid q and a very
+
+
+good database like posgress and then you
+
+
+can query into the JSON blob or the JSON
+
+
+column for the for this information but
+
+
+you got no guarantees that uh it's going
+
+
+to be neither easy nor accurate. And
+
+
+this all kind of it's all kind of put
+
+
+put behind the scenes there right now uh
+
+
+what if we want to do this well so we
+
+
+want a workflow solution which does not
+
+
+uh have this pre pretense that we are
+
+
+running in a small talk VM right it
+
+
+doesn't force us into TypeScript and
+
+
+JavaScript um it does not require
+
+
+dependencies because for example as far
+
+
+as I remember temporal does require
+
+
+running on Postgress it does require
+
+
+running a separate server And you have
+
+
+to talk to it using gRPC which is the
+
+
+most Ruby friendly uh RPC framework and
+
+
+library as we all know right uh we want
+
+
+uniqueness for our workflows. If there
+
+
+is a workflow which is trying to send
+
+
+money to somebody we want to have just
+
+
+one. We don't want to have two right. We
+
+
+want to have identity. So we want to be
+
+
+able to query for a workflow to find
+
+
+where it's at. What's going on? We want
+
+
+to have atomicity. So we we want to have
+
+
+known and understandable transactional
+
+
+semantics around workflow steps and uh
+
+
+we want to have either potency as well
+
+
+meaning that we want to be able to
+
+
+easily introspect uh things that have to
+
+
+rerun and it has to look like rails it
+
+
+has to feel like rails because it lives
+
+
+inside a rails application now it turns
+
+
+out that there is there already was an
+
+
+API which did this uh and it's called
+
+
+hya which is an engine for email
+
+
+campaigns from the wonderful Honey
+
+
+Badger folks. Uh here you can already
+
+
+see how the shape of the API roughly
+
+
+looks like. You can say step welcome. So
+
+
+you give it a name and then you say wait
+
+
+one day which is uh this weight is going
+
+
+to happen on the um active job weight
+
+
+level. So it doesn't mean that your
+
+
+background worker or your web server
+
+
+application server process is going to
+
+
+be hanging around for one day waiting
+
+
+for this to happen. And then you have
+
+
+some um details which are uh standard
+
+
+expected stuff for uh for emails. Uh and
+
+
+so when at Cheddar we were looking for
+
+
+something to
+
+
+uh to do workflows, we tried H initially
+
+
+but there were some issues because it
+
+
+turns out that while you do get classes
+
+
+for your um uh for your campaigns in HYA
+
+
+and you are encouraged to uh specify
+
+
+them explicitly, you cannot actually
+
+
+call any methods of those classes from
+
+
+your steps. You cannot do pretty much
+
+
+anything at all. It's a bit difficult to
+
+
+find the identity of um of a campaign
+
+
+because the campaign is not directly
+
+
+queryable. You have to do tricks. Uh
+
+
+it's hardish to interrupt a HEA campaign
+
+
+uh midway if you want to. And the
+
+
+developers of HYA take a particular
+
+
+um flavor of Postgress which is called
+
+
+them very smart. And this did look a bit
+
+
+scary when we were looking into the into
+
+
+the queries. it was generating. It's
+
+
+nice, but it's got this whiff of like
+
+
+just too clever for its own good. Now,
+
+
+what if we were to take that API, which
+
+
+looks decent by itself, right? And uh if
+
+
+we would try to redress it um so that it
+
+
+gives us uh something for running actual
+
+
+workflows without those hail
+
+
+limitations. And this is what you would
+
+
+get.
+
+
+This is a chunk from an actual um Geneva
+
+
+Drive workflow. Uh so we would have some
+
+
+blocks for early cancellation at the top
+
+
+for example which are also nodes. They
+
+
+get evaluated when your workflow uh
+
+
+starts executing a step. Uh and then we
+
+
+will have our step definitions. We will
+
+
+have the weights. Uh and then inside of
+
+
+the step definitions what we're going to
+
+
+do is we're going to have a block and
+
+
+unlike HA that block is going to be
+
+
+instance executed inside of this uh
+
+
+workflow class. meaning that inside of
+
+
+the workflow class you can actually
+
+
+define methods which call each other and
+
+
+provide you with all the conveniences
+
+
+that you would expect for structuring
+
+
+code decently. Um now there is a thing
+
+
+which
+
+
+uh is really nice and this is where
+
+
+being rails natives comes into the
+
+
+picture. So that workflow it's actually
+
+
+an active record which means that you
+
+
+can do wares on it. You can do delete
+
+
+all on it. You can do update all on it.
+
+
+You can do all of that lovely stuff. And
+
+
+you can also have uh associations from
+
+
+your other models to particular
+
+
+workflows like you can have a signup
+
+
+workflow for a particular user or a
+
+
+billing workflow or a user eraser
+
+
+workflow. And you can actually query
+
+
+does this user have a billing workflow
+
+
+or or or don't they? It's nice uh stuff
+
+
+like that, right? Uh and um those
+
+
+workflows, they have this thing called a
+
+
+hero. Um which we're going to get to in
+
+
+a minute, but to give this a bit of
+
+
+flavor, a hero, it's actually a single
+
+
+polymorphic association which you get on
+
+
+any workflow and you can link from that
+
+
+workflow to any record you want. Uh, and
+
+
+the idea is that most of your state that
+
+
+you care about is going to be stored
+
+
+inside of that hero. Uh, and the
+
+
+workflow just drives the the state
+
+
+changes with your hero. And your hero is
+
+
+usually going to be something like a
+
+
+payment or a user account or an email
+
+
+campaign or a billing cycle or whatever
+
+
+that is expressible with standard Rails
+
+
+models and things we know and can do in
+
+
+our sleep. Basically
+
+
+now
+
+
+uh since this is an active record and
+
+
+since we got the Ruby meta programming
+
+
+stuff uh there are many ways to to
+
+
+define steps. These are just a few of
+
+
+them. Uh for example, you can have uh
+
+
+just a step block and then they're going
+
+
+to be defined in sequence. You can use
+
+
+stepdef because um maybe some folks are
+
+
+know this, some folks don't. It's a bit
+
+
+of a factoid, but it's useful. If you
+
+
+call defaf in Ruby uh to define a
+
+
+method, the defaf actually returns the
+
+
+name of the method as a symbol, which
+
+
+means that in this case, you can do step
+
+
+defaf and then just give your method a
+
+
+name. And you can also delegate the
+
+
+calls to your hero. So for example, if
+
+
+you have a hero which has a method
+
+
+called consume, here there's a little
+
+
+typo. it's consume bang. But basically
+
+
+you can say that this active record
+
+
+delegates consume bang to hero and then
+
+
+you say step consume bang and uh as your
+
+
+step your hero is going to be called. Uh
+
+
+and it's a synchronous meaning that for
+
+
+example you can do 12 times wait for 30
+
+
+days and then schedule your touchpoint
+
+
+workflow which is going to run for a
+
+
+year roughly. Um, and the weight it
+
+
+doesn't actually hang up your background
+
+
+worker. It uses active job. We'll get to
+
+
+the scheduling in a minute. Uh, you have
+
+
+a lot of handy flow control in there.
+
+
+So, for example, if we want to do
+
+
+something, but we know that this
+
+
+workflow doesn't make sense. For
+
+
+example, a user has requested themselves
+
+
+to be removed from your platform, but
+
+
+you are still running some workflow for
+
+
+them. You can say cancel bang. And this
+
+
+will actually use throw under the hood.
+
+
+You don't have to return anything or do
+
+
+any breaks or whatever. Um, it's going
+
+
+to immediately cancel this workflow and
+
+
+it's going to abort the step and you
+
+
+won't have to think about it anymore.
+
+
+You can also finish a workflow early if
+
+
+you want to. And you can also skip steps
+
+
+if they are not relevant. And some of
+
+
+those methods you can also do on a
+
+
+workflow that you just recalled using
+
+
+where. For example, you can find all of
+
+
+the workflows which only made sense last
+
+
+month. Uh some of them may be hanging
+
+
+due to an due to an error or something
+
+
+similar, but they don't make sense to
+
+
+resume anymore. So you can actually
+
+
+query for all of them and then for all
+
+
+of the for all of those workflows, you
+
+
+can call cancel bang and the rest is
+
+
+going to be taken care of care of for
+
+
+you. Uh and you can also do reattempts
+
+
+for example if you have exceptions or if
+
+
+an external service is misbehaving.
+
+
+Um or if you want to just retry a step
+
+
+over and over um you can use arbitrary
+
+
+weights however long you like basically.
+
+
+And you can also pause the workflow if
+
+
+something is not working well
+
+
+um to take a look at it. uh and pausing
+
+
+means that the uh current step that you
+
+
+are running at the moment if there is
+
+
+any um is going to stop uh and the
+
+
+workflow is going to be put into
+
+
+hibernation and then you can query for
+
+
+it for example from your production
+
+
+rails console or you can look at it from
+
+
+the admin UI which I'm also going to
+
+
+show uh and figure out what's what's
+
+
+going wrong. Now how does this waiting
+
+
+and pausing and all this stuff works?
+
+
+Um, we use active job not as a container
+
+
+for all our workflows and not as a
+
+
+carrier. We use it as a trigger. We use
+
+
+it or even even more closely we use it
+
+
+as a finger that pulls the trigger if
+
+
+that makes sense. So if you create a
+
+
+workflow or use or you ask your workflow
+
+
+to perform a step then there's actually
+
+
+going to be an active job in cued uh and
+
+
+the active job is going to be to be to
+
+
+get incued with the wait time that you
+
+
+specify for your waiting for for example
+
+
+it will incue a job which will only
+
+
+start in 30 days. uh and the time at
+
+
+which your step is supposed to run uh
+
+
+it's also going to get recorded in the
+
+
+workflow.
+
+
+Uh and when you do this
+
+
+uh actually what happens is this right.
+
+
+Uh so we create a new step execution
+
+
+because every execution of a particular
+
+
+step gets recorded in the database which
+
+
+is the basis for how you can take a look
+
+
+at where things uh went wrong, how long
+
+
+your steps took, um how many reattempts
+
+
+did you have to do etc etc etc. uh it's
+
+
+going to create the step execution and
+
+
+and then it's going to um incue a job
+
+
+deferred to the time when your step is
+
+
+supposed to run which is supposed to be
+
+
+triggering only and exactly that step
+
+
+execution which you just created which
+
+
+provides it impotency. So, for example,
+
+
+if you need to um if you discovered a
+
+
+terrible bug and you want to cancel all
+
+
+of the potential executions which are
+
+
+supposed to run within an hour, for
+
+
+example, uh you can just delete the step
+
+
+executions from the database. Uh it's
+
+
+dirty, but it works and these jobs are
+
+
+going to become noops. Same if you
+
+
+adjust the schedule time of your step
+
+
+executions. If these jobs for whatever
+
+
+reason turn out to run too early,
+
+
+they're also going to be no ops and your
+
+
+step execution is going to be correctly
+
+
+deferred to the right moment.
+
+
+And here is how we actually do the uh
+
+
+step execution. Uh at the moment it
+
+
+usually happens inside of this um
+
+
+perform step job, but you can also do it
+
+
+in line. uh nothing prevents you from it
+
+
+is that we do some fine grain locking
+
+
+and we use uh um database locks for this
+
+
+and we only lock just before we run the
+
+
+step and just after. So we check out
+
+
+your uh step execution record which we
+
+
+are supposed to be running. Uh we then
+
+
+mark it as in progress. We mark that the
+
+
+workflow is in progress. We check that
+
+
+none of these states have changed
+
+
+underneath us to prevent races. So you
+
+
+have a guarantee that only one job is
+
+
+going to switch the uh step execution
+
+
+into the running state. Then we run your
+
+
+code and this can do for example long
+
+
+HTTP requests um it can do um file
+
+
+processing whatever but it happens
+
+
+outside of any database transactions
+
+
+and then at the end we register the
+
+
+outcomes and if necessary the next step
+
+
+execution for the next step gets incued
+
+
+gets created and then gets incued right
+
+
+now it doesn't do some of the more
+
+
+sophisticated stuff so for example your
+
+
+steps should be item potent
+
+
+Right. It's it's your responsibility.
+
+
+There is no structured roll back
+
+
+although you can do it uh to an extent
+
+
+by specifying steps for it but there is
+
+
+nothing built in uh and no suspension
+
+
+resumption. Uh although I'm almost there
+
+
+making it happen. However,
+
+
+here's all the stuff that you do not
+
+
+have to have if you choose this right.
+
+
+You don't need any extra systems. You
+
+
+don't need the Kafkas. You don't need
+
+
+the Reddus. You don't need the Rebbit
+
+
+MQ. Uh you don't need the gRPC.
+
+
+I'm sorry, but I hate it with a passion,
+
+
+right? You don't need uh bags of
+
+
+attributes. You know, you don't need a
+
+
+separate storage. And you get to do this
+
+
+all with the database that you already
+
+
+have because Geneva drive uh works with
+
+
+SQLite, it works with MySQL, and it
+
+
+works with Postgress all the same.
+
+
+And there is some stuff on top. So for
+
+
+example uh you can uh do very fine grain
+
+
+uh specifications for your exceptions uh
+
+
+including stuff like lazy matching uh
+
+
+hierarchies. You can specify exception
+
+
+handling per step etc etc etc. You get
+
+
+proper active support instrumentations
+
+
+that you can subscribe to if you want.
+
+
+you get a housekeeping job which you can
+
+
+put on the chron. Meaning that for
+
+
+example imagine you are running 10
+
+
+workflows and for whatever reason your
+
+
+entire cluster of background job workers
+
+
+has crashed or all of your uh background
+
+
+job workers got um OM killed or whatever
+
+
+this job will actually be exactly
+
+
+because all of this stuff is natively
+
+
+queriable just inside your database.
+
+
+It's very easy to find all of the uh
+
+
+workflows which have ended up hanging
+
+
+and just resume them right tell them
+
+
+okay restart whichever step that you
+
+
+crashed on and it just keeps chugging.
+
+
+It has an exhaustive manual MD you can
+
+
+read it and I would recommend that.
+
+
+However, it's also very useful for your
+
+
+LLM. So you can use you can grab Geneva
+
+
+drive and then you can tell your LLM uh
+
+
+I'm using a library called such and so
+
+
+it has a manual read it and design me a
+
+
+workflow which does XYZ and uh it does
+
+
+help uh documentation is suddenly useful
+
+
+again right uh and uh the last thing is
+
+
+tagged logs so it's very easy to grab
+
+
+for the logs and maybe I will get a
+
+
+chance to show that to you uh this is
+
+
+the stuff that hopefully is getting in
+
+
+soon. No promises. Now, uh where does it
+
+
+already run this uh thing? So, one of
+
+
+the spots that's making a lot of use is
+
+
+of Geneva Drive that's Kora, which is
+
+
+your email assistant. most of the stuff
+
+
+that um uh happens in Kora and that is
+
+
+transactional meaning uh
+
+
+synchronizing your Gmail account,
+
+
+downloading Gmail history, uh doing uh
+
+
+push messaging, notifications, etc.,
+
+
+etc., etc., etc. Most of it runs based
+
+
+on those workflows.
+
+
+Uh and another one is actually Porsche
+
+
+TUI uh which is made by Stas who's
+
+
+sitting there in the audience and he's
+
+
+uh an awesome guy and a former colleague
+
+
+of mine and in Porsche TUI uh Geneva
+
+
+drive is Geneva drive is secretly
+
+
+responsible for processing um all of the
+
+
+documentation that Stas is cooking. Now
+
+
+uh it is a dual license thing um and um
+
+
+there is a bit which costs money but I
+
+
+think it's better if we take a look at
+
+
+it in vivo as they say because uh with
+
+
+Kora I actually got permission from the
+
+
+founder to show you how Geneva Drive
+
+
+including its admin UI looks on a real
+
+
+live application which is what we're
+
+
+going to try now. So, please uh do the
+
+
+sacrifices to the demo gods.
+
+
+Now, we're going to turn on the
+
+
+the ma the magic internet thing.
+
+
+We got the magic internet thing and then
+
+
+we're now we're going to do the mirror
+
+
+thing.
+
+
+Okay. So, this is actually Geneva Drive
+
+
+which is running right now inside of
+
+
+Kora the email assistant. Um this mounts
+
+
+into any um into any admin name spaces
+
+
+just a rails engine which you mount and
+
+
+uh these are all the various classes of
+
+
+workflows which are defined inside of
+
+
+that application and why don't we go and
+
+
+take a look at some of them. So for
+
+
+example these this is where all every
+
+
+single email gets processed through. So
+
+
+for example here we get a list of all
+
+
+the workflows. Oh so these are
+
+
+finishing. So all of these are right now
+
+
+running on uh active job workers. Uh we
+
+
+are getting by I think with one server
+
+
+right now. Sometimes it scales up to two
+
+
+or three or whatever. Uh this is what
+
+
+the hero is of uh every workflow. So
+
+
+that's the email processing state. Those
+
+
+are separate emails, right? And if we
+
+
+want to take a look at something that is
+
+
+taking place, this is how it works. So
+
+
+these are the steps defined in that
+
+
+workflow.
+
+
+This is the timeline. So here for
+
+
+example it was supposed to start. There
+
+
+was a delay before the step actually
+
+
+started executing.
+
+
+Uh then it
+
+
+uh then it ran for 200 200 200
+
+
+milliseconds and then the next step got
+
+
+spooled up
+
+
+and then if we follow this then you will
+
+
+see that these yellow ones it uh they
+
+
+didn't have to be done for that
+
+
+particular email apparently. Um and the
+
+
+last ones
+
+
+the last one took six seconds. Some of
+
+
+them take a long time because we talked
+
+
+to LLMs. This kind of system is also
+
+
+perfect if you need to do model calls or
+
+
+uh model chats inside of your steps
+
+
+because if you are using uh something
+
+
+like PG bouncer and you can run a lot of
+
+
+threads
+
+
+um you can do tons of workflows at the
+
+
+concurrently at the same time just like
+
+
+you can uh with active jobs that's no
+
+
+issue at all and you're not going to
+
+
+have long transactions. Uh, and if
+
+
+you're using async um um async job, then
+
+
+you're gonna you can get even more
+
+
+concurrency out of it. And uh since this
+
+
+is all based of core Rails primitives,
+
+
+it doesn't lock you into a specific
+
+
+execution model. Whichever is good for
+
+
+your active job adapter is going to work
+
+
+here. Um but you also have things like
+
+
+this. So for example, these ones,
+
+
+it shows you one paused. What does it
+
+
+mean? Usually it means that it hit a
+
+
+snag. So for example, here is a person
+
+
+who was trying to sign up, right? And if
+
+
+we look at what happened here, then
+
+
+we're going to see that throughout six
+
+
+days
+
+
+there were attempts to do stuff here and
+
+
+then we had three of them which worked,
+
+
+but then there was one which failed. And
+
+
+the admin actually shows you first the
+
+
+source code of the step which failed and
+
+
+it shows you where to find it in your
+
+
+source, right? But it also shows you
+
+
+what the exception was so that you can
+
+
+um do something about it. Here for
+
+
+example uh you see that cancelling
+
+
+statement due to statement timeout time
+
+
+to look for n plus1's and heavy selects
+
+
+I guess right. Uh and if we look at the
+
+
+last one here
+
+
+then uh here you will see that it's
+
+
+basically the same issue. So it's
+
+
+probably a user who has a ton of
+
+
+something. Um and you need to
+
+
+investigate why this why this fails. And
+
+
+for with with those things, uh, the
+
+
+pausing allows you actually to
+
+
+investigate your issue the the issues
+
+
+that you may have with your workflows in
+
+
+peace and it allows you to um it allows
+
+
+you to resume them once you have fixed
+
+
+the bug. And we have found tons of bugs
+
+
+using this. Um, while we were working on
+
+
+Kora and we were introducing workflows
+
+
+in there. Um here here for example you
+
+
+will have some of these fail for example
+
+
+because there is a concurrency thing or
+
+
+whatever. I know for a fact that if I
+
+
+fix the bug which is leading to this and
+
+
+if I press resume then it's just going
+
+
+to work right or I can actually press
+
+
+resume now and then we can see what
+
+
+happens.
+
+
+Most likely it's going to
+
+
+most likely it's going to succeed. Yeah.
+
+
+So here you see this is blue which means
+
+
+that this step execution started
+
+
+and it we see that it's already beca it
+
+
+already became green uh because it could
+
+
+complete there is no race condition in
+
+
+there anymore and so this workflow is
+
+
+finished
+
+
+um and all of that is just very basic
+
+
+polling and designing decent UIs
+
+
+nothing more plus you also have this DD
+
+
+which you can customize for your
+
+
+specific uh op setup. If I'm not
+
+
+mistaken, if we click this, it will
+
+
+actually bump us into app signal, which
+
+
+is our APM of choice, and we would be
+
+
+able to actually live follow all the
+
+
+logs because all of the logs are tagged.
+
+
+You can actually GP for this stuff,
+
+
+right? And you can examine um the recent
+
+
+log messages for uh for any particular
+
+
+workflow or any particular step
+
+
+execution that you happen to need.
+
+
+Now, uh the base gem which you use to
+
+
+run those workflows and to
+
+
+uh let me get back to the wonderful
+
+
+button with the very slow mouse. Very
+
+
+slow. There we go. There we go. Um now
+
+
+you can grab just the library and it
+
+
+will work for you and it's LGPL. Uh if
+
+
+the license is fine for you uh then just
+
+
+roll with it and uh uh I think you will
+
+
+have a good time because even in a
+
+
+headless mode this is such a blessing to
+
+
+have a system like this then the
+
+
+licensing is fairly simple. You can buy
+
+
+it for one app and you can buy it for as
+
+
+many apps as you want. uh and if you do
+
+
+then you get access to the admin uh
+
+
+which I just showed you and that admin
+
+
+is one line in the gem file and one line
+
+
+in your routes.rb RB whichever
+
+
+authentication you have is going to work
+
+
+whichever whatever you have is going to
+
+
+work no assets to set up nothing uh and
+
+
+since we are here and since
+
+
+uh
+
+
+it's actually the first time that I'm
+
+
+speaking about money which makes me
+
+
+incredibly anxious incredibly anxious
+
+
+moral support everyone right so uh at
+
+
+the moment there is no private gem
+
+
+server and it's very very janky but if
+
+
+you come to me or if If you message me
+
+
+that you have seen me at Rosslaf RB uh
+
+
+and you do this within a reasonable time
+
+
+frame, say within 2 3 days or so, then
+
+
+this is the pricing that I can give you
+
+
+uh and you get to play with this stuff
+
+
+and investigate it and um um and uh you
+
+
+will get the admin as well. I think this
+
+
+is reasonable. Some people have been
+
+
+testing this for free. Um they were very
+
+
+happy with it. Uh now it's time to take
+
+
+the next step. So to find out more
+
+
+uh here's where you can go. Uh the first
+
+
+URL is the the website the website. Um
+
+
+and the second one is where the repo is
+
+
+and it's also in Ruby gems although the
+
+
+GitHub version updates more frequently.
+
+
+So um I think this is it. That's the
+
+
+story of Geneva Drive. I wonder what you
+
+
+can build with it.
+
+
+All right.
+
+
+>> Hey, great talk, Julie. Um, two
+
+
+questions if I may. Uh, one, since the
+
+
+um since the DSL is declarative
+
+
+um can you and should you
+
+
+model conditional tags as in if this
+
+
+step succeeds go to this other step or
+
+
+go to that other step or is that kind of
+
+
+>> uh so at the moment I don't have this
+
+
+because I feel like this is half a step
+
+
+from being touring complete. uh but it's
+
+
+but it it would be very easy to do to
+
+
+just uh tell it to make a jump basically
+
+
+to to to tell at the moment the the all
+
+
+that I have is a skip right so we can
+
+
+skip a step and then move on to the next
+
+
+one and if the next one skips um it also
+
+
+uh it will also uh it will also skip and
+
+
+so on and so forth um but there is no
+
+
+jump to step at the moment uh I am
+
+
+contemplating it uh it's likely going to
+
+
+end up there uh in some fashion but
+
+
+another issue with doing this is that I
+
+
+want this the next iteration of this
+
+
+thing to be actual DAGs and if you have
+
+
+an actual DAG it means that this is not
+
+
+running sequentially but it can run
+
+
+concurrently and if you run concurrently
+
+
+that I'm sorry then skip is a better
+
+
+idiom than having a jump so I'm not
+
+
+decided on this if you want to
+
+
+brainstorm you're welcome
+
+
+>> uh yeah I would like to actually um
+
+
+>> okay
+
+
+>> another quick question um the
+
+
+relationship between the workflow and
+
+
+the quote unquote hero.
+
+
+>> As I understood it, the hero is usually
+
+
+just another active record.
+
+
+>> Yep.
+
+
+>> Yeah. So that makes a lot of sense. It's
+
+
+actually a common pattern with
+
+
+background jobs where the background job
+
+
+drives the state changes of another
+
+
+record.
+
+
+>> My question is
+
+
+um I'm sure you have an answer for this,
+
+
+but what happens because it's just
+
+
+active record because it's just rails.
+
+
+What happens if a hero record is deleted
+
+
+or mutated externally while the workflow
+
+
+is running?
+
+
+>> Uh so if it happens to get externally
+
+
+mutated, it happens to get externally
+
+
+mutated. That means that this is how
+
+
+your system is written. Uh you don't
+
+
+want that. Uh it may also get externally
+
+
+mutated for an unrelated reason. Like
+
+
+for example, you have um I don't know,
+
+
+you have a workflow which does email
+
+
+stuff, but the um a user u but the user
+
+
+record which is a hero, they get a new
+
+
+email address, you still want to send
+
+
+them the email which which they were
+
+
+scheduled for. So having updated
+
+
+attributes in there makes sense. If it
+
+
+gets deleted, uh Geneva Drive has a
+
+
+default for this that if your uh hero
+
+
+gets deleted from the database, the
+
+
+workflow cancels. But you can have
+
+
+workflows without a hero. You there is
+
+
+actually a statement that you can do.
+
+
+You can say continue without hero as
+
+
+well.
+
+
+>> Okay. So uh thanks for the talk again
+
+
+and uh my question will be like you
+
+
+mentioned that the state is stored uh on
+
+
+the hero side uh and uh do we have any
+
+
+like limitations on how do we need to
+
+
+mutate the hero like model to make it uh
+
+
+Geneva drive compatible and do you have
+
+
+any specific like generations that uh do
+
+
+these mutations for you?
+
+
+uh it's just an active record which
+
+
+means that it is mutable and
+
+
+uncoordinated and chaotic as rails
+
+
+permits. You don't you don't have any
+
+
+limitations. The hero so the hero is
+
+
+first it's there for convenience and
+
+
+it's for linking the workflow to the
+
+
+thing that it is most important for uh
+
+
+and second it is there for uniqueness.
+
+
+So for example, if you can only if you
+
+
+want to only have one billing workflow
+
+
+for a particular user, there is an
+
+
+actual database constraint on the uh
+
+
+hero type, workflow type and the hero
+
+
+ID. That's what it's used for. There are
+
+
+no other limitations whatsoever.
+
+
+>> Okay. And uh from the like migrations
+
+
+perspective like all the migrations to
+
+
+the database should be made by the like
+
+
+application owner or they can be
+
+
+generated with a gem.
+
+
+>> Uh well if you mean the migrations that
+
+
+you uh the migrations that you need to
+
+
+get Geneva drive set up um by itself the
+
+
+migrations are in the gem. You run the
+
+
+uh you run the the the generator, the
+
+
+install generator and it uh creates the
+
+
+migrations for you and uh it's going to
+
+
+even do some uh tricky stuff where it's
+
+
+going for example to it's going to
+
+
+determine whether you are using uh big
+
+
+primary keys or UYU ids. Uh it's going
+
+
+to set up the foreign key accordingly.
+
+
+It's going to set up your ids for your
+
+
+step executions uh with the right format
+
+
+etc. But you don't need to do anything
+
+
+to your other database tables.
+
+
+>> Okay. Thanks.
+
+
+>> Any questions? Wait, Andy was first.
+
+
+>> Uh, hi. Thank you for the talk. Um, as
+
+
+as an agile software developer, I always
+
+
+like to follow the Yagdi principle. If
+
+
+you ain't going to need it, I always ask
+
+
+that question before I try to use any
+
+
+technology on my project uh or
+
+
+technique. So how do um when is when is
+
+
+this not needed? Like what are the cases
+
+
+when you think this is too much or it's
+
+
+not really needed versus you know cases
+
+
+where it is needed?
+
+
+>> Um well I would say this is not needed
+
+
+if you have something that you can run
+
+
+in a fire and forget manner. Um and it
+
+
+fits inside of a single active job
+
+
+perform basically.
+
+
+uh because even in Kora the stuff that
+
+
+we use workflows for we do it out of
+
+
+convenience and we do it because there
+
+
+is a lot of intermediate uh stuff
+
+
+generated when you run things through
+
+
+LLMs and you don't want to have to redo
+
+
+it but we also use just standard actor
+
+
+jobs for the rest of the stuff like
+
+
+sending an email or I don't know uh
+
+
+doing something um slightly later than
+
+
+now etc. you you can get like Rails
+
+
+gives you plenty of stuff out of the
+
+
+box.
+
+
+>> Thank you.
+
+
+>> Okay. And the last one uh running out of
+
+
+time.
+
+
+>> Hi, thanks for your talk. Uh I just
+
+
+wanted uh to check if uh I I get it that
+
+
+uh you store the state of the workflow.
+
+
+I'm interested if you have a
+
+
+functionality to store all the history
+
+
+of states.
+
+
+>> Uh so uh that's a that's a that's a
+
+
+tricky bit. Um now the
+
+
+inside of the workflow I try to avoid
+
+
+storing state for a number of reasons.
+
+
+Uh I do store all of the breadcrumbs. So
+
+
+for example, the workflow does record
+
+
+which step is to run next uh when it's
+
+
+supposed to run um when the workflow was
+
+
+created, what the hero is, etc. Um, when
+
+
+I was designing Geneva Drive initially,
+
+
+my gut feeling was that while it's nice
+
+
+to store some kind of blob of whatever
+
+
+in your workflow and to have it
+
+
+recoverable if you go between steps for
+
+
+example or if you have to restart a
+
+
+step, uh, the rest of your Rails models
+
+
+usually already do a pretty good job of
+
+
+that. uh and if they do not likely the
+
+
+state that you want to store is either
+
+
+very big like a large CSV or perk output
+
+
+or whatever uh or it has a very
+
+
+particular shape. If you allow workflows
+
+
+to store state natively, then you also
+
+
+have to deal with mutability semantics.
+
+
+Like for example, okay, we're running
+
+
+we're running a step uh and it does some
+
+
+changes to the state inside of the
+
+
+workflow. Uh if the step has to resume,
+
+
+uh does the resumed step see the changed
+
+
+state or the previous version and so on
+
+
+and so on. It's like an endless onion
+
+
+that you have to peel of the questions
+
+
+that you need to answer. So my answer to
+
+
+that was if there are meaningful state
+
+
+changes that you need and want to
+
+
+register they have to be with your Rails
+
+
+models.
+
+
+So basically just uh use paper trail
+
+
+>> uh yeah
+
+
+>> on the her paper trail on the hero
+
+
+because the uh Geneva drive preserves
+
+
+step executions um it preserves step
+
+
+executions that it performed and you can
+
+
+actually uh look them up like they they
+
+
+are already in a way uh a log record.
+
+
+>> Great. Thank you.
+
+
+>> Okay. So there was one more question. Do
+
+
+you still have power to answer it?
+
+
+>> I do.
+
+
+>> Okay, let's go. I hope it's quick.
+
+
+>> I'm ready to answer for everything.
+
+
+>> Hi there. So, I used uh HA on a previous
+
+
+project. Actually, it was close-knit.
+
+
+So, I'm not sure if it's still in the
+
+
+codebase. Um my question around it, what
+
+
+I remember from using H was that like
+
+
+you would schedule like a campaign and
+
+
+then it would run at a certain time,
+
+
+right? The the wait 10 days or whatever.
+
+
+>> So, if you're using that for something
+
+
+like that was great, like would run, you
+
+
+know, 10 days later at 5 in the morning
+
+
+be like, "Who's on their 10th day since
+
+
+they signed up? let's send them the next
+
+
+step of onboarding.
+
+
+>> When you're using it for something
+
+
+that's more tightly constrained like I
+
+
+just did a thing like you know five
+
+
+minutes from now do something. Do you
+
+
+with Geneva Drive do you have to have
+
+
+something that's like always looking for
+
+
+scheduled things or
+
+
+>> uh that's the beauty of it. It has no
+
+
+uhuler and it's got no customizeduler.
+
+
+It uses uh the granularity of your
+
+
+active job adapter. So if your if your
+
+
+active job adapter supports wait uh 1
+
+
+second then that's how long it's going
+
+
+to wait if your queue is fast enough. If
+
+
+you do uh if you do execute it right now
+
+
+and you are overprovisioned on your
+
+
+queue as you should be um you are going
+
+
+to get it executed quasi immediately.
+
+
+>> Awesome. Thank you.
+
+
+>> Okay. Thank you.
+
+
+>> Thank you. My pleasure.

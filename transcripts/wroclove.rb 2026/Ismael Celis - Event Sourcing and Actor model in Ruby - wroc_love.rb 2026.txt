@@ -1,0 +1,3859 @@
+Our
+
+
+next speaker is Ismael from London and
+
+
+he's going to talk about event sourcing
+
+
+and the actor model in Ruby.
+
+
+>> Hi. Um yeah, I'm Ismile from uh living
+
+
+and working in London. So um yes, the
+
+
+title of the talk was originally event
+
+
+sourcing and the actor model in Ruby.
+
+
+Since I submitted it though, I've kind
+
+
+of kept experimenting with the ideas and
+
+
+gone down a different path. So I renamed
+
+
+the talk and it's now called building
+
+
+reactive systems with Ruby and Event
+
+
+Sourcing. So if you were looking forward
+
+
+to hearing about the active model, I'm
+
+
+I'm sorry. Uh
+
+
+uh so I did some other talks uh in in
+
+
+which I do talk about the actor model a
+
+
+bit. So if you're curious about it,
+
+
+please visit my website and you can find
+
+
+those those talks. So I've been learning
+
+
+about and experimenting with uh event
+
+
+sourcing and patterns around event
+
+
+sourcing for many years now and I've
+
+
+tried different approaches,
+
+
+architectures, languages
+
+
+and as I go as I learn I blog about it
+
+
+and I try and I've also done done a
+
+
+couple of talks. So in those in those
+
+
+other talks and blog posts I touch on
+
+
+the fundamentals and the basics and why
+
+
+you would use a sourcing and the core
+
+
+patterns. So, I'm not going to talk
+
+
+about that too much today. So, if you're
+
+
+uh I I I have a feeling that most people
+
+
+in this room are familiar with the
+
+
+pattern anyway. But if you're not or if
+
+
+you're completely lost after this talk,
+
+
+please visit my website and maybe watch
+
+
+those talks because that's where I fill
+
+
+in the the missing the missing context.
+
+
+Uh so, for this talk, I built a tiny
+
+
+demo app. I'm not going to live demo it.
+
+
+It's all recorded. But uh it's a little
+
+
+donations app that you can for example
+
+
+put in a in a public library say and uh
+
+
+you know with a little donation campaign
+
+
+you know help us repaint the walls or
+
+
+something like that so people can um use
+
+
+their contactless
+
+
+card to to donate money that kind of
+
+
+thing just to illustrate the different
+
+
+points in this in this talk.
+
+
+Uh so this is how it works. You select
+
+
+an amount
+
+
+for some reason you're required to f uh
+
+
+to add your details. there's an email
+
+
+verification process where it sends you
+
+
+an email uh to with a token to verify.
+
+
+So the point is that there's many it's a
+
+
+workflow with many steps and some of
+
+
+those steps may run in the background in
+
+
+an eventually consistent manner. Some of
+
+
+them respond to the UI directly. So it's
+
+
+a very fairly typical use case.
+
+
+Before going into that though I want to
+
+
+talk about
+
+
+sort of the conceptual issues that I'm
+
+
+trying to work through. Um, the first
+
+
+one I call the model depth issue. Not
+
+
+sure if that's the best the best name,
+
+
+but what I mean by that is that when we
+
+
+typically think about a domain to to to
+
+
+write some sort of software system, we
+
+
+look at the problem in this way, right?
+
+
+We we try to understand the structure of
+
+
+the system, how the different entities
+
+
+in the domain relate to each other.
+
+
+So this is the typical entity
+
+
+relationship diagram. So for this
+
+
+particular demo app, we may we may have
+
+
+campaigns, donations, notifications and
+
+
+so on. But then when the domain becomes
+
+
+more and more complex and we add
+
+
+features, maybe we need to add taxes and
+
+
+deductions and so on. uh we are
+
+
+basically adding nodes to that graph and
+
+
+the domain model and also the mental
+
+
+model becomes more and more complex and
+
+
+eventually we end up it's easy to end up
+
+
+in a place where everything relates to
+
+
+everything and that makes that's to me
+
+
+the the the main cause of coupling and
+
+
+complexity in systems like eventually
+
+
+you reach that point where it's really
+
+
+hard to change these models just because
+
+
+of it's a really complex graph basically
+
+
+So an alternative way to think about
+
+
+domain modeling is to look at a system
+
+
+and try to not so much to understand the
+
+
+structure of the system but to just to
+
+
+understand the operations like what can
+
+
+the system actually do. So for if you go
+
+
+back to this one again, it's a really
+
+
+nice way to understand the structure of
+
+
+the system, but it doesn't tell you
+
+
+anything about the behavior of the
+
+
+system. Right? So if this is a donations
+
+
+app, I can understand the different
+
+
+parts, but I have no idea how to
+
+
+actually go through the workflow, the
+
+
+process of donating money. It's not
+
+
+there. It's not it's not uh spelled out
+
+
+in the in the model. So the the
+
+
+alternative way is to just concentrate
+
+
+and list all the operations, all the
+
+
+things that can happen in this system.
+
+
+So you can select an amount and that's
+
+
+basically the idea of a command like the
+
+
+uh an attempt to change the state of the
+
+
+system. I I want to select the amount
+
+
+and then something happens some business
+
+
+rule some business invariant and then
+
+
+the amount is selected and that box in
+
+
+in yellow the amount is selected you can
+
+
+call it an event something that happened
+
+
+after running an operation in the system
+
+
+and so on. then confirm payments
+
+
+business rules and the payment was
+
+
+confirmed and you you can basically go
+
+
+through the exercise of cataloging all
+
+
+of the operations available in the
+
+
+system and that's your domain model.
+
+
+That's your understanding of what the
+
+
+app does. To be clear, these two
+
+
+approaches are complimentary. They're
+
+
+not exclusive. So at the top you have
+
+
+the entity relationship diagram that
+
+
+tells you about the structure of the
+
+
+system and at the bottom you have this
+
+
+timeline
+
+
+based view of the system around
+
+
+operations and commands.
+
+
+So that's that's one one thing that I
+
+
+want to talk about. The other one I'm
+
+
+calling it execution context and by that
+
+
+I mean that usually with the especially
+
+
+in web development with the tools that
+
+
+we use the toolkits and frameworks uh
+
+
+this how we tend to think about that
+
+
+about the the commands the the work that
+
+
+needs to be done. So we usually have a
+
+
+client or a browser or an API client and
+
+
+that may send a synchronous request to
+
+
+the server and in the server we have
+
+
+some sort of web handler web controller
+
+
+and there we do the quick and easy work
+
+
+like we put something in the database or
+
+
+we fetch something from the database and
+
+
+send it back to the browser. But then
+
+
+there's a another class of operations
+
+
+that we might want to retry that they
+
+
+might fail that we might want to delay
+
+
+and we put those in in some sort of
+
+
+asynchronous context usually a
+
+
+background job in the case of of rails
+
+
+for example.
+
+
+So we have these if you think about uh
+
+
+those two layers of execution at the
+
+
+high level they are just all commands
+
+
+they're just operations in the domain.
+
+
+But when we go to the implementation, we
+
+
+think about them in very different ways.
+
+
+So this is a typical rails controller
+
+
+where I get something from the database,
+
+
+update it and put it back in the
+
+
+database and maybe redirect back to the
+
+
+UI to show the next step in the in the
+
+
+workflow. Right? So this is one kind of
+
+
+command in in this app. The other thing
+
+
+that this is doing is scheduling a
+
+
+background job that will run the next
+
+
+step in the workflow later. in this case
+
+
+to send the verification email and
+
+
+that's that background job that sends an
+
+
+email up updates the state of the of the
+
+
+record in database uh and and that's it.
+
+
+So again these two things the controller
+
+
+and the background job are essentially
+
+
+just commands in your domain but because
+
+
+of the tools and APIs and abstractions
+
+
+that we use they look very different and
+
+
+we think about them in really different
+
+
+terms and they also have very different
+
+
+expectations. So in a controller when
+
+
+you're doing error handling it's easy to
+
+
+just show the errors back to the to the
+
+
+browser to to the UI.
+
+
+But if you're doing error handling in a
+
+
+in a background job then you have a
+
+
+problem. What do you do? Like do you
+
+
+save the state in the database with an
+
+
+error state? Do you just fail and let
+
+
+your error notify notifier tell you as a
+
+
+developer? What if you uh after sending
+
+
+the email you want to update the state
+
+
+of the UI to re to tell the user that
+
+
+they should check their the email? Do
+
+
+you have a web soocket and just send
+
+
+render templates from the job? Do you
+
+
+have the UI just pulling the state of
+
+
+the database? Um so widely different
+
+
+expectations for these two different um
+
+
+execution layers. So that's this is how
+
+
+that picture works and we're all
+
+
+familiar with this. We have a UI that
+
+
+sends a command to the controller. The
+
+
+the the first controller just updates
+
+
+the the UI to show you the next step.
+
+
+Then another command and this time that
+
+
+command
+
+
+uh may dispatch a background job to run
+
+
+later and somehow the background job
+
+
+will update the UI to tell the user to
+
+
+check their email and so on and so on.
+
+
+And then you have another background job
+
+
+to process the payment. But again, if
+
+
+you squint and if you step back,
+
+
+we're just talking about one command
+
+
+leading to the next command. It's just a
+
+
+workflow, right? So if you step away
+
+
+from the execution, sorry, the
+
+
+implementation details, this is what I
+
+
+would like to care about when I'm
+
+
+designing systems. So again, if I look
+
+
+at the full picture, I only care about
+
+
+this. I I have the the UIs are the
+
+
+triggers. They trigger commands in a
+
+
+workflow. uh and then some UI might
+
+
+trigger a command that then updates the
+
+
+state of the UI that then triggers the
+
+
+next command and in this ca in this case
+
+
+the command actually dispatches a new
+
+
+command and then that command may update
+
+
+the UI and so on and so on. So it's a
+
+
+single layer of execution where all of
+
+
+the business logic runs all the commands
+
+
+anyway. So to explore these ideas into
+
+
+actual implementation, I started playing
+
+
+with this library that I'm building
+
+
+called Cidurial. You can check it up in
+
+
+um check it out in on my GitHub. It's
+
+
+really early stages. It's all of this is
+
+
+very experimental. So don't put this on
+
+
+production or anything, but I'm going to
+
+
+show you how it works.
+
+
+So the first primitive in in this
+
+
+library, it's a command. And a command
+
+
+is just a strct, a data object with
+
+
+attributes. And the attributes have
+
+
+types. So you can do like basic
+
+
+structural validations on those on these
+
+
+commands. The second uh object in this
+
+
+library is an app. And an a cidurial app
+
+
+is basically a rack app that you can
+
+
+mount on on a rack server. And it does
+
+
+typical things like layouts and pages.
+
+
+But it also gives you this DSL for
+
+
+command handler blocks. And these are
+
+
+blocks that given one of these data
+
+
+straps, these command classes, when you
+
+
+send a command to this app, either via a
+
+
+web form like a a UI or maybe a CLI, it
+
+
+doesn't really matter. When there's a
+
+
+new command, it runs one of the block
+
+
+for that command. And in that block, you
+
+
+put your business logic. So in this case
+
+
+I'm just fetching the donation record
+
+
+from the database updating some state
+
+
+and then upserting it back to the to the
+
+
+database
+
+
+and then because this is a workflow this
+
+
+command updates the database and then
+
+
+dispatches
+
+
+the new command in the workflow. So you
+
+
+can think of this as one background job
+
+
+calling the next background job in a
+
+
+workflow basically.
+
+
+So it's a single basic and this is the
+
+
+picture like one command calls the next
+
+
+command that's all I care about whether
+
+
+this runs in a controller or a
+
+
+background job whether this is
+
+
+synchronous or asynchronous at this
+
+
+level I don't really care I just want to
+
+
+think about what logic runs in each step
+
+
+of the workflow
+
+
+so cidurial the library gives you this
+
+
+runtime that that runs asynchronous from
+
+
+the web server in the same process and
+
+
+it just claims the next available
+
+
+command runs it for you and then updates
+
+
+updates the UI and I'm going to show you
+
+
+how. But before I'm going to talk about
+
+
+the UI. The UI are these Ruby classes
+
+
+representing HTML pages. And I'm using
+
+
+flex for the templating. Um, and it's
+
+
+just classes and you can pass arguments
+
+
+and you can use subcomponents to
+
+
+decompose complex UIs. There's nothing
+
+
+new here. Basically, uh, component-based
+
+
+UIs. Uh, but also at the top you can see
+
+
+that the page also knows about the path
+
+
+that it lives on. So a page is a
+
+
+self-contained object that knows
+
+
+everything about the page that you're
+
+
+looking at in in the UI. The other thing
+
+
+that pages do is that they can subscribe
+
+
+to these commands. So cid the cidial
+
+
+runtime after it's run a command, it
+
+
+publishes that command as a data object
+
+
+into a popsub interface. So then
+
+
+pages can subscribe to those commands
+
+
+and update themselves. And basically
+
+
+they use that browser object to send
+
+
+HTML patches back to the to the browser.
+
+
+I'll explain how that works in a second.
+
+
+The other thing is that you have helpers
+
+
+like this. Again, everything is based
+
+
+around commands. That's the the the main
+
+
+primitive here. So if you want to build
+
+
+a button or a form, you use the command
+
+
+helper and you pass the command class
+
+
+and then you're building a form for that
+
+
+or a button for that command. In this
+
+
+case, for that little tap card uh
+
+
+button, you you just use you know
+
+
+command donation start payment. That's
+
+
+the command class. And then you can add
+
+
+your hidden fields or visible fields if
+
+
+it's a form
+
+
+and side will be will turn that into a
+
+
+form that submits itself to the server
+
+
+via Ajax. But that's all transparent.
+
+
+You don't have to to do anything for
+
+
+that. So this is the main high level
+
+
+architecture. At the top you have the
+
+
+browser and when the page loads in the
+
+
+browser the first thing that happens is
+
+
+that it opens a long lived server sent
+
+
+events connection to the cidurial back
+
+
+end.
+
+
+Um then when you press a you send a form
+
+
+or press a button to to send a command
+
+
+to the server it does uh basically a
+
+
+post request to a single URL and it
+
+
+sends that serialized command to the to
+
+
+the back end. And in the web uh handler
+
+
+in the back end the first thing it
+
+
+validates that the command is valid that
+
+
+it exists and and that it's structurally
+
+
+valid and then it appends that command
+
+
+to a store interface and that's it.
+
+
+That's where the the request um stops
+
+
+and then it just responds to the browser
+
+
+with an empty an empty body. There's
+
+
+nothing to to reply. So it's all
+
+
+asynchronous. And then there's a bunch
+
+
+of this is running on the Falcon server
+
+
+which is fiber based by the way. And
+
+
+there there's a bunch of um asynchronous
+
+
+worker fibers that are picking up new
+
+
+commands from the store interface,
+
+
+locating the right hander for that
+
+
+command, running the your business code
+
+
+in that handler, and then publishing
+
+
+that the same command into a popsub
+
+
+interface. So then back in the Falcon
+
+
+uh web handling fiber that that has that
+
+
+connection open to the to the browser,
+
+
+it receives those commands after they've
+
+
+run coming from the popsub interface. It
+
+
+looks for page objects that are
+
+
+interested in those commands and it runs
+
+
+those those event handlers so that the
+
+
+pages can rerender themselves in the
+
+
+server and push that rendered HTML back
+
+
+to the browser. And a page can choose to
+
+
+render the whole page again and
+
+
+basically re replace the entire page on
+
+
+the browser or just render bits of the
+
+
+DOM, bits of the page.
+
+
+This is the kind of process layout
+
+
+version of the same thing. You have the
+
+
+browser, the browser sends this post
+
+
+request with a command that gets to the
+
+
+to the Falcon web handler. It stores it
+
+
+appends the command to the store. Then
+
+
+the cidurial worker fibers pick up the
+
+
+command asynchronously
+
+
+run the commander put the command back
+
+
+in the popsup uh interface and back in
+
+
+falcon picks up the work renders the
+
+
+page and push it pushes it back up to to
+
+
+the browser. So this is a version of
+
+
+CQRS basically uh command query
+
+
+responsibility segregation and the basic
+
+
+idea is that you have different channels
+
+
+for reads and writes. You post a command
+
+
+to change the state of the system. Those
+
+
+are the rights and it ends there and
+
+
+then asynchronously something happens.
+
+
+the command is run and the read side
+
+
+like that that open SS connection is
+
+
+notified that there was a change and it
+
+
+up updates the the UI
+
+
+and everything works the same way
+
+
+there's again there's no distinction
+
+
+between controllers uh or background job
+
+
+there's only one way to run your logic
+
+
+and it's just a command handler and the
+
+
+runtime makes sure to run it and notify
+
+
+the UI and this is the Falcon
+
+
+integration you have a fiber and you
+
+
+first run start the uh Falcon fibers uh
+
+
+the server and then concurrently to that
+
+
+you start the cidurial
+
+
+worker fibers
+
+
+and and the the two will communicate via
+
+
+appending command to the store and then
+
+
+publishing back on the popsup interface
+
+
+and this is the interface between the
+
+
+two sides the web handling side in
+
+
+Falcon and the ciderial side for the
+
+
+background processing.
+
+
+So you can you append a command to the
+
+
+store interface and you can also publish
+
+
+a command for an arbitrary channel name
+
+
+and then you can the the the web
+
+
+handling uh fiber can subscribe to to
+
+
+channels using wild card notation if you
+
+
+want and do something with the with the
+
+
+the event like rendering things and
+
+
+pushing it back to the to the browser.
+
+
+So how do you actually render pages
+
+
+server side and push them back to the
+
+
+browser? I'm using data star. It's a
+
+
+tiny bit of JavaScript. It's a bit like
+
+
+HTMX that was discussed yesterday, but
+
+
+but I think it does more with actually
+
+
+less with with a smaller API. Um, and I
+
+
+wrote the Ruby SDK
+
+
+for for for data sting. What it does on
+
+
+the client, it keeps that SSC connection
+
+
+open to the server. And when the server
+
+
+pushes some rendered HTML uh down that
+
+
+that connection, data star morphes that
+
+
+HTML into the DOM seamlessly.
+
+
+It actually uses a similar algorithm as
+
+
+uh ID morph from hotwire. Uh so it's
+
+
+really fast and and seamless. Uh you can
+
+
+you can patch flex you can send flex
+
+
+components which will be rendered for
+
+
+you by the SDK. You can also just send
+
+
+HTML strings. you can actually execute
+
+
+JavaScript and even send variables send
+
+
+signal values to the to the browser. So
+
+
+you can basically it's a hypermedia
+
+
+premise where the server drives the UI
+
+
+entirely.
+
+
+Right? So this is again the example of
+
+
+the app working and notice how things
+
+
+are updated on the DOM without page
+
+
+refreshes
+
+
+and as the commands run asynchronously
+
+
+in the asynchronous runtime the UI just
+
+
+reacts to those command after they run
+
+
+and up updates everything.
+
+
+Some of those commands will be
+
+
+immediate. Some of them like this one
+
+
+will take some seconds. They're you know
+
+
+doing slow API queries uh calls that
+
+
+kind of thing. It doesn't matter.
+
+
+There's only one way to do everything.
+
+
+This is another example. Little chat
+
+
+app. It actually uses Ruby LLM to talk
+
+
+to an LLM, but it doesn't matter. Uh, so
+
+
+I'm showing how you get multiplayer and
+
+
+real time for free because all the
+
+
+clients are listening on this. It's just
+
+
+the decoupling reads from writes via the
+
+
+asynchronous uh popsup interface that
+
+
+gives you real time functionality and
+
+
+multiplayer functionality for free. So
+
+
+again, there's nothing special you have
+
+
+to do if you need a multiplayer chat or
+
+
+a game. It's just it's the only way it
+
+
+works. Yet another example is um cinema
+
+
+seat booking app. So you can see one
+
+
+user is booking seats and the other is
+
+
+seeing those um seats as unavailable as
+
+
+they happen.
+
+
+And
+
+
+finally, just to show that this is not
+
+
+just about discrete uh UI updates, but
+
+
+also streaming updates. You can keep a a
+
+
+stream open and push changes to the UI
+
+
+as it as they go.
+
+
+So here I push a custom HTML component
+
+
+and then I use I just push events to
+
+
+change the value of a single variable on
+
+
+the page that that progress from one to
+
+
+100 and that updates the web component
+
+
+uh on the page and simultaneously on a
+
+
+on a separate fiber I also push you know
+
+
+items for that activity feed. So it's
+
+
+actually quite powerful and the um data
+
+
+star SDK when it sends data down this uh
+
+
+SSC connection it actually uses broadly
+
+
+compression. Uh so for HTML especially
+
+
+you can get compression ratios ratios
+
+
+above 80%. So it's it's also quite
+
+
+efficient. So there's not a lot of cost
+
+
+in just replacing the full page if you
+
+
+want.
+
+
+Okay. So the other thing I want to talk
+
+
+about is the idea of state. In the
+
+
+previous previous example in that
+
+
+command handler I was fetching state
+
+
+from the database and then and then
+
+
+putting it back to the database like
+
+
+normal. Um but when you start modeling
+
+
+apps around the idea of commands like
+
+
+commands are the core prototype.
+
+
+So state is not anymore the the key like
+
+
+you can always change the the shape of
+
+
+the database tables and so on that's not
+
+
+so important now the commands are the
+
+
+thing that that's the kind of the public
+
+
+API of the system so you start thinking
+
+
+about okay so what is state really like
+
+
+conceptually
+
+
+so you have the command and the command
+
+
+runs and something happened and you can
+
+
+call that an event whether it's an
+
+
+actual event in a database or
+
+
+conceptually the fact that something
+
+
+happened and the state the current state
+
+
+of the donation for example, is sort of
+
+
+conceptually at least just the data
+
+
+artifact that is left behind after the
+
+
+command, right? After the behavior. So
+
+
+the state is really the commands and
+
+
+events are the behavior and the state is
+
+
+sort of what's the the data trail after
+
+
+the the record of the behavior if you
+
+
+want.
+
+
+So in more general terms, if you have a
+
+
+workflow, it starts it starts with a
+
+
+command that sends an event and from
+
+
+from that event that that fact that
+
+
+happened in your system, you can derive
+
+
+the current state of the system and you
+
+
+can use that state to inform the next
+
+
+command in the workflow that sends a new
+
+
+event. And now you have two events that
+
+
+you can collect to update the current
+
+
+state of something in the system, a
+
+
+donation, for example. And that leads me
+
+
+to event sourcing finally. And event
+
+
+sourcing is just that idea that current
+
+
+state is derived from the facts from the
+
+
+events that happened in the system. That
+
+
+means that it's the events that really
+
+
+are the core canonical data in the
+
+
+system. The data is actually something
+
+
+that you can derive from those events.
+
+
+Right? So a good simple example is your
+
+
+bank account.
+
+
+Bank account is you know debits and
+
+
+credits. That's it. That's the data.
+
+
+That's those are the events. That's the
+
+
+data that matters. If you want to arrive
+
+
+at the current state, the balance, you
+
+
+just add up all the credits and debits
+
+
+and you get the balance. You can always
+
+
+throw the balance away. If you have it
+
+
+in a database or cache somewhere, you
+
+
+throw it away and you just recomputee
+
+
+all the debits and credits and you
+
+
+arrive deterministically at the same
+
+
+balance. Right? So that kind of hints at
+
+
+the fact that current state is just a
+
+
+derivation like a materialized view of
+
+
+the events and the the events are really
+
+
+what what matters. So that that's event
+
+
+sourcing. Um so I'm also building a
+
+
+separate library called sourced and is a
+
+
+library to explore event sourcing
+
+
+patterns in Ruby. There's nothing web
+
+
+based about source like the cidurial
+
+
+that I show. It's just a way to build
+
+
+reactive web apps as I showed. Source is
+
+
+just to explore these command and event
+
+
+and state patterns in using event
+
+
+source. So you can use it to build CLI
+
+
+apps or web apps or whatever kind of
+
+
+apps.
+
+
+And the way it works is this very
+
+
+similar to cidilia cidurial in that you
+
+
+start with the core primitives which are
+
+
+these data objects. You have a command
+
+
+which again is a strct with actually the
+
+
+same interface as the cidurial command
+
+
+just a data object and you have an
+
+
+event. An event is also a strct but if
+
+
+you notice the names the semantics are
+
+
+different. The command is an intent to
+
+
+change the system. So start a payment
+
+
+and the and the event is the result of
+
+
+that change. Payment started in the
+
+
+past. It's something that already
+
+
+happened.
+
+
+So it's a it's a it's basically a
+
+
+representation of cause and effect.
+
+
+The next uh object in sourced is the
+
+
+idea of a decider and a decider is a
+
+
+class that encapsulates the life cycle
+
+
+of handling a command and publishing and
+
+
+creating new events as a result of the
+
+
+command. So the first thing that you
+
+
+want to do normally is you start with
+
+
+some initial state when you initialize
+
+
+one of these objects. state can be
+
+
+anything. Uh in this case I'm just using
+
+
+a strct and you use that state block to
+
+
+initialize the initial version of the
+
+
+state
+
+
+and the state the only point of the
+
+
+state is yeah so that's clear you have a
+
+
+strct and then you initialize it.
+
+
+What is state for in a decided state is
+
+
+only there to allow you to answer
+
+
+questions about the current state of the
+
+
+system and maybe run the next command.
+
+
+Right? It's it's it's it's only the
+
+
+necessary context to to make decisions
+
+
+basically. So when you load a decider uh
+
+
+first thing you look at all the past
+
+
+events that already stored and you use
+
+
+them to collect them into this strct
+
+
+into this state
+
+
+and that's what the evolve um blocks
+
+
+are. You just give it an event update
+
+
+that little strct in memory. So then you
+
+
+can handle the next command that's
+
+
+available for you. And the command block
+
+
+gives you the the state after it's been
+
+
+evolve evolved by the events and the new
+
+
+command that you're handling. And now
+
+
+you can use the state to inform the
+
+
+decision that you're making. For
+
+
+example,
+
+
+if the command is start a donation, you
+
+
+want to check that the campaign that the
+
+
+donation belongs to is still open. So
+
+
+that's you're you're verifying the the
+
+
+system's invariance there.
+
+
+And if everything's all right, you can
+
+
+emit the next event to record the fact
+
+
+that yes, the donation was was started.
+
+
+The other bit uh of functionality here
+
+
+is that a command and and its resulting
+
+
+events is a single operation, right?
+
+
+There's a single thing, a sing, for
+
+
+example, a single button that you click
+
+
+on the UI. But if you're building a
+
+
+workflow, how do you glue the different
+
+
+steps together? And that's a reaction.
+
+
+And a reaction looks at a new event that
+
+
+happened and does something and maybe
+
+
+dispatches the next command in the
+
+
+workflow. So in this case, it it sees
+
+
+the new payment started event. It calls
+
+
+to some payment gateway that may take
+
+
+seconds.
+
+
+Um and if that works, you get a payment
+
+
+reference and it dispatches the the new
+
+
+command, the confirm payment command
+
+
+with the payment reference and so on. So
+
+
+this is the visual representation of
+
+
+that
+
+
+you started with the you know you have
+
+
+the start payment that updated the
+
+
+system to the payment started event then
+
+
+the reaction sees that reacts to that
+
+
+calls the payment gateway and if that if
+
+
+that succeeds it sends the the next
+
+
+command confirm payment which updates
+
+
+the system the the system state to
+
+
+payment confirmed
+
+
+Um, by the way, those little diagrams, I
+
+
+wrote this little um toy app. It's
+
+
+called event lane app. It's an easy way
+
+
+to basic basically build these um
+
+
+diagrams. You can check it out. It's
+
+
+it's free. Um, okay. So, this leads me
+
+
+to the idea of decision making. So all
+
+
+that I've said is that basically event
+
+
+sourcing is a pattern for decision
+
+
+making for handing commands based on all
+
+
+the information that you have all of the
+
+
+decisions that you made before which are
+
+
+the the the result of which is the
+
+
+events.
+
+
+So this is an example. Uh this is how
+
+
+you you make the decision to select an
+
+
+amount for a new donation. First you
+
+
+take all of the past events
+
+
+and you need to to check is the campaign
+
+
+for the donation started. That's one
+
+
+event. Then is the donations itself
+
+
+started and you take those two events
+
+
+and you collect them into a bit of state
+
+
+and that state gives you the for example
+
+
+you can use a state to feed the UI so
+
+
+that the user can see the options to
+
+
+select an amount. the user click on the
+
+
+clicks on the button se to select amount
+
+
+and that goes back to the back end and
+
+
+results in the new amount selected
+
+
+event. So now you've progressed the
+
+
+state of that donation.
+
+
+Another this is an error scenario.
+
+
+You have uh the campaign started event
+
+
+donation started but also the campaign
+
+
+closed event. So now when you try to to
+
+
+send the select amount
+
+
+command, the state tells you that the
+
+
+campaign is now closed. So you should
+
+
+fail that command. So then you raised an
+
+
+error for example or maybe an error
+
+
+event.
+
+
+Another way to understand these little
+
+
+scenarios, these little slices of
+
+
+behavior is in given when then format.
+
+
+So this is saying given that I already
+
+
+have the campaign created events and the
+
+
+donation started event when I dispatch
+
+
+the new select amount command then as a
+
+
+result I expect the amount selected
+
+
+event. So it's a nice intuitive way to
+
+
+think about bits of behavior. And this
+
+
+is the error case. Given that I have
+
+
+campaign created, donation started and
+
+
+campaign closed. When I send the select
+
+
+amount command, then I expect an error.
+
+
+So in source to my library, you can
+
+
+basically test your code in the same
+
+
+terms. You say with reactor and a
+
+
+reactor is an interface that knows how
+
+
+to handle commands and events. So a
+
+
+decider class is a reactor with the
+
+
+reactor donation. Given that I have a
+
+
+campaign created event and a donation
+
+
+started event when I send the select
+
+
+amount commands then I expect the amount
+
+
+selected event. And all of this is
+
+
+running in memory. You're just testing
+
+
+the behavior of your logic. The sourced
+
+
+runtime actually makes sure to when your
+
+
+logic produces new events, put them back
+
+
+in the store and then distribute them to
+
+
+any listening uh decider asynchronously.
+
+
+All of that is done by the source
+
+
+infrastructure. So at this layer, you're
+
+
+only concerned with behavior. You're
+
+
+only testing behavior. There's no
+
+
+database set up. There's no factories or
+
+
+anything like that.
+
+
+Okay. Okay, so putting it all together
+
+
+on the one hand I had this little
+
+
+toolkit for building reactive web apps
+
+
+based around commands and on the other
+
+
+hand I had this system for running uh
+
+
+event sourced systems asynchronously and
+
+
+handling and dispatching commands and
+
+
+events.
+
+
+So because I wrote both of them I made
+
+
+them easy to for them to work together.
+
+
+So you configure the cidial web toolkit
+
+
+to swap out the built-in command
+
+
+dispatching and command handling
+
+
+mechanism and instead use the sourced
+
+
+store which has the same API to append
+
+
+messages to append commands and the
+
+
+source dispatcher which is the one that
+
+
+actually keeps those uh asynchronous
+
+
+fibers running and claiming claiming
+
+
+commands
+
+
+saving events and so on.
+
+
+That's that's all you have to do. And
+
+
+then you write your source code and
+
+
+the web app should just work and react
+
+
+to changes in the event sourced system.
+
+
+There's an older demo. It's um
+
+
+e-commerce kind of shopping cart for a
+
+
+coffee shop example. So you can see on
+
+
+one screen I'm adding products to the to
+
+
+the cart and on the other you see how
+
+
+the new commands and events arrive in
+
+
+real time and you can see how the
+
+
+shopping cart is updated for with the
+
+
+new events.
+
+
+Okay, so I'm going to talk about
+
+
+projections.
+
+
+A projection is a different kind of
+
+
+reactor in event sourcing or that's what
+
+
+I call them anyway. So that list of open
+
+
+of campaigns there on the right
+
+
+basically is uh how do I build that
+
+
+list? So that list is also derived from
+
+
+the events that happened in the system.
+
+
+Right? So and for that in the source
+
+
+library I have the super class for the
+
+
+for a projector and it's a type of
+
+
+reactor as well. And again what you do
+
+
+you start with a some state in this case
+
+
+I'm just going to database and fetching
+
+
+a record for that campaign. I could be
+
+
+using a file. I could be using radius
+
+
+elastic search like this is it doesn't
+
+
+really matter where the data lives.
+
+
+And then when there's new events emitted
+
+
+by my deciders in this system, the
+
+
+projection uh reads those events and
+
+
+runs those evolve blocks to update the
+
+
+state for that campaign. So campaign
+
+
+created, campaign closed.
+
+
+So that's u I'm evolving from from an
+
+
+event.
+
+
+And then after running the event
+
+
+handlers, it runs this block with
+
+
+arbitrary code. And here I'm I'm just
+
+
+putting that updated bit of state back
+
+
+in the database. And again I could be
+
+
+saving a file or a cache whatever.
+
+
+And again the the source runtime manages
+
+
+distributing and dispatching new events
+
+
+to the different workers to to run your
+
+
+projectors.
+
+
+And again you test a projector in a very
+
+
+similar way as you test a decider except
+
+
+there's no commands only you're only
+
+
+evolving from events. So given that I
+
+
+have these events campaign created and
+
+
+then a payment confirmed for an amount
+
+
+and then another payment confirmed for
+
+
+another amount and then the campaign was
+
+
+closed. I expect the state of that
+
+
+projected campaign uh record to have
+
+
+those ids and that amount and the status
+
+
+to be closed. And again you can use the
+
+
+test helpers to test it in the same
+
+
+terms given this event and that event
+
+
+and that event. then I expect the the
+
+
+record to look like this and have these
+
+
+these attributes.
+
+
+Okay. So, what does all of this give you
+
+
+using event sourcing and all that? Uh
+
+
+why would you use it? To me personally,
+
+
+I just like the mental model to be
+
+
+honest. I just like to be able to think
+
+
+about problems in terms of things that
+
+
+happen and then to be able to go go back
+
+
+to those things that happen and review
+
+
+the decisions that were made by the
+
+
+system and derive current state from
+
+
+them. I just find it a very nice and
+
+
+elegant way to understand and to frame
+
+
+problems. But there's also actually
+
+
+practical implications and features that
+
+
+sort of fall out of the pattern for
+
+
+free.
+
+
+The one thing is message correlation. So
+
+
+as your command handers produce events,
+
+
+the source runtime automatically it
+
+
+first gets a new command passes it it to
+
+
+your code. Your code produces a new
+
+
+event and back in the runtime it
+
+
+correlates the two messages, the command
+
+
+and the event that resulted from them.
+
+
+So then you have the data with the full
+
+
+tracing of the entire workflow. So you
+
+
+can build a UI like this that tells you
+
+
+exactly what happened. So you can see
+
+
+that the UI sent a command that resulted
+
+
+in an event and then the the workflow
+
+
+reacted to that event and sent a new
+
+
+command that sent a new event and so on
+
+
+and so forth. And you can do really neat
+
+
+things like for example you can use the
+
+
+request ID the coming from the load
+
+
+balancer for example as the ID of the
+
+
+first command if you want and then that
+
+
+will be correlated with all of the
+
+
+events and commands resulting from that
+
+
+workflow. So you can easily map from the
+
+
+request down to the entire workflow even
+
+
+if it's act the workers are running in
+
+
+different servers for example.
+
+
+You can also
+
+
+just build your your UI to do time
+
+
+traveling to actually load the state of
+
+
+an object uh from the events in memory
+
+
+so that you can actually navigate the
+
+
+history in real time. So this is this is
+
+
+the coffee shop shopping cart and you
+
+
+can you can just click on on the event
+
+
+numbers and navigate the state and you
+
+
+can see how the the state is updated in
+
+
+the in the same UI that your users see.
+
+
+So it's a really nice tool for debugging
+
+
+and just replaying exactly what happened
+
+
+in your system.
+
+
+The other thing is that in my source
+
+
+library and I'm still working on this.
+
+
+It gives you this web dashboard where
+
+
+you can actually see all of the
+
+
+reactors, all all of the classes that
+
+
+are listening
+
+
+uh to events and commands in your system
+
+
+and you can stop them, you can restart
+
+
+them and you can replay them. So for
+
+
+example, you have that list of campaigns
+
+
+and you want to make a change. You want
+
+
+to move it from using a database to
+
+
+using elastic search or you want to add
+
+
+a field. Um, so basically you just
+
+
+delete the data for that projection for
+
+
+that list. You set the offsets in the
+
+
+system in the runtime back to zero and
+
+
+you let it replay all of the events
+
+
+against your code again to just rebuild
+
+
+the entire list.
+
+
+And you can there's an API for that, but
+
+
+you can also just click on the button in
+
+
+the dashboard, you click resume, and it
+
+
+will just rebuild the entire list again
+
+
+for you. And it actually makes sure to
+
+
+par parallelize the work uh while
+
+
+keeping the order guarantees like events
+
+
+for the same projection should always be
+
+
+run in the same order but different
+
+
+different campaigns can be evolved in
+
+
+parallel by different workers. So this
+
+
+the runtime does all of that for you.
+
+
+Um,
+
+
+right. The other thing that I'm working
+
+
+on is that because that little DSL to
+
+
+define commands and events, it's it's
+
+
+it's basically so simple and so high
+
+
+level, so declarative, it's actually
+
+
+very easy to do static analysis on it
+
+
+using the Prism Prism parser. So I can
+
+
+just analyze your code and produce nice
+
+
+visuals like this to describe the
+
+
+workflows in the code that you wrote. So
+
+
+you can just see the how to actually
+
+
+what's the be the the workflow to add a
+
+
+donation. So you can see in here you can
+
+
+see the commands the events and the
+
+
+reactions that glue the two two commands
+
+
+together.
+
+
+The other concept that you get out of
+
+
+this pattern is basically the idea of
+
+
+autonomous services.
+
+
+Yeah, we've all written microservices
+
+
+that are really just rest APIs talking
+
+
+to each other. like you have a a service
+
+
+that calls a third party or another
+
+
+service via a rest request and if that
+
+
+uh it's a synchronous call so if that
+
+
+service is down then your system is down
+
+
+as well. So it's not really a micros
+
+
+service architecture. It's just a
+
+
+distributed monolith. We all know this I
+
+
+think. So the real point of
+
+
+microservices was always autonomy so
+
+
+that you have each system is working at
+
+
+its own pace independent from the others
+
+
+and they're always catching up to the
+
+
+other. So they're not blocking calls
+
+
+between each other. That's really the
+
+
+key to micro to decoupling services. It
+
+
+it's not about different servers or
+
+
+different languages. It's just about
+
+
+that things are running independent from
+
+
+each other.
+
+
+So this is what you get here as well for
+
+
+free. Each decider, each projector is
+
+
+just consuming events and commands as
+
+
+they appear in the in the store at their
+
+
+own pace. Some of them can be slower
+
+
+than the others and that's fine. So for
+
+
+example, one service is processing
+
+
+commands and appending new events and
+
+
+then later some other uh reactor sees
+
+
+that event reacts to it and sends an
+
+
+email or does something else at their
+
+
+own pace. So you get autonomous services
+
+
+and the contract between the different
+
+
+services is just the event and command
+
+
+schemas which are just just really
+
+
+simple attribute schemas. So that's
+
+
+basically the protocol of the
+
+
+communication between your services.
+
+
+The other thing that you get is durable
+
+
+execution. I think there's a there's a
+
+
+really good uh talk tomorrow about
+
+
+durable execution that I'm looking
+
+
+forward to to see. Durable execution is
+
+
+the idea that you have a complex
+
+
+uh
+
+
+method call or process or workflow that
+
+
+may be composed of several things like
+
+
+call this API and then call this API and
+
+
+then record something to a database and
+
+
+then update a cache etc. Any of those
+
+
+things can fail. So if one of them
+
+
+fails, so here for example, uh you start
+
+
+the payment event, then there's a
+
+
+reaction to call stripe or the payment
+
+
+gateway and maybe that fails because the
+
+
+network is down or there's a bug or
+
+
+whatever a bug in your own code
+
+
+possibly. You re you if that fails you
+
+
+you really don't want to have to run
+
+
+everything again because you might have
+
+
+side effects that you don't want to run
+
+
+again. So with durable execution you
+
+
+basically snapshot the result of each
+
+
+each step so that if any step fails when
+
+
+you retry later or when you fix the bug
+
+
+you only
+
+
+uh pick the work up from the last
+
+
+successful step instead of repeating
+
+
+everything previous to that. So event
+
+
+sourcing gives you durable execution by
+
+
+definition because each event tracks
+
+
+what was the last successful thing that
+
+
+you did. So if there's a bug in your
+
+
+Stripe code, you fix it, you deploy it,
+
+
+you run it again, and then it will just
+
+
+try that reaction again to try to talk
+
+
+to Stripe again, and then it will emit
+
+
+record with a new event and so on. So
+
+
+you sort of get that for free as well.
+
+
+So now it's fixed.
+
+
+There's way more to talk about. Uh but I
+
+
+think that's that's the time I have.
+
+
+These are the links.
+
+
+Yeah. any questions uh now or or later
+
+
+happy to to answer them.
+
+
+>> Yeah, first of all, thank you for the
+
+
+presentation and uh I have basically two
+
+
+questions. First of them is is a decider
+
+
+really is an local implementation of the
+
+
+state machine for many inputs.
+
+
+>> What do you mean by many inputs? uh so
+
+
+that you can not only check uh the state
+
+
+of uh for example like could you please
+
+
+switch back to the examples for the
+
+
+decider if it's not a problem
+
+
+>> can you
+
+
+>> yeah cuz you showed that we track yeah
+
+
+uh the false scenario will be ideal I
+
+
+think uh no the next one with the false
+
+
+when uh yeah the campaign is closed so
+
+
+cuz right now we are checking like the
+
+
+campaign started and campaign closed and
+
+
+also the donation started. So we uh many
+
+
+inputs means that uh we not only track
+
+
+the state of the campaign but also track
+
+
+the state of the uh donation.
+
+
+>> Yes. Uh this something I left out of the
+
+
+talk in traditional event sourcing
+
+
+events are tied to a single stream. A
+
+
+stream is just an identifier like
+
+
+donation one or campaign one. So you are
+
+
+kind of forced to to partition
+
+
+the execution by streams. You first do
+
+
+donation stuff you and then you do
+
+
+campaign stuff or the other way around.
+
+
+You never mix them. Basically, when you
+
+
+have to do something that touches on
+
+
+both the campaign and the donation, you
+
+
+use eventual consistency. You use claim
+
+
+patterns and things like that to do this
+
+
+and then do that and it's all and you
+
+
+can still do that with source. So that's
+
+
+that's actually how I started doing it.
+
+
+In the new version of sourced, I'm using
+
+
+something that it some people call it
+
+
+DCV uh dynamic consistency boundaries,
+
+
+which means that events are not tied to
+
+
+a single stream. Events just have
+
+
+attributes. They're just objects with
+
+
+attributes. And then you can basically
+
+
+index events by different attributes. So
+
+
+you can build when you want to project
+
+
+events or make a decision, you can just
+
+
+query different events by different like
+
+
+a normal query really like give me
+
+
+donation events for this event uh for
+
+
+this donation and campaign events for
+
+
+this campaign and put them together and
+
+
+it's they are globally ordered basically
+
+
+which is a limitation of course. Uh and
+
+
+then you you you take that subset of
+
+
+events. So you're basically building
+
+
+virtual streams designed
+
+
+just for the thing that you want to do.
+
+
+So there's no such such thing as
+
+
+donation events and campaign events.
+
+
+There's just events of things that
+
+
+happen and you build the context
+
+
+of depending on the decision that you
+
+
+have to to make. Does that make sense?
+
+
+>> Yeah, absolutely. And the second
+
+
+question is do you have any specific
+
+
+advice on the storage for the events?
+
+
+like is it something basic like simply
+
+
+store events in the database or in some
+
+
+cases it's just enough to store them
+
+
+like in memory or just in logs or
+
+
+something like that cuz based on your
+
+
+examples I see that uh probably the most
+
+
+sense makes to just store them in
+
+
+database as events and that's all
+
+
+>> so as I said at the beginning I've been
+
+
+looking into event sourcing for many
+
+
+years and yet I have virtually zero
+
+
+production experience with it so this
+
+
+was all a waste of time for you
+
+
+basically but uh I I just I just like to
+
+
+explore the patterns um so I can't give
+
+
+authoritative advice but for this before
+
+
+I was using posgress and now I'm just
+
+
+using SQL lights just because I wanted
+
+
+to simplify the dependencies to
+
+
+concentrate on the patterns but I know
+
+
+that people actually use sourcing at
+
+
+scale on top of postgress and even files
+
+
+sometimes. Yeah, thank you so much.
+
+
+Yeah, thank you.
+
+
+>> Any more questions? Oh,
+
+
+>> there's a statement so I can confirm it
+
+
+works really well on top of Postgress.
+
+
+>> Thanks. Good to know.
+
+
+>> Hello. Hello. Hello. Yeah, it works well
+
+
+with Postgress. We are doing it. um
+
+
+question is how do you prevent um race
+
+
+conditions stuff like that because uh do
+
+
+you put everything like in a transaction
+
+
+like storing events and storing the read
+
+
+models or how do you how do you handle
+
+
+that?
+
+
+>> Yes. So again, I didn't touch on that.
+
+
+There's a lot of complexity. The thing
+
+
+with event sourcing, it's a simple
+
+
+pattern conceptually. You just a a
+
+
+command produce an event, you store the
+
+
+event, then you fetch all the events to
+
+
+handle the next command. Easy.
+
+
+Actually, when you want to do this in an
+
+
+eventually consistent manual running in
+
+
+the background, there's a lot of
+
+
+complexity. How do you deal with many
+
+
+workers competing on the same commands,
+
+
+for example? How do you partition those
+
+
+things to make sure that events and
+
+
+commands for the same donation are
+
+
+always handled in the same order and
+
+
+only once by one worker in a fleet of
+
+
+many processes for example. There's
+
+
+actually a lot of complexity around
+
+
+locking uh and transactions and so on.
+
+
+So that's basically what source does and
+
+
+it basically has a a claim mechanism
+
+
+mechanism similar to solid Q a bit in
+
+
+that it first takes a claim like a a
+
+
+lock basically a a row a flag in the in
+
+
+the database to make sure that no other
+
+
+worker is going to process events for
+
+
+this partition while this worker is is
+
+
+running and processing your command or
+
+
+your event or a projection. Then when
+
+
+the work is done, it releases that claim
+
+
+so that any other worker can uh pick up
+
+
+new work for the same partition. I'm not
+
+
+sure if that explains. I don't want I
+
+
+can show you the code, but it's it's
+
+
+quite complex.
+
+
+>> Makes sense. Thanks.
+
+
+>> Um, can you talk more about error
+
+
+handling? How does that integrate with
+
+
+Ruby exceptions, the the Ruby exception
+
+
+model, and also how you communicate it
+
+
+to the UI? Yes,
+
+
+again I handwave that and it's like
+
+
+that's an entire talk on its own. uh
+
+
+before going into the technical aspect I
+
+
+think the valuable question is once
+
+
+you're thinking in these terms what is
+
+
+actually an error right so we we tend to
+
+
+in for example in CRUD systems we tend
+
+
+to oh that didn't work an error right
+
+
+and also because we're just doing
+
+
+request response so we can just show
+
+
+something to the to the UI or something
+
+
+when you're doing things in the
+
+
+background what happens if uh the the
+
+
+payment doesn't work because your your
+
+
+card is blocked or out of funds or
+
+
+whatever. Do you just fail and raise an
+
+
+exception or maybe it's a higher level
+
+
+domain question that where you should be
+
+
+thinking
+
+
+failed payments are something that can
+
+
+happen in this domain. It's not an
+
+
+error. It's actually something that can
+
+
+happen. So maybe it's not an error at
+
+
+all. Maybe it's just another kind of
+
+
+event. Maybe when you try to to pay to
+
+
+run the payment processing and it fails
+
+
+instead of raising an exception, you
+
+
+should just be saving a new event saying
+
+
+recording the fact that the payment
+
+
+failed. And you can actually explore
+
+
+what the implications of that are for
+
+
+the domain. Maybe you you can use that
+
+
+fact to offer the customer a different
+
+
+payment form for example, right? Or
+
+
+saying sorry and give them a discount
+
+
+for the next one, right? uh so it kind
+
+
+of makes you question what is an error
+
+
+in the first case. So in my view it kind
+
+
+of reduces the scope of what true errors
+
+
+are. So
+
+
+my current thinking is quite radical in
+
+
+that I'm thinking that there's actually
+
+
+no such thing as errors at the domain
+
+
+level. It's either things that can
+
+
+happen and you have to handle basically
+
+
+events or true exceptions like technical
+
+
+or network issues that you should report
+
+
+to your you know monitoring system and
+
+
+maybe retry or just
+
+
+hold the system.
+
+
+So, for example,
+
+
+here that little dashboard there, it it
+
+
+it keeps it it visualizes the running
+
+
+reactors that you have in your workers.
+
+
+And if there's an actual a true
+
+
+exception raised by a bug or a network
+
+
+error, it will retry and it will do
+
+
+exponential back off. That's
+
+
+configurable. And when it reaches the
+
+
+end of that and it's still failing, it
+
+
+just stops that reactor. it basically
+
+
+dregisters it so it just stops handing
+
+
+messages. It's kind of a brute force
+
+
+solution. But again, the thinking is
+
+
+that if there's a true exception,
+
+
+there's something went terribly wrong
+
+
+and you just should stop trying and fix
+
+
+the problem. I'm I'm I'm aware that that
+
+
+doesn't really answer your questions,
+
+
+but it's uh I hope it helps.
+
+
+>> All right. Um we don't have time for
+
+
+more questions, but Ismile told me that
+
+
+he'll be there at the at the party
+
+
+tonight. Thank you.
+
+
+>> Right. So you can approach him and uh
+
+
+let's talk about email sourcing. But
+
+
+first, thank you very much

@@ -1,0 +1,2161 @@
+Shaon will talk about high performance,
+
+
+high concurrency Ruby in Yuring machine.
+
+
+Please welcome HIM
+
+
+CHESHKIM.
+
+
+I love the Polish language. It's uh it's
+
+
+a has a very beautiful sound. It's very
+
+
+sexy, I find.
+
+
+So, uh hello everybody. My name is Shaon
+
+
+and uh today I would like to talk to you
+
+
+about Turing machine and uh building
+
+
+concurrent Ruby apps.
+
+
+uh with fibers and IOuring.
+
+
+So let's talk about fibers. What is a
+
+
+fiber?
+
+
+A fiber is simply a context of execution
+
+
+that can be suspended and resumed.
+
+
+And in Ruby for each thread we start
+
+
+with a single context of execution which
+
+
+we can refer to as the main or the
+
+
+default fiber and we can create
+
+
+additional fibers or context of
+
+
+execution that we can switch between
+
+
+such as uh so that one uh fiber will be
+
+
+suspended and the other will be resumed.
+
+
+Now fibers have uh many different uses
+
+
+in Ruby. For example, they are used to
+
+
+implement lazy enumerators.
+
+
+Um they can also be used to implement
+
+
+state machines, parsers and such stuff.
+
+
+But uh today we are going to concentrate
+
+
+on their usage for concurrency. And
+
+
+fibers are useful for concurrency in uh
+
+
+very specific circumstances
+
+
+um especially when we're dealing with
+
+
+applications that are IO bound. So we'll
+
+
+uh go back to this idea of IObound
+
+
+applications as we uh progress through
+
+
+this talk.
+
+
+So let's look at how we work with fibers
+
+
+to in order to achieve concurrency. Now
+
+
+uh the program that we see here uh does
+
+
+two things at the same time.
+
+
+Um one task is to read from standard in
+
+
+and to print back the data that we read
+
+
+to the the terminal and the other task
+
+
+is to sleep for 5 seconds and to print
+
+
+the message to the terminal.
+
+
+So uh we start by creating two fibers
+
+
+and for each fiber we provide a block of
+
+
+code that will be run in the context of
+
+
+the fiber.
+
+
+Now when we create a fiber the fiber is
+
+
+in a suspended state. So when we get to
+
+
+the end of this program and we have
+
+
+created the two fibers in order to start
+
+
+those fibers running we call reader
+
+
+transfer on to switch to the first fiber
+
+
+the reader fiber and this has the effect
+
+
+of suspending the main fiber uh which
+
+
+run up until that point and to resume
+
+
+the reader fiber.
+
+
+So what the reader fiber does is since
+
+
+we do not want to block the thread while
+
+
+we are reading from uh standard in we
+
+
+call read non-block which will not block
+
+
+instead if there is no data available we
+
+
+are uh going to get a weight readable
+
+
+return value and in that case we are
+
+
+going to call sleeper transfer which
+
+
+will switch to the sleeper fiber
+
+
+and the sleeper fiber will do something
+
+
+similar. It also runs in a loop and it
+
+
+just checks if enough time has passed
+
+
+since it started running. If not, it
+
+
+will transfer control back to the reader
+
+
+fiber. So what this program will do is
+
+
+that it will pingpong between those two
+
+
+fibers until a condition has been met
+
+
+and the relevant fiber can continue
+
+
+processing.
+
+
+So um one problem that we can see in
+
+
+this code is that the references for the
+
+
+fibers are hardwired in the code. So the
+
+
+two fibers actually need to know about
+
+
+each other. Um, but what happens if we
+
+
+wanted to add a third fiber uh that ran
+
+
+concurrently at the same time? Or what
+
+
+happens if we want to uh be able to
+
+
+create fibers dynamically as we go?
+
+
+So a solution to that would be to
+
+
+introduce the concept of a run Q. The
+
+
+run Q is simply a queue that holds
+
+
+fibers that are ready to run. So instead
+
+
+of calling uh reader transfer or slipper
+
+
+transfer, we are going to abstract it
+
+
+away into a method called fiber switch.
+
+
+And in that method, we are going to add
+
+
+the current fiber to the tail of the
+
+
+runq and pull the fiber at the head of
+
+
+the runq and switch to that fiber. So it
+
+
+has the effect of doing the same thing
+
+
+but it is mediated through the rank and
+
+
+that allows us to uh create a solution
+
+
+that is more universal.
+
+
+Now a second problem with this program
+
+
+is that all of that pingpong between the
+
+
+two fibers is a lot of busy work for
+
+
+nothing basically.
+
+
+So maybe instead of polling all the time
+
+
+for uh a condition to be met, we can use
+
+
+some of the tools that the Ruby runtime
+
+
+gives us um in order to wait for an I
+
+
+operation to complete.
+
+
+So instead of doing all those loops and
+
+
+checking for uh the I operation, the
+
+
+completion of the I operation, we um
+
+
+excuse me.
+
+
+So instead of um uh um instead of this
+
+
+loop that we had that was a bit uh a bit
+
+
+of an ugly code, we abstract it away
+
+
+into a single method call. And you can
+
+
+see now that the code in the fibers, the
+
+
+two fibers, it it's not only shorter, it
+
+
+also shows uh a much clearer intent of
+
+
+what it needs to do. So from the point
+
+
+of view of the fibers um we're just
+
+
+doing a normal method called it's
+
+
+obviously blocking but we have hidden
+
+
+away uh the old mechanism of switching
+
+
+between fibers and one peculiar thing
+
+
+about the do read and the do sleep
+
+
+method uh methods is that actually we
+
+
+are not doing any IO instead we are uh
+
+
+registering the intent to perform IO and
+
+
+we just do a fiber switch.
+
+
+So
+
+
+we we here we have the whole solution
+
+
+for creating uh an IO an alternative IO
+
+
+implementation that is fiber aware and
+
+
+we see that in the fiber switch method
+
+
+instead of always putting the current
+
+
+fiber into the tail of the run q we just
+
+
+pull fibers off the run q resume them
+
+
+and when the runq is empty it's only
+
+
+then that we are going to perform the
+
+
+IO. And when we do the IO, we use IO
+
+
+select to check for readiness, which
+
+
+will block the thread. But since we have
+
+
+no more processing to do, there's no
+
+
+problem with that. And when we actually
+
+
+read the the data from standard in, we
+
+
+can then put the fiber back on the rune
+
+
+and then u return to processing the
+
+
+fibers normally.
+
+
+So uh one thing to observe about uh this
+
+
+technique of concurrency is that uh
+
+
+actually when the runq is not empty
+
+
+excuse me
+
+
+need some air.
+
+
+So when the runq is not empty that means
+
+
+that we have more CPUbound work to do.
+
+
+We have more processing to do. And in
+
+
+contrast when the rancu is finally empty
+
+
+that means that we have no more work to
+
+
+do and we can then go and wait for IO
+
+
+operations to complete. So we will have
+
+
+CPUbound work and then IO work and it's
+
+
+going to alternate like that.
+
+
+So now let's talk about IO uring. So um
+
+
+excuse me I have nowhere.
+
+
+So Iuring is an interface for performing
+
+
+asynchronous IO. It is a Linux specific
+
+
+interface. It doesn't uh exist on other
+
+
+operating system systems. It provides a
+
+
+comprehensive set of IO operations that
+
+
+follows the design of the normal system
+
+
+call IO API. Um, and it does so it
+
+
+provides asynchronous IO by breaking
+
+
+each IO operation into three phases.
+
+
+Submission, execution, and completion.
+
+
+So let's look at how we interact with
+
+
+IOuring. With IU ring uh an application
+
+
+sets up two circular buffers or ring
+
+
+buffers, hence the name IO ring IO user
+
+
+ring. Uh the first buffer is a
+
+
+submission queue or SQ. The second
+
+
+buffer is the completion queue. And the
+
+
+way we perform IO is that the
+
+
+application adds entries to the
+
+
+submission queue. Each entry describes
+
+
+an IO operation. The kernel pulls these
+
+
+entries from the submission queue,
+
+
+performs the IO asynchronously.
+
+
+Meanwhile, the application can do other
+
+
+stuff and eventually when each IO
+
+
+operation is complete, the kernel is
+
+
+going to put entries uh completion
+
+
+entries into the completion queue which
+
+
+will eventually be read by the
+
+
+application and processed by the
+
+
+application.
+
+
+So in this example that we see here,
+
+
+this is some C code. Um we start by
+
+
+setting up the ION instance and we then
+
+
+in order to submit an IO operation, we
+
+
+get a pointer to an entry in the
+
+
+submission queue by using Iuring SQE. We
+
+
+prepare the entry using uh one of the
+
+
+IOuring prep functions in this case a
+
+
+read uh operation. We provide the
+
+
+different arguments for the read
+
+
+operation which is really similar to how
+
+
+you would do it with a normal read Cisco
+
+
+code and we also set a user data that is
+
+
+associated with the SQE with this I
+
+
+operation. Um now the user data can be a
+
+
+tag, it can be an ID, it can be a
+
+
+pointer to some C data structure and
+
+
+this value will be copied by the kernel
+
+
+into the completion entry once the IO
+
+
+operation is completed and this will
+
+
+allow us to identify the IO operation
+
+
+that we're dealing with.
+
+
+So we prepare the SQE and then we call
+
+
+IO during submit. This is actually a
+
+
+wrapper around a system call uh called
+
+
+Iuring enter. Um and this lets the
+
+
+colonel know that there are entries that
+
+
+are waiting to be um processed by the
+
+
+kernel. Meanwhile, while the kernel is
+
+
+performing the I operation, we can do
+
+
+some more processing. we can submit more
+
+
+I operations and eventually when we are
+
+
+ready we go and we wait for one or more
+
+
+CQEs to be available on the completion
+
+
+queue.
+
+
+We can then look at the user data of the
+
+
+completion queue that allows us to
+
+
+identify um the the IO operation and we
+
+
+can process the result of the IO
+
+
+operation. So you see here that we there
+
+
+is a pattern that is actually very
+
+
+similar to the concurrency model that we
+
+
+saw with fibers. We process
+
+
+uh whatever work that we have to do
+
+
+CPUbound work. We submit IO operations
+
+
+that we are interested in performing and
+
+
+eventually when we have no more
+
+
+processing to do then we can wait for
+
+
+one or more CQES completion entries to
+
+
+be available and we can process them.
+
+
+So what if you wanted to combine the
+
+
+two? What if we wanted to drive the
+
+
+fiber concurrency model with IOuring? So
+
+
+here's a sketch of how of how this could
+
+
+look. We have a sleep function, a do
+
+
+sleep function that prepares an SQE. It
+
+
+also keeps track of the current fiber in
+
+
+order to know which fiber originated the
+
+
+I operation. And then we do simply a
+
+
+fiber switch. The fiber switch function
+
+
+implementation is very similar to what
+
+
+we saw before. We pick fibers off the
+
+
+run Q. We resume them. And finally, when
+
+
+the run is empty, we can then go and
+
+
+submit all of the SQEs that we prepared
+
+
+and wait for one or more completion.
+
+
+And for each CQE we process that we
+
+
+process, we grab the fiber that is
+
+
+associated with the IO operation and we
+
+
+put it back on the run Q.
+
+
+So this is basically the design between
+
+
+uh behind year machine. Uring machine is
+
+
+a project that uh I've been working on
+
+
+for the last year or so. um and it is uh
+
+
+uh an implementation of fiber
+
+
+concurrency based on ioing.
+
+
+So in your machine the idea is that a
+
+
+machine uh a machine is an instance of
+
+
+Iuring ION plus a run Q. It has
+
+
+different methods for controlling the
+
+
+lifetime of fibers and it provides a
+
+
+low-level API that follows more or less
+
+
+the normal system call IO uh interface.
+
+
+We work with raw file descriptors and we
+
+
+also work with uh buffers that the
+
+
+application is supposed to provide for
+
+
+these method calls. Euring machine also
+
+
+includes some higher level abstractions
+
+
+over this low-level API namely the Uring
+
+
+machine IO class uh which does buffered
+
+
+reads which we'll uh discuss later and
+
+
+also a fiber scheduleuler implementation
+
+
+that we'll also look at.
+
+
+So to recap, during machine uh
+
+
+concurrency model combines the idea of a
+
+
+run Q with the ioink submission queue
+
+
+and completion queue.
+
+
+Yuri machine also supports cancelling IO
+
+
+operations.
+
+
+Uh IOuring has a mechanism for
+
+
+cancelling ongoing IO operations. So in
+
+
+your machine whenever you want to cancel
+
+
+an operation you can manually schedule
+
+
+the fiber uh that is currently blocked
+
+
+on an I operation you can manually
+
+
+schedule it with an exception and when
+
+
+the fiber is finally resumed it detects
+
+
+that the IO operation has not completed
+
+
+it will cancel the IO operation at the
+
+
+level of IO uring and it will finally
+
+
+raise the except exception uh that was
+
+
+scheduled with the fiber. There's also a
+
+
+universal mechanism for timeout and
+
+
+since uh error handling follows the Ruby
+
+
+exception uh the standard Ruby exception
+
+
+mechanisms it is very easy to uh uh
+
+
+implement patterns such as graceful
+
+
+shutdown.
+
+
+Uring machine also supports uh using
+
+
+multi-shot operations. So I urine has a
+
+
+few different operations that are
+
+
+multi-shot variants of the normal
+
+
+operations namely for accept for
+
+
+timeouts for reads and for receives.
+
+
+So the way this works that uh this works
+
+
+is that normally with IO uring you
+
+
+submit an SQE once and you receive a
+
+
+completion once but with multi-shot
+
+
+operations you submit once and you
+
+
+receive multiple completions. So for
+
+
+example with accept the normal way to do
+
+
+it would be to submit an accept and wait
+
+
+for a completion and then submit and
+
+
+accept again and wait for a completion.
+
+
+Instead with multi-shot accept, we
+
+
+submit once and the kernel will just
+
+
+provide us with a continuous stream of
+
+
+uh completions each completion with the
+
+
+FD of the new connection. So the way
+
+
+this looks to to the developer using uh
+
+
+this interface is with an accept each
+
+
+method that will run as an infinite loop
+
+
+and on each CQE that that arrives the
+
+
+fiber will be resumed and it will yield
+
+
+the value to the block that was given to
+
+
+the method call. The same for periodic
+
+
+timeout for that can be used for uh for
+
+
+implementing um uh repeated uh uh tasks
+
+
+that you want to uh to uh perform
+
+
+perform periodically.
+
+
+And also there is the possibility to
+
+
+perform multi-shot read and receive but
+
+
+that also requires uh the use of u
+
+
+another feature of Iuring called
+
+
+provided buffers.
+
+
+Let's look at that feature.
+
+
+Now the idea be behind provided buffers
+
+
+is that for multi-shot reads and
+
+
+multi-shot receives uh there's a problem
+
+
+because normally when you do a read you
+
+
+need to provide some kind of buffer a
+
+
+pointer to a location me in memory where
+
+
+the data will be read into but what
+
+
+happens if you want to read repeatedly
+
+
+so that is what provided buffers are for
+
+
+so the way this works is that The
+
+
+application sets up another circular
+
+
+buffer called a buffer ring. And this
+
+
+buffer holds entries that each entry
+
+
+references a buffer for reading that the
+
+
+alloca that the application has
+
+
+allocated. So the the application is
+
+
+basically saying to the to the kernel
+
+
+here's a set of buffers you can use them
+
+
+with h each each cqe tell me which
+
+
+buffer you used and how much data you
+
+
+read into it and in recent versions of
+
+
+the kernel uh Iuring is able to consume
+
+
+buffers incrementally such that for
+
+
+example if you provide a buffer that is
+
+
+16 kilobytes in size. If you only read
+
+
+three bytes, then the kernel will only
+
+
+consume three bytes from the buffer. And
+
+
+the next time it reads data, it will put
+
+
+the data where it left off.
+
+
+And the best uh the best thing about
+
+
+this feature is that you can use the
+
+
+same set of buffers for as many
+
+
+concurrent uh read operations as you
+
+
+want. So there is no need to allocate
+
+
+buffers separately for each read
+
+
+operation. You can use the same set of
+
+
+buffers for all your reading.
+
+
+So what year machine does is it builds
+
+
+on this feature of provided buffers and
+
+
+on multi-shot operations to uh implement
+
+
+completely automatic buffer uh
+
+
+management. So the way this work is that
+
+
+your machine allocates uh a bunch of
+
+
+buffers and it provides them to the
+
+
+kernel and as CQEs arrive it will track
+
+
+also where data was read for each CQE
+
+
+and it also tracks the uh the amount of
+
+
+buffer space that is left for use if
+
+
+that buffer space falls behind uh below
+
+
+a certain threshold, it will allocate
+
+
+additional buffers and provide them to
+
+
+the kernel. And in that way we we uh um
+
+
+excuse me uh in that way we avoid
+
+
+allocating buffers for each read
+
+
+operation. We just use the same set of
+
+
+buffers over and over again and buffers
+
+
+can be recycled back and provided back
+
+
+to the kernel once we are done uh
+
+
+consuming them.
+
+
+So in addition to the normal way of
+
+
+reading with uh either singleshot reads
+
+
+or multi-shot reads, we can also have a
+
+
+higher level abstraction
+
+
+uh called the uring machine IO class
+
+
+which builds on top of those primitives.
+
+
+So buffered reads are important when we
+
+
+are implementing protocol. uh in the
+
+
+Ruby world we we take it for granted
+
+
+because the IO class is so convenient to
+
+
+use and provides all that uh all those
+
+
+features that we don't even think of
+
+
+about them. But if for example we need
+
+
+to read a whole line if we're dealing
+
+
+with a a linebased protocol or if we
+
+
+need to be able to read a set of a a a
+
+
+fixed size of a message of a fixed size.
+
+
+Actually, when we read using the
+
+
+low-level API, we are not guaranteed
+
+
+that we'll we'll get a complete message.
+
+
+The message can arrive in chunks since
+
+
+uh TCP sockets is basically stream uh a
+
+
+stream of bytes. We are not guaranteed
+
+
+that we are going to get the whole
+
+
+message. So, we might have to repeat the
+
+
+read and meanwhile put the data that we
+
+
+already read in a buffer. So the idea
+
+
+behind the IO classes that we build on
+
+
+the fact that we receive CQEs
+
+
+um continuously and that they use a set
+
+
+of buffers that we provided to the
+
+
+kernel and uh the kernel reads
+
+
+incrementally into those buffers. So the
+
+
+the IO class provides an API that is
+
+
+very um convenient to use for
+
+
+implementing uh protocols
+
+
+and uh let's see how that works.
+
+
+So as we receive CQEs those CQEs are
+
+
+translated into segments. segments are
+
+
+just little C data structures that
+
+
+reference chunks of data that are uh
+
+
+that the kernel read into the buffers we
+
+
+provided to it. We then arrange those
+
+
+segments in a linked list and that can
+
+
+give us the whole message that we are
+
+
+waiting for. So in that way we have a
+
+
+segmented buffer. It's not a contiguous
+
+
+buffer but we avoid copying data and we
+
+
+also avoid allocating and reallocating
+
+
+uh buffers.
+
+
+Another feature that Turing machine has
+
+
+is a fiber scheduleuler implementation.
+
+
+So the fiberuler interface was uh
+
+
+introduced to Ruby in version 3.0 to I
+
+
+believe by Samuel Williams. He is the
+
+
+guy behind a lot of the work on uh
+
+
+fibers in Ruby uh in the last few years.
+
+
+And the idea of the fiberul interface is
+
+
+to provide hooks in the Ruby IO
+
+
+implementation
+
+
+such that in the presence of a fiber
+
+
+scheduleuler when we are performing IO
+
+
+um instead of the IO being performed by
+
+
+the Ruby runtime it will be deferred to
+
+
+the fiber scheduleuler which will be
+
+
+able to perform those IO operations
+
+
+uh in a fiber way without blocking the
+
+
+thread and this provides compatibility
+
+
+with basically the entire uh Ruby
+
+
+ecosystem.
+
+
+Um currently there are a few
+
+
+implementations of fiber scheduleuler uh
+
+
+of the fiberul interface and most
+
+
+notably the async uh gem and it's
+
+
+actually a family of gems that uh are
+
+
+authored by Samuel. He's also the author
+
+
+of the Falcon uh web server that was
+
+
+discussed already in other talks and now
+
+
+there's all also a year machine
+
+
+some more features that uh I'll discuss
+
+
+briefly um there are some
+
+
+synchronization primitives mutxes cues
+
+
+uh which use the futex uh version in uh
+
+
+the the iOutixes
+
+
+there's also some SSL integration. So um
+
+
+the OpenSSL gem um uh uses the OpenSSL
+
+
+library and the OpenSSL library has this
+
+
+um concept of a bio bio uh basic IO I
+
+
+believe um which is the method that is
+
+
+actually used to perform send and
+
+
+sending and receiving of encrypted data.
+
+
+But what happens in the OpenSSL gem is
+
+
+that it uses the Ruby the standard Ruby
+
+
+APIs only for checking for readiness.
+
+
+But the actual sending and receiving is
+
+
+done by the OpenSSL library uh which
+
+
+will do it using normal system calls. So
+
+
+if we want to do the sending and
+
+
+receiving using IO uring we have to uh
+
+
+override the bio with a custom BIOS. So
+
+
+uh the machine gem does just like that.
+
+
+I also um contributed a PR to the
+
+
+OpenSSL gem itself. It stays open. There
+
+
+is a competing PR from one of the
+
+
+maintainers of the OpenSSL gem and
+
+
+hopefully this will see this will be
+
+
+adopted one of the those PRs will be uh
+
+
+adopted in the future. There's also
+
+
+support for SSL
+
+
+uh in the IO class such that you can
+
+
+implement uh protocols on top of SSL
+
+
+sockets. Uh your machine also includes
+
+
+support for some uh Linux specific uh
+
+
+interfaces such as PFD for working with
+
+
+processes using FDS instead of PIDs and
+
+
+the I notify interface for uh watching
+
+
+file system events.
+
+
+And now the moment you've all been
+
+
+waiting for
+
+
+because you've probably been asking
+
+
+yourself how fast it is and the answer
+
+
+is it depends. However,
+
+
+however, what you see in this chart here
+
+
+is a certain scenario. It's an synthetic
+
+
+scenario. Um in this scenario we create
+
+
+50 pipes Unix pipes and we create for
+
+
+each pipe a pair of threads or fibers.
+
+
+One for reading, one for writing and we
+
+
+are reading and writing data a certain
+
+
+number of times and we measure the time
+
+
+it takes. So the blue bar is the thread
+
+
+implementation.
+
+
+The red bar is the async uh fiber
+
+
+scheduleuler implementation.
+
+
+The uh orange bar is the uring machine
+
+
+uh fiberul implementation and the uh
+
+
+green bar is the uring machine low-level
+
+
+API implementation. So you can see the
+
+
+difference between the different
+
+
+implementations.
+
+
+Another thing to note is that as we
+
+
+increase the level of concurrency, we
+
+
+also increase the advantage that Turing
+
+
+machine has uh compared to threads.
+
+
+Now I should add that this is a very uh
+
+
+specific scenario where we do we're
+
+
+doing basically only IO bound work but
+
+
+in real life this will not happen. In
+
+
+real life you will have also a lot of
+
+
+CPUbound work. This is especially true
+
+
+for uh any mature uh rails application
+
+
+where you are going to do a lot of
+
+
+allocation of objects, a lot of copying
+
+
+of data, a lot of uh rendering of
+
+
+templates etc.
+
+
+I uh recommend for you all to read uh
+
+
+the mythical IO bound Rails app by Jean
+
+
+Busier which goes into a lot of detail
+
+
+in discussing this
+
+
+So what can you do with your machine?
+
+
+Well, for the time being, not much. Um,
+
+
+there is a proof of concept rack
+
+
+compatible web server that I worked on
+
+
+for a few days just as a to to show that
+
+
+it can run rails applications, but it
+
+
+probably will need a lot of work uh in
+
+
+order to be able to use it in
+
+
+production. There is a project called
+
+
+Cynthropy which is uh my own web
+
+
+framework uh for that for my personal
+
+
+use that is maybe the subject for
+
+
+another talk. Um I'm working on a closed
+
+
+source platform for dealing with time
+
+
+series data for one of my clients and
+
+
+I'm also um I'm I'm going to uh convert
+
+
+some legacy apps that I maintain from
+
+
+using event machine to yearing machine.
+
+
+So uh what lies in the future for your
+
+
+machine? There are some missing features
+
+
+that I want to add to it. Most notably
+
+
+support for IPv6 addresses. I also want
+
+
+to come up with some kind of DSL for
+
+
+batch processing such that instead of
+
+
+having to create a separate fiber for
+
+
+each concurrent I operation we could
+
+
+just say to your machine here's a bunch
+
+
+of files go and read them and let me
+
+
+know when you're done.
+
+
+So this is uh also an idea that uh I
+
+
+need to develop further.
+
+
+uh another thing that I want to do is to
+
+
+uh implement protocols on top of the
+
+
+uring machine IO uh abstraction which uh
+
+
+as we saw is about buffered reads. So
+
+
+there is already an implementation of
+
+
+the radius protocol that uh is working
+
+
+very nicely and I want to do the same
+
+
+for uh HTTP1 HTTP2 and if I get to do
+
+
+this for PostgreSQL the PostgresQL wire
+
+
+protocol it will be really uh awesome
+
+
+and I also want to be able to integrate
+
+
+your machine with uh let's say the the
+
+
+pillars of the Ruby ecosystem
+
+
+uh Rails and Hanami and Sidekick and and
+
+
+other projects like that.
+
+
+So that's it.
+
+
+Life is beautiful. Thank you for
+
+
+listening.
+
+
+Thank you very much, Sharon. Are there
+
+
+any questions
+
+
+on the multi-shot except for listening
+
+
+socket? Um, aren't we concerned there
+
+
+that we commit to way too many in-flight
+
+
+um TCP connections? Is there any kind of
+
+
+way to limit that we do not have like
+
+
+100,000 TCP sockets open in the end and
+
+
+run out of file descriptors?
+
+
+I believe you can set the size of the
+
+
+backlog using the listen uh call.
+
+
+>> Sure. But if I do that, but I I on the
+
+
+slide I saw like I can delegate um
+
+
+accepting to the to the kernel and the
+
+
+kernel would keep accepting and giving
+
+
+me like 100,000 active TCP connections.
+
+
+That's what I understood at that point.
+
+
+>> Um even if I set the backlog to one, one
+
+
+time 100,000 is still 100,000 active
+
+
+FDs.
+
+
+I'm not sure.
+
+
+>> Cool. I'm just curious. So, okay. Thank
+
+
+you.
+
+
+>> This this needs to be investigated.
+
+
+>> Any other questions?
+
+
+>> Thanks for the talk. So, are you already
+
+
+using Falcon like everywhere with your
+
+
+framework and with other stuff?
+
+
+>> Falcon, you mean the the web server? I
+
+
+don't use Falcon.
+
+
+>> So what are you using? You said that you
+
+
+have your own rack and then your own
+
+
+framework. How you
+
+
+>> do? The the framework that I that I
+
+
+wrote for myself, Cropy, is uh runs on
+
+
+top of a custommade web server that I
+
+
+created that runs on top of it. It
+
+
+doesn't use Falcon.
+
+
+>> All right.
+
+
+>> Yeah. Thanks for the talk again and uh
+
+
+like I'm interesting in uh what were
+
+
+what were the original business needs
+
+
+that forced you to implement such an
+
+
+approach like uh what can be the example
+
+
+that tells you that probably you should
+
+
+think about optimizing this exactly part
+
+
+of the application.
+
+
+>> Yeah. So um actually I've been working
+
+
+with fibers and with Iuring for a few
+
+
+years already. Um I and I already
+
+
+published some gems that attempt to
+
+
+bring IOuring to Ruby. Uh there was one
+
+
+gem called Polifany that was very very
+
+
+high level with all kinds of other
+
+
+features for concurrency. Uh there was
+
+
+another gem that was much much lower
+
+
+level. So uring machine for me was
+
+
+really about finding the correct uh
+
+
+level of obstructions of ab obstruction
+
+
+such that on on the one hand we will not
+
+
+have to deal with the internals of of
+
+
+Iuring but on the other hand we could
+
+
+build higher level abstractions on top
+
+
+of it. And uh in the work that I do, I I
+
+
+work in process control in industrial
+
+
+process control. And uh I have a few
+
+
+applications that are based on event
+
+
+machine. Now event machine is uh
+
+
+how many people here know what event
+
+
+machine is?
+
+
+Right. A good a good number. So for
+
+
+those who don't know, event machine is
+
+
+an event reactor for Ruby. It was quite
+
+
+popular back in the day when people were
+
+
+looking for a way to create reactive
+
+
+applications in Ruby uh when you know
+
+
+Rails was just uh breaking into the
+
+
+scene. Um but uh unfortunately event
+
+
+machine has been uh unmaintained for uh
+
+
+quite a few years already. So I I was
+
+
+and I'm still am a bit uh concerned
+
+
+about this and uh since the the the apps
+
+
+that I'm maintaining that I am
+
+
+responsible for they they are already
+
+
+running for uh many years and uh they
+
+
+are seeing all the time you know uh they
+
+
+have to scale more and all that. This is
+
+
+this this is a this was a concern for
+
+
+me. So, uh, Yuring machine, you know,
+
+
+even the name, I mean, it basically came
+
+
+from wanting to to find a replacement
+
+
+for event machine.
+
+
+Okay. Yes, that's clear. Thank you so
+
+
+much.
+
+
+>> Okay, I see no more questions. Correct
+
+
+me if I'm wrong. Nope. Thank you very
+
+
+much, Aron. Thank you.

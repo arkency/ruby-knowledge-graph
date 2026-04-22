@@ -1,0 +1,4693 @@
+Our
+
+
+next speaker is Ryan. He came to us from
+
+
+England and as you know it's a little
+
+
+bit harder than it used to be. So please
+
+
+show some appreciation.
+
+
+>> Thank you.
+
+
+>> Sorry that was bad joke. But uh Ryan is
+
+
+going is working in CloudFare now and
+
+
+he's going to tell us about the no build
+
+
+utopia.
+
+
+>> Thank you. Um hey everyone. Uh I'm going
+
+
+to speak about uh the front end uh today
+
+
+and I'm going to hopefully uh make you
+
+
+all believe that Rails was right all
+
+
+along and and I'll show you how it's
+
+
+well positioned to kind of capitalize on
+
+
+the changes that are happening in the
+
+
+web platform. As just mentioned, I'm
+
+
+currently working at Cloudflare. I
+
+
+literally just joined. Um I'm a a
+
+
+principal product manager, so I don't
+
+
+even really get to write code anymore.
+
+
+Um, and I'm responsible for our real
+
+
+user monitoring web analytics product.
+
+
+Um, so if any of you are interested in
+
+
+making sure that you have really great
+
+
+web performance, please check it out.
+
+
+You can use it completely for free. You
+
+
+don't even have to be using Cloudflare.
+
+
+You can use it as a standalone product.
+
+
+Um, and the great thing about that
+
+
+product is that it gives me the insight
+
+
+across so much of the web because we
+
+
+power I think it's over 20% of the
+
+
+entire web. um I get insight into all of
+
+
+that data and I can see how things are
+
+
+performing in the real world. Um but
+
+
+yeah, you might be thinking I don't
+
+
+recall Cloudflare ever using Rails. Um
+
+
+and it's a fair concern because we
+
+
+don't. Um but um I did only just join in
+
+
+March. This is a new thing for me. Uh
+
+
+you know, we organized this conference
+
+
+before that happened. Um and I actually
+
+
+built on top of Rails for two decades.
+
+
+And the reason I joined Cloudflare is
+
+
+the same reason I uh was building on
+
+
+Rails. And that's because I love the
+
+
+web. I think it's a really precious and
+
+
+amazing thing. It's an incredible gift
+
+
+to the world. We can effortlessly reach
+
+
+global audiences. Um it's a single
+
+
+platform that kind of within reason we
+
+
+can reach every device on the planet. Um
+
+
+you know, maybe not watches quite yet
+
+
+really, but you know, we're getting
+
+
+there. Um and yeah, you can write once
+
+
+and deploy literally anywhere. There's
+
+
+no gatekeepers. There's no, you know, no
+
+
+one stopping you roll out a re release.
+
+
+So within seconds you can put something
+
+
+in front of real people. Um one of my
+
+
+old uh software engineers at my previous
+
+
+company um he was a prior to being a
+
+
+software engineer he uh designed nuclear
+
+
+power stations and he was like yeah we
+
+
+you know some people go their entire
+
+
+career without even doing a release you
+
+
+know getting one built um you know and
+
+
+once it's out there you can't just
+
+
+easily refactor it. You can't be like oh
+
+
+yeah we realized there was a bug there
+
+
+you know we'll just tweak it and it's
+
+
+it's all fine. Uh so we're in this
+
+
+really special place, but the web's got
+
+
+a bit of a problem with JavaScript. Um
+
+
+so uh uh we're now shipping over the
+
+
+course of the past decade, we're now
+
+
+shipping three times the volume of
+
+
+JavaScript than a decade ago, right? Uh
+
+
+and these these figures just show the
+
+
+median. Um you can't really see it's a
+
+
+bit uh high contrast here. Behind those
+
+
+two lines, there's kind of a range that
+
+
+show you um that you can get the slides
+
+
+later. Um but across basically every
+
+
+different percentile we are shipping
+
+
+them three times the volume now. Um so
+
+
+that's not ideal obviously. Um and it's
+
+
+growing faster than any other resource.
+
+
+And that's a problem because JavaScript
+
+
+is heavier than any other thing. So like
+
+
+if you load an image 100 kilobytes of
+
+
+image it can be decoded by a GPU and
+
+
+whatnot versus you know passing
+
+
+compiling executing JavaScript is a lot
+
+
+slower. It's a lot heavier. My colleague
+
+
+uh Tim Kadle recently ran these stats um
+
+
+and found that just year onear um kind
+
+
+of since the introduction of LLMs um he
+
+
+saw an increase of 15% on desktop and
+
+
+10% on mobile and yeah his theory you
+
+
+know if you look at when that started to
+
+
+happen the better the LLMs got generally
+
+
+the faster the JavaScript started to
+
+
+grow. Um but you might be thinking well
+
+
+you know our devices are getting faster
+
+
+right um and um kind of is the answer.
+
+
+So if you look at an iPhone at the top
+
+
+there you know if you're buying the
+
+
+latest one or your users your visitors
+
+
+are buying the latest one every single
+
+
+year then you could say yeah as long as
+
+
+it's fully charged and it's not running
+
+
+on the efficiency cores you know it's
+
+
+not in like low power mode or anything
+
+
+like that. um as long as there aren't
+
+
+other apps doing all these other things
+
+
+and it's kind of in isolation purely
+
+
+running a benchmark. Yes, it's about
+
+
+keeping up with the volume of JavaScript
+
+
+we're we're adding. And you know, again,
+
+
+the same thing on the on the Android
+
+
+side if you're buying those flagship
+
+
+devices every single year, which
+
+
+obviously most people don't do.
+
+
+But the interesting thing is these two
+
+
+lower lines represent 23 of new devices
+
+
+that get purchased. And if you draw a
+
+
+line over from the Galaxy A26, you'll
+
+
+find that it's about as fast as an
+
+
+iPhone 8 from 2017. Um, so 2/3 of new
+
+
+devices that are purchased today are
+
+
+equivalent to a device that's, you know,
+
+
+almost a decade old. Um and the trouble
+
+
+here is that you know whilst we're all
+
+
+used to kind of tuning our backend
+
+
+servers you know we can you know monitor
+
+
+the performance really closely that's a
+
+
+lot harder to do um on end user devices
+
+
+part of what my product does. Um and you
+
+
+know ultimately we can't depend on those
+
+
+those user environments uh for running
+
+
+our code. Um, in so kind of in summary,
+
+
+you know, if your visitors are baller
+
+
+enough to be buying a flagship model
+
+
+every year, that's great. But software
+
+
+is just kind of expanding to fill this
+
+
+gap continually. It's worth law that
+
+
+goes all the way back to the '9s and
+
+
+it's still happening today. But the the
+
+
+bit that always perplexes me is really
+
+
+what's happening. Like is the web
+
+
+getting substantially more interactive?
+
+
+Um, like I'm sure we're doing amazing
+
+
+things at the kind of 99 plus plus
+
+
+percentile. Um, you know, those amazing
+
+
+odd applications, but that's not most of
+
+
+the web. And I tried to look at like
+
+
+what I kind of uh summarized to the LLM
+
+
+is like what are the web's kind of
+
+
+greatest hits? And I was trying to
+
+
+categorize this into kind of rough areas
+
+
+around kind of the capabilities that
+
+
+they depend on, kind of technologies
+
+
+they're using on the web, and how
+
+
+they've pushed things forwards. And you
+
+
+know, this isn't an exhaustive li list
+
+
+by any measure. It was just kind of some
+
+
+highlights. Um, but most of these things
+
+
+are over a decade old. So, it's not like
+
+
+we're just magically coming up with
+
+
+these amazing new things. Like even with
+
+
+AI and everything, most of that's
+
+
+sitting on a server somewhere. It's not
+
+
+things we're really doing in the
+
+
+browser. Um, if we go back even further
+
+
+than a decade, uh, for any of you who've
+
+
+ever played Runescape before, they
+
+
+actually made a web version of it. um
+
+
+they did can it um because it had
+
+
+performance issues, but at that point,
+
+
+you know, they're trying to, you know,
+
+
+they're rendering 3D in real time with
+
+
+dynamic shadows and all that kind of
+
+
+good stuff. Trying to aim for over 60
+
+
+frames a second. So, you know, us trying
+
+
+to just arrange some rectangles on a
+
+
+page and some process some form input
+
+
+seems kind of silly in comparison
+
+
+really. We should be so fast at that.
+
+
+But our JavaScript isn't purely just a
+
+
+performance issue. If the if the
+
+
+JavaScript has kind of 3xed on the
+
+
+client, then it's probably 3xed kind of
+
+
+behind the scenes, we're doing more uh
+
+
+internally uh and that means that we
+
+
+have to maintain all of that JavaScript.
+
+
+So until until March, annoyingly, they
+
+
+they literally changed this as I started
+
+
+to prep this talk. Um this was the kind
+
+
+of mantra on the Rails homepage. It's
+
+
+it's similar today. Um but they've
+
+
+tweaked it to be kind of more AI
+
+
+focused. Um, and I I really love this
+
+
+like compressing the complexity of
+
+
+modern web apps. Like if only the
+
+
+JavaScript side could get on board with
+
+
+this. Um, and you know, I find it really
+
+
+disappointing because Rails comes with
+
+
+these really great tools, you know,
+
+
+Hotwire, Turbo, Stimulus, etc. Um, but
+
+
+so many people just kind of put them in
+
+
+the bin and go, you know what, we're
+
+
+just going to make it an API. Um, and
+
+
+they onboard like a a massive single
+
+
+page app framework. And when we do that,
+
+
+we we have to maintain so much more. uh
+
+
+you know you've got the framework
+
+
+itself, you've got all the libraries you
+
+
+might be using and like I can't so my my
+
+
+previous company uh we had a big single
+
+
+page app nextj app and we were um I
+
+
+can't tell you how many times we updated
+
+
+like rooting libraries and client side
+
+
+state management um it was just kind of
+
+
+this endless churn for no real gain for
+
+
+the actual customer um you've also got
+
+
+things like bundlers you got to try and
+
+
+make sure that you know the stuff you
+
+
+are outputting is hopefully as
+
+
+performant as possible
+
+
+um transpilers, you make sure you've got
+
+
+that kind of backwards compatibility. Uh
+
+
+and then you've got your dev servers and
+
+
+you know they're running side by side to
+
+
+to rails on your laptop and everything.
+
+
+Uh and then hot reloading and all that
+
+
+kind of stuff as well. Um so to like mpm
+
+
+install just like bundle install isn't
+
+
+free like we are bringing uh those
+
+
+dependencies in. are responsible for
+
+
+those. Um, and we're kind of borrowing
+
+
+against our uh future productivity and
+
+
+it kind of results in this kind of
+
+
+abstraction that sits between our input,
+
+
+our code uh and the actual user
+
+
+experience that we give uh to our
+
+
+visitors and our users. And ideally, we
+
+
+do want to be spending time on those
+
+
+things, you know, really kind of
+
+
+crafting uh that for our users. And
+
+
+anything kind of in this abstracted
+
+
+layer between is really just kind of
+
+
+time wasted. um you know we don't want
+
+
+to have to fight against the
+
+
+abstractions that we bring in and people
+
+
+are doing this all for you know say
+
+
+bringing this this complexity in for you
+
+
+know oh you know well there's going to
+
+
+be lots of page views and you know we
+
+
+want it to be as snippy as possible but
+
+
+in reality most single page apps on the
+
+
+web actually only see one soft
+
+
+navigation i.e. the one after you've
+
+
+landed, one click, that's it, uh, on
+
+
+average. Um, so we're loading all this
+
+
+extra JavaScript just for one click. Um,
+
+
+it doesn't really add up. So you might
+
+
+be thinking, you know, where does Rails
+
+
+fit into this? You know, we're building
+
+
+really serious applications in this
+
+
+industry. Uh, which is great. It's a
+
+
+very mature framework. Um, and actually,
+
+
+uh, Rails is doing really, really well.
+
+
+If we compare it to the JavaScript
+
+
+frameworks on this chart, Rails is up
+
+
+here at the top. So these are the these
+
+
+are the core web vitals. So for any of
+
+
+you who don't know, there's three
+
+
+metrics that the kind of web performance
+
+
+industry has um standardized to a degree
+
+
+with the backing of Google um for
+
+
+measuring perceived performance. So this
+
+
+is what does the user feel as close as
+
+
+possible um you know we've got one for
+
+
+kind of loading performance, there's one
+
+
+for visual stability and there's one for
+
+
+interactive interactivity
+
+
+responsiveness. Um, and you can see that
+
+
+in terms of origins that pass all three
+
+
+of those uh kind of thresholds for those
+
+
+metrics, Rails is jumping ahead of
+
+
+everyone else. So, if you stick with
+
+
+what Rails already has, uh, you know,
+
+
+you're on to a good thing. Um, but of
+
+
+course, as I say, many people just see
+
+
+it as an API and then they front it with
+
+
+all these big JavaScript frameworks. Um,
+
+
+so that kind of made me think, you know,
+
+
+is is Rails uh, you know, was it right
+
+
+all along? um you know do we need this
+
+
+kind of return to our raw materials our
+
+
+HTML our CSS and JavaScript so if you'll
+
+
+forgive me a little bit we need to
+
+
+obviously rewind and understand where
+
+
+Rails came from to understand you know
+
+
+had it made some right decisions along
+
+
+the way so I picked up Rails in 2005 um
+
+
+back then we weren't even using git uh I
+
+
+had to check it out of SVN I had to
+
+
+learn SVN to actually get access to the
+
+
+code um which was a whole new thing for
+
+
+me um you know I didn't even use version
+
+
+control before that embarrassingly
+
+
+Um but um but yeah, and then I remember
+
+
+um printing the docks off in a ring
+
+
+binder to take on holiday with me. Um
+
+
+because back then like we did have
+
+
+dongles that you could like plug in to
+
+
+get, you know, well it wasn't 3G yet,
+
+
+but you know, internet um of dialup
+
+
+quality. Um but you had to pay like £10
+
+
+a megabyte to to get access to it. So I
+
+
+printed it all off. You know, I was the
+
+
+cool kid on the airplane like reading uh
+
+
+these things on this holiday. Um, and
+
+
+you know, and I checked out Rails and I
+
+
+was just, you know, I probably spent
+
+
+more time inside just in awe of the
+
+
+productivity, um, than I did outside in
+
+
+the sunshine. Um, so yeah, I was the
+
+
+cool kid. Um, but back then, you know,
+
+
+we literally we just dump our JavaScript
+
+
+and our CSS and stuff into the public
+
+
+directory and be like, "Yeah, there
+
+
+there we go." But at least we knew what
+
+
+we were putting in there to a degree.
+
+
+Um, fast forward to 2006.
+
+
+Um, Rails 1.11 came out. Um, and this
+
+
+introduced RJS which allowed you to run
+
+
+some JavaScript from the server
+
+
+effectively in response to HTTP
+
+
+requests. Um, so we had some nice APIs
+
+
+like inserting HTML, replacing HTML,
+
+
+etc. Could even do little visual effects
+
+
+using what was probably terribly
+
+
+performant JavaScript back then, but we
+
+
+didn't know any better. Um, fast
+
+
+forwarding again to 2009, uh, sprockets
+
+
+as a gem came to be. We started to adopt
+
+
+that. Um, and then Rails made that
+
+
+official in 3.1. And what that gave us
+
+
+is the ability to concatenate files
+
+
+together so we could get improved
+
+
+compression. It gave us the ability to
+
+
+minify that so we could reduce that code
+
+
+down even before compressing it. Um, and
+
+
+then fingerprint them so that way we the
+
+
+little hashes that you see in the URLs
+
+
+um, we could tell the browser when it
+
+
+needs to download the new version just
+
+
+by the URL changing for us. And we also
+
+
+saw coffecript and SAS which were a kind
+
+
+of response to the fact that the
+
+
+browsers move very very slowly. You know
+
+
+we wanted a better syntax for
+
+
+JavaScript. We wanted a better syntax
+
+
+for CSS. It's not easy just to roll
+
+
+those things out. Those things are now
+
+
+deprecated. You can do um all of the all
+
+
+all well most of the features that they
+
+
+had are now all baked into the browser.
+
+
+So there's no need to use them today.
+
+
+But we were kind of trying to push uh
+
+
+the envelope a little bit there. In the
+
+
+same year, Chris Wroth of GitHub uh
+
+
+introduced a library called Pjax. This
+
+
+was a library where, you know, you click
+
+
+a link, it would intercept that, it
+
+
+would download the page, and it would
+
+
+just swap the HTML over. So that way
+
+
+you'd kind of get this single page app
+
+
+style thing. Um, and then Rails made
+
+
+that official with Turbo Links in 32.
+
+
+And then, um, that actually became a
+
+
+default in Rails 4.
+
+
+Then the dark years started.
+
+
+Um,
+
+
+uh, I have to say that I was kind of
+
+
+part of the part of the problem here in
+
+
+terms of like resumed driven development
+
+
+came in. Everyone wanted to be like the,
+
+
+you know, Netflix's, Amazon's, Google's,
+
+
+Metas, you know, I don't think it was
+
+
+meta then. It was probably just
+
+
+Facebook. But, um, yeah, we wanted to
+
+
+all act like these massive companies.
+
+
+We're like, yeah, we should be using
+
+
+microservices. We should be using NoSQL,
+
+
+GraphQL, single page apps. Um and
+
+
+everyone I think it was just a response
+
+
+to trying to make um a lot of our jobs
+
+
+that were very technical and complex
+
+
+visibly so so people would value the
+
+
+work we're doing and particularly on the
+
+
+front end that was kind of always
+
+
+treated as this kind of like oh well
+
+
+yeah kind of yeah it's it's not real
+
+
+programming that stuff. Um so I can see
+
+
+why that all came to be and Rails had to
+
+
+kind of respond to that. So it
+
+
+introduced Webpacker so that we could
+
+
+bring in Rails, Vue, Angular, etc. and
+
+
+make that kind of experience a little
+
+
+bit more native. So effectively this was
+
+
+the point at which we traded this uh
+
+
+left side uh for replicating pretty much
+
+
+everything on the client. um as say dark
+
+
+times um and you know we put all of that
+
+
+burden not on just our visitors our
+
+
+users but on ourselves as well because
+
+
+we had to maintain that and that's why
+
+
+people have been continually pushing for
+
+
+like yeah let's write some JavaScript
+
+
+and have it run on the server and in the
+
+
+client you know what could possibly go
+
+
+wrong with security there um so
+
+
+thankfully Rails helped us move out of
+
+
+the dark times uh with uh Rails 7 uh
+
+
+where the uh import map integration uh
+
+
+was was brought in and that effectively
+
+
+all that really means is that it was a
+
+
+response to uh HTTP2 becoming uh
+
+
+supported in browsers and what this
+
+
+meant was that there was a a much
+
+
+smaller overhead for downloading lots of
+
+
+small files versus one big one. Um so
+
+
+that way you know if you roll out a
+
+
+release you only have to download the
+
+
+files that have changed and it doesn't
+
+
+break the cache of that one big file.
+
+
+Um, so you know, we were responding to
+
+
+what was happening on the web. Um, hot
+
+
+wire and turbo replace turbo links. Um,
+
+
+and prop shaft because now we didn't
+
+
+need that concatenation and we didn't
+
+
+need the minification that uh was a
+
+
+minimal replacement uh for sprockets and
+
+
+it still stands today. So you can see
+
+
+we've kind of come full circle where
+
+
+we've almost removed all of the bits
+
+
+that you know have been introduced along
+
+
+the I mean, you can still obviously use
+
+
+React and View and all that stuff
+
+
+through Webpacker, but you know, there
+
+
+are options here to go back to this much
+
+
+more minimal almost no build world. Um,
+
+
+and that's something that I think we
+
+
+really need to do. There was a a post
+
+
+that came over uh last year um uh by uh
+
+
+Loren Stewart um where he talked about
+
+
+how we've kind of been sold this this
+
+
+binary view of like you're either
+
+
+building serverside rendered HTML and
+
+
+that's like for not real businesses and
+
+
+not real websites that's just toy stuff
+
+
+you know your own personal blog and all
+
+
+that kind of stuff or you jump up to the
+
+
+world of single page apps and that's
+
+
+what real you know software engineers
+
+
+are building but really what he's saying
+
+
+is that it should be a gradient
+
+
+you know, too many people are starting
+
+
+at the bottom of this complexity stack
+
+
+and say, "Yep, just jump into a full
+
+
+framework." Whereas reality, you know,
+
+
+most people should start right at the
+
+
+top there, um, in the first few
+
+
+categories. You know, a bit of
+
+
+JavaScript here and there. And that's
+
+
+kind of where Hotwire and Turbo live.
+
+
+Um, level four in his like he's not a
+
+
+Rails developer. Um, but it's it's
+
+
+awfully similar to to Stimulus. Uh, so
+
+
+you can see how kind of Rails naturally
+
+
+fits into this space. Effectively, we
+
+
+should be growing our complexity kind of
+
+
+organically rather than just jumping
+
+
+into it from the get-go. And really, we
+
+
+should be resisting that complexity all
+
+
+the time, like refactoring back to more
+
+
+uh simple approaches as much as
+
+
+possible.
+
+
+>> Absolutely. Um, so I've messed up my
+
+
+animations. Now I'm going to have to sit
+
+
+and watch these
+
+
+I don't know why it's going at about two
+
+
+frames a second, but there we go. Uh
+
+
+there we go. Right. Um so yeah, so the
+
+
+the web kind of responded to, you know,
+
+
+files not loading, uh you know, the
+
+
+overhead of loading individual files and
+
+
+created HTTP2. Um you know, impul maps
+
+
+were created in the in in the uh the web
+
+
+platform, you know, we replaced that
+
+
+need for sprockets. you know ES6 came
+
+
+along and replaced coffecript. You know
+
+
+SAS has been eaten away at by native CSS
+
+
+alternatives. So continually the web
+
+
+platforms doing that. Um and for the
+
+
+second half of this I just want to take
+
+
+you through five like brand new.
+
+
+Some of them are not even out yet. Um
+
+
+some of them have been in the browser
+
+
+for a couple of years. APIs that will
+
+
+hopefully convince you that you
+
+
+shouldn't just jump straight into single
+
+
+page apps. So first one is view
+
+
+transitions. So view transitions there's
+
+
+two levels to these. Uh it's a
+
+
+declarative way to handle page
+
+
+transitions. Now this might be within a
+
+
+page kind of spa style like you're
+
+
+making a change to the DOM or it might
+
+
+be between pages. So you are just doing
+
+
+server side rendering but you want to
+
+
+transition and give that that really
+
+
+nice UI. So we we can bring that kind of
+
+
+app-like fluid uh UI that single page
+
+
+apps have promised without all the kind
+
+
+of baggage and the weight of doing that.
+
+
+And the way that we do it is literally
+
+
+with just a couple of lines of code. So
+
+
+for level one it's JavaScript because
+
+
+it's you know you're having to mutate
+
+
+the DOM. Um and for level two between
+
+
+the pages we do that with just CSS. It's
+
+
+literally one line each. So this is the
+
+
+API uh to perform uh transitions within
+
+
+a document. And this is the API in CSS
+
+
+for doing it across documents. You can
+
+
+obviously got go a lot further. This
+
+
+will just create a a kind of fade
+
+
+between the pages depending on how they
+
+
+change. Um, but you can completely
+
+
+customize those animations. Um, and if
+
+
+you want to transition two elements,
+
+
+just say you've, I don't know, you've
+
+
+got a page that looks like YouTube,
+
+
+loads of videos, and you want to be able
+
+
+to click on one and have that kind of
+
+
+expand, you just need to give it a name
+
+
+so the browser knows kind of before and
+
+
+after where is it moved from to. Simple
+
+
+as that. So, I've got some visuals here
+
+
+to kind of demonstrate what this looks
+
+
+like. So the right hand side, this is
+
+
+the kind of single page app version, the
+
+
+level one, um where we're filtering on
+
+
+an e-commerce page. Uh it's I'm not the
+
+
+best at doing the animations. I'm not a
+
+
+designer, but you can see the kind of
+
+
+process where, you know, as we change
+
+
+some of the filters, the products change
+
+
+and you get a nice little animation. And
+
+
+as I say, you can customize that however
+
+
+you want. On the left, we've got a more
+
+
+traditional, you know, serverside
+
+
+rendered multi-page app. Um, and this is
+
+
+uh animating uh between the two screens
+
+
+automatically. And literally all we've
+
+
+had to do here is add those uh view
+
+
+transition names to each of the products
+
+
+so the browser knows to kind of uh
+
+
+animate between them. Simple as that. So
+
+
+when can you use this? Uh level one, the
+
+
+kind of single page app version is in
+
+
+all of the browsers now. And the nice
+
+
+thing is that if they're not supported,
+
+
+if you're going way way back, they just
+
+
+get an instant. There's no animation. So
+
+
+yeah, some people might not get the the
+
+
+beautiful kind of fluid experience, but
+
+
+they'll still get something that's
+
+
+really fast because you've removed all
+
+
+of that burden. Um, and with level two,
+
+
+um, you know, across pages, um, this
+
+
+isn't everything but, uh, Firefox now,
+
+
+but, you know, that's covering most of
+
+
+the web. And again, they will just get
+
+
+the regular page view, uh, rather than
+
+
+that kind of fluid approach. Now, if you
+
+
+want to make the kind of cross document
+
+
+uh transitions as smooth as possible,
+
+
+you really want to minimize your time to
+
+
+first bite. Um because this is just kind
+
+
+of the the browser, you know, you're
+
+
+going to click something, the browser is
+
+
+going to wait for the new document to
+
+
+arrive and then it's going to do the
+
+
+animation. Um so obviously you might
+
+
+need to put some loading state in there
+
+
+for that. Um but we can hide that
+
+
+latency uh with the next API which is
+
+
+speculation rules. So again, these are
+
+
+declarative API um for either
+
+
+pre-fetching uh HTML documents or
+
+
+completely pre-rendering the whole page.
+
+
+Um so this is absolutely incredible for
+
+
+performance. Um so yeah, so we can hide
+
+
+the latency and give truly instant page
+
+
+loads like React etc cannot be as fast
+
+
+as this. And I'll explain why in a
+
+
+second. And the way that we do this is
+
+
+just via a little blob of JSON. So
+
+
+there's no JavaScript to write, no
+
+
+anything else. It literally looks like
+
+
+this. You tell the browser basically how
+
+
+to discover the links that you want to
+
+
+either prefetch or pre-render. Uh the
+
+
+top level uh key is uh either prefetch
+
+
+or pre-render uh to tell the browser.
+
+
+You can use them in combination. So you
+
+
+can say prefetch these links pre uh
+
+
+pre-render these ones or do it in
+
+
+different behaviors which I'll come on
+
+
+to in a second. Um but yeah, you can you
+
+
+can either use uh URL matching or match
+
+
+based on CSS selectors. If you update
+
+
+the page, the browser will automatically
+
+
+look for these things. So, if you're
+
+
+doing something like type ahead search
+
+
+and then you want someone to be able to
+
+
+click on a product, say for example, or
+
+
+a search result, and you want that to be
+
+
+instant, you can hook that up here. Um,
+
+
+so visually, this it's really hard to
+
+
+show this because it just makes it
+
+
+instant. So, this is a pre-rendered
+
+
+site. Um, effectively on hover of a
+
+
+product, it would pre-render the next
+
+
+page. As you can see, it is just
+
+
+instant. I tried to show the little
+
+
+flicker of the mouse there as it gets
+
+
+clicked. Um, but uh, Chrome does have a
+
+
+panel to kind of inspect this stuff. So,
+
+
+you can see the kind of two success
+
+
+labels on the right hand side there.
+
+
+That's showing that Chrome has used
+
+
+those pre-renders. So, the way this
+
+
+works kind of behind the scenes is it
+
+
+effectively creates kind of two tabs,
+
+
+but the second one is hidden behind the
+
+
+first one. So, as you click the link, it
+
+
+literally just goes, there we go. Swaps
+
+
+them over. Um, so that's how instant it
+
+
+can be. you know, even with like React,
+
+
+if you've got a, you know, a page that
+
+
+depends on, say, like a network request,
+
+
+it's still going to have to, even if
+
+
+that network request has already been
+
+
+cached, it's still going to have to like
+
+
+mutate the DOM, and that's going to take
+
+
+some time. So, this is still faster. The
+
+
+only trouble with going this full
+
+
+pre-rendering approach is that it can be
+
+
+really wasteful on resources. You know,
+
+
+you don't want to be downloading entire
+
+
+pages if someone doesn't actually go to
+
+
+them. Um, it is kind of a speculative
+
+
+approach. Um, and because JavaScript
+
+
+will execute, you have to be careful
+
+
+with your analytics libraries because it
+
+
+might think that people are browsing way
+
+
+more pages than they actually are. Most
+
+
+most analytics platforms have updated
+
+
+now uh their APIs to deal with that. Uh,
+
+
+it's just something you've got to be
+
+
+careful with. Um, so yeah, so your first
+
+
+line of defense against kind of this
+
+
+overuse of resources um is the eagerness
+
+
+level. So you've got a few different
+
+
+options here and they behave differently
+
+
+and this is the really nice thing about
+
+
+this API is that browsers can change
+
+
+this over time. You give it a key of
+
+
+like this is the kind of level I want.
+
+
+Um you know is it based on actually
+
+
+clicking something that's the most
+
+
+conservative approach literally called
+
+
+conservative at the top there. Is it
+
+
+based on hover and you've got a couple
+
+
+of options kind of in between. Um or are
+
+
+you just saying please pre-render or or
+
+
+prefetch this as soon as possible
+
+
+whenever the browser's idle. So if it's
+
+
+not busy downloading the page already,
+
+
+it will go away and it will immediately
+
+
+do this stuff in the background. So you
+
+
+can you can vary that. You might say,
+
+
+"Okay, my prefetches, I'm going to do
+
+
+those as im immediate because it's just
+
+
+a bit of HTML. I can make those really
+
+
+small files and it'll download really
+
+
+quickly." But um for my pre-renders, I'm
+
+
+going to keep that conservative. I'm
+
+
+going to wait for someone to actually
+
+
+click down and just capitalize on the,
+
+
+you know, the 100 milliseconds before
+
+
+their mouse, you know, pops back up. Or,
+
+
+you know, the same on on mobile.
+
+
+And the second offense um is the the
+
+
+actual action. As I say, you know,
+
+
+you've got pre-render and prefetch. Um
+
+
+these are two distinct options. Um you
+
+
+know, pre-render is the the the most
+
+
+resource heavy. Um but you know, that
+
+
+does give you the best experience
+
+
+because it is instant. With prefetch,
+
+
+all we can save is that kind of time to
+
+
+first bite. It's not going to discover
+
+
+any sub resources. So your stylesheets,
+
+
+any JavaScript, your images, etc. But
+
+
+Google are working on a middle ground
+
+
+which is pre-render until script. Um so
+
+
+what this will do um it's still fairly
+
+
+heavy so it's more towards pre-render
+
+
+which is it's handy that they've named
+
+
+it that. Um but effectively what this
+
+
+will do is like it says on the tin
+
+
+really. It will start downloading a
+
+
+page. As soon as it finds any script tag
+
+
+it will just stop. So the prepars will
+
+
+still run. it will discover all the
+
+
+resources that are in the HTML. But as
+
+
+soon as a script tag uh is is
+
+
+discovered, it will just stop at that
+
+
+point and then that way you don't have
+
+
+to worry about your analytics or
+
+
+anything like that. You can pre-render
+
+
+safely. So they're working on that at
+
+
+the moment. Unfortunately, it's a Chrome
+
+
+only API at the moment. Chrome
+
+
+implements both of these things. Safari
+
+
+are about to release I think the work is
+
+
+done, but they haven't actually pushed
+
+
+it in a release yet. We're all kind of
+
+
+waiting for it. uh they're about to
+
+
+release prefetch. Um they have some
+
+
+concerns over pre-render. I don't know
+
+
+whether that's technologically or
+
+
+privacy. They you know they they uh they
+
+
+do like to uh protect that side of
+
+
+things. So um it is coming soon. Um so
+
+
+yeah uh our third way to kind of
+
+
+mitigate that overhead is of course to
+
+
+make things as small as humanly
+
+
+possible. So this affects not only our
+
+
+JavaScript, it could affect our scripts,
+
+
+it could affect any any kind of text
+
+
+resource. Uh can be improved with
+
+
+compression dictionaries. Um so this is
+
+
+a new uh RFC under the ITF. Um it got uh
+
+
+approved in I think September last year.
+
+
+Um so it's it's a brand new standard.
+
+
+Um, and what it does is it lets you use
+
+
+a a resource that you've already
+
+
+downloaded to compress a resource that
+
+
+you're downloading next. Um, so this
+
+
+this affects two different things.
+
+
+Firstly, if you're uh updating your app,
+
+
+say you've you've rolled out a new
+
+
+release, you've tweaked some JavaScript,
+
+
+you fixed a bug, you might have only
+
+
+changed one line of code. Now, at the
+
+
+moment, you'll have to redownload that
+
+
+whole file. So if it's a 50 kilobyte
+
+
+file, one line of code changing, you
+
+
+know, means 50 kilobytes more getting
+
+
+redownloaded. With compression
+
+
+dictionaries, you can say, okay, well,
+
+
+we've got version one stored locally on
+
+
+the user's device. Their device will
+
+
+tell our server, hey, I've got version
+
+
+one. Give me version two, but use
+
+
+version one to compress it. So you only
+
+
+have the little diff. So we can get down
+
+
+to bytes um in terms of changes there.
+
+
+Um and you know effectively by doing
+
+
+this we can we can compress uh you know
+
+
+other types of files as well. We can
+
+
+download a dictionary that we've built
+
+
+based on other contents of other files.
+
+
+Doesn't have to be just one JavaScript
+
+
+file for example. It can be a whole
+
+
+bunch of different things. We can use
+
+
+that as a dictionary to compress
+
+
+anything else that's textbased. So the
+
+
+way this works is just a a couple of
+
+
+HTTP headers. that is kind of
+
+
+trivializing it somewhat because
+
+
+actually applying the compression is
+
+
+something that's a little more tricky
+
+
+but there's libraries out there you know
+
+
+if you use brley or zstandard you can uh
+
+
+integrate your your dictionaries with
+
+
+them so it's just a little bit of code
+
+
+this is ideal to kind of just bang in
+
+
+your CD CDN of choice um you know use
+
+
+like a worker or something like that and
+
+
+you can kind of um deploy it more as
+
+
+like infrastructure rather than
+
+
+necessarily part of your codebase
+
+
+um so yeah it completely changes the
+
+
+level of compression we can achieve. So
+
+
+just say we've got a file that's
+
+
+uncompressed. Obviously it's 100% of its
+
+
+own size. You know gzip and brley you
+
+
+know we might half it for example.
+
+
+Obviously it all depends on how much
+
+
+repetitions in that file. But then with
+
+
+dictionary compression we can get like
+
+
+90% on top of that. So these files are
+
+
+getting to be like 5% of their original
+
+
+value. Um this is my personal site just
+
+
+opened uh well I opened the homepage and
+
+
+then navigated to my events page. And
+
+
+because that um well in the other
+
+
+browser it will it will have the
+
+
+dictionary in Firefox that doesn't
+
+
+support it yet. I get like a 20 kilobyte
+
+
+download for that page. So 85%
+
+
+compression ratio. It's a fairly large
+
+
+HTML uh file because I'm in llining
+
+
+loads of styles. With Chrome I get 5
+
+
+kilobytes. Um so I achieve 96%. And so
+
+
+it's a quarter of the size that the
+
+
+other one was. And this means that when
+
+
+it comes to things like prefetching, we
+
+
+could do four times as much or we we can
+
+
+be as four times as lax or you know if
+
+
+we've got quite a heavy site we can you
+
+
+know dial that back a little bit and not
+
+
+be so heavy for our users.
+
+
+So I mentioned kind of standalone
+
+
+dictionaries. Um and the way that this
+
+
+works um is you know if we compare it to
+
+
+a single page app you know they were
+
+
+pushed as like you download your shell
+
+
+and then that makes like a call for some
+
+
+JSON and then that is rendered to
+
+
+produce our page our content. Uh we can
+
+
+now effectively achieve the same thing
+
+
+just with compression dictionaries. So
+
+
+we've got a shared herer and footer that
+
+
+are across all of our pages. That's our
+
+
+shell. we, you know, we download that
+
+
+including probably our content for the
+
+
+first page. Then when we make the
+
+
+request for the second page, we just do
+
+
+a regular navigation, but because we've
+
+
+already stored the header and footer,
+
+
+we're just loading that kind of diff in
+
+
+between. Um, and we get the same
+
+
+experience. So you basically look for
+
+
+commonalities across different pages on
+
+
+your site. Now, these have all got the
+
+
+same, you know, header. It's got like a
+
+
+mega nav in there. You know, that could
+
+
+be a massive amount of content. You
+
+
+might have your head tag. you know,
+
+
+that's one of the most important things
+
+
+to get loaded as soon as possible in
+
+
+terms of performance because it'll
+
+
+discover loads of things like your
+
+
+stylesheets, get them downloading really
+
+
+quick. Um, so we look at those and we
+
+
+go, yeah, all of this is is duplicate.
+
+
+And basically, you could just copy and
+
+
+paste that into a text file. Like make
+
+
+sure not to include anyone's personal
+
+
+information in there, but as a trial,
+
+
+you can literally just do that by hand
+
+
+uh to see the impact of this. Then you
+
+
+load that dictionary um as a standalone
+
+
+dictionary. So you just tell the browser
+
+
+with a one link tag, hey can you
+
+
+download this again in idle time after
+
+
+the page is downloaded it will go away
+
+
+and download that dictionary and then
+
+
+basically on that dictionary um you tell
+
+
+you need a HTTP header to say hey
+
+
+browser when you get this just store it
+
+
+locally as a dictionary and use it for
+
+
+other documents. So you can match based
+
+
+on different things. You could say use
+
+
+this for JavaScript, use this for CSS,
+
+
+you could say based on root and I'll
+
+
+show that that example in a second. Um,
+
+
+but that's all you really need other
+
+
+than actually applying that compression
+
+
+when it comes back in. So, just to kind
+
+
+of visualize the kind of hops between
+
+
+the browser and the server originally,
+
+
+your browser is going to make a request
+
+
+for a resource. So, take take the
+
+
+JavaScript example here, v1.js.
+
+
+Um, browser is going to be like, okay, I
+
+
+don't have a dictionary, so I'll just
+
+
+request it as normal. And the server
+
+
+will say, right, okay, I'm going to
+
+
+serve this as a dictionary for any
+
+
+future version of this JavaScript. Um,
+
+
+so it will store it. You need somewhere
+
+
+to store this across releases. So we
+
+
+can't just, you know, disappear our
+
+
+assets between releases. That's one
+
+
+little nuance of of implementing this.
+
+
+But just say you put it in a cache
+
+
+somewhere. Um, and then it returns it
+
+
+and says, "Hey, use this for future
+
+
+versions of this JavaScript file. We're
+
+
+just going to encode that with brley."
+
+
+Um, so we can't use a dictionary,
+
+
+nothing fancy. The browser stores that
+
+
+as a dictionary, um, as well as using
+
+
+it, of course. Um, and then we do a
+
+
+release. Version two comes out. So the
+
+
+next page view, the browser goes, "Hey,
+
+
+I need V2 now." Um, so it looks up, it's
+
+
+got the dictionary. So it will it will
+
+
+tell the the server via just a hash of
+
+
+the file. It will say, "Hey, I've got
+
+
+this uh dictionary stored locally." And
+
+
+then your server just needs to go,
+
+
+"Okay, can I load that dictionary from
+
+
+the cache?" So you just store them keyed
+
+
+by hash basically. Um, and if that
+
+
+exists, great. uh we compress the the
+
+
+new response using that dictionary. So
+
+
+literally your one line of code will be
+
+
+the diff and we send that back uh with a
+
+
+different encoding. So this is encoding
+
+
+it with Zstandard. So DC zed for
+
+
+Zstandard. There's also DCB for Broley.
+
+
+Um so depending on what stack you're on,
+
+
+different libraries have different uh uh
+
+
+kind of ease of integration. uh most
+
+
+when you use this the kind of actual
+
+
+compression that you use it becomes far
+
+
+less relevant because it's so good at
+
+
+compressing things that you're saving
+
+
+bytes here and there um when you know
+
+
+just implementing dictionaries can save
+
+
+you kilobytes so um so yeah um when can
+
+
+you use this um it's in Chrome today
+
+
+again like Firefox had an implementation
+
+
+they rolled it out I think to their like
+
+
+uh canary builds um but they had they
+
+
+had some bugs with it so they rolled it
+
+
+back so there's is basically done.
+
+
+They're just refining the bugs. Safari,
+
+
+I saw yesterday, I think it was, they've
+
+
+started pulling in all the tests into
+
+
+WebKit for it. So, they are it to me
+
+
+looks like they're starting to work on
+
+
+this as well. Um, but the great thing is
+
+
+because you have to still be able to
+
+
+respond with these old formats anyway
+
+
+without the dictionaries, it's a
+
+
+progressive enhancement. So, there's no
+
+
+reason to not implement this today. You
+
+
+can lit, you know, Chrome's half the web
+
+
+or thereabouts. Um so you can you can
+
+
+improve things for 50% of your users if
+
+
+not more uh depending on your use cases.
+
+
+Um you know uh and then you get the
+
+
+extra benefits when the other browsers
+
+
+adopt it as well. So even with
+
+
+compression dictionaries we're still
+
+
+shipping around JavaScript. We still
+
+
+have to pay penalties around uh latency
+
+
+and things like that. Um you know
+
+
+there's still runtime execution. Um you
+
+
+know we still have like inaccuracies in
+
+
+like our speculations and things like
+
+
+that. So this is where the kind of
+
+
+fourth API comes into play. So this is
+
+
+in invoker commands and interest
+
+
+invokers. So these let us build
+
+
+interactivity without even having
+
+
+JavaScript at all. Um they're simil like
+
+
+a limited use case at the moment. Um but
+
+
+it is expanding. So um so yeah, so
+
+
+there's this kind of uncanny valley
+
+
+between you download a page and then
+
+
+JavaScript kind of arrives in a little
+
+
+bit and then you can actually interact
+
+
+with it. Great. Um, so in that middle
+
+
+time, you know, people have started rage
+
+
+clicking on stuff because they're just
+
+
+like, why is this not responding to me?
+
+
+So we have this kind of uh awful place
+
+
+in the middle here, uh, while we're
+
+
+waiting for our JavaScript. Um, so that
+
+
+these APIs let us kind of remove that
+
+
+and we get the interactivity kind of for
+
+
+free, which is great. And it's literally
+
+
+just HTML. Um, so with the invoker
+
+
+commands API, these sit on buttons, so
+
+
+you can trigger any command, you can
+
+
+write your own commands at the moment.
+
+
+the native ones are only for working
+
+
+with the dialogue element. Um, so it
+
+
+sounds like a fairly minimal use case
+
+
+like dialogues, but actually, you know,
+
+
+you've got burger menus, you know, you
+
+
+know, other types of menu, you've got um
+
+
+things like cookie banners, um, you
+
+
+know, any kind of like sliding drawers
+
+
+with forms in them and things like that
+
+
+um can all use this. Um, and literally
+
+
+it's just a couple of uh HTML
+
+
+attributes. So you've got command four,
+
+
+which give you give it the ID and then
+
+
+tell the command like open this as a
+
+
+modal. Um and the idea is that uh the
+
+
+open UI group who who kind of pushed for
+
+
+this and and standardized this um are
+
+
+looking to expand this to loads of other
+
+
+commands. So playing and pausing videos
+
+
+for example or um incrementing and
+
+
+decrementing uh number fields. Um so
+
+
+that's literally my my kind of next
+
+
+example. Um at the moment we don't have
+
+
+this. So you have to write your own
+
+
+commands. So you can see here that my
+
+
+custom commands are prefixed with two
+
+
+dashes. that's required by the the
+
+
+standard. Um, so what this means is that
+
+
+you no longer have to like attach click
+
+
+events to things. The browser will just
+
+
+trigger these command events and it will
+
+
+trigger them on whatever ID you give in
+
+
+that command for field. Uh, so in this
+
+
+instance, all I've got to do is write
+
+
+the little bit of JavaScript, hook it up
+
+
+to uh the item quantity field and say
+
+
+when I get step up or step down, I want
+
+
+you to do X or Y. Um, so it does, you
+
+
+know, this when you're implementing your
+
+
+own stuff, it doesn't completely remove
+
+
+the JavaScript, but it does remove all
+
+
+of that kind of boilerplate stuff of I
+
+
+just want this to be, you know, I want
+
+
+to link into this clicking. Um, you
+
+
+know, it does that for you. And then on
+
+
+the interest invoker side, this is a
+
+
+newer API. Um, this allows you to do
+
+
+things like have little pop-ups um when
+
+
+you when you hover things and it caters
+
+
+for mobile. So on mobile, if you like
+
+
+long press, um you know, it'll come up
+
+
+with a little extra uh context menu that
+
+
+lets you trigger this. So say for
+
+
+example, you know, you've built a social
+
+
+network or some site where you can kind
+
+
+of like things um and you want it so
+
+
+that when you hover that, you can see
+
+
+who else has liked it. Again, just a
+
+
+little tiny bit of HTML and you can and
+
+
+you can achieve that. And I've got a
+
+
+visual that kind of shows this off. So
+
+
+this is a little demo site. The code for
+
+
+this is on GitHub and there's a um QR
+
+
+code at the end. So, you can see as we
+
+
+hover over, it's gone too far ahead, but
+
+
+I didn't want to do a live demo. Um, as
+
+
+we hover the uh little pills, it gives
+
+
+us a little popover that tells us when
+
+
+those items were published. Um, and
+
+
+that's great. That's the interest
+
+
+invoker API. And then this edit
+
+
+literally opens this drawer. Again, no
+
+
+JavaScript to open and close that.
+
+
+That's all just native of the page.
+
+
+There's no, you just have to believe me
+
+
+because I don't have the code on screen,
+
+
+but there is no JavaScript running on
+
+
+that page. The great thing is that in
+
+
+terms of invoker commands, you can use
+
+
+them today. Um, they're in all of the
+
+
+browsers and there's a little tiny
+
+
+polyfill. So, if you want it to go
+
+
+really far back, then you can. Um, it's
+
+
+a few kilobytes. Um, and obviously that
+
+
+won't you won't need to load that on
+
+
+anything modern. Um, interest invokers,
+
+
+they're working out some of the kinks
+
+
+just in terms of Safari has different UI
+
+
+when you like long press and things for
+
+
+like opening tabs. Um, so they need to
+
+
+to come up with a solution to of how to
+
+
+integrate it. Um, but that is something
+
+
+that's going to come along. And to be
+
+
+fair, a lot of tool tips just don't work
+
+
+on mobile at all. So, you know, um,
+
+
+Safari may not be your problem. Uh,
+
+
+there is a a a polyfill for this. Um,
+
+
+but obviously it only works on desktop
+
+
+because, uh, that has hover events. And
+
+
+our final API. So, this is something
+
+
+that's really exciting to me. Um, very
+
+
+simple like the others. Um, but uh it's
+
+
+an experimental API that kind of brings
+
+
+Hotwire to the native web. So we'll be
+
+
+able to effectively integrate kind of
+
+
+any front-end component with any kind of
+
+
+backend using the kind of same process.
+
+
+Um, so why might we want to do this?
+
+
+Well, you know, again, we remove
+
+
+JavaScript. That's great.
+
+
+um you know, we don't have to care about
+
+
+isomeorphic rendering because we've got
+
+
+the server side just powering those
+
+
+those kind of uh partials, those HTML
+
+
+bits that we're rendering. Um and it
+
+
+takes uh for slow pages, just say you've
+
+
+got something like a dashboard and
+
+
+you've got loads of charts that take
+
+
+loads of time to to run some queries,
+
+
+you can just stream that HTML out of
+
+
+order and this the this API lets you
+
+
+reorder your HTML uh as it streams down
+
+
+to the browser, which is really cool. Um
+
+
+so yeah, I'm really excited to for where
+
+
+this goes.
+
+
+Um, so yeah, so how this works is
+
+
+literally like a a template tag in your
+
+
+HTML and then there's these little
+
+
+placeholders that I'll show you in a
+
+
+second that look like old school PHP. So
+
+
+we're all going to have to deal with
+
+
+that. Um, but this is what it looks
+
+
+like. Um, so imagine that we're
+
+
+streaming a page down to the browser.
+
+
+Um, you know, you can put a placeholder
+
+
+in. You this could be like a full
+
+
+skeleton UI if you want. Again, no
+
+
+JavaScript necessary. Just put in
+
+
+whatever you want. some time passes, you
+
+
+know, your queries run or gather all the
+
+
+data for the for the dashboard. Um, and
+
+
+then we can render that just streaming
+
+
+down the HTML. Um, and and it will
+
+
+automatically replace uh that area. It's
+
+
+as simple as that in terms of an API.
+
+
+Annoyingly, I couldn't demo this with
+
+
+Rails because there's no way to manually
+
+
+flush between things yet. So, if if we
+
+
+were to actually integrate this into
+
+
+Rails fully, we'd have to do a little
+
+
+bit of work there just to tie that up.
+
+
+Um, but we can also do things like we
+
+
+can append messages. So you don't have
+
+
+to use the kind of start and end marker.
+
+
+If you've just got like a placeholder
+
+
+that's not going to contain anything,
+
+
+you can just use marker as a shortand.
+
+
+Um, anytime you inject this template
+
+
+into the DOM, um, it will effectively
+
+
+append it and then we can put the
+
+
+another marker with the same name back
+
+
+in after it. Uh, so that way we can
+
+
+continually append to it. Um similarly
+
+
+we can remove DOM nodes again start and
+
+
+end wrapped around an element and then
+
+
+we just send a blank template just say
+
+
+don't you know don't put anything in its
+
+
+place. Um and yeah you can re-mbed these
+
+
+these identifiers like I said with the
+
+
+at the appending version if you wanted
+
+
+just to replace something but allow it
+
+
+to be replaced again in future just keep
+
+
+wrapping it in those uh those tags. And
+
+
+this is all natively handled by the
+
+
+browser. So at the moment this is a
+
+
+JavaScript only API. Um but it's
+
+
+literally like a few lines of code uh to
+
+
+stream this in. So just say you made a
+
+
+fetch call, you're loading something and
+
+
+you want to put it into the document and
+
+
+you're not using the HTML streaming
+
+
+approach. Few lines of code and I've
+
+
+even gone to the extent of wrapping it
+
+
+in the view transition thing here now.
+
+
+So that will automatically animate it as
+
+
+well. Um but where I think this could go
+
+
+and this is just me speculating. Um, and
+
+
+I've talked to the the owner of this
+
+
+specification about this um, is that we
+
+
+could have uh, an implementation where
+
+
+uh, our browsers could handle this API
+
+
+itself. So imagine you make a navigation
+
+
+like a link or a form and it might be
+
+
+like an opt-in attribute or something
+
+
+like that, but we say, you know what, we
+
+
+just want one of those fragments back.
+
+
+We don't want a whole document. Don't
+
+
+send us a whole HTML response. We we're
+
+
+just submitting this form and we want
+
+
+the changes. the server then could
+
+
+decide, yeah, okay, I can see that
+
+
+you're on that form from the referral
+
+
+header. You know, I'm going to just
+
+
+stream back that little fragment just as
+
+
+Rails does, um, you know, with with
+
+
+things like Turbo. Um, and then the
+
+
+browser just applies that to the DOM for
+
+
+us, that could be completely without
+
+
+JavaScript. Um, and obviously if the if
+
+
+the server decided, you know what, um,
+
+
+you're moving from one section to
+
+
+another, I don't want to do that as a
+
+
+soft navigation. I want you to actually
+
+
+go to that page. um it just sends the
+
+
+whole document back as normal. Um so you
+
+
+know the and the browser could handle
+
+
+that kind of regular flow. Um or if it
+
+
+returns a redirect it could just do the
+
+
+redirect just as it does today. Um so
+
+
+this tiny little tweak of how browsers
+
+
+work could be could be really powerful
+
+
+and thankfully you can actually polyfill
+
+
+this behavior. Um I built a little demo
+
+
+just like an email signup form. So
+
+
+hitting submit I get a little error
+
+
+that's just returned as a little
+
+
+fragment. Um, if I put my email address
+
+
+incorrectly, this is all just service I
+
+
+rendered. Um, and then I've actually
+
+
+given it the option of disabling
+
+
+fragments. So again, it responds to like
+
+
+if it just gets a whole HTML page back.
+
+
+Um, I can't do a hard navigation for
+
+
+that, but um, you know, I can just
+
+
+replace the whole page kind of turbolink
+
+
+style. Um, so this is an example. How
+
+
+many um plugins and things like that do
+
+
+we have across the web where it's like
+
+
+we just want this tiny little bit of
+
+
+kind of interactivity, you know, how
+
+
+many newsletter signup forms do we have,
+
+
+comment forms, that kind of stuff. You
+
+
+know, that could all just be replaced
+
+
+with a tiny little uh native thing. And
+
+
+then as soon as someone lands on this
+
+
+page, we don't have to download any
+
+
+JavaScript. They can just hit submit. If
+
+
+that JavaScript hasn't loaded, they
+
+
+don't even have to have that hard uh
+
+
+navigation approach where you get taken
+
+
+off to some other website. they still
+
+
+get that beautiful little confirmation
+
+
+message. Um, so bringing all these
+
+
+things together, I will wrap up because
+
+
+I'm, you know, I'm sure that everyone
+
+
+wants to get to get to have some beer.
+
+
+Um, but yeah, I built this into a full
+
+
+uh demonstration. Again, the only bit of
+
+
+JavaScript running on this completely is
+
+
+the little patch for those fragments.
+
+
+Um, so you can see here I'm like
+
+
+resorting the page uh using those links.
+
+
+Um, you know, I've got um the I don't
+
+
+know whether I show the hovers on this
+
+
+bit. I might have skipped that by
+
+
+accident if I remember rightly. I did.
+
+
+Um, but you can obviously, you know,
+
+
+make changes in this uh modal window.
+
+
+Um, you know, we are so close to this
+
+
+entire UI being completely JavaScript
+
+
+free. Um, so this is how close we are.
+
+
+614 bytes of JavaScript that whole UI
+
+
+took. Um, and that's just me patching in
+
+
+that that little approach. So, I'm going
+
+
+to be pushing for this to be adopted by
+
+
+browsers. Um, so we'll see how far I
+
+
+get. Um, it would be my first ever
+
+
+browser API. Um, so yeah, you can't
+
+
+really use this today. You could patch
+
+
+it uh just like I did. Um, but none of
+
+
+your users are going to use it because
+
+
+you actually have to enable certain
+
+
+flags in Chrome just to even get this
+
+
+preview. Um, the flags are on the slides
+
+
+if you want to have a go. Um, but it's
+
+
+definitely something that you want to
+
+
+follow for the next six to 12 months
+
+
+because I think the the Chrome team will
+
+
+start talking about it more and more.
+
+
+So, just in summary, I'll wrap up really
+
+
+quickly. Um, view transitions give us
+
+
+that kind of fluid app-like uh feel. Uh,
+
+
+speculation rules give us those instant
+
+
+hard navigations. Uh, compression
+
+
+dictionaries remove uh so much of that
+
+
+network overhead that we've got across
+
+
+all of our kind of text resources. Um,
+
+
+invokers let us just completely remove
+
+
+JavaScript altogether.
+
+
+and our declarative partial updates are
+
+
+a potential future for standardizing
+
+
+softnav directly in the browser which
+
+
+would be really exciting. So was Rails
+
+
+really right in terms of where the web
+
+
+uh you know how we implement the the
+
+
+kind of front end of the web?
+
+
+Sadly being right doesn't necessarily
+
+
+mean we're going to get adopted. Um so
+
+
+this is the the popularity of these
+
+
+things um you know across origins on the
+
+
+web which is you know it does make me
+
+
+very sad. Um I think a so many people
+
+
+could benefit from Rails. Um but um if
+
+
+any of you have ever kind of invested in
+
+
+the stock market you may have heard this
+
+
+phrase where it's the market can remain
+
+
+irrational longer than you can stay
+
+
+solvent. So if you start shorting things
+
+
+you might be thinking oh there's an AI
+
+
+bubble at the moment you know I'm going
+
+
+to start shorting the AI companies.
+
+
+You'll probably go bankrupt first. Um,
+
+
+so but I don't think Rails is going to
+
+
+go bankrupt to be clear. Um, but you
+
+
+know, to me it's like it does show that
+
+
+we were kind of kind of right and we
+
+
+unfortunately we don't just win by just
+
+
+purely being right. But ultimately the
+
+
+zero interest rate era is over. You
+
+
+know, the business is changing. We do
+
+
+need to look to get more out of our
+
+
+tech. That's the big push with AI like
+
+
+getting more out of our productivity.
+
+
+And we need to expect better from our
+
+
+tech as well for our users. We can't
+
+
+just have our productivity without
+
+
+supporting them as well. So really my
+
+
+message today is try and see client side
+
+
+JavaScript as a liability rather than an
+
+
+asset. Use as little as possible to
+
+
+achieve what you need and try and you
+
+
+know I'm not saying like if you've got a
+
+
+single page app today don't bin it off.
+
+
+You don't need to suddenly park
+
+
+everything and spend a year rebuilding
+
+
+everything. But just you know there
+
+
+might be things within it where next
+
+
+time you're implementing a component
+
+
+like oh I can just use a web platform
+
+
+API for this.
+
+
+So yeah, I think you'll find with Rails
+
+
+and the web platform generally for
+
+
+99.99%
+
+
+of people they'll have everything that
+
+
+you need. Thank you.
+
+
+>> Are there any questions?
+
+
+>> Everyone just wants beer.
+
+
+So if you had a like race application
+
+
+let's say I don't know five years old
+
+
+race app
+
+
+>> but unfortunately with react what would
+
+
+you be your advice to actually get from
+
+
+this state to the dreamy one that you
+
+
+were describing?
+
+
+>> That's a very good question actually
+
+
+useful one because it gets it lets me
+
+
+cover things that I didn't fit in the
+
+
+talk uh it was already long enough. Um
+
+
+so yeah I think the first thing is
+
+
+making sure you're measuring uh client
+
+
+side performance. Um, so you know, a lot
+
+
+of us, you know, we've got charts in
+
+
+data dog and New Relic and all the good
+
+
+stuff. Um, but most of those are kind of
+
+
+focused on the kind of backend
+
+
+performance. You really need something
+
+
+that's focused on core web vitals. And
+
+
+I'm not just doing a sales pitch for for
+
+
+my Cloudflare product. Um it is ju just
+
+
+like if you have that data wherever you
+
+
+get it uh that's tremendously valuable
+
+
+because just because you're getting a
+
+
+fast response out of a server doesn't
+
+
+mean that your users are actually
+
+
+experiencing a fast uh experience on the
+
+
+front end and that gives you the kind of
+
+
+ammunition to to actually drive some
+
+
+change. If you recognize that this is
+
+
+really slow if you see that in the
+
+
+metrics like if you see that you've
+
+
+happened to build one that's really
+
+
+quick that's wonderful. Um I I would
+
+
+like to see that. um you know it's it
+
+
+usually takes you know when you're
+
+
+adopting these these big frameworks like
+
+
+teams of people to do like active
+
+
+performance work on them to keep them to
+
+
+make them fast and keep them fast. Um
+
+
+but yeah once you've got the data you
+
+
+can't optimize anything that you can't
+
+
+you're not measuring. So that's the
+
+
+first step. Um and as I say that gives
+
+
+you the uh you know the ammo to go look
+
+
+we're leaving money on the table here by
+
+
+you know making this slow experience for
+
+
+our users. it's going to be frustrating
+
+
+and have more churn. Or if you've got
+
+
+like a public site like an e-commerce
+
+
+site or something like that, you know,
+
+
+people are just going to bounce away and
+
+
+not not transact with you. So, um you
+
+
+know, you can start to correlate your uh
+
+
+web performance in certain tools with
+
+
+actual commercial value at the end. You
+
+
+know, look at conversion rates and
+
+
+things like that. Um so, that's where
+
+
+I'd start. And then yeah just I I take
+
+
+an iterative approach of just you know
+
+
+you look at what your biggest problems
+
+
+are try and get to the bottom of those
+
+
+and then you know try and slice those
+
+
+out. Um if some things are really
+
+
+difficult well maybe look for the kind
+
+
+of medium where it's like this will have
+
+
+a medium impact but it's a medium amount
+
+
+of effort as well rather than the really
+
+
+hard but valuable stuff necessarily. Um
+
+
+you know once you get a few wins under
+
+
+your belt um you know businesses start
+
+
+to see the kind of progress you're
+
+
+making it makes that conversation a lot
+
+
+easier. Um, so yeah, if you start with a
+
+
+few things that kind of move things
+
+
+forward, you can see it in the data. Um,
+
+
+you know, uh, then you know, it's easier
+
+
+to get investment to keep going and do
+
+
+do the harder things. So, so I just look
+
+
+for the little things that you can you
+
+
+can rip out and be like, "Oh, this bit's
+
+
+really slow. We're just going to focus
+
+
+just on that."
+
+
+>> Cool. Uh, thanks. That explains a lot. I
+
+
+was maybe hoping that you would say that
+
+
+there is some magic prompt with make no
+
+
+mistakes.
+
+
+If I could do that, I'd be implementing
+
+
+that right right this second.
+
+
+>> All right. Any other questions?
+
+
+>> So, if you're currently using like
+
+
+you're using like you're using hot wire,
+
+
+you're doing maybe you're using
+
+
+pre-fetching, maybe not um you're using
+
+
+broadcast on your models, uh and you're
+
+
+using more specifically than turboring
+
+
+like on your pages so that as a model
+
+
+changes by some event, some process,
+
+
+some job, the page automatically
+
+
+updates. with like all the tips that
+
+
+you've been shown here, how much do you
+
+
+end up fighting Turbo? Like do you end
+
+
+up essentially like not using Turbo for
+
+
+some of these optimizations?
+
+
+>> Uh well, I mean, so with with Turbo, uh
+
+
+it's generally all right from my
+
+
+experience. Like Rails aligns itself um
+
+
+kind of so well with the web, you know,
+
+
+we've we've had things for like doing
+
+
+proper HTTP caching for for decades. um
+
+
+you know that you know you can see it in
+
+
+the data you know the chart that I
+
+
+showed kind of early on that Rails is
+
+
+generally ahead of everyone else um so
+
+
+it's um so yeah like you need the data
+
+
+on where is the performance problem um
+
+
+generally turbo itself is absolutely
+
+
+fine I think the exciting thing like I
+
+
+said about things like the the last API
+
+
+that is kind of most similar to that
+
+
+world is that that brings it to it
+
+
+standardizes what Turbo's kind of
+
+
+for everyone. So, you know, you know, if
+
+
+you've got component libraries that are
+
+
+built for that, we'd be able to
+
+
+integrate them with Rails in future. Um,
+
+
+so rather than it being like Rails kind
+
+
+of parked off in its own little world
+
+
+where it's like there's going to be very
+
+
+few kind of front-end um libraries that
+
+
+implement, you know, Turbo natively and
+
+
+things like that and integrate that. Um,
+
+
+you know, we can reach into the broader
+
+
+community in terms of the front end,
+
+
+which will be really nice. Um, so
+
+
+hopefully because we can kind of support
+
+
+that rather than being like, oh, we kind
+
+
+of fight it with uh, you know, APIs that
+
+
+are trying to mask away the web, we can
+
+
+embrace the web and and yeah, so so yes,
+
+
+so I'd say make sure that you're you're
+
+
+monitoring stuff and you understand what
+
+
+is the problem. But yeah, I don't often
+
+
+see um problems too many problems with
+
+
+ter some of the kind of typing you if
+
+
+you've got fast uh like typerhead
+
+
+solutions. Um you need to be aware of
+
+
+how much data you're sending back for
+
+
+that and how quickly you're rendering
+
+
+that stuff. Um but yeah, generally
+
+
+dealing in HTML is the fastest way
+
+
+rather than dealing in like JSON and
+
+
+then passing that on a client.
+
+
+>> Thank you.
+
+
+>> All right. Thank you. Um we
+
+
+>> short one. Short one.
+
+
+>> Yeah. Okay,
+
+
+>> we're very lucky in Rails we have
+
+
+hotwire, but what do you think about
+
+
+XHTML?
+
+
+Like are there other options like X
+
+
+HTML?
+
+
+>> That doesn't ring about
+
+
+>> HTMX. Oh, yeah.
+
+
+>> HTMX.
+
+
+>> Oh, yeah. Yeah. I'm a big fan of HTMX.
+
+
+Um, yeah. Yeah, I mean as a kind of
+
+
+utility library, uh, you know, it
+
+
+doesn't, you know, uh,
+
+
+it doesn't kind of do a lot kind of
+
+
+behind the scenes. It's it's, you know,
+
+
+a very lightweight. It's almost like
+
+
+jQuery back in the day. Um, you know,
+
+
+just kind of more integrated into your
+
+
+HTML. Um so so yeah I think it's you
+
+
+know again I think part of the goal of
+
+
+HTMX is to kind of make itself redundant
+
+
+over time because um you know the
+
+
+browser should be implementing a lot of
+
+
+what it's it's providing. Um you know
+
+
+just like jQuery did it was like we want
+
+
+to move the APIs forward so that then we
+
+
+don't need jQuery anymore. Um so so yeah
+
+
+hmx is a great little library to to be
+
+
+using basically. Um, it provides a lot
+
+
+of little utils and you can just
+
+
+straight up get stuff in your HTML. Um,
+
+
+and again it's it works really well with
+
+
+Rails because there's APIs there for
+
+
+like loading HTML in and just injecting
+
+
+it into the page. So that again that's
+
+
+faster than passing JSON um on the
+
+
+client. So
+
+
+>> all right, thank you very much Ryan. You
